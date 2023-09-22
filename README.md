@@ -28,6 +28,9 @@ Preset must have empty magazine and empty chamber.
 
 Mod does not support weapon without magazines.
 
+**Installation**
+Put folder `BarlogM-Andern` from zip file into your `user/mods` folder
+
 Tier One Ammo
 
 * https://escapefromtarkov.fandom.com/wiki/5.45x39mm_PS_gs
