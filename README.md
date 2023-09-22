@@ -30,36 +30,36 @@ Mod does not support weapon without magazines.
 
 Tier One Ammo
 
-https://escapefromtarkov.fandom.com/wiki/5.45x39mm_PS_gs
-https://escapefromtarkov.fandom.com/wiki/7.62x39mm_HP
-https://escapefromtarkov.fandom.com/wiki/5.56x45mm_FMJ
-https://escapefromtarkov.fandom.com/wiki/.366_TKM_EKO
-https://escapefromtarkov.fandom.com/wiki/7.62x51mm_TCW_SP
-https://escapefromtarkov.fandom.com/wiki/7.62x54mm_R_LPS_gzh
+* https://escapefromtarkov.fandom.com/wiki/5.45x39mm_PS_gs
+* https://escapefromtarkov.fandom.com/wiki/7.62x39mm_HP
+* https://escapefromtarkov.fandom.com/wiki/5.56x45mm_FMJ
+* https://escapefromtarkov.fandom.com/wiki/.366_TKM_EKO
+* https://escapefromtarkov.fandom.com/wiki/7.62x51mm_TCW_SP
+* https://escapefromtarkov.fandom.com/wiki/7.62x54mm_R_LPS_gzh
 
 Tier Two Ammo
 
-https://escapefromtarkov.fandom.com/wiki/5.45x39mm_PP_gs
-https://escapefromtarkov.fandom.com/wiki/7.62x39mm_PS_gzh
-https://escapefromtarkov.fandom.com/wiki/5.56x45mm_M856A1
-https://escapefromtarkov.fandom.com/wiki/.366_TKM_EKO
-https://escapefromtarkov.fandom.com/wiki/7.62x51mm_BCP_FMJ
-https://escapefromtarkov.fandom.com/wiki/7.62x54mm_R_T-46M_gzh
+* https://escapefromtarkov.fandom.com/wiki/5.45x39mm_PP_gs
+* https://escapefromtarkov.fandom.com/wiki/7.62x39mm_PS_gzh
+* https://escapefromtarkov.fandom.com/wiki/5.56x45mm_M856A1
+* https://escapefromtarkov.fandom.com/wiki/.366_TKM_EKO
+* https://escapefromtarkov.fandom.com/wiki/7.62x51mm_BCP_FMJ
+* https://escapefromtarkov.fandom.com/wiki/7.62x54mm_R_T-46M_gzh
 
 Tier Three Ammo
 
-https://escapefromtarkov.fandom.com/wiki/5.45x39mm_BP_gs
-https://escapefromtarkov.fandom.com/wiki/7.62x39mm_PS_gzh
-https://escapefromtarkov.fandom.com/wiki/5.56x45mm_M856A1
-https://escapefromtarkov.fandom.com/wiki/.366_TKM_AP-M
-https://escapefromtarkov.fandom.com/wiki/7.62x51mm_BCP_FMJ
-https://escapefromtarkov.fandom.com/wiki/7.62x54mm_R_PS_gzh
-https://escapefromtarkov.fandom.com/wiki/.300_Blackout_M62_Tracer
+* https://escapefromtarkov.fandom.com/wiki/5.45x39mm_BP_gs
+* https://escapefromtarkov.fandom.com/wiki/7.62x39mm_PS_gzh
+* https://escapefromtarkov.fandom.com/wiki/5.56x45mm_M856A1
+* https://escapefromtarkov.fandom.com/wiki/.366_TKM_AP-M
+* https://escapefromtarkov.fandom.com/wiki/7.62x51mm_BCP_FMJ
+* https://escapefromtarkov.fandom.com/wiki/7.62x54mm_R_PS_gzh
+* https://escapefromtarkov.fandom.com/wiki/.300_Blackout_M62_Tracer
 
 Tier Four Ammo
 
-https://escapefromtarkov.fandom.com/wiki/5.45x39mm_7N40
-https://escapefromtarkov.fandom.com/wiki/7.62x39mm_BP_gzh
-https://escapefromtarkov.fandom.com/wiki/5.56x45mm_M855A1
-https://escapefromtarkov.fandom.com/wiki/7.62x51mm_M80
-https://escapefromtarkov.fandom.com/wiki/7.62x54mm_R_BT_gzh
+* https://escapefromtarkov.fandom.com/wiki/5.45x39mm_7N40
+* https://escapefromtarkov.fandom.com/wiki/7.62x39mm_BP_gzh
+* https://escapefromtarkov.fandom.com/wiki/5.56x45mm_M855A1
+* https://escapefromtarkov.fandom.com/wiki/7.62x51mm_M80
+* https://escapefromtarkov.fandom.com/wiki/7.62x54mm_R_BT_gzh
