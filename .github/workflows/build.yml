@@ -14,6 +14,12 @@ jobs:
         with:
           node-version: 20.x
 
-      - run: npm install
+      - name: npm install, build, and test
+        run: |
+          npm install
+          npm run build zip
 
-      - run: npm run build zip
+      - name: Archive production artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          path: dist/BarlogM-Andern.zip
