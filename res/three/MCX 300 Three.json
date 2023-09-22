@@ -1,0 +1,130 @@
+{
+    "id": "f4caa2d8ac9ef0e420cfc70b",
+    "name": "MCX 300 Three",
+    "root": "c1531392fe491fabd906e3ba",
+    "items": [
+        {
+            "_id": "c1531392fe491fabd906e3ba",
+            "_tpl": "5fbcc1d9016cce60e8341ab3",
+            "upd": {
+                "Repairable": {
+                    "MaxDurability": 100,
+                    "Durability": 100
+                },
+                "FireMode": {
+                    "FireMode": "single"
+                }
+            }
+        },
+        {
+            "_id": "07a7980b26258973fee80e3d",
+            "_tpl": "6113c3586c780c1e710c90bc",
+            "parentId": "c1531392fe491fabd906e3ba",
+            "slotId": "mod_pistol_grip"
+        },
+        {
+            "_id": "64211c8cec7df590bb55c3e4",
+            "_tpl": "55802d5f4bdc2dac148b458e",
+            "parentId": "c1531392fe491fabd906e3ba",
+            "slotId": "mod_magazine"
+        },
+        {
+            "_id": "8be689b0f11027955c00d6bc",
+            "_tpl": "5fbcc3e4d6fa9c00c571bb58",
+            "parentId": "c1531392fe491fabd906e3ba",
+            "slotId": "mod_reciever"
+        },
+        {
+            "_id": "dbc800334a1850d6e0653f2b",
+            "_tpl": "5c5db6f82e2216003a0fe914",
+            "parentId": "c1531392fe491fabd906e3ba",
+            "slotId": "mod_stock"
+        },
+        {
+            "_id": "e075927ca234c80bb0818009",
+            "_tpl": "5fbcc640016cce60e8341acc",
+            "parentId": "c1531392fe491fabd906e3ba",
+            "slotId": "mod_charge"
+        },
+        {
+            "_id": "2a86a1f186209ef4b18b4bb6",
+            "_tpl": "58491f3324597764bc48fa02",
+            "parentId": "8be689b0f11027955c00d6bc",
+            "slotId": "mod_scope",
+            "upd": {
+                "Sight": {
+                    "ScopesCurrentCalibPointIndexes": [0],
+                    "ScopesSelectedModes": [0],
+                    "SelectedScope": 0
+                }
+            }
+        },
+        {
+            "_id": "c34f383322a683aacbcd5785",
+            "_tpl": "5fbbfacda56d053a3543f799",
+            "parentId": "8be689b0f11027955c00d6bc",
+            "slotId": "mod_barrel"
+        },
+        {
+            "_id": "c1c9ee01ade5d4c6f2add77a",
+            "_tpl": "5fbc227aa56d053a3543f79e",
+            "parentId": "8be689b0f11027955c00d6bc",
+            "slotId": "mod_handguard"
+        },
+        {
+            "_id": "c9bb07289b70bef9b53c6a23",
+            "_tpl": "5fbc22ccf24b94483f726483",
+            "parentId": "c34f383322a683aacbcd5785",
+            "slotId": "mod_muzzle"
+        },
+        {
+            "_id": "89c128e8ec99c0288464fcfc",
+            "_tpl": "5fbc210bf24b94483f726481",
+            "parentId": "c34f383322a683aacbcd5785",
+            "slotId": "mod_gas_block"
+        },
+        {
+            "_id": "244b2bb0970c55b827021382",
+            "_tpl": "59e0bdb186f774156f04ce82",
+            "parentId": "c1c9ee01ade5d4c6f2add77a",
+            "slotId": "mod_mount_001"
+        },
+        {
+            "_id": "3d997914cee60407d2d889b4",
+            "_tpl": "59e0bed186f774156f04ce84",
+            "parentId": "c1c9ee01ade5d4c6f2add77a",
+            "slotId": "mod_foregrip"
+        },
+        {
+            "_id": "87eddfe3e53871368fe64036",
+            "_tpl": "5fbcbd10ab884124df0cd563",
+            "parentId": "c9bb07289b70bef9b53c6a23",
+            "slotId": "mod_muzzle_000"
+        },
+        {
+            "_id": "f60297fc86b42ec8c5d160dc",
+            "_tpl": "5fbe760793164a5b6278efc8",
+            "parentId": "c9bb07289b70bef9b53c6a23",
+            "slotId": "mod_muzzle_001"
+        },
+        {
+            "_id": "6b79def8013447ce932d7705",
+            "_tpl": "6272370ee4013c5d7e31f418",
+            "parentId": "244b2bb0970c55b827021382",
+            "slotId": "mod_tactical",
+            "upd": {
+                "Light": {
+                    "IsActive": true,
+                    "SelectedMode": 0
+                }
+            }
+        },
+        {
+            "_id": "a9f0959a7d3a4731b080c422",
+            "_tpl": "59fc48e086f77463b1118392",
+            "parentId": "3d997914cee60407d2d889b4",
+            "slotId": "mod_foregrip"
+        }
+    ],
+    "Parent": "5447b5f14bdc2d61278b4567"
+}

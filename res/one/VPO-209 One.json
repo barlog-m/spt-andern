@@ -1,0 +1,100 @@
+{
+    "id": "465bddae10e3e8d83a586a88",
+    "name": "VPO-209 One",
+    "root": "7e4e52b6fbf41d0e8372e7fa",
+    "items": [
+        {
+            "_id": "7e4e52b6fbf41d0e8372e7fa",
+            "_tpl": "59e6687d86f77411d949b251",
+            "upd": {
+                "Repairable": {
+                    "MaxDurability": 100,
+                    "Durability": 100
+                },
+                "FireMode": {
+                    "FireMode": "single"
+                }
+            }
+        },
+        {
+            "_id": "b4ee81d75d1aa07c4cd029fa",
+            "_tpl": "59e649f986f77411d949b246",
+            "parentId": "7e4e52b6fbf41d0e8372e7fa",
+            "slotId": "mod_gas_block"
+        },
+        {
+            "_id": "20daedd3fedaea2ed7e424cd",
+            "_tpl": "5a9fbb74a2750c0032157181",
+            "parentId": "7e4e52b6fbf41d0e8372e7fa",
+            "slotId": "mod_muzzle"
+        },
+        {
+            "_id": "426112d829257b0721db8558",
+            "_tpl": "59e6318286f77444dd62c4cc",
+            "parentId": "7e4e52b6fbf41d0e8372e7fa",
+            "slotId": "mod_pistol_grip"
+        },
+        {
+            "_id": "1bada4a7c7c6e7a7363b998e",
+            "_tpl": "5d2c76ed48f03532f2136169",
+            "parentId": "7e4e52b6fbf41d0e8372e7fa",
+            "slotId": "mod_reciever"
+        },
+        {
+            "_id": "b5e7e631405633ff01cb34b2",
+            "_tpl": "59e89d0986f77427600d226e",
+            "parentId": "7e4e52b6fbf41d0e8372e7fa",
+            "slotId": "mod_stock"
+        },
+        {
+            "_id": "b133637c41d13fb00f5121fc",
+            "_tpl": "59d625f086f774661516605d",
+            "parentId": "7e4e52b6fbf41d0e8372e7fa",
+            "slotId": "mod_magazine"
+        },
+        {
+            "_id": "ce19f266b68928f6ef594f3f",
+            "_tpl": "5648ac824bdc2ded0b8b457d",
+            "parentId": "7e4e52b6fbf41d0e8372e7fa",
+            "slotId": "mod_charge"
+        },
+        {
+            "_id": "ff4e97996e4bb5967c3d1279",
+            "_tpl": "5648ae314bdc2d3d1c8b457f",
+            "parentId": "b4ee81d75d1aa07c4cd029fa",
+            "slotId": "mod_handguard"
+        },
+        {
+            "_id": "72e14e76c9007db33bf79ed1",
+            "_tpl": "570fd721d2720bc5458b4596",
+            "parentId": "1bada4a7c7c6e7a7363b998e",
+            "slotId": "mod_scope",
+            "upd": {
+                "Sight": {
+                    "ScopesCurrentCalibPointIndexes": [0],
+                    "ScopesSelectedModes": [0],
+                    "SelectedScope": 0
+                }
+            }
+        },
+        {
+            "_id": "bae298ef5c40f97f72f0dc77",
+            "_tpl": "5c1bc7752e221602b1779b34",
+            "parentId": "ff4e97996e4bb5967c3d1279",
+            "slotId": "mod_foregrip"
+        },
+        {
+            "_id": "1294f9f741883375770ba786",
+            "_tpl": "5a800961159bd4315e3a1657",
+            "parentId": "ff4e97996e4bb5967c3d1279",
+            "slotId": "mod_tactical_002",
+            "upd": {
+                "Light": {
+                    "IsActive": true,
+                    "SelectedMode": 0
+                }
+            }
+        }
+    ],
+    "Parent": "5447b5f14bdc2d61278b4567"
+}

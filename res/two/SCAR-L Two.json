@@ -1,0 +1,133 @@
+{
+    "id": "0221f87bb939d863de5faf47",
+    "name": "SCAR-L Two",
+    "root": "53fa61b9a905b57616197fc8",
+    "items": [
+        {
+            "_id": "53fa61b9a905b57616197fc8",
+            "_tpl": "618428466ef05c2ce828f218",
+            "upd": {
+                "Repairable": {
+                    "MaxDurability": 100,
+                    "Durability": 100
+                },
+                "Foldable": {
+                    "Folded": false
+                },
+                "FireMode": {
+                    "FireMode": "single"
+                }
+            }
+        },
+        {
+            "_id": "5afed03036f3c39c8009631e",
+            "_tpl": "5a339805c4a2826c6e06d73d",
+            "parentId": "53fa61b9a905b57616197fc8",
+            "slotId": "mod_pistol_grip"
+        },
+        {
+            "_id": "1ef35ecb1b52ca81b6f3957c",
+            "_tpl": "5d1340cad7ad1a0b0b249869",
+            "parentId": "53fa61b9a905b57616197fc8",
+            "slotId": "mod_magazine"
+        },
+        {
+            "_id": "d79975367da7b0d680c6e089",
+            "_tpl": "618426d96c780c1e710c9b9f",
+            "parentId": "53fa61b9a905b57616197fc8",
+            "slotId": "mod_reciever"
+        },
+        {
+            "_id": "e4061b82486d346c7303322d",
+            "_tpl": "61825d06d92c473c770215de",
+            "parentId": "53fa61b9a905b57616197fc8",
+            "slotId": "mod_stock"
+        },
+        {
+            "_id": "76634ae5a9f0dabee4717a0c",
+            "_tpl": "6181688c6c780c1e710c9b04",
+            "parentId": "53fa61b9a905b57616197fc8",
+            "slotId": "mod_charge"
+        },
+        {
+            "_id": "0ac5d393e5f3a311f87d04d4",
+            "_tpl": "58491f3324597764bc48fa02",
+            "parentId": "d79975367da7b0d680c6e089",
+            "slotId": "mod_scope",
+            "upd": {
+                "Sight": {
+                    "ScopesCurrentCalibPointIndexes": [0],
+                    "ScopesSelectedModes": [0],
+                    "SelectedScope": 0
+                }
+            }
+        },
+        {
+            "_id": "dbfb9f82289e294f81260c7c",
+            "_tpl": "6183fc15d3a39d50044c13e9",
+            "parentId": "d79975367da7b0d680c6e089",
+            "slotId": "mod_barrel"
+        },
+        {
+            "_id": "71b0b280991ac37891a5e8e2",
+            "_tpl": "61816df1d3a39d50044c139e",
+            "parentId": "d79975367da7b0d680c6e089",
+            "slotId": "mod_mount_000"
+        },
+        {
+            "_id": "d5516728c2b3725654a8176c",
+            "_tpl": "61816dfa6ef05c2ce828f1ad",
+            "parentId": "d79975367da7b0d680c6e089",
+            "slotId": "mod_mount_001"
+        },
+        {
+            "_id": "36c19c76a69aecd4961b8459",
+            "_tpl": "61825d136ef05c2ce828f1cc",
+            "parentId": "e4061b82486d346c7303322d",
+            "slotId": "mod_stock_001"
+        },
+        {
+            "_id": "2c35221fdbca58c6ba502a53",
+            "_tpl": "61825d24d3a39d50044c13af",
+            "parentId": "e4061b82486d346c7303322d",
+            "slotId": "mod_stock_002"
+        },
+        {
+            "_id": "e650463cec4867d74b28011c",
+            "_tpl": "5c6d710d2e22165df16b81e7",
+            "parentId": "dbfb9f82289e294f81260c7c",
+            "slotId": "mod_muzzle"
+        },
+        {
+            "_id": "6605383f05e14fdd2f53355c",
+            "_tpl": "5c7fc87d2e221644f31c0298",
+            "parentId": "71b0b280991ac37891a5e8e2",
+            "slotId": "mod_foregrip"
+        },
+        {
+            "_id": "6e68e43522ad80cbbe7691b6",
+            "_tpl": "6272370ee4013c5d7e31f418",
+            "parentId": "d5516728c2b3725654a8176c",
+            "slotId": "mod_tactical_001",
+            "upd": {
+                "Light": {
+                    "IsActive": true,
+                    "SelectedMode": 0
+                }
+            }
+        },
+        {
+            "_id": "741b8a015c58e18a82b5c43f",
+            "_tpl": "55d6190f4bdc2d87028b4567",
+            "parentId": "e650463cec4867d74b28011c",
+            "slotId": "mod_muzzle"
+        },
+        {
+            "_id": "ed695ab744c216aba49308ca",
+            "_tpl": "618167616ef05c2ce828f1a8",
+            "parentId": "36c19c76a69aecd4961b8459",
+            "slotId": "mod_stock"
+        }
+    ],
+    "Parent": "5447b5f14bdc2d61278b4567"
+}

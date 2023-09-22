@@ -1,0 +1,136 @@
+{
+    "id": "7c21e1972121d37f747ef22d",
+    "name": "TX-15 Four",
+    "root": "58f136bfcdc053ace9d0e9c6",
+    "items": [
+        {
+            "_id": "58f136bfcdc053ace9d0e9c6",
+            "_tpl": "5d43021ca4b9362eab4b5e25",
+            "upd": {
+                "Repairable": {
+                    "MaxDurability": 100,
+                    "Durability": 100
+                },
+                "FireMode": {
+                    "FireMode": "single"
+                }
+            }
+        },
+        {
+            "_id": "89bdbfe8b219d89b4f625c2f",
+            "_tpl": "59db3a1d86f77429e05b4e92",
+            "parentId": "58f136bfcdc053ace9d0e9c6",
+            "slotId": "mod_pistol_grip"
+        },
+        {
+            "_id": "486879548d5f93b7f69354ec",
+            "_tpl": "5c6d46132e221601da357d56",
+            "parentId": "58f136bfcdc053ace9d0e9c6",
+            "slotId": "mod_magazine"
+        },
+        {
+            "_id": "8f6d54406ba430be28380047",
+            "_tpl": "59bfe68886f7746004266202",
+            "parentId": "58f136bfcdc053ace9d0e9c6",
+            "slotId": "mod_reciever"
+        },
+        {
+            "_id": "df73ce724817da07e3a818e7",
+            "_tpl": "5c793fb92e221644f31bfb64",
+            "parentId": "58f136bfcdc053ace9d0e9c6",
+            "slotId": "mod_stock"
+        },
+        {
+            "_id": "cd7001e838df515daef58a20",
+            "_tpl": "5f633ff5c444ce7e3c30a006",
+            "parentId": "58f136bfcdc053ace9d0e9c6",
+            "slotId": "mod_charge"
+        },
+        {
+            "_id": "a0278315e0253f500519109a",
+            "_tpl": "5b3b99265acfc4704b4a1afb",
+            "parentId": "8f6d54406ba430be28380047",
+            "slotId": "mod_scope"
+        },
+        {
+            "_id": "756ce397c25386109cd231c4",
+            "_tpl": "5d440b9fa4b93601354d480c",
+            "parentId": "8f6d54406ba430be28380047",
+            "slotId": "mod_barrel"
+        },
+        {
+            "_id": "dfff859cfded2d98d0646ecf",
+            "_tpl": "5c78f2492e221600114c9f04",
+            "parentId": "8f6d54406ba430be28380047",
+            "slotId": "mod_handguard"
+        },
+        {
+            "_id": "8e6c45889c642107b1aa5f66",
+            "_tpl": "56eabf3bd2720b75698b4569",
+            "parentId": "df73ce724817da07e3a818e7",
+            "slotId": "mod_stock_000"
+        },
+        {
+            "_id": "05b291793e4b5ed3034e9ffb",
+            "_tpl": "618ba27d9008e4636a67f61d",
+            "parentId": "a0278315e0253f500519109a",
+            "slotId": "mod_scope",
+            "upd": {
+                "Sight": {
+                    "ScopesCurrentCalibPointIndexes": [0],
+                    "ScopesSelectedModes": [0],
+                    "SelectedScope": 0
+                }
+            }
+        },
+        {
+            "_id": "95a18097a5df27cfc730a5cf",
+            "_tpl": "609269c3b0e443224b421cc1",
+            "parentId": "756ce397c25386109cd231c4",
+            "slotId": "mod_muzzle"
+        },
+        {
+            "_id": "85d90cfec5a0b22e293fb768",
+            "_tpl": "5d00ec68d7ad1a04a067e5be",
+            "parentId": "756ce397c25386109cd231c4",
+            "slotId": "mod_gas_block"
+        },
+        {
+            "_id": "18995a739ae36f6f48fa7eaa",
+            "_tpl": "5b7be4895acfc400170e2dd5",
+            "parentId": "dfff859cfded2d98d0646ecf",
+            "slotId": "mod_foregrip"
+        },
+        {
+            "_id": "6743bad552e6651f0a45b7f6",
+            "_tpl": "6272370ee4013c5d7e31f418",
+            "parentId": "dfff859cfded2d98d0646ecf",
+            "slotId": "mod_tactical_003",
+            "upd": {
+                "Light": {
+                    "IsActive": true,
+                    "SelectedMode": 0
+                }
+            }
+        },
+        {
+            "_id": "b0dc84b700294ba0ec54b211",
+            "_tpl": "60926df0132d4d12c81fd9df",
+            "parentId": "95a18097a5df27cfc730a5cf",
+            "slotId": "mod_muzzle"
+        },
+        {
+            "_id": "db9277ccc719cdf076192935",
+            "_tpl": "5b057b4f5acfc4771e1bd3e9",
+            "parentId": "18995a739ae36f6f48fa7eaa",
+            "slotId": "mod_foregrip"
+        },
+        {
+            "_id": "c9afec0ebab2936fd3a94287",
+            "_tpl": "58d2912286f7744e27117493",
+            "parentId": "8e6c45889c642107b1aa5f66",
+            "slotId": "mod_stock"
+        }
+    ],
+    "Parent": "5447b5f14bdc2d61278b4567"
+}

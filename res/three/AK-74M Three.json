@@ -1,0 +1,133 @@
+{
+    "id": "1b9ea01e3df52ac9a2e49252",
+    "name": "AK-74M Three",
+    "root": "69b99cec8c19ded33c58c05f",
+    "items": [
+        {
+            "_id": "69b99cec8c19ded33c58c05f",
+            "_tpl": "5ac4cd105acfc40016339859",
+            "upd": {
+                "Repairable": {
+                    "MaxDurability": 100,
+                    "Durability": 100
+                },
+                "Foldable": {
+                    "Folded": false
+                },
+                "FireMode": {
+                    "FireMode": "single"
+                }
+            }
+        },
+        {
+            "_id": "29e9aeefa83011d1853fab4b",
+            "_tpl": "59c6633186f7740cf0493bb9",
+            "parentId": "69b99cec8c19ded33c58c05f",
+            "slotId": "mod_gas_block"
+        },
+        {
+            "_id": "a58759803b607d3d3de8d4a2",
+            "_tpl": "59bffc1f86f77435b128b872",
+            "parentId": "69b99cec8c19ded33c58c05f",
+            "slotId": "mod_muzzle"
+        },
+        {
+            "_id": "94d636459e90aeca7a14276f",
+            "_tpl": "5beec8ea0db834001a6f9dbf",
+            "parentId": "69b99cec8c19ded33c58c05f",
+            "slotId": "mod_pistol_grip"
+        },
+        {
+            "_id": "21c4e3d0b62d03ee5eb8e60e",
+            "_tpl": "5d2c76ed48f03532f2136169",
+            "parentId": "69b99cec8c19ded33c58c05f",
+            "slotId": "mod_reciever"
+        },
+        {
+            "_id": "ad15981506e83928f82d4833",
+            "_tpl": "5ac78eaf5acfc4001926317a",
+            "parentId": "69b99cec8c19ded33c58c05f",
+            "slotId": "mod_stock"
+        },
+        {
+            "_id": "f73b126d01d7a86c85db59fd",
+            "_tpl": "5aaa4194e5b5b055d06310a5",
+            "parentId": "69b99cec8c19ded33c58c05f",
+            "slotId": "mod_magazine"
+        },
+        {
+            "_id": "91550f08dd19d67e239aa3d7",
+            "_tpl": "6130ca3fd92c473c77020dbd",
+            "parentId": "69b99cec8c19ded33c58c05f",
+            "slotId": "mod_charge"
+        },
+        {
+            "_id": "3fb9946966787f58e940bd81",
+            "_tpl": "5c17664f2e2216398b5a7e3c",
+            "parentId": "29e9aeefa83011d1853fab4b",
+            "slotId": "mod_handguard"
+        },
+        {
+            "_id": "1e82a66520cac7427ee9b31a",
+            "_tpl": "59bffbb386f77435b379b9c2",
+            "parentId": "a58759803b607d3d3de8d4a2",
+            "slotId": "mod_muzzle"
+        },
+        {
+            "_id": "88ed0b4b1b7a265882993f57",
+            "_tpl": "5b3b99265acfc4704b4a1afb",
+            "parentId": "21c4e3d0b62d03ee5eb8e60e",
+            "slotId": "mod_scope"
+        },
+        {
+            "_id": "dfb155b03f8400fad07c603c",
+            "_tpl": "59ecc3dd86f7746dc827481c",
+            "parentId": "ad15981506e83928f82d4833",
+            "slotId": "mod_stock"
+        },
+        {
+            "_id": "e976af29cbcd10cebf0cfef5",
+            "_tpl": "59e0bed186f774156f04ce84",
+            "parentId": "3fb9946966787f58e940bd81",
+            "slotId": "mod_mount_000"
+        },
+        {
+            "_id": "42eee89c431f91935951cd81",
+            "_tpl": "59e0bdb186f774156f04ce82",
+            "parentId": "3fb9946966787f58e940bd81",
+            "slotId": "mod_mount_003"
+        },
+        {
+            "_id": "f7a7ad17c38727bd573f0a4a",
+            "_tpl": "59fc48e086f77463b1118392",
+            "parentId": "e976af29cbcd10cebf0cfef5",
+            "slotId": "mod_foregrip"
+        },
+        {
+            "_id": "85ca6af9155481172b92666a",
+            "_tpl": "6272370ee4013c5d7e31f418",
+            "parentId": "42eee89c431f91935951cd81",
+            "slotId": "mod_tactical",
+            "upd": {
+                "Light": {
+                    "IsActive": true,
+                    "SelectedMode": 0
+                }
+            }
+        },
+        {
+            "_id": "5ac443a7aff73cc0e933207f",
+            "_tpl": "5b3b99475acfc432ff4dcbee",
+            "parentId": "88ed0b4b1b7a265882993f57",
+            "slotId": "mod_scope",
+            "upd": {
+                "Sight": {
+                    "ScopesCurrentCalibPointIndexes": [0],
+                    "ScopesSelectedModes": [0],
+                    "SelectedScope": 0
+                }
+            }
+        }
+    ],
+    "Parent": "5447b5f14bdc2d61278b4567"
+}
