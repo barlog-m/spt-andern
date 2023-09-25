@@ -7,10 +7,10 @@ import { MinMax } from "@spt-aki/models/common/MinMax";
 import { BotLevelGenerator } from "@spt-aki/generators/BotLevelGenerator";
 import { ProfileHelper } from "@spt-aki/helpers/ProfileHelper";
 import { RandomUtil } from "@spt-aki/utils/RandomUtil";
-
+import { RaidInfo } from "./RaidInfo";
 import * as config from "../config/config.json";
 
-export default function botLevelChanges(
+export default function registerBotLevelGenerator(
     container: DependencyContainer
 ): undefined {
     const logger = container.resolve<ILogger>("WinstonLogger");
@@ -33,6 +33,8 @@ export default function botLevelChanges(
                         botGenerationDetails,
                         bot
                     );
+
+                //const raidInfo = container.resolve<RaidInfo>("AndernRaidInfo");
 
                 const { playerLevel } = botGenerationDetails;
 

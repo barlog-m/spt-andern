@@ -134,11 +134,15 @@ export abstract class WeaponGenerator {
 
     protected updateWeaponInfo(
         weaponWithMods: Item[],
-        weaponParentId: string
+        weaponParentId: string,
+        isNight: boolean
     ): undefined {
         weaponWithMods[0].slotId = this.equipmentSlot;
         weaponWithMods[0].parentId = weaponParentId;
         this.replaceId(weaponWithMods, 0);
+        if (isNight) this.replaceTacticalDevice(weaponWithMods);
+        this.setTacticalDeviceMode(weaponWithMods);
+        this.setScopeMode(weaponWithMods);
     }
 
     protected replaceId(weaponWithMods: Item[], i: number): undefined {
@@ -157,9 +161,41 @@ export abstract class WeaponGenerator {
         }
     }
 
-    public generateWeapon(weaponParentId: string): GeneratedWeapon {
+    protected replaceTacticalDevice(weaponWithMods: Item[]): undefined {
+        for (const item of weaponWithMods) {
+            if (item.slotId.startsWith("mod_tactical")) {
+                item._tpl = "5a5f1ce64f39f90b401987bc";
+            }
+        }
+    }
+
+    protected setTacticalDeviceMode(weaponWithMods: Item[]): undefined {
+        for (const item of weaponWithMods) {
+            if (item.slotId.startsWith("mod_tactical")) {
+                if (item.upd?.Light) {
+                    item.upd.Light.IsActive = false;
+                    item.upd.Light.SelectedMode = 1;
+                }
+            }
+        }
+    }
+
+    protected setScopeMode(weaponWithMods: Item[]): undefined {
+        for (const item of weaponWithMods) {
+            if (item.slotId.startsWith("mod_scope")) {
+                if (item.upd?.Sight) {
+                    item.upd.Sight.ScopesSelectedModes = [1];
+                }
+            }
+        }
+    }
+
+    public generateWeapon(
+        weaponParentId: string,
+        isNight: boolean
+    ): GeneratedWeapon {
         const weaponWithMods = this.getRandomWeapon();
-        this.updateWeaponInfo(weaponWithMods, weaponParentId);
+        this.updateWeaponInfo(weaponWithMods, weaponParentId, isNight);
         const weaponTpl = this.getTemplateIdFromWeaponItems(weaponWithMods);
         const weaponTemplate = this.getTemplateById(weaponTpl);
         const caliber = this.getCaliberByTemplateId(weaponTpl);

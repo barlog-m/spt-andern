@@ -91,12 +91,6 @@ export class DoeTrader {
             buyRestriction: 1,
         },
         {
-            id: "5a13f46386f7741dd7384b04",
-            price: 50000,
-            name: "Health Resort west wing room 306 key",
-            buyRestriction: 1,
-        },
-        {
             id: "5eff09cd30a7dc22fd1ddfed",
             price: 80000,
             name: "Health Resort office key with a blue tape",
@@ -106,6 +100,24 @@ export class DoeTrader {
             id: "62987da96188c076bc0d8c51",
             price: 80000,
             name: "Operating room key",
+            buyRestriction: 1,
+        },
+        {
+            id: "593aa4be86f77457f56379f8",
+            price: 50000,
+            name: "Dorm room 303 key",
+            buyRestriction: 1,
+        },
+        {
+            id: "5780cf7f2459777de4559322",
+            price: 3500000,
+            name: "Dorm room 314 marked key",
+            buyRestriction: 1,
+        },
+        {
+            id: "5a0ee30786f774023b6ee08f",
+            price: 100000,
+            name: "Health Resort west wing room 216 key",
             buyRestriction: 1,
         },
     ];

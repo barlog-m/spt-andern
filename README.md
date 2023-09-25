@@ -1,4 +1,4 @@
-Andern mod for SPT-AKI
+# Andern mod for SPT-AKI
 
 [![GitHub Tags](https://img.shields.io/github/v/tag/barlog-m/SPT-AKI-Andern?color=0298c3&label=version&style=flat-square)](https://github.com/barlog-m/oceanic-primal-visual-studio-code/tags)
 [![MIT License](https://img.shields.io/badge/license-MIT-0298c3.svg?style=flat-square)](https://opensource.org/licenses/MIT)
@@ -7,13 +7,13 @@ Andern mod for SPT-AKI
 
 Idea of this mod is to rebalance a bit the game for better single player experience.
 
-* Disable Flea Market until level 42. Config parameter `fleaMinUserLevel`. It add more sense to looting because with Flea you can easy just buy everything your need for craft and hideout update.
-
-* Add trader that sell you couple weapon modules to make weapon until level 15 a bit less crap. And sells you keys for quests witch hard to find because of high randomness of loot in the game.
+* Give PMC bots decent weapon from presets. Bots weapon ranged tiers: before 15 - tier one, from 15 to 30 - tier two, from 28 to 40 - tier three, and above 40 - tier four.
 
 * Generate PMC with levels in range ± 10 levels from yours. Config parameter `pmcBotLevelDelta`.
 
-* Give PMC bots decent weapon from presets. Bots weapon ranged by Mechanic level: before 20 - tier one, from 20 to 30 - tier two, from 30 to 40 - tier three, and above 40 - tier four.
+* Add trader that sell you couple weapon modules to make weapon until level 15 a bit less crap. And sells you keys for quests witch hard to find because of high randomness of loot in the game.
+
+* Disable Flea Market until level 42. Config parameter `fleaMinUserLevel`. It add more sense to looting because with Flea you can easy just buy everything your need for craft and hideout update.
 
 Bots get random weapon from lists. There is no pistols and other crap that bots can't use very good.
 Also bots use specified ammo for each caliber from list.
@@ -26,10 +26,22 @@ You can make your own preset. Just be sure that `ammo.json` contain record for w
 
 Preset must have empty magazine and empty chamber.
 
+Preset must have one tactical device.
+
 Mod does not support weapon without magazines.
 
-**Installation**
+At night raids tactical device replaced to [Zenit Klesch-2IKS](https://escapefromtarkov.fandom.com/wiki/Zenit_Klesch-2IKS_IR_illuminator_with_laser)
+
+At night raids all PMC wear helmets with night vision googles
+
+## Installation
+
 Put folder `BarlogM-Andern` from zip file into your `user/mods` folder
+
+## Known issues
+
+* If you close game client with Alt+F4 you have to restart server becouse mod stops working.
+* Mod does not work with [Algorithmic Level Progression](https://hub.sp-tarkov.com/files/file/1400-algorithmic-level-progression/)
 
 Tier One Ammo
 

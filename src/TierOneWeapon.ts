@@ -1,10 +1,10 @@
 import { inject, injectable } from "tsyringe";
 
+import { ILogger } from "@spt-aki/models/spt/utils/ILogger";
 import { DatabaseServer } from "@spt-aki/servers/DatabaseServer";
 import { HashUtil } from "@spt-aki/utils/HashUtil";
 import { RandomUtil } from "@spt-aki/utils/RandomUtil";
 import { ItemHelper } from "@spt-aki/helpers/ItemHelper";
-import { ILogger } from "@spt-aki/models/spt/utils/ILogger";
 import { WeaponGenerator } from "./WeaponGenerator";
 import * as ammo from "../res/one/ammo.json";
 

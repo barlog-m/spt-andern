@@ -24,8 +24,12 @@ import { TierOneWeapon } from "./TierOneWeapon";
 import { TierTwoWeapon } from "./TierTwoWeapon";
 import { TierThreeWeapon } from "./TierThreeWeapon";
 import { TierFourWeapon } from "./TierFourWeapon";
-import botWeaponChanges from "./botWeaponChanges";
-import botLevelChanges from "./botLevelChanges";
+import registerInfoUpdater from "./registerInfoUpdater";
+import registerBotWeaponGenerator from "./registerBotWeaponGenerator";
+import registerBotLevelGenerator from "./registerBotLevelGenerator";
+import registerBotInventoryGenerator from "./registerBotInventoryGenerator";
+import { RaidInfo } from "./RaidInfo";
+import { BotHeadwear } from "./BotHeadwear";
 import * as config from "../config/config.json";
 
 export class Andern implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
@@ -46,25 +50,55 @@ export class Andern implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
         const resPath = `./${preAkiModLoader.getModPath(this.fullModName)}res`;
         container.register("ModResPath", { useValue: resPath });
 
-        container.register<TierOneWeapon>("TierOneWeapon", TierOneWeapon, {
-            lifecycle: Lifecycle.Singleton,
-        });
-        container.register<TierTwoWeapon>("TierTwoWeapon", TierTwoWeapon, {
-            lifecycle: Lifecycle.Singleton,
-        });
+        container.register<TierOneWeapon>(
+            "AndernTierOneWeapon",
+            TierOneWeapon,
+            {
+                lifecycle: Lifecycle.Singleton,
+            }
+        );
+        container.register<TierTwoWeapon>(
+            "AndernTierTwoWeapon",
+            TierTwoWeapon,
+            {
+                lifecycle: Lifecycle.Singleton,
+            }
+        );
         container.register<TierThreeWeapon>(
-            "TierThreeWeapon",
+            "AndernTierThreeWeapon",
             TierThreeWeapon,
             {
                 lifecycle: Lifecycle.Singleton,
             }
         );
-        container.register<TierFourWeapon>("TierFourWeapon", TierFourWeapon, {
+        container.register<TierFourWeapon>(
+            "AndernTierFourWeapon",
+            TierFourWeapon,
+            {
+                lifecycle: Lifecycle.Singleton,
+            }
+        );
+
+        container.register<TierFourWeapon>(
+            "AndernTierFourWeapon",
+            TierFourWeapon,
+            {
+                lifecycle: Lifecycle.Singleton,
+            }
+        );
+
+        container.register<RaidInfo>("AndernRaidInfo", RaidInfo, {
             lifecycle: Lifecycle.Singleton,
         });
 
-        botLevelChanges(container);
-        botWeaponChanges(container);
+        container.register<BotHeadwear>("AndernBotHeadwear", BotHeadwear, {
+            lifecycle: Lifecycle.Singleton,
+        });
+
+        registerInfoUpdater(container);
+        registerBotLevelGenerator(container);
+        registerBotWeaponGenerator(container);
+        registerBotInventoryGenerator(container);
 
         this.prepareTrader(container, preAkiModLoader);
     }
