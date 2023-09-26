@@ -1,8 +1,7 @@
-import { DependencyContainer } from "tsyringe";
 import { WeatherGenerator } from "@spt-aki/generators/WeatherGenerator";
 import { IWeatherData } from "@spt-aki/models/eft/weather/IWeatherData";
 
-function getCurrentTime(weatherGenerator: WeatherGenerator): string {
+export function getCurrentTime(weatherGenerator: WeatherGenerator): string {
     let result: IWeatherData = {
         acceleration: 0,
         time: "",
@@ -13,32 +12,30 @@ function getCurrentTime(weatherGenerator: WeatherGenerator): string {
     return result.time;
 }
 
-function getCurrentHour(
-    container: DependencyContainer,
+export function getCurrentHour(
+    currentTime: string,
     timeVariant: string
 ): number {
-    const weatherGenerator =
-        container.resolve<WeatherGenerator>("WeatherGenerator");
-
-    const currentTime = getCurrentTime(weatherGenerator);
     const [hourStr, minStr, secStr] = currentTime.split(":");
     const hour = parseInt(hourStr);
 
     if (timeVariant === "PAST") {
-        return hour - 12;
+        return Math.abs(hour - 12);
     }
     return hour;
 }
 
 export function isNight(
-    container: DependencyContainer,
+    currentTime: string,
     timeVariant: string,
     location: string
 ): boolean {
     if (location === "factory4_night") {
         return true;
+    } else if (location === "factory4_day") {
+        return false;
     } else {
-        const currentHour = getCurrentHour(container, timeVariant);
+        const currentHour = getCurrentHour(currentTime, timeVariant);
 
         if (currentHour >= 22 || currentHour <= 5) return true;
 

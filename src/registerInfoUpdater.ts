@@ -1,8 +1,9 @@
 import { DependencyContainer } from "tsyringe";
 import { StaticRouterModService } from "@spt-aki/services/mod/staticRouter/StaticRouterModService";
 import { ILogger } from "@spt-aki/models/spt/utils/ILogger";
+import { WeatherGenerator } from "@spt-aki/generators/WeatherGenerator";
 import { RaidInfo } from "./RaidInfo";
-import { isNight } from "./timeUtils";
+import { isNight, getCurrentTime } from "./timeUtils";
 
 export default function registerInfoUpdater(
     container: DependencyContainer
@@ -11,6 +12,8 @@ export default function registerInfoUpdater(
     const staticRouterModService = container.resolve<StaticRouterModService>(
         "StaticRouterModService"
     );
+    const weatherGenerator =
+        container.resolve<WeatherGenerator>("WeatherGenerator");
     const raidInfo = container.resolve<RaidInfo>("AndernRaidInfo");
 
     staticRouterModService.registerStaticRouter(
@@ -20,16 +23,16 @@ export default function registerInfoUpdater(
                 url: "/client/raid/configuration",
                 action: (_url, info, _sessionId, output) => {
                     raidInfo.location = info.location.toLowerCase();
+                    raidInfo.currentTime = getCurrentTime(weatherGenerator);
+                    raidInfo.timeVariant = info.timeVariant;
                     raidInfo.isNight = isNight(
-                        container,
-                        info.timeVariant,
+                        raidInfo.currentTime,
+                        raidInfo.timeVariant,
                         raidInfo.location
                     );
-                    /*
                     logger.info(
                         `[Andern] raid info ${JSON.stringify(raidInfo)}`
                     );
-                    */
                     return output;
                 },
             },

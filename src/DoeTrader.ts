@@ -120,6 +120,36 @@ export class DoeTrader {
             name: "Health Resort west wing room 216 key",
             buyRestriction: 1,
         },
+        {
+            id: "5a0dc95c86f77452440fc675",
+            price: 60000,
+            name: "Health Resort west wing office room 112 key",
+            buyRestriction: 1,
+        },
+        {
+            id: "5a0ee34586f774023b6ee092",
+            price: 60000,
+            name: "Health Resort west wing room 220 key",
+            buyRestriction: 1,
+        },
+        {
+            id: "5ad5db3786f7743568421cce",
+            price: 90000,
+            name: "EMERCOM medical unit key",
+            buyRestriction: 1,
+        },
+        {
+            id: "5d947d4e86f774447b415895",
+            price: 150000,
+            name: "RB-KSM key",
+            buyRestriction: 1,
+        },
+        {
+            id: "5d947d3886f774447b415893",
+            price: 140000,
+            name: "RB-SMP key",
+            buyRestriction: 1,
+        },
     ];
 
     public static addItems(
