@@ -34,6 +34,16 @@ At night raids tactical device replaced to [Zenit Klesch-2IKS](https://escapefro
 
 At night raids all PMC wear helmets with night vision googles
 
+## Trader sells after level 40 this ammo
+
+* https://escapefromtarkov.fandom.com/wiki/.300_Blackout_AP
+* https://escapefromtarkov.fandom.com/wiki/7.62x39mm_BP_gzh
+* https://escapefromtarkov.fandom.com/wiki/5.45x39mm_7N40
+
+Trader can insure with zero return time and 100% return chance.
+
+Trader can repair without degradation.
+
 ## Installation
 
 Put folder `BarlogM-Andern` from zip file into your `user/mods` folder
@@ -78,3 +88,4 @@ Tier Four Ammo
 * https://escapefromtarkov.fandom.com/wiki/5.56x45mm_M855A1
 * https://escapefromtarkov.fandom.com/wiki/7.62x51mm_M80
 * https://escapefromtarkov.fandom.com/wiki/7.62x54mm_R_BT_gzh
+* https://escapefromtarkov.fandom.com/wiki/.300_Blackout_AP

@@ -11,7 +11,7 @@ type TraderItem = {
 };
 
 export class DoeTrader {
-    private static items: TraderItem[] = [
+    public static items: TraderItem[] = [
         {
             id: "5648ae314bdc2d3d1c8b457f",
             price: 12000,
@@ -139,30 +139,65 @@ export class DoeTrader {
             buyRestriction: 1,
         },
         {
-            id: "5d947d4e86f774447b415895",
-            price: 150000,
-            name: "RB-KSM key",
+            id: "5d80c6c586f77440351beef1",
+            price: 280000,
+            name: "RB-OB key",
             buyRestriction: 1,
         },
         {
-            id: "5d947d3886f774447b415893",
-            price: 140000,
-            name: "RB-SMP key",
+            id: "5d80cd1a86f77402aa362f42",
+            price: 160000,
+            name: "RB-ORB3 key",
             buyRestriction: 1,
+        },
+        {
+            id: "5d80ccdd86f77474f7575e02",
+            price: 150000,
+            name: "RB-ORB2 key",
+            buyRestriction: 1,
+        },
+        {
+            id: "5d80ccac86f77470841ff452",
+            price: 220000,
+            name: "RB-ORB1",
+            buyRestriction: 1,
+        },
+    ];
+
+    public static tierFourItems: TraderItem[] = [
+        {
+            id: "5fd20ff893a8961fc660a954",
+            price: 1200,
+            name: "patron_762x35_blackout_ap",
+            buyRestriction: 500,
+        },
+        {
+            id: "59e0d99486f7744a32234762",
+            price: 1200,
+            name: "patron_762x39_BP",
+            buyRestriction: 500,
+        },
+        {
+            id: "61962b617c6c7b169525f168",
+            price: 1200,
+            name: "patron_545x39_7n40",
+            buyRestriction: 500,
         },
     ];
 
     public static addItems(
         fluentTraderAssortHeper: FluentAssortConstructor,
-        tables: IDatabaseTables
-    ): void {
-        DoeTrader.items.forEach((i) => {
+        tables: IDatabaseTables,
+        items: TraderItem[],
+        loyalityLevel: number
+    ): undefined {
+        items.forEach((i) => {
             fluentTraderAssortHeper
                 .createSingleAssortItem(i.id)
                 .addUnlimitedStackCount()
                 .addBuyRestriction(i.buyRestriction)
                 .addMoneyCost(Money.ROUBLES, i.price)
-                .addLoyaltyLevel(1)
+                .addLoyaltyLevel(loyalityLevel)
                 .export(tables.traders[baseJson._id]);
         });
     }

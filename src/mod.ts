@@ -10,6 +10,7 @@ import { ImageRouter } from "@spt-aki/routers/ImageRouter";
 import { ConfigServer } from "@spt-aki/servers/ConfigServer";
 import { ConfigTypes } from "@spt-aki/models/enums/ConfigTypes";
 import { ITraderConfig } from "@spt-aki/models/spt/config/ITraderConfig";
+import { IInsuranceConfig } from "@spt-aki/models/spt/config/IInsuranceConfig";
 import { JsonUtil } from "@spt-aki/utils/JsonUtil";
 
 import * as baseJson from "../db/base.json";
@@ -140,6 +141,33 @@ export class Andern implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
         Traders[baseJson._id] = baseJson._id;
     }
 
+    private prepareInsurance(
+        container: DependencyContainer,
+        doeTraderId: string
+    ) {
+        const configServer = container.resolve<ConfigServer>("ConfigServer");
+
+        const insuranceConfig: IInsuranceConfig = configServer.getConfig(
+            ConfigTypes.INSURANCE
+        );
+
+        insuranceConfig.returnChancePercent[baseJson._id] = 100;
+        insuranceConfig.insuranceMultiplier[baseJson._id] = 0.1;
+
+        const databaseServer: DatabaseServer =
+            container.resolve<DatabaseServer>("DatabaseServer");
+
+        const praporDialogs = JSON.parse(
+            JSON.stringify(
+                databaseServer.getTables().traders["54cb50c76803fa8b248b4571"]
+                    .dialogue
+            )
+        ) as Record<string, string[]>;
+
+        databaseServer.getTables().traders[doeTraderId].dialogue =
+            praporDialogs;
+    }
+
     private registerTrader(container: DependencyContainer): undefined {
         const databaseServer: DatabaseServer =
             container.resolve<DatabaseServer>("DatabaseServer");
@@ -149,7 +177,18 @@ export class Andern implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
 
         this.traderHelper.addTraderToDb(baseJson, tables, jsonUtil);
 
-        DoeTrader.addItems(this.fluentTraderAssortHeper, tables);
+        DoeTrader.addItems(
+            this.fluentTraderAssortHeper,
+            tables,
+            DoeTrader.items,
+            1
+        );
+        DoeTrader.addItems(
+            this.fluentTraderAssortHeper,
+            tables,
+            DoeTrader.tierFourItems,
+            4
+        );
 
         this.traderHelper.addTraderToLocales(
             baseJson,
@@ -161,6 +200,7 @@ export class Andern implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
             ModConfig.traderDescription
         );
 
+        this.prepareInsurance(container, baseJson._id);
         this.logger.info("[Andern] Doe trader registered");
     }
 
