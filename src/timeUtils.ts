@@ -34,6 +34,8 @@ export function isNight(
         return true;
     } else if (location === "factory4_day") {
         return false;
+    } else if (location === "laboratory") {
+        return false;
     } else {
         const currentHour = getCurrentHour(currentTime, timeVariant);
 
