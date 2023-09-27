@@ -1,5 +1,7 @@
 {
     "pmcBotLevelDelta": 10,
+    "lootMultiplier": 3,
+    "insuranceOnLab": true,
     "fleaMinUserLevel": 42,
     "debug": false
 }

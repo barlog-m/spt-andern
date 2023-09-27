@@ -11,6 +11,8 @@ import { ConfigServer } from "@spt-aki/servers/ConfigServer";
 import { ConfigTypes } from "@spt-aki/models/enums/ConfigTypes";
 import { ITraderConfig } from "@spt-aki/models/spt/config/ITraderConfig";
 import { IInsuranceConfig } from "@spt-aki/models/spt/config/IInsuranceConfig";
+import { ILocationConfig } from "@spt-aki/models/spt/config/ILocationConfig";
+import { ILocationBase } from "@spt-aki/models/eft/common/ILocationBase";
 import { JsonUtil } from "@spt-aki/utils/JsonUtil";
 
 import * as baseJson from "../db/base.json";
@@ -107,6 +109,11 @@ export class Andern implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
     postAkiLoad(container: DependencyContainer): void {
         this.banScavVestForPmc(container);
         this.setMinFleaLevel(container);
+        this.lootConfig(container);
+
+        if (config.insuranceOnLab) {
+            this.enableInsuranceOnLab(container);
+        }
     }
 
     public postDBLoad(container: DependencyContainer): void {
@@ -237,6 +244,30 @@ export class Andern implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
                 `[Andern] Flea Market minimal user level set to ${config.fleaMinUserLevel}`
             );
         }
+    }
+
+    private lootConfig(container: DependencyContainer): undefined {
+        const configServer = container.resolve<ConfigServer>("ConfigServer");
+
+        const locatinConfig: ILocationConfig = configServer.getConfig(
+            ConfigTypes.LOCATION
+        );
+
+        for (const map in locatinConfig.looseLootMultiplier) {
+            locatinConfig.looseLootMultiplier[map] = config.lootMultiplier;
+        }
+
+        for (const map in locatinConfig.staticLootMultiplier) {
+            locatinConfig.looseLootMultiplier[map] = config.lootMultiplier;
+        }
+    }
+
+    private enableInsuranceOnLab(container: DependencyContainer): undefined {
+        const databaseServer: DatabaseServer =
+            container.resolve<DatabaseServer>("DatabaseServer");
+        const mapLab: ILocationBase =
+            databaseServer.getTables().locations["laboratory"].base;
+        mapLab.Insurance = true;
     }
 }
 

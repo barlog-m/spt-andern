@@ -44,6 +44,10 @@ Trader can insure with zero return time and 100% return chance.
 
 Trader can repair without degradation.
 
+Enable insurance on Lab. Option `insuranceOnLab`.
+
+Loot multiplayer for each map for static and loose loot. Default is 3. Option `lootMultiplier`.
+
 ## Installation
 
 Put folder `BarlogM-Andern` from zip file into your `user/mods` folder
