@@ -36,7 +36,7 @@
         "min_payment": 0,
         "min_return_hour": 0,
         "max_return_hour": 0,
-        "max_storage_time": 99,
+        "max_storage_time": 168,
         "excluded_category": ["62e9103049c018f425059f38"]
     },
     "gridHeight": 150,

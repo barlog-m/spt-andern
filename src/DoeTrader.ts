@@ -162,6 +162,12 @@ export class DoeTrader {
             name: "RB-ORB1",
             buyRestriction: 1,
         },
+        {
+            id: "5a0eee1486f77402aa773226",
+            price: 80000,
+            name: "Health Resort east wing room 328 key",
+            buyRestriction: 1,
+        },
     ];
 
     public static tierFourItems: TraderItem[] = [

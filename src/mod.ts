@@ -111,6 +111,8 @@ export class Andern implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
         this.setMinFleaLevel(container);
         this.lootConfig(container);
 
+        this.traderInsurance(container, baseJson._id);
+
         if (config.insuranceOnLab) {
             this.enableInsuranceOnLab(container);
         }
@@ -148,19 +150,10 @@ export class Andern implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
         Traders[baseJson._id] = baseJson._id;
     }
 
-    private prepareInsurance(
+    private traderInsurance(
         container: DependencyContainer,
         doeTraderId: string
     ) {
-        const configServer = container.resolve<ConfigServer>("ConfigServer");
-
-        const insuranceConfig: IInsuranceConfig = configServer.getConfig(
-            ConfigTypes.INSURANCE
-        );
-
-        insuranceConfig.returnChancePercent[baseJson._id] = 100;
-        insuranceConfig.insuranceMultiplier[baseJson._id] = 0.1;
-
         const databaseServer: DatabaseServer =
             container.resolve<DatabaseServer>("DatabaseServer");
 
@@ -173,6 +166,15 @@ export class Andern implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
 
         databaseServer.getTables().traders[doeTraderId].dialogue =
             praporDialogs;
+
+        const configServer = container.resolve<ConfigServer>("ConfigServer");
+
+        const insuranceConfig: IInsuranceConfig = configServer.getConfig(
+            ConfigTypes.INSURANCE
+        );
+
+        insuranceConfig.returnChancePercent[doeTraderId] = 100;
+        insuranceConfig.insuranceMultiplier[doeTraderId] = 0.1;
     }
 
     private registerTrader(container: DependencyContainer): undefined {
@@ -207,7 +209,6 @@ export class Andern implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
             ModConfig.traderDescription
         );
 
-        this.prepareInsurance(container, baseJson._id);
         this.logger.info("[Andern] Doe trader registered");
     }
 

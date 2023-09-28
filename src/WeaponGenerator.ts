@@ -51,11 +51,13 @@ export abstract class WeaponGenerator {
             }
             files.forEach((f) => {
                 if (f === "ammo.json") return;
-                const jsonData = fs.readFileSync(`${presetsDir}/${f}`, "utf-8");
+                const fullFileName = `${presetsDir}/${f}`;
+                const jsonData = fs.readFileSync(fullFileName, "utf-8");
                 const preset = new WeaponPreset();
                 Object.assign(preset, JSON.parse(jsonData));
-
-                this.weaponPresets[preset.id] = preset;
+                if (this.isPresetValid(preset, fullFileName)) {
+                    this.weaponPresets[preset.id] = preset;
+                }
             });
         });
     }
@@ -188,6 +190,48 @@ export abstract class WeaponGenerator {
                 }
             }
         }
+    }
+
+    protected isPresetValid(
+        weaponPreset: WeaponPreset,
+        fileName: string
+    ): boolean {
+        let hasMagazine = false;
+        let hasTacticalDevice = false;
+
+        for (const i of weaponPreset.items) {
+            if (!i.slotId) {
+                continue;
+            }
+            if (i.slotId === "cartridges") {
+                this.logger.error(
+                    `[Andern] preset's magazine is not empty '${fileName}'`
+                );
+                return false;
+            }
+            if (i.slotId === "mod_magazine") {
+                hasMagazine = true;
+            }
+            if (i.slotId.startsWith("mod_tactical")) {
+                hasTacticalDevice = true;
+            }
+        }
+
+        if (!hasMagazine) {
+            this.logger.error(
+                `[Andern] preset doesn't have magazine '${fileName}'`
+            );
+            return false;
+        }
+
+        if (!hasTacticalDevice) {
+            this.logger.error(
+                `[Andern] preset doesn't have tactical device '${fileName}'`
+            );
+            return false;
+        }
+
+        return true;
     }
 
     public generateWeapon(
