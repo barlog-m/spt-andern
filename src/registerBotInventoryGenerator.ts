@@ -4,7 +4,10 @@ import { BotInventoryGenerator } from "@spt-aki/generators/BotInventoryGenerator
 import { Inventory as PmcInventory } from "@spt-aki/models/eft/common/tables/IBotBase";
 import { IBotType } from "@spt-aki/models/eft/common/tables/IBotType";
 import { RaidInfo } from "./RaidInfo";
-import { BotHeadwear } from "./BotHeadwear";
+import { TierOneGear } from "./TierOneGear";
+import { TierTwoGear } from "./TierTwoGear";
+import { TierThreeGear } from "./TierThreeGear";
+import { TierFourGear } from "./TierFourGear";
 
 export default function registerBotInventoryGenerator(
     container: DependencyContainer
@@ -13,8 +16,14 @@ export default function registerBotInventoryGenerator(
     const botInventoryGenerator = container.resolve<BotInventoryGenerator>(
         "BotInventoryGenerator"
     );
-    const botHeadwear = container.resolve<BotHeadwear>("AndernBotHeadwear");
     const raidInfo = container.resolve<RaidInfo>("AndernRaidInfo");
+
+    const tierOneGear = container.resolve<TierOneGear>("AndernTierOneGear");
+    const tierTwoGear = container.resolve<TierTwoGear>("AndernTierTwoGear");
+    const tierThreeGear = container.resolve<TierThreeGear>(
+        "AndernTierThreeGear"
+    );
+    const tierFourGear = container.resolve<TierFourGear>("AndernTierFourGear");
 
     container.afterResolution(
         "BotInventoryGenerator",
@@ -26,35 +35,57 @@ export default function registerBotInventoryGenerator(
                 isPmc: boolean,
                 botLevel: number
             ): PmcInventory => {
-                const inventory = botInventoryGenerator.generateInventory(
+                if (isPmc) {
+                    if (botLevel < 15) {
+                        const inventory = tierOneGear.generateInventory(
+                            sessionId,
+                            botJsonTemplate,
+                            botRole,
+                            isPmc,
+                            botLevel,
+                            raidInfo.isNight
+                        );
+                        return inventory;
+                    } else if (botLevel >= 15 && botLevel < 28) {
+                        const inventory = tierTwoGear.generateInventory(
+                            sessionId,
+                            botJsonTemplate,
+                            botRole,
+                            isPmc,
+                            botLevel,
+                            raidInfo.isNight
+                        );
+                        return inventory;
+                    } else if (botLevel >= 28 && botLevel < 40) {
+                        const inventory = tierThreeGear.generateInventory(
+                            sessionId,
+                            botJsonTemplate,
+                            botRole,
+                            isPmc,
+                            botLevel,
+                            raidInfo.isNight
+                        );
+                        return inventory;
+                    } else {
+                        const inventory = tierFourGear.generateInventory(
+                            sessionId,
+                            botJsonTemplate,
+                            botRole,
+                            isPmc,
+                            botLevel,
+                            raidInfo.isNight
+                        );
+                        return inventory;
+                    }
+                }
+
+                return botInventoryGenerator.generateInventory(
                     sessionId,
                     botJsonTemplate,
                     botRole,
                     isPmc,
                     botLevel
                 );
-
-                if (isPmc && raidInfo.isNight) {
-                    if (botLevel < 15) {
-                        botHeadwear.tierOneHeadwearWithNvg(inventory);
-                    } else if (botLevel >= 15 && botLevel < 28) {
-                        botHeadwear.tierTwoHeadwearWithNvg(inventory);
-                    } else if (botLevel >= 28 && botLevel < 40) {
-                        botHeadwear.tierThreeHeadwearWithNvg(inventory);
-                    } else {
-                        botHeadwear.tierFourHeadwearWithNvg(inventory);
-                    }
-
-                    /*
-                    logger.info(
-                        `[Andern] PMC Bot headwear replaced ${JSON.stringify(
-                            inventory.items
-                        )}`
-                    );
-                    */
-                }
-
-                return inventory;
             };
         },
         { frequency: "Always" }

@@ -1,0 +1,193 @@
+{
+    "headsets": [
+        {
+            "weight": 2,
+            "id": "5e4d34ca86f774264f758330",
+            "name": "Walkers Razor Digital headset"
+        },
+        {
+            "weight": 1,
+            "id": "6033fa48ffd42c541047f728",
+            "name": "OPSMEN Earmor M32 headset"
+        },
+        {
+            "weight": 1,
+            "id": "5645bcc04bdc2d363b8b4572",
+            "name": "Peltor ComTac 2 headset"
+        },
+        {
+            "weight": 1,
+            "id": "5aa2ba71e5b5b000137b758f",
+            "name": "MSA Sordin Supreme PRO-X/L active headset"
+        }
+    ],
+    "helmets": [
+        {
+            "weight": 2,
+            "id": "5ac8d6885acfc400180ae7b0",
+            "name": "Ops-Core FAST MT Super High Cut helmet (Tan)"
+        },
+        {
+            "weight": 2,
+            "id": "5a154d5cfcdbcb001a3b00da",
+            "name": "Ops-Core FAST MT Super High Cut helmet (Black)"
+        },
+        {
+            "weight": 1,
+            "id": "5e00c1ad86f774747333222c",
+            "name": "Team Wendy EXFIL Ballistic Helmet (Black)"
+        },
+        {
+            "weight": 1,
+            "id": "5b40e3f35acfc40016388218",
+            "name": "HighCom Striker ACHHC IIIA helmet (Black)"
+        },
+        {
+            "weight": 1,
+            "id": "5b40e4035acfc47a87740943",
+            "name": "HighCom Striker ACHHC IIIA helmet (Olive Drab)"
+        }
+    ],
+    "armoredRigs": [
+        {
+            "weight": 2,
+            "id": "5b44cad286f77402a54ae7e5",
+            "name": "5.11 Tactical TacTec plate carrier"
+        },
+        {
+            "weight": 2,
+            "id": "628d0618d1ba6e4fa07ce5a4",
+            "name": "NPP KlASS Bagariy armored rig"
+        },
+        {
+            "weight": 1,
+            "id": "639343fce101f4caa40a4ef3",
+            "name": "Shellback Tactical Banshee plate carrier (A-TACS AU)"
+        },
+        {
+            "weight": 1,
+            "id": "60a3c70cde5f453f634816a3",
+            "name": "CQC Osprey MK4A plate carrier (Assault, MTP)"
+        }
+    ],
+    "armor": [
+        {
+            "weight": 1,
+            "id": "5f5f41476bdad616ad46d631",
+            "name": "NPP KlASS Korund-VM body armor"
+        },
+        {
+            "weight": 1,
+            "id": "5b44d0de86f774503d30cba8",
+            "name": "IOTV Gen4 body armor (High Mobility Kit)"
+        },
+        {
+            "weight": 1,
+            "id": "5ca2151486f774244a3b8d30",
+            "name": "FORT Redut-M body armor"
+        }
+    ],
+    "rigs": [
+        {
+            "weight": 1,
+            "id": "5648a69d4bdc2ded0b8b457b",
+            "name": "BlackRock chest rig"
+        },
+        {
+            "weight": 1,
+            "id": "5ab8dab586f77441cd04f2a2",
+            "name": "WARTECH MK3 TV-104 chest rig"
+        },
+        {
+            "weight": 1,
+            "id": "5c0e6a1586f77404597b4965",
+            "name": "Belt-A + Belt-B gear rig"
+        },
+        {
+            "weight": 1,
+            "id": "60a621c49c197e4e8c4455e6",
+            "name": "Stich Profi Chest Rig MK2 (Assault, A-TACS FG)"
+        },
+        {
+            "weight": 1,
+            "id": "5df8a42886f77412640e2e75",
+            "name": "Velocity Systems MPPV Multi-Purpose Patrol Vest"
+        },
+        {
+            "weight": 1,
+            "id": "5fd4c60f875c30179f5d04c2",
+            "name": "Gear Craft GC-BSS-MK1 chest rig"
+        },
+        {
+            "weight": 1,
+            "id": "603648ff5a45383c122086ac",
+            "name": "Azimut SS Zhuk chest harness (Black)"
+        },
+        {
+            "weight": 1,
+            "id": "60a6220e953894617404b00a",
+            "name": "Stich Profi Chest Rig MK2 (Recon, A-TACS FG)"
+        }
+    ],
+    "backpacks": [
+        {
+            "weight": 1,
+            "id": "5ca20d5986f774331e7c9602",
+            "name": "WARTECH Berkut BB-102 backpack"
+        },
+        {
+            "weight": 1,
+            "id": "5e9dcf5986f7746c417435b3",
+            "name": "LBT-8005A Day Pack backpack"
+        },
+        {
+            "weight": 1,
+            "id": "5f5e467b0bc58666c37e7821",
+            "name": "Eberlestock F5 Switchblade backpack (Dry Earth)"
+        },
+        {
+            "weight": 1,
+            "id": "6038d614d10cbf667352dd44",
+            "name": "Hazard 4 Takedown sling backpack (Multicam)"
+        },
+        {
+            "weight": 1,
+            "id": "619cf0335771dd3c390269ae",
+            "name": "Gruppa 99 T20 backpack (Multicam)"
+        },
+        {
+            "weight": 1,
+            "id": "62a1b7fbc30cfa1d366af586",
+            "name": "Gruppa 99 T30 backpack (Multicam)"
+        },
+        {
+            "weight": 1,
+            "id": "639346cc1c8f182ad90c8972",
+            "name": "Tasmanian Tiger Trooper 35 backpack"
+        },
+        {
+            "weight": 1,
+            "id": "618cfae774bb2d036a049e7c",
+            "name": "LBT-1476A 3Day Pack (Woodland)"
+        }
+    ],
+    "face": [
+        {
+            "weight": 1,
+            "id": "5b432f3d5acfc4704b4a1dfb",
+            "name": "Momex balaclava"
+        },
+        {
+            "weight": 1,
+            "id": "5ab8f85d86f7745cd93a1cf5",
+            "name": "Shemagh (Green)"
+        }
+    ],
+    "eyewear": [
+        {
+            "weight": 1,
+            "id": "603409c80ca681766b6a0fb2",
+            "name": "NPP KlASS Condor glasses"
+        }
+    ]
+}

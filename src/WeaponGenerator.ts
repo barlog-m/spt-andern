@@ -5,6 +5,12 @@ import { HashUtil } from "@spt-aki/utils/HashUtil";
 import { ItemHelper } from "@spt-aki/helpers/ItemHelper";
 import { ILogger } from "@spt-aki/models/spt/utils/ILogger";
 import { RandomUtil } from "@spt-aki/utils/RandomUtil";
+import { BotWeaponGeneratorHelper } from "@spt-aki/helpers/BotWeaponGeneratorHelper";
+import { EquipmentSlots } from "@spt-aki/models/enums/EquipmentSlots";
+import { IInventoryMagGen } from "@spt-aki/generators/weapongen/IInventoryMagGen";
+import { InventoryMagGen } from "@spt-aki/generators/weapongen/InventoryMagGen";
+import { Inventory as PmcInventory } from "@spt-aki/models/eft/common/tables/IBotBase";
+import { MinMax } from "@spt-aki/models/common/MinMax";
 
 import * as fs from "fs";
 
@@ -19,6 +25,7 @@ export class GeneratedWeapon {
     weaponWithMods: Item[];
     weaponTemplate: ITemplateItem;
     ammoTpl: string;
+    magazineTpl: string;
 }
 
 export abstract class WeaponGenerator {
@@ -28,12 +35,17 @@ export abstract class WeaponGenerator {
 
     protected weaponPresets: Record<string, WeaponPreset> = {};
 
+    protected readonly numberOfMagazines: MinMax = { min: 2, max: 5 };
+    protected readonly secureContainerAmmoStackCount = 3;
+
     constructor(
         protected logger: ILogger,
         protected hashUtil: HashUtil,
         protected randomUtil: RandomUtil,
         protected databaseServer: DatabaseServer,
         protected itemHelper: ItemHelper,
+        protected botWeaponGeneratorHelper: BotWeaponGeneratorHelper,
+        protected inventoryMagGenComponents: IInventoryMagGen[],
         protected modResPath: string
     ) {
         this.loadPresets(modResPath);
@@ -43,14 +55,14 @@ export abstract class WeaponGenerator {
         return this.databaseServer.getTables().templates?.items;
     }
 
-    protected loadPresets(presetsDir: string): void {
+    protected loadPresets(presetsDir: string): undefined {
         fs.readdir(presetsDir, (err, files) => {
             if (err) {
                 console.error("Error reading directory:", err);
                 return;
             }
             files.forEach((f) => {
-                if (f === "ammo.json") return;
+                if (f === "ammo.json" || f === "gear.json") return;
                 const fullFileName = `${presetsDir}/${f}`;
                 const jsonData = fs.readFileSync(fullFileName, "utf-8");
                 const preset = new WeaponPreset();
@@ -109,7 +121,7 @@ export abstract class WeaponGenerator {
         }
     }
 
-    protected fillMagazine(weaponWithMods: Item[], ammoTpl: string): undefined {
+    protected fillMagazine(weaponWithMods: Item[], ammoTpl: string): string {
         for (const magazine of weaponWithMods.filter(
             (x) => x.slotId === this.magazineSlotId
         )) {
@@ -127,6 +139,7 @@ export abstract class WeaponGenerator {
                 1,
                 ...magazineWithCartridges
             );
+            return magazine._tpl;
         }
     }
 
@@ -233,6 +246,58 @@ export abstract class WeaponGenerator {
 
         return true;
     }
+    public addExtraMagazinesToInventory(
+        weapon: GeneratedWeapon,
+        inventory: PmcInventory
+    ): undefined {
+        const weaponTemplate = weapon.weaponTemplate;
+
+        const magazineTemplate = this.getTemplateById(weapon.magazineTpl);
+        const ammoTemplate = this.getTemplateById(weapon.ammoTpl);
+
+        const inventoryMagGenModel = new InventoryMagGen(
+            this.numberOfMagazines,
+            magazineTemplate,
+            weaponTemplate,
+            ammoTemplate,
+            inventory
+        );
+
+        this.inventoryMagGenComponents
+            .find((v) => v.canHandleInventoryMagGen(inventoryMagGenModel))
+            .process(inventoryMagGenModel);
+
+        this.addAmmoToSecureContainer(
+            this.secureContainerAmmoStackCount,
+            weapon.ammoTpl,
+            ammoTemplate._props.StackMaxSize,
+            inventory
+        );
+    }
+
+    protected addAmmoToSecureContainer(
+        stackCount: number,
+        ammoTpl: string,
+        stackSize: number,
+        inventory: PmcInventory
+    ): void {
+        for (let i = 0; i < stackCount; i++) {
+            const id = this.hashUtil.generate();
+            this.botWeaponGeneratorHelper.addItemWithChildrenToEquipmentSlot(
+                [EquipmentSlots.SECURED_CONTAINER],
+                id,
+                ammoTpl,
+                [
+                    {
+                        _id: id,
+                        _tpl: ammoTpl,
+                        upd: { StackObjectsCount: stackSize },
+                    },
+                ],
+                inventory
+            );
+        }
+    }
 
     public generateWeapon(
         weaponParentId: string,
@@ -245,12 +310,13 @@ export abstract class WeaponGenerator {
         const caliber = this.getCaliberByTemplateId(weaponTpl);
         const ammoTpl = this.getAmmoByCaliber(caliber);
         this.addCartridgeToChamber(weaponWithMods, ammoTpl);
-        this.fillMagazine(weaponWithMods, ammoTpl);
+        const magazineTpl = this.fillMagazine(weaponWithMods, ammoTpl);
 
         return {
             weaponWithMods: weaponWithMods,
             weaponTemplate: weaponTemplate,
             ammoTpl: ammoTpl,
+            magazineTpl: magazineTpl,
         };
     }
 }

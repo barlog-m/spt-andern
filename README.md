@@ -9,6 +9,8 @@ Idea of this mod is to rebalance a bit the game for better single player experie
 
 * Give PMC bots decent weapon from presets. Bots weapon ranged tiers: before 15 - tier one, from 15 to 30 - tier two, from 28 to 40 - tier three, and above 40 - tier four.
 
+* Give PMC good gear. Every PMC wear armor, helmet, rig, headphones, face cover and glasses.
+
 * Generate PMC with levels in range ± 10 levels from yours. Config parameter `pmcBotLevelDelta`.
 
 * Add trader that sell you couple weapon modules to make weapon until level 15 a bit less crap. And sells you keys for quests witch hard to find because of high randomness of loot in the game.
@@ -32,7 +34,9 @@ Mod does not support weapon without magazines.
 
 At night raids tactical device replaced to [Zenit Klesch-2IKS](https://escapefromtarkov.fandom.com/wiki/Zenit_Klesch-2IKS_IR_illuminator_with_laser)
 
-At night raids all PMC wear helmets with night vision googles
+At night raids all PMC wear helmets with night vision googles.
+
+PMC wear gear from gear.json for their level.
 
 ## Trader sells after level 40 this ammo
 

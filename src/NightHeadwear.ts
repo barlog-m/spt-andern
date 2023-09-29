@@ -19,7 +19,7 @@ const OPS_CORE_FAST_MT_SUPER_HIGH_CUT_HELMET = "5a154d5cfcdbcb001a3b00da";
 const GPNVG_18_NIGHT_VISION_GOGGLES = "5c0558060db834001b735271";
 
 @injectable()
-export class BotHeadwear {
+export class NightHeadwear {
     constructor(
         @inject("WinstonLogger") protected logger: ILogger,
         @inject("HashUtil") protected hashUtil: HashUtil,

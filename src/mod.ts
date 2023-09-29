@@ -28,11 +28,14 @@ import { TierTwoWeapon } from "./TierTwoWeapon";
 import { TierThreeWeapon } from "./TierThreeWeapon";
 import { TierFourWeapon } from "./TierFourWeapon";
 import registerInfoUpdater from "./registerInfoUpdater";
-import registerBotWeaponGenerator from "./registerBotWeaponGenerator";
 import registerBotLevelGenerator from "./registerBotLevelGenerator";
 import registerBotInventoryGenerator from "./registerBotInventoryGenerator";
 import { RaidInfo } from "./RaidInfo";
-import { BotHeadwear } from "./BotHeadwear";
+import { NightHeadwear } from "./NightHeadwear";
+import { TierOneGear } from "./TierOneGear";
+import { TierTwoGear } from "./TierTwoGear";
+import { TierThreeGear } from "./TierThreeGear";
+import { TierFourGear } from "./TierFourGear";
 import * as config from "../config/config.json";
 
 export class Andern implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
@@ -94,13 +97,36 @@ export class Andern implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
             lifecycle: Lifecycle.Singleton,
         });
 
-        container.register<BotHeadwear>("AndernBotHeadwear", BotHeadwear, {
+        container.register<NightHeadwear>(
+            "AndernNightHeadwear",
+            NightHeadwear,
+            {
+                lifecycle: Lifecycle.Singleton,
+            }
+        );
+
+        container.register<TierOneGear>("AndernTierOneGear", TierOneGear, {
+            lifecycle: Lifecycle.Singleton,
+        });
+
+        container.register<TierTwoGear>("AndernTierTwoGear", TierTwoGear, {
+            lifecycle: Lifecycle.Singleton,
+        });
+
+        container.register<TierThreeGear>(
+            "AndernTierThreeGear",
+            TierThreeGear,
+            {
+                lifecycle: Lifecycle.Singleton,
+            }
+        );
+
+        container.register<TierFourGear>("AndernTierFourGear", TierFourGear, {
             lifecycle: Lifecycle.Singleton,
         });
 
         registerInfoUpdater(container);
         registerBotLevelGenerator(container);
-        registerBotWeaponGenerator(container);
         registerBotInventoryGenerator(container);
 
         this.prepareTrader(container, preAkiModLoader);
