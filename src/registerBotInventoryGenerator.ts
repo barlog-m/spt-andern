@@ -43,7 +43,7 @@ export default function registerBotInventoryGenerator(
                             botRole,
                             isPmc,
                             botLevel,
-                            raidInfo.isNight
+                            raidInfo
                         );
                         return inventory;
                     } else if (botLevel >= 15 && botLevel < 28) {
@@ -53,7 +53,7 @@ export default function registerBotInventoryGenerator(
                             botRole,
                             isPmc,
                             botLevel,
-                            raidInfo.isNight
+                            raidInfo
                         );
                         return inventory;
                     } else if (botLevel >= 28 && botLevel < 40) {
@@ -63,7 +63,7 @@ export default function registerBotInventoryGenerator(
                             botRole,
                             isPmc,
                             botLevel,
-                            raidInfo.isNight
+                            raidInfo
                         );
                         return inventory;
                     } else {
@@ -73,7 +73,7 @@ export default function registerBotInventoryGenerator(
                             botRole,
                             isPmc,
                             botLevel,
-                            raidInfo.isNight
+                            raidInfo
                         );
                         return inventory;
                     }

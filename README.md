@@ -7,7 +7,7 @@
 
 Idea of this mod is to rebalance a bit the game for better single player experience.
 
-* Give PMC bots decent weapon from presets. Bots weapon ranged tiers: before 15 - tier one, from 15 to 30 - tier two, from 28 to 40 - tier three, and above 40 - tier four.
+* Give PMC bots decent weapon from presets. Bots weapon ranged tiers: before 15 - tier one, from 15 to 28 - tier two, from 28 to 40 - tier three, and above 40 - tier four.
 
 * Give PMC good gear. Every PMC wear armor, helmet, rig, headphones, face cover and glasses.
 
@@ -15,7 +15,9 @@ Idea of this mod is to rebalance a bit the game for better single player experie
 
 * Add trader that sell you couple weapon modules to make weapon until level 15 a bit less crap. And sells you keys for quests witch hard to find because of high randomness of loot in the game.
 
-* Disable Flea Market until level 42. Config parameter `fleaMinUserLevel`. It add more sense to looting because with Flea you can easy just buy everything your need for craft and hideout update.
+* Mod allows to change Flea Market access level. Config parameter `fleaMinUserLevel`. You can increase it to level 42 to add more sense to looting because with Flea you can easy just buy everything your need for craft and hideout update.
+
+* Mod allows to increase loot multiplier for each map for static and loose loot to play without Flea Market. Option `lootMultiplier`.
 
 Bots get random weapon from lists. There is no pistols and other crap that bots can't use very good.
 Also bots use specified ammo for each caliber from list.
@@ -25,8 +27,6 @@ For example list of ammo for tier one weapon presets is in file `res\one\ammo.js
 Preset made in the game and then exported with [SPT-AKI Profile Editor](https://hub.sp-tarkov.com/files/file/184-spt-aki-profile-editor/)
 
 You can make your own preset. Just be sure that `ammo.json` contain record for weapon caliber.
-
-Preset must have empty magazine and empty chamber.
 
 Preset must have one tactical device.
 
@@ -49,8 +49,6 @@ Trader can insure with zero return time and 100% return chance.
 Trader can repair without degradation.
 
 Enable insurance on Lab. Option `insuranceOnLab`.
-
-Loot multiplayer for each map for static and loose loot. Default is 3. Option `lootMultiplier`.
 
 ## Installation
 

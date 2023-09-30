@@ -35,8 +35,8 @@ export abstract class WeaponGenerator {
 
     protected weaponPresets: Record<string, WeaponPreset> = {};
 
-    protected readonly numberOfMagazines: MinMax = { min: 2, max: 5 };
-    protected readonly secureContainerAmmoStackCount = 3;
+    protected readonly numberOfMagazines: MinMax = { min: 3, max: 7 };
+    protected readonly secureContainerAmmoStackCount = 6;
 
     constructor(
         protected logger: ILogger,
@@ -129,7 +129,7 @@ export abstract class WeaponGenerator {
             const magazineWithCartridges = [magazine];
 
             this.itemHelper.fillMagazineWithCartridge(
-                weaponWithMods,
+                magazineWithCartridges,
                 magazineTemplate,
                 ammoTpl,
                 1

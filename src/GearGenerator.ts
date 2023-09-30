@@ -7,7 +7,9 @@ import { IBotType } from "@spt-aki/models/eft/common/tables/IBotType";
 import { EquipmentSlots } from "@spt-aki/models/enums/EquipmentSlots";
 import { BotGeneratorHelper } from "@spt-aki/helpers/BotGeneratorHelper";
 import { BotLootGenerator } from "@spt-aki/generators/BotLootGenerator";
+import { RaidInfo } from "./RaidInfo";
 import { WeaponGenerator } from "./WeaponGenerator";
+import { isFactoryOrLab } from "./mapUtils";
 
 import * as fs from "fs";
 
@@ -181,11 +183,20 @@ export abstract class GearGenerator {
 
     protected generateChad(
         botRole: string,
-        botInventory: PmcInventory
-    ): undefined {
-        this.generateTacticalVest(botRole, botInventory);
-        this.generateChadArmor(botRole, botInventory);
-        this.generateChadHelmet(botRole, botInventory);
+        botInventory: PmcInventory,
+        botLevel: number,
+        raidInfo: RaidInfo
+    ): boolean {
+        const chance = Math.random() <= 0.3;
+
+        if (chance && isFactoryOrLab(raidInfo.location) && botLevel >= 42) {
+            this.generateTacticalVest(botRole, botInventory);
+            this.generateChadArmor(botRole, botInventory);
+            this.generateChadHelmet(botRole, botInventory);
+            return true;
+        }
+
+        return false;
     }
 
     protected generateChadArmor(
@@ -316,7 +327,7 @@ export abstract class GearGenerator {
         botRole: string,
         isPmc: boolean,
         botLevel: number,
-        isNight: boolean
+        raidInfo: RaidInfo
     ): PmcInventory {
         const botInventory = this.generateInventoryBase();
 
@@ -336,10 +347,8 @@ export abstract class GearGenerator {
             securedContainerTpl
         );
 
-        if (botLevel >= 40 && !isNight && this.randomUtil.getBool) {
-            this.generateChad(botRole, botInventory);
-        } else {
-            if (isNight) {
+        if (!this.generateChad(botRole, botInventory, botLevel, raidInfo)) {
+            if (raidInfo.isNight) {
                 this.generateNightHeadwear(botInventory);
 
                 this.generateGearItem(
@@ -383,7 +392,7 @@ export abstract class GearGenerator {
 
         const generatedWeapon = this.weaponGenerator.generateWeapon(
             botInventory.equipment,
-            isNight
+            raidInfo.isNight
         );
 
         botInventory.items.push(...generatedWeapon.weaponWithMods);
