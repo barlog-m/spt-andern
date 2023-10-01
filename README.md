@@ -28,7 +28,7 @@ Preset made in the game and then exported with [SPT-AKI Profile Editor](https://
 
 You can make your own preset. Just be sure that `ammo.json` contain record for weapon caliber.
 
-Preset must have one tactical device.
+Tactical device is not obligatory anymore.
 
 Mod does not support weapon without magazines.
 

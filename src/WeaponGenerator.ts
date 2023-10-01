@@ -238,10 +238,10 @@ export abstract class WeaponGenerator {
         }
 
         if (!hasTacticalDevice) {
-            this.logger.error(
+            this.logger.warning(
                 `[Andern] preset doesn't have tactical device '${fileName}'`
             );
-            return false;
+            return true;
         }
 
         return true;
