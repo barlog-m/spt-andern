@@ -10,6 +10,7 @@ import { BotLootGenerator } from "@spt-aki/generators/BotLootGenerator";
 import { RaidInfo } from "./RaidInfo";
 import { WeaponGenerator } from "./WeaponGenerator";
 import { isFactoryOrLab } from "./mapUtils";
+import * as config from "../config/config.json";
 
 import * as fs from "fs";
 
@@ -187,9 +188,13 @@ export abstract class GearGenerator {
         botLevel: number,
         raidInfo: RaidInfo
     ): boolean {
-        const chance = Math.random() <= 0.3;
+        const chance = Math.random() <= config.chadsPercentage / 100;
 
-        if (chance && isFactoryOrLab(raidInfo.location) && botLevel >= 42) {
+        const isMapOk = config.chadsOnFactoryAndLabOnly
+            ? isFactoryOrLab(raidInfo.location)
+            : false;
+
+        if (chance && isMapOk && botLevel >= config.chadsMinimumLevel) {
             this.generateTacticalVest(botRole, botInventory);
             this.generateChadArmor(botRole, botInventory);
             this.generateChadHelmet(botRole, botInventory);

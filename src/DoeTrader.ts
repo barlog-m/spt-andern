@@ -168,6 +168,42 @@ export class DoeTrader {
             name: "Health Resort east wing room 328 key",
             buyRestriction: 1,
         },
+        {
+            id: "63a39f18c2d53c2c6839c1d3",
+            price: 80000,
+            name: "Pinewood hotel room 206 key",
+            buyRestriction: 1,
+        },
+        {
+            id: "63a39f08cd6db0635c197600",
+            price: 40000,
+            name: "Pinewood hotel room 215 key",
+            buyRestriction: 1,
+        },
+        {
+            id: "63a39c7964283b5e9c56b280",
+            price: 50000,
+            name: "Concordia security room key",
+            buyRestriction: 1,
+        },
+        {
+            id: "63a39f6e64283b5e9c56b289",
+            price: 1400000,
+            name: "Iron gate key",
+            buyRestriction: 1,
+        },
+        {
+            id: "63a397d3af870e651d58e65b",
+            price: 2500000,
+            name: "Car dealership closed section key",
+            buyRestriction: 1,
+        },
+        {
+            id: "63a39fc0af870e651d58e6ae",
+            price: 4000000,
+            name: "Chekannaya 15 apartment key",
+            buyRestriction: 1,
+        },
     ];
 
     public static tierFourItems: TraderItem[] = [

@@ -3,5 +3,8 @@
     "lootMultiplier": 1,
     "insuranceOnLab": true,
     "fleaMinUserLevel": 15,
+    "chadsOnFactoryAndLabOnly": true,
+    "chadsPercentage": 30,
+    "chadsMinimumLevel": 42,
     "debug": false
 }

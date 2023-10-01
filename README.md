@@ -50,6 +50,14 @@ Trader can repair without degradation.
 
 Enable insurance on Lab. Option `insuranceOnLab`.
 
+PMC bots can use "chads" armor (Altyn or Rys with Zabralo or THOR)
+
+It possible only in day raids.
+
+Settings in config 'chadsOnFactoryAndLabOnly', 'chadsPercentage' and 'chadsMinimumLevel',
+
+chadsMinimumLevel means bot can wear chads armor only if his level 42 or higher.
+
 ## Installation
 
 Put folder `BarlogM-Andern` from zip file into your `user/mods` folder
