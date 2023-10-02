@@ -20,6 +20,7 @@ import { TraderHelper } from "./TraderHelpers";
 import { FluentAssortConstructor } from "./FluentTraderAssortCreator";
 import { Traders } from "@spt-aki/models/enums/Traders";
 import { HashUtil } from "@spt-aki/utils/HashUtil";
+import { IRagfairConfig } from "@spt-aki/models/spt/config/IRagfairConfig";
 
 import { ModConfig } from "./ModConfig";
 import { DoeTrader } from "./DoeTrader";
@@ -133,7 +134,6 @@ export class Andern implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
     }
 
     postAkiLoad(container: DependencyContainer): void {
-        this.banScavVestForPmc(container);
         this.setMinFleaLevel(container);
         this.lootConfig(container);
 
@@ -235,29 +235,13 @@ export class Andern implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
             ModConfig.traderDescription
         );
 
-        this.logger.info("[Andern] Doe trader registered");
-    }
-
-    private banScavVestForPmc(container: DependencyContainer): undefined {
-        const scavVestId = "572b7adb24597762ae139821";
-        const databaseServer: DatabaseServer =
-            container.resolve<DatabaseServer>("DatabaseServer");
-        const tables = databaseServer.getTables();
-
-        delete tables.bots.types.bear.inventory.equipment.TacticalVest[
-            scavVestId
-        ];
-        delete tables.bots.types.usec.inventory.equipment.TacticalVest[
-            scavVestId
-        ];
-
-        /*
-        this.logger.info(
-            `[Andern] bear vests ${JSON.stringify(
-                tables.bots.types.bear.inventory.equipment.TacticalVest
-            )}`
+        const configServer = container.resolve<ConfigServer>("ConfigServer");
+        const ragfairConfig = configServer.getConfig<IRagfairConfig>(
+            ConfigTypes.RAGFAIR
         );
-        */
+        ragfairConfig.traders[baseJson._id] = true;
+
+        this.logger.info("[Andern] Doe trader registered");
     }
 
     private setMinFleaLevel(container: DependencyContainer): undefined {

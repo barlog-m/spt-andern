@@ -204,6 +204,12 @@ export class DoeTrader {
             name: "Chekannaya 15 apartment key",
             buyRestriction: 1,
         },
+        {
+            id: "63a3a93f8a56922e82001f5d",
+            price: 2800000,
+            name: "Abandoned factory marked key",
+            buyRestriction: 1,
+        },
     ];
 
     public static tierFourItems: TraderItem[] = [
