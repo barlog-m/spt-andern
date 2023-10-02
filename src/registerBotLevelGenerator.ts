@@ -35,10 +35,22 @@ export default function registerBotLevelGenerator(
 
                 const { playerLevel } = botGenerationDetails;
 
-                const delta = config.pmcBotLevelDelta;
-                const min = playerLevel - 8 <= 0 ? 1 : playerLevel - delta;
-                const max = playerLevel + 10 >= 71 ? 71 : playerLevel + delta;
-                const level = randomUtil.getInt(min, max);
+                let level = 1;
+
+                if (config.useFixedPmcBotLevelRange) {
+                    level = randomUtil.getInt(
+                        config.pmcBotMinLevel,
+                        config.pmcBotMaxLevel
+                    );
+                } else {
+                    const downDelta = config.pmcBotLevelDownDelta;
+                    const upDelta = config.pmcBotLevelUpDelta;
+                    const min =
+                        playerLevel - 8 <= 0 ? 1 : playerLevel - downDelta;
+                    const max =
+                        playerLevel + 10 >= 71 ? 71 : playerLevel + upDelta;
+                    level = randomUtil.getInt(min, max);
+                }
 
                 const res: IRandomisedBotLevelResult = {
                     level,

@@ -11,7 +11,7 @@ Idea of this mod is to rebalance a bit the game for better single player experie
 
 * Give PMC good gear. Every PMC wear armor, helmet, rig, headphones, face cover and glasses.
 
-* Generate PMC with levels in range ± 10 levels from yours. Config parameter `pmcBotLevelDelta`.
+* Generate PMC with levels in configurable range.
 
 * Add trader that sell you couple weapon modules to make weapon until level 15 a bit less crap. And sells you keys for quests witch hard to find because of high randomness of loot in the game.
 
@@ -40,6 +40,12 @@ At night raids all PMC wear helmets with night vision googles.
 
 PMC wear gear from gear.json for their level.
 
+## PMC Bots Level configuration
+
+Player level - `pmcBotLevelDownDelta`. Player level + `pmcBotLevelUpDelta`
+
+if `useFixedPmcBotLevelRange` true then pmc bots level in fixed range from `pmcBotMinLevel` to `pmcBotMaxLevel`
+
 ## Trader sells after level 40 this ammo
 
 * https://escapefromtarkov.fandom.com/wiki/.300_Blackout_AP
@@ -58,7 +64,15 @@ It possible only in day raids.
 
 Settings in config 'chadsOnFactoryAndLabOnly', 'chadsPercentage' and 'chadsMinimumLevel',
 
-chadsMinimumLevel means bot can wear chads armor only if his level 42 or higher.
+`chadsMinimumLevel` means bot can wear chads armor only if his level `chadsMinimumLevel` or higher.
+
+## Keys spawn settings
+
+`keyRelativeProbabilityThreshold` modified only keys with multiplier below this value
+`keyRelativeProbabilityMultiplier` spawn multiplier
+`looseKeyPercentage` loose loot keys spawn percentage
+`looseCardPercentage` loose loot cards spawn percentage
+`keyStaticRelativeProbability` containers keys spawn chance
 
 ## Installation
 

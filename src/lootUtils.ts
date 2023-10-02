@@ -43,12 +43,6 @@ function increaseKeysSpawnChance(
     const locations = database.locations;
     const staticLoot = database.loot.staticLoot;
 
-    const relativeProbabilityThreshold = 3;
-    const relativeProbabilityMultiplier = 20;
-    const looseKeyProbability = 0.2;
-    const looseCardProbability = 0.1;
-    const staticRelativeProbability = 2000;
-
     for (const staticName in staticLoot) {
         const staticy: ItemDistribution[] =
             staticLoot[staticName]?.itemDistribution;
@@ -68,10 +62,10 @@ function increaseKeysSpawnChance(
                 if (matchingItem) {
                     if (
                         itemDistribution.relativeProbability <
-                        staticRelativeProbability
+                        config.keyStaticRelativeProbability
                     ) {
                         itemDistribution.relativeProbability =
-                            staticRelativeProbability;
+                            config.keyStaticRelativeProbability;
                     }
                 }
             }
@@ -96,15 +90,17 @@ function increaseKeysSpawnChance(
                         (x) => x.composedKey.key === item._id
                     );
                     if (matchingItem) {
+                        const looseKeyProbability =
+                            config.looseKeyPercentage / 100;
                         if (spawnPoint.probability < looseKeyProbability) {
                             spawnPoint.probability = looseKeyProbability;
                         }
                         if (
                             matchingItem.relativeProbability <
-                            relativeProbabilityThreshold
+                            config.keyRelativeProbabilityThreshold
                         ) {
                             matchingItem.relativeProbability *=
-                                relativeProbabilityMultiplier;
+                                config.keyRelativeProbabilityMultiplier;
                         }
                     }
                 } else {
@@ -115,6 +111,8 @@ function increaseKeysSpawnChance(
                             (x) => x.composedKey.key === item._id
                         );
                         if (matchingItem) {
+                            const looseCardProbability =
+                                config.looseCardPercentage / 100;
                             if (spawnPoint.probability < looseCardProbability) {
                                 spawnPoint.probability = looseCardProbability;
                             }
