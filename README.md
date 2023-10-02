@@ -17,7 +17,9 @@ Idea of this mod is to rebalance a bit the game for better single player experie
 
 * Mod allows to change Flea Market access level. Config parameter `fleaMinUserLevel`. You can increase it to level 42 to add more sense to looting because with Flea you can easy just buy everything your need for craft and hideout update.
 
-* Mod allows to increase loot multiplier for each map for static and loose loot to play without Flea Market. Option `lootMultiplier`.
+* Mod allows to increase static and loose loot multipliers for each without Flea Market. Options `looseLootMultiplier` and `staticLootMultiplier`.
+
+* Mod increse keys spawn chance. Inspired by [LooseKeyModifier](https://hub.sp-tarkov.com/files/file/1097-loosekeymodifier/)
 
 Bots get random weapon from lists. There is no pistols and other crap that bots can't use very good.
 Also bots use specified ammo for each caliber from list.

@@ -1,6 +1,7 @@
 {
     "pmcBotLevelDelta": 10,
-    "lootMultiplier": 1,
+    "looseLootMultiplier": 1,
+    "staticLootMultiplier": 1,
     "insuranceOnLab": true,
     "fleaMinUserLevel": 15,
     "chadsOnFactoryAndLabOnly": true,
