@@ -39,6 +39,7 @@ import { TierFourGear } from "./TierFourGear";
 import { lootConfig } from "./lootUtils";
 import { mapBotConfig } from "./botUtils";
 import { bossChanceBuff } from "./mapUtils";
+import { ItemHelper } from "@spt-aki/helpers/ItemHelper";
 import * as config from "../config/config.json";
 
 export class Andern implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
@@ -46,13 +47,16 @@ export class Andern implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
     private logger: ILogger;
     private traderHelper: TraderHelper;
     private fluentTraderAssortHeper: FluentAssortConstructor;
+    private itemHelper: ItemHelper;
 
     constructor() {
-        this.fullModName = `${ModConfig.authorName}-${ModConfig.modName}`;
+        this.fullModName =
+            `${ModConfig.authorName}-${ModConfig.modName}-${ModConfig.modVersion}`.toLowerCase();
     }
 
     public preAkiLoad(container: DependencyContainer): void {
         this.logger = container.resolve<ILogger>("WinstonLogger");
+        this.itemHelper = container.resolve<ItemHelper>("ItemHelper");
         const preAkiModLoader: PreAkiModLoader =
             container.resolve<PreAkiModLoader>("PreAkiModLoader");
 
@@ -227,17 +231,10 @@ export class Andern implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
 
         this.traderHelper.addTraderToDb(baseJson, tables, jsonUtil);
 
-        DoeTrader.addItems(
+        DoeTrader.addAllItems(
             this.fluentTraderAssortHeper,
             tables,
-            DoeTrader.items,
-            1
-        );
-        DoeTrader.addItems(
-            this.fluentTraderAssortHeper,
-            tables,
-            DoeTrader.tierFourItems,
-            4
+            this.itemHelper
         );
 
         this.traderHelper.addTraderToLocales(

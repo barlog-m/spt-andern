@@ -52,6 +52,8 @@ if `useFixedPmcBotLevelRange` true then pmc bots level in fixed range from `pmcB
 * https://escapefromtarkov.fandom.com/wiki/7.62x39mm_BP_gzh
 * https://escapefromtarkov.fandom.com/wiki/5.45x39mm_7N40
 
+Trader assortiment for each tier is on file `trader.json`
+
 Trader can insure with zero return time and 100% return chance.
 
 Trader can repair without degradation.
