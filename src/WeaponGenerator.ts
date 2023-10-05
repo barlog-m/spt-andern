@@ -62,7 +62,12 @@ export abstract class WeaponGenerator {
                 return;
             }
             files.forEach((f) => {
-                if (f === "ammo.json" || f === "gear.json") return;
+                if (
+                    f === "ammo.json" ||
+                    f === "gear.json" ||
+                    f === "trader.json"
+                )
+                    return;
                 const fullFileName = `${presetsDir}/${f}`;
                 const jsonData = fs.readFileSync(fullFileName, "utf-8");
                 const preset = new WeaponPreset();

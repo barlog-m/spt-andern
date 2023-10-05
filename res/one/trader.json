@@ -1,0 +1,134 @@
+[
+    {
+        "tpl": "5648ae314bdc2d3d1c8b457f",
+        "name": "AK_CAA_RS47_HANDGUARD"
+    },
+    {
+        "tpl": "593d493f86f7745e6b2ceb22",
+        "name": "SILENCER_AK74_HEXAGON_AK74_545X39"
+    },
+    {
+        "tpl": "570fd6c2d2720bc6458b457f",
+        "name": "SCOPE_ALL_EOTECH_553"
+    },
+    {
+        "tpl": "5a9fbb84a2750c00137fa685",
+        "name": "SILENCER_ALL_ROTOR_43_V2_556X45"
+    },
+    {
+        "tpl": "5a9fbacda2750c00141e080f",
+        "name": "SILENCER_ALL_ROTOR_43_V2_762X39"
+    },
+    {
+        "tpl": "59d625f086f774661516605d",
+        "name": "MAG_AK_IZHMASH_AK_STD_55_762X39_30"
+    },
+    {
+        "tpl": "59387a4986f77401cc236e62",
+        "name": "Dorm room 114 key"
+    },
+    {
+        "tpl": "5938144586f77473c2087145",
+        "name": "Portable bunkhouse key"
+    },
+    {
+        "tpl": "591afe0186f77431bd616a11",
+        "name": "ZB-014 key"
+    },
+    {
+        "tpl": "5938504186f7740991483f30",
+        "name": "Dorm room 203 key"
+    },
+    {
+        "tpl": "5d947d4e86f774447b415895",
+        "name": "RB-KSM key"
+    },
+    {
+        "tpl": "5d947d3886f774447b415893",
+        "name": "RB-SMP key"
+    },
+    {
+        "tpl": "5a0eb6ac86f7743124037a28",
+        "name": "Cottage back door key"
+    },
+    {
+        "tpl": "5eff09cd30a7dc22fd1ddfed",
+        "name": "Health Resort office key with a blue tape"
+    },
+    {
+        "tpl": "62987da96188c076bc0d8c51",
+        "name": "Operating room key"
+    },
+    {
+        "tpl": "593aa4be86f77457f56379f8",
+        "name": "Dorm room 303 key"
+    },
+    {
+        "tpl": "5780cf7f2459777de4559322",
+        "name": "Dorm room 314 marked key"
+    },
+    {
+        "tpl": "5a0ee30786f774023b6ee08f",
+        "name": "Health Resort west wing room 216 key"
+    },
+    {
+        "tpl": "5a0dc95c86f77452440fc675",
+        "name": "Health Resort west wing office room 112 key"
+    },
+    {
+        "tpl": "5a0ee34586f774023b6ee092",
+        "name": "Health Resort west wing room 220 key"
+    },
+    {
+        "tpl": "5ad5db3786f7743568421cce",
+        "name": "EMERCOM medical unit key"
+    },
+    {
+        "tpl": "5d80c6c586f77440351beef1",
+        "name": "RB-OB key"
+    },
+    {
+        "tpl": "5d80cd1a86f77402aa362f42",
+        "name": "RB-ORB3 key"
+    },
+    {
+        "tpl": "5d80ccdd86f77474f7575e02",
+        "name": "RB-ORB2 key"
+    },
+    {
+        "tpl": "5d80ccac86f77470841ff452",
+        "name": "RB-ORB1"
+    },
+    {
+        "tpl": "5a0eee1486f77402aa773226",
+        "name": "Health Resort east wing room 328 key"
+    },
+    {
+        "tpl": "63a39f18c2d53c2c6839c1d3",
+        "name": "Pinewood hotel room 206 key"
+    },
+    {
+        "tpl": "63a39f08cd6db0635c197600",
+        "name": "Pinewood hotel room 215 key"
+    },
+    {
+        "tpl": "63a39c7964283b5e9c56b280",
+        "name": "Concordia security room key"
+    },
+    {
+        "tpl": "63a39f6e64283b5e9c56b289",
+        "name": "Iron gate key"
+    },
+    {
+        "tpl": "63a397d3af870e651d58e65b",
+        "name": "Car dealership closed section key"
+    },
+    {
+        "tpl": "63a39fc0af870e651d58e6ae",
+        "name": "Chekannaya 15 apartment key"
+    },
+    {
+        "tpl": "63a3a93f8a56922e82001f5d",
+        "name": "Abandoned factory marked key"
+    }
+]
