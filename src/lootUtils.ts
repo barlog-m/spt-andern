@@ -10,6 +10,9 @@ import { ILocationConfig } from "@spt-aki/models/spt/config/ILocationConfig";
 
 import config from "../config/config.json";
 
+const DRAWER = "578f87b7245977356274f2cd";
+const JACKET = "578f8778245977358849a9b5";
+
 export function lootConfig(
     container: DependencyContainer,
     databaseServer: DatabaseServer
@@ -49,23 +52,25 @@ function increaseKeysSpawnChance(
         if (!staticy) {
             continue;
         }
-        for (const itemDistribution of staticy) {
-            if (
-                itemHelper.isOfBaseclass(
-                    itemDistribution.tpl,
-                    BaseClasses.KEY_MECHANICAL
-                )
-            ) {
-                const matchingItem = staticy.find(
-                    (s) => s.tpl === itemDistribution.tpl
-                );
-                if (matchingItem) {
-                    if (
-                        itemDistribution.relativeProbability <
-                        config.keyStaticRelativeProbability
-                    ) {
-                        itemDistribution.relativeProbability =
-                            config.keyStaticRelativeProbability;
+        if (staticName === DRAWER || staticName === JACKET) {
+            for (const itemDistribution of staticy) {
+                if (
+                    itemHelper.isOfBaseclass(
+                        itemDistribution.tpl,
+                        BaseClasses.KEY_MECHANICAL
+                    )
+                ) {
+                    const matchingItem = staticy.find(
+                        (s) => s.tpl === itemDistribution.tpl
+                    );
+                    if (matchingItem) {
+                        if (
+                            itemDistribution.relativeProbability <
+                            config.keyStaticRelativeProbability
+                        ) {
+                            itemDistribution.relativeProbability =
+                                config.keyStaticRelativeProbability;
+                        }
                     }
                 }
             }
