@@ -11,10 +11,10 @@
     "chadsMinimumLevel": 42,
     "looseLootMultiplier": 1,
     "staticLootMultiplier": 1,
-    "keyRelativeProbabilityThreshold": 3,
-    "keyRelativeProbabilityMultiplier": 20,
-    "looseKeyPercentage": 20,
-    "looseCardPercentage": 10,
-    "keyStaticRelativeProbability": 2000,
+    "looseLootKeysRelativeProbabilityThreshold": 3,
+    "looseLootKeysRelativeProbabilityMultiplier": 20,
+    "looseLootKeysPercentage": 20,
+    "looseLootCardsPercentage": 10,
+    "staticLootKeysRelativeProbability": 2000,
     "debug": false
 }
