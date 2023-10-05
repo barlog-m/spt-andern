@@ -210,6 +210,13 @@ export class DoeTrader {
             name: "Abandoned factory marked key",
             buyRestriction: 1,
         },
+        {
+            id: "5696686a4bdc2da3298b456a",
+            price: 1,
+            name: "USD",
+            buyRestriction: 999999,
+        },
+
     ];
 
     public static tierFourItems: TraderItem[] = [

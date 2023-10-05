@@ -37,6 +37,8 @@ import { TierTwoGear } from "./TierTwoGear";
 import { TierThreeGear } from "./TierThreeGear";
 import { TierFourGear } from "./TierFourGear";
 import { lootConfig } from "./lootUtils";
+import { mapBotConfig } from "./botUtils";
+import { bossChanceBuff } from "./mapUtils";
 import * as config from "../config/config.json";
 
 export class Andern implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
@@ -148,6 +150,16 @@ export class Andern implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
 
         if (config.insuranceOnLab) {
             this.enableInsuranceOnLab(container);
+        }
+
+        if (config.mapBotSettings) {
+            mapBotConfig(container);
+        }
+
+        if (config.bossChanceBuff > 0) {
+            const databaseServer: DatabaseServer =
+                container.resolve<DatabaseServer>("DatabaseServer");
+            bossChanceBuff(databaseServer, config.bossChanceBuff, this.logger);
         }
     }
 

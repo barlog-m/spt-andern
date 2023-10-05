@@ -74,6 +74,13 @@ Settings in config 'chadsOnFactoryAndLabOnly', 'chadsPercentage' and 'chadsMinim
 `looseCardPercentage` loose loot cards spawn percentage
 `keyStaticRelativeProbability` containers keys spawn chance
 
+## Settings for bot generation on maps
+
+Wors only if `mapBotSettings` set to true.
+`mapMaxBotCapacity` maximum amount of bots on map
+`mapPmcBotDifficulty` "easy", "normal", "hard", "impossible"
+`bossChanceBuff` add percent for existing boss chance. For example if map boss chance is 35 and you set this parameter to 20 then boss chance will be 35 + 20.
+
 ## Installation
 
 Put folder `BarlogM-Andern` from zip file into your `user/mods` folder

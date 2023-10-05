@@ -21,7 +21,7 @@ export function lootConfig(
     increaseKeysSpawnChance(container, databaseServer);
 }
 
-function setLootMultiplier(container: DependencyContainer) {
+function setLootMultiplier(container: DependencyContainer): undefined {
     const configServer = container.resolve<ConfigServer>("ConfigServer");
 
     const locatinConfig: ILocationConfig = configServer.getConfig(
