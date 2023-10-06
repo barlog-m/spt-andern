@@ -13,14 +13,13 @@ import { ITraderConfig } from "@spt-aki/models/spt/config/ITraderConfig";
 import { IInsuranceConfig } from "@spt-aki/models/spt/config/IInsuranceConfig";
 import { ILocationBase } from "@spt-aki/models/eft/common/ILocationBase";
 import { JsonUtil } from "@spt-aki/utils/JsonUtil";
-
-import * as baseJson from "../db/base.json";
-import { TraderHelper } from "./TraderHelpers";
-import { FluentAssortConstructor } from "./FluentTraderAssortCreator";
 import { Traders } from "@spt-aki/models/enums/Traders";
 import { HashUtil } from "@spt-aki/utils/HashUtil";
 import { IRagfairConfig } from "@spt-aki/models/spt/config/IRagfairConfig";
+import { ItemHelper } from "@spt-aki/helpers/ItemHelper";
 
+import { TraderHelper } from "./TraderHelpers";
+import { FluentAssortConstructor } from "./FluentTraderAssortCreator";
 import { ModConfig } from "./ModConfig";
 import { DoeTrader } from "./DoeTrader";
 import { TierOneWeapon } from "./TierOneWeapon";
@@ -38,16 +37,16 @@ import { TierThreeGear } from "./TierThreeGear";
 import { TierFourGear } from "./TierFourGear";
 import { lootConfig } from "./lootUtils";
 import { mapBotConfig } from "./botUtils";
-import { bossChanceBuff } from "./mapUtils";
-import { ItemHelper } from "@spt-aki/helpers/ItemHelper";
+import { mapsSpawnTuning } from "./mapUtils";
+import * as baseJson from "../db/base.json";
 import * as config from "../config/config.json";
 
 export class Andern implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
     private fullModName: string;
     private logger: ILogger;
+    private itemHelper: ItemHelper;
     private traderHelper: TraderHelper;
     private fluentTraderAssortHeper: FluentAssortConstructor;
-    private itemHelper: ItemHelper;
 
     constructor() {
         this.fullModName =
@@ -160,11 +159,9 @@ export class Andern implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
             mapBotConfig(container);
         }
 
-        if (config.bossChanceBuff > 0) {
-            const databaseServer: DatabaseServer =
-                container.resolve<DatabaseServer>("DatabaseServer");
-            bossChanceBuff(databaseServer, config.bossChanceBuff, this.logger);
-        }
+        const databaseServer: DatabaseServer =
+            container.resolve<DatabaseServer>("DatabaseServer");
+        mapsSpawnTuning(databaseServer, this.logger);
     }
 
     private prepareTrader(

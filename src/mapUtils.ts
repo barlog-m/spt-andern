@@ -7,6 +7,8 @@ import {
     BossLocationSpawn,
 } from "@spt-aki/models/eft/common/ILocationBase";
 
+import * as config from "../config/config.json";
+
 export function isFactoryOrLab(location: string): boolean {
     if (location === "factory4_day") {
         return true;
@@ -17,9 +19,8 @@ export function isFactoryOrLab(location: string): boolean {
     }
 }
 
-export function bossChanceBuff(
+export function mapsSpawnTuning(
     databaseServer: DatabaseServer,
-    buff: number,
     logger: ILogger
 ): undefined {
     const db: IDatabaseTables = databaseServer.getTables();
@@ -27,23 +28,61 @@ export function bossChanceBuff(
         const location: ILocationData = locationObj;
         if (location.base) {
             const locationBase: ILocationBase = location.base;
-            Object.entries(locationBase.BossLocationSpawn).forEach(
-                ([spawnKey, spawnObj]) => {
-                    let bossLocationSpawn: BossLocationSpawn = spawnObj;
-                    if (bossLocationSpawn.BossChance > 0) {
-                        let chance = Math.round(
-                            bossLocationSpawn.BossChance + buff
-                        );
-                        if (chance > 100) {
-                            chance = 100;
-                        }
-                        bossLocationSpawn.BossChance = chance;
-                        logger.info(
-                            `[Andern] location '${locationBase.Name}' boss '${bossLocationSpawn.BossName}' chance ${chance}`
-                        );
-                    }
+            if (config.mapBotSettings) {
+                if (
+                    locationBase.Name !== "Laboratory" &&
+                    locationBase.Name !== "Factory"
+                ) {
+                    locationBase.BotMax += Math.ceil(
+                        locationBase.BotMax *
+                            (config.mapMaxBotBuffPercentage / 100)
+                    );
                 }
+                //reduceSpawnPointDelay(locationBase);
+            }
+
+            if (config.bossChanceBuff != 0) {
+                bossChanceChange(locationBase, logger);
+            }
+        }
+    });
+}
+
+function reduceSpawnPointDelay(locationBase: ILocationBase): undefined {
+    locationBase.SpawnPointParams.forEach((spawnPointParam) => {
+        if (spawnPointParam.DelayToCanSpawnSec > 20) {
+            spawnPointParam.DelayToCanSpawnSec = Math.round(
+                spawnPointParam.DelayToCanSpawnSec / 2
             );
         }
     });
+}
+
+function bossChanceChange(
+    locationBase: ILocationBase,
+    logger: ILogger
+): undefined {
+    Object.entries(locationBase.BossLocationSpawn).forEach(
+        ([spawnKey, spawnObj]) => {
+            const bossLocationSpawn: BossLocationSpawn = spawnObj;
+            if (
+                bossLocationSpawn.BossChance != 100 &&
+                bossLocationSpawn.BossChance > 0
+            ) {
+                let chance = Math.round(
+                    bossLocationSpawn.BossChance + config.bossChanceBuff
+                );
+                if (chance > 100) {
+                    chance = 100;
+                }
+                if (chance < 0) {
+                    chance = 0;
+                }
+                bossLocationSpawn.BossChance = chance;
+                logger.info(
+                    `[Andern] location '${locationBase.Name}' boss '${bossLocationSpawn.BossName}' chance ${chance}`
+                );
+            }
+        }
+    );
 }

@@ -17,8 +17,12 @@ function setMaxBotCap(configServer: ConfigServer): undefined {
     const botConfig = configServer.getConfig<IBotConfig>(ConfigTypes.BOT);
 
     for (const map in botConfig.maxBotCap) {
-        if (botConfig.maxBotCap[map] < config.mapMaxBotCapacity) {
-            botConfig.maxBotCap[map] = config.mapMaxBotCapacity;
+        if (map === "factory4_night" || map === "laboratory") continue;
+        if (botConfig.maxBotCap[map] < config.mapMaxBotBuffPercentage) {
+            botConfig.maxBotCap[map] += Math.ceil(
+                botConfig.maxBotCap[map] *
+                    (config.mapMaxBotBuffPercentage / 100)
+            );
         }
     }
 }

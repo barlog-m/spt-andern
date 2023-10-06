@@ -79,9 +79,9 @@ Settings in config 'chadsOnFactoryAndLabOnly', 'chadsPercentage' and 'chadsMinim
 ## Settings for bot generation on maps
 
 Wors only if `mapBotSettings` set to true.
-`mapMaxBotCapacity` maximum amount of bots on map
+`mapMaxBotBuffPercentage` increase amount of bots on maps.
 `mapPmcBotDifficulty` "easy", "normal", "hard", "impossible"
-`bossChanceBuff` add percent for existing boss chance. For example if map boss chance is 35 and you set this parameter to 20 then boss chance will be 35 + 20.
+`bossChanceBuff` add or remove percent for existing boss chance. For example if map boss chance is 35 and you set this parameter to 20 then boss chance will be 35 + 20.
 
 ## Installation
 

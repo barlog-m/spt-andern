@@ -17,7 +17,7 @@
     "looseLootCardsPercentage": 10,
     "staticLootKeysRelativeProbability": 2000,
     "mapBotSettings": false,
-    "mapMaxBotCapacity": 40,
+    "mapMaxBotBuffPercentage": 20,
     "mapPmcBotDifficulty": "hard",
     "bossChanceBuff": 0,
     "debug": false
