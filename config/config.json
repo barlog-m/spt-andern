@@ -19,6 +19,7 @@
     "mapBotSettings": false,
     "mapMaxBotBuffPercentage": 20,
     "mapPmcBotDifficulty": "hard",
+    "botScatteringIncreasePercentage": 300,
     "bossChanceBuff": 0,
     "debug": false
 }
