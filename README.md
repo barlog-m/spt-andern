@@ -52,6 +52,8 @@ if `useFixedPmcBotLevelRange` true then pmc bots level in fixed range from `pmcB
 * https://escapefromtarkov.fandom.com/wiki/7.62x39mm_BP_gzh
 * https://escapefromtarkov.fandom.com/wiki/5.45x39mm_7N40
 
+Trader assortiment for each tier is on file `trader.json`
+
 Trader can insure with zero return time and 100% return chance.
 
 Trader can repair without degradation.
@@ -68,11 +70,19 @@ Settings in config 'chadsOnFactoryAndLabOnly', 'chadsPercentage' and 'chadsMinim
 
 ## Keys spawn settings
 
-`keyRelativeProbabilityThreshold` modified only keys with multiplier below this value
-`keyRelativeProbabilityMultiplier` spawn multiplier
-`looseKeyPercentage` loose loot keys spawn percentage
-`looseCardPercentage` loose loot cards spawn percentage
-`keyStaticRelativeProbability` containers keys spawn chance
+`looseLootKeysRelativeProbabilityThreshold` modified only keys with multiplier below this value
+`looseLootKeysRelativeProbabilityMultiplier` spawn multiplier
+`looseLootKeysPercentage` loose loot keys spawn percentage
+`looseLootCardsPercentage` loose loot cards spawn percentage
+`staticLootKeysRelativeProbability` containers keys spawn chance
+
+## Settings for bot generation on maps
+
+Wors only if `mapBotSettings` set to true.
+`mapMaxBotBuffPercentage` increase amount of bots on maps.
+`mapPmcBotDifficulty` "easy", "normal", "hard", "impossible"
+`bossChanceBuff` add or remove percent for existing boss chance. For example if map boss chance is 35 and you set this parameter to 20 then boss chance will be 35 + 20.
+`botScatteringIncreasePercentage` increase bot weapon scattering.
 
 ## Installation
 

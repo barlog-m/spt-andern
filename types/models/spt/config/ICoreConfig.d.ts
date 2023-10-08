@@ -6,7 +6,9 @@ export interface ICoreConfig extends IBaseConfig {
     compatibleTarkovVersion: string;
     serverName: string;
     profileSaveIntervalSeconds: number;
+    sptFriendNickname: string;
     fixes: IGameFixes;
+    features: IServerFeatures;
     commit: string;
 }
 export interface IGameFixes {
@@ -14,4 +16,7 @@ export interface IGameFixes {
     fixShotgunDispersion: boolean;
     /** Remove items added by mods when the mod no longer exists - can fix dead profiles stuck at game load*/
     removeModItemsFromProfile: boolean;
+}
+export interface IServerFeatures {
+    autoInstallModDependencies: boolean;
 }

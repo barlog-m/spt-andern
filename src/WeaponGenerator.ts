@@ -10,7 +10,7 @@ import { EquipmentSlots } from "@spt-aki/models/enums/EquipmentSlots";
 import { IInventoryMagGen } from "@spt-aki/generators/weapongen/IInventoryMagGen";
 import { InventoryMagGen } from "@spt-aki/generators/weapongen/InventoryMagGen";
 import { Inventory as PmcInventory } from "@spt-aki/models/eft/common/tables/IBotBase";
-import { MinMax } from "@spt-aki/models/common/MinMax";
+import { GenerationData } from "@spt-aki/models/eft/common/tables/IBotType";
 
 import * as fs from "fs";
 
@@ -35,7 +35,6 @@ export abstract class WeaponGenerator {
 
     protected weaponPresets: Record<string, WeaponPreset> = {};
 
-    protected readonly numberOfMagazines: MinMax = { min: 3, max: 7 };
     protected readonly secureContainerAmmoStackCount = 6;
 
     constructor(
@@ -260,8 +259,19 @@ export abstract class WeaponGenerator {
         const magazineTemplate = this.getTemplateById(weapon.magazineTpl);
         const ammoTemplate = this.getTemplateById(weapon.ammoTpl);
 
+        const magazinesGenerationWeights: GenerationData = {
+            weights: {
+                0: 0,
+                1: 0,
+                2: 1,
+                3: 3,
+                4: 2,
+            },
+            whitelist: [],
+        };
+
         const inventoryMagGenModel = new InventoryMagGen(
-            this.numberOfMagazines,
+            magazinesGenerationWeights,
             magazineTemplate,
             weaponTemplate,
             ammoTemplate,
