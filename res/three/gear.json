@@ -85,6 +85,11 @@
             "weight": 1,
             "id": "5ca2151486f774244a3b8d30",
             "name": "FORT Redut-M body armor"
+        },
+        {
+            "weight": 1,
+            "id": "5ab8e79e86f7742d8b372e78",
+            "name": "BNTI Gzhel-K body armor"
         }
     ],
     "rigs": [

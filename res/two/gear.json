@@ -53,6 +53,11 @@
         },
         {
             "weight": 1,
+            "id": "64abd93857958b4249003418",
+            "name": "Interceptor OTV body armor (UCP)"
+        },
+        {
+            "weight": 1,
             "id": "5c0e51be86f774598e797894",
             "name": "6B13 assault armor (Flora)"
         }

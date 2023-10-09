@@ -275,7 +275,7 @@ function createProjectName(packageJson) {
 
     // Ensure the name is lowercase, as per the package.json specification.
     //return `${author}-${name}-${version}`.toLowerCase();
-    return `${author}-${name}-${version}`.toLowerCase();
+    return `${author}-${name}`;
 }
 
 /**

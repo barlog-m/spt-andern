@@ -3,6 +3,7 @@
 /.editorconfig
 /.eslintignore
 /.eslintrc.json
+/.prettierrc.js
 /.git
 /.github
 /.gitignore
