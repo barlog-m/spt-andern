@@ -29,6 +29,6 @@ jobs:
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
         with:
-          files: dist/barlogm-andern-*.zip
+          files: dist/BarlogM-Andern.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
