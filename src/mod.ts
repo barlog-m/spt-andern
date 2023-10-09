@@ -48,8 +48,7 @@ export class Andern implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
     private fluentTraderAssortHeper: FluentAssortConstructor;
 
     constructor() {
-        this.fullModName =
-            `${ModConfig.authorName}-${ModConfig.modName}-${ModConfig.modVersion}`.toLowerCase();
+        this.fullModName = `${ModConfig.authorName}-${ModConfig.modName}`;
     }
 
     public preAkiLoad(container: DependencyContainer): void {
