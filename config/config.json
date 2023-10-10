@@ -9,17 +9,12 @@
     "chadsOnFactoryAndLabOnly": true,
     "chadsPercentage": 30,
     "chadsMinimumLevel": 42,
-    "looseLootMultiplier": 3,
+    "looseLootMultiplier": 1,
     "staticLootMultiplier": 3,
     "looseLootKeysRelativeProbabilityThreshold": 3,
     "looseLootKeysRelativeProbabilityMultiplier": 20,
     "looseLootKeysPercentage": 20,
     "looseLootCardsPercentage": 10,
     "staticLootKeysRelativeProbability": 2000,
-    "mapBotSettings": false,
-    "mapMaxBotBuffPercentage": 20,
-    "mapPmcBotDifficulty": "hard",
-    "botScatteringIncreasePercentage": 300,
-    "bossChanceBuff": 0,
     "debug": false
 }

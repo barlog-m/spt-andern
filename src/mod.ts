@@ -36,8 +36,6 @@ import { TierTwoGear } from "./TierTwoGear";
 import { TierThreeGear } from "./TierThreeGear";
 import { TierFourGear } from "./TierFourGear";
 import { lootConfig } from "./lootUtils";
-import { mapBotConfig } from "./botUtils";
-import { mapsSpawnTuning } from "./mapUtils";
 import * as baseJson from "../db/base.json";
 import * as config from "../config/config.json";
 
@@ -153,14 +151,6 @@ export class Andern implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
         if (config.insuranceOnLab) {
             this.enableInsuranceOnLab(container);
         }
-
-        if (config.mapBotSettings) {
-            mapBotConfig(container);
-        }
-
-        const databaseServer: DatabaseServer =
-            container.resolve<DatabaseServer>("DatabaseServer");
-        mapsSpawnTuning(databaseServer, this.logger);
     }
 
     private prepareTrader(

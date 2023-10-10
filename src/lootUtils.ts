@@ -29,11 +29,11 @@ function setLootMultiplier(container: DependencyContainer): undefined {
     );
 
     for (const map in locatinConfig.looseLootMultiplier) {
-        locatinConfig.looseLootMultiplier[map] = config.looseLootMultiplier;
+        locatinConfig.looseLootMultiplier[map] *= config.looseLootMultiplier;
     }
 
     for (const map in locatinConfig.staticLootMultiplier) {
-        locatinConfig.staticLootMultiplier[map] = config.staticLootMultiplier;
+        locatinConfig.staticLootMultiplier[map] *= config.staticLootMultiplier;
     }
 }
 
