@@ -70,11 +70,27 @@ Settings in config 'chadsOnFactoryAndLabOnly', 'chadsPercentage' and 'chadsMinim
 
 ## Keys spawn settings
 
-`looseLootKeysRelativeProbabilityThreshold` modified only keys with multiplier below this value
-`looseLootKeysRelativeProbabilityMultiplier` spawn multiplier
-`looseLootKeysPercentage` loose loot keys spawn percentage
-`looseLootCardsPercentage` loose loot cards spawn percentage
-`staticLootKeysRelativeProbability` containers keys spawn chance
+`looseLootKeysRelativeProbabilityThreshold` modified only keys with multiplier below this value. Some keys already has high relative probability chance. Mod don't increase probability for keys above this value because places for loose loot are limited.
+
+`looseLootKeysRelativeProbabilityMultiplier` spawn multiplier. If value is 1 than nothing changes.
+
+`looseLootKeysPercentage` loose loot keys spawn percentage. Percent is from origin SPT-AKI value. Default is different for different keys.
+
+`looseLootCardsPercentage` loose loot cards spawn percentage. Same for cards. Cards is different type of loot
+
+`staticLootKeysRelativeProbability` containers keys spawn chance. Key containers is drawers and jackets. The value is based on biggest among other keys.
+
+## Settings for bot generation on maps
+
+Works only if `mapBotSettings` set to true.
+
+`mapMaxBotBuffPercentage` increase amount of bots on maps exclude night Factory and Lab.
+
+`mapPmcBotDifficulty` "easy", "normal", "hard", "impossible"
+
+`mapBotScatteringIncreasePercentage` increase bot weapon scattering (i'm not sure if it works properly).
+
+`mapBossChanceBuff` add or remove percent for existing boss chance. For example if map boss chance is 35 and you set this parameter to 20 then boss chance will be 35 + 20.
 
 ## Installation
 
