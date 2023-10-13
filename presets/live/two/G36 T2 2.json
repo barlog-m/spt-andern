@@ -1,0 +1,122 @@
+{
+    "type": "weapon",
+    "id": "4498c2b1626935b223256de7",
+    "name": "G36 T2 2",
+    "root": "4a086bcd0a979e0e5455b826",
+    "items": [
+        {
+            "_id": "4a086bcd0a979e0e5455b826",
+            "_tpl": "623063e994fc3f7b302a9696",
+            "upd": {
+                "Repairable": {
+                    "MaxDurability": 100,
+                    "Durability": 100
+                },
+                "Foldable": {
+                    "Folded": false
+                },
+                "FireMode": {
+                    "FireMode": "single"
+                }
+            }
+        },
+        {
+            "_id": "b73947cbafd517e1a136d6f5",
+            "_tpl": "55802d5f4bdc2dac148b458e",
+            "parentId": "4a086bcd0a979e0e5455b826",
+            "slotId": "mod_magazine"
+        },
+        {
+            "_id": "1626c77c5d626eeaaecd70e2",
+            "_tpl": "622f14e899892a7f9e08f6c5",
+            "parentId": "4a086bcd0a979e0e5455b826",
+            "slotId": "mod_stock"
+        },
+        {
+            "_id": "1c515e5ec14a22d1cc94d35a",
+            "_tpl": "622b379bf9cfc87d675d2de5",
+            "parentId": "4a086bcd0a979e0e5455b826",
+            "slotId": "mod_barrel"
+        },
+        {
+            "_id": "aecc43c6c2f4913672187441",
+            "_tpl": "62386b2adf47d66e835094b2",
+            "parentId": "4a086bcd0a979e0e5455b826",
+            "slotId": "mod_handguard"
+        },
+        {
+            "_id": "8b2009eecd36181b798d494a",
+            "_tpl": "622f039199f4ea1a4d6c9a17",
+            "parentId": "4a086bcd0a979e0e5455b826",
+            "slotId": "mod_mount"
+        },
+        {
+            "_id": "1802e3abdeb45532ac3c4dee",
+            "_tpl": "622b3d5cf9cfc87d675d2de9",
+            "parentId": "4a086bcd0a979e0e5455b826",
+            "slotId": "mod_scope"
+        },
+        {
+            "_id": "047f42aaea9d44e9eb8a4dfd",
+            "_tpl": "5cf6937cd7f00c056c53fb39",
+            "parentId": "1c515e5ec14a22d1cc94d35a",
+            "slotId": "mod_muzzle"
+        },
+        {
+            "_id": "8ddce370c07a7082ae819bcb",
+            "_tpl": "622b327b267a1b13a44abea3",
+            "parentId": "1c515e5ec14a22d1cc94d35a",
+            "slotId": "mod_gas_block"
+        },
+        {
+            "_id": "544172d709ab266a3aa00c81",
+            "_tpl": "62444cb99f47004c781903eb",
+            "parentId": "aecc43c6c2f4913672187441",
+            "slotId": "mod_mount_000"
+        },
+        {
+            "_id": "33700fc68e7f465972e8edba",
+            "_tpl": "62444cd3674028188b052799",
+            "parentId": "aecc43c6c2f4913672187441",
+            "slotId": "mod_mount_001"
+        },
+        {
+            "_id": "d2bef25f22386a9457938cd5",
+            "_tpl": "622f16a1a5958f63c67f1737",
+            "parentId": "aecc43c6c2f4913672187441",
+            "slotId": "mod_tactical"
+        },
+        {
+            "_id": "39295a87a4507728cae69fcc",
+            "_tpl": "58491f3324597764bc48fa02",
+            "parentId": "1802e3abdeb45532ac3c4dee",
+            "slotId": "mod_scope",
+            "upd": {
+                "Sight": {
+                    "ScopesCurrentCalibPointIndexes": [0],
+                    "ScopesSelectedModes": [0],
+                    "SelectedScope": 0
+                }
+            }
+        },
+        {
+            "_id": "8082934d656f08c472e2554a",
+            "_tpl": "59fc48e086f77463b1118392",
+            "parentId": "544172d709ab266a3aa00c81",
+            "slotId": "mod_foregrip"
+        },
+        {
+            "_id": "769787a4d290f632a9956fbb",
+            "_tpl": "56def37dd2720bec348b456a",
+            "parentId": "33700fc68e7f465972e8edba",
+            "slotId": "mod_tactical",
+            "upd": {
+                "Light": {
+                    "IsActive": true,
+                    "SelectedMode": 0
+                }
+            }
+        }
+    ],
+    "Parent": "5447b5f14bdc2d61278b4567"
+}

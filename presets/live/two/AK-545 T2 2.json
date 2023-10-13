@@ -1,0 +1,132 @@
+{
+    "type": "weapon",
+    "id": "9489fe75a9468fdb7cbcaf4e",
+    "name": "AK-545 T2 2",
+    "root": "befb2f64259d8c8ba5449f84",
+    "items": [
+        {
+            "_id": "befb2f64259d8c8ba5449f84",
+            "_tpl": "628b5638ad252a16da6dd245",
+            "upd": {
+                "Repairable": {
+                    "MaxDurability": 100,
+                    "Durability": 100
+                },
+                "FireMode": {
+                    "FireMode": "single"
+                }
+            }
+        },
+        {
+            "_id": "ec0d77ab95ad249d52aa60ad",
+            "_tpl": "628b8d83717774443b15e248",
+            "parentId": "befb2f64259d8c8ba5449f84",
+            "slotId": "mod_gas_block"
+        },
+        {
+            "_id": "7fa40aa4c06570f1e376c163",
+            "_tpl": "5649aa744bdc2ded0b8b457e",
+            "parentId": "befb2f64259d8c8ba5449f84",
+            "slotId": "mod_muzzle"
+        },
+        {
+            "_id": "ee96d8e9e09fd742d19aa5fa",
+            "_tpl": "5947f92f86f77427344a76b1",
+            "parentId": "befb2f64259d8c8ba5449f84",
+            "slotId": "mod_pistol_grip"
+        },
+        {
+            "_id": "a2eae68cae4a0319b979bbae",
+            "_tpl": "628b9a40717774443b15e9f2",
+            "parentId": "befb2f64259d8c8ba5449f84",
+            "slotId": "mod_stock_000"
+        },
+        {
+            "_id": "0b3a3973f39344678708983a",
+            "_tpl": "5aaa4194e5b5b055d06310a5",
+            "parentId": "befb2f64259d8c8ba5449f84",
+            "slotId": "mod_magazine"
+        },
+        {
+            "_id": "1d749d7dcc33d598fa53c930",
+            "_tpl": "5648ac824bdc2ded0b8b457d",
+            "parentId": "befb2f64259d8c8ba5449f84",
+            "slotId": "mod_charge"
+        },
+        {
+            "_id": "fb5cc816d91c9e5f3f8aead0",
+            "_tpl": "628b916469015a4e1711ed8d",
+            "parentId": "ec0d77ab95ad249d52aa60ad",
+            "slotId": "mod_handguard"
+        },
+        {
+            "_id": "a5471c3ebcde8888f3ae9d68",
+            "_tpl": "5fbbaa86f9986c4cff3fe5f6",
+            "parentId": "a2eae68cae4a0319b979bbae",
+            "slotId": "mod_stock"
+        },
+        {
+            "_id": "755366a699ec366a3400f537",
+            "_tpl": "5b7be4895acfc400170e2dd5",
+            "parentId": "fb5cc816d91c9e5f3f8aead0",
+            "slotId": "mod_foregrip"
+        },
+        {
+            "_id": "efb6772b3b0b2df205d4464d",
+            "_tpl": "5b7be47f5acfc400170e2dd2",
+            "parentId": "fb5cc816d91c9e5f3f8aead0",
+            "slotId": "mod_mount_000"
+        },
+        {
+            "_id": "401ba1f00017404a11a46106",
+            "_tpl": "628b9be6cff66b70c002b14c",
+            "parentId": "fb5cc816d91c9e5f3f8aead0",
+            "slotId": "mod_reciever"
+        },
+        {
+            "_id": "928bd7e24756fbe203ce4a7b",
+            "_tpl": "59fc48e086f77463b1118392",
+            "parentId": "755366a699ec366a3400f537",
+            "slotId": "mod_foregrip"
+        },
+        {
+            "_id": "538ef516beffc4bb52c91889",
+            "_tpl": "56def37dd2720bec348b456a",
+            "parentId": "efb6772b3b0b2df205d4464d",
+            "slotId": "mod_tactical",
+            "upd": {
+                "Light": {
+                    "IsActive": true,
+                    "SelectedMode": 0
+                }
+            }
+        },
+        {
+            "_id": "c879948615d7e60e170c9de5",
+            "_tpl": "628b9471078f94059a4b9bfb",
+            "parentId": "401ba1f00017404a11a46106",
+            "slotId": "mod_sight_rear",
+            "upd": {
+                "Sight": {
+                    "ScopesCurrentCalibPointIndexes": [0],
+                    "ScopesSelectedModes": [0],
+                    "SelectedScope": 0
+                }
+            }
+        },
+        {
+            "_id": "bd91efce3df7524438da4619",
+            "_tpl": "58491f3324597764bc48fa02",
+            "parentId": "401ba1f00017404a11a46106",
+            "slotId": "mod_scope",
+            "upd": {
+                "Sight": {
+                    "ScopesCurrentCalibPointIndexes": [0],
+                    "ScopesSelectedModes": [0],
+                    "SelectedScope": 0
+                }
+            }
+        }
+    ],
+    "Parent": "5447b5f14bdc2d61278b4567"
+}

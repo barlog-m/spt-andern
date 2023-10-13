@@ -1,0 +1,104 @@
+{
+    "type": "weapon",
+    "id": "ce027d8a765c587ef7b85272",
+    "name": "74UN T1",
+    "root": "cd949b5afb289e3565976d4c",
+    "items": [
+        {
+            "_id": "cd949b5afb289e3565976d4c",
+            "_tpl": "583990e32459771419544dd2",
+            "upd": {
+                "Repairable": {
+                    "MaxDurability": 100,
+                    "Durability": 100
+                },
+                "Foldable": {
+                    "Folded": false
+                },
+                "FireMode": {
+                    "FireMode": "single"
+                }
+            }
+        },
+        {
+            "_id": "8d4619329ae7d9cddb5b17e8",
+            "_tpl": "5649ad3f4bdc2df8348b4585",
+            "parentId": "cd949b5afb289e3565976d4c",
+            "slotId": "mod_pistol_grip"
+        },
+        {
+            "_id": "4ef26feb578bd32bdbc53525",
+            "_tpl": "57dc347d245977596754e7a1",
+            "parentId": "cd949b5afb289e3565976d4c",
+            "slotId": "mod_stock"
+        },
+        {
+            "_id": "a0d8a2057feabe12c046c655",
+            "_tpl": "564ca99c4bdc2d16268b4589",
+            "parentId": "cd949b5afb289e3565976d4c",
+            "slotId": "mod_magazine"
+        },
+        {
+            "_id": "7a18a844e4ab27f992a3b175",
+            "_tpl": "57dc324a24597759501edc20",
+            "parentId": "cd949b5afb289e3565976d4c",
+            "slotId": "mod_muzzle"
+        },
+        {
+            "_id": "a161cb835946ec4ff220c284",
+            "_tpl": "57dc334d245977597164366f",
+            "parentId": "cd949b5afb289e3565976d4c",
+            "slotId": "mod_reciever"
+        },
+        {
+            "_id": "7478fbdc71087646e726db40",
+            "_tpl": "59d36a0086f7747e673f3946",
+            "parentId": "cd949b5afb289e3565976d4c",
+            "slotId": "mod_gas_block"
+        },
+        {
+            "_id": "836f0394b780ad1dac9f5da6",
+            "_tpl": "57ffb0062459777a045af529",
+            "parentId": "a161cb835946ec4ff220c284",
+            "slotId": "mod_mount_000"
+        },
+        {
+            "_id": "96bc54b8ff1942a119b4af96",
+            "_tpl": "57ffa9f4245977728561e844",
+            "parentId": "7478fbdc71087646e726db40",
+            "slotId": "mod_handguard"
+        },
+        {
+            "_id": "b7dff4d15b2e188835d05170",
+            "_tpl": "57ae0171245977343c27bfcf",
+            "parentId": "836f0394b780ad1dac9f5da6",
+            "slotId": "mod_scope",
+            "upd": {
+                "Sight": {
+                    "ScopesCurrentCalibPointIndexes": [0],
+                    "ScopesSelectedModes": [0],
+                    "SelectedScope": 0
+                }
+            }
+        },
+        {
+            "_id": "dee09b6913d94e77bed96662",
+            "_tpl": "5c1bc7752e221602b1779b34",
+            "parentId": "96bc54b8ff1942a119b4af96",
+            "slotId": "mod_foregrip"
+        },
+        {
+            "_id": "285c6178ab76bd97abda90a5",
+            "_tpl": "5a7b483fe899ef0016170d15",
+            "parentId": "96bc54b8ff1942a119b4af96",
+            "slotId": "mod_tactical_000",
+            "upd": {
+                "Light": {
+                    "IsActive": true,
+                    "SelectedMode": 0
+                }
+            }
+        }
+    ],
+    "Parent": "5447b5f14bdc2d61278b4567"
+}

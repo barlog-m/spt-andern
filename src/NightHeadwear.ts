@@ -28,7 +28,7 @@ export class NightHeadwear {
         this.logger.info("[Andern] Bot Headwear Changes enabled");
     }
 
-    public tierOneHeadwearWithNvg(pmcInventory: PmcInventory): undefined {
+    tierOneHeadwearWithNvg(pmcInventory: PmcInventory): undefined {
         const [items, headwearId] = this.replaceHeadwear(
             pmcInventory.items,
             _6B47_RATNIK_BSH_HELMET
@@ -37,7 +37,7 @@ export class NightHeadwear {
         pmcInventory.items = items;
     }
 
-    public tierTwoHeadwearWithNvg(pmcInventory: PmcInventory): undefined {
+    tierTwoHeadwearWithNvg(pmcInventory: PmcInventory): undefined {
         const [items, headwearId] = this.replaceHeadwear(
             pmcInventory.items,
             MSA_ACH_TC_2001_MICH_SERIES_HELMET
@@ -46,7 +46,7 @@ export class NightHeadwear {
         pmcInventory.items = items;
     }
 
-    public tierThreeHeadwearWithNvg(pmcInventory: PmcInventory): undefined {
+    tierThreeHeadwearWithNvg(pmcInventory: PmcInventory): undefined {
         const [items, headwearId] = this.replaceHeadwear(
             pmcInventory.items,
             OPS_CORE_FAST_MT_SUPER_HIGH_CUT_HELMET
@@ -55,7 +55,7 @@ export class NightHeadwear {
         pmcInventory.items = items;
     }
 
-    public tierFourHeadwearWithNvg(pmcInventory: PmcInventory): undefined {
+    tierFourHeadwearWithNvg(pmcInventory: PmcInventory): undefined {
         const [items, headwearId] = this.replaceHeadwear(
             pmcInventory.items,
             CRYE_PRECISION_AIRFRAME_HELMET_TAN
@@ -64,7 +64,7 @@ export class NightHeadwear {
         pmcInventory.items = items;
     }
 
-    protected replaceHeadwear(
+    replaceHeadwear(
         inventoryItems: Item[],
         headwearTemplateId: string
     ): [Item[], string] {
@@ -74,7 +74,7 @@ export class NightHeadwear {
         return [items, headwearId];
     }
 
-    protected findItemToDelete(items: Item[], parentId: string): Item {
+    findItemToDelete(items: Item[], parentId: string): Item {
         for (const item of items) {
             if (item.parentId && item.parentId == parentId) {
                 return item;
@@ -84,7 +84,7 @@ export class NightHeadwear {
         }
     }
 
-    protected deleteHeadwear(inventoryItems: Item[]): Item[] {
+    deleteHeadwear(inventoryItems: Item[]): Item[] {
         const itemsToDelete: Item[] = [];
 
         for (const item of inventoryItems) {
@@ -116,11 +116,7 @@ export class NightHeadwear {
         return filteredItems;
     }
 
-    protected addHeadwear(
-        items: Item[],
-        rootId: string,
-        timplateId: string
-    ): string {
+    addHeadwear(items: Item[], rootId: string, timplateId: string): string {
         const headwearItem: Item = {
             _id: this.hashUtil.generate(),
             _tpl: timplateId,
@@ -132,7 +128,7 @@ export class NightHeadwear {
         return headwearItem._id;
     }
 
-    protected addNightVision(
+    addNightVision(
         items: Item[],
         headwearId: string,
         timplateId: string
@@ -151,10 +147,7 @@ export class NightHeadwear {
         return nvgItem._id;
     }
 
-    protected addTierTwoNightVision(
-        items: Item[],
-        headwearId: string
-    ): undefined {
+    addTierTwoNightVision(items: Item[], headwearId: string): undefined {
         const mountId = this.addNightVision(
             items,
             headwearId,
@@ -166,5 +159,20 @@ export class NightHeadwear {
             PNV_10T_DOVETAIL_ADAPTER
         );
         this.addNightVision(items, adapterId, PNV_10T_NIGHT_VISION_GOGGLES);
+    }
+
+    public generateNightHeadwear(
+        botLevel: number,
+        botInventory: PmcInventory
+    ): undefined {
+        if (botLevel < 15) {
+            this.tierOneHeadwearWithNvg(botInventory);
+        } else if (botLevel >= 15 && botLevel < 28) {
+            this.tierTwoHeadwearWithNvg(botInventory);
+        } else if (botLevel >= 28 && botLevel < 40) {
+            this.tierThreeHeadwearWithNvg(botInventory);
+        } else {
+            this.tierFourHeadwearWithNvg(botInventory);
+        }
     }
 }

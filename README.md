@@ -7,7 +7,7 @@
 
 Idea of this mod is to rebalance a bit the game for better single player experience.
 
-* Give PMC bots decent weapon from presets. Bots weapon ranged tiers: before 15 - tier one, from 15 to 28 - tier two, from 28 to 40 - tier three, and above 40 - tier four.
+* Give PMC bots decent weapon from handmade presets. 
 
 * Give PMC good gear. Every PMC wear armor, helmet, rig, headphones, face cover and glasses.
 
@@ -21,10 +21,10 @@ Idea of this mod is to rebalance a bit the game for better single player experie
 
 * Mod increse keys and cards spawn chance.
 
+Weapon and gear split by tiers. Tiers is described in `preset_name/preset.json` file. Mod has two presets *meta* and *live*. Choise *live* if you want more veraity and close to live Tarkov expirience.
+
 Bots get random weapon from lists. There is no pistols and other crap that bots can't use very good.
 Also bots use specified ammo for each caliber from list.
-
-For example list of ammo for tier one weapon presets is in file `res\one\ammo.json`
 
 Preset made in the game and then exported with [SPT-AKI Profile Editor](https://hub.sp-tarkov.com/files/file/184-spt-aki-profile-editor/)
 
@@ -52,9 +52,13 @@ if `useFixedPmcBotLevelRange` true then pmc bots level in fixed range from `pmcB
 * https://escapefromtarkov.fandom.com/wiki/7.62x39mm_BP_gzh
 * https://escapefromtarkov.fandom.com/wiki/5.45x39mm_7N40
 
+Trader assortiment for each tier is on file `trader.json`
+
 Trader can insure with zero return time and 100% return chance.
 
 Trader can repair without degradation.
+
+You cand disable trader by set `trader` to false in config.json
 
 Enable insurance on Lab. Option `insuranceOnLab`.
 
@@ -68,11 +72,15 @@ Settings in config 'chadsOnFactoryAndLabOnly', 'chadsPercentage' and 'chadsMinim
 
 ## Keys spawn settings
 
-`keyRelativeProbabilityThreshold` modified only keys with multiplier below this value
-`keyRelativeProbabilityMultiplier` spawn multiplier
-`looseKeyPercentage` loose loot keys spawn percentage
-`looseCardPercentage` loose loot cards spawn percentage
-`keyStaticRelativeProbability` containers keys spawn chance
+`looseLootKeysRelativeProbabilityThreshold` modified only keys with multiplier below this value. Some keys already has high relative probability chance. Mod don't increase probability for keys above this value because places for loose loot are limited.
+
+`looseLootKeysRelativeProbabilityMultiplier` spawn multiplier. If value is 1 than nothing changes.
+
+`looseLootKeysPercentage` loose loot keys spawn percentage. Percent is from origin SPT-AKI value. Default is different for different keys.
+
+`looseLootCardsPercentage` loose loot cards spawn percentage. Same for cards. Cards is different type of loot
+
+`staticLootKeysRelativeProbability` containers keys spawn chance. Key containers is drawers and jackets. The value is based on biggest among other keys.
 
 ## Installation
 
@@ -82,40 +90,3 @@ Put folder `BarlogM-Andern` from zip file into your `user/mods` folder
 
 * If you close game client with Alt+F4 you have to restart server becouse mod stops working.
 * Mod does not work with [Algorithmic Level Progression](https://hub.sp-tarkov.com/files/file/1400-algorithmic-level-progression/)
-
-Tier One Ammo
-
-* https://escapefromtarkov.fandom.com/wiki/5.45x39mm_PS_gs
-* https://escapefromtarkov.fandom.com/wiki/7.62x39mm_HP
-* https://escapefromtarkov.fandom.com/wiki/5.56x45mm_FMJ
-* https://escapefromtarkov.fandom.com/wiki/.366_TKM_EKO
-* https://escapefromtarkov.fandom.com/wiki/7.62x51mm_TCW_SP
-* https://escapefromtarkov.fandom.com/wiki/7.62x54mm_R_LPS_gzh
-
-Tier Two Ammo
-
-* https://escapefromtarkov.fandom.com/wiki/5.45x39mm_PP_gs
-* https://escapefromtarkov.fandom.com/wiki/7.62x39mm_PS_gzh
-* https://escapefromtarkov.fandom.com/wiki/5.56x45mm_M856A1
-* https://escapefromtarkov.fandom.com/wiki/.366_TKM_EKO
-* https://escapefromtarkov.fandom.com/wiki/7.62x51mm_BCP_FMJ
-* https://escapefromtarkov.fandom.com/wiki/7.62x54mm_R_T-46M_gzh
-
-Tier Three Ammo
-
-* https://escapefromtarkov.fandom.com/wiki/5.45x39mm_BP_gs
-* https://escapefromtarkov.fandom.com/wiki/7.62x39mm_PS_gzh
-* https://escapefromtarkov.fandom.com/wiki/5.56x45mm_M856A1
-* https://escapefromtarkov.fandom.com/wiki/.366_TKM_AP-M
-* https://escapefromtarkov.fandom.com/wiki/7.62x51mm_BCP_FMJ
-* https://escapefromtarkov.fandom.com/wiki/7.62x54mm_R_PS_gzh
-* https://escapefromtarkov.fandom.com/wiki/.300_Blackout_M62_Tracer
-
-Tier Four Ammo
-
-* https://escapefromtarkov.fandom.com/wiki/5.45x39mm_7N40
-* https://escapefromtarkov.fandom.com/wiki/7.62x39mm_BP_gzh
-* https://escapefromtarkov.fandom.com/wiki/5.56x45mm_M855A1
-* https://escapefromtarkov.fandom.com/wiki/7.62x51mm_M80
-* https://escapefromtarkov.fandom.com/wiki/7.62x54mm_R_BT_gzh
-* https://escapefromtarkov.fandom.com/wiki/.300_Blackout_AP

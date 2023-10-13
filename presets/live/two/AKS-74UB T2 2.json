@@ -1,0 +1,116 @@
+{
+    "type": "weapon",
+    "id": "891e8abbc46cb00db6b4c9a9",
+    "name": "AKS-74UB T2 2",
+    "root": "553f4af68a8a831b1dbe2c85",
+    "items": [
+        {
+            "_id": "553f4af68a8a831b1dbe2c85",
+            "_tpl": "5839a40f24597726f856b511",
+            "upd": {
+                "Repairable": {
+                    "MaxDurability": 100,
+                    "Durability": 100
+                },
+                "Foldable": {
+                    "Folded": false
+                },
+                "FireMode": {
+                    "FireMode": "single"
+                }
+            }
+        },
+        {
+            "_id": "afc5df180b7e4072a8b57c17",
+            "_tpl": "5947f92f86f77427344a76b1",
+            "parentId": "553f4af68a8a831b1dbe2c85",
+            "slotId": "mod_pistol_grip"
+        },
+        {
+            "_id": "3616ce16a3e9f0fdcf684c83",
+            "_tpl": "59ecc28286f7746d7a68aa8c",
+            "parentId": "553f4af68a8a831b1dbe2c85",
+            "slotId": "mod_stock"
+        },
+        {
+            "_id": "9b8d9a0af3fabb7dc7d0c491",
+            "_tpl": "5648ac824bdc2ded0b8b457d",
+            "parentId": "553f4af68a8a831b1dbe2c85",
+            "slotId": "mod_charge"
+        },
+        {
+            "_id": "931cd9b77037a4eb5e7638d5",
+            "_tpl": "564ca99c4bdc2d16268b4589",
+            "parentId": "553f4af68a8a831b1dbe2c85",
+            "slotId": "mod_magazine"
+        },
+        {
+            "_id": "6f1c77579c19c8d4251efc05",
+            "_tpl": "57ffb0e42459777d047111c5",
+            "parentId": "553f4af68a8a831b1dbe2c85",
+            "slotId": "mod_muzzle"
+        },
+        {
+            "_id": "dc6cac35acb341d821e483cd",
+            "_tpl": "5839a7742459773cf9693481",
+            "parentId": "553f4af68a8a831b1dbe2c85",
+            "slotId": "mod_reciever"
+        },
+        {
+            "_id": "5e5f24bcbfd74e36bf1c3cd1",
+            "_tpl": "63d114019e35b334d82302f7",
+            "parentId": "553f4af68a8a831b1dbe2c85",
+            "slotId": "mod_mount_000"
+        },
+        {
+            "_id": "9d59c3ff6bd59dde35739c25",
+            "_tpl": "59d36a0086f7747e673f3946",
+            "parentId": "553f4af68a8a831b1dbe2c85",
+            "slotId": "mod_gas_block"
+        },
+        {
+            "_id": "9d395b828a18df41afed8e8d",
+            "_tpl": "5b222d405acfc400153af4fe",
+            "parentId": "3616ce16a3e9f0fdcf684c83",
+            "slotId": "mod_stock"
+        },
+        {
+            "_id": "d180949dae22b2d638c62ad2",
+            "_tpl": "64785e7c19d732620e045e15",
+            "parentId": "5e5f24bcbfd74e36bf1c3cd1",
+            "slotId": "mod_scope",
+            "upd": {
+                "Sight": {
+                    "ScopesCurrentCalibPointIndexes": [0],
+                    "ScopesSelectedModes": [0],
+                    "SelectedScope": 0
+                }
+            }
+        },
+        {
+            "_id": "88f2d03415d4285e5a0d4609",
+            "_tpl": "57ffa9f4245977728561e844",
+            "parentId": "9d59c3ff6bd59dde35739c25",
+            "slotId": "mod_handguard"
+        },
+        {
+            "_id": "be21bea12f04d56ce6206c7e",
+            "_tpl": "5c1bc4812e22164bef5cfde7",
+            "parentId": "88f2d03415d4285e5a0d4609",
+            "slotId": "mod_foregrip"
+        },
+        {
+            "_id": "27ea2a845276d5645aff4e0d",
+            "_tpl": "56def37dd2720bec348b456a",
+            "parentId": "88f2d03415d4285e5a0d4609",
+            "slotId": "mod_tactical_001",
+            "upd": {
+                "Light": {
+                    "IsActive": true,
+                    "SelectedMode": 0
+                }
+            }
+        }
+    ],
+    "Parent": "5447b5f14bdc2d61278b4567"
+}

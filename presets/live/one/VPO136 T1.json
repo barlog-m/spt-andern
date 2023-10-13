@@ -1,0 +1,89 @@
+{
+    "type": "weapon",
+    "id": "3ef64d56b76160dfb6313d61",
+    "name": "VPO136 T1",
+    "root": "13ba384c7f0c812d4fdec416",
+    "items": [
+        {
+            "_id": "13ba384c7f0c812d4fdec416",
+            "_tpl": "59e6152586f77473dc057aa1",
+            "upd": {
+                "Repairable": {
+                    "MaxDurability": 100,
+                    "Durability": 100
+                },
+                "FireMode": {
+                    "FireMode": "single"
+                }
+            }
+        },
+        {
+            "_id": "12e0ecd2491e33f5b23d365d",
+            "_tpl": "59ccfdba86f7747f2109a587",
+            "parentId": "13ba384c7f0c812d4fdec416",
+            "slotId": "mod_gas_block"
+        },
+        {
+            "_id": "6152432963cd5de882c3449f",
+            "_tpl": "59d64fc686f774171b243fe2",
+            "parentId": "13ba384c7f0c812d4fdec416",
+            "slotId": "mod_muzzle"
+        },
+        {
+            "_id": "7a8977572721bbe55a726eef",
+            "_tpl": "59e6318286f77444dd62c4cc",
+            "parentId": "13ba384c7f0c812d4fdec416",
+            "slotId": "mod_pistol_grip"
+        },
+        {
+            "_id": "96ac79c54f4a4ebbab7c6024",
+            "_tpl": "5d2c76ed48f03532f2136169",
+            "parentId": "13ba384c7f0c812d4fdec416",
+            "slotId": "mod_reciever"
+        },
+        {
+            "_id": "8d77dc892f3981e522f2d2a4",
+            "_tpl": "59e6227d86f77440d64f5dc2",
+            "parentId": "13ba384c7f0c812d4fdec416",
+            "slotId": "mod_stock"
+        },
+        {
+            "_id": "2e1ac2201c04e8c630c71b21",
+            "_tpl": "5b1fd4e35acfc40018633c39",
+            "parentId": "13ba384c7f0c812d4fdec416",
+            "slotId": "mod_magazine"
+        },
+        {
+            "_id": "a4eff27eee5d2b4b2df1f52a",
+            "_tpl": "5648ac824bdc2ded0b8b457d",
+            "parentId": "13ba384c7f0c812d4fdec416",
+            "slotId": "mod_charge"
+        },
+        {
+            "_id": "fd4345315d39ad69771f3095",
+            "_tpl": "5a7b483fe899ef0016170d15",
+            "parentId": "12e0ecd2491e33f5b23d365d",
+            "slotId": "mod_tactical_000",
+            "upd": {
+                "Light": {
+                    "IsActive": true,
+                    "SelectedMode": 0
+                }
+            }
+        },
+        {
+            "_id": "de75b457ffd214d84fb6c33b",
+            "_tpl": "570fd721d2720bc5458b4596",
+            "parentId": "96ac79c54f4a4ebbab7c6024",
+            "slotId": "mod_scope",
+            "upd": {
+                "Sight": {
+                    "ScopesCurrentCalibPointIndexes": [0],
+                    "ScopesSelectedModes": [0],
+                    "SelectedScope": 0
+                }
+            }
+        }
+    ],
+    "Parent": "5447b5f14bdc2d61278b4567"
+}

@@ -4,10 +4,7 @@ import { BotInventoryGenerator } from "@spt-aki/generators/BotInventoryGenerator
 import { Inventory as PmcInventory } from "@spt-aki/models/eft/common/tables/IBotBase";
 import { IBotType } from "@spt-aki/models/eft/common/tables/IBotType";
 import { RaidInfo } from "./RaidInfo";
-import { TierOneGear } from "./TierOneGear";
-import { TierTwoGear } from "./TierTwoGear";
-import { TierThreeGear } from "./TierThreeGear";
-import { TierFourGear } from "./TierFourGear";
+import { GearGenerator } from "./GearGenerator";
 
 export default function registerBotInventoryGenerator(
     container: DependencyContainer
@@ -18,12 +15,9 @@ export default function registerBotInventoryGenerator(
     );
     const raidInfo = container.resolve<RaidInfo>("AndernRaidInfo");
 
-    const tierOneGear = container.resolve<TierOneGear>("AndernTierOneGear");
-    const tierTwoGear = container.resolve<TierTwoGear>("AndernTierTwoGear");
-    const tierThreeGear = container.resolve<TierThreeGear>(
-        "AndernTierThreeGear"
+    const gearGenerator = container.resolve<GearGenerator>(
+        "AndernGearGenerator"
     );
-    const tierFourGear = container.resolve<TierFourGear>("AndernTierFourGear");
 
     container.afterResolution(
         "BotInventoryGenerator",
@@ -36,47 +30,15 @@ export default function registerBotInventoryGenerator(
                 botLevel: number
             ): PmcInventory => {
                 if (isPmc) {
-                    if (botLevel < 15) {
-                        const inventory = tierOneGear.generateInventory(
-                            sessionId,
-                            botJsonTemplate,
-                            botRole,
-                            isPmc,
-                            botLevel,
-                            raidInfo
-                        );
-                        return inventory;
-                    } else if (botLevel >= 15 && botLevel < 28) {
-                        const inventory = tierTwoGear.generateInventory(
-                            sessionId,
-                            botJsonTemplate,
-                            botRole,
-                            isPmc,
-                            botLevel,
-                            raidInfo
-                        );
-                        return inventory;
-                    } else if (botLevel >= 28 && botLevel < 40) {
-                        const inventory = tierThreeGear.generateInventory(
-                            sessionId,
-                            botJsonTemplate,
-                            botRole,
-                            isPmc,
-                            botLevel,
-                            raidInfo
-                        );
-                        return inventory;
-                    } else {
-                        const inventory = tierFourGear.generateInventory(
-                            sessionId,
-                            botJsonTemplate,
-                            botRole,
-                            isPmc,
-                            botLevel,
-                            raidInfo
-                        );
-                        return inventory;
-                    }
+                    const inventory = gearGenerator.generateInventory(
+                        sessionId,
+                        botJsonTemplate,
+                        botRole,
+                        isPmc,
+                        botLevel,
+                        raidInfo
+                    );
+                    return inventory;
                 }
 
                 return botInventoryGenerator.generateInventory(

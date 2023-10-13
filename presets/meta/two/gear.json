@@ -1,0 +1,148 @@
+{
+    "headsets": [
+        {
+            "weight": 1,
+            "id": "6033fa48ffd42c541047f728",
+            "name": "OPSMEN Earmor M32 headset"
+        },
+        {
+            "weight": 1,
+            "id": "5645bcc04bdc2d363b8b4572",
+            "name": "Peltor ComTac 2 headset"
+        },
+        {
+            "weight": 1,
+            "id": "5aa2ba71e5b5b000137b758f",
+            "name": "MSA Sordin Supreme PRO-X/L active headset"
+        }
+    ],
+    "helmets": [
+        {
+            "weight": 1,
+            "id": "5d5e7d28a4b936645d161203",
+            "name": "MSA ACH TC-2001 MICH Series helmet"
+        }
+    ],
+    "armoredRigs": [
+        {
+            "weight": 2,
+            "id": "544a5caa4bdc2d1a388b4568",
+            "name": "Crye Precision AVS plate carrier"
+        },
+        {
+            "weight": 2,
+            "id": "592c2d1a86f7746dbe2af32a",
+            "name": "ANA Tactical Alpha chest rig"
+        },
+        {
+            "weight": 1,
+            "id": "5c0e446786f7742013381639",
+            "name": "6B5-15 Zh-86 Uley armored rig"
+        },
+        {
+            "weight": 1,
+            "id": "5d5d646386f7742797261fd9",
+            "name": "6B3TM-01M armored rig"
+        }
+    ],
+    "armor": [
+        {
+            "weight": 2,
+            "id": "5c0e655586f774045612eeb2",
+            "name": "HighCom Trooper TFO body armor (Multicam)"
+        },
+        {
+            "weight": 1,
+            "id": "64abd93857958b4249003418",
+            "name": "Interceptor OTV body armor (UCP)"
+        },
+        {
+            "weight": 1,
+            "id": "5c0e51be86f774598e797894",
+            "name": "6B13 assault armor (Flora)"
+        }
+    ],
+    "rigs": [
+        {
+            "weight": 1,
+            "id": "6034cf5fffd42c541047f72e",
+            "name": "Umka M33-SET1 hunter vest"
+        },
+        {
+            "weight": 1,
+            "id": "5d5d85c586f774279a21cbdb",
+            "name": "Haley Strategic D3CRX Chest Harness"
+        },
+        {
+            "weight": 1,
+            "id": "5ca20abf86f77418567a43f2",
+            "name": "Dynaforce Triton M43-A chest harness"
+        },
+        {
+            "weight": 1,
+            "id": "5c0e9f2c86f77432297fe0a3",
+            "name": "BlackHawk! Commando chest harness (Black)"
+        },
+        {
+            "weight": 1,
+            "id": "5e4abfed86f77406a2713cf7",
+            "name": "Splav Tarzan M22 chest rig"
+        },
+        {
+            "weight": 1,
+            "id": "5929a2a086f7744f4b234d43",
+            "name": "UMTBS 6sh112 Scout-Sniper"
+        }
+    ],
+    "backpacks": [
+        {
+            "weight": 2,
+            "id": "5ca20d5986f774331e7c9602",
+            "name": "WARTECH Berkut BB-102 backpack"
+        },
+        {
+            "weight": 2,
+            "id": "5e9dcf5986f7746c417435b3",
+            "name": "LBT-8005A Day Pack backpack"
+        },
+        {
+            "weight": 1,
+            "id": "5d5d940f86f7742797262046",
+            "name": "Oakley Mechanism heavy duty backpack (Black)"
+        },
+        {
+            "weight": 1,
+            "id": "6038d614d10cbf667352dd44",
+            "name": "Hazard 4 Takedown sling backpack (Multicam)"
+        },
+        {
+            "weight": 1,
+            "id": "60a272cc93ef783291411d8e",
+            "name": "Hazard 4 Drawbridge backpack (Coyote Tan)"
+        },
+        {
+            "weight": 1,
+            "id": "618bb76513f5097c8d5aa2d5",
+            "name": "Gruppa 99 T20 backpack"
+        }
+    ],
+    "face": [
+        {
+            "weight": 1,
+            "id": "5ab8f39486f7745cd93a1cca",
+            "name": "Cold Fear infrared balaclava"
+        },
+        {
+            "weight": 1,
+            "id": "5b4325355acfc40019478126",
+            "name": "Shemagh (Tan)"
+        }
+    ],
+    "eyewear": [
+        {
+            "weight": 1,
+            "id": "5d5fca1ea4b93635fd598c07",
+            "name": "Crossbow tactical glasses"
+        }
+    ]
+}

@@ -1,3 +1,5 @@
+import { inject, injectAll, injectable } from "tsyringe";
+
 import { DatabaseServer } from "@spt-aki/servers/DatabaseServer";
 import { Item } from "@spt-aki/models/eft/common/tables/IItem";
 import { ITemplateItem } from "@spt-aki/models/eft/common/tables/ITemplateItem";
@@ -12,78 +14,33 @@ import { InventoryMagGen } from "@spt-aki/generators/weapongen/InventoryMagGen";
 import { Inventory as PmcInventory } from "@spt-aki/models/eft/common/tables/IBotBase";
 import { MinMax } from "@spt-aki/models/common/MinMax";
 
-import * as fs from "fs";
+import { GeneratedWeapon } from "./models";
+import { PresetData } from "./PresetData";
 
-export class WeaponPreset {
-    id: string;
-    name: string;
-    root: string;
-    items: Item[];
-}
-
-export class GeneratedWeapon {
-    weaponWithMods: Item[];
-    weaponTemplate: ITemplateItem;
-    ammoTpl: string;
-    magazineTpl: string;
-}
-
-export abstract class WeaponGenerator {
+@injectable()
+export class WeaponGenerator {
     protected readonly magazineSlotId = "mod_magazine";
     protected readonly chamberSlotId = "patron_in_weapon";
     protected readonly equipmentSlot = "FirstPrimaryWeapon";
 
-    protected weaponPresets: Record<string, WeaponPreset> = {};
-
-    protected readonly numberOfMagazines: MinMax = { min: 3, max: 7 };
+    protected readonly numberOfMagazines: MinMax = { min: 2, max: 4 };
     protected readonly secureContainerAmmoStackCount = 6;
 
     constructor(
-        protected logger: ILogger,
-        protected hashUtil: HashUtil,
-        protected randomUtil: RandomUtil,
-        protected databaseServer: DatabaseServer,
-        protected itemHelper: ItemHelper,
+        @inject("WinstonLogger") protected logger: ILogger,
+        @inject("HashUtil") protected hashUtil: HashUtil,
+        @inject("RandomUtil") protected randomUtil: RandomUtil,
+        @inject("DatabaseServer") protected databaseServer: DatabaseServer,
+        @inject("ItemHelper") protected itemHelper: ItemHelper,
+        @inject("BotWeaponGeneratorHelper")
         protected botWeaponGeneratorHelper: BotWeaponGeneratorHelper,
+        @injectAll("InventoryMagGen")
         protected inventoryMagGenComponents: IInventoryMagGen[],
-        protected modResPath: string
-    ) {
-        this.loadPresets(modResPath);
-    }
+        @inject("AndernPresetData") protected presetData: PresetData
+    ) {}
 
-    protected itemsDb(): Record<string, ITemplateItem> {
-        return this.databaseServer.getTables().templates?.items;
-    }
-
-    protected loadPresets(presetsDir: string): undefined {
-        fs.readdir(presetsDir, (err, files) => {
-            if (err) {
-                console.error("Error reading directory:", err);
-                return;
-            }
-            files.forEach((f) => {
-                if (
-                    f === "ammo.json" ||
-                    f === "gear.json" ||
-                    f === "trader.json"
-                )
-                    return;
-                const fullFileName = `${presetsDir}/${f}`;
-                const jsonData = fs.readFileSync(fullFileName, "utf-8");
-                const preset = new WeaponPreset();
-                Object.assign(preset, JSON.parse(jsonData));
-                if (this.isPresetValid(preset, fullFileName)) {
-                    this.weaponPresets[preset.id] = preset;
-                }
-            });
-        });
-    }
-
-    protected getRandomWeapon(): Item[] {
-        const keys = Object.keys(this.weaponPresets);
-        const randomKey = this.randomUtil.getArrayValue(keys);
-        const preset = this.weaponPresets[randomKey];
-        return JSON.parse(JSON.stringify(preset.items)) as Item[];
+    protected templatesTable(): Record<string, ITemplateItem> {
+        return this.databaseServer.getTables().templates.items;
     }
 
     protected getTemplateIdFromWeaponItems(weaponWithMods: Item[]): string {
@@ -91,10 +48,8 @@ export abstract class WeaponGenerator {
     }
 
     protected getCaliberByTemplateId(tpl: string): string {
-        return this.itemsDb()[tpl]._props.ammoCaliber;
+        return this.templatesTable()[tpl]._props.ammoCaliber;
     }
-
-    protected abstract getAmmoByCaliber(caliber: string): string;
 
     protected getWeaponMagazine(weaponWithMods: Item[]): Item {
         return weaponWithMods.find((item) => item.slotId === "mod_magazine");
@@ -149,7 +104,7 @@ export abstract class WeaponGenerator {
     }
 
     protected getTemplateById(tpl: string): ITemplateItem {
-        return this.itemsDb()[tpl];
+        return this.templatesTable()[tpl];
     }
 
     protected updateWeaponInfo(
@@ -210,47 +165,6 @@ export abstract class WeaponGenerator {
         }
     }
 
-    protected isPresetValid(
-        weaponPreset: WeaponPreset,
-        fileName: string
-    ): boolean {
-        let hasMagazine = false;
-        let hasTacticalDevice = false;
-
-        for (const i of weaponPreset.items) {
-            if (!i.slotId) {
-                continue;
-            }
-            if (i.slotId === "cartridges") {
-                this.logger.error(
-                    `[Andern] preset's magazine is not empty '${fileName}'`
-                );
-                return false;
-            }
-            if (i.slotId === "mod_magazine") {
-                hasMagazine = true;
-            }
-            if (i.slotId.startsWith("mod_tactical")) {
-                hasTacticalDevice = true;
-            }
-        }
-
-        if (!hasMagazine) {
-            this.logger.error(
-                `[Andern] preset doesn't have magazine '${fileName}'`
-            );
-            return false;
-        }
-
-        if (!hasTacticalDevice) {
-            this.logger.warning(
-                `[Andern] preset doesn't have tactical device '${fileName}'`
-            );
-            return true;
-        }
-
-        return true;
-    }
     public addExtraMagazinesToInventory(
         weapon: GeneratedWeapon,
         inventory: PmcInventory
@@ -305,15 +219,19 @@ export abstract class WeaponGenerator {
     }
 
     public generateWeapon(
+        botLevel: number,
         weaponParentId: string,
         isNight: boolean
     ): GeneratedWeapon {
-        const weaponWithMods = this.getRandomWeapon();
+        const weaponWithMods = this.presetData.getRandomWeapon(botLevel);
         this.updateWeaponInfo(weaponWithMods, weaponParentId, isNight);
         const weaponTpl = this.getTemplateIdFromWeaponItems(weaponWithMods);
         const weaponTemplate = this.getTemplateById(weaponTpl);
         const caliber = this.getCaliberByTemplateId(weaponTpl);
-        const ammoTpl = this.getAmmoByCaliber(caliber);
+        const ammoTpl = this.presetData.getRandomAmmoByCaliber(
+            botLevel,
+            caliber
+        );
         this.addCartridgeToChamber(weaponWithMods, ammoTpl);
         const magazineTpl = this.fillMagazine(weaponWithMods, ammoTpl);
 
