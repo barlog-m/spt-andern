@@ -1,0 +1,128 @@
+{
+    "type": "weapon",
+    "id": "a5a0000db138a720d6649a74",
+    "name": "AKS-74UB T4 6",
+    "root": "7ce0e1d1092b4e2235544f14",
+    "items": [
+        {
+            "_id": "7ce0e1d1092b4e2235544f14",
+            "_tpl": "5839a40f24597726f856b511",
+            "upd": {
+                "Repairable": {
+                    "MaxDurability": 100,
+                    "Durability": 100
+                },
+                "Foldable": {
+                    "Folded": false
+                },
+                "FireMode": {
+                    "FireMode": "single"
+                }
+            }
+        },
+        {
+            "_id": "70343811588533cd32045680",
+            "_tpl": "6087e663132d4d12c81fd96b",
+            "parentId": "7ce0e1d1092b4e2235544f14",
+            "slotId": "mod_pistol_grip"
+        },
+        {
+            "_id": "7e11518f036f29d996384c9d",
+            "_tpl": "59ecc28286f7746d7a68aa8c",
+            "parentId": "7ce0e1d1092b4e2235544f14",
+            "slotId": "mod_stock"
+        },
+        {
+            "_id": "9f206ebd5bd1d2b8a358c201",
+            "_tpl": "6130ca3fd92c473c77020dbd",
+            "parentId": "7ce0e1d1092b4e2235544f14",
+            "slotId": "mod_charge"
+        },
+        {
+            "_id": "7080f6eb13d69a02c33ad22e",
+            "_tpl": "55d482194bdc2d1d4e8b456b",
+            "parentId": "7ce0e1d1092b4e2235544f14",
+            "slotId": "mod_magazine"
+        },
+        {
+            "_id": "1913a5b60b89ccb0d634ec64",
+            "_tpl": "615d8f5dd92c473c770212ef",
+            "parentId": "7ce0e1d1092b4e2235544f14",
+            "slotId": "mod_muzzle"
+        },
+        {
+            "_id": "7020dc9f52420134d19796ad",
+            "_tpl": "5839a7742459773cf9693481",
+            "parentId": "7ce0e1d1092b4e2235544f14",
+            "slotId": "mod_reciever"
+        },
+        {
+            "_id": "ee8c2b083a3820a81d6f3427",
+            "_tpl": "63d114019e35b334d82302f7",
+            "parentId": "7ce0e1d1092b4e2235544f14",
+            "slotId": "mod_mount_000"
+        },
+        {
+            "_id": "d6fa3789bfde67fe6f880a37",
+            "_tpl": "59d36a0086f7747e673f3946",
+            "parentId": "7ce0e1d1092b4e2235544f14",
+            "slotId": "mod_gas_block"
+        },
+        {
+            "_id": "5a46891c792b4a2dac52dbdb",
+            "_tpl": "59ecc3dd86f7746dc827481c",
+            "parentId": "7e11518f036f29d996384c9d",
+            "slotId": "mod_stock"
+        },
+        {
+            "_id": "8c0c8217a6cb6a0e82256a2e",
+            "_tpl": "615d8f8567085e45ef1409ca",
+            "parentId": "1913a5b60b89ccb0d634ec64",
+            "slotId": "mod_muzzle"
+        },
+        {
+            "_id": "5ff32b8393fe0c80b3629b46",
+            "_tpl": "5b3b99265acfc4704b4a1afb",
+            "parentId": "ee8c2b083a3820a81d6f3427",
+            "slotId": "mod_scope"
+        },
+        {
+            "_id": "7d5b65c263916f1c0524e27c",
+            "_tpl": "57ffa9f4245977728561e844",
+            "parentId": "d6fa3789bfde67fe6f880a37",
+            "slotId": "mod_handguard"
+        },
+        {
+            "_id": "71326c888a79ed3eb00cd87d",
+            "_tpl": "5b3b99475acfc432ff4dcbee",
+            "parentId": "5ff32b8393fe0c80b3629b46",
+            "slotId": "mod_scope",
+            "upd": {
+                "Sight": {
+                    "ScopesCurrentCalibPointIndexes": [0],
+                    "ScopesSelectedModes": [0],
+                    "SelectedScope": 0
+                }
+            }
+        },
+        {
+            "_id": "c23abe83f4f51797f2d91d94",
+            "_tpl": "5b057b4f5acfc4771e1bd3e9",
+            "parentId": "7d5b65c263916f1c0524e27c",
+            "slotId": "mod_foregrip"
+        },
+        {
+            "_id": "3a38c77749c7fe189ec6e624",
+            "_tpl": "56def37dd2720bec348b456a",
+            "parentId": "7d5b65c263916f1c0524e27c",
+            "slotId": "mod_tactical_001",
+            "upd": {
+                "Light": {
+                    "IsActive": true,
+                    "SelectedMode": 0
+                }
+            }
+        }
+    ],
+    "Parent": "5447b5f14bdc2d61278b4567"
+}

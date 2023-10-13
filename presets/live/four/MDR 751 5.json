@@ -1,0 +1,120 @@
+{
+    "type": "weapon",
+    "id": "f3d2bb3a4a7a065b62ba21ef",
+    "name": "MDR 751 5",
+    "root": "eb019b76e01333d22a014884",
+    "items": [
+        {
+            "_id": "eb019b76e01333d22a014884",
+            "_tpl": "5dcbd56fdbd3d91b3e5468d5",
+            "upd": {
+                "Repairable": {
+                    "MaxDurability": 100,
+                    "Durability": 100
+                },
+                "FireMode": {
+                    "FireMode": "single"
+                }
+            }
+        },
+        {
+            "_id": "da8138817fd42f7e02ca0645",
+            "_tpl": "5dcbd6dddbd3d91b3e5468de",
+            "parentId": "eb019b76e01333d22a014884",
+            "slotId": "mod_pistol_grip"
+        },
+        {
+            "_id": "50d1503c475df1ae1dd05779",
+            "_tpl": "5a3501acc4a282000d72293a",
+            "parentId": "eb019b76e01333d22a014884",
+            "slotId": "mod_magazine"
+        },
+        {
+            "_id": "6da0647162c75ead30f595df",
+            "_tpl": "5dcbd6b46ec07c0c4347a564",
+            "parentId": "eb019b76e01333d22a014884",
+            "slotId": "mod_handguard"
+        },
+        {
+            "_id": "f97ea6020cef3ef2b0d271d8",
+            "_tpl": "5dcbe9431e1f4616d354987e",
+            "parentId": "eb019b76e01333d22a014884",
+            "slotId": "mod_barrel"
+        },
+        {
+            "_id": "07ebf612a67382a489b6d7cb",
+            "_tpl": "5b3b99265acfc4704b4a1afb",
+            "parentId": "eb019b76e01333d22a014884",
+            "slotId": "mod_scope"
+        },
+        {
+            "_id": "52ffc9567e44cf017b63f740",
+            "_tpl": "5fb6564947ce63734e3fa1da",
+            "parentId": "eb019b76e01333d22a014884",
+            "slotId": "mod_sight_rear",
+            "upd": {
+                "Sight": {
+                    "ScopesCurrentCalibPointIndexes": [0],
+                    "ScopesSelectedModes": [0],
+                    "SelectedScope": 0
+                }
+            }
+        },
+        {
+            "_id": "0ddd1f71c3d0e1e7b65c12ee",
+            "_tpl": "5b7be4895acfc400170e2dd5",
+            "parentId": "6da0647162c75ead30f595df",
+            "slotId": "mod_mount_000"
+        },
+        {
+            "_id": "7491c98c7c5c3240e7aab76d",
+            "_tpl": "5b7be47f5acfc400170e2dd2",
+            "parentId": "6da0647162c75ead30f595df",
+            "slotId": "mod_mount_001"
+        },
+        {
+            "_id": "688cfedd8af6c5431e15145c",
+            "_tpl": "6130c43c67085e45ef1405a1",
+            "parentId": "f97ea6020cef3ef2b0d271d8",
+            "slotId": "mod_muzzle"
+        },
+        {
+            "_id": "ca1136a2f13dcc2ddcafd9d6",
+            "_tpl": "618ba27d9008e4636a67f61d",
+            "parentId": "07ebf612a67382a489b6d7cb",
+            "slotId": "mod_scope",
+            "upd": {
+                "Sight": {
+                    "ScopesCurrentCalibPointIndexes": [0],
+                    "ScopesSelectedModes": [0],
+                    "SelectedScope": 0
+                }
+            }
+        },
+        {
+            "_id": "831e90b2c56943cfcc3f0f74",
+            "_tpl": "5c1bc5af2e221602b412949b",
+            "parentId": "0ddd1f71c3d0e1e7b65c12ee",
+            "slotId": "mod_foregrip"
+        },
+        {
+            "_id": "dad0266520553ec4a49ef94b",
+            "_tpl": "56def37dd2720bec348b456a",
+            "parentId": "7491c98c7c5c3240e7aab76d",
+            "slotId": "mod_tactical",
+            "upd": {
+                "Light": {
+                    "IsActive": true,
+                    "SelectedMode": 0
+                }
+            }
+        },
+        {
+            "_id": "34ad8608eb347678a8708cfd",
+            "_tpl": "5dfa3d2b0dee1b22f862eade",
+            "parentId": "688cfedd8af6c5431e15145c",
+            "slotId": "mod_muzzle"
+        }
+    ],
+    "Parent": "5447b5f14bdc2d61278b4567"
+}

@@ -1,0 +1,128 @@
+{
+    "type": "weapon",
+    "id": "94cad2401ddc197aad5f23d0",
+    "name": "G36 T2 1",
+    "root": "086156729e8fc9980cca89c4",
+    "items": [
+        {
+            "_id": "086156729e8fc9980cca89c4",
+            "_tpl": "623063e994fc3f7b302a9696",
+            "upd": {
+                "Repairable": {
+                    "MaxDurability": 100,
+                    "Durability": 100
+                },
+                "Foldable": {
+                    "Folded": false
+                },
+                "FireMode": {
+                    "FireMode": "single"
+                }
+            }
+        },
+        {
+            "_id": "a2c00beebb228de40d275a7b",
+            "_tpl": "55802d5f4bdc2dac148b458e",
+            "parentId": "086156729e8fc9980cca89c4",
+            "slotId": "mod_magazine"
+        },
+        {
+            "_id": "dc9e4df9a66397c0479a3ba0",
+            "_tpl": "622f14e899892a7f9e08f6c5",
+            "parentId": "086156729e8fc9980cca89c4",
+            "slotId": "mod_stock"
+        },
+        {
+            "_id": "62f23d6ae3e87971382d4ddc",
+            "_tpl": "622b379bf9cfc87d675d2de5",
+            "parentId": "086156729e8fc9980cca89c4",
+            "slotId": "mod_barrel"
+        },
+        {
+            "_id": "7d80cdc2bef6ec79d311b802",
+            "_tpl": "62386b2adf47d66e835094b2",
+            "parentId": "086156729e8fc9980cca89c4",
+            "slotId": "mod_handguard"
+        },
+        {
+            "_id": "d52cf19919200c1aa9747488",
+            "_tpl": "622f039199f4ea1a4d6c9a17",
+            "parentId": "086156729e8fc9980cca89c4",
+            "slotId": "mod_mount"
+        },
+        {
+            "_id": "537c5d48e2d05fbe794109b0",
+            "_tpl": "622b3d5cf9cfc87d675d2de9",
+            "parentId": "086156729e8fc9980cca89c4",
+            "slotId": "mod_scope"
+        },
+        {
+            "_id": "76be09b09303f76a5d3df42b",
+            "_tpl": "56ea8180d2720bf2698b456a",
+            "parentId": "62f23d6ae3e87971382d4ddc",
+            "slotId": "mod_muzzle"
+        },
+        {
+            "_id": "7b51a34b941b733c39dc5578",
+            "_tpl": "622b327b267a1b13a44abea3",
+            "parentId": "62f23d6ae3e87971382d4ddc",
+            "slotId": "mod_gas_block"
+        },
+        {
+            "_id": "882f05b69a2729ca7fffda91",
+            "_tpl": "62444cb99f47004c781903eb",
+            "parentId": "7d80cdc2bef6ec79d311b802",
+            "slotId": "mod_mount_000"
+        },
+        {
+            "_id": "0ad3f87477cf6f15afd3127d",
+            "_tpl": "62444cd3674028188b052799",
+            "parentId": "7d80cdc2bef6ec79d311b802",
+            "slotId": "mod_mount_001"
+        },
+        {
+            "_id": "086ebe0e00f5356f7de90b1a",
+            "_tpl": "622f16a1a5958f63c67f1737",
+            "parentId": "7d80cdc2bef6ec79d311b802",
+            "slotId": "mod_tactical"
+        },
+        {
+            "_id": "6c40ac1a556edf2b463f32a7",
+            "_tpl": "58491f3324597764bc48fa02",
+            "parentId": "537c5d48e2d05fbe794109b0",
+            "slotId": "mod_scope",
+            "upd": {
+                "Sight": {
+                    "ScopesCurrentCalibPointIndexes": [0],
+                    "ScopesSelectedModes": [0],
+                    "SelectedScope": 0
+                }
+            }
+        },
+        {
+            "_id": "60c6f059cee8af8a51245864",
+            "_tpl": "57da93632459771cb65bf83f",
+            "parentId": "76be09b09303f76a5d3df42b",
+            "slotId": "mod_muzzle"
+        },
+        {
+            "_id": "73cba0516bfccaac2efb9b18",
+            "_tpl": "59fc48e086f77463b1118392",
+            "parentId": "882f05b69a2729ca7fffda91",
+            "slotId": "mod_foregrip"
+        },
+        {
+            "_id": "6f727958168e6374170b0e74",
+            "_tpl": "56def37dd2720bec348b456a",
+            "parentId": "0ad3f87477cf6f15afd3127d",
+            "slotId": "mod_tactical",
+            "upd": {
+                "Light": {
+                    "IsActive": true,
+                    "SelectedMode": 0
+                }
+            }
+        }
+    ],
+    "Parent": "5447b5f14bdc2d61278b4567"
+}

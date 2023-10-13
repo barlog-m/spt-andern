@@ -1,0 +1,114 @@
+{
+    "type": "weapon",
+    "id": "77516918786a9624eb0cefa0",
+    "name": "Tier 3 MDR Tan 4",
+    "root": "d039d7ad4996facbd2c65ba8",
+    "items": [
+        {
+            "_id": "d039d7ad4996facbd2c65ba8",
+            "_tpl": "5c488a752e221602b412af63",
+            "upd": {
+                "Repairable": {
+                    "MaxDurability": 100,
+                    "Durability": 100
+                },
+                "FireMode": {
+                    "FireMode": "single"
+                }
+            }
+        },
+        {
+            "_id": "a761de8a3a9e193512ffeee9",
+            "_tpl": "5c48a2c22e221602b313fb6c",
+            "parentId": "d039d7ad4996facbd2c65ba8",
+            "slotId": "mod_pistol_grip"
+        },
+        {
+            "_id": "5f94dae522ee32d0c5ef90b0",
+            "_tpl": "55802d5f4bdc2dac148b458e",
+            "parentId": "d039d7ad4996facbd2c65ba8",
+            "slotId": "mod_magazine"
+        },
+        {
+            "_id": "fc679b38dc354925436308cb",
+            "_tpl": "5c48a14f2e2216152006edd7",
+            "parentId": "d039d7ad4996facbd2c65ba8",
+            "slotId": "mod_handguard"
+        },
+        {
+            "_id": "61070e09ed4512ee0461b036",
+            "_tpl": "5c48a2852e221602b21d5923",
+            "parentId": "d039d7ad4996facbd2c65ba8",
+            "slotId": "mod_barrel"
+        },
+        {
+            "_id": "346bb03042c9aafae9f35e9f",
+            "_tpl": "58491f3324597764bc48fa02",
+            "parentId": "d039d7ad4996facbd2c65ba8",
+            "slotId": "mod_scope",
+            "upd": {
+                "Sight": {
+                    "ScopesCurrentCalibPointIndexes": [0],
+                    "ScopesSelectedModes": [0],
+                    "SelectedScope": 0
+                }
+            }
+        },
+        {
+            "_id": "94b27cc7690bb7a664f3f303",
+            "_tpl": "5fb6564947ce63734e3fa1da",
+            "parentId": "d039d7ad4996facbd2c65ba8",
+            "slotId": "mod_sight_rear",
+            "upd": {
+                "Sight": {
+                    "ScopesCurrentCalibPointIndexes": [0],
+                    "ScopesSelectedModes": [0],
+                    "SelectedScope": 0
+                }
+            }
+        },
+        {
+            "_id": "dfca4a3808fef740e4e58688",
+            "_tpl": "5b7be4895acfc400170e2dd5",
+            "parentId": "fc679b38dc354925436308cb",
+            "slotId": "mod_mount_000"
+        },
+        {
+            "_id": "49e30eea3c2b4a8125c75197",
+            "_tpl": "5b7be47f5acfc400170e2dd2",
+            "parentId": "fc679b38dc354925436308cb",
+            "slotId": "mod_mount_001"
+        },
+        {
+            "_id": "397892408cea8e113ed27ce0",
+            "_tpl": "6386120cd6baa055ad1e201c",
+            "parentId": "61070e09ed4512ee0461b036",
+            "slotId": "mod_muzzle"
+        },
+        {
+            "_id": "3ee2113404fc69a3e05a173d",
+            "_tpl": "5c1bc5612e221602b5429350",
+            "parentId": "dfca4a3808fef740e4e58688",
+            "slotId": "mod_foregrip"
+        },
+        {
+            "_id": "10d496aa67da4ec52493ee69",
+            "_tpl": "6272370ee4013c5d7e31f418",
+            "parentId": "49e30eea3c2b4a8125c75197",
+            "slotId": "mod_tactical",
+            "upd": {
+                "Light": {
+                    "IsActive": true,
+                    "SelectedMode": 0
+                }
+            }
+        },
+        {
+            "_id": "7d36e95649acd0c71ee16c17",
+            "_tpl": "638612b607dfed1ccb7206ba",
+            "parentId": "397892408cea8e113ed27ce0",
+            "slotId": "mod_muzzle"
+        }
+    ],
+    "Parent": "5447b5f14bdc2d61278b4567"
+}

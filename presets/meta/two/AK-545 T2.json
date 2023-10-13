@@ -1,0 +1,125 @@
+{
+    "type": "weapon",
+    "id": "d478f0fba5905084cb5f83b5",
+    "name": "AK-545 T2",
+    "root": "43f2fa5f00b0dc9ff1f98167",
+    "items": [
+        {
+            "_id": "43f2fa5f00b0dc9ff1f98167",
+            "_tpl": "628b5638ad252a16da6dd245",
+            "upd": {
+                "Repairable": {
+                    "MaxDurability": 100,
+                    "Durability": 100
+                },
+                "FireMode": {
+                    "FireMode": "single"
+                }
+            }
+        },
+        {
+            "_id": "e5a9dfb56f0da9d4136932a2",
+            "_tpl": "628b8d83717774443b15e248",
+            "parentId": "43f2fa5f00b0dc9ff1f98167",
+            "slotId": "mod_gas_block"
+        },
+        {
+            "_id": "602ea335836013e7760d2c95",
+            "_tpl": "59bffc1f86f77435b128b872",
+            "parentId": "43f2fa5f00b0dc9ff1f98167",
+            "slotId": "mod_muzzle"
+        },
+        {
+            "_id": "ed6586b2dfb3bceb622e60e8",
+            "_tpl": "5947f92f86f77427344a76b1",
+            "parentId": "43f2fa5f00b0dc9ff1f98167",
+            "slotId": "mod_pistol_grip"
+        },
+        {
+            "_id": "5c97f0a4922e2ee14a163e7f",
+            "_tpl": "628b9a40717774443b15e9f2",
+            "parentId": "43f2fa5f00b0dc9ff1f98167",
+            "slotId": "mod_stock_000"
+        },
+        {
+            "_id": "63f2ae64bdbf07724b1d3036",
+            "_tpl": "5aaa4194e5b5b055d06310a5",
+            "parentId": "43f2fa5f00b0dc9ff1f98167",
+            "slotId": "mod_magazine"
+        },
+        {
+            "_id": "fbcb3d3ce225bb1f4bf57f2a",
+            "_tpl": "5648ac824bdc2ded0b8b457d",
+            "parentId": "43f2fa5f00b0dc9ff1f98167",
+            "slotId": "mod_charge"
+        },
+        {
+            "_id": "928f54381483def654ef58ab",
+            "_tpl": "628b916469015a4e1711ed8d",
+            "parentId": "e5a9dfb56f0da9d4136932a2",
+            "slotId": "mod_handguard"
+        },
+        {
+            "_id": "a221c16ef6f3f304d103c713",
+            "_tpl": "59bffbb386f77435b379b9c2",
+            "parentId": "602ea335836013e7760d2c95",
+            "slotId": "mod_muzzle"
+        },
+        {
+            "_id": "466d5bbed72762ca39f48432",
+            "_tpl": "5fbbaa86f9986c4cff3fe5f6",
+            "parentId": "5c97f0a4922e2ee14a163e7f",
+            "slotId": "mod_stock"
+        },
+        {
+            "_id": "fc17faa5cd8506a25123c627",
+            "_tpl": "5b7be4895acfc400170e2dd5",
+            "parentId": "928f54381483def654ef58ab",
+            "slotId": "mod_foregrip"
+        },
+        {
+            "_id": "2b4567c32243697587429546",
+            "_tpl": "5b7be47f5acfc400170e2dd2",
+            "parentId": "928f54381483def654ef58ab",
+            "slotId": "mod_mount_001"
+        },
+        {
+            "_id": "18ad573bc7d3756cd3838128",
+            "_tpl": "628b9be6cff66b70c002b14c",
+            "parentId": "928f54381483def654ef58ab",
+            "slotId": "mod_reciever"
+        },
+        {
+            "_id": "f7ea0968927d5be7200fb3fb",
+            "_tpl": "5c7fc87d2e221644f31c0298",
+            "parentId": "fc17faa5cd8506a25123c627",
+            "slotId": "mod_foregrip"
+        },
+        {
+            "_id": "c413e1992169b75646cf2c82",
+            "_tpl": "6272370ee4013c5d7e31f418",
+            "parentId": "2b4567c32243697587429546",
+            "slotId": "mod_tactical",
+            "upd": {
+                "Light": {
+                    "IsActive": true,
+                    "SelectedMode": 0
+                }
+            }
+        },
+        {
+            "_id": "79a2620f99b1d212590c74d9",
+            "_tpl": "58491f3324597764bc48fa02",
+            "parentId": "18ad573bc7d3756cd3838128",
+            "slotId": "mod_scope",
+            "upd": {
+                "Sight": {
+                    "ScopesCurrentCalibPointIndexes": [0],
+                    "ScopesSelectedModes": [0],
+                    "SelectedScope": 0
+                }
+            }
+        }
+    ],
+    "Parent": "5447b5f14bdc2d61278b4567"
+}

@@ -1,0 +1,103 @@
+{
+    "headsets": [
+        {
+            "weight": 2,
+            "id": "6033fa48ffd42c541047f728",
+            "name": "OPSMEN Earmor M32 headset"
+        },
+        {
+            "weight": 1,
+            "id": "5645bcc04bdc2d363b8b4572",
+            "name": "Peltor ComTac 2 headset"
+        },
+        {
+            "weight": 1,
+            "id": "5b432b965acfc47a8774094e",
+            "name": "GSSh-01 active headset"
+        }
+    ],
+    "helmets": [
+        {
+            "weight": 2,
+            "id": "5a7c4850e899ef00150be885",
+            "name": "6B47 Ratnik-BSh helmet"
+        },
+        {
+            "weight": 1,
+            "id": "5c06c6a80db834001b735491",
+            "name": "SSh-68 steel helmet"
+        }
+    ],
+    "armoredRigs": [
+        {
+            "weight": 1,
+            "id": "5c0e3eb886f7742015526062",
+            "name": "6B5-16 Zh-86 Uley armored rig"
+        }
+    ],
+    "armor": [
+        {
+            "weight": 1,
+            "id": "64be79e2bf8412471d0d9bcc",
+            "name": "NPP KlASS Kora-Kulon body armor (Digital Flora)"
+        },
+        {
+            "weight": 1,
+            "id": "5df8a2ca86f7740bfe6df777",
+            "name": "6B2 body armor (Flora)"
+        },
+        {
+            "weight": 1,
+            "id": "5648a7494bdc2d9d488b4583",
+            "name": "PACA Soft Armor"
+        }
+    ],
+    "rigs": [
+        {
+            "weight": 1,
+            "id": "64be7110bf597ba84a0a41ea",
+            "name": "Type 56 Chicom chest harness"
+        },
+        {
+            "weight": 1,
+            "id": "6034cf5fffd42c541047f72e",
+            "name": "Umka M33-SET1 hunter vest"
+        },
+        {
+            "weight": 1,
+            "id": "59e7643b86f7742cbf2c109a",
+            "name": "WARTECH TV-109 + TV-106 chest rig"
+        },
+        {
+            "weight": 1,
+            "id": "6034d0230ca681766b6a0fb5",
+            "name": "CSA chest rig"
+        }
+    ],
+    "backpacks": [
+        {
+            "weight": 2,
+            "id": "5ca20d5986f774331e7c9602",
+            "name": "WARTECH Berkut BB-102 backpack"
+        },
+        {
+            "weight": 2,
+            "id": "544a5cde4bdc2d39388b456b",
+            "name": "Flyye MBSS backpack"
+        }
+    ],
+    "face": [
+        {
+            "weight": 1,
+            "id": "572b7f1624597762ae139822",
+            "name": "Balaclava"
+        }
+    ],
+    "eyewear": [
+        {
+            "weight": 1,
+            "id": "557ff21e4bdc2d89578b4586",
+            "name": "Tactical glasses"
+        }
+    ]
+}

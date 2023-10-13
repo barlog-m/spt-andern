@@ -1,0 +1,104 @@
+{
+    "type": "weapon",
+    "id": "64ed3fc96cc7fd7dd733d4dc",
+    "name": "UMP T2 2",
+    "root": "6fe04eb5350ca24de082d3bd",
+    "items": [
+        {
+            "_id": "6fe04eb5350ca24de082d3bd",
+            "_tpl": "5fc3e272f8b6a877a729eac5",
+            "upd": {
+                "Repairable": {
+                    "MaxDurability": 100,
+                    "Durability": 100
+                },
+                "Foldable": {
+                    "Folded": false
+                },
+                "FireMode": {
+                    "FireMode": "single"
+                }
+            }
+        },
+        {
+            "_id": "1fd1406ea65b363bfae8c435",
+            "_tpl": "5fc3e466187fea44d52eda90",
+            "parentId": "6fe04eb5350ca24de082d3bd",
+            "slotId": "mod_magazine"
+        },
+        {
+            "_id": "330cf2b19b7839fdca4c2ed2",
+            "_tpl": "64785e7c19d732620e045e15",
+            "parentId": "6fe04eb5350ca24de082d3bd",
+            "slotId": "mod_scope",
+            "upd": {
+                "Sight": {
+                    "ScopesCurrentCalibPointIndexes": [0],
+                    "ScopesSelectedModes": [0],
+                    "SelectedScope": 0
+                }
+            }
+        },
+        {
+            "_id": "b9ab34d4d88c3dc5632fba53",
+            "_tpl": "5fc3e4ee7283c4046c5814af",
+            "parentId": "6fe04eb5350ca24de082d3bd",
+            "slotId": "mod_stock"
+        },
+        {
+            "_id": "097c8b71f0d610193b4fd69d",
+            "_tpl": "6130c3dffaa1272e43151c7d",
+            "parentId": "6fe04eb5350ca24de082d3bd",
+            "slotId": "mod_barrel"
+        },
+        {
+            "_id": "f14eea78a03fc4b2f03f8824",
+            "_tpl": "5fc53954f8b6a877a729eaeb",
+            "parentId": "6fe04eb5350ca24de082d3bd",
+            "slotId": "mod_mount_000"
+        },
+        {
+            "_id": "1b715288ebd4cedd793ccc1f",
+            "_tpl": "5fc5396e900b1d5091531e72",
+            "parentId": "6fe04eb5350ca24de082d3bd",
+            "slotId": "mod_mount_001"
+        },
+        {
+            "_id": "7e0e1145fae83cdd902ca0b8",
+            "_tpl": "5fc5396e900b1d5091531e72",
+            "parentId": "6fe04eb5350ca24de082d3bd",
+            "slotId": "mod_mount_002"
+        },
+        {
+            "_id": "a4bd2d74de9b71c164f6a0cd",
+            "_tpl": "5fc4b992187fea44d52edaa9",
+            "parentId": "097c8b71f0d610193b4fd69d",
+            "slotId": "mod_muzzle"
+        },
+        {
+            "_id": "bf5c47758f60a68f2920f034",
+            "_tpl": "59fc48e086f77463b1118392",
+            "parentId": "f14eea78a03fc4b2f03f8824",
+            "slotId": "mod_foregrip"
+        },
+        {
+            "_id": "1ba1e71eb2d47be97728849c",
+            "_tpl": "56def37dd2720bec348b456a",
+            "parentId": "1b715288ebd4cedd793ccc1f",
+            "slotId": "mod_tactical",
+            "upd": {
+                "Light": {
+                    "IsActive": true,
+                    "SelectedMode": 0
+                }
+            }
+        },
+        {
+            "_id": "fbeb55c4bd20fa1ca3b93e0a",
+            "_tpl": "5fc4b9b17283c4046c5814d7",
+            "parentId": "a4bd2d74de9b71c164f6a0cd",
+            "slotId": "mod_muzzle"
+        }
+    ],
+    "Parent": "5447b5e04bdc2d62278b4567"
+}

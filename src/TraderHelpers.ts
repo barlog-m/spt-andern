@@ -27,7 +27,9 @@ export class TraderHelper {
         traderImageName: string
     ): void {
         // Reference the mod "res" folder
-        const imageFilepath = `./${preAkiModLoader.getModPath(fullModName)}res`;
+        const imageFilepath = `./${preAkiModLoader.getModPath(
+            fullModName
+        )}trader`;
 
         // Register a route to point to the profile picture - remember to remove the .jpg from it
         imageRouter.addRoute(

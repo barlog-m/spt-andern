@@ -1,0 +1,123 @@
+{
+    "type": "weapon",
+    "id": "e7659846573a5554fae3fbf3",
+    "name": "MP9 T2 2",
+    "root": "017bae1eb8097657f745cf39",
+    "items": [
+        {
+            "_id": "017bae1eb8097657f745cf39",
+            "_tpl": "5e00903ae9dc277128008b87",
+            "upd": {
+                "Repairable": {
+                    "MaxDurability": 100,
+                    "Durability": 100
+                },
+                "Foldable": {
+                    "Folded": false
+                },
+                "FireMode": {
+                    "FireMode": "single"
+                }
+            }
+        },
+        {
+            "_id": "fce7ac29d01c5f4b00a2d164",
+            "_tpl": "5de8eac42a78646d96665d91",
+            "parentId": "017bae1eb8097657f745cf39",
+            "slotId": "mod_magazine"
+        },
+        {
+            "_id": "11bca08af0bc93fe70233820",
+            "_tpl": "5de8f237bbaf010b10528a70",
+            "parentId": "017bae1eb8097657f745cf39",
+            "slotId": "mod_muzzle"
+        },
+        {
+            "_id": "44fe5ea15bdf07eb8e9a4990",
+            "_tpl": "5de910da8b6c4240ba2651b5",
+            "parentId": "017bae1eb8097657f745cf39",
+            "slotId": "mod_stock"
+        },
+        {
+            "_id": "3a551b15ae72a52065d3978e",
+            "_tpl": "5e0090f7e9dc277128008b93",
+            "parentId": "017bae1eb8097657f745cf39",
+            "slotId": "mod_reciever"
+        },
+        {
+            "_id": "1eb017ad5119b39653b3a97e",
+            "_tpl": "5de922d4b11454561e39239f",
+            "parentId": "017bae1eb8097657f745cf39",
+            "slotId": "mod_charge"
+        },
+        {
+            "_id": "64b41a3cc31cbc8c79c746be",
+            "_tpl": "5de8fbf2b74cd90030650c79",
+            "parentId": "017bae1eb8097657f745cf39",
+            "slotId": "mod_mount_000"
+        },
+        {
+            "_id": "9f1edf6ff831f5fa0a4b4812",
+            "_tpl": "5de8f2d5b74cd90030650c72",
+            "parentId": "11bca08af0bc93fe70233820",
+            "slotId": "mod_muzzle"
+        },
+        {
+            "_id": "b23119030ef1617e7fa8ce13",
+            "_tpl": "58d2664f86f7747fec5834f6",
+            "parentId": "3a551b15ae72a52065d3978e",
+            "slotId": "mod_scope"
+        },
+        {
+            "_id": "8f202a3e9ba26f5c7eed45f0",
+            "_tpl": "5de8fb539f98ac2bc659513a",
+            "parentId": "3a551b15ae72a52065d3978e",
+            "slotId": "mod_sight_rear",
+            "upd": {
+                "Sight": {
+                    "ScopesCurrentCalibPointIndexes": [0],
+                    "ScopesSelectedModes": [0],
+                    "SelectedScope": 0
+                }
+            }
+        },
+        {
+            "_id": "4b67681c1f6e8856aa640cdb",
+            "_tpl": "5de8fc0b205ddc616a6bc51b",
+            "parentId": "3a551b15ae72a52065d3978e",
+            "slotId": "mod_mount"
+        },
+        {
+            "_id": "ffa367b5c831da9884ad5b30",
+            "_tpl": "5c1bc5fb2e221602b1779b32",
+            "parentId": "64b41a3cc31cbc8c79c746be",
+            "slotId": "mod_foregrip"
+        },
+        {
+            "_id": "d7bd562799906967bb261557",
+            "_tpl": "58d268fc86f774111273f8c2",
+            "parentId": "b23119030ef1617e7fa8ce13",
+            "slotId": "mod_scope",
+            "upd": {
+                "Sight": {
+                    "ScopesCurrentCalibPointIndexes": [0],
+                    "ScopesSelectedModes": [0],
+                    "SelectedScope": 0
+                }
+            }
+        },
+        {
+            "_id": "9acd017ac0c4e160a84574a8",
+            "_tpl": "56def37dd2720bec348b456a",
+            "parentId": "4b67681c1f6e8856aa640cdb",
+            "slotId": "mod_tactical",
+            "upd": {
+                "Light": {
+                    "IsActive": true,
+                    "SelectedMode": 0
+                }
+            }
+        }
+    ],
+    "Parent": "5447b5e04bdc2d62278b4567"
+}

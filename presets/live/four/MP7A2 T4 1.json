@@ -1,0 +1,93 @@
+{
+    "type": "weapon",
+    "id": "9f4b17be3b2a6d33414f0e12",
+    "name": "MP7A2 T4 1",
+    "root": "80bc510d0b6c3fb355b383da",
+    "items": [
+        {
+            "_id": "80bc510d0b6c3fb355b383da",
+            "_tpl": "5bd70322209c4d00d7167b8f",
+            "upd": {
+                "Repairable": {
+                    "MaxDurability": 100,
+                    "Durability": 100
+                },
+                "Foldable": {
+                    "Folded": false
+                },
+                "FireMode": {
+                    "FireMode": "single"
+                }
+            }
+        },
+        {
+            "_id": "10d8d36ae906c972f8dd8c2a",
+            "_tpl": "5ba26586d4351e44f824b340",
+            "parentId": "80bc510d0b6c3fb355b383da",
+            "slotId": "mod_magazine"
+        },
+        {
+            "_id": "dc6535082296c2f6a58da517",
+            "_tpl": "5ba26acdd4351e003562908e",
+            "parentId": "80bc510d0b6c3fb355b383da",
+            "slotId": "mod_muzzle"
+        },
+        {
+            "_id": "dcf58731de96eb05e1e8c22a",
+            "_tpl": "5fb6564947ce63734e3fa1da",
+            "parentId": "80bc510d0b6c3fb355b383da",
+            "slotId": "mod_sight_rear",
+            "upd": {
+                "Sight": {
+                    "ScopesCurrentCalibPointIndexes": [0],
+                    "ScopesSelectedModes": [0],
+                    "SelectedScope": 0
+                }
+            }
+        },
+        {
+            "_id": "5849aa430d3ea801fa0eb06b",
+            "_tpl": "58491f3324597764bc48fa02",
+            "parentId": "80bc510d0b6c3fb355b383da",
+            "slotId": "mod_scope",
+            "upd": {
+                "Sight": {
+                    "ScopesCurrentCalibPointIndexes": [0],
+                    "ScopesSelectedModes": [0],
+                    "SelectedScope": 0
+                }
+            }
+        },
+        {
+            "_id": "9db23174ca2f5bb1852ce711",
+            "_tpl": "56def37dd2720bec348b456a",
+            "parentId": "80bc510d0b6c3fb355b383da",
+            "slotId": "mod_tactical_001",
+            "upd": {
+                "Light": {
+                    "IsActive": true,
+                    "SelectedMode": 0
+                }
+            }
+        },
+        {
+            "_id": "6185453b09fd3d5d93be1b62",
+            "_tpl": "5bd704e7209c4d00d7167c31",
+            "parentId": "80bc510d0b6c3fb355b383da",
+            "slotId": "mod_stock"
+        },
+        {
+            "_id": "701ff3284c5a1f118e999764",
+            "_tpl": "5c1cd46f2e22164bef5cfedb",
+            "parentId": "80bc510d0b6c3fb355b383da",
+            "slotId": "mod_foregrip"
+        },
+        {
+            "_id": "29675688ce51e4973e86dd59",
+            "_tpl": "5ba26ae8d4351e00367f9bdb",
+            "parentId": "dc6535082296c2f6a58da517",
+            "slotId": "mod_muzzle"
+        }
+    ],
+    "Parent": "5447b5e04bdc2d62278b4567"
+}

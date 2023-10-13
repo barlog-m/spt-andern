@@ -1,0 +1,86 @@
+{
+  "type": "weapon",
+  "id": "a963a516f689b966076bbff1",
+  "name": "Tier 3 AVT",
+  "root": "4ea316e0624a13dfd2428803",
+  "items": [
+    {
+      "_id": "4ea316e0624a13dfd2428803",
+      "_tpl": "6410733d5dd49d77bd07847e",
+      "upd": {
+        "Repairable": {
+          "MaxDurability": 100,
+          "Durability": 100
+        },
+        "FireMode": {
+          "FireMode": "single"
+        }
+      }
+    },
+    {
+      "_id": "2e42f39642ad47eb94876b6f",
+      "_tpl": "6410745d5dd49d77bd078485",
+      "parentId": "4ea316e0624a13dfd2428803",
+      "slotId": "mod_stock"
+    },
+    {
+      "_id": "de46f25c4ce805b9a4cd5bf4",
+      "_tpl": "6410758c857473525b08bb77",
+      "parentId": "4ea316e0624a13dfd2428803",
+      "slotId": "mod_barrel"
+    },
+    {
+      "_id": "5049fd4b0b3d6b2a93224bdc",
+      "_tpl": "641074a07fd350b98c0b3f96",
+      "parentId": "4ea316e0624a13dfd2428803",
+      "slotId": "mod_magazine"
+    },
+    {
+      "_id": "911072e80b266ef0b1c7d4ba",
+      "_tpl": "64119cdbdcf48d656f0aa272",
+      "parentId": "4ea316e0624a13dfd2428803",
+      "slotId": "mod_reciever"
+    },
+    {
+      "_id": "9c503368d93e72d10c811ff4",
+      "_tpl": "64119d1f2c6d6f921a0929f8",
+      "parentId": "de46f25c4ce805b9a4cd5bf4",
+      "slotId": "mod_muzzle"
+    },
+    {
+      "_id": "b53064bd0ad273a5439b44b4",
+      "_tpl": "64119d90dcf48d656f0aa275",
+      "parentId": "de46f25c4ce805b9a4cd5bf4",
+      "slotId": "mod_sight_rear",
+      "upd": {
+        "Sight": {
+          "ScopesCurrentCalibPointIndexes": [
+            0
+          ],
+          "ScopesSelectedModes": [
+            0
+          ],
+          "SelectedScope": 0
+        }
+      }
+    },
+    {
+      "_id": "daab086d517c989ceea354d4",
+      "_tpl": "64119d672c6d6f921a0929fb",
+      "parentId": "9c503368d93e72d10c811ff4",
+      "slotId": "mod_sight_front",
+      "upd": {
+        "Sight": {
+          "ScopesCurrentCalibPointIndexes": [
+            0
+          ],
+          "ScopesSelectedModes": [
+            0
+          ],
+          "SelectedScope": 0
+        }
+      }
+    }
+  ],
+  "Parent": "5447b5fc4bdc2d87278b4567"
+}

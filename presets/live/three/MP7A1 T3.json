@@ -1,0 +1,100 @@
+{
+    "type": "weapon",
+    "id": "8ac5e6f2e7c96c08a289d2bc",
+    "name": "MP7A1 T3",
+    "root": "9be1666559e3b5f7123f93b3",
+    "items": [
+        {
+            "_id": "9be1666559e3b5f7123f93b3",
+            "_tpl": "5ba26383d4351e00334c93d9",
+            "upd": {
+                "Repairable": {
+                    "MaxDurability": 100,
+                    "Durability": 100
+                },
+                "Foldable": {
+                    "Folded": false
+                },
+                "FireMode": {
+                    "FireMode": "single"
+                }
+            }
+        },
+        {
+            "_id": "320890f8e45792ffe624ced4",
+            "_tpl": "5ba2657ed4351e0035628ff2",
+            "parentId": "9be1666559e3b5f7123f93b3",
+            "slotId": "mod_magazine"
+        },
+        {
+            "_id": "9b5e28d5f8c87b40edf36152",
+            "_tpl": "5ba26acdd4351e003562908e",
+            "parentId": "9be1666559e3b5f7123f93b3",
+            "slotId": "mod_muzzle"
+        },
+        {
+            "_id": "1f4396b86e9091b8b604a0cc",
+            "_tpl": "5fb6567747ce63734e3fa1dc",
+            "parentId": "9be1666559e3b5f7123f93b3",
+            "slotId": "mod_sight_front",
+            "upd": {
+                "Sight": {
+                    "ScopesCurrentCalibPointIndexes": [0],
+                    "ScopesSelectedModes": [0],
+                    "SelectedScope": 0
+                }
+            }
+        },
+        {
+            "_id": "a4fe1ecc16371fed19df277b",
+            "_tpl": "5fb6564947ce63734e3fa1da",
+            "parentId": "9be1666559e3b5f7123f93b3",
+            "slotId": "mod_sight_rear",
+            "upd": {
+                "Sight": {
+                    "ScopesCurrentCalibPointIndexes": [0],
+                    "ScopesSelectedModes": [0],
+                    "SelectedScope": 0
+                }
+            }
+        },
+        {
+            "_id": "38c0ea7c8ddd0ef3dc76ea75",
+            "_tpl": "58491f3324597764bc48fa02",
+            "parentId": "9be1666559e3b5f7123f93b3",
+            "slotId": "mod_scope",
+            "upd": {
+                "Sight": {
+                    "ScopesCurrentCalibPointIndexes": [0],
+                    "ScopesSelectedModes": [0],
+                    "SelectedScope": 0
+                }
+            }
+        },
+        {
+            "_id": "7a5822ca18ebd528721f5aee",
+            "_tpl": "56def37dd2720bec348b456a",
+            "parentId": "9be1666559e3b5f7123f93b3",
+            "slotId": "mod_tactical_001",
+            "upd": {
+                "Light": {
+                    "IsActive": true,
+                    "SelectedMode": 0
+                }
+            }
+        },
+        {
+            "_id": "8eb260328de9966ad19dfc7a",
+            "_tpl": "5bcf0213d4351e0085327c17",
+            "parentId": "9be1666559e3b5f7123f93b3",
+            "slotId": "mod_stock"
+        },
+        {
+            "_id": "8ec8b9329c178bce4672f1ca",
+            "_tpl": "5ba26ae8d4351e00367f9bdb",
+            "parentId": "9b5e28d5f8c87b40edf36152",
+            "slotId": "mod_muzzle"
+        }
+    ],
+    "Parent": "5447b5e04bdc2d62278b4567"
+}

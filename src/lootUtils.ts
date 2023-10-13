@@ -13,10 +13,9 @@ import { Item } from "@spt-aki/models/eft/common/tables/IItem";
 
 import config from "../config/config.json";
 
-export function lootConfig(
-    container: DependencyContainer,
-    databaseServer: DatabaseServer
-): undefined {
+export function lootConfig(container: DependencyContainer): undefined {
+    const databaseServer: DatabaseServer =
+        container.resolve<DatabaseServer>("DatabaseServer");
     setLootMultiplier(container);
     increaseKeysSpawnChance(container, databaseServer);
 }
@@ -44,7 +43,7 @@ function increaseStaticLootKeysSpawnChance(
     const DRAWER_TPL = "578f87b7245977356274f2cd";
     const JACKET_TPL = "578f8778245977358849a9b5";
 
-    let drawersAndJackets = Object.fromEntries(
+    const drawersAndJackets = Object.fromEntries(
         Object.entries(staticLootDistribution).filter(
             ([staticLootTpl, staticLootDetails]) => {
                 return (

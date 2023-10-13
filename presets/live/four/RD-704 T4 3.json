@@ -1,0 +1,113 @@
+{
+    "type": "weapon",
+    "id": "081756b4c181cb2c905b2e77",
+    "name": "RD-704 T4 3",
+    "root": "e596df1b3023bec32b43d3e1",
+    "items": [
+        {
+            "_id": "e596df1b3023bec32b43d3e1",
+            "_tpl": "628a60ae6b1d481ff772e9c8",
+            "upd": {
+                "Repairable": {
+                    "MaxDurability": 100,
+                    "Durability": 100
+                },
+                "FireMode": {
+                    "FireMode": "single"
+                }
+            }
+        },
+        {
+            "_id": "03816cedef917488b71b3641",
+            "_tpl": "628a83c29179c324ed269508",
+            "parentId": "e596df1b3023bec32b43d3e1",
+            "slotId": "mod_gas_block"
+        },
+        {
+            "_id": "155f8b85936898b31b4d9519",
+            "_tpl": "6130c43c67085e45ef1405a1",
+            "parentId": "e596df1b3023bec32b43d3e1",
+            "slotId": "mod_muzzle"
+        },
+        {
+            "_id": "7dbfa08da296ea4676dad8fb",
+            "_tpl": "6087e663132d4d12c81fd96b",
+            "parentId": "e596df1b3023bec32b43d3e1",
+            "slotId": "mod_pistol_grip"
+        },
+        {
+            "_id": "016198786398ffa0bbcb6736",
+            "_tpl": "5d2c76ed48f03532f2136169",
+            "parentId": "e596df1b3023bec32b43d3e1",
+            "slotId": "mod_reciever"
+        },
+        {
+            "_id": "3be187f757c0d3addf7fc484",
+            "_tpl": "5b0e794b5acfc47a877359b2",
+            "parentId": "e596df1b3023bec32b43d3e1",
+            "slotId": "mod_stock_000"
+        },
+        {
+            "_id": "c83d63e74401f3a6d756ea2e",
+            "_tpl": "59e5f5a486f7746c530b3ce2",
+            "parentId": "e596df1b3023bec32b43d3e1",
+            "slotId": "mod_magazine"
+        },
+        {
+            "_id": "7e6b4adac8edfe06c2372f7e",
+            "_tpl": "6130ca3fd92c473c77020dbd",
+            "parentId": "e596df1b3023bec32b43d3e1",
+            "slotId": "mod_charge"
+        },
+        {
+            "_id": "add5d300cb8ce1c81056a345",
+            "_tpl": "5b7be47f5acfc400170e2dd2",
+            "parentId": "03816cedef917488b71b3641",
+            "slotId": "mod_mount_000"
+        },
+        {
+            "_id": "20a4c0c4e85ddc3ba5fd9595",
+            "_tpl": "5b7be4895acfc400170e2dd5",
+            "parentId": "03816cedef917488b71b3641",
+            "slotId": "mod_foregrip"
+        },
+        {
+            "_id": "ebe4e41733d12ab262e3e85c",
+            "_tpl": "5dfa3d2b0dee1b22f862eade",
+            "parentId": "155f8b85936898b31b4d9519",
+            "slotId": "mod_muzzle"
+        },
+        {
+            "_id": "2b845d3dafca7880a8e1436e",
+            "_tpl": "58491f3324597764bc48fa02",
+            "parentId": "016198786398ffa0bbcb6736",
+            "slotId": "mod_scope",
+            "upd": {
+                "Sight": {
+                    "ScopesCurrentCalibPointIndexes": [0],
+                    "ScopesSelectedModes": [0],
+                    "SelectedScope": 0
+                }
+            }
+        },
+        {
+            "_id": "6e4dcbdec87dd193b6258bb6",
+            "_tpl": "56def37dd2720bec348b456a",
+            "parentId": "add5d300cb8ce1c81056a345",
+            "slotId": "mod_tactical",
+            "upd": {
+                "Light": {
+                    "IsActive": true,
+                    "SelectedMode": 0
+                }
+            }
+        },
+        {
+            "_id": "4939167e345d83bf36d62806",
+            "_tpl": "5c1cd46f2e22164bef5cfedb",
+            "parentId": "20a4c0c4e85ddc3ba5fd9595",
+            "slotId": "mod_foregrip"
+        }
+    ],
+    "Parent": "5447b5f14bdc2d61278b4567"
+}
