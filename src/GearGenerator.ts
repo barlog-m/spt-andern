@@ -37,8 +37,6 @@ export class GearGenerator {
         protected botGeneratorHelper: BotGeneratorHelper,
         @inject("BotLootGenerator")
         protected botLootGenerator: BotLootGenerator,
-        @inject("AndernWeaponGenerator")
-        protected weaponGenerator: WeaponGenerator,
         @inject("AndernNightHeadwear")
         protected nightHeadwear: NightHeadwear,
         @inject("AndernPresetData") protected presetData: PresetData

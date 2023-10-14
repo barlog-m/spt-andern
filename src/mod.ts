@@ -15,6 +15,7 @@ import { GearGenerator } from "./GearGenerator";
 import registerInfoUpdater from "./registerInfoUpdater";
 import registerBotLevelGenerator from "./registerBotLevelGenerator";
 import registerBotInventoryGenerator from "./registerBotInventoryGenerator";
+import registerBotWeaponGenerator from "./registerBotWeaponGenerator";
 import { RaidInfo } from "./RaidInfo";
 import { NightHeadwear } from "./NightHeadwear";
 import { lootConfig } from "./lootUtils";
@@ -76,8 +77,16 @@ export class Andern implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
         this.doeTrader = container.resolve<DoeTrader>("AndernDoeTrader");
 
         registerInfoUpdater(container);
-        registerBotLevelGenerator(container);
-        registerBotInventoryGenerator(container);
+
+        if (config.pmcLevels) {
+            registerBotLevelGenerator(container);
+        }
+
+        if (config.pmcGear) {
+            registerBotInventoryGenerator(container);
+        } else {
+            registerBotWeaponGenerator(container);
+        }
 
         this.doeTrader.prepareTrader(preAkiModLoader, this.fullModName);
     }

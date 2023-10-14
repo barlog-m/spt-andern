@@ -1,5 +1,7 @@
 {
     "preset": "meta",
+    "pmcLevels": true,
+    "pmcGear": true,
     "pmcBotLevelDownDelta": 10,
     "pmcBotLevelUpDelta": 10,
     "useFixedPmcBotLevelRange": false,
