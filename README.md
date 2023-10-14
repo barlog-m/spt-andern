@@ -23,6 +23,10 @@ Idea of this mod is to rebalance a bit the game for better single player experie
 
 Weapon and gear split by tiers. Tiers is described in `preset_name/preset.json` file. Mod has two presets *meta* and *live*. Choise *live* if you want more veraity and close to live Tarkov expirience.
 
+You can disable PMC bot level generator with option `pmcLevel`.
+
+You can disable PMC bot gear generator with option `pmcGear`. Then mod only generate weapon.
+
 Bots get random weapon from lists. There is no pistols and other crap that bots can't use very good.
 Also bots use specified ammo for each caliber from list.
 
