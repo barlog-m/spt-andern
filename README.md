@@ -7,7 +7,7 @@
 
 Idea of this mod is to rebalance a bit the game for better single player experience.
 
-* Give PMC bots decent weapon from handmade presets. 
+* Give PMC bots decent weapon from handmade presets.
 
 * Give PMC good gear. Every PMC wear armor, helmet, rig, headphones, face cover and glasses.
 
@@ -22,6 +22,10 @@ Idea of this mod is to rebalance a bit the game for better single player experie
 * Mod increse keys and cards spawn chance.
 
 Weapon and gear split by tiers. Tiers is described in `preset_name/preset.json` file. Mod has two presets *meta* and *live*. Choise *live* if you want more veraity and close to live Tarkov expirience.
+
+You can disable PMC bot level generator with option `pmcLevel`.
+
+You can disable PMC bot gear generator with option `pmcGear`. Then mod only generate weapon.
 
 Bots get random weapon from lists. There is no pistols and other crap that bots can't use very good.
 Also bots use specified ammo for each caliber from list.

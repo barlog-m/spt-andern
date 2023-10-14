@@ -15,7 +15,7 @@
             "id": "5aa2ba71e5b5b000137b758f",
             "name": "MSA Sordin Supreme PRO-X/L active headset"
         },
-	{
+        {
             "weight": 1,
             "id": "5c165d832e2216398b5a7e36",
             "name": "Peltor Tactical Sport headset"
@@ -48,24 +48,9 @@
             "weight": 1,
             "id": "5d5d646386f7742797261fd9",
             "name": "6B3TM-01M armored rig"
-        },
-        {
-            "weight": 1,
-            "id": "64a536392d2c4e6e970f4121",
-            "name": "WARTECH TV-115 plate carrier"
-        },
-        {
-            "weight": 1,
-            "id": "64a5366719bab53bd203bf33",
-            "name": "Eagle Allied Industries MBSS plate carrier"
         }
     ],
     "armor": [
-        {
-            "weight": 1,
-            "id": "64abd93857958b4249003418",
-            "name": "Interceptor OTV body armor (UCP)"
-        },
         {
             "weight": 1,
             "id": "5c0e53c886f7747fa54205c7",

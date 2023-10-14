@@ -35,16 +35,6 @@
     ],
     "armoredRigs": [
         {
-            "weight": 3,
-            "id": "64a5366719bab53bd203bf33",
-            "name": "Eagle Allied Industries MBSS plate carrier"
-        },
-        {
-            "weight": 3,
-            "id": "64a536392d2c4e6e970f4121",
-            "name": "WARTECH TV-115 plate carrier"
-        },
-        {
             "weight": 2,
             "id": "544a5caa4bdc2d1a388b4568",
             "name": "Crye Precision AVS plate carrier"
@@ -63,16 +53,6 @@
     "armor": [
         {
             "weight": 1,
-            "id": "64be79c487d1510151095552",
-            "name": "NPP KlASS Kora-Kulon body armor"
-        },
-        {
-            "weight": 1,
-            "id": "64be79e2bf8412471d0d9bcc",
-            "name": "NPP KlASS Kora-Kulon body armor (Digital Flora)"
-        },
-        {
-            "weight": 1,
             "id": "5c0e5edb86f77461f55ed1f7",
             "name": "BNTI Zhuk-3 body armor (Press)"
         },
@@ -83,11 +63,6 @@
         }
     ],
     "rigs": [
-        {
-            "weight": 3,
-            "id": "64be7110bf597ba84a0a41ea",
-            "name": "Type 56 Chicom chest harness"
-        },
         {
             "weight": 2,
             "id": "6034cf5fffd42c541047f72e",

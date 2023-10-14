@@ -38,11 +38,6 @@
     "armor": [
         {
             "weight": 1,
-            "id": "64be79e2bf8412471d0d9bcc",
-            "name": "NPP KlASS Kora-Kulon body armor (Digital Flora)"
-        },
-        {
-            "weight": 1,
             "id": "5df8a2ca86f7740bfe6df777",
             "name": "6B2 body armor (Flora)"
         },
@@ -53,11 +48,6 @@
         }
     ],
     "rigs": [
-        {
-            "weight": 1,
-            "id": "64be7110bf597ba84a0a41ea",
-            "name": "Type 56 Chicom chest harness"
-        },
         {
             "weight": 1,
             "id": "6034cf5fffd42c541047f72e",
