@@ -1,11 +1,11 @@
 {
     "type": "weapon",
-    "id": "2dcaae583fc7436866962760",
+    "id": "1e0357568597dcdb4a8ffb45",
     "name": "G36 T2 3",
-    "root": "cc639e56b69d7e58d43a5f3d",
+    "root": "3304920f77e20fdbdd0d8007",
     "items": [
         {
-            "_id": "cc639e56b69d7e58d43a5f3d",
+            "_id": "3304920f77e20fdbdd0d8007",
             "_tpl": "623063e994fc3f7b302a9696",
             "upd": {
                 "Repairable": {
@@ -21,75 +21,75 @@
             }
         },
         {
-            "_id": "5da110c39913694feea58a05",
-            "_tpl": "55802d5f4bdc2dac148b458e",
-            "parentId": "cc639e56b69d7e58d43a5f3d",
+            "_id": "a144ebbeaf39dc65a1daa141",
+            "_tpl": "62307b7b10d2321fa8741921",
+            "parentId": "3304920f77e20fdbdd0d8007",
             "slotId": "mod_magazine"
         },
         {
-            "_id": "9bca246692adaf10a83c1a09",
+            "_id": "e6164df7fb756995b1dc2867",
             "_tpl": "622f14e899892a7f9e08f6c5",
-            "parentId": "cc639e56b69d7e58d43a5f3d",
+            "parentId": "3304920f77e20fdbdd0d8007",
             "slotId": "mod_stock"
         },
         {
-            "_id": "9c429d7baf0b48da4abec389",
+            "_id": "b3ab4724f4f3d83c3e238ace",
             "_tpl": "622b379bf9cfc87d675d2de5",
-            "parentId": "cc639e56b69d7e58d43a5f3d",
+            "parentId": "3304920f77e20fdbdd0d8007",
             "slotId": "mod_barrel"
         },
         {
-            "_id": "b538bd2bebaf689af4e48942",
+            "_id": "791277cde952c193a12ce5bf",
             "_tpl": "62386b2adf47d66e835094b2",
-            "parentId": "cc639e56b69d7e58d43a5f3d",
+            "parentId": "3304920f77e20fdbdd0d8007",
             "slotId": "mod_handguard"
         },
         {
-            "_id": "ffc51f1b4a029f4eb0b123e7",
-            "_tpl": "622f039199f4ea1a4d6c9a17",
-            "parentId": "cc639e56b69d7e58d43a5f3d",
+            "_id": "60941d4d56429a7ef57bcffb",
+            "_tpl": "622f02437762f55aaa68ac85",
+            "parentId": "3304920f77e20fdbdd0d8007",
             "slotId": "mod_mount"
         },
         {
-            "_id": "b768502dcf3ebb338f321c77",
-            "_tpl": "622b3d5cf9cfc87d675d2de9",
-            "parentId": "cc639e56b69d7e58d43a5f3d",
+            "_id": "6e851523310928d04d0904b3",
+            "_tpl": "622b3c081b89c677a33bcda6",
+            "parentId": "3304920f77e20fdbdd0d8007",
             "slotId": "mod_scope"
         },
         {
-            "_id": "5fa2c238321604abbda1292c",
-            "_tpl": "5cf6937cd7f00c056c53fb39",
-            "parentId": "9c429d7baf0b48da4abec389",
+            "_id": "bfb58b3e1e77c3f21c1f6d3d",
+            "_tpl": "56ea8180d2720bf2698b456a",
+            "parentId": "b3ab4724f4f3d83c3e238ace",
             "slotId": "mod_muzzle"
         },
         {
-            "_id": "b85920c8ad9181607dc7e92a",
+            "_id": "597c9aa686639f175ec65076",
             "_tpl": "622b327b267a1b13a44abea3",
-            "parentId": "9c429d7baf0b48da4abec389",
+            "parentId": "b3ab4724f4f3d83c3e238ace",
             "slotId": "mod_gas_block"
         },
         {
-            "_id": "5e906bb09557fd4674158c13",
+            "_id": "4b83da55a24c0f1b5311e4c6",
             "_tpl": "62444cb99f47004c781903eb",
-            "parentId": "b538bd2bebaf689af4e48942",
+            "parentId": "791277cde952c193a12ce5bf",
             "slotId": "mod_mount_000"
         },
         {
-            "_id": "006b7153b3a5f133861661fc",
+            "_id": "a2b94b98954b854a95b321d5",
             "_tpl": "62444cd3674028188b052799",
-            "parentId": "b538bd2bebaf689af4e48942",
-            "slotId": "mod_mount_001"
+            "parentId": "791277cde952c193a12ce5bf",
+            "slotId": "mod_mount_002"
         },
         {
-            "_id": "319b490deeb1b0360918d394",
+            "_id": "0e03d5760d0d40525508871a",
             "_tpl": "622f16a1a5958f63c67f1737",
-            "parentId": "b538bd2bebaf689af4e48942",
+            "parentId": "791277cde952c193a12ce5bf",
             "slotId": "mod_tactical"
         },
         {
-            "_id": "ed0cedc4945f725a6e214d3d",
-            "_tpl": "64785e7c19d732620e045e15",
-            "parentId": "b768502dcf3ebb338f321c77",
+            "_id": "4e41e8253cbb3fa6f62c50f4",
+            "_tpl": "58491f3324597764bc48fa02",
+            "parentId": "6e851523310928d04d0904b3",
             "slotId": "mod_scope",
             "upd": {
                 "Sight": {
@@ -100,15 +100,41 @@
             }
         },
         {
-            "_id": "ddc50e6dd07d2581d163f65b",
-            "_tpl": "59fc48e086f77463b1118392",
-            "parentId": "5e906bb09557fd4674158c13",
+            "_id": "f5166c01fa5ed985c863217a",
+            "_tpl": "623166e08c43374ca1567195",
+            "parentId": "6e851523310928d04d0904b3",
+            "slotId": "mod_sight_front",
+            "upd": {
+                "Sight": {
+                    "ScopesCurrentCalibPointIndexes": [0],
+                    "ScopesSelectedModes": [0],
+                    "SelectedScope": 0
+                }
+            }
+        },
+        {
+            "_id": "8de387bd73da65645338fdf6",
+            "_tpl": "6231670f0b8aa5472d060095",
+            "parentId": "6e851523310928d04d0904b3",
+            "slotId": "mod_sight_rear",
+            "upd": {
+                "Sight": {
+                    "ScopesCurrentCalibPointIndexes": [0],
+                    "ScopesSelectedModes": [0],
+                    "SelectedScope": 0
+                }
+            }
+        },
+        {
+            "_id": "8c3adadb9fe6decd1a26294a",
+            "_tpl": "5c1bc5fb2e221602b1779b32",
+            "parentId": "4b83da55a24c0f1b5311e4c6",
             "slotId": "mod_foregrip"
         },
         {
-            "_id": "cba42efba631b65c9388b172",
-            "_tpl": "56def37dd2720bec348b456a",
-            "parentId": "006b7153b3a5f133861661fc",
+            "_id": "612d3cf447c131c7eb5977a3",
+            "_tpl": "6272370ee4013c5d7e31f418",
+            "parentId": "a2b94b98954b854a95b321d5",
             "slotId": "mod_tactical",
             "upd": {
                 "Light": {

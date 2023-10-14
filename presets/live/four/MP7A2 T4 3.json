@@ -1,11 +1,11 @@
 {
     "type": "weapon",
-    "id": "42b78650df0e98590060de2a",
+    "id": "ce1e62c686f8af56774f23ce",
     "name": "MP7A2 T4 3",
-    "root": "df1f687a654459e338ad61dc",
+    "root": "0425f3de94253c11769b1e9d",
     "items": [
         {
-            "_id": "df1f687a654459e338ad61dc",
+            "_id": "0425f3de94253c11769b1e9d",
             "_tpl": "5bd70322209c4d00d7167b8f",
             "upd": {
                 "Repairable": {
@@ -21,21 +21,21 @@
             }
         },
         {
-            "_id": "23a42cf872354d0721aee39e",
+            "_id": "40587d824a4e474dbcb4778c",
             "_tpl": "5ba26586d4351e44f824b340",
-            "parentId": "df1f687a654459e338ad61dc",
+            "parentId": "0425f3de94253c11769b1e9d",
             "slotId": "mod_magazine"
         },
         {
-            "_id": "57c2a97869eb91935bb7eb5b",
+            "_id": "8854d1f0a459b3839a22934f",
             "_tpl": "5ba26acdd4351e003562908e",
-            "parentId": "df1f687a654459e338ad61dc",
+            "parentId": "0425f3de94253c11769b1e9d",
             "slotId": "mod_muzzle"
         },
         {
-            "_id": "b98551bdb9f443de4b84ffb8",
+            "_id": "fe66c6562da60d0600f749cf",
             "_tpl": "5fb6564947ce63734e3fa1da",
-            "parentId": "df1f687a654459e338ad61dc",
+            "parentId": "0425f3de94253c11769b1e9d",
             "slotId": "mod_sight_rear",
             "upd": {
                 "Sight": {
@@ -46,15 +46,22 @@
             }
         },
         {
-            "_id": "19a219a7fb7af34382579ce6",
-            "_tpl": "58d2664f86f7747fec5834f6",
-            "parentId": "df1f687a654459e338ad61dc",
-            "slotId": "mod_scope"
+            "_id": "6d796b96a3604a30f94b971f",
+            "_tpl": "64785e7c19d732620e045e15",
+            "parentId": "0425f3de94253c11769b1e9d",
+            "slotId": "mod_scope",
+            "upd": {
+                "Sight": {
+                    "ScopesCurrentCalibPointIndexes": [0],
+                    "ScopesSelectedModes": [0],
+                    "SelectedScope": 0
+                }
+            }
         },
         {
-            "_id": "e7429708fb87ca027d2589eb",
+            "_id": "d40cdbbcedee7663db388a9c",
             "_tpl": "56def37dd2720bec348b456a",
-            "parentId": "df1f687a654459e338ad61dc",
+            "parentId": "0425f3de94253c11769b1e9d",
             "slotId": "mod_tactical_001",
             "upd": {
                 "Light": {
@@ -64,35 +71,22 @@
             }
         },
         {
-            "_id": "df494a476cc189def3f1d17d",
+            "_id": "63102c0b012ddbc67c45aa28",
             "_tpl": "5bd704e7209c4d00d7167c31",
-            "parentId": "df1f687a654459e338ad61dc",
+            "parentId": "0425f3de94253c11769b1e9d",
             "slotId": "mod_stock"
         },
         {
-            "_id": "56d09720f11269e7ec2a240a",
+            "_id": "a963e0ce29c748753c2603dd",
             "_tpl": "5c1cd46f2e22164bef5cfedb",
-            "parentId": "df1f687a654459e338ad61dc",
+            "parentId": "0425f3de94253c11769b1e9d",
             "slotId": "mod_foregrip"
         },
         {
-            "_id": "b73af59277c79b1fc3c21a75",
+            "_id": "9283c048604eb240c2a6e3ed",
             "_tpl": "5ba26ae8d4351e00367f9bdb",
-            "parentId": "57c2a97869eb91935bb7eb5b",
+            "parentId": "8854d1f0a459b3839a22934f",
             "slotId": "mod_muzzle"
-        },
-        {
-            "_id": "23b97c60bad6b53bce2d4b75",
-            "_tpl": "58d268fc86f774111273f8c2",
-            "parentId": "19a219a7fb7af34382579ce6",
-            "slotId": "mod_scope",
-            "upd": {
-                "Sight": {
-                    "ScopesCurrentCalibPointIndexes": [0],
-                    "ScopesSelectedModes": [0],
-                    "SelectedScope": 0
-                }
-            }
         }
     ],
     "Parent": "5447b5e04bdc2d62278b4567"
