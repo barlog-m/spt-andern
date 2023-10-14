@@ -101,11 +101,6 @@
         },
         {
             "weight": 1,
-            "id": "60a3c68c37ea821725773ef5",
-            "name": "CQC Osprey MK4A plate carrier (Protection, MTP)"
-        },
-        {
-            "weight": 1,
             "id": "5b44cad286f77402a54ae7e5",
             "name": "5.11 Tactical TacTec plate carrier"
         },
@@ -208,7 +203,7 @@
         },
         {
             "weight": 1,
-            "id": "5ab8e79e86f7742d8b372e78",
+            "id": "5c0e625a86f7742d77340f62",
             "name": "BNTI Zhuk-6a body armor"
         },
         {
@@ -230,7 +225,7 @@
     "rigs": [
         {
             "weight": 1,
-            "id": "5c0e625a86f7742d77340f62",
+            "id": "5648a69d4bdc2ded0b8b457b",
             "name": "BlackRock chest rig"
         },
         {
