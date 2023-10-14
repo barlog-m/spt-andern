@@ -7,7 +7,7 @@
 
 Idea of this mod is to rebalance a bit the game for better single player experience.
 
-* Give PMC bots decent weapon from handmade presets. 
+* Give PMC bots decent weapon from handmade presets.
 
 * Give PMC good gear. Every PMC wear armor, helmet, rig, headphones, face cover and glasses.
 

@@ -139,6 +139,10 @@
         {
             "tpl": "64ccc206793ca11c8f450a38",
             "name": "TerraGroup meeting room key"
+        },
+        {
+            "tpl": "64ccc246ff54fb38131acf29",
+            "name": "X-ray room key"
         }
     ],
     "two": [],
