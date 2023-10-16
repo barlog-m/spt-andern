@@ -20,6 +20,7 @@ export class PresetData {
     private gear: Record<string, Gear> = {};
     private weapon: Record<string, WeaponPreset[]> = {};
     private ammo: Record<string, Record<string, string[]>> = {};
+    private modules: Record<string, Record<string, string[]>> = {};
 
     constructor(
         @inject("WinstonLogger") protected logger: ILogger,
@@ -72,6 +73,26 @@ export class PresetData {
         return this.gear[tier];
     }
 
+    public getAlternativeModule(botLevel: number, moduleTpl: string): string {
+        const tier = this.tierByLevel(botLevel);
+        const alternativesData = this.modules[tier];
+        if (!alternativesData) {
+            return moduleTpl;
+        }
+
+        if (moduleTpl in alternativesData) {
+            const alternatives = alternativesData[moduleTpl];
+
+            if (this.randomUtil.getBool()) {
+                const keys = Object.keys(alternatives);
+                const randomKey = this.randomUtil.getArrayValue(keys);
+                return alternatives[randomKey];
+            }
+        }
+
+        return moduleTpl;
+    }
+
     load(): undefined {
         this.loadPresetConfig();
         this.loadData();
@@ -98,6 +119,7 @@ export class PresetData {
 
                 this.loadTierGear(dir.name, tierDirName);
                 this.loadTierAmmo(dir.name, tierDirName);
+                this.loadTierModules(dir.name, tierDirName);
                 this.loadTierWeapon(dir.name, tierDirName);
             });
         });
@@ -111,10 +133,19 @@ export class PresetData {
     }
 
     loadTierAmmo(tier: string, tierDir: string): undefined {
-        const gearFileName = `${tierDir}/ammo.json`;
-        const jsonData = fs.readFileSync(gearFileName, "utf-8");
+        const ammoFileName = `${tierDir}/ammo.json`;
+        const jsonData = fs.readFileSync(ammoFileName, "utf-8");
         this.ammo[tier] = {};
         Object.assign(this.ammo[tier], JSON.parse(jsonData));
+    }
+
+    loadTierModules(tier: string, tierDir: string): undefined {
+        const modulesFileName = `${tierDir}/modules.json`;
+        this.modules[tier] = {};
+        if (fs.existsSync(modulesFileName)) {
+            const jsonData = fs.readFileSync(modulesFileName, "utf-8");
+            Object.assign(this.modules[tier], JSON.parse(jsonData));
+        }
     }
 
     loadTierWeapon(tier: string, tierDir: string): undefined {
@@ -126,7 +157,12 @@ export class PresetData {
             this.weapon[tier] = [];
 
             files.forEach((f) => {
-                if (f === "ammo.json" || f === "gear.json") return;
+                if (
+                    f === "ammo.json" ||
+                    f === "gear.json" ||
+                    f === "modules.json"
+                )
+                    return;
 
                 const fullWeaponPresetName = `${tierDir}/${f}`;
 

@@ -19,11 +19,11 @@ import { PresetData } from "./PresetData";
 
 @injectable()
 export class WeaponGenerator {
-    protected readonly magazineSlotId = "mod_magazine";
-    protected readonly chamberSlotId = "patron_in_weapon";
-    protected readonly equipmentSlot = "FirstPrimaryWeapon";
+    private readonly magazineSlotId = "mod_magazine";
+    private readonly chamberSlotId = "patron_in_weapon";
+    private readonly equipmentSlot = "FirstPrimaryWeapon";
 
-    protected readonly secureContainerAmmoStackCount = 6;
+    private readonly secureContainerAmmoStackCount = 6;
 
     constructor(
         @inject("WinstonLogger") protected logger: ILogger,
@@ -38,26 +38,23 @@ export class WeaponGenerator {
         @inject("AndernPresetData") protected presetData: PresetData
     ) {}
 
-    protected templatesTable(): Record<string, ITemplateItem> {
+    templatesTable(): Record<string, ITemplateItem> {
         return this.databaseServer.getTables().templates.items;
     }
 
-    protected getTemplateIdFromWeaponItems(weaponWithMods: Item[]): string {
+    getTemplateIdFromWeaponItems(weaponWithMods: Item[]): string {
         return weaponWithMods[0]._tpl;
     }
 
-    protected getCaliberByTemplateId(tpl: string): string {
+    getCaliberByTemplateId(tpl: string): string {
         return this.templatesTable()[tpl]._props.ammoCaliber;
     }
 
-    protected getWeaponMagazine(weaponWithMods: Item[]): Item {
+    getWeaponMagazine(weaponWithMods: Item[]): Item {
         return weaponWithMods.find((item) => item.slotId === "mod_magazine");
     }
 
-    protected addCartridgeToChamber(
-        weaponWithMods: Item[],
-        ammoId: string
-    ): undefined {
+    addCartridgeToChamber(weaponWithMods: Item[], ammoId: string): undefined {
         const slotName = "patron_in_weapon";
 
         const existingItemWithSlot = weaponWithMods.find(
@@ -80,7 +77,7 @@ export class WeaponGenerator {
         }
     }
 
-    protected fillMagazine(weaponWithMods: Item[], ammoTpl: string): string {
+    fillMagazine(weaponWithMods: Item[], ammoTpl: string): string {
         for (const magazine of weaponWithMods.filter(
             (x) => x.slotId === this.magazineSlotId
         )) {
@@ -102,11 +99,11 @@ export class WeaponGenerator {
         }
     }
 
-    protected getTemplateById(tpl: string): ITemplateItem {
+    getTemplateById(tpl: string): ITemplateItem {
         return this.templatesTable()[tpl];
     }
 
-    protected updateWeaponInfo(
+    updateWeaponInfo(
         weaponWithMods: Item[],
         weaponParentId: string,
         isNight: boolean
@@ -119,7 +116,7 @@ export class WeaponGenerator {
         this.setScopeMode(weaponWithMods);
     }
 
-    protected replaceId(weaponWithMods: Item[], i: number): undefined {
+    replaceId(weaponWithMods: Item[], i: number): undefined {
         const oldId = weaponWithMods[i]._id;
         const newId = this.hashUtil.generate();
         weaponWithMods[i]._id = newId;
@@ -135,7 +132,7 @@ export class WeaponGenerator {
         }
     }
 
-    protected replaceTacticalDevice(weaponWithMods: Item[]): undefined {
+    replaceTacticalDevice(weaponWithMods: Item[]): undefined {
         for (const item of weaponWithMods) {
             if (item.slotId.startsWith("mod_tactical")) {
                 item._tpl = "5a5f1ce64f39f90b401987bc";
@@ -143,7 +140,7 @@ export class WeaponGenerator {
         }
     }
 
-    protected setTacticalDeviceMode(weaponWithMods: Item[]): undefined {
+    setTacticalDeviceMode(weaponWithMods: Item[]): undefined {
         for (const item of weaponWithMods) {
             if (item.slotId.startsWith("mod_tactical")) {
                 if (item.upd?.Light) {
@@ -154,7 +151,7 @@ export class WeaponGenerator {
         }
     }
 
-    protected setScopeMode(weaponWithMods: Item[]): undefined {
+    setScopeMode(weaponWithMods: Item[]): undefined {
         for (const item of weaponWithMods) {
             if (item.slotId.startsWith("mod_scope")) {
                 if (item.upd?.Sight) {
@@ -204,7 +201,7 @@ export class WeaponGenerator {
         );
     }
 
-    protected addAmmoToSecureContainer(
+    addAmmoToSecureContainer(
         stackCount: number,
         ammoTpl: string,
         stackSize: number,
@@ -228,6 +225,18 @@ export class WeaponGenerator {
         }
     }
 
+    alternateModules(botLevel: number, weapon: Item[]): undefined {
+        weapon.forEach((item) => {
+            const alternativeTpl = this.presetData.getAlternativeModule(
+                botLevel,
+                item._tpl
+            );
+            if (alternativeTpl != item._tpl) {
+                item._tpl = alternativeTpl;
+            }
+        });
+    }
+
     public generateWeapon(
         botLevel: number,
         weaponParentId: string,
@@ -235,6 +244,7 @@ export class WeaponGenerator {
     ): GeneratedWeapon {
         const weaponWithMods = this.presetData.getRandomWeapon(botLevel);
         this.updateWeaponInfo(weaponWithMods, weaponParentId, isNight);
+        this.alternateModules(botLevel, weaponWithMods);
         const weaponTpl = this.getTemplateIdFromWeaponItems(weaponWithMods);
         const weaponTemplate = this.getTemplateById(weaponTpl);
         const caliber = this.getCaliberByTemplateId(weaponTpl);
