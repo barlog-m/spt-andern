@@ -209,19 +209,26 @@ export class WeaponGenerator {
     ): void {
         for (let i = 0; i < stackCount; i++) {
             const id = this.hashUtil.generate();
-            this.botWeaponGeneratorHelper.addItemWithChildrenToEquipmentSlot(
-                [EquipmentSlots.SECURED_CONTAINER],
-                id,
-                ammoTpl,
-                [
-                    {
-                        _id: id,
-                        _tpl: ammoTpl,
-                        upd: { StackObjectsCount: stackSize },
-                    },
-                ],
-                inventory
-            );
+            try {
+                this.botWeaponGeneratorHelper.addItemWithChildrenToEquipmentSlot(
+                    [EquipmentSlots.SECURED_CONTAINER],
+                    id,
+                    ammoTpl,
+                    [
+                        {
+                            _id: id,
+                            _tpl: ammoTpl,
+                            upd: { StackObjectsCount: stackSize },
+                        },
+                    ],
+                    inventory
+                );
+            } catch (e) {
+                this.logger.error(
+                    `[Andern] error when add ammo '${ammoTpl}' with stack size ${stackSize} to secure container`
+                );
+                this.logger.error(`[Andern] ${e.message}`);
+            }
         }
     }
 
