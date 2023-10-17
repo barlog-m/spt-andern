@@ -23,16 +23,16 @@ export function lootConfig(container: DependencyContainer): undefined {
 function setLootMultiplier(container: DependencyContainer): undefined {
     const configServer = container.resolve<ConfigServer>("ConfigServer");
 
-    const locatinConfig: ILocationConfig = configServer.getConfig(
+    const locationConfig: ILocationConfig = configServer.getConfig(
         ConfigTypes.LOCATION
     );
 
-    for (const map in locatinConfig.looseLootMultiplier) {
-        locatinConfig.looseLootMultiplier[map] *= config.looseLootMultiplier;
+    for (const map in locationConfig.looseLootMultiplier) {
+        locationConfig.looseLootMultiplier[map] *= config.looseLootMultiplier;
     }
 
-    for (const map in locatinConfig.staticLootMultiplier) {
-        locatinConfig.staticLootMultiplier[map] *= config.staticLootMultiplier;
+    for (const map in locationConfig.staticLootMultiplier) {
+        locationConfig.staticLootMultiplier[map] *= config.staticLootMultiplier;
     }
 }
 

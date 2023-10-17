@@ -24,14 +24,14 @@ export function mapBotTuning(container: DependencyContainer): undefined {
     const databaseTables: IDatabaseTables = databaseServer.getTables();
     const globals: IGlobals = databaseServer.getTables().globals;
 
-    if (config.mapMaxBotBuffPercentage > 0) {
+    if (config.mapMaxBotBuffMultiplier != 0) {
         setMaxBotCap(configServer);
-        mapsSpawnTunning(databaseTables, logger);
+        mapsTunning(databaseTables, logger);
     }
 
     setPmcBotDifficulty(configServer);
 
-    if (config.mapBotScatteringIncreasePercentage > 0) {
+    if (config.mapBotAccuracyMultiplier != 0) {
         ajustBotWeaponScattering(globals);
     }
 }
@@ -41,12 +41,10 @@ function setMaxBotCap(configServer: ConfigServer): undefined {
 
     for (const map in botConfig.maxBotCap) {
         if (map === "factory4_night" || map === "laboratory") continue;
-        if (botConfig.maxBotCap[map] < config.mapMaxBotBuffPercentage) {
-            botConfig.maxBotCap[map] += Math.ceil(
-                botConfig.maxBotCap[map] *
-                    (config.mapMaxBotBuffPercentage / 100)
-            );
-        }
+
+        botConfig.maxBotCap[map] = Math.ceil(
+            botConfig.maxBotCap[map] * config.mapMaxBotBuffMultiplier
+        );
     }
 }
 
@@ -58,27 +56,14 @@ function setPmcBotDifficulty(configServer: ConfigServer): undefined {
 
 function ajustBotWeaponScattering(globals: IGlobals): undefined {
     globals.BotWeaponScatterings.forEach((scattering) => {
-        scattering.PriorityScatter100meter = increaseValueByPercentage(
-            scattering.PriorityScatter100meter,
-            config.mapBotScatteringIncreasePercentage
-        );
-        scattering.PriorityScatter10meter = increaseValueByPercentage(
-            scattering.PriorityScatter10meter,
-            config.mapBotScatteringIncreasePercentage
-        );
-        scattering.PriorityScatter1meter = increaseValueByPercentage(
-            scattering.PriorityScatter1meter,
-            config.mapBotScatteringIncreasePercentage
-        );
+        const divider = config.mapBotAccuracyMultiplier / 2;
+        scattering.PriorityScatter100meter /= divider;
+        scattering.PriorityScatter10meter /= divider;
+        scattering.PriorityScatter1meter /= divider;
     });
 }
 
-function increaseValueByPercentage(value: number, percentage: number): number {
-    const increment = (value / 100) * percentage;
-    return value + increment;
-}
-
-function mapsSpawnTunning(
+function mapsTunning(
     databaseTables: IDatabaseTables,
     logger: ILogger
 ): undefined {
@@ -92,12 +77,20 @@ function mapsSpawnTunning(
                         locationBase.Name !== "Laboratory" &&
                         locationBase.Name !== "Factory"
                     ) {
-                        locationBase.BotMax += Math.ceil(
-                            locationBase.BotMax *
-                                (config.mapMaxBotBuffPercentage / 100)
-                        );
+                        if (config.mapMaxBotBuffMultiplier != 1) {
+                            locationBase.BotMax = Math.ceil(
+                                locationBase.BotMax *
+                                    config.mapMaxBotBuffMultiplier
+                            );
+                        }
                     }
-                    //reduceSpawnPointDelay(locationBase);
+
+                    if (config.mapBotAccuracyMultiplier != 1) {
+                        locationBase.BotLocationModifier.AccuracySpeed *=
+                            config.mapBotAccuracyMultiplier;
+                        locationBase.BotLocationModifier.Scattering /=
+                            config.mapBotAccuracyMultiplier;
+                    }
                 }
 
                 if (config.mapBossChanceBuff != 0) {

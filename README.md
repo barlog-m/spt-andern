@@ -90,11 +90,11 @@ Settings in config 'chadsOnFactoryAndLabOnly', 'chadsPercentage' and 'chadsMinim
 
 Works only if `mapBotSettings` set to true.
 
-`mapMaxBotBuffPercentage` increase amount of bots on maps exclude night Factory and Lab.
+`mapMaxBotBuffMultiplier` increase or decrease amount of bots on maps exclude night Factory and Lab.
 
 `mapPmcBotDifficulty` "easy", "normal", "hard", "impossible"
 
-`mapBotScatteringIncreasePercentage` increase bot weapon scattering (i'm not sure if it works properly).
+`mapBotAccuracyMultiplier` decrease bot accuracy and increase scattering.
 
 `mapBossChanceBuff` add or remove percent for existing boss chance. For example if map boss chance is 35 and you set this parameter to 20 then boss chance will be 35 + 20.
 
