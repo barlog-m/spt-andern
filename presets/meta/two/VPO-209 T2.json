@@ -1,11 +1,11 @@
 {
     "type": "weapon",
-    "id": "20b9305b23591b2024104867",
+    "id": "baafe86a4019405d2a59eed2",
     "name": "VPO-209 T2",
-    "root": "efe3cec66d6fffa12a4893f9",
+    "root": "4e8560805042fc8cabd42e3a",
     "items": [
         {
-            "_id": "efe3cec66d6fffa12a4893f9",
+            "_id": "4e8560805042fc8cabd42e3a",
             "_tpl": "59e6687d86f77411d949b251",
             "upd": {
                 "Repairable": {
@@ -18,57 +18,57 @@
             }
         },
         {
-            "_id": "5cd9cdebd22365c592cfc557",
+            "_id": "de50be486a9d444979b176f9",
             "_tpl": "59e649f986f77411d949b246",
-            "parentId": "efe3cec66d6fffa12a4893f9",
+            "parentId": "4e8560805042fc8cabd42e3a",
             "slotId": "mod_gas_block"
         },
         {
-            "_id": "a27147bd3e288ac93b2e19ad",
+            "_id": "c3c783dbffb291f5127b1cff",
             "_tpl": "5a9fbb74a2750c0032157181",
-            "parentId": "efe3cec66d6fffa12a4893f9",
+            "parentId": "4e8560805042fc8cabd42e3a",
             "slotId": "mod_muzzle"
         },
         {
-            "_id": "7e2ec52dea1abbb65d2f6259",
+            "_id": "e47c6a3556b660492841d115",
             "_tpl": "5947f92f86f77427344a76b1",
-            "parentId": "efe3cec66d6fffa12a4893f9",
+            "parentId": "4e8560805042fc8cabd42e3a",
             "slotId": "mod_pistol_grip"
         },
         {
-            "_id": "3ae19b28b6567dbfebee50e1",
+            "_id": "304b41d495c38f565f38e82a",
             "_tpl": "5d2c76ed48f03532f2136169",
-            "parentId": "efe3cec66d6fffa12a4893f9",
+            "parentId": "4e8560805042fc8cabd42e3a",
             "slotId": "mod_reciever"
         },
         {
-            "_id": "ac027a3e486527ff80e1e692",
+            "_id": "5d03675b2156d55408dec860",
             "_tpl": "59e89d0986f77427600d226e",
-            "parentId": "efe3cec66d6fffa12a4893f9",
+            "parentId": "4e8560805042fc8cabd42e3a",
             "slotId": "mod_stock"
         },
         {
-            "_id": "fe002d82559bd0d08b77f5a3",
+            "_id": "cf43e0a9901151add3e72aad",
             "_tpl": "59d6272486f77466146386ff",
-            "parentId": "efe3cec66d6fffa12a4893f9",
+            "parentId": "4e8560805042fc8cabd42e3a",
             "slotId": "mod_magazine"
         },
         {
-            "_id": "bce296abe2cfe3c3af943aa5",
+            "_id": "5b1c70ba39f375567f1bdf7b",
             "_tpl": "5648ac824bdc2ded0b8b457d",
-            "parentId": "efe3cec66d6fffa12a4893f9",
+            "parentId": "4e8560805042fc8cabd42e3a",
             "slotId": "mod_charge"
         },
         {
-            "_id": "aede6f663b60cfa9ef63a248",
+            "_id": "661b35fca43dc75ecc717a39",
             "_tpl": "5efaf417aeb21837e749c7f2",
-            "parentId": "5cd9cdebd22365c592cfc557",
+            "parentId": "de50be486a9d444979b176f9",
             "slotId": "mod_handguard"
         },
         {
-            "_id": "8e706b8deee9b6621de8fb90",
-            "_tpl": "58491f3324597764bc48fa02",
-            "parentId": "3ae19b28b6567dbfebee50e1",
+            "_id": "566fbdbfbdde4efcdb52f773",
+            "_tpl": "64785e7c19d732620e045e15",
+            "parentId": "304b41d495c38f565f38e82a",
             "slotId": "mod_scope",
             "upd": {
                 "Sight": {
@@ -79,21 +79,21 @@
             }
         },
         {
-            "_id": "9cd95d1f50c8dfef165890c6",
+            "_id": "29d7b9272937eccb324669c8",
             "_tpl": "5a0c59791526d8dba737bba7",
-            "parentId": "ac027a3e486527ff80e1e692",
+            "parentId": "5d03675b2156d55408dec860",
             "slotId": "mod_stock"
         },
         {
-            "_id": "80c4d71d5c136504589b20e5",
+            "_id": "1ffa292dd725fd8b861cf3b7",
             "_tpl": "5c1bc5fb2e221602b1779b32",
-            "parentId": "aede6f663b60cfa9ef63a248",
+            "parentId": "661b35fca43dc75ecc717a39",
             "slotId": "mod_foregrip"
         },
         {
-            "_id": "49e7d56bef6774408cf59d58",
+            "_id": "6b6db7e4e30413ea0fb00166",
             "_tpl": "6272370ee4013c5d7e31f418",
-            "parentId": "aede6f663b60cfa9ef63a248",
+            "parentId": "661b35fca43dc75ecc717a39",
             "slotId": "mod_tactical_002",
             "upd": {
                 "Light": {

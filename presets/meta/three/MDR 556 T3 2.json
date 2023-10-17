@@ -1,0 +1,95 @@
+{
+    "type": "weapon",
+    "id": "8e63021be6e696552102b0be",
+    "name": "MDR 556 T3 2",
+    "root": "96cb26a28927d426c5cb1134",
+    "items": [
+        {
+            "_id": "96cb26a28927d426c5cb1134",
+            "_tpl": "5c488a752e221602b412af63",
+            "upd": {
+                "Repairable": {
+                    "MaxDurability": 100,
+                    "Durability": 100
+                },
+                "FireMode": {
+                    "FireMode": "single"
+                }
+            }
+        },
+        {
+            "_id": "4d12ff7edefdafa4a36488b6",
+            "_tpl": "5c48a2c22e221602b313fb6c",
+            "parentId": "96cb26a28927d426c5cb1134",
+            "slotId": "mod_pistol_grip"
+        },
+        {
+            "_id": "f0485be0d0c7a1aafded7054",
+            "_tpl": "5d1340cad7ad1a0b0b249869",
+            "parentId": "96cb26a28927d426c5cb1134",
+            "slotId": "mod_magazine"
+        },
+        {
+            "_id": "9966cd56d7a327885d8ad18b",
+            "_tpl": "5c48a14f2e2216152006edd7",
+            "parentId": "96cb26a28927d426c5cb1134",
+            "slotId": "mod_handguard"
+        },
+        {
+            "_id": "73ef9b22d2314884b1e4eb4d",
+            "_tpl": "5c48a2852e221602b21d5923",
+            "parentId": "96cb26a28927d426c5cb1134",
+            "slotId": "mod_barrel"
+        },
+        {
+            "_id": "dabfbac87a82370c8d846cc3",
+            "_tpl": "58491f3324597764bc48fa02",
+            "parentId": "96cb26a28927d426c5cb1134",
+            "slotId": "mod_scope",
+            "upd": {
+                "Sight": {
+                    "ScopesCurrentCalibPointIndexes": [0],
+                    "ScopesSelectedModes": [0],
+                    "SelectedScope": 0
+                }
+            }
+        },
+        {
+            "_id": "690a93c668f94a53fcf17310",
+            "_tpl": "57cffcd624597763133760c5",
+            "parentId": "9966cd56d7a327885d8ad18b",
+            "slotId": "mod_mount_000"
+        },
+        {
+            "_id": "b88e0d1d0a5a8373f2aa0dd4",
+            "_tpl": "5b7be47f5acfc400170e2dd2",
+            "parentId": "9966cd56d7a327885d8ad18b",
+            "slotId": "mod_mount_002"
+        },
+        {
+            "_id": "99c838a1d51311a36f983fb7",
+            "_tpl": "5c6d710d2e22165df16b81e7",
+            "parentId": "73ef9b22d2314884b1e4eb4d",
+            "slotId": "mod_muzzle"
+        },
+        {
+            "_id": "1c6e62867d75dbd2ce0f3378",
+            "_tpl": "6272379924e29f06af4d5ecb",
+            "parentId": "b88e0d1d0a5a8373f2aa0dd4",
+            "slotId": "mod_tactical",
+            "upd": {
+                "Light": {
+                    "IsActive": true,
+                    "SelectedMode": 0
+                }
+            }
+        },
+        {
+            "_id": "3bbc4a36c44ab0f63991c037",
+            "_tpl": "55d6190f4bdc2d87028b4567",
+            "parentId": "99c838a1d51311a36f983fb7",
+            "slotId": "mod_muzzle"
+        }
+    ],
+    "Parent": "5447b5f14bdc2d61278b4567"
+}
