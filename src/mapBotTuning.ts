@@ -109,22 +109,28 @@ function bossChanceChange(
         ([spawnKey, spawnObj]) => {
             const bossLocationSpawn: BossLocationSpawn = spawnObj;
             if (
-                bossLocationSpawn.BossChance != 100 &&
-                bossLocationSpawn.BossChance > 0
+                bossLocationSpawn.BossName !== "pmcBot" &&
+                bossLocationSpawn.BossName !== "crazyAssaultEvent" &&
+                bossLocationSpawn.BossName !== "exUsec"
             ) {
-                let chance = Math.round(
-                    bossLocationSpawn.BossChance + config.mapBossChanceBuff
-                );
-                if (chance > 100) {
-                    chance = 100;
+                if (
+                    bossLocationSpawn.BossChance != 100 &&
+                    bossLocationSpawn.BossChance > 0
+                ) {
+                    let chance = Math.round(
+                        bossLocationSpawn.BossChance + config.mapBossChanceBuff
+                    );
+                    if (chance > 100) {
+                        chance = 100;
+                    }
+                    if (chance < 0) {
+                        chance = 0;
+                    }
+                    bossLocationSpawn.BossChance = chance;
+                    logger.info(
+                        `[Andern] location '${locationBase.Name}' boss '${bossLocationSpawn.BossName}' chance ${chance}`
+                    );
                 }
-                if (chance < 0) {
-                    chance = 0;
-                }
-                bossLocationSpawn.BossChance = chance;
-                logger.info(
-                    `[Andern] location '${locationBase.Name}' boss '${bossLocationSpawn.BossName}' chance ${chance}`
-                );
             }
         }
     );
