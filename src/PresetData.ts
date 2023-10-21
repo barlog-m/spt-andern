@@ -156,23 +156,28 @@ export class PresetData {
             }
             this.weapon[tier] = [];
 
-            files.forEach((f) => {
-                if (
-                    f === "ammo.json" ||
-                    f === "gear.json" ||
-                    f === "modules.json"
-                )
-                    return;
+            files
+                .filter((f) => f.endsWith(".json"))
+                .forEach((f) => {
+                    if (
+                        f === "ammo.json" ||
+                        f === "gear.json" ||
+                        f === "modules.json"
+                    )
+                        return;
 
-                const fullWeaponPresetName = `${tierDir}/${f}`;
+                    const fullWeaponPresetName = `${tierDir}/${f}`;
 
-                const jsonData = fs.readFileSync(fullWeaponPresetName, "utf-8");
-                const preset = new WeaponPreset();
-                Object.assign(preset, JSON.parse(jsonData));
-                if (this.isPresetValid(preset, fullWeaponPresetName)) {
-                    this.weapon[tier][preset.id] = preset;
-                }
-            });
+                    const jsonData = fs.readFileSync(
+                        fullWeaponPresetName,
+                        "utf-8"
+                    );
+                    const preset = new WeaponPreset();
+                    Object.assign(preset, JSON.parse(jsonData));
+                    if (this.isPresetValid(preset, fullWeaponPresetName)) {
+                        this.weapon[tier][preset.id] = preset;
+                    }
+                });
         });
     }
 
