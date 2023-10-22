@@ -25,6 +25,8 @@ export class WeaponGenerator {
 
     private readonly secureContainerAmmoStackCount = 6;
 
+    private readonly MK47_TPL = "606587252535c57a13424cfd";
+
     constructor(
         @inject("WinstonLogger") protected logger: ILogger,
         @inject("HashUtil") protected hashUtil: HashUtil,
@@ -232,13 +234,17 @@ export class WeaponGenerator {
         }
     }
 
-    alternateModules(botLevel: number, weapon: Item[]): undefined {
+    alternateModules(
+        botLevel: number,
+        weapon: Item[],
+        weaponTpl: string
+    ): undefined {
         weapon.forEach((item) => {
             const alternativeTpl = this.presetData.getAlternativeModule(
                 botLevel,
                 item._tpl
             );
-            if (alternativeTpl != item._tpl) {
+            if (weaponTpl !== this.MK47_TPL && alternativeTpl != item._tpl) {
                 item._tpl = alternativeTpl;
             }
         });
@@ -251,8 +257,8 @@ export class WeaponGenerator {
     ): GeneratedWeapon {
         const weaponWithMods = this.presetData.getRandomWeapon(botLevel);
         this.updateWeaponInfo(weaponWithMods, weaponParentId, isNight);
-        this.alternateModules(botLevel, weaponWithMods);
         const weaponTpl = this.getTemplateIdFromWeaponItems(weaponWithMods);
+        this.alternateModules(botLevel, weaponWithMods, weaponTpl);
         const weaponTemplate = this.getTemplateById(weaponTpl);
         const caliber = this.getCaliberByTemplateId(weaponTpl);
         const ammoTpl = this.presetData.getRandomAmmoByCaliber(

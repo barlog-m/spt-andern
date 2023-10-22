@@ -5,6 +5,7 @@ import { Item } from "@spt-aki/models/eft/common/tables/IItem";
 import { RandomUtil } from "@spt-aki/utils/RandomUtil";
 import { HashUtil } from "@spt-aki/utils/HashUtil";
 import { Inventory as PmcInventory } from "@spt-aki/models/eft/common/tables/IBotBase";
+import { GenerationData } from "@spt-aki/models/eft/common/tables/IBotType";
 import { MinMax } from "@spt-aki/models/common/MinMax";
 
 import { NightHeadwear } from "./NightHeadwear";
@@ -21,6 +22,7 @@ export class PresetData {
     private weapon: Record<string, WeaponPreset[]> = {};
     private ammo: Record<string, Record<string, string[]>> = {};
     private modules: Record<string, Record<string, string[]>> = {};
+    private meds: Record<string, GenerationData> = {};
 
     constructor(
         @inject("WinstonLogger") protected logger: ILogger,
@@ -73,6 +75,11 @@ export class PresetData {
         return this.gear[tier];
     }
 
+    public getMeds(level: number): GenerationData {
+        const tier = this.tierByLevel(level);
+        return this.meds[tier];
+    }
+
     public getAlternativeModule(botLevel: number, moduleTpl: string): string {
         const tier = this.tierByLevel(botLevel);
         const alternativesData = this.modules[tier];
@@ -109,7 +116,7 @@ export class PresetData {
 
         fs.readdir(presetDirName, { withFileTypes: true }, (err, files) => {
             if (err) {
-                this.logger.error("Error reading directory: " + err.code);
+                this.logger.error("Error reading directory: " + err.message);
                 return;
             }
             files.forEach((dir) => {
@@ -121,30 +128,48 @@ export class PresetData {
                 this.loadTierAmmo(dir.name, tierDirName);
                 this.loadTierModules(dir.name, tierDirName);
                 this.loadTierWeapon(dir.name, tierDirName);
+                this.loadTierMeds(dir.name, tierDirName);
             });
         });
     }
 
     loadTierGear(tier: string, tierDir: string): undefined {
         const gearFileName = `${tierDir}/gear.json`;
-        const jsonData = fs.readFileSync(gearFileName, "utf-8");
-        this.gear[tier] = new Gear();
-        Object.assign(this.gear[tier], JSON.parse(jsonData));
+        try {
+            const jsonData = fs.readFileSync(gearFileName, "utf-8");
+            this.gear[tier] = new Gear();
+            Object.assign(this.gear[tier], JSON.parse(jsonData));
+        } catch (err) {
+            this.logger.error(`[Andern] error read file '${gearFileName}'`);
+            this.logger.error(err.message);
+        }
     }
 
     loadTierAmmo(tier: string, tierDir: string): undefined {
         const ammoFileName = `${tierDir}/ammo.json`;
-        const jsonData = fs.readFileSync(ammoFileName, "utf-8");
-        this.ammo[tier] = {};
-        Object.assign(this.ammo[tier], JSON.parse(jsonData));
+        try {
+            const jsonData = fs.readFileSync(ammoFileName, "utf-8");
+            this.ammo[tier] = {};
+            Object.assign(this.ammo[tier], JSON.parse(jsonData));
+        } catch (err) {
+            this.logger.error(`[Andern] error read file '${ammoFileName}'`);
+            this.logger.error(err.message);
+        }
     }
 
     loadTierModules(tier: string, tierDir: string): undefined {
         const modulesFileName = `${tierDir}/modules.json`;
         this.modules[tier] = {};
         if (fs.existsSync(modulesFileName)) {
-            const jsonData = fs.readFileSync(modulesFileName, "utf-8");
-            Object.assign(this.modules[tier], JSON.parse(jsonData));
+            try {
+                const jsonData = fs.readFileSync(modulesFileName, "utf-8");
+                Object.assign(this.modules[tier], JSON.parse(jsonData));
+            } catch (err) {
+                this.logger.error(
+                    `[Andern] error read file '${modulesFileName}'`
+                );
+                this.logger.error(err.message);
+            }
         }
     }
 
@@ -162,23 +187,45 @@ export class PresetData {
                     if (
                         f === "ammo.json" ||
                         f === "gear.json" ||
-                        f === "modules.json"
+                        f === "modules.json" ||
+                        f === "meds.json"
                     )
                         return;
 
                     const fullWeaponPresetName = `${tierDir}/${f}`;
 
-                    const jsonData = fs.readFileSync(
-                        fullWeaponPresetName,
-                        "utf-8"
-                    );
-                    const preset = new WeaponPreset();
-                    Object.assign(preset, JSON.parse(jsonData));
-                    if (this.isPresetValid(preset, fullWeaponPresetName)) {
-                        this.weapon[tier][preset.id] = preset;
+                    try {
+                        const jsonData = fs.readFileSync(
+                            fullWeaponPresetName,
+                            "utf-8"
+                        );
+                        const preset = new WeaponPreset();
+                        Object.assign(preset, JSON.parse(jsonData));
+                        if (this.isPresetValid(preset, fullWeaponPresetName)) {
+                            this.weapon[tier][preset.id] = preset;
+                        }
+                    } catch (err) {
+                        this.logger.error(
+                            `[Andern] error read file '${fullWeaponPresetName}'`
+                        );
+                        this.logger.error(err.message);
                     }
                 });
         });
+    }
+
+    loadTierMeds(tier: string, tierDir: string): undefined {
+        const medsFileName = `${tierDir}/meds.json`;
+        if (fs.existsSync(medsFileName)) {
+            try {
+                const jsonData = fs.readFileSync(medsFileName, "utf-8");
+                this.meds[tier] = { weights: {}, whitelist: [] };
+                Object.assign(this.meds[tier], JSON.parse(jsonData));
+            } catch (err) {
+                this.logger.error(`[Andern] error read file '${medsFileName}'`);
+                this.logger.error(err.message);
+            }
+        }
     }
 
     isPresetValid(weaponPreset: WeaponPreset, fileName: string): boolean {

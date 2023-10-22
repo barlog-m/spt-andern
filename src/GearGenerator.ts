@@ -426,6 +426,8 @@ export class GearGenerator {
             botInventory
         );
 
+        this.medsTuning(botLevel, botJsonTemplate);
+
         this.botLootGenerator.generateLoot(
             sessionId,
             botJsonTemplate,
@@ -436,6 +438,13 @@ export class GearGenerator {
         );
 
         return botInventory;
+    }
+
+    medsTuning(botLevel: number, botJsonTemplate: IBotType): undefined {
+        const meds = this.presetData.getMeds(botLevel);
+        if (meds) {
+            botJsonTemplate.generation.items.healing = meds;
+        }
     }
 
     generateNightHeadwear(
