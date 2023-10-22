@@ -8,11 +8,7 @@ import { ItemHelper } from "@spt-aki/helpers/ItemHelper";
 import { ILogger } from "@spt-aki/models/spt/utils/ILogger";
 import { RandomUtil } from "@spt-aki/utils/RandomUtil";
 import { BotWeaponGeneratorHelper } from "@spt-aki/helpers/BotWeaponGeneratorHelper";
-import { EquipmentSlots } from "@spt-aki/models/enums/EquipmentSlots";
 import { IInventoryMagGen } from "@spt-aki/generators/weapongen/IInventoryMagGen";
-import { InventoryMagGen } from "@spt-aki/generators/weapongen/InventoryMagGen";
-import { Inventory as PmcInventory } from "@spt-aki/models/eft/common/tables/IBotBase";
-import { MinMax } from "@spt-aki/models/common/MinMax";
 
 import { GeneratedWeapon } from "./models";
 import { PresetData } from "./PresetData";
@@ -22,9 +18,6 @@ export class WeaponGenerator {
     protected readonly magazineSlotId = "mod_magazine";
     protected readonly chamberSlotId = "patron_in_weapon";
     protected readonly equipmentSlot = "FirstPrimaryWeapon";
-
-    protected readonly numberOfMagazines: MinMax = { min: 2, max: 4 };
-    protected readonly secureContainerAmmoStackCount = 6;
 
     constructor(
         @inject("WinstonLogger") protected logger: ILogger,
@@ -162,59 +155,6 @@ export class WeaponGenerator {
                     item.upd.Sight.ScopesSelectedModes = [1];
                 }
             }
-        }
-    }
-
-    public addExtraMagazinesToInventory(
-        weapon: GeneratedWeapon,
-        inventory: PmcInventory
-    ): undefined {
-        const weaponTemplate = weapon.weaponTemplate;
-
-        const magazineTemplate = this.getTemplateById(weapon.magazineTpl);
-        const ammoTemplate = this.getTemplateById(weapon.ammoTpl);
-
-        const inventoryMagGenModel = new InventoryMagGen(
-            this.numberOfMagazines,
-            magazineTemplate,
-            weaponTemplate,
-            ammoTemplate,
-            inventory
-        );
-
-        this.inventoryMagGenComponents
-            .find((v) => v.canHandleInventoryMagGen(inventoryMagGenModel))
-            .process(inventoryMagGenModel);
-
-        this.addAmmoToSecureContainer(
-            this.secureContainerAmmoStackCount,
-            weapon.ammoTpl,
-            ammoTemplate._props.StackMaxSize,
-            inventory
-        );
-    }
-
-    protected addAmmoToSecureContainer(
-        stackCount: number,
-        ammoTpl: string,
-        stackSize: number,
-        inventory: PmcInventory
-    ): void {
-        for (let i = 0; i < stackCount; i++) {
-            const id = this.hashUtil.generate();
-            this.botWeaponGeneratorHelper.addItemWithChildrenToEquipmentSlot(
-                [EquipmentSlots.SECURED_CONTAINER],
-                id,
-                ammoTpl,
-                [
-                    {
-                        _id: id,
-                        _tpl: ammoTpl,
-                        upd: { StackObjectsCount: stackSize },
-                    },
-                ],
-                inventory
-            );
         }
     }
 

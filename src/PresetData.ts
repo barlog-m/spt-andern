@@ -79,8 +79,15 @@ export class PresetData {
 
     loadPresetConfig(): undefined {
         const presetConfigFileName = `${this.modPath}presets/${config.preset}/preset.json`;
-        const jsonData = fs.readFileSync(presetConfigFileName, "utf-8");
-        Object.assign(this.presetConfig, JSON.parse(jsonData));
+        try {
+            const jsonData = fs.readFileSync(presetConfigFileName, "utf-8");
+            Object.assign(this.presetConfig, JSON.parse(jsonData));
+        } catch (err) {
+            this.logger.error(
+                `[Andern] error read file '${presetConfigFileName}'`
+            );
+            this.logger.error(err.message);
+        }
     }
 
     loadData(): undefined {
@@ -105,16 +112,26 @@ export class PresetData {
 
     loadTierGear(tier: string, tierDir: string): undefined {
         const gearFileName = `${tierDir}/gear.json`;
-        const jsonData = fs.readFileSync(gearFileName, "utf-8");
-        this.gear[tier] = new Gear();
-        Object.assign(this.gear[tier], JSON.parse(jsonData));
+        try {
+            const jsonData = fs.readFileSync(gearFileName, "utf-8");
+            this.gear[tier] = new Gear();
+            Object.assign(this.gear[tier], JSON.parse(jsonData));
+        } catch (err) {
+            this.logger.error(`[Andern] error read file '${gearFileName}'`);
+            this.logger.error(err.message);
+        }
     }
 
     loadTierAmmo(tier: string, tierDir: string): undefined {
-        const gearFileName = `${tierDir}/ammo.json`;
-        const jsonData = fs.readFileSync(gearFileName, "utf-8");
-        this.ammo[tier] = {};
-        Object.assign(this.ammo[tier], JSON.parse(jsonData));
+        const ammoFileName = `${tierDir}/ammo.json`;
+        try {
+            const jsonData = fs.readFileSync(ammoFileName, "utf-8");
+            this.ammo[tier] = {};
+            Object.assign(this.ammo[tier], JSON.parse(jsonData));
+        } catch (err) {
+            this.logger.error(`[Andern] error read file '${ammoFileName}'`);
+            this.logger.error(err.message);
+        }
     }
 
     loadTierWeapon(tier: string, tierDir: string): undefined {
@@ -125,18 +142,30 @@ export class PresetData {
             }
             this.weapon[tier] = [];
 
-            files.forEach((f) => {
-                if (f === "ammo.json" || f === "gear.json") return;
+            files
+                .filter((f) => f.endsWith(".json"))
+                .forEach((f) => {
+                    if (f === "ammo.json" || f === "gear.json") return;
 
-                const fullWeaponPresetName = `${tierDir}/${f}`;
+                    const fullWeaponPresetName = `${tierDir}/${f}`;
 
-                const jsonData = fs.readFileSync(fullWeaponPresetName, "utf-8");
-                const preset = new WeaponPreset();
-                Object.assign(preset, JSON.parse(jsonData));
-                if (this.isPresetValid(preset, fullWeaponPresetName)) {
-                    this.weapon[tier][preset.id] = preset;
-                }
-            });
+                    try {
+                        const jsonData = fs.readFileSync(
+                            fullWeaponPresetName,
+                            "utf-8"
+                        );
+                        const preset = new WeaponPreset();
+                        Object.assign(preset, JSON.parse(jsonData));
+                        if (this.isPresetValid(preset, fullWeaponPresetName)) {
+                            this.weapon[tier][preset.id] = preset;
+                        }
+                    } catch (err) {
+                        this.logger.error(
+                            `[Andern] error read file '${fullWeaponPresetName}'`
+                        );
+                        this.logger.error(err.message);
+                    }
+                });
         });
     }
 
