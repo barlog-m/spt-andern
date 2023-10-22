@@ -25,7 +25,8 @@ export class WeaponGenerator {
 
     private readonly secureContainerAmmoStackCount = 6;
 
-    private readonly MK47_TPL = "606587252535c57a13424cfd";
+    private readonly MK47 = "606587252535c57a13424cfd";
+    private readonly X_47_DRUM = "5cfe8010d7ad1a59283b14c6";
 
     constructor(
         @inject("WinstonLogger") protected logger: ILogger,
@@ -244,8 +245,13 @@ export class WeaponGenerator {
                 botLevel,
                 item._tpl
             );
-            if (weaponTpl !== this.MK47_TPL && alternativeTpl != item._tpl) {
-                item._tpl = alternativeTpl;
+            if (alternativeTpl != item._tpl) {
+                if (
+                    weaponTpl !== this.MK47 &&
+                    alternativeTpl !== this.X_47_DRUM
+                ) {
+                    item._tpl = alternativeTpl;
+                }
             }
         });
     }
