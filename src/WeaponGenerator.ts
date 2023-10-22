@@ -23,8 +23,6 @@ export class WeaponGenerator {
     private readonly chamberSlotId = "patron_in_weapon";
     private readonly equipmentSlot = "FirstPrimaryWeapon";
 
-    private readonly secureContainerAmmoStackCount = 6;
-
     private readonly MK47 = "606587252535c57a13424cfd";
     private readonly X_47_DRUM = "5cfe8010d7ad1a59283b14c6";
 
@@ -195,44 +193,6 @@ export class WeaponGenerator {
         this.inventoryMagGenComponents
             .find((v) => v.canHandleInventoryMagGen(inventoryMagGenModel))
             .process(inventoryMagGenModel);
-
-        this.addAmmoToSecureContainer(
-            this.secureContainerAmmoStackCount,
-            weapon.ammoTpl,
-            ammoTemplate._props.StackMaxSize,
-            inventory
-        );
-    }
-
-    addAmmoToSecureContainer(
-        stackCount: number,
-        ammoTpl: string,
-        stackSize: number,
-        inventory: PmcInventory
-    ): void {
-        for (let i = 0; i < stackCount; i++) {
-            const id = this.hashUtil.generate();
-            try {
-                this.botWeaponGeneratorHelper.addItemWithChildrenToEquipmentSlot(
-                    [EquipmentSlots.SECURED_CONTAINER],
-                    id,
-                    ammoTpl,
-                    [
-                        {
-                            _id: id,
-                            _tpl: ammoTpl,
-                            upd: { StackObjectsCount: stackSize },
-                        },
-                    ],
-                    inventory
-                );
-            } catch (e) {
-                this.logger.error(
-                    `[Andern] error when add ammo '${ammoTpl}' with stack size ${stackSize} to secure container`
-                );
-                this.logger.error(`[Andern] ${e.message}`);
-            }
-        }
     }
 
     alternateModules(

@@ -28,6 +28,9 @@ const RYS_FACE_SHIELD = "5f60c85b58eff926626a60f7";
 
 @injectable()
 export class GearGenerator {
+    private readonly SECURED_CONTAINER_BOSS = "5c0a794586f77461c458f892";
+    private readonly POCKETS_1x4 = "557ffd194bdc2d28148b457f";
+
     constructor(
         @inject("WinstonLogger") protected logger: ILogger,
         @inject("HashUtil") protected hashUtil: HashUtil,
@@ -340,20 +343,18 @@ export class GearGenerator {
     ): PmcInventory {
         const botInventory = this.generateInventoryBase();
 
-        const pcketsTpl = "557ffd194bdc2d28148b457f";
         this.putGearItemToInventory(
             EquipmentSlots.POCKETS,
             botRole,
             botInventory,
-            pcketsTpl
+            this.POCKETS_1x4
         );
 
-        const securedContainerTpl = "5c093ca986f7740a1867ab12";
         this.putGearItemToInventory(
             EquipmentSlots.SECURED_CONTAINER,
             botRole,
             botInventory,
-            securedContainerTpl
+            this.SECURED_CONTAINER_BOSS
         );
 
         if (!this.generateChad(botRole, botInventory, botLevel, raidInfo)) {
@@ -426,8 +427,6 @@ export class GearGenerator {
             botInventory
         );
 
-        this.medsTuning(botLevel, botJsonTemplate);
-
         this.botLootGenerator.generateLoot(
             sessionId,
             botJsonTemplate,
@@ -438,13 +437,6 @@ export class GearGenerator {
         );
 
         return botInventory;
-    }
-
-    medsTuning(botLevel: number, botJsonTemplate: IBotType): undefined {
-        const meds = this.presetData.getMeds(botLevel);
-        if (meds) {
-            botJsonTemplate.generation.items.healing = meds;
-        }
     }
 
     generateNightHeadwear(

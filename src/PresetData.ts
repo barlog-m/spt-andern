@@ -5,7 +5,6 @@ import { Item } from "@spt-aki/models/eft/common/tables/IItem";
 import { RandomUtil } from "@spt-aki/utils/RandomUtil";
 import { HashUtil } from "@spt-aki/utils/HashUtil";
 import { Inventory as PmcInventory } from "@spt-aki/models/eft/common/tables/IBotBase";
-import { GenerationData } from "@spt-aki/models/eft/common/tables/IBotType";
 import { MinMax } from "@spt-aki/models/common/MinMax";
 
 import { NightHeadwear } from "./NightHeadwear";
@@ -22,7 +21,6 @@ export class PresetData {
     private weapon: Record<string, WeaponPreset[]> = {};
     private ammo: Record<string, Record<string, string[]>> = {};
     private modules: Record<string, Record<string, string[]>> = {};
-    private meds: Record<string, GenerationData> = {};
 
     constructor(
         @inject("WinstonLogger") protected logger: ILogger,
@@ -75,11 +73,6 @@ export class PresetData {
         return this.gear[tier];
     }
 
-    public getMeds(level: number): GenerationData {
-        const tier = this.tierByLevel(level);
-        return this.meds[tier];
-    }
-
     public getAlternativeModule(botLevel: number, moduleTpl: string): string {
         const tier = this.tierByLevel(botLevel);
         const alternativesData = this.modules[tier];
@@ -128,7 +121,6 @@ export class PresetData {
                 this.loadTierAmmo(dir.name, tierDirName);
                 this.loadTierModules(dir.name, tierDirName);
                 this.loadTierWeapon(dir.name, tierDirName);
-                this.loadTierMeds(dir.name, tierDirName);
             });
         });
     }
@@ -187,8 +179,7 @@ export class PresetData {
                     if (
                         f === "ammo.json" ||
                         f === "gear.json" ||
-                        f === "modules.json" ||
-                        f === "meds.json"
+                        f === "modules.json"
                     )
                         return;
 
@@ -212,20 +203,6 @@ export class PresetData {
                     }
                 });
         });
-    }
-
-    loadTierMeds(tier: string, tierDir: string): undefined {
-        const medsFileName = `${tierDir}/meds.json`;
-        if (fs.existsSync(medsFileName)) {
-            try {
-                const jsonData = fs.readFileSync(medsFileName, "utf-8");
-                this.meds[tier] = { weights: {}, whitelist: [] };
-                Object.assign(this.meds[tier], JSON.parse(jsonData));
-            } catch (err) {
-                this.logger.error(`[Andern] error read file '${medsFileName}'`);
-                this.logger.error(err.message);
-            }
-        }
     }
 
     isPresetValid(weaponPreset: WeaponPreset, fileName: string): boolean {

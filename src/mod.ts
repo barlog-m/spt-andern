@@ -19,7 +19,7 @@ import registerBotWeaponGenerator from "./registerBotWeaponGenerator";
 import { RaidInfo } from "./RaidInfo";
 import { NightHeadwear } from "./NightHeadwear";
 import { lootConfig } from "./lootUtils";
-import { mapBotTuning } from "./mapBotTuning";
+import { mapBotTuning, setPmcForceHealingItems } from "./mapBotTuning";
 import * as config from "../config/config.json";
 
 export class Andern implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
@@ -107,6 +107,8 @@ export class Andern implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
         if (config.mapBotSettings) {
             mapBotTuning(container);
         }
+
+        setPmcForceHealingItems(container);
     }
 
     private setMinFleaLevel(container: DependencyContainer): undefined {

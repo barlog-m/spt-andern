@@ -54,6 +54,14 @@ function setPmcBotDifficulty(configServer: ConfigServer): undefined {
     pmcConfig.difficulty = config.mapPmcBotDifficulty;
 }
 
+export function setPmcForceHealingItems(
+    container: DependencyContainer
+): undefined {
+    const configServer = container.resolve<ConfigServer>("ConfigServer");
+    const pmcConfig = configServer.getConfig<IPmcConfig>(ConfigTypes.PMC);
+    pmcConfig.forceHealingItemsIntoSecure = true;
+}
+
 function ajustBotWeaponScattering(globals: IGlobals): undefined {
     globals.BotWeaponScatterings.forEach((scattering) => {
         const divider = config.mapBotAccuracyMultiplier / 2;
