@@ -8,11 +8,7 @@ import { ItemHelper } from "@spt-aki/helpers/ItemHelper";
 import { ILogger } from "@spt-aki/models/spt/utils/ILogger";
 import { RandomUtil } from "@spt-aki/utils/RandomUtil";
 import { BotWeaponGeneratorHelper } from "@spt-aki/helpers/BotWeaponGeneratorHelper";
-import { EquipmentSlots } from "@spt-aki/models/enums/EquipmentSlots";
 import { IInventoryMagGen } from "@spt-aki/generators/weapongen/IInventoryMagGen";
-import { InventoryMagGen } from "@spt-aki/generators/weapongen/InventoryMagGen";
-import { Inventory as PmcInventory } from "@spt-aki/models/eft/common/tables/IBotBase";
-import { GenerationData } from "@spt-aki/models/eft/common/tables/IBotType";
 
 import { GeneratedWeapon } from "./models";
 import { PresetData } from "./PresetData";
@@ -160,39 +156,6 @@ export class WeaponGenerator {
                 }
             }
         }
-    }
-
-    public addExtraMagazinesToInventory(
-        weapon: GeneratedWeapon,
-        inventory: PmcInventory
-    ): undefined {
-        const weaponTemplate = weapon.weaponTemplate;
-
-        const magazineTemplate = this.getTemplateById(weapon.magazineTpl);
-        const ammoTemplate = this.getTemplateById(weapon.ammoTpl);
-
-        const magazinesGenerationWeights: GenerationData = {
-            weights: {
-                0: 0,
-                1: 0,
-                2: 1,
-                3: 3,
-                4: 2,
-            },
-            whitelist: [],
-        };
-
-        const inventoryMagGenModel = new InventoryMagGen(
-            magazinesGenerationWeights,
-            magazineTemplate,
-            weaponTemplate,
-            ammoTemplate,
-            inventory
-        );
-
-        this.inventoryMagGenComponents
-            .find((v) => v.canHandleInventoryMagGen(inventoryMagGenModel))
-            .process(inventoryMagGenModel);
     }
 
     alternateModules(

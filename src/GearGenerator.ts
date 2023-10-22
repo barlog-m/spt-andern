@@ -9,6 +9,9 @@ import { IBotType } from "@spt-aki/models/eft/common/tables/IBotType";
 import { EquipmentSlots } from "@spt-aki/models/enums/EquipmentSlots";
 import { BotGeneratorHelper } from "@spt-aki/helpers/BotGeneratorHelper";
 import { BotLootGenerator } from "@spt-aki/generators/BotLootGenerator";
+import { BotWeaponGenerator } from "@spt-aki/generators/BotWeaponGenerator";
+import { MinMax } from "@spt-aki/models/common/MinMax";
+import { GenerateWeaponResult } from "@spt-aki/models/spt/bots/GenerateWeaponResult";
 
 import { RaidInfo } from "./RaidInfo";
 import { WeaponGenerator } from "./WeaponGenerator";
@@ -40,6 +43,8 @@ export class GearGenerator {
         protected botGeneratorHelper: BotGeneratorHelper,
         @inject("BotLootGenerator")
         protected botLootGenerator: BotLootGenerator,
+        @inject("BotWeaponGenerator")
+        protected botWeaponGenerator: BotWeaponGenerator,
         @inject("AndernWeaponGenerator")
         protected weaponGenerator: WeaponGenerator,
         @inject("AndernNightHeadwear")
@@ -422,9 +427,19 @@ export class GearGenerator {
 
         botInventory.items.push(...generatedWeapon.weaponWithMods);
 
-        this.weaponGenerator.addExtraMagazinesToInventory(
-            generatedWeapon,
-            botInventory
+        const generatedWeaponResult: GenerateWeaponResult = {
+            weapon: generatedWeapon.weaponWithMods,
+            chosenAmmoTpl: generatedWeapon.ammoTpl,
+            chosenUbglAmmoTpl: undefined,
+            weaponMods: botJsonTemplate.inventory.mods,
+            weaponTemplate: generatedWeapon.weaponTemplate,
+        };
+
+        this.botWeaponGenerator.addExtraMagazinesToInventory(
+            generatedWeaponResult,
+            botJsonTemplate.generation.items.magazines,
+            botInventory,
+            botRole
         );
 
         this.botLootGenerator.generateLoot(
