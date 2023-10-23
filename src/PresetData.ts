@@ -100,8 +100,15 @@ export class PresetData {
 
     loadPresetConfig(): undefined {
         const presetConfigFileName = `${this.modPath}presets/${config.preset}/preset.json`;
-        const jsonData = fs.readFileSync(presetConfigFileName, "utf-8");
-        Object.assign(this.presetConfig, JSON.parse(jsonData));
+        try {
+            const jsonData = fs.readFileSync(presetConfigFileName, "utf-8");
+            Object.assign(this.presetConfig, JSON.parse(jsonData));
+        } catch (err) {
+            this.logger.error(
+                `[Andern] error read file '${presetConfigFileName}'`
+            );
+            this.logger.error(err.message);
+        }
     }
 
     loadData(): undefined {

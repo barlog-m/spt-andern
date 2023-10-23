@@ -34,6 +34,16 @@ export function mapBotTuning(container: DependencyContainer): undefined {
     if (config.mapBotAccuracyMultiplier != 0) {
         ajustBotWeaponScattering(globals);
     }
+
+    if (config.mapMakePmcAlwaysHostile) {
+        makePmcAlwaysHostile(configServer);
+    }
+
+    tuneScavConvertToPmcRatio(configServer);
+
+    if (config.mapIncreaseSpawnGroupsSize) {
+        increaseSpawnGroupsSize(databaseTables);
+    }
 }
 
 function setMaxBotCap(configServer: ConfigServer): undefined {
@@ -138,6 +148,65 @@ function bossChanceChange(
                     logger.info(
                         `[Andern] location '${locationBase.Name}' boss '${bossLocationSpawn.BossName}' chance ${chance}`
                     );
+                }
+            }
+        }
+    );
+}
+
+function makePmcAlwaysHostile(configServer: ConfigServer): undefined {
+    const pmcConfig = configServer.getConfig<IPmcConfig>(ConfigTypes.PMC);
+    pmcConfig.chanceSameSideIsHostilePercent = 100;
+}
+
+function tuneScavConvertToPmcRatio(configServer: ConfigServer): undefined {
+    const pmcConfig = configServer.getConfig<IPmcConfig>(ConfigTypes.PMC);
+
+    pmcConfig.convertIntoPmcChance.assault.min = Math.ceil(
+        pmcConfig.convertIntoPmcChance.assault.min *
+            config.mapScavToPmcConvertMultiplier
+    );
+    pmcConfig.convertIntoPmcChance.assault.max = Math.ceil(
+        pmcConfig.convertIntoPmcChance.assault.max *
+            config.mapScavToPmcConvertMultiplier
+    );
+
+    pmcConfig.convertIntoPmcChance.cursedassault.min = Math.ceil(
+        pmcConfig.convertIntoPmcChance.cursedassault.min *
+            config.mapScavToPmcConvertMultiplier
+    );
+    pmcConfig.convertIntoPmcChance.cursedassault.max = Math.ceil(
+        pmcConfig.convertIntoPmcChance.cursedassault.max *
+            config.mapScavToPmcConvertMultiplier
+    );
+
+    pmcConfig.convertIntoPmcChance.pmcbot.min = Math.ceil(
+        pmcConfig.convertIntoPmcChance.pmcbot.min *
+            config.mapScavToPmcConvertMultiplier
+    );
+    pmcConfig.convertIntoPmcChance.pmcbot.max = Math.ceil(
+        pmcConfig.convertIntoPmcChance.pmcbot.max *
+            config.mapScavToPmcConvertMultiplier
+    );
+}
+
+function increaseSpawnGroupsSize(databaseTables: IDatabaseTables): undefined {
+    Object.entries(databaseTables.locations).forEach(
+        ([locationName, locationObj]) => {
+            const location: ILocationData = locationObj;
+            if (location.base) {
+                const locationBase: ILocationBase = location.base;
+                if (config.mapBotSettings) {
+                    if (
+                        locationBase.Name !== "Laboratory" &&
+                        locationBase.Name !== "Factory"
+                    ) {
+                        locationBase.waves.forEach((wave) => {
+                            if (wave.slots_max < 3) {
+                                wave.slots_max = 3;
+                            }
+                        });
+                    }
                 }
             }
         }

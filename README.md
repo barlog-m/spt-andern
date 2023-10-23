@@ -98,6 +98,12 @@ Works only if `mapBotSettings` set to true.
 
 `mapBossChanceBuff` add or remove percent for existing boss chance. For example if map boss chance is 35 and you set this parameter to 20 then boss chance will be 35 + 20.
 
+`mapScavToPmcConvertMultiplier` can increase or decrease percent of scavs converted to PMC (changes amount of PMC on map)
+
+`mapMakePmcAlwaysHostile` by default in SPT-AKI 20% chance that PMC is friendly to player. This setting set this chance to 0.
+
+`mapIncreaseSpawnGroupsSize` increase max possible scav group size to 3 if it less.
+
 ## Installation
 
 Put folder `BarlogM-Andern` from zip file into your `user/mods` folder

@@ -21,9 +21,12 @@
     "looseLootCardsPercentage": 10,
     "staticLootKeysRelativeProbability": 1500,
     "mapBotSettings": false,
-    "mapMaxBotBuffMultiplier": 1.3,
+    "mapMaxBotBuffMultiplier": 1.2,
     "mapPmcBotDifficulty": "hard",
     "mapBotAccuracyMultiplier": 0.8,
     "mapBossChanceBuff": 0,
+    "mapScavToPmcConvertMultiplier": 0.8,
+    "mapMakePmcAlwaysHostile": true,
+    "mapIncreaseSpawnGroupsSize": true,
     "debug": false
 }
