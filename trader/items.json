@@ -159,6 +159,18 @@
         {
             "tpl": "61962b617c6c7b169525f168",
             "name": "patron_545x39_7n40"
+        },
+        {
+            "tpl": "54527ac44bdc2d36668b4567",
+            "name": "patron_556x45_M855A1"
+        },
+        {
+            "tpl": "58dd3ad986f77403051cba8f",
+            "name": "patron_762x51_M80"
+        },
+        {
+            "tpl": "5cadf6eeae921500134b2799",
+            "name": "patron_127x55_ps12b"
         }
     ]
 }

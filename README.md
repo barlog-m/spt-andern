@@ -104,6 +104,10 @@ Works only if `mapBotSettings` set to true.
 
 `mapIncreaseSpawnGroupsSize` increase max possible scav group size to 3 if it less.
 
+## Other settings
+
+`disableSeasonalEvents` disables all seasonal events like halloween etc.
+
 ## Installation
 
 Put folder `BarlogM-Andern` from zip file into your `user/mods` folder

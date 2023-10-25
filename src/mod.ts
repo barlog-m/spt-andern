@@ -7,6 +7,9 @@ import { ILogger } from "@spt-aki/models/spt/utils/ILogger";
 import { PreAkiModLoader } from "@spt-aki/loaders/PreAkiModLoader";
 import { DatabaseServer } from "@spt-aki/servers/DatabaseServer";
 import { ILocationBase } from "@spt-aki/models/eft/common/ILocationBase";
+import { ConfigServer } from "@spt-aki/servers/ConfigServer";
+import { ConfigTypes } from "@spt-aki/models/enums/ConfigTypes";
+import { ISeasonalEventConfig } from "@spt-aki/models/spt/config/ISeasonalEventConfig";
 import { ModConfig } from "./ModConfig";
 import { DoeTrader } from "./DoeTrader";
 import { PresetData } from "./PresetData";
@@ -109,6 +112,10 @@ export class Andern implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
         }
 
         setPmcForceHealingItems(container);
+
+        if (config.disableSeasonalEvents) {
+            this.disableSeasonalEvents(container);
+        }
     }
 
     private setMinFleaLevel(container: DependencyContainer): undefined {
@@ -130,6 +137,15 @@ export class Andern implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
         const mapLab: ILocationBase =
             databaseServer.getTables().locations["laboratory"].base;
         mapLab.Insurance = true;
+    }
+
+    private disableSeasonalEvents(container: DependencyContainer): undefined {
+        const configServer = container.resolve<ConfigServer>("ConfigServer");
+        const seasonalEventConfig =
+            configServer.getConfig<ISeasonalEventConfig>(
+                ConfigTypes.SEASONAL_EVENT
+            );
+        seasonalEventConfig.enableSeasonalEventDetection = false;
     }
 }
 

@@ -28,5 +28,6 @@
     "mapScavToPmcConvertMultiplier": 0.8,
     "mapMakePmcAlwaysHostile": true,
     "mapIncreaseSpawnGroupsSize": true,
+    "disableSeasonalEvents": false,
     "debug": false
 }
