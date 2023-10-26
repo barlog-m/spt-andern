@@ -104,6 +104,14 @@ Works only if `mapBotSettings` set to true.
 
 `mapIncreaseSpawnGroupsSize` increase max possible scav group size to 3 if it less.
 
+`mapDisableRogueConvertToPmc` disable converting rogues to PMC.
+
+`mapDisableRaiderConvertToPmc` disable converting raiders to PMC.
+
+`mapDisablePmcBackpackWeapon` disable chance that PMC can have extra weapon in their backpack.
+
+`mapDisableEmissaryPmcBots` disable chance that PMC can have any type of accounts other than user (purple, green names etc).
+
 ## Other settings
 
 `disableSeasonalEvents` disables all seasonal events like halloween etc.

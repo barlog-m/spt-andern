@@ -28,6 +28,10 @@
     "mapScavToPmcConvertMultiplier": 0.8,
     "mapMakePmcAlwaysHostile": true,
     "mapIncreaseSpawnGroupsSize": true,
+    "mapDisableRogueConvertToPmc": true,
+    "mapDisableRaiderConvertToPmc": true,
+    "mapDisablePmcBackpackWeapon": true,
+    "mapDisableEmissaryPmcBots": true,
     "disableSeasonalEvents": false,
     "debug": false
 }

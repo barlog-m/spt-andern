@@ -13,6 +13,7 @@ import {
     ILocationBase,
     BossLocationSpawn,
 } from "@spt-aki/models/eft/common/ILocationBase";
+import { MemberCategory } from "@spt-aki/models/enums/MemberCategory";
 
 import config from "../config/config.json";
 
@@ -41,8 +42,18 @@ export function mapBotTuning(container: DependencyContainer): undefined {
 
     tuneScavConvertToPmcRatio(configServer);
 
+    disableScavConvertToPmc(configServer);
+
     if (config.mapIncreaseSpawnGroupsSize) {
         increaseSpawnGroupsSize(databaseTables);
+    }
+
+    if (config.mapDisablePmcBackpackWeapon) {
+        disablePmcBackpackWeapon(container);
+    }
+
+    if (config.mapDisableEmissaryPmcBots) {
+        disableEmissaryPmcBots(configServer);
     }
 }
 
@@ -70,6 +81,24 @@ export function setPmcForceHealingItems(
     const configServer = container.resolve<ConfigServer>("ConfigServer");
     const pmcConfig = configServer.getConfig<IPmcConfig>(ConfigTypes.PMC);
     pmcConfig.forceHealingItemsIntoSecure = true;
+}
+
+function disableEmissaryPmcBots(configServer: ConfigServer): undefined {
+    const pmcConfig = configServer.getConfig<IPmcConfig>(ConfigTypes.PMC);
+
+    for (const memberCategoryKey of Object.keys(MemberCategory).filter(
+        (key) => !isNaN(key)
+    )) {
+        pmcConfig.accountTypeWeight[memberCategoryKey] = 0;
+    }
+    pmcConfig.accountTypeWeight[MemberCategory.DEFAULT] = 25;
+}
+
+function disablePmcBackpackWeapon(container: DependencyContainer): undefined {
+    const configServer = container.resolve<ConfigServer>("ConfigServer");
+    const pmcConfig = configServer.getConfig<IPmcConfig>(ConfigTypes.PMC);
+    pmcConfig.looseWeaponInBackpackChancePercent = 0;
+    pmcConfig.looseWeaponInBackpackLootMinMax = { min: 0, max: 0 };
 }
 
 function ajustBotWeaponScattering(globals: IGlobals): undefined {
@@ -162,32 +191,37 @@ function makePmcAlwaysHostile(configServer: ConfigServer): undefined {
 function tuneScavConvertToPmcRatio(configServer: ConfigServer): undefined {
     const pmcConfig = configServer.getConfig<IPmcConfig>(ConfigTypes.PMC);
 
-    pmcConfig.convertIntoPmcChance.assault.min = Math.ceil(
-        pmcConfig.convertIntoPmcChance.assault.min *
-            config.mapScavToPmcConvertMultiplier
-    );
-    pmcConfig.convertIntoPmcChance.assault.max = Math.ceil(
-        pmcConfig.convertIntoPmcChance.assault.max *
-            config.mapScavToPmcConvertMultiplier
-    );
+    for (const botType in pmcConfig.convertIntoPmcChance) {
+        pmcConfig.convertIntoPmcChance[botType].min = Math.ceil(
+            pmcConfig.convertIntoPmcChance[botType].min *
+                config.mapScavToPmcConvertMultiplier
+        );
+        pmcConfig.convertIntoPmcChance[botType].max = Math.ceil(
+            pmcConfig.convertIntoPmcChance[botType].max *
+                config.mapScavToPmcConvertMultiplier
+        );
+    }
+}
 
-    pmcConfig.convertIntoPmcChance.cursedassault.min = Math.ceil(
-        pmcConfig.convertIntoPmcChance.cursedassault.min *
-            config.mapScavToPmcConvertMultiplier
-    );
-    pmcConfig.convertIntoPmcChance.cursedassault.max = Math.ceil(
-        pmcConfig.convertIntoPmcChance.cursedassault.max *
-            config.mapScavToPmcConvertMultiplier
-    );
+function disableScavConvertToPmc(configServer: ConfigServer): undefined {
+    const pmcConfig = configServer.getConfig<IPmcConfig>(ConfigTypes.PMC);
 
-    pmcConfig.convertIntoPmcChance.pmcbot.min = Math.ceil(
-        pmcConfig.convertIntoPmcChance.pmcbot.min *
-            config.mapScavToPmcConvertMultiplier
-    );
-    pmcConfig.convertIntoPmcChance.pmcbot.max = Math.ceil(
-        pmcConfig.convertIntoPmcChance.pmcbot.max *
-            config.mapScavToPmcConvertMultiplier
-    );
+    if (config.mapDisableRaiderConvertToPmc) {
+        const botType = "pmcbot";
+        disableBotTypeConvertToPmc(botType, pmcConfig);
+    }
+
+    if (config.mapDisableRogueConvertToPmc) {
+        const botType = "exusec";
+        disableBotTypeConvertToPmc(botType, pmcConfig);
+    }
+}
+
+function disableBotTypeConvertToPmc(
+    botType: string,
+    pmcConfig: IPmcConfig
+): undefined {
+    pmcConfig.convertIntoPmcChance[botType] = { min: 0, max: 0 };
 }
 
 function increaseSpawnGroupsSize(databaseTables: IDatabaseTables): undefined {
