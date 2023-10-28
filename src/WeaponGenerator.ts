@@ -110,7 +110,6 @@ export class WeaponGenerator {
         this.replaceId(weaponWithMods, 0);
         if (isNight) this.replaceTacticalDevice(weaponWithMods);
         this.setTacticalDeviceMode(weaponWithMods);
-        this.setScopeMode(weaponWithMods);
     }
 
     replaceId(weaponWithMods: Item[], i: number): undefined {
@@ -143,16 +142,6 @@ export class WeaponGenerator {
                 if (item.upd?.Light) {
                     item.upd.Light.IsActive = false;
                     item.upd.Light.SelectedMode = 1;
-                }
-            }
-        }
-    }
-
-    setScopeMode(weaponWithMods: Item[]): undefined {
-        for (const item of weaponWithMods) {
-            if (item.slotId.startsWith("mod_scope")) {
-                if (item.upd?.Sight) {
-                    item.upd.Sight.ScopesSelectedModes = [1];
                 }
             }
         }

@@ -61,7 +61,16 @@ function setMaxBotCap(configServer: ConfigServer): undefined {
     const botConfig = configServer.getConfig<IBotConfig>(ConfigTypes.BOT);
 
     for (const map in botConfig.maxBotCap) {
-        if (map === "factory4_night" || map === "laboratory") continue;
+        if (
+            config.mapMaxBotBuffExcludeFactory &&
+            (map === "factory4_night" || map === "factory4_day")
+        ) {
+            continue;
+        }
+
+        if (config.mapMaxBotBuffExcludeLab && map === "laboratory") {
+            continue;
+        }
 
         botConfig.maxBotCap[map] = Math.ceil(
             botConfig.maxBotCap[map] * config.mapMaxBotBuffMultiplier
@@ -114,38 +123,47 @@ function mapsTunning(
     databaseTables: IDatabaseTables,
     logger: ILogger
 ): undefined {
-    Object.entries(databaseTables.locations).forEach(
-        ([locationName, locationObj]) => {
-            const location: ILocationData = locationObj;
-            if (location.base) {
-                const locationBase: ILocationBase = location.base;
-                if (config.mapBotSettings) {
-                    if (
-                        locationBase.Name !== "Laboratory" &&
-                        locationBase.Name !== "Factory"
-                    ) {
-                        if (config.mapMaxBotBuffMultiplier != 1) {
-                            locationBase.BotMax = Math.ceil(
-                                locationBase.BotMax *
-                                    config.mapMaxBotBuffMultiplier
-                            );
-                        }
-                    }
-
-                    if (config.mapBotAccuracyMultiplier != 1) {
-                        locationBase.BotLocationModifier.AccuracySpeed *=
-                            config.mapBotAccuracyMultiplier;
-                        locationBase.BotLocationModifier.Scattering /=
-                            config.mapBotAccuracyMultiplier;
-                    }
+    for (const [locationName, locationObj] of Object.entries(
+        databaseTables.locations
+    )) {
+        const location: ILocationData = locationObj;
+        if (location.base) {
+            const locationBase: ILocationBase = location.base;
+            if (config.mapBotSettings) {
+                if (
+                    config.mapMaxBotBuffExcludeFactory &&
+                    (locationName === "factory4_night" ||
+                        locationName === "factory4_day")
+                ) {
+                    continue;
                 }
 
-                if (config.mapBossChanceBuff != 0) {
-                    bossChanceChange(locationBase, logger);
+                if (
+                    config.mapMaxBotBuffExcludeLab &&
+                    locationName === "laboratory"
+                ) {
+                    continue;
+                }
+
+                if (config.mapMaxBotBuffMultiplier != 1) {
+                    locationBase.BotMax = Math.ceil(
+                        locationBase.BotMax * config.mapMaxBotBuffMultiplier
+                    );
+                }
+
+                if (config.mapBotAccuracyMultiplier != 1) {
+                    locationBase.BotLocationModifier.AccuracySpeed *=
+                        config.mapBotAccuracyMultiplier;
+                    locationBase.BotLocationModifier.Scattering /=
+                        config.mapBotAccuracyMultiplier;
                 }
             }
+
+            if (config.mapBossChanceBuff != 0) {
+                bossChanceChange(locationBase, logger);
+            }
         }
-    );
+    }
 }
 
 function bossChanceChange(

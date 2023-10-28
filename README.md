@@ -90,7 +90,11 @@ Settings in config 'chadsOnFactoryAndLabOnly', 'chadsPercentage' and 'chadsMinim
 
 Works only if `mapBotSettings` set to true.
 
-`mapMaxBotBuffMultiplier` increase or decrease amount of bots on maps exclude night Factory and Lab.
+`mapMaxBotBuffMultiplier` increase or decrease amount of bots on maps.
+
+`mapMaxBotBuffExcludeFactory` exclude Factory from max bot buff multiplier.
+
+`mapMaxBotBuffExcludeLab` exclude Lab from max bot buff multiplier,
 
 `mapPmcBotDifficulty` "easy", "normal", "hard", "impossible"
 
