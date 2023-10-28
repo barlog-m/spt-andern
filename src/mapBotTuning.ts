@@ -48,7 +48,7 @@ export function mapBotTuning(container: DependencyContainer): undefined {
         increaseSpawnGroupsSize(databaseTables);
     }
 
-    if (config.mapDisablePmcBackpackWeapon) {
+    if (config.mapDisablePmcBackpackWeapon || config.lootingBotsCompatibility) {
         disablePmcBackpackWeapon(container);
     }
 

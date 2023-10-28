@@ -120,6 +120,8 @@ Works only if `mapBotSettings` set to true.
 
 `disableSeasonalEvents` disables all seasonal events like halloween etc.
 
+`lootingBotsCompatibility` disable loot generation in PMC's backpack for compatibility with Looting Bots mod. Works only if `pmcGear` enabled.
+
 ## Installation
 
 Put folder `BarlogM-Andern` from zip file into your `user/mods` folder

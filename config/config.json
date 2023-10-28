@@ -35,5 +35,6 @@
     "mapDisablePmcBackpackWeapon": true,
     "mapDisableEmissaryPmcBots": true,
     "disableSeasonalEvents": false,
+    "lootingBotsCompatibility": false,
     "debug": false
 }

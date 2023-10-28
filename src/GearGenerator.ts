@@ -442,6 +442,11 @@ export class GearGenerator {
             botRole
         );
 
+        if (config.lootingBotsCompatibility) {
+            botJsonTemplate.generation.items.backpackLoot.weights = { "0": 1 };
+            botJsonTemplate.generation.items.backpackLoot.whitelist = [];
+        }
+
         this.botLootGenerator.generateLoot(
             sessionId,
             botJsonTemplate,
