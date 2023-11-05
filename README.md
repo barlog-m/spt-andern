@@ -96,6 +96,10 @@ Works only if `mapBotSettings` set to true.
 
 `mapMaxBotBuffExcludeLab` exclude Lab from max bot buff multiplier,
 
+`mapMaxBotBuffExcludeStreets` exclude Streets from max bot buff multiplier,
+
+`mapStreetsMaxBotCap` maximum bot capacity for Streets. Ignored if 0,
+
 `mapPmcBotDifficulty` "easy", "normal", "hard", "impossible"
 
 `mapBotAccuracyMultiplier` decrease bot accuracy and increase scattering.
@@ -106,8 +110,6 @@ Works only if `mapBotSettings` set to true.
 
 `mapMakePmcAlwaysHostile` by default in SPT-AKI 20% chance that PMC is friendly to player. This setting set this chance to 0.
 
-`mapIncreaseSpawnGroupsSize` increase max possible scav group size to 3 if it less.
-
 `mapDisableRogueConvertToPmc` disable converting rogues to PMC.
 
 `mapDisableRaiderConvertToPmc` disable converting raiders to PMC.
@@ -115,6 +117,8 @@ Works only if `mapBotSettings` set to true.
 `mapDisablePmcBackpackWeapon` disable chance that PMC can have extra weapon in their backpack.
 
 `mapDisableEmissaryPmcBots` disable chance that PMC can have any type of accounts other than user (purple, green names etc).
+
+`mapPmcBrainsConfig` if enabled brainc chances for PMC load from `config/pmc.json`
 
 ## Other settings
 

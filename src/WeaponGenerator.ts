@@ -13,6 +13,27 @@ import { IInventoryMagGen } from "@spt-aki/generators/weapongen/IInventoryMagGen
 import { GeneratedWeapon } from "./models";
 import { PresetData } from "./PresetData";
 
+const MUZZLE_PAIRS = {
+    //7.62x51 Tier 4
+    "6130c43c67085e45ef1405a1": "5dfa3d2b0dee1b22f862eade",
+    "618178aa1cb55961fa0fdc80": "5a34fe59c4a282000b1521a2",
+    "5a34fd2bc4a282329a73b4c5": "5a34fe59c4a282000b1521a2",
+
+    //7.62x51 Tier 3
+    "5fbc22ccf24b94483f726483": "5fbe760793164a5b6278efc8",
+    "612e0d3767085e45ef14057f": "63877c99e785640d436458ea",
+    "5d1f819086f7744b355c219b": "5cff9e84d7ad1a049e54ed55",
+
+    //5.56x45 Tier 4
+    "609269c3b0e443224b421cc1": "60926df0132d4d12c81fd9df",
+    "6386120cd6baa055ad1e201c": "638612b607dfed1ccb7206ba",
+    "626667e87379c44d557b7550": "626673016f1edc06f30cf6d5",
+
+    //5.56x45 Tier 3
+    "612e0cfc8004cc50514c2d9e": "63877c99e785640d436458ea",
+    "5c7fb51d2e2216001219ce11": "5ea17bbc09aa976f2e7a51cd",
+};
+
 @injectable()
 export class WeaponGenerator {
     private readonly magazineSlotId = "mod_magazine";
@@ -163,9 +184,35 @@ export class WeaponGenerator {
                     alternativeTpl !== this.X_47_DRUM
                 ) {
                     item._tpl = alternativeTpl;
+
+                    if (item.slotId === "mod_muzzle") {
+                        this.alternateSuppressor(weapon, item);
+                    }
                 }
             }
         });
+    }
+
+    alternateSuppressor(weapon: Item[], muzzleItem: Item): undefined {
+        let isSuppressorReplaced = false;
+        let indexToRemove: number;
+
+        for (let i = 0; i < weapon.length; i++) {
+            const item = weapon[i];
+            if (item.parentId === muzzleItem._id) {
+                if (!isSuppressorReplaced) {
+                    item.slotId = "mod_muzzle";
+                    item._tpl = MUZZLE_PAIRS[muzzleItem._tpl];
+                    isSuppressorReplaced = true;
+                } else {
+                    indexToRemove = i;
+                }
+            }
+        }
+
+        if (isSuppressorReplaced && indexToRemove) {
+            weapon.splice(indexToRemove, 1);
+        }
     }
 
     public generateWeapon(

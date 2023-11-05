@@ -107,11 +107,12 @@ export class Andern implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
         if (config.insuranceOnLab) {
             this.enableInsuranceOnLab(container);
         }
+
         if (config.mapBotSettings) {
             mapBotTuning(container);
         }
 
-        setPmcForceHealingItems(container);
+        setPmcForceHealingItems(container, this.logger);
 
         if (config.disableSeasonalEvents) {
             this.disableSeasonalEvents(container);
