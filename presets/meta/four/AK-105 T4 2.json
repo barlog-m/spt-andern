@@ -1,0 +1,132 @@
+{
+    "type": "weapon",
+    "id": "53958241d7d937e3f95c6af4",
+    "name": "AK-105 T4 2",
+    "root": "d928d25d5dca2e1455d2c6cd",
+    "items": [
+        {
+            "_id": "d928d25d5dca2e1455d2c6cd",
+            "_tpl": "5ac66d9b5acfc4001633997a",
+            "upd": {
+                "Repairable": {
+                    "MaxDurability": 100,
+                    "Durability": 100
+                },
+                "Foldable": {
+                    "Folded": false
+                },
+                "FireMode": {
+                    "FireMode": "single"
+                }
+            }
+        },
+        {
+            "_id": "ea39127b16c0a63fd4d1fa9e",
+            "_tpl": "59e649f986f77411d949b246",
+            "parentId": "d928d25d5dca2e1455d2c6cd",
+            "slotId": "mod_gas_block"
+        },
+        {
+            "_id": "c348bdd4656dcdf32c23a313",
+            "_tpl": "615d8f5dd92c473c770212ef",
+            "parentId": "d928d25d5dca2e1455d2c6cd",
+            "slotId": "mod_muzzle"
+        },
+        {
+            "_id": "e8d7b6df65b3a4c79bc0e021",
+            "_tpl": "6087e663132d4d12c81fd96b",
+            "parentId": "d928d25d5dca2e1455d2c6cd",
+            "slotId": "mod_pistol_grip"
+        },
+        {
+            "_id": "c61c38b1d36d5381b9215e61",
+            "_tpl": "5649af884bdc2d1b2b8b4589",
+            "parentId": "d928d25d5dca2e1455d2c6cd",
+            "slotId": "mod_reciever"
+        },
+        {
+            "_id": "cfa97d7e5c4e6bb81335876e",
+            "_tpl": "628a7b23b0f75035732dd565",
+            "parentId": "d928d25d5dca2e1455d2c6cd",
+            "slotId": "mod_sight_rear",
+            "upd": {
+                "Sight": {
+                    "ScopesCurrentCalibPointIndexes": [0],
+                    "ScopesSelectedModes": [0],
+                    "SelectedScope": 0
+                }
+            }
+        },
+        {
+            "_id": "277ec71c9ebcd27174a1e3be",
+            "_tpl": "5ac78eaf5acfc4001926317a",
+            "parentId": "d928d25d5dca2e1455d2c6cd",
+            "slotId": "mod_stock"
+        },
+        {
+            "_id": "09f0a1e995669fe64c61d2ab",
+            "_tpl": "649ec30cb013f04a700e60fb",
+            "parentId": "d928d25d5dca2e1455d2c6cd",
+            "slotId": "mod_magazine"
+        },
+        {
+            "_id": "882bef2e2f009314f30ee763",
+            "_tpl": "6130ca3fd92c473c77020dbd",
+            "parentId": "d928d25d5dca2e1455d2c6cd",
+            "slotId": "mod_charge"
+        },
+        {
+            "_id": "27e9ac0d5b2e9ad6ae912db0",
+            "_tpl": "5efaf417aeb21837e749c7f2",
+            "parentId": "ea39127b16c0a63fd4d1fa9e",
+            "slotId": "mod_handguard"
+        },
+        {
+            "_id": "74c9b192f1440c9b8f623b4b",
+            "_tpl": "615d8f8567085e45ef1409ca",
+            "parentId": "c348bdd4656dcdf32c23a313",
+            "slotId": "mod_muzzle",
+            "upd": {
+                "SpawnedInSession": true
+            }
+        },
+        {
+            "_id": "e672ab39a08734721b037de1",
+            "_tpl": "58491f3324597764bc48fa02",
+            "parentId": "c61c38b1d36d5381b9215e61",
+            "slotId": "mod_scope",
+            "upd": {
+                "Sight": {
+                    "ScopesCurrentCalibPointIndexes": [0],
+                    "ScopesSelectedModes": [0],
+                    "SelectedScope": 0
+                }
+            }
+        },
+        {
+            "_id": "483b1121709303b2af7aa5c5",
+            "_tpl": "59ecc3dd86f7746dc827481c",
+            "parentId": "277ec71c9ebcd27174a1e3be",
+            "slotId": "mod_stock"
+        },
+        {
+            "_id": "0f3a8e527e9302dc28ee9499",
+            "_tpl": "5b057b4f5acfc4771e1bd3e9",
+            "parentId": "27e9ac0d5b2e9ad6ae912db0",
+            "slotId": "mod_foregrip"
+        },
+        {
+            "_id": "fcc86979a70f095c338d5c7e",
+            "_tpl": "6272370ee4013c5d7e31f418",
+            "parentId": "27e9ac0d5b2e9ad6ae912db0",
+            "slotId": "mod_tactical_002",
+            "upd": {
+                "Light": {
+                    "IsActive": true,
+                    "SelectedMode": 0
+                }
+            }
+        }
+    ],
+    "Parent": "5447b5f14bdc2d61278b4567"
+}

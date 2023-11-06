@@ -33,10 +33,7 @@
             "_id": "785b12963f7aeebead5a19fd",
             "_tpl": "59bfe68886f7746004266202",
             "parentId": "fa0b98045fa640438b5ab3be",
-            "slotId": "mod_reciever",
-            "upd": {
-                "SpawnedInSession": true
-            }
+            "slotId": "mod_reciever"
         },
         {
             "_id": "b35e60b4f25888f6675719cf",

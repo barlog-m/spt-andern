@@ -143,6 +143,14 @@
         {
             "tpl": "64ccc246ff54fb38131acf29",
             "name": "X-ray room key"
+        },
+        {
+            "tpl": "64ccc25f95763a1ae376e447",
+            "name": "Mysterious room marked key"
+        },
+        {
+            "tpl": "62987c658081af308d7558c6",
+            "name": "Radar station commandant room key"
         }
     ],
     "two": [],

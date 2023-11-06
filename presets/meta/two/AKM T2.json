@@ -72,10 +72,7 @@
             "_id": "07e07b5d94d0eb12cec5c289",
             "_tpl": "59bffbb386f77435b379b9c2",
             "parentId": "f20cd519f36b15643a3a4e50",
-            "slotId": "mod_muzzle",
-            "upd": {
-                "SpawnedInSession": true
-            }
+            "slotId": "mod_muzzle"
         },
         {
             "_id": "b618f92c9bd93b3ad83c5a9e",

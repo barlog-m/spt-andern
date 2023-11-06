@@ -27,10 +27,7 @@
             "_id": "4834d6283bdff4601e98a1a8",
             "_tpl": "59bffc1f86f77435b128b872",
             "parentId": "5d2ddf92e22f0bf1f97174b8",
-            "slotId": "mod_muzzle",
-            "upd": {
-                "SpawnedInSession": true
-            }
+            "slotId": "mod_muzzle"
         },
         {
             "_id": "f3dc08b7ac9d4d97b1f8c4ca",

@@ -23,6 +23,7 @@ const MUZZLE_PAIRS = {
     "5fbc22ccf24b94483f726483": "5fbe760793164a5b6278efc8",
     "612e0d3767085e45ef14057f": "63877c99e785640d436458ea",
     "5d1f819086f7744b355c219b": "5cff9e84d7ad1a049e54ed55",
+    "5d443f8fa4b93678dd4a01aa": "5d44064fa4b9361e4f6eb8b5",
 
     //5.56x45 Tier 4
     "609269c3b0e443224b421cc1": "60926df0132d4d12c81fd9df",
@@ -32,6 +33,7 @@ const MUZZLE_PAIRS = {
     //5.56x45 Tier 3
     "612e0cfc8004cc50514c2d9e": "63877c99e785640d436458ea",
     "5c7fb51d2e2216001219ce11": "5ea17bbc09aa976f2e7a51cd",
+    "5d440625a4b9361eec4ae6c5": "5d44064fa4b9361e4f6eb8b5",
 };
 
 @injectable()

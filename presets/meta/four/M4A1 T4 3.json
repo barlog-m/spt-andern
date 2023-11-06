@@ -70,10 +70,7 @@
             "_id": "7ee399a36b71363f683230d9",
             "_tpl": "5c78f2492e221600114c9f04",
             "parentId": "70c943c208d3ca1267dc4475",
-            "slotId": "mod_handguard",
-            "upd": {
-                "SpawnedInSession": true
-            }
+            "slotId": "mod_handguard"
         },
         {
             "_id": "06f8bd819e3c5648a43c333a",

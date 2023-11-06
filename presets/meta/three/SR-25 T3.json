@@ -130,10 +130,7 @@
             "_id": "d05e8b147c2ab76df6da2ee3",
             "_tpl": "5fce0cf655375d18a253eff0",
             "parentId": "12d4510f20cfa0cee2a212d7",
-            "slotId": "mod_foregrip",
-            "upd": {
-                "SpawnedInSession": true
-            }
+            "slotId": "mod_foregrip"
         },
         {
             "_id": "6076472fb59955fec00d00ba",
