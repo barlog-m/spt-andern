@@ -1,11 +1,11 @@
 {
     "type": "weapon",
-    "id": "b33974d1395db9a690bee9ee",
+    "id": "6e291c8712921b33ec2f5555",
     "name": "RPK-16 T3 1",
-    "root": "b87f379e4948f1fb7a1a1430",
+    "root": "7d3306398c7a87d468154263",
     "items": [
         {
-            "_id": "b87f379e4948f1fb7a1a1430",
+            "_id": "7d3306398c7a87d468154263",
             "_tpl": "5beed0f50db834001c062b12",
             "upd": {
                 "Repairable": {
@@ -21,75 +21,81 @@
             }
         },
         {
-            "_id": "3a2285bf8e2b2cd89e01a6e2",
+            "_id": "666bc3f626e61731f92553ee",
             "_tpl": "5b30ac585acfc433000eb79c",
-            "parentId": "b87f379e4948f1fb7a1a1430",
+            "parentId": "7d3306398c7a87d468154263",
             "slotId": "mod_pistol_grip"
         },
         {
-            "_id": "305e49766c107a5a321dfca9",
+            "_id": "fe203297826e4412b3dcb977",
             "_tpl": "5beec91a0db834001961942d",
-            "parentId": "b87f379e4948f1fb7a1a1430",
+            "parentId": "7d3306398c7a87d468154263",
             "slotId": "mod_reciever"
         },
         {
-            "_id": "43b59798dcf372a5c8fa8ffe",
+            "_id": "9f376f0c5e7da173e4bbb3d5",
             "_tpl": "5aaa4194e5b5b055d06310a5",
-            "parentId": "b87f379e4948f1fb7a1a1430",
+            "parentId": "7d3306398c7a87d468154263",
             "slotId": "mod_magazine"
         },
         {
-            "_id": "0b552eb758286b1cf66a8216",
+            "_id": "ce28dcdfdfd13bf6a7b2ab55",
+            "_tpl": "6130ca3fd92c473c77020dbd",
+            "parentId": "7d3306398c7a87d468154263",
+            "slotId": "mod_charge"
+        },
+        {
+            "_id": "1eef303c5a94c84d9d8b4a86",
             "_tpl": "5beec8b20db834001961942a",
-            "parentId": "b87f379e4948f1fb7a1a1430",
+            "parentId": "7d3306398c7a87d468154263",
             "slotId": "mod_stock_001"
         },
         {
-            "_id": "2dc0d250e3cf8716f08c9818",
+            "_id": "8a9859e7a04665be16a6b006",
             "_tpl": "5beec3e30db8340019619424",
-            "parentId": "b87f379e4948f1fb7a1a1430",
+            "parentId": "7d3306398c7a87d468154263",
             "slotId": "mod_handguard"
         },
         {
-            "_id": "611acf29cfe4ad8e3c26b4cd",
+            "_id": "e6bced8fdc991b103f812879",
             "_tpl": "5beec1bd0db834001e6006f3",
-            "parentId": "b87f379e4948f1fb7a1a1430",
+            "parentId": "7d3306398c7a87d468154263",
             "slotId": "mod_barrel"
         },
         {
-            "_id": "77e5d81ad1f787706cf36802",
+            "_id": "4945ce42a2fd4c3cb7da8477",
             "_tpl": "5b3b99265acfc4704b4a1afb",
-            "parentId": "305e49766c107a5a321dfca9",
+            "parentId": "fe203297826e4412b3dcb977",
             "slotId": "mod_scope"
         },
         {
-            "_id": "0801cc8a449cc29a0b1eab80",
+            "_id": "33f6bffbc00f0d8fa87feca6",
             "_tpl": "56eabf3bd2720b75698b4569",
-            "parentId": "0b552eb758286b1cf66a8216",
+            "parentId": "1eef303c5a94c84d9d8b4a86",
             "slotId": "mod_stock"
         },
         {
-            "_id": "8f2ae7d37aea69ad91e69158",
+            "_id": "c7a5c13acc16d6305855189e",
             "_tpl": "5beecbb80db834001d2c465e",
-            "parentId": "2dc0d250e3cf8716f08c9818",
+            "parentId": "8a9859e7a04665be16a6b006",
             "slotId": "mod_mount_001"
         },
         {
-            "_id": "cb4611162fb4030cf539867d",
+            "_id": "1ba9d227c0bfe5108de7c6e2",
             "_tpl": "59fc48e086f77463b1118392",
-            "parentId": "2dc0d250e3cf8716f08c9818",
+            "parentId": "8a9859e7a04665be16a6b006",
             "slotId": "mod_foregrip"
         },
         {
-            "_id": "b12ad87c2e60d8f1c7e9a123",
+            "_id": "465940c984141e279ab48753",
             "_tpl": "564caa3d4bdc2d17108b458e",
-            "parentId": "611acf29cfe4ad8e3c26b4cd",
+            "parentId": "e6bced8fdc991b103f812879",
             "slotId": "mod_muzzle"
         },
         {
-            "_id": "5d0d2f2d53b23f21a33987df",
+            "_id": "803c46ebd950378c2a598579",
             "_tpl": "5b3b99475acfc432ff4dcbee",
-            "parentId": "77e5d81ad1f787706cf36802",
+            "parentId": "4945ce42a2fd4c3cb7da8477",
             "slotId": "mod_scope",
             "upd": {
                 "Sight": {
@@ -100,15 +106,15 @@
             }
         },
         {
-            "_id": "8752dc3ef6952a6e803ab3dd",
+            "_id": "117e7ea24c24458a89e883d3",
             "_tpl": "58d2912286f7744e27117493",
-            "parentId": "0801cc8a449cc29a0b1eab80",
+            "parentId": "33f6bffbc00f0d8fa87feca6",
             "slotId": "mod_stock"
         },
         {
-            "_id": "2c3af22bbaf96e44ff3a8e6e",
+            "_id": "49d6530593d1af1f3e091ff6",
             "_tpl": "6272370ee4013c5d7e31f418",
-            "parentId": "8f2ae7d37aea69ad91e69158",
+            "parentId": "c7a5c13acc16d6305855189e",
             "slotId": "mod_tactical_000",
             "upd": {
                 "Light": {
