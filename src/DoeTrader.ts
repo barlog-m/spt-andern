@@ -204,7 +204,6 @@ export class DoeTrader {
 
         insuranceConfig.returnChancePercent[doeTraderId] = 100;
         insuranceConfig.insuranceMultiplier[doeTraderId] = 0.1;
-        insuranceConfig.returnTimeOverrideSeconds = 60;
         insuranceConfig.runIntervalSeconds = 60;
     }
 }
