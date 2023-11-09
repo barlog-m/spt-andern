@@ -114,13 +114,13 @@ Works only if `mapBotSettings` set to true.
 
 `mapDisableRaiderConvertToPmc` disable converting raiders to PMC.
 
-`mapDisablePmcBackpackWeapon` disable chance that PMC can have extra weapon in their backpack.
-
-`mapDisableEmissaryPmcBots` disable chance that PMC can have any type of accounts other than user (purple, green names etc).
-
 `mapPmcBrainsConfig` if enabled brainc chances for PMC load from `config/pmc.json`
 
 ## Other settings
+
+`disablePmcBackpackWeapon` disable chance that PMC can have extra weapon in their backpack.
+
+`disableEmissaryPmcBots` disable chance that PMC can have any type of accounts other than user (purple, green names etc).
 
 `disableSeasonalEvents` disables all seasonal events like halloween etc.
 

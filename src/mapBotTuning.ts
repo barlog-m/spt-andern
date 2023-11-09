@@ -13,7 +13,6 @@ import {
     ILocationBase,
     BossLocationSpawn,
 } from "@spt-aki/models/eft/common/ILocationBase";
-import { MemberCategory } from "@spt-aki/models/enums/MemberCategory";
 
 import config from "../config/config.json";
 import pmcBrains from "../config/pmc.json";
@@ -59,14 +58,6 @@ export function mapBotTuning(container: DependencyContainer): undefined {
 
     if (config.mapIncreaseSpawnGroupsSize) {
         increaseSpawnGroupsSize(databaseTables, logger);
-    }
-
-    if (config.mapDisablePmcBackpackWeapon || config.lootingBotsCompatibility) {
-        disablePmcBackpackWeapon(container, logger);
-    }
-
-    if (config.mapDisableEmissaryPmcBots) {
-        disableEmissaryPmcBots(configServer, logger);
     }
 
     if (config.mapPmcBrainsConfig) {
@@ -200,30 +191,6 @@ export function setPmcForceHealingItems(
     const configServer = container.resolve<ConfigServer>("ConfigServer");
     const pmcConfig = configServer.getConfig<IPmcConfig>(ConfigTypes.PMC);
     pmcConfig.forceHealingItemsIntoSecure = true;
-}
-
-function disableEmissaryPmcBots(
-    configServer: ConfigServer,
-    logger: ILogger
-): undefined {
-    const pmcConfig = configServer.getConfig<IPmcConfig>(ConfigTypes.PMC);
-
-    for (const memberCategoryKey of Object.keys(MemberCategory).filter(
-        (key) => !isNaN(key)
-    )) {
-        pmcConfig.accountTypeWeight[memberCategoryKey] = 0;
-    }
-    pmcConfig.accountTypeWeight[MemberCategory.DEFAULT] = 25;
-}
-
-function disablePmcBackpackWeapon(
-    container: DependencyContainer,
-    logger: ILogger
-): undefined {
-    const configServer = container.resolve<ConfigServer>("ConfigServer");
-    const pmcConfig = configServer.getConfig<IPmcConfig>(ConfigTypes.PMC);
-    pmcConfig.looseWeaponInBackpackChancePercent = 0;
-    pmcConfig.looseWeaponInBackpackLootMinMax = { min: 0, max: 0 };
 }
 
 function ajustBotWeaponScattering(

@@ -9,6 +9,8 @@ import { DatabaseServer } from "@spt-aki/servers/DatabaseServer";
 import { ILocationBase } from "@spt-aki/models/eft/common/ILocationBase";
 import { ConfigServer } from "@spt-aki/servers/ConfigServer";
 import { ConfigTypes } from "@spt-aki/models/enums/ConfigTypes";
+import { IPmcConfig } from "@spt-aki/models/spt/config/IPmcConfig";
+import { MemberCategory } from "@spt-aki/models/enums/MemberCategory";
 import { ISeasonalEventConfig } from "@spt-aki/models/spt/config/ISeasonalEventConfig";
 import { ModConfig } from "./ModConfig";
 import { DoeTrader } from "./DoeTrader";
@@ -114,6 +116,16 @@ export class Andern implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
 
         setPmcForceHealingItems(container, this.logger);
 
+        if (
+            config.disablePmcBackpackWeapon ||
+            config.lootingBotsCompatibility
+        ) {
+            this.disablePmcBackpackWeapon(container);
+        }
+
+        if (config.disableEmissaryPmcBots) {
+            this.disableEmissaryPmcBots(container);
+        }
         if (config.disableSeasonalEvents) {
             this.disableSeasonalEvents(container);
         }
@@ -132,7 +144,7 @@ export class Andern implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
         }
     }
 
-    private enableInsuranceOnLab(container: DependencyContainer): undefined {
+    enableInsuranceOnLab(container: DependencyContainer): undefined {
         const databaseServer: DatabaseServer =
             container.resolve<DatabaseServer>("DatabaseServer");
         const mapLab: ILocationBase =
@@ -140,7 +152,26 @@ export class Andern implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
         mapLab.Insurance = true;
     }
 
-    private disableSeasonalEvents(container: DependencyContainer): undefined {
+    disableEmissaryPmcBots(container: DependencyContainer): undefined {
+        const configServer = container.resolve<ConfigServer>("ConfigServer");
+        const pmcConfig = configServer.getConfig<IPmcConfig>(ConfigTypes.PMC);
+
+        for (const memberCategoryKey of Object.keys(MemberCategory).filter(
+            (key) => !isNaN(key)
+        )) {
+            pmcConfig.accountTypeWeight[memberCategoryKey] = 0;
+        }
+        pmcConfig.accountTypeWeight[MemberCategory.DEFAULT] = 25;
+    }
+
+    disablePmcBackpackWeapon(container: DependencyContainer): undefined {
+        const configServer = container.resolve<ConfigServer>("ConfigServer");
+        const pmcConfig = configServer.getConfig<IPmcConfig>(ConfigTypes.PMC);
+        pmcConfig.looseWeaponInBackpackChancePercent = 0;
+        pmcConfig.looseWeaponInBackpackLootMinMax = { min: 0, max: 0 };
+    }
+
+    disableSeasonalEvents(container: DependencyContainer): undefined {
         const configServer = container.resolve<ConfigServer>("ConfigServer");
         const seasonalEventConfig =
             configServer.getConfig<ISeasonalEventConfig>(
