@@ -99,5 +99,17 @@
             "id": "557ff21e4bdc2d89578b4586",
             "name": "Tactical glasses"
         }
+    ],
+    "sheath": [
+        {
+            "weight": 1,
+            "id": "5bffdc370db834001d23eca8",
+            "name": "6Kh5 Bayonet"
+        },
+        {
+            "weight": 1,
+            "id": "54491bb74bdc2d09088b4567",
+            "name": "ER Bayonet"
+        }
     ]
 }

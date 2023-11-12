@@ -128,6 +128,11 @@ export class GearGenerator {
                     this.presetData.getGear(botLevel).eyewear
                 );
             }
+            case EquipmentSlots.SCABBARD: {
+                return this.weightedRandomGearItem(
+                    this.presetData.getGear(botLevel).sheath
+                );
+            }
         }
     }
 
@@ -417,6 +422,12 @@ export class GearGenerator {
             botRole,
             botInventory,
             EquipmentSlots.FACE_COVER
+        );
+        this.generateGearItem(
+            botLevel,
+            botRole,
+            botInventory,
+            EquipmentSlots.SCABBARD
         );
 
         const generatedWeapon = this.weaponGenerator.generateWeapon(

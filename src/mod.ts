@@ -29,6 +29,7 @@ import * as config from "../config/config.json";
 
 export class Andern implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
     private fullModName: string;
+    private modPath: string;
     private logger: ILogger;
     private doeTrader: DoeTrader;
 
@@ -41,8 +42,8 @@ export class Andern implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
         const preAkiModLoader: PreAkiModLoader =
             container.resolve<PreAkiModLoader>("PreAkiModLoader");
 
-        const modPath = `./${preAkiModLoader.getModPath(this.fullModName)}`;
-        container.register("AndernModPath", { useValue: modPath });
+        this.modPath = `./${preAkiModLoader.getModPath(this.fullModName)}`;
+        container.register("AndernModPath", { useValue: this.modPath });
 
         container.register<RaidInfo>("AndernRaidInfo", RaidInfo, {
             lifecycle: Lifecycle.Singleton,
@@ -111,7 +112,7 @@ export class Andern implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
         }
 
         if (config.mapBotSettings) {
-            mapBotTuning(container);
+            mapBotTuning(container, this.modPath, this.logger);
         }
 
         setPmcForceHealingItems(container, this.logger);

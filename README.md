@@ -114,7 +114,7 @@ Works only if `mapBotSettings` set to true.
 
 `mapDisableRaiderConvertToPmc` disable converting raiders to PMC.
 
-`mapPmcBrainsConfig` if enabled brainc chances for PMC load from `config/pmc.json`
+`mapPmcBrainsConfig` if set to "default" then does nothing. Loads `brains/[value].json` file with config which brain will be selected as PMC brain. For example "noboss" will load `brains/noboss.json` as brains config.
 
 ## Other settings
 

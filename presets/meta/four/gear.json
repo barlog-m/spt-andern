@@ -229,5 +229,27 @@
             "id": "62a61c988ec41a51b34758d5",
             "name": "Oakley SI Batwolf glasses"
         }
+    ],
+    "sheath": [
+        {
+            "weight": 1,
+            "id": "5c0126f40db834002a125382",
+            "name": "Red Rebel ice pick"
+        },
+        {
+            "weight": 1,
+            "id": "5bffdd7e0db834001b734a1a",
+            "name": "Miller Bros. Blades M-2 Tactical Sword"
+        },
+        {
+            "weight": 1,
+            "id": "5bffe7930db834001b734a39",
+            "name": "Crash Axe"
+        },
+        {
+            "weight": 1,
+            "id": "601948682627df266209af05",
+            "name": "UVSR Taiga-1 survival machete"
+        }
     ]
 }

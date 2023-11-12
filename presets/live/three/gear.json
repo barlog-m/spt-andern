@@ -269,5 +269,22 @@
             "id": "603409c80ca681766b6a0fb2",
             "name": "NPP KlASS Condor glasses"
         }
+    ],
+    "sheath": [
+        {
+            "weight": 1,
+            "id": "5c012ffc0db834001d23f03f",
+            "name": "Camper axe"
+        },
+        {
+            "weight": 1,
+            "id": "57cd379a24597778e7682ecf",
+            "name": "Kiba Arms Tactical Tomahawk"
+        },
+        {
+            "weight": 1,
+            "id": "5c0126f40db834002a125382",
+            "name": "Red Rebel ice pick"
+        }
     ]
 }

@@ -30,4 +30,5 @@ export class Gear {
     backpacks: GearItem[];
     face: GearItem[];
     eyewear: GearItem[];
+    sheath: GearItem[];
 }

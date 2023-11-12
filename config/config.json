@@ -34,7 +34,7 @@
     "mapIncreaseSpawnGroupsSize": false,
     "mapDisableRaiderConvertToPmc": false,
     "mapDisableRogueConvertToPmc": true,
-    "mapPmcBrainsConfig": false,
+    "mapPmcBrainsConfig": "default",
     "disablePmcBackpackWeapon": true,
     "disableEmissaryPmcBots": true,
     "disableSeasonalEvents": false,

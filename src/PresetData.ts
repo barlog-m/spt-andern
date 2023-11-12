@@ -9,10 +9,9 @@ import { MinMax } from "@spt-aki/models/common/MinMax";
 
 import { NightHeadwear } from "./NightHeadwear";
 import { WeaponPreset, Gear } from "./models";
+import * as fs from "fs";
 
 import * as config from "../config/config.json";
-
-import * as fs from "fs";
 
 @injectable()
 export class PresetData {

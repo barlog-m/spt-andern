@@ -13,9 +13,9 @@ import {
     ILocationBase,
     BossLocationSpawn,
 } from "@spt-aki/models/eft/common/ILocationBase";
+import * as fs from "fs";
 
 import config from "../config/config.json";
-import pmcBrains from "../config/pmc.json";
 
 const mapsToIgnore: string[] = [
     "develop",
@@ -27,9 +27,11 @@ const mapsToIgnore: string[] = [
     "default",
 ];
 
-export function mapBotTuning(container: DependencyContainer): undefined {
-    const logger = container.resolve<ILogger>("WinstonLogger");
-
+export function mapBotTuning(
+    container: DependencyContainer,
+    modPath: string,
+    logger: ILogger
+): undefined {
     const configServer = container.resolve<ConfigServer>("ConfigServer");
     const databaseServer = container.resolve<DatabaseServer>("DatabaseServer");
     const databaseTables: IDatabaseTables = databaseServer.getTables();
@@ -52,7 +54,9 @@ export function mapBotTuning(container: DependencyContainer): undefined {
         makePmcAlwaysHostile(configServer, logger);
     }
 
-    tuneScavConvertToPmcRatio(configServer, logger);
+    if (config.mapScavToPmcConvertMultiplier !== 1) {
+        tuneScavConvertToPmcRatio(configServer, logger);
+    }
 
     disableScavConvertToPmc(configServer, logger);
 
@@ -60,8 +64,8 @@ export function mapBotTuning(container: DependencyContainer): undefined {
         increaseSpawnGroupsSize(databaseTables, logger);
     }
 
-    if (config.mapPmcBrainsConfig) {
-        limitPmcBrains(configServer, databaseTables, logger);
+    if (config.mapPmcBrainsConfig !== "default") {
+        setPmcBrains(configServer, databaseTables, logger, modPath);
     }
 }
 
@@ -289,14 +293,31 @@ function tuneScavConvertToPmcRatio(
     const pmcConfig = configServer.getConfig<IPmcConfig>(ConfigTypes.PMC);
 
     for (const botType in pmcConfig.convertIntoPmcChance) {
+        const baseMin = pmcConfig.convertIntoPmcChance[botType].min;
         pmcConfig.convertIntoPmcChance[botType].min = Math.ceil(
             pmcConfig.convertIntoPmcChance[botType].min *
                 config.mapScavToPmcConvertMultiplier
         );
+
+        if (pmcConfig.convertIntoPmcChance[botType].min > 100) {
+            pmcConfig.convertIntoPmcChance[botType].min = 100;
+        }
+
+        const baseMax = pmcConfig.convertIntoPmcChance[botType].max;
         pmcConfig.convertIntoPmcChance[botType].max = Math.ceil(
             pmcConfig.convertIntoPmcChance[botType].max *
                 config.mapScavToPmcConvertMultiplier
         );
+
+        if (pmcConfig.convertIntoPmcChance[botType].max > 100) {
+            pmcConfig.convertIntoPmcChance[botType].max = 100;
+        }
+
+        if (config.debug) {
+            logger.info(
+                `[Andern] pmcConfig.convertIntoPmcChance[${botType}] min: ${baseMin} -> ${pmcConfig.convertIntoPmcChance[botType].min}, max: ${baseMax} -> ${pmcConfig.convertIntoPmcChance[botType].max}`
+            );
+        }
     }
 }
 
@@ -366,12 +387,15 @@ function increaseSpawnGroupsSize(
     }
 }
 
-function limitPmcBrains(
+function setPmcBrains(
     configServer: ConfigServer,
     databaseTables: IDatabaseTables,
-    logger: ILogger
+    logger: ILogger,
+    modPath: string
 ): undefined {
     const pmcConfig = configServer.getConfig<IPmcConfig>(ConfigTypes.PMC);
+
+    const pmcBrains = loadPmcBrains(config.mapPmcBrainsConfig, modPath, logger);
 
     for (const [locationName, locationObj] of Object.entries(
         databaseTables.locations
@@ -390,5 +414,22 @@ function limitPmcBrains(
                 pmcBrains
             )}`
         );
+    }
+}
+
+function loadPmcBrains(
+    brains: string,
+    modPath: string,
+    logger: ILogger
+): Record<string, number> {
+    const brainsFileName = `${modPath}/brains/${brains}.json`;
+    try {
+        const jsonData = fs.readFileSync(brainsFileName, "utf-8");
+        const brainsData: Record<string, number> = {};
+        Object.assign(brainsData, JSON.parse(jsonData));
+        return brainsData;
+    } catch (err) {
+        logger.error(`[Andern] error read file '${brainsFileName}'`);
+        logger.error(err.message);
     }
 }
