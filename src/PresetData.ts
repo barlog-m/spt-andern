@@ -37,15 +37,19 @@ export class PresetData {
         this.nightHeadwear.tierOneHeadwearWithNvg(botInventory);
     }
 
-    public getRandomAmmoByCaliber(botLevel: number, caliber: string): string {
+    public getRandomAmmoByCaliber(
+        botLevel: number,
+        caliber: string
+    ): string | undefined {
         const tier = this.tierByLevel(botLevel);
 
         const ammo = this.ammo[tier][caliber];
 
-        if (!ammo) {
+        if (ammo === undefined) {
             this.logger.error(
                 `[Andern] no ammo record for tier '${tier}' with caliber '${caliber}'`
             );
+            return undefined;
         }
 
         if (ammo.length == 1) {
@@ -234,10 +238,10 @@ export class PresetData {
         }
 
         if (!hasMagazine) {
-            this.logger.error(
+            this.logger.warning(
                 `[Andern] preset doesn't have magazine '${fileName}'`
             );
-            return false;
+            return true;
         }
 
         if (!hasTacticalDevice) {

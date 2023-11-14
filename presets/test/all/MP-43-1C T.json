@@ -1,0 +1,34 @@
+{
+    "type": "weapon",
+    "id": "9a918b6fbd432164034dd297",
+    "name": "MP-43-1C T",
+    "root": "eb25b6443a809825c3e6f7ef",
+    "items": [
+        {
+            "_id": "eb25b6443a809825c3e6f7ef",
+            "_tpl": "5580223e4bdc2d1c128b457f",
+            "upd": {
+                "Repairable": {
+                    "MaxDurability": 100,
+                    "Durability": 100
+                },
+                "FireMode": {
+                    "FireMode": "single"
+                }
+            }
+        },
+        {
+            "_id": "746f5d3f0bf94d4c2cf32f66",
+            "_tpl": "611a30addbdd8440277441dc",
+            "parentId": "eb25b6443a809825c3e6f7ef",
+            "slotId": "mod_barrel"
+        },
+        {
+            "_id": "7a34d55834fdfc1ac4c276b5",
+            "_tpl": "611a31ce5b7ffe001b4649d1",
+            "parentId": "eb25b6443a809825c3e6f7ef",
+            "slotId": "mod_stock"
+        }
+    ],
+    "Parent": "5447b6094bdc2dc3278b4567"
+}

@@ -27,8 +27,7 @@ You can disable PMC bot level generator with option `pmcLevel`.
 
 You can disable PMC bot gear generator with option `pmcGear`. Then mod only generate weapon.
 
-Bots get random weapon from lists. There is no pistols and other crap that bots can't use very good.
-Also bots use specified ammo for each caliber from list.
+Bots get random weapon from presets. Also bots use specified ammo for each caliber from presets.
 
 Preset made in the game and then exported with [SPT-AKI Profile Editor](https://hub.sp-tarkov.com/files/file/184-spt-aki-profile-editor/)
 
@@ -36,7 +35,7 @@ You can make your own preset. Just be sure that `ammo.json` contain record for w
 
 Tactical device is not obligatory anymore.
 
-Mod does not support weapon without magazines.
+Mod support any weapon: shotguns, pistols, revolvers, grenade launchers etc.
 
 At night raids tactical device replaced to [Zenit Klesch-2IKS](https://escapefromtarkov.fandom.com/wiki/Zenit_Klesch-2IKS_IR_illuminator_with_laser)
 

@@ -1,0 +1,48 @@
+{
+  "type": "weapon",
+  "id": "ebc4fc437e7b35a3c2235d3e",
+  "name": "FN40GL T",
+  "root": "4a037d50a5979eff075498eb",
+  "items": [
+    {
+      "_id": "4a037d50a5979eff075498eb",
+      "_tpl": "5e81ebcd8e146c7080625e15",
+      "upd": {
+        "Repairable": {
+          "MaxDurability": 100,
+          "Durability": 100
+        },
+        "Foldable": {
+          "Folded": false
+        },
+        "FireMode": {
+          "FireMode": "single"
+        }
+      }
+    },
+    {
+      "_id": "a3f842e3bec707e80d4ff9ca",
+      "_tpl": "6113cc78d3a39d50044c065a",
+      "parentId": "4a037d50a5979eff075498eb",
+      "slotId": "mod_pistol_grip"
+    },
+    {
+      "_id": "51189419ab3281d6cf72bfa5",
+      "_tpl": "6284bd5f95250a29bc628a30",
+      "parentId": "4a037d50a5979eff075498eb",
+      "slotId": "mod_scope",
+      "upd": {
+        "Sight": {
+          "ScopesCurrentCalibPointIndexes": [
+            0
+          ],
+          "ScopesSelectedModes": [
+            0
+          ],
+          "SelectedScope": 0
+        }
+      }
+    }
+  ],
+  "Parent": "5447bedf4bdc2d87278b4568"
+}

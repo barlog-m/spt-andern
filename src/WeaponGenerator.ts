@@ -1,6 +1,10 @@
 import { inject, injectAll, injectable } from "tsyringe";
 
 import { DatabaseServer } from "@spt-aki/servers/DatabaseServer";
+import { ConfigServer } from "@spt-aki/servers/ConfigServer";
+import { IPmcConfig } from "@spt-aki/models/spt/config/IPmcConfig";
+import { IRepairConfig } from "@spt-aki/models/spt/config/IRepairConfig";
+import { ConfigTypes } from "@spt-aki/models/enums/ConfigTypes";
 import { Item } from "@spt-aki/models/eft/common/tables/IItem";
 import { ITemplateItem } from "@spt-aki/models/eft/common/tables/ITemplateItem";
 import { HashUtil } from "@spt-aki/utils/HashUtil";
@@ -8,7 +12,9 @@ import { ItemHelper } from "@spt-aki/helpers/ItemHelper";
 import { ILogger } from "@spt-aki/models/spt/utils/ILogger";
 import { RandomUtil } from "@spt-aki/utils/RandomUtil";
 import { BotWeaponGeneratorHelper } from "@spt-aki/helpers/BotWeaponGeneratorHelper";
+import { RepairService } from "@spt-aki/services/RepairService";
 import { IInventoryMagGen } from "@spt-aki/generators/weapongen/IInventoryMagGen";
+import { EquipmentSlots } from "@spt-aki/models/enums/EquipmentSlots";
 
 import { GeneratedWeapon } from "./models";
 import { PresetData } from "./PresetData";
@@ -41,23 +47,30 @@ const MUZZLE_PAIRS = {
 export class WeaponGenerator {
     private readonly magazineSlotId = "mod_magazine";
     private readonly chamberSlotId = "patron_in_weapon";
-    private readonly equipmentSlot = "FirstPrimaryWeapon";
 
     private readonly MK47 = "606587252535c57a13424cfd";
     private readonly X_47_DRUM = "5cfe8010d7ad1a59283b14c6";
+
+    protected pmcConfig: IPmcConfig;
+    protected repairConfig: IRepairConfig;
 
     constructor(
         @inject("WinstonLogger") protected logger: ILogger,
         @inject("HashUtil") protected hashUtil: HashUtil,
         @inject("RandomUtil") protected randomUtil: RandomUtil,
         @inject("DatabaseServer") protected databaseServer: DatabaseServer,
+        @inject("ConfigServer") protected configServer: ConfigServer,
         @inject("ItemHelper") protected itemHelper: ItemHelper,
         @inject("BotWeaponGeneratorHelper")
         protected botWeaponGeneratorHelper: BotWeaponGeneratorHelper,
+        @inject("RepairService") protected repairService: RepairService,
         @injectAll("InventoryMagGen")
         protected inventoryMagGenComponents: IInventoryMagGen[],
         @inject("AndernPresetData") protected presetData: PresetData
-    ) {}
+    ) {
+        this.pmcConfig = this.configServer.getConfig(ConfigTypes.PMC);
+        this.repairConfig = this.configServer.getConfig(ConfigTypes.REPAIR);
+    }
 
     templatesTable(): Record<string, ITemplateItem> {
         return this.databaseServer.getTables().templates.items;
@@ -68,33 +81,67 @@ export class WeaponGenerator {
     }
 
     getCaliberByTemplateId(tpl: string): string {
-        return this.templatesTable()[tpl]._props.ammoCaliber;
+        return this.getTemplateById(tpl)._props.ammoCaliber;
+    }
+
+    getWeaponClassByTemplateId(tpl: string): string {
+        return this.getTemplateById(tpl)._props.weapClass;
+    }
+
+    getWeaponSlotByWeaponClass(weaponClass: string): string {
+        switch (weaponClass) {
+            case "pistol":
+                return EquipmentSlots.HOLSTER;
+            default:
+                return EquipmentSlots.FIRST_PRIMARY_WEAPON;
+        }
     }
 
     getWeaponMagazine(weaponWithMods: Item[]): Item {
         return weaponWithMods.find((item) => item.slotId === "mod_magazine");
     }
 
-    addCartridgeToChamber(weaponWithMods: Item[], ammoId: string): undefined {
-        const slotName = "patron_in_weapon";
-
-        const existingItemWithSlot = weaponWithMods.find(
-            (item) => item.slotId === this.chamberSlotId
+    addCartridgeToChamber(
+        weaponWithMods: Item[],
+        ammoId: string,
+        chambersAmount: number
+    ): undefined {
+        const existingItemWithSlot = weaponWithMods.filter((item) =>
+            item.slotId.startsWith("patron_in_weapon")
         );
 
-        if (!existingItemWithSlot) {
-            weaponWithMods.push({
-                _id: this.hashUtil.generate(),
-                _tpl: ammoId,
-                parentId: weaponWithMods[0]._id,
-                slotId: slotName,
-                upd: { StackObjectsCount: 1 },
+        if (existingItemWithSlot.length > 0) {
+            existingItemWithSlot.forEach((chamber) => {
+                chamber.upd = {
+                    StackObjectsCount: 1,
+                };
+                chamber._tpl = ammoId;
             });
         } else {
-            existingItemWithSlot.upd = {
-                StackObjectsCount: 1,
-            };
-            existingItemWithSlot._tpl = ammoId;
+            if (chambersAmount === 1) {
+                weaponWithMods.push({
+                    _id: this.hashUtil.generate(),
+                    _tpl: ammoId,
+                    parentId: weaponWithMods[0]._id,
+                    slotId: "patron_in_weapon",
+                    upd: { StackObjectsCount: 1 },
+                });
+            } else {
+                for (
+                    let chamberNum = 0;
+                    chamberNum < chambersAmount;
+                    chamberNum++
+                ) {
+                    const slotIdName = `patron_in_weapon_00${chamberNum}`;
+                    weaponWithMods.push({
+                        _id: this.hashUtil.generate(),
+                        _tpl: ammoId,
+                        parentId: weaponWithMods[0]._id,
+                        slotId: slotIdName,
+                        upd: { StackObjectsCount: 1 },
+                    });
+                }
+            }
         }
     }
 
@@ -127,9 +174,12 @@ export class WeaponGenerator {
     updateWeaponInfo(
         weaponWithMods: Item[],
         weaponParentId: string,
-        isNight: boolean
+        isNight: boolean,
+        weaponTpl: string
     ): undefined {
-        weaponWithMods[0].slotId = this.equipmentSlot;
+        weaponWithMods[0].slotId = this.getWeaponSlotByWeaponClass(
+            this.getWeaponClassByTemplateId(weaponTpl)
+        );
         weaponWithMods[0].parentId = weaponParentId;
         this.replaceId(weaponWithMods, 0);
         if (isNight) this.replaceTacticalDevice(weaponWithMods);
@@ -218,22 +268,46 @@ export class WeaponGenerator {
         }
     }
 
+    addRandomEnhancement(weapon: Item[]): undefined {
+        if (
+            this.randomUtil.getChance100(
+                this.pmcConfig.weaponHasEnhancementChancePercent
+            )
+        ) {
+            const weaponConfig = this.repairConfig.repairKit.weapon;
+            this.repairService.addBuff(weaponConfig, weapon[0]);
+        }
+    }
+
+    getChambersAmountFromWeaponTemplate(weaponTemplate: ITemplateItem): number {
+        return weaponTemplate._props.Chambers.length;
+    }
+
     public generateWeapon(
         botLevel: number,
         weaponParentId: string,
         isNight: boolean
     ): GeneratedWeapon {
         const weaponWithMods = this.presetData.getRandomWeapon(botLevel);
-        this.updateWeaponInfo(weaponWithMods, weaponParentId, isNight);
         const weaponTpl = this.getTemplateIdFromWeaponItems(weaponWithMods);
+        this.updateWeaponInfo(
+            weaponWithMods,
+            weaponParentId,
+            isNight,
+            weaponTpl
+        );
         this.alternateModules(botLevel, weaponWithMods, weaponTpl);
+        this.addRandomEnhancement(weaponWithMods);
         const weaponTemplate = this.getTemplateById(weaponTpl);
         const caliber = this.getCaliberByTemplateId(weaponTpl);
         const ammoTpl = this.presetData.getRandomAmmoByCaliber(
             botLevel,
             caliber
         );
-        this.addCartridgeToChamber(weaponWithMods, ammoTpl);
+
+        const chambersAmount =
+            this.getChambersAmountFromWeaponTemplate(weaponTemplate);
+        this.addCartridgeToChamber(weaponWithMods, ammoTpl, chambersAmount);
         const magazineTpl = this.fillMagazine(weaponWithMods, ammoTpl);
 
         return {

@@ -1,0 +1,139 @@
+{
+  "type": "weapon",
+  "id": "dc911b9711ed8d2317c7904e",
+  "name": "MP-155 T",
+  "root": "5d622f6e6c6e9d511ca80a13",
+  "items": [
+    {
+      "_id": "5d622f6e6c6e9d511ca80a13",
+      "_tpl": "606dae0ab0e443224b421bb7",
+      "upd": {
+        "Repairable": {
+          "MaxDurability": 100,
+          "Durability": 100
+        },
+        "FireMode": {
+          "FireMode": "single"
+        }
+      }
+    },
+    {
+      "_id": "149474eade630c3fb5aec721",
+      "_tpl": "6076c1b9f2cb2e02a42acedc",
+      "parentId": "5d622f6e6c6e9d511ca80a13",
+      "slotId": "mod_barrel"
+    },
+    {
+      "_id": "a3e079ccf0ead53c1c4573c2",
+      "_tpl": "606ee5c81246154cad35d65e",
+      "parentId": "5d622f6e6c6e9d511ca80a13",
+      "slotId": "mod_handguard"
+    },
+    {
+      "_id": "e3d9888060e471d414c9ca19",
+      "_tpl": "55d484b44bdc2d1d4e8b456d",
+      "parentId": "5d622f6e6c6e9d511ca80a13",
+      "slotId": "mod_magazine"
+    },
+    {
+      "_id": "5fa012a0663b9e2eddfa4c56",
+      "_tpl": "606eef46232e5a31c233d500",
+      "parentId": "5d622f6e6c6e9d511ca80a13",
+      "slotId": "mod_stock"
+    },
+    {
+      "_id": "00999d72e3bfcfc7db644348",
+      "_tpl": "60785ce5132d4d12c81fd918",
+      "parentId": "5d622f6e6c6e9d511ca80a13",
+      "slotId": "mod_mount"
+    },
+    {
+      "_id": "29e994079b9cf7fed2bb5a03",
+      "_tpl": "5b363dea5acfc4771e1c5e7e",
+      "parentId": "149474eade630c3fb5aec721",
+      "slotId": "mod_muzzle"
+    },
+    {
+      "_id": "1cc09e50c8c7333ebe182a4f",
+      "_tpl": "606eef756d0bd7580617baf8",
+      "parentId": "5fa012a0663b9e2eddfa4c56",
+      "slotId": "mod_stock"
+    },
+    {
+      "_id": "1f2cce72c2e29b48583c83b5",
+      "_tpl": "58491f3324597764bc48fa02",
+      "parentId": "00999d72e3bfcfc7db644348",
+      "slotId": "mod_scope",
+      "upd": {
+        "Sight": {
+          "ScopesCurrentCalibPointIndexes": [
+            0
+          ],
+          "ScopesSelectedModes": [
+            0
+          ],
+          "SelectedScope": 0
+        }
+      }
+    },
+    {
+      "_id": "5c7b3692f1a52e78e6824c6e",
+      "_tpl": "6272370ee4013c5d7e31f418",
+      "parentId": "00999d72e3bfcfc7db644348",
+      "slotId": "mod_tactical_002",
+      "upd": {
+        "Light": {
+          "IsActive": true,
+          "SelectedMode": 0
+        }
+      }
+    },
+    {
+      "_id": "adb06bad2aa46405280e8e21",
+      "_tpl": "5fb6567747ce63734e3fa1dc",
+      "parentId": "00999d72e3bfcfc7db644348",
+      "slotId": "mod_sight_front",
+      "upd": {
+        "Sight": {
+          "ScopesCurrentCalibPointIndexes": [
+            0
+          ],
+          "ScopesSelectedModes": [
+            0
+          ],
+          "SelectedScope": 0
+        }
+      }
+    },
+    {
+      "_id": "ddfda5c80c717d043e294623",
+      "_tpl": "5fb6564947ce63734e3fa1da",
+      "parentId": "00999d72e3bfcfc7db644348",
+      "slotId": "mod_sight_rear",
+      "upd": {
+        "Sight": {
+          "ScopesCurrentCalibPointIndexes": [
+            0
+          ],
+          "ScopesSelectedModes": [
+            0
+          ],
+          "SelectedScope": 0
+        }
+      }
+    },
+    {
+      "_id": "9e86632d367462c5fb38f4dd",
+      "_tpl": "5b363dd25acfc4001a598fd2",
+      "parentId": "29e994079b9cf7fed2bb5a03",
+      "slotId": "mod_muzzle"
+    },
+    {
+      "_id": "9f65d254b15cea487c31982d",
+      "_tpl": "606ef0812535c57a13424d20",
+      "parentId": "1cc09e50c8c7333ebe182a4f",
+      "slotId": "mod_stock"
+    }
+  ],
+  "Parent": "5447b6094bdc2dc3278b4567"
+}
