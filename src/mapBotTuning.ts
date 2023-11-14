@@ -1,6 +1,5 @@
 import { DependencyContainer } from "tsyringe";
 import { ILogger } from "@spt-aki/models/spt/utils/ILogger";
-
 import { ConfigServer } from "@spt-aki/servers/ConfigServer";
 import { ConfigTypes } from "@spt-aki/models/enums/ConfigTypes";
 import { IBotConfig } from "@spt-aki/models/spt/config/IBotConfig";
@@ -13,6 +12,7 @@ import {
     ILocationBase,
     BossLocationSpawn,
 } from "@spt-aki/models/eft/common/ILocationBase";
+import { IBotType } from "@spt-aki/models/eft/common/tables/IBotType";
 import * as fs from "fs";
 
 import config from "../config/config.json";
@@ -119,7 +119,7 @@ function setLocationBaseBotMax(
 
             if (config.debug) {
                 logger.info(
-                    `[Andern] ${locationName}.Base.BotMax ${locationBaseBotMaxDefault} >> ${locationBase.BotMax}`
+                    `[Andern] ${locationName}.Base.BotMax ${locationBaseBotMaxDefault} -> ${locationBase.BotMax}`
                 );
             }
         }
@@ -168,7 +168,7 @@ function setBotConfigMaxBotCap(
 
         if (config.debug) {
             logger.info(
-                `[Andern] botConfig.maxBotCap[${map}] ${botConfigMaxBotCapDefault} >> ${botConfig.maxBotCap[map]}`
+                `[Andern] botConfig.maxBotCap[${map}] ${botConfigMaxBotCapDefault} -> ${botConfig.maxBotCap[map]}`
             );
         }
     }
@@ -183,7 +183,7 @@ function setPmcBotDifficulty(
     pmcConfig.difficulty = config.mapPmcBotDifficulty;
     if (config.debug) {
         logger.info(
-            `[Andern] pmcConfig.difficulty = ${config.mapPmcBotDifficulty}`
+            `[Andern] pmcConfig.difficulty: ${config.mapPmcBotDifficulty}`
         );
     }
 }
@@ -294,6 +294,12 @@ function tuneScavConvertToPmcRatio(
 
     for (const botType in pmcConfig.convertIntoPmcChance) {
         const baseMin = pmcConfig.convertIntoPmcChance[botType].min;
+        const baseMax = pmcConfig.convertIntoPmcChance[botType].max;
+
+        if (baseMin === 0 && baseMax === 0) {
+            continue;
+        }
+
         pmcConfig.convertIntoPmcChance[botType].min = Math.ceil(
             pmcConfig.convertIntoPmcChance[botType].min *
                 config.mapScavToPmcConvertMultiplier
@@ -303,7 +309,6 @@ function tuneScavConvertToPmcRatio(
             pmcConfig.convertIntoPmcChance[botType].min = 100;
         }
 
-        const baseMax = pmcConfig.convertIntoPmcChance[botType].max;
         pmcConfig.convertIntoPmcChance[botType].max = Math.ceil(
             pmcConfig.convertIntoPmcChance[botType].max *
                 config.mapScavToPmcConvertMultiplier
@@ -431,5 +436,27 @@ function loadPmcBrains(
     } catch (err) {
         logger.error(`[Andern] error read file '${brainsFileName}'`);
         logger.error(err.message);
+    }
+}
+
+export function fixBossSpecialLoot(
+    botJsonTemplate: IBotType,
+    botRole: string,
+    logger: ILogger
+): undefined {
+    const badWeightsString = '{"0":1,"1":0}';
+    const correctWeights = { "0": 0, "1": 1 };
+    const weights = JSON.stringify(
+        botJsonTemplate.generation.items.specialItems.weights
+    );
+    if (weights === badWeightsString) {
+        botJsonTemplate.generation.items.specialItems.weights = correctWeights;
+        if (config.debug) {
+            logger.info(
+                `[Andern] ${botRole} special items weight set to ${JSON.stringify(
+                    correctWeights
+                )}`
+            );
+        }
     }
 }

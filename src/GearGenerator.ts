@@ -10,7 +10,6 @@ import { EquipmentSlots } from "@spt-aki/models/enums/EquipmentSlots";
 import { BotGeneratorHelper } from "@spt-aki/helpers/BotGeneratorHelper";
 import { BotLootGenerator } from "@spt-aki/generators/BotLootGenerator";
 import { BotWeaponGenerator } from "@spt-aki/generators/BotWeaponGenerator";
-import { MinMax } from "@spt-aki/models/common/MinMax";
 import { GenerateWeaponResult } from "@spt-aki/models/spt/bots/GenerateWeaponResult";
 
 import { RaidInfo } from "./RaidInfo";

@@ -39,5 +39,6 @@
     "disableEmissaryPmcBots": true,
     "disableSeasonalEvents": false,
     "lootingBotsCompatibility": false,
+    "fixBossSpecialLoot": true,
     "debug": false
 }

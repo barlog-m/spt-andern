@@ -5,6 +5,8 @@ import { Inventory as PmcInventory } from "@spt-aki/models/eft/common/tables/IBo
 import { IBotType } from "@spt-aki/models/eft/common/tables/IBotType";
 import { RaidInfo } from "./RaidInfo";
 import { GearGenerator } from "./GearGenerator";
+import { fixBossSpecialLoot } from "./mapBotTuning";
+import * as config from "../config/config.json";
 
 export default function registerBotInventoryGenerator(
     container: DependencyContainer
@@ -39,6 +41,10 @@ export default function registerBotInventoryGenerator(
                         raidInfo
                     );
                     return inventory;
+                }
+
+                if (config.fixBossSpecialLoot && botRole.startsWith("boss")) {
+                    fixBossSpecialLoot(botJsonTemplate, botRole, logger);
                 }
 
                 return botInventoryGenerator.generateInventory(
