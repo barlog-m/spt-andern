@@ -125,8 +125,6 @@ Works only if `mapBotSettings` set to true.
 
 `lootingBotsCompatibility` disable loot generation in PMC's backpack for compatibility with Looting Bots mod. Works only if `pmcGear` enabled.
 
-`fixBossSpecialLoot` if true force bosses always have their special loot like `Keycard with a blue marking` on `Sanitar`. Works only if `pmcGear` true.
-
 ## Installation
 
 Put folder `BarlogM-Andern` from zip file into your `user/mods` folder

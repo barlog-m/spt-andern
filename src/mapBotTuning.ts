@@ -438,25 +438,3 @@ function loadPmcBrains(
         logger.error(err.message);
     }
 }
-
-export function fixBossSpecialLoot(
-    botJsonTemplate: IBotType,
-    botRole: string,
-    logger: ILogger
-): undefined {
-    const badWeightsString = '{"0":1,"1":0}';
-    const correctWeights = { "0": 0, "1": 1 };
-    const weights = JSON.stringify(
-        botJsonTemplate.generation.items.specialItems.weights
-    );
-    if (weights === badWeightsString) {
-        botJsonTemplate.generation.items.specialItems.weights = correctWeights;
-        if (config.debug) {
-            logger.info(
-                `[Andern] ${botRole} special items weight set to ${JSON.stringify(
-                    correctWeights
-                )}`
-            );
-        }
-    }
-}
