@@ -10,6 +10,7 @@ import { MinMax } from "@spt-aki/models/common/MinMax";
 import { NightHeadwear } from "./NightHeadwear";
 import { WeaponPreset, Gear } from "./models";
 import * as fs from "fs";
+import * as path from "path";
 
 import * as config from "../config/config.json";
 
@@ -68,6 +69,13 @@ export class PresetData {
         const keys = Object.keys(presets);
         const randomKey = this.randomUtil.getArrayValue(keys);
         const preset = presets[randomKey];
+
+        if (config.debug) {
+            this.logger.info(
+                `[Andern] for bot level ${botLevel} selected tier '${tier}' weapon '${preset.name}'`
+            );
+        }
+
         return JSON.parse(JSON.stringify(preset.items)) as Item[];
     }
 
@@ -203,7 +211,7 @@ export class PresetData {
                         const preset = new WeaponPreset();
                         Object.assign(preset, JSON.parse(jsonData));
                         if (this.isPresetValid(preset, fullWeaponPresetName)) {
-                            this.weapon[tier][preset.id] = preset;
+                            this.weapon[tier][path.parse(f).name] = preset;
                         }
                     } catch (err) {
                         this.logger.error(
@@ -255,14 +263,17 @@ export class PresetData {
     }
 
     tierByLevel(level: number): string {
+        let result = Object.keys(this.presetConfig)[0];
+
         for (const tier in this.presetConfig) {
             if (
                 level >= this.presetConfig[tier].min &&
-                level < this.presetConfig[tier].max
+                level <= this.presetConfig[tier].max
             ) {
-                return tier;
+                result = tier;
+                break;
             }
         }
-        return "one";
+        return result;
     }
 }

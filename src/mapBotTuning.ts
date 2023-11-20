@@ -12,7 +12,6 @@ import {
     ILocationBase,
     BossLocationSpawn,
 } from "@spt-aki/models/eft/common/ILocationBase";
-import { IBotType } from "@spt-aki/models/eft/common/tables/IBotType";
 import * as fs from "fs";
 
 import config from "../config/config.json";
@@ -24,7 +23,6 @@ const mapsToIgnore: string[] = [
     "suburbs",
     "terminal",
     "town",
-    "default",
 ];
 
 export function mapBotTuning(
