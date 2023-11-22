@@ -17,7 +17,10 @@ export function lootConfig(container: DependencyContainer): undefined {
     const databaseServer: DatabaseServer =
         container.resolve<DatabaseServer>("DatabaseServer");
     setLootMultiplier(container);
-    increaseKeysSpawnChance(container, databaseServer);
+
+    if (config.looseLootKeyAndCardsSettings) {
+        increaseKeysSpawnChance(container, databaseServer);
+    }
 }
 
 function setLootMultiplier(container: DependencyContainer): undefined {

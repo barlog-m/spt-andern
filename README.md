@@ -75,6 +75,8 @@ Settings in config 'chadsOnFactoryAndLabOnly', 'chadsPercentage' and 'chadsMinim
 
 ## Keys spawn settings
 
+`looseLootKeyAndCardsSettings` disable or enable any keys and keycards settings
+
 `looseLootKeysRelativeProbabilityThreshold` modified only keys with multiplier below this value. Some keys already has high relative probability chance. Mod don't increase probability for keys above this value because places for loose loot are limited.
 
 `looseLootKeysRelativeProbabilityMultiplier` spawn multiplier. If value is 1 than nothing changes.

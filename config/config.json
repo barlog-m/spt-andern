@@ -15,6 +15,7 @@
     "chadsMinimumLevel": 42,
     "looseLootMultiplier": 1.4,
     "staticLootMultiplier": 4,
+    "keyAndCardsLootSettings": true,
     "looseLootKeysRelativeProbabilityThreshold": 3,
     "looseLootKeysRelativeProbabilityMultiplier": 20,
     "looseLootKeysPercentage": 20,
