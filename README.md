@@ -1,6 +1,6 @@
 # Andern mod for SPT-AKI
 
-[![GitHub Tags](https://img.shields.io/github/v/tag/barlog-m/SPT-AKI-Andern?color=0298c3&label=version&style=flat-square)](https://github.com/barlog-m/oceanic-primal-visual-studio-code/tags)
+[![GitHub Tags](https://img.shields.io/github/v/tag/barlog-m/SPT-AKI-Andern?color=0298c3&label=version&style=flat-square)](https://github.com/barlog-m/SPT-AKI-Andern/tags)
 [![MIT License](https://img.shields.io/badge/license-MIT-0298c3.svg?style=flat-square)](https://opensource.org/licenses/MIT)
 
 **Andern** is a mod for [SPT-AKI](https://www.sp-tarkov.com/)

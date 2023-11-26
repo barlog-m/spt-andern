@@ -12,6 +12,7 @@ import { ItemHelper } from "@spt-aki/helpers/ItemHelper";
 import { ILogger } from "@spt-aki/models/spt/utils/ILogger";
 import { RandomUtil } from "@spt-aki/utils/RandomUtil";
 import { BotWeaponGeneratorHelper } from "@spt-aki/helpers/BotWeaponGeneratorHelper";
+import { BotGeneratorHelper } from "@spt-aki/helpers/BotGeneratorHelper";
 import { RepairService } from "@spt-aki/services/RepairService";
 import { IInventoryMagGen } from "@spt-aki/generators/weapongen/IInventoryMagGen";
 import { EquipmentSlots } from "@spt-aki/models/enums/EquipmentSlots";
@@ -64,6 +65,8 @@ export class WeaponGenerator {
         @inject("BotWeaponGeneratorHelper")
         protected botWeaponGeneratorHelper: BotWeaponGeneratorHelper,
         @inject("RepairService") protected repairService: RepairService,
+        @inject("BotGeneratorHelper")
+        protected botGeneratorHelper: BotGeneratorHelper,
         @injectAll("InventoryMagGen")
         protected inventoryMagGenComponents: IInventoryMagGen[],
         @inject("AndernPresetData") protected presetData: PresetData
@@ -181,6 +184,15 @@ export class WeaponGenerator {
             this.getWeaponClassByTemplateId(weaponTpl)
         );
         weaponWithMods[0].parentId = weaponParentId;
+
+        weaponWithMods[0] = {
+            ...weaponWithMods[0],
+            ...this.botGeneratorHelper.generateExtraPropertiesForItem(
+                this.getTemplateById(weaponTpl),
+                "pmc"
+            ),
+        };
+
         this.replaceId(weaponWithMods, 0);
         if (isNight) this.replaceTacticalDevice(weaponWithMods);
         this.setTacticalDeviceMode(weaponWithMods);
