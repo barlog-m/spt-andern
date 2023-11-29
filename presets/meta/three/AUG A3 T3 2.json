@@ -1,0 +1,127 @@
+{
+    "type": "weapon",
+    "id": "91bf48bc61026c629ea7f543",
+    "name": "AUG A3 T3 2",
+    "root": "4fce32d23b371d292e696a6e",
+    "items": [
+        {
+            "_id": "4fce32d23b371d292e696a6e",
+            "_tpl": "63171672192e68c5460cebc5",
+            "upd": {
+                "Repairable": {
+                    "MaxDurability": 100,
+                    "Durability": 100
+                },
+                "FireMode": {
+                    "FireMode": "single"
+                }
+            }
+        },
+        {
+            "_id": "1f035ef2543486e044f6ab20",
+            "_tpl": "62e7c98b550c8218d602cbb4",
+            "parentId": "4fce32d23b371d292e696a6e",
+            "slotId": "mod_magazine"
+        },
+        {
+            "_id": "fcc71a27c9d64654003956a8",
+            "_tpl": "62ebbc53e3c1e1ec7c02c44f",
+            "parentId": "4fce32d23b371d292e696a6e",
+            "slotId": "mod_charge"
+        },
+        {
+            "_id": "cabd28c930b0c7c842fe5722",
+            "_tpl": "62e7c72df68e7a0676050c77",
+            "parentId": "4fce32d23b371d292e696a6e",
+            "slotId": "mod_reciever"
+        },
+        {
+            "_id": "380d1819c5913e39861bb888",
+            "_tpl": "62e7c7f3c34ea971710c32fc",
+            "parentId": "cabd28c930b0c7c842fe5722",
+            "slotId": "mod_barrel"
+        },
+        {
+            "_id": "6ed137590b5735336b1a8071",
+            "_tpl": "62e7c8f91cd3fde4d503d690",
+            "parentId": "cabd28c930b0c7c842fe5722",
+            "slotId": "mod_mount"
+        },
+        {
+            "_id": "68f41bcf7764eceb94cd8db9",
+            "_tpl": "6272379924e29f06af4d5ecb",
+            "parentId": "cabd28c930b0c7c842fe5722",
+            "slotId": "mod_tactical",
+            "upd": {
+                "Light": {
+                    "IsActive": true,
+                    "SelectedMode": 0
+                }
+            }
+        },
+        {
+            "_id": "9e56045e85e28e516c3d6995",
+            "_tpl": "630f27f04f3f6281050b94d7",
+            "parentId": "380d1819c5913e39861bb888",
+            "slotId": "mod_muzzle_000"
+        },
+        {
+            "_id": "42acd5636f3980d371ad05b4",
+            "_tpl": "634e61b0767cb15c4601a877",
+            "parentId": "380d1819c5913e39861bb888",
+            "slotId": "mod_foregrip"
+        },
+        {
+            "_id": "98c28bdb3742065f294add9f",
+            "_tpl": "58491f3324597764bc48fa02",
+            "parentId": "6ed137590b5735336b1a8071",
+            "slotId": "mod_scope",
+            "upd": {
+                "Sight": {
+                    "ScopesCurrentCalibPointIndexes": [0],
+                    "ScopesSelectedModes": [0],
+                    "SelectedScope": 0
+                }
+            }
+        },
+        {
+            "_id": "030ff9b9da1ff283aaaa9f57",
+            "_tpl": "5fb6567747ce63734e3fa1dc",
+            "parentId": "6ed137590b5735336b1a8071",
+            "slotId": "mod_sight_front",
+            "upd": {
+                "Sight": {
+                    "ScopesCurrentCalibPointIndexes": [0],
+                    "ScopesSelectedModes": [0],
+                    "SelectedScope": 0
+                }
+            }
+        },
+        {
+            "_id": "973c98fe9b4693f0a65a3e2d",
+            "_tpl": "5fb6564947ce63734e3fa1da",
+            "parentId": "6ed137590b5735336b1a8071",
+            "slotId": "mod_sight_rear",
+            "upd": {
+                "Sight": {
+                    "ScopesCurrentCalibPointIndexes": [0],
+                    "ScopesSelectedModes": [0],
+                    "SelectedScope": 0
+                }
+            }
+        },
+        {
+            "_id": "72b91ee66db09d25398e9033",
+            "_tpl": "612e0cfc8004cc50514c2d9e",
+            "parentId": "9e56045e85e28e516c3d6995",
+            "slotId": "mod_muzzle"
+        },
+        {
+            "_id": "f686c5902c8ed92e312f8615",
+            "_tpl": "63877c99e785640d436458ea",
+            "parentId": "72b91ee66db09d25398e9033",
+            "slotId": "mod_muzzle"
+        }
+    ],
+    "Parent": "5447b5f14bdc2d61278b4567"
+}

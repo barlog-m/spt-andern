@@ -1,6 +1,6 @@
 {
     "type": "weapon",
-    "id": "0cf172de642b80115ab2672b",
+    "id": "1129172921314768915df19f",
     "name": "MDR 545 T3 2",
     "root": "4dda8485c9c63025484bc154",
     "items": [
@@ -48,12 +48,8 @@
             "slotId": "mod_scope",
             "upd": {
                 "Sight": {
-                    "ScopesCurrentCalibPointIndexes": [
-                        0
-                    ],
-                    "ScopesSelectedModes": [
-                        0
-                    ],
+                    "ScopesCurrentCalibPointIndexes": [0],
+                    "ScopesSelectedModes": [0],
                     "SelectedScope": 0
                 }
             }
@@ -65,12 +61,8 @@
             "slotId": "mod_sight_rear",
             "upd": {
                 "Sight": {
-                    "ScopesCurrentCalibPointIndexes": [
-                        0
-                    ],
-                    "ScopesSelectedModes": [
-                        0
-                    ],
+                    "ScopesCurrentCalibPointIndexes": [0],
+                    "ScopesSelectedModes": [0],
                     "SelectedScope": 0
                 }
             }

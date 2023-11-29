@@ -1,0 +1,95 @@
+{
+    "type": "weapon",
+    "id": "820afdb00e2fa6850e5ee755",
+    "name": "VSS T4 2",
+    "root": "9cdfedaaa9c4c5107c82ab42",
+    "items": [
+        {
+            "_id": "9cdfedaaa9c4c5107c82ab42",
+            "_tpl": "57838ad32459774a17445cd2",
+            "upd": {
+                "Repairable": {
+                    "MaxDurability": 100,
+                    "Durability": 100
+                },
+                "FireMode": {
+                    "FireMode": "single"
+                }
+            }
+        },
+        {
+            "_id": "4e232c45978f59f97cea3f33",
+            "_tpl": "5dff8db859400025ea5150d4",
+            "parentId": "9cdfedaaa9c4c5107c82ab42",
+            "slotId": "mod_mount_000"
+        },
+        {
+            "_id": "ea8bfa6aaf5b51e3ab3c462f",
+            "_tpl": "5a9e81fba2750c00164f6b11",
+            "parentId": "9cdfedaaa9c4c5107c82ab42",
+            "slotId": "mod_magazine"
+        },
+        {
+            "_id": "2cb62424c0562873d156ba26",
+            "_tpl": "57838c962459774a1651ec63",
+            "parentId": "9cdfedaaa9c4c5107c82ab42",
+            "slotId": "mod_muzzle"
+        },
+        {
+            "_id": "2d4ff2807f01b43bfb4b3d40",
+            "_tpl": "578395402459774a256959b5",
+            "parentId": "9cdfedaaa9c4c5107c82ab42",
+            "slotId": "mod_reciever"
+        },
+        {
+            "_id": "bd3a65c29e2a2e1366b17e55",
+            "_tpl": "578395e82459774a0e553c7b",
+            "parentId": "9cdfedaaa9c4c5107c82ab42",
+            "slotId": "mod_stock"
+        },
+        {
+            "_id": "ee42e0289b3791bcdacd5559",
+            "_tpl": "6130ca3fd92c473c77020dbd",
+            "parentId": "9cdfedaaa9c4c5107c82ab42",
+            "slotId": "mod_charge"
+        },
+        {
+            "_id": "65f11da8f4d2453cb8dfa476",
+            "_tpl": "58491f3324597764bc48fa02",
+            "parentId": "4e232c45978f59f97cea3f33",
+            "slotId": "mod_scope",
+            "upd": {
+                "Sight": {
+                    "ScopesCurrentCalibPointIndexes": [0],
+                    "ScopesSelectedModes": [0],
+                    "SelectedScope": 0
+                }
+            }
+        },
+        {
+            "_id": "8ef7b452cb888d9da06a8fee",
+            "_tpl": "59eb7ebe86f7740b373438ce",
+            "parentId": "2cb62424c0562873d156ba26",
+            "slotId": "mod_mount_000"
+        },
+        {
+            "_id": "c051649701b26210200abe77",
+            "_tpl": "6272370ee4013c5d7e31f418",
+            "parentId": "8ef7b452cb888d9da06a8fee",
+            "slotId": "mod_tactical_001",
+            "upd": {
+                "Light": {
+                    "IsActive": true,
+                    "SelectedMode": 0
+                }
+            }
+        },
+        {
+            "_id": "37ff599ba8b51ecdaca3f823",
+            "_tpl": "5b057b4f5acfc4771e1bd3e9",
+            "parentId": "8ef7b452cb888d9da06a8fee",
+            "slotId": "mod_foregrip"
+        }
+    ],
+    "Parent": "5447b6194bdc2d67278b4567"
+}

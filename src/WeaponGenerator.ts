@@ -106,11 +106,17 @@ export class WeaponGenerator {
 
     addCartridgeToChamber(
         weaponWithMods: Item[],
-        ammoId: string,
-        chambersAmount: number
+        ammoTpl: string,
+        weaponTemplate: ITemplateItem
     ): undefined {
+        const chambersAmount =
+            this.getChambersAmountFromWeaponTemplate(weaponTemplate);
+
+        const chamberName =
+            this.getChamberNameFromWeaponTemplate(weaponTemplate);
+
         const existingItemWithSlot = weaponWithMods.filter((item) =>
-            item.slotId.startsWith("patron_in_weapon")
+            item.slotId.startsWith(chamberName)
         );
 
         if (existingItemWithSlot.length > 0) {
@@ -118,15 +124,15 @@ export class WeaponGenerator {
                 chamber.upd = {
                     StackObjectsCount: 1,
                 };
-                chamber._tpl = ammoId;
+                chamber._tpl = ammoTpl;
             });
         } else {
             if (chambersAmount === 1) {
                 weaponWithMods.push({
                     _id: this.hashUtil.generate(),
-                    _tpl: ammoId,
+                    _tpl: ammoTpl,
                     parentId: weaponWithMods[0]._id,
-                    slotId: "patron_in_weapon",
+                    slotId: chamberName,
                     upd: { StackObjectsCount: 1 },
                 });
             } else {
@@ -135,10 +141,10 @@ export class WeaponGenerator {
                     chamberNum < chambersAmount;
                     chamberNum++
                 ) {
-                    const slotIdName = `patron_in_weapon_00${chamberNum}`;
+                    const slotIdName = `${chamberName}_00${chamberNum}`;
                     weaponWithMods.push({
                         _id: this.hashUtil.generate(),
-                        _tpl: ammoId,
+                        _tpl: ammoTpl,
                         parentId: weaponWithMods[0]._id,
                         slotId: slotIdName,
                         upd: { StackObjectsCount: 1 },
@@ -146,6 +152,24 @@ export class WeaponGenerator {
                 }
             }
         }
+    }
+
+    getChamberNameFromWeaponTemplate(weaponTemplate: ITemplateItem): string {
+        const weapon_chiappa_rhino_50ds_9x33R = "61a4c8884f95bc3b2c5dc96f";
+        const weapon_chiappa_rhino_200ds_9x19 = "624c2e8614da335f1e034d8c";
+        const weapon_kbp_rsh_12_127x55 = "633ec7c2a6918cb895019c6c";
+
+        let chamberName = "patron_in_weapon";
+
+        if (
+            weaponTemplate._id === weapon_chiappa_rhino_50ds_9x33R ||
+            weaponTemplate._id === weapon_chiappa_rhino_200ds_9x19 ||
+            weaponTemplate._id === weapon_kbp_rsh_12_127x55
+        ) {
+            chamberName = "camora";
+        }
+
+        return chamberName;
     }
 
     fillMagazine(weaponWithMods: Item[], ammoTpl: string): string {
@@ -259,24 +283,20 @@ export class WeaponGenerator {
     }
 
     alternateSuppressor(weapon: Item[], muzzleItem: Item): undefined {
-        let isSuppressorReplaced = false;
-        let indexToRemove: number;
+        const suppressor = weapon.find(
+            (i) => i.parentId === muzzleItem._id && (i.slotId = "mod_muzzle")
+        );
+        suppressor._tpl = MUZZLE_PAIRS[muzzleItem._tpl];
 
-        for (let i = 0; i < weapon.length; i++) {
-            const item = weapon[i];
-            if (item.parentId === muzzleItem._id) {
-                if (!isSuppressorReplaced) {
-                    item.slotId = "mod_muzzle";
-                    item._tpl = MUZZLE_PAIRS[muzzleItem._tpl];
-                    isSuppressorReplaced = true;
-                } else {
-                    indexToRemove = i;
-                }
-            }
-        }
+        this.deleteUnnecessaryModules(weapon);
+    }
 
-        if (isSuppressorReplaced && indexToRemove) {
-            weapon.splice(indexToRemove, 1);
+    deleteUnnecessaryModules(weapon: Item[]): undefined {
+        const i = weapon.findIndex(
+            (item) => item._tpl === "5fbcbd10ab884124df0cd563"
+        );
+        if (i > -1) {
+            weapon.splice(i, 1);
         }
     }
 
@@ -317,9 +337,7 @@ export class WeaponGenerator {
             caliber
         );
 
-        const chambersAmount =
-            this.getChambersAmountFromWeaponTemplate(weaponTemplate);
-        this.addCartridgeToChamber(weaponWithMods, ammoTpl, chambersAmount);
+        this.addCartridgeToChamber(weaponWithMods, ammoTpl, weaponTemplate);
         const magazineTpl = this.fillMagazine(weaponWithMods, ammoTpl);
 
         return {
