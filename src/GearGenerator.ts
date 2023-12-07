@@ -225,7 +225,7 @@ export class GearGenerator {
 
         const isMapOk = config.chadsOnFactoryAndLabOnly
             ? isFactoryOrLab(raidInfo.location)
-            : false;
+            : true;
 
         if (chance && isMapOk && botLevel >= config.chadsMinimumLevel) {
             this.generateTacticalVest(
