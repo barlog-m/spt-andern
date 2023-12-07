@@ -40,6 +40,7 @@ export default function registerBotWeaponGenerator(
 
                     const weapon: GeneratedWeapon =
                         pmcWeaponGenerator.generateWeapon(
+                            "",
                             botLevel,
                             weaponParentId,
                             raidInfo.isNight

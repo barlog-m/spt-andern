@@ -5,22 +5,24 @@ import { Item } from "@spt-aki/models/eft/common/tables/IItem";
 import { RandomUtil } from "@spt-aki/utils/RandomUtil";
 import { HashUtil } from "@spt-aki/utils/HashUtil";
 import { Inventory as PmcInventory } from "@spt-aki/models/eft/common/tables/IBotBase";
-import { MinMax } from "@spt-aki/models/common/MinMax";
 
 import { NightHeadwear } from "./NightHeadwear";
-import { WeaponPreset, Gear } from "./models";
+import {
+    PresetData,
+    PresetConfig,
+    WeaponPreset,
+    Gear,
+    Ammo,
+    Modules,
+} from "./models";
 import * as fs from "fs";
-import * as path from "path";
 
 import * as config from "../config/config.json";
 
 @injectable()
-export class PresetData {
-    private presetConfig: Record<string, MinMax> = {};
-    private gear: Record<string, Gear> = {};
-    private weapon: Record<string, WeaponPreset[]> = {};
-    private ammo: Record<string, Record<string, string[]>> = {};
-    private modules: Record<string, Record<string, string[]>> = {};
+export class Data {
+    private presets = config.presets;
+    private data: Record<string, PresetData> = {};
 
     constructor(
         @inject("WinstonLogger") protected logger: ILogger,
@@ -31,20 +33,22 @@ export class PresetData {
         @inject("AndernModPath") protected modPath: string
     ) {
         this.load();
-        this.logger.info(`[Andern] preset '${config.preset}' enabled`);
     }
 
-    public generateNightHeadwear(botInventory: PmcInventory): undefined {
-        this.nightHeadwear.tierOneHeadwearWithNvg(botInventory);
+    public generateNightHeadwear(
+        botRole: string,
+        botInventory: PmcInventory
+    ): undefined {
+        this.nightHeadwear.tierOneHeadwearWithNvg(botRole, botInventory);
     }
 
     public getRandomAmmoByCaliber(
+        presetName: string,
         botLevel: number,
         caliber: string
     ): string | undefined {
-        const tier = this.tierByLevel(botLevel);
-
-        const ammo = this.ammo[tier][caliber];
+        const tier = this.tierByLevel(presetName, botLevel);
+        const ammo = this.data[presetName].ammo[tier][caliber];
 
         if (ammo === undefined) {
             this.logger.error(
@@ -62,10 +66,10 @@ export class PresetData {
         }
     }
 
-    public getRandomWeapon(botLevel: number): Item[] {
-        const tier = this.tierByLevel(botLevel);
+    public getRandomWeapon(presetName: string, botLevel: number): Item[] {
+        const tier = this.tierByLevel(presetName, botLevel);
 
-        const presets = this.weapon[tier];
+        const presets = this.data[presetName].weapon[tier];
         const keys = Object.keys(presets);
         const randomKey = this.randomUtil.getArrayValue(keys);
         const preset = presets[randomKey];
@@ -79,14 +83,18 @@ export class PresetData {
         return JSON.parse(JSON.stringify(preset.items)) as Item[];
     }
 
-    public getGear(level: number): Gear {
-        const tier = this.tierByLevel(level);
-        return this.gear[tier];
+    public getGear(presetName: string, level: number): Gear {
+        const tier = this.tierByLevel(presetName, level);
+        return this.data[presetName].gear[tier];
     }
 
-    public getAlternativeModule(botLevel: number, moduleTpl: string): string {
-        const tier = this.tierByLevel(botLevel);
-        const alternativesData = this.modules[tier];
+    public getAlternativeModule(
+        presetName: string,
+        botLevel: number,
+        moduleTpl: string
+    ): string {
+        const tier = this.tierByLevel(presetName, botLevel);
+        const alternativesData = this.data[presetName].modules[tier];
         if (!alternativesData) {
             return moduleTpl;
         }
@@ -104,76 +112,123 @@ export class PresetData {
         return moduleTpl;
     }
 
-    load(): undefined {
-        this.loadPresetConfig();
-        this.loadData();
+    getPresetsDir(): string {
+        return `${this.modPath}presets`;
     }
 
-    loadPresetConfig(): undefined {
-        const presetConfigFileName = `${this.modPath}presets/${config.preset}/preset.json`;
-        try {
-            const jsonData = fs.readFileSync(presetConfigFileName, "utf-8");
-            Object.assign(this.presetConfig, JSON.parse(jsonData));
-        } catch (err) {
-            this.logger.error(
-                `[Andern] error read file '${presetConfigFileName}'`
-            );
-            this.logger.error(err.message);
+    load(): undefined {
+        for (const presetName of this.readAllPresetsList()) {
+            const config = this.loadPresetConfig(presetName);
+            const presetData = this.loadData(presetName);
+            presetData.config = config;
+            this.data[presetName] = presetData;
         }
     }
 
-    loadData(): undefined {
-        const presetDirName = `${this.modPath}presets/${config.preset}`;
+    readAllPresetsList(): string[] {
+        const presetsDir = this.getPresetsDir();
+        const presetNames: string[] = [];
 
-        fs.readdir(presetDirName, { withFileTypes: true }, (err, files) => {
-            if (err) {
-                this.logger.error("Error reading directory: " + err.message);
-                return;
-            }
+        try {
+            const files = fs.readdirSync(presetsDir, { withFileTypes: true });
             files.forEach((dir) => {
-                if (!dir.isDirectory()) return;
-
-                const tierDirName = `${presetDirName}/${dir.name}`;
-
-                this.loadTierGear(dir.name, tierDirName);
-                this.loadTierAmmo(dir.name, tierDirName);
-                this.loadTierModules(dir.name, tierDirName);
-                this.loadTierWeapon(dir.name, tierDirName);
+                if (dir.isDirectory()) {
+                    presetNames.push(dir.name);
+                }
             });
-        });
+        } catch (err) {
+            this.logger.error(
+                `[Andern] Error reading directory: ${err.message}`
+            );
+        }
+
+        return presetNames;
     }
 
-    loadTierGear(tier: string, tierDir: string): undefined {
+    loadPresetConfig(presetName: string): PresetConfig {
+        const presetConfigFileName = `${this.getPresetsDir()}/${presetName}/preset.json`;
+        const presetConfig: PresetConfig = {};
+
+        try {
+            const jsonData = fs.readFileSync(presetConfigFileName, "utf-8");
+            Object.assign(presetConfig, JSON.parse(jsonData));
+        } catch (err) {
+            this.logger.error(
+                `[Andern] Error read file '${presetConfigFileName}'`
+            );
+            this.logger.error(err.message);
+        }
+
+        return presetConfig;
+    }
+
+    loadData(presetName: string): PresetData {
+        const presetDir = `${this.getPresetsDir()}/${presetName}`;
+        const presetData: PresetData = {
+            config: {},
+            gear: {},
+            weapon: {},
+            ammo: {},
+            modules: {},
+        };
+
+        try {
+            const files = fs.readdirSync(presetDir, { withFileTypes: true });
+            files.forEach((dir) => {
+                if (dir.isDirectory()) {
+                    const tierDirName = `${presetDir}/${dir.name}`;
+                    const tierName = dir.name;
+
+                    presetData.gear[tierName] = this.loadTierGear(tierDirName);
+                    presetData.ammo[tierName] = this.loadTierAmmo(tierDirName);
+                    presetData.modules[tierName] =
+                        this.loadTierModules(tierDirName);
+                    presetData.weapon[tierName] =
+                        this.loadTierWeapon(tierDirName);
+                }
+            });
+        } catch (err) {
+            this.logger.error(
+                `[Andern] Error reading directory: ${err.message}`
+            );
+        }
+
+        return presetData;
+    }
+
+    loadTierGear(tierDir: string): Gear {
         const gearFileName = `${tierDir}/gear.json`;
+        const gear = new Gear();
         try {
             const jsonData = fs.readFileSync(gearFileName, "utf-8");
-            this.gear[tier] = new Gear();
-            Object.assign(this.gear[tier], JSON.parse(jsonData));
+            Object.assign(gear, JSON.parse(jsonData));
         } catch (err) {
             this.logger.error(`[Andern] error read file '${gearFileName}'`);
             this.logger.error(err.message);
         }
+        return gear;
     }
 
-    loadTierAmmo(tier: string, tierDir: string): undefined {
+    loadTierAmmo(tierDir: string): Ammo {
         const ammoFileName = `${tierDir}/ammo.json`;
+        const ammo: Ammo = {};
         try {
             const jsonData = fs.readFileSync(ammoFileName, "utf-8");
-            this.ammo[tier] = {};
-            Object.assign(this.ammo[tier], JSON.parse(jsonData));
+            Object.assign(ammo, JSON.parse(jsonData));
         } catch (err) {
             this.logger.error(`[Andern] error read file '${ammoFileName}'`);
             this.logger.error(err.message);
         }
+        return ammo;
     }
 
-    loadTierModules(tier: string, tierDir: string): undefined {
+    loadTierModules(tierDir: string): Modules {
         const modulesFileName = `${tierDir}/modules.json`;
-        this.modules[tier] = {};
+        const modules: Modules = {};
         if (fs.existsSync(modulesFileName)) {
             try {
                 const jsonData = fs.readFileSync(modulesFileName, "utf-8");
-                Object.assign(this.modules[tier], JSON.parse(jsonData));
+                Object.assign(modules, JSON.parse(jsonData));
             } catch (err) {
                 this.logger.error(
                     `[Andern] error read file '${modulesFileName}'`
@@ -181,15 +236,14 @@ export class PresetData {
                 this.logger.error(err.message);
             }
         }
+        return modules;
     }
 
-    loadTierWeapon(tier: string, tierDir: string): undefined {
-        fs.readdir(tierDir, (err, files) => {
-            if (err) {
-                this.logger.error("Error reading directory: " + err.code);
-                return;
-            }
-            this.weapon[tier] = [];
+    loadTierWeapon(tierDir: string): WeaponPreset[] {
+        const weapon: WeaponPreset[] = [];
+
+        try {
+            const files = fs.readdirSync(tierDir);
 
             files
                 .filter((f) => f.endsWith(".json"))
@@ -211,7 +265,7 @@ export class PresetData {
                         const preset = new WeaponPreset();
                         Object.assign(preset, JSON.parse(jsonData));
                         if (this.isPresetValid(preset, fullWeaponPresetName)) {
-                            this.weapon[tier][path.parse(f).name] = preset;
+                            weapon.push(preset);
                         }
                     } catch (err) {
                         this.logger.error(
@@ -220,7 +274,13 @@ export class PresetData {
                         this.logger.error(err.message);
                     }
                 });
-        });
+        } catch (err) {
+            this.logger.error(
+                `[Andern] Error reading directory: ${err.message}`
+            );
+        }
+
+        return weapon;
     }
 
     isPresetValid(weaponPreset: WeaponPreset, fileName: string): boolean {
@@ -262,18 +322,34 @@ export class PresetData {
         return true;
     }
 
-    tierByLevel(level: number): string {
-        let result = Object.keys(this.presetConfig)[0];
+    tierByLevel(presetName: string, level: number): string {
+        const presetConfig = this.data[presetName].config;
+        let result = Object.keys(presetConfig)[0];
 
-        for (const tier in this.presetConfig) {
+        for (const tier in presetConfig) {
             if (
-                level >= this.presetConfig[tier].min &&
-                level <= this.presetConfig[tier].max
+                level >= presetConfig[tier].min &&
+                level <= presetConfig[tier].max
             ) {
                 result = tier;
                 break;
             }
         }
         return result;
+    }
+
+    getPresetName(): string {
+        const totalWeight = Object.values(this.presets).reduce(
+            (sum, item) => sum + item
+        );
+
+        let random = Math.random() * totalWeight;
+        for (const [name, weight] of Object.entries(this.presets)) {
+            random -= weight;
+            if (random <= 0) {
+                return name;
+            }
+        }
+        return Object.keys(this.presets)[0];
     }
 }

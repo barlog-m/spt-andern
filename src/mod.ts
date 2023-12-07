@@ -14,7 +14,7 @@ import { MemberCategory } from "@spt-aki/models/enums/MemberCategory";
 import { ISeasonalEventConfig } from "@spt-aki/models/spt/config/ISeasonalEventConfig";
 import { ModConfig } from "./ModConfig";
 import { DoeTrader } from "./DoeTrader";
-import { PresetData } from "./PresetData";
+import { Data } from "./Data";
 import { WeaponGenerator } from "./WeaponGenerator";
 import { GearGenerator } from "./GearGenerator";
 import registerInfoUpdater from "./registerInfoUpdater";
@@ -49,7 +49,7 @@ export class Andern implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
             lifecycle: Lifecycle.Singleton,
         });
 
-        container.register<PresetData>("AndernPresetData", PresetData, {
+        container.register<Data>("AndernData", Data, {
             lifecycle: Lifecycle.Singleton,
         });
 

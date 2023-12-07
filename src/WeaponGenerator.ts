@@ -18,7 +18,7 @@ import { IInventoryMagGen } from "@spt-aki/generators/weapongen/IInventoryMagGen
 import { EquipmentSlots } from "@spt-aki/models/enums/EquipmentSlots";
 
 import { GeneratedWeapon } from "./models";
-import { PresetData } from "./PresetData";
+import { Data } from "./Data";
 
 const MUZZLE_PAIRS = {
     //7.62x51 Tier 4
@@ -47,7 +47,6 @@ const MUZZLE_PAIRS = {
 @injectable()
 export class WeaponGenerator {
     private readonly magazineSlotId = "mod_magazine";
-    private readonly chamberSlotId = "patron_in_weapon";
 
     private readonly MK47 = "606587252535c57a13424cfd";
     private readonly X_47_DRUM = "5cfe8010d7ad1a59283b14c6";
@@ -69,7 +68,7 @@ export class WeaponGenerator {
         protected botGeneratorHelper: BotGeneratorHelper,
         @injectAll("InventoryMagGen")
         protected inventoryMagGenComponents: IInventoryMagGen[],
-        @inject("AndernPresetData") protected presetData: PresetData
+        @inject("AndernData") protected data: Data
     ) {
         this.pmcConfig = this.configServer.getConfig(ConfigTypes.PMC);
         this.repairConfig = this.configServer.getConfig(ConfigTypes.REPAIR);
@@ -258,12 +257,14 @@ export class WeaponGenerator {
     }
 
     alternateModules(
+        presetName: string,
         botLevel: number,
         weapon: Item[],
         weaponTpl: string
     ): undefined {
         weapon.forEach((item) => {
-            const alternativeTpl = this.presetData.getAlternativeModule(
+            const alternativeTpl = this.data.getAlternativeModule(
+                presetName,
                 botLevel,
                 item._tpl
             );
@@ -316,11 +317,15 @@ export class WeaponGenerator {
     }
 
     public generateWeapon(
+        presetName: string = "",
         botLevel: number,
         weaponParentId: string,
         isNight: boolean
     ): GeneratedWeapon {
-        const weaponWithMods = this.presetData.getRandomWeapon(botLevel);
+        if (presetName.length == 0) {
+            presetName = this.data.getPresetName();
+        }
+        const weaponWithMods = this.data.getRandomWeapon(presetName, botLevel);
         const weaponTpl = this.getTemplateIdFromWeaponItems(weaponWithMods);
         this.updateWeaponInfo(
             weaponWithMods,
@@ -328,11 +333,12 @@ export class WeaponGenerator {
             isNight,
             weaponTpl
         );
-        this.alternateModules(botLevel, weaponWithMods, weaponTpl);
+        this.alternateModules(presetName, botLevel, weaponWithMods, weaponTpl);
         this.addRandomEnhancement(weaponWithMods);
         const weaponTemplate = this.getTemplateById(weaponTpl);
         const caliber = this.getCaliberByTemplateId(weaponTpl);
-        const ammoTpl = this.presetData.getRandomAmmoByCaliber(
+        const ammoTpl = this.data.getRandomAmmoByCaliber(
+            presetName,
             botLevel,
             caliber
         );

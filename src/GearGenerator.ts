@@ -3,10 +3,10 @@ import { inject, injectable } from "tsyringe";
 import { ILogger } from "@spt-aki/models/spt/utils/ILogger";
 import { RandomUtil } from "@spt-aki/utils/RandomUtil";
 import { HashUtil } from "@spt-aki/utils/HashUtil";
-import { DatabaseServer } from "@spt-aki/servers/DatabaseServer";
 import { Inventory as PmcInventory } from "@spt-aki/models/eft/common/tables/IBotBase";
 import { IBotType } from "@spt-aki/models/eft/common/tables/IBotType";
 import { EquipmentSlots } from "@spt-aki/models/enums/EquipmentSlots";
+import { ItemHelper } from "@spt-aki/helpers/ItemHelper";
 import { BotGeneratorHelper } from "@spt-aki/helpers/BotGeneratorHelper";
 import { BotLootGenerator } from "@spt-aki/generators/BotLootGenerator";
 import { BotWeaponGenerator } from "@spt-aki/generators/BotWeaponGenerator";
@@ -15,7 +15,7 @@ import { GenerateWeaponResult } from "@spt-aki/models/spt/bots/GenerateWeaponRes
 import { RaidInfo } from "./RaidInfo";
 import { WeaponGenerator } from "./WeaponGenerator";
 import { isFactoryOrLab } from "./mapUtils";
-import { PresetData } from "./PresetData";
+import { Data } from "./Data";
 import { NightHeadwear } from "./NightHeadwear";
 import { GearItem } from "./models";
 
@@ -37,7 +37,7 @@ export class GearGenerator {
         @inject("WinstonLogger") protected logger: ILogger,
         @inject("HashUtil") protected hashUtil: HashUtil,
         @inject("RandomUtil") protected randomUtil: RandomUtil,
-        @inject("DatabaseServer") protected databaseServer: DatabaseServer,
+        @inject("ItemHelper") protected itemHelper: ItemHelper,
         @inject("BotGeneratorHelper")
         protected botGeneratorHelper: BotGeneratorHelper,
         @inject("BotLootGenerator")
@@ -48,7 +48,7 @@ export class GearGenerator {
         protected weaponGenerator: WeaponGenerator,
         @inject("AndernNightHeadwear")
         protected nightHeadwear: NightHeadwear,
-        @inject("AndernPresetData") protected presetData: PresetData
+        @inject("AndernData") protected data: Data
     ) {}
 
     generateInventoryBase(): PmcInventory {
@@ -100,61 +100,77 @@ export class GearGenerator {
         };
     }
 
-    getGearItem(botLevel: number, equipmentSlot: EquipmentSlots): GearItem {
+    getGearItem(
+        presetName: string,
+        botLevel: number,
+        equipmentSlot: EquipmentSlots
+    ): GearItem {
         switch (equipmentSlot) {
             case EquipmentSlots.EARPIECE: {
                 return this.weightedRandomGearItem(
-                    this.presetData.getGear(botLevel).headsets
+                    this.data.getGear(presetName, botLevel).headsets
                 );
             }
             case EquipmentSlots.HEADWEAR: {
                 return this.weightedRandomGearItem(
-                    this.presetData.getGear(botLevel).helmets
+                    this.data.getGear(presetName, botLevel).helmets
                 );
             }
             case EquipmentSlots.BACKPACK: {
                 return this.weightedRandomGearItem(
-                    this.presetData.getGear(botLevel).backpacks
+                    this.data.getGear(presetName, botLevel).backpacks
                 );
             }
             case EquipmentSlots.FACE_COVER: {
                 return this.weightedRandomGearItem(
-                    this.presetData.getGear(botLevel).face
+                    this.data.getGear(presetName, botLevel).face
                 );
             }
             case EquipmentSlots.EYEWEAR: {
                 return this.weightedRandomGearItem(
-                    this.presetData.getGear(botLevel).eyewear
+                    this.data.getGear(presetName, botLevel).eyewear
                 );
             }
             case EquipmentSlots.SCABBARD: {
                 return this.weightedRandomGearItem(
-                    this.presetData.getGear(botLevel).sheath
+                    this.data.getGear(presetName, botLevel).sheath
                 );
             }
         }
     }
 
     generateArmor(
+        presetName: string,
         botLevel: number,
         botRole: string,
         botInventory: PmcInventory
     ): undefined {
         if (this.randomUtil.getBool()) {
-            this.generateArmoredRig(botLevel, botRole, botInventory);
+            this.generateArmoredRig(
+                presetName,
+                botLevel,
+                botRole,
+                botInventory
+            );
         } else {
-            this.generateArmorVest(botLevel, botRole, botInventory);
-            this.generateTacticalVest(botLevel, botRole, botInventory);
+            this.generateArmorVest(presetName, botLevel, botRole, botInventory);
+            this.generateTacticalVest(
+                presetName,
+                botLevel,
+                botRole,
+                botInventory
+            );
         }
     }
 
     generateArmoredRig(
+        presetName: string,
         botLevel: number,
         botRole: string,
         botInventory: PmcInventory
     ): undefined {
         const armoredRig = this.weightedRandomGearItem(
-            this.presetData.getGear(botLevel).armoredRigs
+            this.data.getGear(presetName, botLevel).armoredRigs
         );
         this.putGearItemToInventory(
             EquipmentSlots.TACTICAL_VEST,
@@ -165,12 +181,13 @@ export class GearGenerator {
     }
 
     generateArmorVest(
+        presetName: string,
         botLevel: number,
         botRole: string,
         botInventory: PmcInventory
     ): undefined {
         const armor = this.weightedRandomGearItem(
-            this.presetData.getGear(botLevel).armor
+            this.data.getGear(presetName, botLevel).armor
         );
         this.putGearItemToInventory(
             EquipmentSlots.ARMOR_VEST,
@@ -181,12 +198,13 @@ export class GearGenerator {
     }
 
     generateTacticalVest(
+        presetName: string,
         botLevel: number,
         botRole: string,
         botInventory: PmcInventory
     ): undefined {
         const vest = this.weightedRandomGearItem(
-            this.presetData.getGear(botLevel).rigs
+            this.data.getGear(presetName, botLevel).rigs
         );
         this.putGearItemToInventory(
             EquipmentSlots.TACTICAL_VEST,
@@ -197,6 +215,7 @@ export class GearGenerator {
     }
 
     generateChad(
+        presetName: string,
         botRole: string,
         botInventory: PmcInventory,
         botLevel: number,
@@ -209,16 +228,25 @@ export class GearGenerator {
             : false;
 
         if (chance && isMapOk && botLevel >= config.chadsMinimumLevel) {
-            this.generateTacticalVest(botLevel, botRole, botInventory);
-            this.generateChadArmor(botRole, botInventory);
-            this.generateChadHelmet(botRole, botInventory);
+            this.generateTacticalVest(
+                presetName,
+                botLevel,
+                botRole,
+                botInventory
+            );
+            this.generateChadArmor(presetName, botRole, botInventory);
+            this.generateChadHelmet(presetName, botRole, botInventory);
             return true;
         }
 
         return false;
     }
 
-    generateChadArmor(botRole: string, botInventory: PmcInventory): undefined {
+    generateChadArmor(
+        presetName: string,
+        botRole: string,
+        botInventory: PmcInventory
+    ): undefined {
         const armorId = this.randomUtil.getBool() ? NFM_THOR : ZABRALO;
 
         this.putGearItemToInventory(
@@ -229,7 +257,11 @@ export class GearGenerator {
         );
     }
 
-    generateChadHelmet(botRole: string, botInventory: PmcInventory): undefined {
+    generateChadHelmet(
+        presetName: string,
+        botRole: string,
+        botInventory: PmcInventory
+    ): undefined {
         const helmetId = this.randomUtil.getBool() ? RYS_HELMET : ALTYN_HELMET;
 
         const helmetItemId = this.putGearItemToInventory(
@@ -252,12 +284,13 @@ export class GearGenerator {
     }
 
     generateGearItem(
+        presetName: string,
         botLevel: number,
         botRole: string,
         botInventory: PmcInventory,
         equipmentSlot: EquipmentSlots
     ): GearItem {
-        const gearItem = this.getGearItem(botLevel, equipmentSlot);
+        const gearItem = this.getGearItem(presetName, botLevel, equipmentSlot);
         const equipmentItemTpl = gearItem.id;
         this.putGearItemToInventory(
             equipmentSlot,
@@ -275,8 +308,14 @@ export class GearGenerator {
         equipmentItemTpl: string
     ): string {
         const id = this.hashUtil.generate();
-        const itemTemplate =
-            this.databaseServer.getTables().templates.items[equipmentItemTpl];
+
+        const [isItemExists, itemTemplate] =
+            this.itemHelper.getItem(equipmentItemTpl);
+        if (!isItemExists) {
+            this.logger.error(
+                `[Andern] wrong template id ${equipmentItemTpl} for slot HEADWEAR`
+            );
+        }
 
         let extraProps;
         try {
@@ -310,8 +349,14 @@ export class GearGenerator {
         parentId: string
     ): string {
         const id = this.hashUtil.generate();
-        const itemTemplate =
-            this.databaseServer.getTables().templates.items[equipmentItemTpl];
+
+        const [isItemExists, itemTemplate] =
+            this.itemHelper.getItem(equipmentItemTpl);
+        if (!isItemExists) {
+            this.logger.error(
+                `[Andern] wrong template id ${equipmentItemTpl} for slot HEADWEAR`
+            );
+        }
 
         const item = {
             _id: id,
@@ -350,6 +395,7 @@ export class GearGenerator {
         botLevel: number,
         raidInfo: RaidInfo
     ): PmcInventory {
+        const presetName = this.data.getPresetName();
         const botInventory = this.generateInventoryBase();
 
         this.putGearItemToInventory(
@@ -366,11 +412,20 @@ export class GearGenerator {
             this.SECURED_CONTAINER_BOSS
         );
 
-        if (!this.generateChad(botRole, botInventory, botLevel, raidInfo)) {
+        if (
+            !this.generateChad(
+                presetName,
+                botRole,
+                botInventory,
+                botLevel,
+                raidInfo
+            )
+        ) {
             if (raidInfo.isNight) {
-                this.generateNightHeadwear(botLevel, botInventory);
+                this.generateNightHeadwear(botLevel, botRole, botInventory);
 
                 this.generateGearItem(
+                    presetName,
                     botLevel,
                     botRole,
                     botInventory,
@@ -378,6 +433,7 @@ export class GearGenerator {
                 );
             } else {
                 const helmGearItem = this.generateGearItem(
+                    presetName,
                     botLevel,
                     botRole,
                     botInventory,
@@ -393,6 +449,7 @@ export class GearGenerator {
                     );
                 } else {
                     this.generateGearItem(
+                        presetName,
                         botLevel,
                         botRole,
                         botInventory,
@@ -401,28 +458,33 @@ export class GearGenerator {
                 }
             }
 
-            this.generateArmor(botLevel, botRole, botInventory);
+            this.generateArmor(presetName, botLevel, botRole, botInventory);
 
             this.generateGearItem(
+                presetName,
                 botLevel,
                 botRole,
                 botInventory,
                 EquipmentSlots.EYEWEAR
             );
         }
+
         this.generateGearItem(
+            presetName,
             botLevel,
             botRole,
             botInventory,
             EquipmentSlots.BACKPACK
         );
         this.generateGearItem(
+            presetName,
             botLevel,
             botRole,
             botInventory,
             EquipmentSlots.FACE_COVER
         );
         this.generateGearItem(
+            presetName,
             botLevel,
             botRole,
             botInventory,
@@ -430,6 +492,7 @@ export class GearGenerator {
         );
 
         const generatedWeapon = this.weaponGenerator.generateWeapon(
+            presetName,
             botLevel,
             botInventory.equipment,
             raidInfo.isNight
@@ -471,8 +534,13 @@ export class GearGenerator {
 
     generateNightHeadwear(
         botLevel: number,
+        botRole: string,
         botInventory: PmcInventory
     ): undefined {
-        this.nightHeadwear.generateNightHeadwear(botLevel, botInventory);
+        this.nightHeadwear.generateNightHeadwear(
+            botLevel,
+            botRole,
+            botInventory
+        );
     }
 }

@@ -5,6 +5,7 @@ import { Item } from "@spt-aki/models/eft/common/tables/IItem";
 import { HashUtil } from "@spt-aki/utils/HashUtil";
 import { ItemHelper } from "@spt-aki/helpers/ItemHelper";
 import { EquipmentSlots } from "@spt-aki/models/enums/EquipmentSlots";
+import { BotGeneratorHelper } from "@spt-aki/helpers/BotGeneratorHelper";
 
 const NVG_SLOT_ID = "mod_nvg";
 
@@ -23,42 +24,60 @@ export class NightHeadwear {
     constructor(
         @inject("WinstonLogger") protected logger: ILogger,
         @inject("HashUtil") protected hashUtil: HashUtil,
-        @inject("ItemHelper") protected itemHelper: ItemHelper
+        @inject("ItemHelper") protected itemHelper: ItemHelper,
+        @inject("BotGeneratorHelper")
+        protected botGeneratorHelper: BotGeneratorHelper
     ) {
-        this.logger.info("[Andern] Bot Headwear Changes enabled");
+        this.logger.info("[Andern] PMC Bot Headwear Changes enabled");
     }
 
-    tierOneHeadwearWithNvg(pmcInventory: PmcInventory): undefined {
+    tierOneHeadwearWithNvg(
+        botRole: string,
+        pmcInventory: PmcInventory
+    ): undefined {
         const [items, headwearId] = this.replaceHeadwear(
             pmcInventory.items,
-            _6B47_RATNIK_BSH_HELMET
+            _6B47_RATNIK_BSH_HELMET,
+            botRole
         );
         this.addTierTwoNightVision(items, headwearId);
         pmcInventory.items = items;
     }
 
-    tierTwoHeadwearWithNvg(pmcInventory: PmcInventory): undefined {
+    tierTwoHeadwearWithNvg(
+        botRole: string,
+        pmcInventory: PmcInventory
+    ): undefined {
         const [items, headwearId] = this.replaceHeadwear(
             pmcInventory.items,
-            MSA_ACH_TC_2001_MICH_SERIES_HELMET
+            MSA_ACH_TC_2001_MICH_SERIES_HELMET,
+            botRole
         );
         this.addTierTwoNightVision(items, headwearId);
         pmcInventory.items = items;
     }
 
-    tierThreeHeadwearWithNvg(pmcInventory: PmcInventory): undefined {
+    tierThreeHeadwearWithNvg(
+        botRole: string,
+        pmcInventory: PmcInventory
+    ): undefined {
         const [items, headwearId] = this.replaceHeadwear(
             pmcInventory.items,
-            OPS_CORE_FAST_MT_SUPER_HIGH_CUT_HELMET
+            OPS_CORE_FAST_MT_SUPER_HIGH_CUT_HELMET,
+            botRole
         );
         this.addNightVision(items, headwearId, GPNVG_18_NIGHT_VISION_GOGGLES);
         pmcInventory.items = items;
     }
 
-    tierFourHeadwearWithNvg(pmcInventory: PmcInventory): undefined {
+    tierFourHeadwearWithNvg(
+        botRole: string,
+        pmcInventory: PmcInventory
+    ): undefined {
         const [items, headwearId] = this.replaceHeadwear(
             pmcInventory.items,
-            CRYE_PRECISION_AIRFRAME_HELMET_TAN
+            CRYE_PRECISION_AIRFRAME_HELMET_TAN,
+            botRole
         );
         this.addNightVision(items, headwearId, GPNVG_18_NIGHT_VISION_GOGGLES);
         pmcInventory.items = items;
@@ -66,11 +85,17 @@ export class NightHeadwear {
 
     replaceHeadwear(
         inventoryItems: Item[],
-        headwearTemplateId: string
+        headwearTemplateId: string,
+        botRole: string
     ): [Item[], string] {
         const rootId = inventoryItems[0]._id;
         const items = this.deleteHeadwear(inventoryItems);
-        const headwearId = this.addHeadwear(items, rootId, headwearTemplateId);
+        const headwearId = this.addHeadwear(
+            items,
+            rootId,
+            headwearTemplateId,
+            botRole
+        );
         return [items, headwearId];
     }
 
@@ -116,16 +141,44 @@ export class NightHeadwear {
         return filteredItems;
     }
 
-    addHeadwear(items: Item[], rootId: string, timplateId: string): string {
+    addHeadwear(
+        items: Item[],
+        rootId: string,
+        equipmentItemTpl: string,
+        botRole: string
+    ): string {
+        const id = this.hashUtil.generate();
+
+        const [isItemExists, itemTemplate] =
+            this.itemHelper.getItem(equipmentItemTpl);
+        if (!isItemExists) {
+            this.logger.error(
+                `[Andern] wrong template id ${equipmentItemTpl} for slot HEADWEAR`
+            );
+        }
+
+        let extraProps;
+        try {
+            extraProps = this.botGeneratorHelper.generateExtraPropertiesForItem(
+                itemTemplate,
+                botRole
+            );
+        } catch (e) {
+            this.logger.error(
+                `[Andern] wrong template id ${equipmentItemTpl} for slot HEADWEAR`
+            );
+        }
+
         const headwearItem: Item = {
-            _id: this.hashUtil.generate(),
-            _tpl: timplateId,
+            _id: id,
+            _tpl: equipmentItemTpl,
             parentId: rootId,
             slotId: EquipmentSlots.HEADWEAR,
+            ...extraProps,
         };
 
         items.push(headwearItem);
-        return headwearItem._id;
+        return id;
     }
 
     addNightVision(
@@ -163,16 +216,17 @@ export class NightHeadwear {
 
     public generateNightHeadwear(
         botLevel: number,
+        botRole: string,
         botInventory: PmcInventory
     ): undefined {
         if (botLevel < 15) {
-            this.tierOneHeadwearWithNvg(botInventory);
+            this.tierOneHeadwearWithNvg(botRole, botInventory);
         } else if (botLevel >= 15 && botLevel < 28) {
-            this.tierTwoHeadwearWithNvg(botInventory);
+            this.tierTwoHeadwearWithNvg(botRole, botInventory);
         } else if (botLevel >= 28 && botLevel < 40) {
-            this.tierThreeHeadwearWithNvg(botInventory);
+            this.tierThreeHeadwearWithNvg(botRole, botInventory);
         } else {
-            this.tierFourHeadwearWithNvg(botInventory);
+            this.tierFourHeadwearWithNvg(botRole, botInventory);
         }
     }
 }

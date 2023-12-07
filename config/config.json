@@ -1,5 +1,9 @@
 {
-    "preset": "meta",
+    "presets": {
+        "meta": 1,
+        "live": 0,
+        "test": 0
+    },
     "pmcLevels": true,
     "pmcGear": true,
     "pmcBotLevelDownDelta": 10,
