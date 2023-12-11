@@ -17,12 +17,13 @@ import { DoeTrader } from "./DoeTrader";
 import { Data } from "./Data";
 import { WeaponGenerator } from "./WeaponGenerator";
 import { GearGenerator } from "./GearGenerator";
+import { GearGeneratorHelper } from "./GearGeneratorHelper";
+import { HelmetGenerator } from "./HelmetGenerator";
 import registerInfoUpdater from "./registerInfoUpdater";
 import registerBotLevelGenerator from "./registerBotLevelGenerator";
 import registerBotInventoryGenerator from "./registerBotInventoryGenerator";
 import registerBotWeaponGenerator from "./registerBotWeaponGenerator";
 import { RaidInfo } from "./RaidInfo";
-import { NightHeadwear } from "./NightHeadwear";
 import { lootConfig } from "./lootUtils";
 import { mapBotTuning, setPmcForceHealingItems } from "./mapBotTuning";
 import * as config from "../config/config.json";
@@ -53,17 +54,25 @@ export class Andern implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
             lifecycle: Lifecycle.Singleton,
         });
 
-        container.register<NightHeadwear>(
-            "AndernNightHeadwear",
-            NightHeadwear,
+        container.register<WeaponGenerator>(
+            "AndernWeaponGenerator",
+            WeaponGenerator,
             {
                 lifecycle: Lifecycle.Singleton,
             }
         );
 
-        container.register<WeaponGenerator>(
-            "AndernWeaponGenerator",
-            WeaponGenerator,
+        container.register<GearGeneratorHelper>(
+            "AndernGearGeneratorHelper",
+            GearGeneratorHelper,
+            {
+                lifecycle: Lifecycle.Singleton,
+            }
+        );
+
+        container.register<HelmetGenerator>(
+            "AndernHelmetGenerator",
+            HelmetGenerator,
             {
                 lifecycle: Lifecycle.Singleton,
             }

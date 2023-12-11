@@ -4,9 +4,6 @@ import { ILogger } from "@spt-aki/models/spt/utils/ILogger";
 import { Item } from "@spt-aki/models/eft/common/tables/IItem";
 import { RandomUtil } from "@spt-aki/utils/RandomUtil";
 import { HashUtil } from "@spt-aki/utils/HashUtil";
-import { Inventory as PmcInventory } from "@spt-aki/models/eft/common/tables/IBotBase";
-
-import { NightHeadwear } from "./NightHeadwear";
 import {
     PresetData,
     PresetConfig,
@@ -28,18 +25,9 @@ export class Data {
         @inject("WinstonLogger") protected logger: ILogger,
         @inject("HashUtil") protected hashUtil: HashUtil,
         @inject("RandomUtil") protected randomUtil: RandomUtil,
-        @inject("AndernNightHeadwear")
-        protected nightHeadwear: NightHeadwear,
         @inject("AndernModPath") protected modPath: string
     ) {
         this.load();
-    }
-
-    public generateNightHeadwear(
-        botRole: string,
-        botInventory: PmcInventory
-    ): undefined {
-        this.nightHeadwear.tierOneHeadwearWithNvg(botRole, botInventory);
     }
 
     public getRandomAmmoByCaliber(
@@ -117,32 +105,19 @@ export class Data {
     }
 
     load(): undefined {
-        for (const presetName of this.readAllPresetsList()) {
+        for (const [presetName, presetWeight] of this.readAllPresetsList()) {
             const config = this.loadPresetConfig(presetName);
             const presetData = this.loadData(presetName);
             presetData.config = config;
             this.data[presetName] = presetData;
+            this.logger.info(`[Andern] Loaded preset '${presetName}'`);
         }
     }
 
-    readAllPresetsList(): string[] {
-        const presetsDir = this.getPresetsDir();
-        const presetNames: string[] = [];
-
-        try {
-            const files = fs.readdirSync(presetsDir, { withFileTypes: true });
-            files.forEach((dir) => {
-                if (dir.isDirectory()) {
-                    presetNames.push(dir.name);
-                }
-            });
-        } catch (err) {
-            this.logger.error(
-                `[Andern] Error reading directory: ${err.message}`
-            );
-        }
-
-        return presetNames;
+    readAllPresetsList(): [string, number][] {
+        return Object.entries(this.presets).filter(([name, weight]) => {
+            return weight > 0;
+        });
     }
 
     loadPresetConfig(presetName: string): PresetConfig {

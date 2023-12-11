@@ -33,9 +33,24 @@
             "name": "Ops-Core FAST MT Super High Cut helmet (Black)"
         },
         {
+            "weight": 2,
+            "id": "5e4bfc1586f774264f7582d3",
+            "name": "MSA Gallet TC 800 High Cut combat helmet"
+        },
+        {
+            "weight": 2,
+            "id": "5ea17ca01412a1425304d1c0",
+            "name": "Diamond Age Bastion helmet"
+        },
+        {
+            "weight": 2,
+            "id": "5d5e9c74a4b9364855191c40",
+            "name": "MSA ACH TC-2002 MICH Series helmet"
+        },
+        {
             "weight": 1,
-            "id": "5e00c1ad86f774747333222c",
-            "name": "Team Wendy EXFIL Ballistic Helmet (Black)"
+            "id": "5f60b34a41e30a4ab12a6947",
+            "name": "Galvion Caiman Hybrid helmet"
         },
         {
             "weight": 1,
@@ -216,5 +231,7 @@
             "id": "5c0126f40db834002a125382",
             "name": "Red Rebel ice pick"
         }
-    ]
+    ],
+    "chadHelmets": [],
+    "chadArmor": []
 }

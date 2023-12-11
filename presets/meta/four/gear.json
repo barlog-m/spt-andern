@@ -28,6 +28,16 @@
             "name": "Crye Precision AirFrame helmet (Tan)"
         },
         {
+            "weight": 2,
+            "id": "5e00c1ad86f774747333222c",
+            "name": "Team Wendy EXFIL Ballistic Helmet (Black)"
+        },
+        {
+            "weight": 1,
+            "id": "5e01ef6886f77445f643baa4",
+            "name": "Team Wendy EXFIL Ballistic Helmet (Coyote Brown)"
+        },
+        {
             "weight": 1,
             "id": "5ac8d6885acfc400180ae7b0",
             "name": "Ops-Core FAST MT Super High Cut helmet (Tan)"
@@ -36,16 +46,6 @@
             "weight": 1,
             "id": "5a154d5cfcdbcb001a3b00da",
             "name": "Ops-Core FAST MT Super High Cut helmet (Black)"
-        },
-        {
-            "weight": 1,
-            "id": "5e00c1ad86f774747333222c",
-            "name": "Team Wendy EXFIL Ballistic Helmet (Black)"
-        },
-        {
-            "weight": 1,
-            "id": "5e01ef6886f77445f643baa4",
-            "name": "Team Wendy EXFIL Ballistic Helmet (Coyote Brown)"
         }
     ],
     "armoredRigs": [
@@ -250,6 +250,30 @@
             "weight": 1,
             "id": "601948682627df266209af05",
             "name": "UVSR Taiga-1 survival machete"
+        }
+    ],
+    "chadHelmets": [
+        {
+            "weight": 1,
+            "id": "5aa7e276e5b5b000171d0647",
+            "name": "Altyn bulletproof helmet"
+        },
+        {
+            "weight": 1,
+            "id": "5f60c74e3b85f6263c145586",
+            "name": "Rys-T bulletproof helmet"
+        }
+    ],
+    "chadArmor": [
+        {
+            "weight": 1,
+            "id": "545cdb794bdc2d3a198b456a",
+            "name": "6B43 6A Zabralo-Sh body armor"
+        },
+        {
+            "weight": 1,
+            "id": "60a283193cb70855c43a381d",
+            "name": "NFM THOR Integrated Carrier body armor"
         }
     ]
 }

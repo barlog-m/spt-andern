@@ -371,5 +371,29 @@
             "id": "601948682627df266209af05",
             "name": "UVSR Taiga-1 survival machete"
         }
+    ],
+    "chadHelmets": [
+        {
+            "weight": 1,
+            "id": "5aa7e276e5b5b000171d0647",
+            "name": "Altyn bulletproof helmet"
+        },
+        {
+            "weight": 1,
+            "id": "5f60c74e3b85f6263c145586",
+            "name": "Rys-T bulletproof helmet"
+        }
+    ],
+    "chadArmor": [
+        {
+            "weight": 1,
+            "id": "545cdb794bdc2d3a198b456a",
+            "name": "6B43 6A Zabralo-Sh body armor"
+        },
+        {
+            "weight": 1,
+            "id": "60a283193cb70855c43a381d",
+            "name": "NFM THOR Integrated Carrier body armor"
+        }
     ]
 }
