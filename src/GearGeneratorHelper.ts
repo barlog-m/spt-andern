@@ -94,4 +94,23 @@ export class GearGeneratorHelper {
         botInventory.items.push(item);
         return id;
     }
+
+    public replaceEarpiece(tpl: string): string {
+        // "Peltor ComTac 2 headset" -> "OPSMEN Earmor M32 headset"
+        if (tpl === "5645bcc04bdc2d363b8b4572") {
+            return "6033fa48ffd42c541047f728";
+        }
+
+        // "Peltor Tactical Sport headset" -> "OPSMEN Earmor M32 headset"
+        if (tpl === "5c165d832e2216398b5a7e36") {
+            return "6033fa48ffd42c541047f728";
+        }
+
+        // "MSA Sordin Supreme PRO-X/L active headset" -> "Walkers Razor Digital headset"
+        if (tpl === "5aa2ba71e5b5b000137b758f") {
+            return "5e4d34ca86f774264f758330";
+        }
+
+        return tpl;
+    }
 }

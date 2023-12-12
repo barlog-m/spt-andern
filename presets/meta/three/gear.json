@@ -7,6 +7,11 @@
         },
         {
             "weight": 1,
+            "id": "5aa2ba71e5b5b000137b758f",
+            "name": "MSA Sordin Supreme PRO-X/L active headset"
+        },
+        {
+            "weight": 1,
             "id": "6033fa48ffd42c541047f728",
             "name": "OPSMEN Earmor M32 headset"
         },
@@ -14,11 +19,6 @@
             "weight": 1,
             "id": "5645bcc04bdc2d363b8b4572",
             "name": "Peltor ComTac 2 headset"
-        },
-        {
-            "weight": 1,
-            "id": "5aa2ba71e5b5b000137b758f",
-            "name": "MSA Sordin Supreme PRO-X/L active headset"
         }
     ],
     "helmets": [

@@ -302,29 +302,53 @@ export class GearGenerator {
         return gearItem;
     }
 
-    generateHeadwearItem(
+    generateHeadwearAndEarpieceItem(
         presetName: string,
         botLevel: number,
         botRole: string,
         botInventory: PmcInventory,
         isNight: boolean
-    ): GearItem {
-        const gearItem = this.getGearItem(
+    ): undefined {
+        const headwearItem = this.getGearItem(
             presetName,
             botLevel,
             EquipmentSlots.HEADWEAR
         );
-        const equipmentItemTpl = gearItem.id;
 
-        this.helmetGenerator.generateHelmet(
+        const isEarpiceCompatable = this.helmetGenerator.generateHelmet(
             botLevel,
             botRole,
             botInventory,
-            equipmentItemTpl,
+            headwearItem.id,
             isNight
         );
 
-        return gearItem;
+        // for "SSh-68 steel helmet" only one earpiece "GSSh-01 active headset"
+        if (headwearItem.id === "5c06c6a80db834001b735491") {
+            this.gearGeneratorHelper.putGearItemToInventory(
+                EquipmentSlots.EARPIECE,
+                botRole,
+                botInventory,
+                "5b432b965acfc47a8774094e"
+            );
+        } else {
+            const earpieceItem = this.getGearItem(
+                presetName,
+                botLevel,
+                EquipmentSlots.EARPIECE
+            );
+
+            const earpieceTpl = isEarpiceCompatable
+                ? earpieceItem.id
+                : this.gearGeneratorHelper.replaceEarpiece(earpieceItem.id);
+
+            this.gearGeneratorHelper.putGearItemToInventory(
+                EquipmentSlots.EARPIECE,
+                botRole,
+                botInventory,
+                earpieceTpl
+            );
+        }
     }
 
     weightedRandomGearItem(items: GearItem[]): GearItem {
@@ -373,31 +397,13 @@ export class GearGenerator {
                 raidInfo
             )
         ) {
-            const helmGearItem = this.generateHeadwearItem(
+            this.generateHeadwearAndEarpieceItem(
                 presetName,
                 botLevel,
                 botRole,
                 botInventory,
                 raidInfo.isNight
             );
-
-            if (helmGearItem.name === "SSh-68 steel helmet") {
-                const equipmentItemTpl = "5b432b965acfc47a8774094e";
-                this.gearGeneratorHelper.putGearItemToInventory(
-                    EquipmentSlots.EARPIECE,
-                    botRole,
-                    botInventory,
-                    equipmentItemTpl
-                );
-            } else {
-                this.generateGearItem(
-                    presetName,
-                    botLevel,
-                    botRole,
-                    botInventory,
-                    EquipmentSlots.EARPIECE
-                );
-            }
 
             this.generateArmor(presetName, botLevel, botRole, botInventory);
 

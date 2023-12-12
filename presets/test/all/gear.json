@@ -6,19 +6,14 @@
             "name": "Peltor ComTac 4 Hybrid headset"
         },
         {
-            "weight": 2,
-            "id": "5c165d832e2216398b5a7e36",
-            "name": "Peltor Tactical Sport headset"
+            "weight": 1,
+            "id": "5f60cd6cf2bcbb675b00dac6",
+            "name": "Walker's XCEL 500BT Digital headset"
         },
         {
             "weight": 1,
             "id": "5e4d34ca86f774264f758330",
             "name": "Walkers Razor Digital headset"
-        },
-        {
-            "weight": 1,
-            "id": "5aa2ba71e5b5b000137b758f",
-            "name": "MSA Sordin Supreme PRO-X/L active headset"
         }
     ],
     "helmets": [
