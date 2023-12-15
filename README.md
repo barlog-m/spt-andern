@@ -127,6 +127,8 @@ Works only if `mapBotSettings` set to true.
 
 `lootingBotsCompatibility` disable loot generation in PMC's backpack for compatibility with Looting Bots mod. Works only if `pmcGear` enabled.
 
+`scavCaseLootValueMultiplier` multiplies each value range to improve Scav Case loot.
+
 ## Installation
 
 Put folder `BarlogM-Andern` from zip file into your `user/mods` folder

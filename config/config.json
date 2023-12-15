@@ -19,6 +19,7 @@
     "chadsMinimumLevel": 42,
     "looseLootMultiplier": 1.4,
     "staticLootMultiplier": 4,
+    "scavCaseLootValueMultiplier": 10,
     "looseLootKeyAndCardsSettings": true,
     "looseLootKeysRelativeProbabilityThreshold": 3,
     "looseLootKeysRelativeProbabilityMultiplier": 20,

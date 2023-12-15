@@ -10,6 +10,7 @@ import { IDatabaseTables } from "@spt-aki/models/spt/server/IDatabaseTables";
 import { ILocations } from "@spt-aki/models/spt/server/ILocations";
 import { IStaticLootDetails } from "@spt-aki/models/eft/common/tables/ILootBase";
 import { Item } from "@spt-aki/models/eft/common/tables/IItem";
+import { IScavCaseConfig } from "@spt-aki/models/spt/config/IScavCaseConfig";
 
 import config from "../config/config.json";
 
@@ -17,6 +18,7 @@ export function lootConfig(container: DependencyContainer): undefined {
     const databaseServer: DatabaseServer =
         container.resolve<DatabaseServer>("DatabaseServer");
     setLootMultiplier(container);
+    setScavCaseLootValueMultiplier(container);
 
     if (config.looseLootKeyAndCardsSettings) {
         increaseKeysSpawnChance(container, databaseServer);
@@ -146,4 +148,22 @@ function increaseKeysSpawnChance(
 
     increaseStaticLootKeysSpawnChance(staticLootDistribution, itemHelper);
     increaseLooseLootKeysAndCardsSpawnChance(locations, itemHelper);
+}
+
+function setScavCaseLootValueMultiplier(
+    container: DependencyContainer
+): undefined {
+    const configServer = container.resolve<ConfigServer>("ConfigServer");
+    const scavCaseConfig = configServer.getConfig<IScavCaseConfig>(
+        ConfigTypes.SCAVCASE
+    );
+
+    scavCaseConfig.allowBossItemsAsRewards = true;
+
+    for (const valueRange in scavCaseConfig.rewardItemValueRangeRub) {
+        scavCaseConfig.rewardItemValueRangeRub[valueRange].min *=
+            config.scavCaseLootValueMultiplier;
+        scavCaseConfig.rewardItemValueRangeRub[valueRange].max *=
+            config.scavCaseLootValueMultiplier;
+    }
 }
