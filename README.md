@@ -7,11 +7,11 @@
 
 Idea of this mod is to rebalance a bit the game for better single player experience.
 
-* Give PMC bots decent weapon from handmade presets.
+* Gives PMC bots decent weapon from handmade presets.
 
-* Give PMC good gear. Every PMC wear armor, helmet, rig, headphones, face cover and glasses.
+* Gives PMC good gear. Every PMC wear armor, helmet, rig, headphones, face cover and glasses.
 
-* Generate PMC with levels in configurable range.
+* Generates PMC with levels in configurable range.
 
 * Add trader that sell you couple weapon modules to make weapon until level 15 a bit less crap. And sells you keys for quests witch hard to find because of high randomness of loot in the game.
 
@@ -37,11 +37,11 @@ Tactical device is not obligatory anymore.
 
 Mod support any weapon: shotguns, pistols, revolvers, grenade launchers etc.
 
-At night raids tactical device replaced to [Zenit Klesch-2IKS](https://escapefromtarkov.fandom.com/wiki/Zenit_Klesch-2IKS_IR_illuminator_with_laser)
+At night raids tactical device replaced to infrared one.
 
 At night raids all PMC wear helmets with night vision googles.
 
-PMC wear gear from gear.json for their level.
+PMC wears gear from gear.json for their level.
 
 ## PMC Bots Level configuration
 
@@ -75,7 +75,7 @@ Settings in config 'chadsOnFactoryAndLabOnly', 'chadsPercentage' and 'chadsMinim
 
 ## Keys spawn settings
 
-`looseLootKeyAndCardsSettings` disable or enable any keys and keycards settings
+`looseLootKeyAndCardsSettings` disables or enable any keys and keycards settings
 
 `looseLootKeysRelativeProbabilityThreshold` modified only keys with multiplier below this value. Some keys already has high relative probability chance. Mod don't increase probability for keys above this value because places for loose loot are limited.
 
@@ -91,19 +91,19 @@ Settings in config 'chadsOnFactoryAndLabOnly', 'chadsPercentage' and 'chadsMinim
 
 Works only if `mapBotSettings` set to true.
 
-`mapMaxBotBuffMultiplier` increase or decrease amount of bots on maps.
+`mapMaxBotBuffMultiplier` increases or decreases amount of bots on maps.
 
-`mapMaxBotBuffExcludeFactory` exclude Factory from max bot buff multiplier.
+`mapMaxBotBuffExcludeFactory` excludes Factory from max bot buff multiplier.
 
-`mapMaxBotBuffExcludeLab` exclude Lab from max bot buff multiplier,
+`mapMaxBotBuffExcludeLab` excludes Lab from max bot buff multiplier,
 
-`mapMaxBotBuffExcludeStreets` exclude Streets from max bot buff multiplier,
+`mapMaxBotBuffExcludeStreets` excludes Streets from max bot buff multiplier,
 
 `mapStreetsMaxBotCap` maximum bot capacity for Streets. Ignored if 0,
 
 `mapPmcBotDifficulty` "easy", "normal", "hard", "impossible"
 
-`mapBotAccuracyMultiplier` decrease bot accuracy and increase scattering.
+`mapBotAccuracyMultiplier` decreases bot accuracy and increase scattering.
 
 `mapBossChanceBuff` add or remove percent for existing boss chance. For example if map boss chance is 35 and you set this parameter to 20 then boss chance will be 35 + 20.
 
@@ -111,17 +111,17 @@ Works only if `mapBotSettings` set to true.
 
 `mapMakePmcAlwaysHostile` by default in SPT-AKI 20% chance that PMC is friendly to player. This setting set this chance to 0.
 
-`mapDisableRogueConvertToPmc` disable converting rogues to PMC.
+`mapDisableRogueConvertToPmc` disables converting rogues to PMC.
 
-`mapDisableRaiderConvertToPmc` disable converting raiders to PMC.
+`mapDisableRaiderConvertToPmc` disables converting raiders to PMC.
 
 `mapPmcBrainsConfig` if set to "default" then does nothing. Loads `brains/[value].json` file with config which brain will be selected as PMC brain. For example "noboss" will load `brains/noboss.json` as brains config.
 
 ## Other settings
 
-`disablePmcBackpackWeapon` disable chance that PMC can have extra weapon in their backpack.
+`disablePmcBackpackWeapon` disables chance that PMC can have extra weapon in their backpack.
 
-`disableEmissaryPmcBots` disable chance that PMC can have any type of accounts other than user (purple, green names etc).
+`disableEmissaryPmcBots` disables chance that PMC can have any type of accounts other than user (purple, green names etc).
 
 `disableSeasonalEvents` disables all seasonal events like halloween etc.
 
