@@ -1,81 +1,77 @@
 {
-  "type": "weapon",
-  "id": "c1e35fcbd88bcc83bada1cd6",
-  "name": "Glock 17 T",
-  "root": "ef605694fb59a27cdf28207f",
-  "items": [
-    {
-      "_id": "ef605694fb59a27cdf28207f",
-      "_tpl": "5a7ae0c351dfba0017554310",
-      "upd": {
-        "Repairable": {
-          "MaxDurability": 100,
-          "Durability": 100
+    "type": "weapon",
+    "id": "c1e35fcbd88bcc83bada1cd6",
+    "name": "Glock 17 T",
+    "root": "ef605694fb59a27cdf28207f",
+    "items": [
+        {
+            "_id": "ef605694fb59a27cdf28207f",
+            "_tpl": "5a7ae0c351dfba0017554310",
+            "upd": {
+                "Repairable": {
+                    "MaxDurability": 100,
+                    "Durability": 100
+                },
+                "FireMode": {
+                    "FireMode": "single"
+                }
+            }
         },
-        "FireMode": {
-          "FireMode": "single"
+        {
+            "_id": "4ae9db5b732f6ad6f73eb0a7",
+            "_tpl": "5a6b5e468dc32e001207faf5",
+            "parentId": "ef605694fb59a27cdf28207f",
+            "slotId": "mod_barrel"
+        },
+        {
+            "_id": "aacd2806a36943d0ad928c07",
+            "_tpl": "5a7b4960e899ef197b331a2d",
+            "parentId": "ef605694fb59a27cdf28207f",
+            "slotId": "mod_pistol_grip"
+        },
+        {
+            "_id": "c6fa3a583190fc6c294b1b48",
+            "_tpl": "5a71e22f8dc32e00094b97f4",
+            "parentId": "ef605694fb59a27cdf28207f",
+            "slotId": "mod_reciever"
+        },
+        {
+            "_id": "9956241dca634b228569daf8",
+            "_tpl": "5a7ad2e851dfba0016153692",
+            "parentId": "ef605694fb59a27cdf28207f",
+            "slotId": "mod_magazine"
+        },
+        {
+            "_id": "f92e023acd316a4f93989ee5",
+            "_tpl": "5a7ad74e51dfba0015068f45",
+            "parentId": "ef605694fb59a27cdf28207f",
+            "slotId": "mod_tactical"
+        },
+        {
+            "_id": "7fc6e5bc8e8dd30160036a2f",
+            "_tpl": "5a32aa8bc4a2826c6e06d737",
+            "parentId": "c6fa3a583190fc6c294b1b48",
+            "slotId": "mod_scope",
+            "upd": {
+                "Sight": {
+                    "ScopesCurrentCalibPointIndexes": [0],
+                    "ScopesSelectedModes": [0],
+                    "SelectedScope": 0
+                }
+            }
+        },
+        {
+            "_id": "cbbc0828406beba0a9f55fe6",
+            "_tpl": "6272370ee4013c5d7e31f418",
+            "parentId": "f92e023acd316a4f93989ee5",
+            "slotId": "mod_tactical",
+            "upd": {
+                "Light": {
+                    "IsActive": true,
+                    "SelectedMode": 0
+                }
+            }
         }
-      }
-    },
-    {
-      "_id": "4ae9db5b732f6ad6f73eb0a7",
-      "_tpl": "5a6b5e468dc32e001207faf5",
-      "parentId": "ef605694fb59a27cdf28207f",
-      "slotId": "mod_barrel"
-    },
-    {
-      "_id": "aacd2806a36943d0ad928c07",
-      "_tpl": "5a7b4960e899ef197b331a2d",
-      "parentId": "ef605694fb59a27cdf28207f",
-      "slotId": "mod_pistol_grip"
-    },
-    {
-      "_id": "c6fa3a583190fc6c294b1b48",
-      "_tpl": "5a71e22f8dc32e00094b97f4",
-      "parentId": "ef605694fb59a27cdf28207f",
-      "slotId": "mod_reciever"
-    },
-    {
-      "_id": "9956241dca634b228569daf8",
-      "_tpl": "5a7ad2e851dfba0016153692",
-      "parentId": "ef605694fb59a27cdf28207f",
-      "slotId": "mod_magazine"
-    },
-    {
-      "_id": "f92e023acd316a4f93989ee5",
-      "_tpl": "5a7ad74e51dfba0015068f45",
-      "parentId": "ef605694fb59a27cdf28207f",
-      "slotId": "mod_tactical"
-    },
-    {
-      "_id": "7fc6e5bc8e8dd30160036a2f",
-      "_tpl": "5a32aa8bc4a2826c6e06d737",
-      "parentId": "c6fa3a583190fc6c294b1b48",
-      "slotId": "mod_scope",
-      "upd": {
-        "Sight": {
-          "ScopesCurrentCalibPointIndexes": [
-            0
-          ],
-          "ScopesSelectedModes": [
-            0
-          ],
-          "SelectedScope": 0
-        }
-      }
-    },
-    {
-      "_id": "cbbc0828406beba0a9f55fe6",
-      "_tpl": "6272370ee4013c5d7e31f418",
-      "parentId": "f92e023acd316a4f93989ee5",
-      "slotId": "mod_tactical",
-      "upd": {
-        "Light": {
-          "IsActive": true,
-          "SelectedMode": 0
-        }
-      }
-    }
-  ],
-  "Parent": "5447b5cf4bdc2d65278b4567"
+    ],
+    "Parent": "5447b5cf4bdc2d65278b4567"
 }

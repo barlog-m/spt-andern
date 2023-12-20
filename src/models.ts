@@ -48,6 +48,7 @@ export class Gear {
     face: GearItem[];
     eyewear: GearItem[];
     sheath: GearItem[];
+    chadMasks: GearItem[];
     chadHelmets: GearItem[];
     chadArmor: GearItem[];
 }

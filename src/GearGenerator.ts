@@ -231,13 +231,40 @@ export class GearGenerator {
                 botInventory
             );
             this.generateChadArmor(presetName, botLevel, botRole, botInventory);
-            this.generateChadHelmet(
-                presetName,
-                botLevel,
-                botRole,
-                botInventory,
-                raidInfo.isNight
-            );
+
+            if (this.randomUtil.getBool()) {
+                this.generateChadHelmet(
+                    presetName,
+                    botLevel,
+                    botRole,
+                    botInventory,
+                    raidInfo.isNight
+                );
+
+                this.generateGearItem(
+                    presetName,
+                    botLevel,
+                    botRole,
+                    botInventory,
+                    EquipmentSlots.FACE_COVER
+                );
+
+                this.generateGearItem(
+                    presetName,
+                    botLevel,
+                    botRole,
+                    botInventory,
+                    EquipmentSlots.EYEWEAR
+                );
+            } else {
+                this.generateChadMask(
+                    presetName,
+                    botLevel,
+                    botRole,
+                    botInventory
+                );
+            }
+
             return true;
         }
 
@@ -282,6 +309,24 @@ export class GearGenerator {
         );
     }
 
+    generateChadMask(
+        presetName: string,
+        botLevel: number,
+        botRole: string,
+        botInventory: PmcInventory
+    ): undefined {
+        const mask = this.weightedRandomGearItem(
+            this.data.getGear(presetName, botLevel).chadMasks
+        );
+
+        this.gearGeneratorHelper.putGearItemToInventory(
+            EquipmentSlots.FACE_COVER,
+            botRole,
+            botInventory,
+            mask.id
+        );
+    }
+
     generateGearItem(
         presetName: string,
         botLevel: number,
@@ -315,7 +360,7 @@ export class GearGenerator {
             EquipmentSlots.HEADWEAR
         );
 
-        const isEarpiceCompatable = this.helmetGenerator.generateHelmet(
+        this.helmetGenerator.generateHelmet(
             botLevel,
             botRole,
             botInventory,
@@ -331,24 +376,31 @@ export class GearGenerator {
                 botInventory,
                 "5b432b965acfc47a8774094e"
             );
-        } else {
-            const earpieceItem = this.getGearItem(
-                presetName,
-                botLevel,
-                EquipmentSlots.EARPIECE
-            );
-
-            const earpieceTpl = isEarpiceCompatable
-                ? earpieceItem.id
-                : this.gearGeneratorHelper.replaceEarpiece(earpieceItem.id);
-
-            this.gearGeneratorHelper.putGearItemToInventory(
-                EquipmentSlots.EARPIECE,
-                botRole,
-                botInventory,
-                earpieceTpl
-            );
+            return;
         }
+
+        if (this.helmetGenerator.isEarpiceIncompatable(headwearItem.id)) {
+            return;
+        }
+
+        const earpieceItem = this.getGearItem(
+            presetName,
+            botLevel,
+            EquipmentSlots.EARPIECE
+        );
+
+        const earpieceTpl = this.helmetGenerator.isEarpiceNotFullyCompatable(
+            headwearItem.id
+        )
+            ? this.gearGeneratorHelper.replaceEarpiece(earpieceItem.id)
+            : earpieceItem.id;
+
+        this.gearGeneratorHelper.putGearItemToInventory(
+            EquipmentSlots.EARPIECE,
+            botRole,
+            botInventory,
+            earpieceTpl
+        );
     }
 
     weightedRandomGearItem(items: GearItem[]): GearItem {
@@ -414,6 +466,14 @@ export class GearGenerator {
                 botInventory,
                 EquipmentSlots.EYEWEAR
             );
+
+            this.generateGearItem(
+                presetName,
+                botLevel,
+                botRole,
+                botInventory,
+                EquipmentSlots.FACE_COVER
+            );
         }
 
         this.generateGearItem(
@@ -422,13 +482,6 @@ export class GearGenerator {
             botRole,
             botInventory,
             EquipmentSlots.BACKPACK
-        );
-        this.generateGearItem(
-            presetName,
-            botLevel,
-            botRole,
-            botInventory,
-            EquipmentSlots.FACE_COVER
         );
         this.generateGearItem(
             presetName,

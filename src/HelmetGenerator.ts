@@ -12,13 +12,18 @@ import { GearGeneratorHelper } from "./GearGeneratorHelper";
 export class HelmetGenerator {
     readonly ALTYN_HELMET = "5aa7e276e5b5b000171d0647";
     readonly RYS_HELMET = "5f60c74e3b85f6263c145586";
+    readonly MASKA_OLIVE_HELMET = "5c091a4e0db834001d5addc8";
+    readonly MASKA_KILLA_HELMET = "5c0e874186f7745dc7616606";
+    readonly VULKAN_HELMET = "5ca20ee186f774799474abc2";
+    readonly LSHZ_2DTM_HELMET = "5d6d3716a4b9361bc8618872";
+
     readonly AIRFRAME_HELMET = "5c17a7ed2e2216152142459c";
     readonly CAIMAN_HYBRID_HELMET = "5f60b34a41e30a4ab12a6947";
 
     readonly _6B47_RATNIK_BSH_HELMET = "5a7c4850e899ef00150be885";
     readonly _6B47_RATNIK_BSH_HELMET_DIGITAL = "5aa7cfc0e5b5b00015693143";
 
-    readonly LSHZ_HELMET = "5b432d215acfc4771e1c6624";
+    readonly LSHZ_LIGHT_HELMET = "5b432d215acfc4771e1c6624";
 
     readonly TC_2001_HELMET = "5d5e7d28a4b936645d161203";
     readonly TC_2002_HELMET = "5d5e9c74a4b9364855191c40";
@@ -53,6 +58,24 @@ export class HelmetGenerator {
         "5a16b8a9fcdbcb00165aa6ca";
     readonly PNV_10T_DOVETAIL_ADAPTER = "5c0695860db834001b735461";
 
+    readonly headphonesIncompatableHelmets = [
+        this.ALTYN_HELMET,
+        this.RYS_HELMET,
+        this.MASKA_OLIVE_HELMET,
+        this.MASKA_KILLA_HELMET,
+        this.VULKAN_HELMET,
+        this.LSHZ_2DTM_HELMET,
+    ];
+
+    readonly headphonesNotFullyCompatableHelmets = [
+        this.AIRFRAME_HELMET,
+        this.LSHZ_LIGHT_HELMET,
+        this.EXFIL_BLACK_HELMET,
+        this.EXFIL_BROWN_HELMET,
+        this.FAST_BLACK_HELMET,
+        this.FAST_TAN_HELMET,
+    ];
+
     constructor(
         @inject("WinstonLogger") protected logger: ILogger,
         @inject("HashUtil") protected hashUtil: HashUtil,
@@ -67,129 +90,144 @@ export class HelmetGenerator {
         botInventory: PmcInventory,
         tpl: string,
         isNight: boolean
-    ): boolean {
+    ): undefined {
         if (isNight) {
             tpl = this.selectNightHelmet(botLevel);
         }
 
         switch (tpl) {
             case this.ALTYN_HELMET: {
-                return this.altynHelmet(botRole, botInventory);
+                this.altynHelmet(botRole, botInventory);
+                break;
             }
             case this.RYS_HELMET: {
-                return this.rysHelmet(botRole, botInventory);
+                this.rysHelmet(botRole, botInventory);
+                break;
+            }
+            case this.MASKA_OLIVE_HELMET: {
+                this.maskaHelmet(
+                    this.MASKA_OLIVE_HELMET,
+                    botRole,
+                    botInventory
+                );
+                break;
+            }
+            case this.MASKA_KILLA_HELMET: {
+                this.maskaHelmet(
+                    this.MASKA_KILLA_HELMET,
+                    botRole,
+                    botInventory
+                );
+                break;
+            }
+            case this.VULKAN_HELMET: {
+                this.vulkanHelmet(botRole, botInventory);
+                break;
+            }
+            case this.LSHZ_2DTM_HELMET: {
+                this.lshz2dtmHelmet(botRole, botInventory);
+                break;
             }
             case this.AIRFRAME_HELMET: {
-                return this.airFrameHelmet(
-                    botLevel,
-                    botRole,
-                    botInventory,
-                    isNight
-                );
+                this.airFrameHelmet(botLevel, botRole, botInventory, isNight);
+                break;
             }
             case this.CAIMAN_HYBRID_HELMET: {
-                return this.caimanHybridHelmet(
+                this.caimanHybridHelmet(
                     botLevel,
                     botRole,
                     botInventory,
                     isNight
                 );
+                break;
             }
             case this._6B47_RATNIK_BSH_HELMET: {
-                return this.ratnikBshHelmet(
+                this.ratnikBshHelmet(
                     this._6B47_RATNIK_BSH_HELMET,
                     botLevel,
                     botRole,
                     botInventory,
                     isNight
                 );
+                break;
             }
             case this._6B47_RATNIK_BSH_HELMET_DIGITAL: {
-                return this.ratnikBshHelmet(
+                this.ratnikBshHelmet(
                     this._6B47_RATNIK_BSH_HELMET_DIGITAL,
                     botLevel,
                     botRole,
                     botInventory,
                     isNight
                 );
+                break;
             }
-            case this.LSHZ_HELMET: {
-                return this.lshzHelmet(
-                    botLevel,
-                    botRole,
-                    botInventory,
-                    isNight
-                );
+            case this.LSHZ_LIGHT_HELMET: {
+                this.lshzLightHelmet(botLevel, botRole, botInventory, isNight);
+                break;
             }
             case this.TC_2001_HELMET: {
-                return this.tc200xHelmet(
+                this.tc200xHelmet(
                     this.TC_2001_HELMET,
                     botLevel,
                     botRole,
                     botInventory,
                     isNight
                 );
+                break;
+            }
+            case this.TC_2002_HELMET: {
+                this.tc200xHelmet(
+                    this.TC_2002_HELMET,
+                    botLevel,
+                    botRole,
+                    botInventory,
+                    isNight
+                );
+                break;
             }
             case this.EXFIL_BLACK_HELMET: {
-                return this.exfilBlackHelmet(
-                    botLevel,
-                    botRole,
-                    botInventory,
-                    isNight
-                );
+                this.exfilBlackHelmet(botLevel, botRole, botInventory, isNight);
+                break;
             }
             case this.EXFIL_BROWN_HELMET: {
-                return this.exfilBrownHelmet(
-                    botLevel,
-                    botRole,
-                    botInventory,
-                    isNight
-                );
+                this.exfilBrownHelmet(botLevel, botRole, botInventory, isNight);
+                break;
             }
             case this.HJELM_HELMET: {
-                return this.hjelmHelmet(
-                    botLevel,
-                    botRole,
-                    botInventory,
-                    isNight
-                );
+                this.hjelmHelmet(botLevel, botRole, botInventory, isNight);
+                break;
             }
             case this.TC800_HELMET: {
-                return this.tc800Helmet(
-                    botLevel,
-                    botRole,
-                    botInventory,
-                    isNight
-                );
+                this.tc800Helmet(botLevel, botRole, botInventory, isNight);
+                break;
             }
             case this.BASTION_HELMET: {
-                return this.bastionHelmet(
-                    botLevel,
-                    botRole,
-                    botInventory,
-                    isNight
-                );
+                this.bastionHelmet(botLevel, botRole, botInventory, isNight);
+                break;
             }
             case this.FAST_TAN_HELMET: {
-                return this.fastHelmet(
+                this.fastHelmet(
                     this.FAST_TAN_HELMET,
                     botLevel,
                     botRole,
                     botInventory,
                     isNight
                 );
+                break;
             }
             case this.FAST_BLACK_HELMET: {
-                return this.fastHelmet(
+                this.fastHelmet(
                     this.FAST_BLACK_HELMET,
                     botLevel,
                     botRole,
                     botInventory,
                     isNight
                 );
+                break;
             }
             default: {
-                return this.anyOtherHelmet(tpl, botRole, botInventory);
+                this.anyOtherHelmet(tpl, botRole, botInventory);
+                break;
             }
         }
     }
@@ -208,7 +246,7 @@ export class HelmetGenerator {
         );
     }
 
-    altynHelmet(botRole: string, botInventory: PmcInventory): boolean {
+    altynHelmet(botRole: string, botInventory: PmcInventory): undefined {
         const ALTYN_FACE_SHIELD = "5aa7e373e5b5b000137b76f0";
 
         const helmetItemId = this.gearGeneratorHelper.putGearItemToInventory(
@@ -225,11 +263,9 @@ export class HelmetGenerator {
             "mod_equipment",
             helmetItemId
         );
-
-        return false;
     }
 
-    rysHelmet(botRole: string, botInventory: PmcInventory): boolean {
+    rysHelmet(botRole: string, botInventory: PmcInventory): undefined {
         const RYS_FACE_SHIELD = "5f60c85b58eff926626a60f7";
 
         const helmetItemId = this.gearGeneratorHelper.putGearItemToInventory(
@@ -246,8 +282,91 @@ export class HelmetGenerator {
             "mod_equipment",
             helmetItemId
         );
+    }
 
-        return false;
+    maskaHelmet(
+        helmetTpl: string,
+        botRole: string,
+        botInventory: PmcInventory
+    ): undefined {
+        const MASKA_OLIVE_FACE_SHIELD = "5c0919b50db834001b7ce3b9";
+        const MASKA_KILLA_FACE_SHIELD = "5c0e842486f77443a74d2976";
+
+        const faceShieldTpl =
+            helmetTpl === this.MASKA_OLIVE_HELMET
+                ? MASKA_OLIVE_FACE_SHIELD
+                : MASKA_KILLA_FACE_SHIELD;
+
+        const helmetItemId = this.gearGeneratorHelper.putGearItemToInventory(
+            EquipmentSlots.HEADWEAR,
+            botRole,
+            botInventory,
+            helmetTpl
+        );
+
+        this.gearGeneratorHelper.putModItemToInventory(
+            botRole,
+            botInventory,
+            faceShieldTpl,
+            "mod_equipment",
+            helmetItemId
+        );
+    }
+
+    vulkanHelmet(botRole: string, botInventory: PmcInventory): undefined {
+        const VULKAN_FACE_SHIELD = "5ca2113f86f7740b2547e1d2";
+
+        const helmetItemId = this.gearGeneratorHelper.putGearItemToInventory(
+            EquipmentSlots.HEADWEAR,
+            botRole,
+            botInventory,
+            this.VULKAN_HELMET
+        );
+
+        this.gearGeneratorHelper.putModItemToInventory(
+            botRole,
+            botInventory,
+            VULKAN_FACE_SHIELD,
+            "mod_equipment",
+            helmetItemId
+        );
+    }
+
+    lshz2dtmHelmet(botRole: string, botInventory: PmcInventory): undefined {
+        const LSHZ_2DTM_FACE_SHIELD = "5d6d3829a4b9361bc8618943";
+        const LSHZ_2DTM_AVENTAIL = "5d6d3be5a4b9361bc73bc763";
+        const LSHZ_2DTM_COVER = "5d6d3943a4b9360dbc46d0cc";
+
+        const helmetItemId = this.gearGeneratorHelper.putGearItemToInventory(
+            EquipmentSlots.HEADWEAR,
+            botRole,
+            botInventory,
+            this.LSHZ_2DTM_HELMET
+        );
+
+        this.gearGeneratorHelper.putModItemToInventory(
+            botRole,
+            botInventory,
+            LSHZ_2DTM_FACE_SHIELD,
+            "mod_equipment_000",
+            helmetItemId
+        );
+
+        this.gearGeneratorHelper.putModItemToInventory(
+            botRole,
+            botInventory,
+            LSHZ_2DTM_AVENTAIL,
+            "mod_equipment_001",
+            helmetItemId
+        );
+
+        this.gearGeneratorHelper.putModItemToInventory(
+            botRole,
+            botInventory,
+            LSHZ_2DTM_COVER,
+            "mod_equipment_002",
+            helmetItemId
+        );
     }
 
     airFrameHelmet(
@@ -255,7 +374,7 @@ export class HelmetGenerator {
         botRole: string,
         botInventory: PmcInventory,
         isNight: boolean
-    ): boolean {
+    ): undefined {
         const helmetItemId = this.gearGeneratorHelper.putGearItemToInventory(
             EquipmentSlots.HEADWEAR,
             botRole,
@@ -284,8 +403,6 @@ export class HelmetGenerator {
                 helmetItemId
             );
         }
-
-        return false;
     }
 
     caimanHybridHelmet(
@@ -293,7 +410,7 @@ export class HelmetGenerator {
         botRole: string,
         botInventory: PmcInventory,
         isNight: boolean
-    ): boolean {
+    ): undefined {
         const helmetItemId = this.gearGeneratorHelper.putGearItemToInventory(
             EquipmentSlots.HEADWEAR,
             botRole,
@@ -331,8 +448,6 @@ export class HelmetGenerator {
                 helmetItemId
             );
         }
-
-        return true;
     }
 
     ratnikBshHelmet(
@@ -341,7 +456,7 @@ export class HelmetGenerator {
         botRole: string,
         botInventory: PmcInventory,
         isNight: boolean
-    ): boolean {
+    ): undefined {
         const helmetItemId = this.gearGeneratorHelper.putGearItemToInventory(
             EquipmentSlots.HEADWEAR,
             botRole,
@@ -352,21 +467,19 @@ export class HelmetGenerator {
         if (isNight) {
             this.generateNvg(botLevel, botRole, botInventory, helmetItemId);
         }
-
-        return true;
     }
 
-    lshzHelmet(
+    lshzLightHelmet(
         botLevel: number,
         botRole: string,
         botInventory: PmcInventory,
         isNight: boolean
-    ): boolean {
+    ): undefined {
         const helmetItemId = this.gearGeneratorHelper.putGearItemToInventory(
             EquipmentSlots.HEADWEAR,
             botRole,
             botInventory,
-            this.LSHZ_HELMET
+            this.LSHZ_LIGHT_HELMET
         );
 
         if (!isNight && this.randomUtil.getBool()) {
@@ -413,8 +526,6 @@ export class HelmetGenerator {
                 this.generateNvg(botLevel, botRole, botInventory, helmetItemId);
             }
         }
-
-        return false;
     }
 
     tc200xHelmet(
@@ -423,7 +534,7 @@ export class HelmetGenerator {
         botRole: string,
         botInventory: PmcInventory,
         isNight: boolean
-    ): boolean {
+    ): undefined {
         const helmetItemId = this.gearGeneratorHelper.putGearItemToInventory(
             EquipmentSlots.HEADWEAR,
             botRole,
@@ -442,8 +553,6 @@ export class HelmetGenerator {
         if (isNight) {
             this.generateNvg(botLevel, botRole, botInventory, helmetItemId);
         }
-
-        return true;
     }
 
     exfilBlackHelmet(
@@ -451,7 +560,7 @@ export class HelmetGenerator {
         botRole: string,
         botInventory: PmcInventory,
         isNight: boolean
-    ): boolean {
+    ): undefined {
         const helmetItemId = this.gearGeneratorHelper.putGearItemToInventory(
             EquipmentSlots.HEADWEAR,
             botRole,
@@ -481,8 +590,6 @@ export class HelmetGenerator {
                 helmetItemId
             );
         }
-
-        return false;
     }
 
     exfilBrownHelmet(
@@ -490,7 +597,7 @@ export class HelmetGenerator {
         botRole: string,
         botInventory: PmcInventory,
         isNight: boolean
-    ): boolean {
+    ): undefined {
         const helmetItemId = this.gearGeneratorHelper.putGearItemToInventory(
             EquipmentSlots.HEADWEAR,
             botRole,
@@ -509,8 +616,6 @@ export class HelmetGenerator {
         if (isNight) {
             this.generateNvg(botLevel, botRole, botInventory, helmetItemId);
         }
-
-        return false;
     }
 
     hjelmHelmet(
@@ -518,7 +623,7 @@ export class HelmetGenerator {
         botRole: string,
         botInventory: PmcInventory,
         isNight: boolean
-    ): boolean {
+    ): undefined {
         const helmetItemId = this.gearGeneratorHelper.putGearItemToInventory(
             EquipmentSlots.HEADWEAR,
             botRole,
@@ -537,8 +642,6 @@ export class HelmetGenerator {
                 helmetItemId
             );
         }
-
-        return true;
     }
 
     tc800Helmet(
@@ -546,7 +649,7 @@ export class HelmetGenerator {
         botRole: string,
         botInventory: PmcInventory,
         isNight: boolean
-    ): boolean {
+    ): undefined {
         const helmetItemId = this.gearGeneratorHelper.putGearItemToInventory(
             EquipmentSlots.HEADWEAR,
             botRole,
@@ -565,8 +668,6 @@ export class HelmetGenerator {
                 helmetItemId
             );
         }
-
-        return true;
     }
 
     bastionHelmet(
@@ -574,7 +675,7 @@ export class HelmetGenerator {
         botRole: string,
         botInventory: PmcInventory,
         isNight: boolean
-    ): boolean {
+    ): undefined {
         const helmetItemId = this.gearGeneratorHelper.putGearItemToInventory(
             EquipmentSlots.HEADWEAR,
             botRole,
@@ -593,8 +694,6 @@ export class HelmetGenerator {
         if (isNight) {
             this.generateNvg(botLevel, botRole, botInventory, plateId);
         }
-
-        return true;
     }
 
     fastHelmet(
@@ -603,7 +702,7 @@ export class HelmetGenerator {
         botRole: string,
         botInventory: PmcInventory,
         isNight: boolean
-    ): boolean {
+    ): undefined {
         const helmetItemId = this.gearGeneratorHelper.putGearItemToInventory(
             EquipmentSlots.HEADWEAR,
             botRole,
@@ -661,8 +760,6 @@ export class HelmetGenerator {
                 this.generateNvg(botLevel, botRole, botInventory, helmetItemId);
             }
         }
-
-        return false;
     }
 
     generateNvg(
@@ -734,7 +831,7 @@ export class HelmetGenerator {
             this.CAIMAN_HYBRID_HELMET,
             this.TC800_HELMET,
             this.BASTION_HELMET,
-            this.LSHZ_HELMET,
+            this.LSHZ_LIGHT_HELMET,
             this.HJELM_HELMET,
         ];
         return this.randomUtil.getArrayValue(helmets);
@@ -772,5 +869,13 @@ export class HelmetGenerator {
         } else {
             return this.tierFourNightHelmet();
         }
+    }
+
+    public isEarpiceIncompatable(headwearTpl: string): boolean {
+        return this.headphonesIncompatableHelmets.includes(headwearTpl);
+    }
+
+    public isEarpiceNotFullyCompatable(headwearTpl: string): boolean {
+        return this.headphonesNotFullyCompatableHelmets.includes(headwearTpl);
     }
 }

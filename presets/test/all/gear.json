@@ -247,6 +247,33 @@
             "name": "UVSR Taiga-1 survival machete"
         }
     ],
+    "chadMasks": [
+        {
+            "weight": 1,
+            "id": "60a7ad3a0c5cb24b0134664a",
+            "name": "Tagilla's welding mask 'Gorilla'"
+        },
+        {
+            "weight": 1,
+            "id": "60a7ad2a2198820d95707a2e",
+            "name": "Tagilla's welding mask 'UBEY'"
+        },
+        {
+            "weight": 1,
+            "id": "62a09e08de7ac81993580532",
+            "name": "Glorious E lightweight armored mask"
+        },
+        {
+            "weight": 1,
+            "id": "5b432b2f5acfc4771e1c6622",
+            "name": "Shattered lightweight armored mask"
+        },
+        {
+            "weight": 1,
+            "id": "62963c18dbc8ab5f0d382d0b",
+            "name": "Death Knight mask"
+        }
+    ],
     "chadHelmets": [
         {
             "weight": 1,
@@ -257,6 +284,26 @@
             "weight": 1,
             "id": "5f60c74e3b85f6263c145586",
             "name": "Rys-T bulletproof helmet"
+        },
+        {
+            "weight": 1,
+            "id": "5c091a4e0db834001d5addc8",
+            "name": "Maska-1SCh bulletproof helmet (Olive Drab)"
+        },
+        {
+            "weight": 1,
+            "id": "5c0e874186f7745dc7616606",
+            "name": "Maska-1SCh bulletproof helmet (Killa)"
+        },
+        {
+            "weight": 1,
+            "id": "5ca20ee186f774799474abc2",
+            "name": "Vulkan-5 (LShZ-5) bulletproof helmet"
+        },
+        {
+            "weight": 1,
+            "id": "5d6d3716a4b9361bc8618872",
+            "name": "BNTI LShZ-2DTM helmet"
         }
     ],
     "chadArmor": [

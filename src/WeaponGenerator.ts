@@ -249,7 +249,7 @@ export class WeaponGenerator {
         for (const item of weaponWithMods) {
             if (item.slotId.startsWith("mod_tactical")) {
                 if (item.upd?.Light) {
-                    item.upd.Light.IsActive = false;
+                    item.upd.Light.IsActive = true;
                     item.upd.Light.SelectedMode = 1;
                 }
             }
