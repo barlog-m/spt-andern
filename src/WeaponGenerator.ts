@@ -49,7 +49,10 @@ export class WeaponGenerator {
     private readonly magazineSlotId = "mod_magazine";
 
     private readonly MK47 = "606587252535c57a13424cfd";
+
     private readonly X_47_DRUM = "5cfe8010d7ad1a59283b14c6";
+    
+    private readonly MAGPUL_MOE_CARBINE_RUBBER_BUTTPAD = "58d2912286f7744e27117493";
 
     protected pmcConfig: IPmcConfig;
     protected repairConfig: IRepairConfig;
@@ -262,6 +265,8 @@ export class WeaponGenerator {
         weapon: Item[],
         weaponTpl: string
     ): undefined {
+        let deleteMagpulRubberButtpad = false;
+        
         weapon.forEach((item) => {
             const alternativeTpl = this.data.getAlternativeModule(
                 presetName,
@@ -278,9 +283,17 @@ export class WeaponGenerator {
                     if (item.slotId === "mod_muzzle") {
                         this.alternateSuppressor(weapon, item);
                     }
+                    
+                    if (item._tpl === this.MAGPUL_MOE_CARBINE_RUBBER_BUTTPAD) {
+                        deleteMagpulRubberButtpad = true;
+                    }
                 }
             }
         });
+       
+        if (deleteMagpulRubberButtpad) {
+            this.deleteModule(weapon, this.MAGPUL_MOE_CARBINE_RUBBER_BUTTPAD);
+        }
     }
 
     alternateSuppressor(weapon: Item[], muzzleItem: Item): undefined {
@@ -289,12 +302,17 @@ export class WeaponGenerator {
         );
         suppressor._tpl = MUZZLE_PAIRS[muzzleItem._tpl];
 
-        this.deleteUnnecessaryModules(weapon);
+        this.deleteUnnecessaryMuzzleModules(weapon);
     }
 
-    deleteUnnecessaryModules(weapon: Item[]): undefined {
+    deleteUnnecessaryMuzzleModules(weapon: Item[]): undefined {
+       const SIG_SAUER_TWO_PORT_BRAKE_762X51_MUZZLE_BRAKE = "5fbcbd10ab884124df0cd563"; 
+       this.deleteModule(weapon, SIG_SAUER_TWO_PORT_BRAKE_762X51_MUZZLE_BRAKE);
+    }
+
+    deleteModule(weapon: Item[], tpl: string): undefined {
         const i = weapon.findIndex(
-            (item) => item._tpl === "5fbcbd10ab884124df0cd563"
+            (item) => item._tpl === tpl
         );
         if (i > -1) {
             weapon.splice(i, 1);

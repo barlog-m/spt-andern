@@ -29,7 +29,7 @@ import { mapBotTuning, setPmcForceHealingItems } from "./mapBotTuning";
 import * as config from "../config/config.json";
 
 export class Andern implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
-    private fullModName: string;
+    private readonly fullModName: string;
     private modPath: string;
     private logger: ILogger;
     private doeTrader: DoeTrader;
@@ -47,18 +47,18 @@ export class Andern implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
         container.register("AndernModPath", { useValue: this.modPath });
 
         container.register<RaidInfo>("AndernRaidInfo", RaidInfo, {
-            lifecycle: Lifecycle.Singleton,
+            lifecycle: Lifecycle.Singleton
         });
 
         container.register<Data>("AndernData", Data, {
-            lifecycle: Lifecycle.Singleton,
+            lifecycle: Lifecycle.Singleton
         });
 
         container.register<WeaponGenerator>(
             "AndernWeaponGenerator",
             WeaponGenerator,
             {
-                lifecycle: Lifecycle.Singleton,
+                lifecycle: Lifecycle.Singleton
             }
         );
 
@@ -66,7 +66,7 @@ export class Andern implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
             "AndernGearGeneratorHelper",
             GearGeneratorHelper,
             {
-                lifecycle: Lifecycle.Singleton,
+                lifecycle: Lifecycle.Singleton
             }
         );
 
@@ -74,7 +74,7 @@ export class Andern implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
             "AndernHelmetGenerator",
             HelmetGenerator,
             {
-                lifecycle: Lifecycle.Singleton,
+                lifecycle: Lifecycle.Singleton
             }
         );
 
@@ -82,12 +82,12 @@ export class Andern implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
             "AndernGearGenerator",
             GearGenerator,
             {
-                lifecycle: Lifecycle.Singleton,
+                lifecycle: Lifecycle.Singleton
             }
         );
 
         container.register<DoeTrader>("AndernDoeTrader", DoeTrader, {
-            lifecycle: Lifecycle.Singleton,
+            lifecycle: Lifecycle.Singleton
         });
         this.doeTrader = container.resolve<DoeTrader>("AndernDoeTrader");
 
@@ -167,7 +167,7 @@ export class Andern implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
         const pmcConfig = configServer.getConfig<IPmcConfig>(ConfigTypes.PMC);
 
         for (const memberCategoryKey of Object.keys(MemberCategory).filter(
-            (key) => !isNaN(key)
+            (key) => !isNaN(Number(key))
         )) {
             pmcConfig.accountTypeWeight[memberCategoryKey] = 0;
         }
