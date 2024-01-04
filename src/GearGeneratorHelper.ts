@@ -96,6 +96,11 @@ export class GearGeneratorHelper {
     }
 
     public replaceEarpiece(tpl: string): string {
+        // "GSSh-01 active headset" -> "OPSMEN Earmor M32 headset"
+        if (tpl === "5b432b965acfc47a8774094e") {
+            return "6033fa48ffd42c541047f728";
+        }
+        
         // "Peltor ComTac 2 headset" -> "OPSMEN Earmor M32 headset"
         if (tpl === "5645bcc04bdc2d363b8b4572") {
             return "6033fa48ffd42c541047f728";

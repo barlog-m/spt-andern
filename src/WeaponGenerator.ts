@@ -300,9 +300,12 @@ export class WeaponGenerator {
         const suppressor = weapon.find(
             (i) => i.parentId === muzzleItem._id && (i.slotId = "mod_muzzle")
         );
-        suppressor._tpl = MUZZLE_PAIRS[muzzleItem._tpl];
+        
+        if (suppressor !== undefined) {
+            suppressor._tpl = MUZZLE_PAIRS[muzzleItem._tpl];
 
-        this.deleteUnnecessaryMuzzleModules(weapon);
+            this.deleteUnnecessaryMuzzleModules(weapon);
+        }
     }
 
     deleteUnnecessaryMuzzleModules(weapon: Item[]): undefined {

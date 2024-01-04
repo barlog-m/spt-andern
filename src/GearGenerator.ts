@@ -277,15 +277,17 @@ export class GearGenerator {
         botRole: string,
         botInventory: PmcInventory
     ): undefined {
-        const armor = this.weightedRandomGearItem(
-            this.data.getGear(presetName, botLevel).chadArmor
-        );
+        let armor = this.data.getGear(presetName, botLevel).chadArmor
+        if (armor.length == 0) {
+            armor = this.data.getGear(presetName, botLevel).armor
+        }
+        const selectedArmor = this.weightedRandomGearItem(armor);
 
         this.gearGeneratorHelper.putGearItemToInventory(
             EquipmentSlots.ARMOR_VEST,
             botRole,
             botInventory,
-            armor.id
+            selectedArmor.id
         );
     }
 
@@ -296,15 +298,17 @@ export class GearGenerator {
         botInventory: PmcInventory,
         isNight: boolean
     ): undefined {
-        const helmet = this.weightedRandomGearItem(
-            this.data.getGear(presetName, botLevel).chadHelmets
-        );
+        let helmets = this.data.getGear(presetName, botLevel).chadHelmets;
+        if (helmets.length == 0) {
+            helmets = this.data.getGear(presetName, botLevel).helmets;
+        }
+        const selectedHelmet = this.weightedRandomGearItem(helmets);
 
         this.helmetGenerator.generateHelmet(
             botLevel,
             botRole,
             botInventory,
-            helmet.id,
+            selectedHelmet.id,
             isNight
         );
     }

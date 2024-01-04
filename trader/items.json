@@ -2,27 +2,47 @@
     "one": [
         {
             "tpl": "5648ae314bdc2d3d1c8b457f",
-            "name": "AK_CAA_RS47_HANDGUARD"
-        },
-        {
-            "tpl": "593d493f86f7745e6b2ceb22",
-            "name": "SILENCER_AK74_HEXAGON_AK74_545X39"
+            "name": "AK CAA RS47 handguard"
         },
         {
             "tpl": "570fd6c2d2720bc6458b457f",
-            "name": "SCOPE_ALL_EOTECH_553"
+            "name": "EOTech 553 holographic sight"
+        },
+        {
+            "tpl": "593d493f86f7745e6b2ceb22",
+            "name": "AK-74 Hexagon 5.45x39 sound suppressor"
+        },
+        {
+            "tpl": "593d489686f7745c6255d58a",
+            "name": "AKM Hexagon 7.62x39 sound suppressor"
+        },
+        {
+            "tpl": "593d490386f7745ee97a1555",
+            "name": "SKS Hexagon 7.62x39 sound suppressor"
         },
         {
             "tpl": "5a9fbb84a2750c00137fa685",
-            "name": "SILENCER_ALL_ROTOR_43_V2_556X45"
+            "name": "Rotor 43 5.56x45 muzzle brake-compensator"
         },
         {
             "tpl": "5a9fbacda2750c00141e080f",
-            "name": "SILENCER_ALL_ROTOR_43_V2_762X39"
+            "name": "Rotor 43 7.62x39 muzzle brake-compensator"
         },
         {
             "tpl": "59d625f086f774661516605d",
-            "name": "MAG_AK_IZHMASH_AK_STD_55_762X39_30"
+            "name": "AK 7.62x39 30-round magazine (issued '55 or later)"
+        },
+        {
+            "tpl": "64a536392d2c4e6e970f4121",
+            "name": "WARTECH TV-115 plate carrier"
+        },
+        {
+            "tpl": "64a5366719bab53bd203bf33",
+            "name": "Eagle Allied Industries MBSS plate carrier"
+        },
+        {
+            "tpl": "5b44d22286f774172b0c9de8",
+            "name": "BNTI Kirasa-N body armor"
         },
         {
             "tpl": "59387a4986f77401cc236e62",

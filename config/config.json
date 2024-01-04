@@ -32,7 +32,7 @@
     "mapMaxBotBuffExcludeLab": true,
     "mapMaxBotBuffExcludeStreets": true,
     "mapStreetsMaxBotCap": 0,
-    "mapPmcBotDifficulty": "hard",
+    "mapPmcBotDifficulty": "normal",
     "mapBotAccuracyMultiplier": 0.8,
     "mapBossChanceBuff": 0,
     "mapScavToPmcConvertMultiplier": 0.8,
