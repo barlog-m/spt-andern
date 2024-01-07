@@ -111,9 +111,14 @@ export class GearGeneratorHelper {
             return "6033fa48ffd42c541047f728";
         }
 
-        // "MSA Sordin Supreme PRO-X/L active headset" -> "Walkers Razor Digital headset"
+        // "MSA Sordin Supreme PRO-X/L active headset" -> "Walker's XCEL 500BT Digital headset"
         if (tpl === "5aa2ba71e5b5b000137b758f") {
-            return "5e4d34ca86f774264f758330";
+            return "5f60cd6cf2bcbb675b00dac6";
+        }
+        
+        // "Walkers Razor Digital headset" -> "Walker's XCEL 500BT Digital headset"
+        if (tpl === "5e4d34ca86f774264f758330") {
+            return "5f60cd6cf2bcbb675b00dac6";
         }
 
         return tpl;

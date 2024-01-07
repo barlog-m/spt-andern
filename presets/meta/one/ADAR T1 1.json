@@ -1,7 +1,7 @@
 {
     "type": "weapon",
     "id": "8b616590e042bd8d75e81bc6",
-    "name": "ADAR T1",
+    "name": "ADAR T1 1",
     "root": "70deaa561d500c98c162a826",
     "items": [
         {
@@ -54,8 +54,12 @@
             "slotId": "mod_scope",
             "upd": {
                 "Sight": {
-                    "ScopesCurrentCalibPointIndexes": [0],
-                    "ScopesSelectedModes": [0],
+                    "ScopesCurrentCalibPointIndexes": [
+                        0
+                    ],
+                    "ScopesSelectedModes": [
+                        0
+                    ],
                     "SelectedScope": 0
                 }
             }
