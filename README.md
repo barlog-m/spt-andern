@@ -19,7 +19,7 @@ Idea of this mod is to rebalance a bit the game for better single player experie
 
 * Mod allows to increase static and loose loot multipliers. Options `looseLootMultiplier` and `staticLootMultiplier`.
 
-* Mod increse keys and cards spawn chance.
+* Mod increase keys and cards spawn chance.
 
 Weapon and gear split by tiers. Tiers is described in `preset_name/preset.json` file. Mod has two presets *meta* and *live*. Choise *live* if you want more veraity and close to live Tarkov expirience.
 
@@ -27,7 +27,7 @@ You can disable PMC bot level generator with option `pmcLevel`.
 
 You can disable PMC bot gear generator with option `pmcGear`. Then mod only generate weapon.
 
-Bots get random weapon from presets. Also bots use specified ammo for each caliber from presets.
+Bots get random weapon from presets. Also, bots use specified ammo for each caliber from presets.
 
 Preset made in the game and then exported with [SPT-AKI Profile Editor](https://hub.sp-tarkov.com/files/file/184-spt-aki-profile-editor/)
 
@@ -55,19 +55,17 @@ if `useFixedPmcBotLevelRange` true then pmc bots level in fixed range from `pmcB
 * https://escapefromtarkov.fandom.com/wiki/7.62x39mm_BP_gzh
 * https://escapefromtarkov.fandom.com/wiki/5.45x39mm_7N40
 
-Trader assortiment for each tier is on file `trader.json`
+Trader assortment for each tier is on file `trader.json`
 
-Trader can insure with zero return time and 100% return chance.
+You can disable trader by set `trader` to false in config.json
 
-Trader can repair without degradation.
+`traderInsurance` enables trader insurance with 100% instant return.
 
-You cand disable trader by set `trader` to false in config.json
+`traderRepair` enables trader repair without degradation.
 
-Enable insurance on Lab. Option `insuranceOnLab`.
+`insuranceOnLab` enables insurance on Lab.
 
-PMC bots can use "chads" armor (Altyn or Rys with Zabralo or THOR)
-
-It possible only in day raids.
+PMC bots can use "chads" armor. It possible only in day raids.
 
 Settings in config 'chadsOnFactoryAndLabOnly', 'chadsPercentage' and 'chadsMinimumLevel',
 
@@ -123,11 +121,15 @@ Works only if `mapBotSettings` set to true.
 
 `disableEmissaryPmcBots` disables chance that PMC can have any type of accounts other than user (purple, green names etc).
 
-`disableSeasonalEvents` disables all seasonal events like halloween etc.
+`disableSeasonalEvents` disables all seasonal events like Halloween etc.
 
 `lootingBotsCompatibility` disable loot generation in PMC's backpack for compatibility with Looting Bots mod. Works only if `pmcGear` enabled.
 
 `scavCaseLootValueMultiplier` multiplies each value range to improve Scav Case loot.
+
+`insuranceDecreaseReturnTime` decrease return time for Prapor (2 - 3 hours) and Therapist (1 - 2 hours).
+
+`insuranceIncreaseStorageTime` increase storage time for Prapor and Therapist (14 days).
 
 ## Installation
 

@@ -1,15 +1,15 @@
-import { PreAkiModLoader } from "@spt-aki/loaders/PreAkiModLoader";
+import {PreAkiModLoader} from "@spt-aki/loaders/PreAkiModLoader";
 import {
     ITraderBase,
-    ITraderAssort,
+    ITraderAssort
 } from "@spt-aki/models/eft/common/tables/ITrader";
 import {
     ITraderConfig,
-    UpdateTime,
+    UpdateTime
 } from "@spt-aki/models/spt/config/ITraderConfig";
-import { IDatabaseTables } from "@spt-aki/models/spt/server/IDatabaseTables";
-import { ImageRouter } from "@spt-aki/routers/ImageRouter";
-import { JsonUtil } from "@spt-aki/utils/JsonUtil";
+import {IDatabaseTables} from "@spt-aki/models/spt/server/IDatabaseTables";
+import {ImageRouter} from "@spt-aki/routers/ImageRouter";
+import {JsonUtil} from "@spt-aki/utils/JsonUtil";
 
 export class TraderHelper {
     /**
@@ -52,7 +52,7 @@ export class TraderHelper {
         // Add refresh time in seconds to config
         const traderRefreshRecord: UpdateTime = {
             traderId: baseJson._id,
-            seconds: refreshTimeSeconds,
+            seconds: refreshTimeSeconds
         };
 
         traderConfig.updateTime.push(traderRefreshRecord);
@@ -79,8 +79,8 @@ export class TraderHelper {
             questassort: {
                 started: {},
                 success: {},
-                fail: {},
-            }, // questassort is empty as trader has no assorts unlocked by quests
+                fail: {}
+            } // questassort is empty as trader has no assorts unlocked by quests
         };
     }
 
@@ -96,7 +96,7 @@ export class TraderHelper {
             nextResupply: 0,
             items: [],
             barter_scheme: {},
-            loyal_level_items: {},
+            loyal_level_items: {}
         };
 
         return assortTable;
@@ -120,12 +120,9 @@ export class TraderHelper {
         nickName: string,
         location: string,
         description: string
-    ) {
+    ): undefined {
         // For each language, add locale for the new trader
-        const locales = Object.values(tables.locales.global) as Record<
-            string,
-            string
-        >[];
+        const locales = Object.values(tables.locales.global) as Record<string, string>[];
         for (const locale of locales) {
             locale[`${baseJson._id} FullName`] = fullName;
             locale[`${baseJson._id} FirstName`] = firstName;

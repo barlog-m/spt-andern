@@ -180,23 +180,16 @@ export class DoeTrader {
     }
 
     public traderInsurance(): undefined {
-        if (config.trader) {
-            this.traderInsuranceImpl();
-        }
-    }
-
-    traderInsuranceImpl(): undefined {
+        const praporId = "54cb50c76803fa8b248b4571";
+        const traders = this.databaseServer.getTables().traders;
         const doeTraderId = baseJson._id;
         const praporDialogs = JSON.parse(
-            JSON.stringify(
-                this.databaseServer.getTables().traders[
-                    "54cb50c76803fa8b248b4571"
-                ].dialogue
-            )
+            JSON.stringify(traders[praporId].dialogue)
         ) as Record<string, string[]>;
 
-        this.databaseServer.getTables().traders[doeTraderId].dialogue =
-            praporDialogs;
+        const trader = traders[doeTraderId];
+        trader.dialogue = praporDialogs;
+        trader.base.insurance.availability = true;
 
         const insuranceConfig: IInsuranceConfig = this.configServer.getConfig(
             ConfigTypes.INSURANCE
@@ -205,5 +198,12 @@ export class DoeTrader {
         insuranceConfig.returnChancePercent[doeTraderId] = 100;
         insuranceConfig.insuranceMultiplier[doeTraderId] = 0.1;
         insuranceConfig.runIntervalSeconds = 60;
+    }
+    
+    public traderRepair(): undefined {
+        const doeTraderId = baseJson._id;
+        
+        const trader = this.databaseServer.getTables().traders[doeTraderId];
+        trader.base.repair.availability = true;
     }
 }

@@ -12,7 +12,9 @@
     "pmcBotMinLevel": 10,
     "pmcBotMaxLevel": 20,
     "trader": true,
-    "insuranceOnLab": true,
+    "traderInsurance": false,
+    "traderRepair": false,
+    "insuranceOnLab": false,
     "fleaMinUserLevel": 15,
     "chadsOnFactoryAndLabOnly": true,
     "chadsPercentage": 30,
@@ -45,5 +47,7 @@
     "disableEmissaryPmcBots": true,
     "disableSeasonalEvents": false,
     "lootingBotsCompatibility": false,
+    "insuranceDecreaseReturnTime": false,
+    "insuranceIncreaseStorageTime": false,
     "debug": false
 }

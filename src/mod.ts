@@ -114,7 +114,13 @@ export class Andern implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
     postAkiLoad(container: DependencyContainer): void {
         this.setMinFleaLevel(container);
 
-        this.doeTrader.traderInsurance();
+        if (config.trader && config.traderInsurance) {
+            this.doeTrader.traderInsurance();
+        }
+        
+        if (config.trader && config.traderRepair) {
+            this.doeTrader.traderRepair();
+        }
 
         if (config.insuranceOnLab) {
             this.enableInsuranceOnLab(container);
@@ -136,8 +142,13 @@ export class Andern implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
         if (config.disableEmissaryPmcBots) {
             this.disableEmissaryPmcBots(container);
         }
+        
         if (config.disableSeasonalEvents) {
             this.disableSeasonalEvents(container);
+        }
+        
+        if (config.insuranceIncreaseStorageTime || config.insuranceDecreaseReturnTime) {
+            this.insuranceTune(container);
         }
     }
 
@@ -188,6 +199,30 @@ export class Andern implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
                 ConfigTypes.SEASONAL_EVENT
             );
         seasonalEventConfig.enableSeasonalEventDetection = false;
+    }
+
+    insuranceTune(container: DependencyContainer): undefined {
+        const databaseServer: DatabaseServer =
+            container.resolve<DatabaseServer>("DatabaseServer");
+
+        const traders = databaseServer.getTables().traders
+
+        const praporId = "54cb50c76803fa8b248b4571";
+        const therapistId = "54cb57776803fa99248b456e";
+       
+        if (config.insuranceDecreaseReturnTime) {
+            traders[praporId].base.insurance.min_return_hour = 2;
+            traders[praporId].base.insurance.max_return_hour = 3;
+            
+            traders[therapistId].base.insurance.min_return_hour = 1;
+            traders[therapistId].base.insurance.max_return_hour = 2;
+        }
+        
+        if (config.insuranceIncreaseStorageTime) {
+            traders[praporId].base.insurance.max_storage_time = 336;
+            traders[therapistId].base.insurance.max_storage_time = 336;
+        }
+        
     }
 }
 

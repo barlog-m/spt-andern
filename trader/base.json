@@ -23,7 +23,7 @@
     "currency": "RUB",
     "nextResupply": 1615141448,
     "repair": {
-        "availability": true,
+        "availability": false,
         "quality": 0,
         "excluded_id_list": [],
         "excluded_category": [],
@@ -32,7 +32,7 @@
         "price_rate": 1
     },
     "insurance": {
-        "availability": true,
+        "availability": false,
         "min_payment": 0,
         "min_return_hour": 0,
         "max_return_hour": 0,
