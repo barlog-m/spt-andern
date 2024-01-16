@@ -131,6 +131,8 @@ Works only if `mapBotSettings` set to true.
 
 `insuranceIncreaseStorageTime` increase storage time for Prapor and Therapist (14 days).
 
+`cheeseQuests` disable gear and weapon conditions for same quests. For example DMR allowed for any quest required bolt action rifle.
+
 ## Installation
 
 Put folder `BarlogM-Andern` from zip file into your `user/mods` folder

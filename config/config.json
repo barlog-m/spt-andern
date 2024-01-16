@@ -49,5 +49,6 @@
     "lootingBotsCompatibility": false,
     "insuranceDecreaseReturnTime": false,
     "insuranceIncreaseStorageTime": false,
+    "cheeseQuests": false,
     "debug": false
 }
