@@ -1,6 +1,9 @@
 import {DependencyContainer} from "tsyringe";
 import {DatabaseServer} from "@spt-aki/servers/DatabaseServer";
-import {CounterProps} from "@spt-aki/models/eft/common/tables/IQuest";
+import {
+    CounterCondition,
+    CounterProps
+} from "@spt-aki/models/eft/common/tables/IQuest";
 import * as config from "../config/config.json";
 import {ILogger} from "@spt-aki/models/spt/utils/ILogger";
 
@@ -11,6 +14,7 @@ export default function cheeseQuests(
     const databaseServer: DatabaseServer =
         container.resolve<DatabaseServer>("DatabaseServer");
     const tables = databaseServer.getTables();
+    const shotySilencerArray = ["5b363dd25acfc4001a598fd2"];
 
     Object.entries(tables.templates.quests).forEach(([questId, quest]) => {
         const counters = quest.conditions.AvailableForFinish.filter(
@@ -23,12 +27,13 @@ export default function cheeseQuests(
                     (c._parent === "Kills") || (c._parent === "Shots") || (c._parent === "Equipment"));
 
                 if (conditions !== undefined) {
+                    const conditionToDelete: CounterCondition[] = [];
                     conditions.forEach((condition) => {
 
                         const cp = condition._props;
                         if (cp !== undefined) {
                             // if quest required silenced shotgun
-                            if (cp.weaponModsInclusive?.includes(["5b363dd25acfc4001a598fd2"])) {
+                            if (cp.weaponModsInclusive?.some(subArray => subArray.every((value, index) => value === shotySilencerArray[index]))) {
                                 replaceWithAnySilencedWeapon(cp);
                                 if (config.debug) {
                                     logger.info(`[Andern] quest '${quest.QuestName}' condition set to any silenced weapon`)
@@ -37,7 +42,7 @@ export default function cheeseQuests(
 
                             // if quest has gear conditions
                             if (cp.equipmentInclusive?.length > 0) {
-                                cp.equipmentInclusive = [];
+                                conditionToDelete.push(condition)
                                 if (config.debug) {
                                     logger.info(`[Andern] quest '${quest.QuestName}' gear condition removed`)
                                 }
@@ -59,12 +64,16 @@ export default function cheeseQuests(
 
                             // if quest required shotgun
                             if (cp.weapon?.includes("54491c4f4bdc2db1078b4568")) {
-                                cp.weapon = [];
+                                delete cp.weapon;
                                 if (config.debug) {
                                     logger.info(`[Andern] quest '${quest.QuestName}' weapon condition removed`)
                                 }
                             }
                         }
+
+                        counter._props.counter.conditions = counter._props?.counter.conditions.filter(
+                            c => !conditionToDelete.includes(c)
+                        )
                     })
                 }
             });
@@ -87,7 +96,7 @@ function addAllDmr(cp: CounterProps): undefined {
 
 function replaceWithAnySilencedWeapon(cp: CounterProps): undefined {
     // exclude weapon restrictions
-    cp.weapon = [];
+    delete cp.weapon;
     // include all silencers
     cp.weaponModsInclusive = [
         ["59bffc1f86f77435b128b872"],
