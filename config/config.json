@@ -50,5 +50,6 @@
     "insuranceDecreaseReturnTime": false,
     "insuranceIncreaseStorageTime": false,
     "cheeseQuests": false,
+    "vssValOverheatMultiplier": 0.85,
     "debug": false
 }

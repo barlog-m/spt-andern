@@ -27,6 +27,7 @@ import { RaidInfo } from "./RaidInfo";
 import { lootConfig } from "./lootUtils";
 import { mapBotTuning, setPmcForceHealingItems } from "./mapBotTuning";
 import cheeseQuests from "./questUtils";
+import vssOverheatFix from "./weaponUtils";
 import * as config from "../config/config.json";
 
 export class Andern implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
@@ -153,8 +154,10 @@ export class Andern implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
         }
         
         if (config.cheeseQuests) {
-            this.cheeseQuests(container);
+            cheeseQuests(container);
         }
+
+        vssOverheatFix(container);
     }
 
     private setMinFleaLevel(container: DependencyContainer): undefined {
@@ -228,10 +231,6 @@ export class Andern implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
             traders[therapistId].base.insurance.max_storage_time = 336;
         }
         
-    }
-
-    private cheeseQuests(container: DependencyContainer): undefined {
-        cheeseQuests(container);
     }
 }
 

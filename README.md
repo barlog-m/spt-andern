@@ -133,6 +133,8 @@ Works only if `mapBotSettings` set to true.
 
 `cheeseQuests` disable gear and weapon conditions for same quests. For example DMR allowed for any quest required bolt action rifle.
 
+`vssValOverheatMultiplier` change heat modifier for VSS, VAL and all Caliber9x39 ammo. Recommended value is 0.85.
+
 ## Installation
 
 Put folder `BarlogM-Andern` from zip file into your `user/mods` folder
