@@ -30,7 +30,7 @@ export declare class BotGeneratorHelper {
      * @param botRole Used by weapons to randomize the durability values. Null for non-equipped items
      * @returns Item Upd object with extra properties
      */
-    generateExtraPropertiesForItem(itemTemplate: ITemplateItem, botRole?: any): {
+    generateExtraPropertiesForItem(itemTemplate: ITemplateItem, botRole?: string): {
         upd?: Upd;
     };
     /**
@@ -64,14 +64,15 @@ export declare class BotGeneratorHelper {
     protected generateArmorRepairableProperties(itemTemplate: ITemplateItem, botRole: string): Repairable;
     /**
      * Can item be added to another item without conflict
-     * @param items Items to check compatibilities with
+     * @param itemsEquipped Items to check compatibilities with
      * @param tplToCheck Tpl of the item to check for incompatibilities
      * @param equipmentSlot Slot the item will be placed into
      * @returns false if no incompatibilities, also has incompatibility reason
      */
-    isItemIncompatibleWithCurrentItems(items: Item[], tplToCheck: string, equipmentSlot: string): {
+    isItemIncompatibleWithCurrentItems(itemsEquipped: Item[], tplToCheck: string, equipmentSlot: string): {
         incompatible: boolean;
         reason: string;
+        slotBlocked?: boolean;
     };
     /**
      * Convert a bots role to the equipment role used in config/bot.json

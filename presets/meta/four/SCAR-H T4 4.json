@@ -1,0 +1,188 @@
+{
+    "id": "65b2930f01001c3ee53987e0",
+    "name": "SCAR-H T4 4",
+    "root": "4a11d5f03379a217ff0bf8f3",
+    "items": [
+        {
+            "_id": "4a11d5f03379a217ff0bf8f3",
+            "_tpl": "6183afd850224f204c1da514",
+            "upd": {
+                "Repairable": {
+                    "MaxDurability": 100,
+                    "Durability": 100
+                },
+                "Foldable": {
+                    "Folded": false
+                },
+                "FireMode": {
+                    "FireMode": "single"
+                }
+            }
+        },
+        {
+            "_id": "579e6dc16c48bf1d213370ba",
+            "_tpl": "59db3a1d86f77429e05b4e92",
+            "parentId": "4a11d5f03379a217ff0bf8f3",
+            "slotId": "mod_pistol_grip"
+        },
+        {
+            "_id": "2daf84d4d91be7a055211838",
+            "_tpl": "618168dc8004cc50514c34fc",
+            "parentId": "4a11d5f03379a217ff0bf8f3",
+            "slotId": "mod_magazine"
+        },
+        {
+            "_id": "e0770170983fc45e15d5f93d",
+            "_tpl": "6165adcdd3a39d50044c120f",
+            "parentId": "4a11d5f03379a217ff0bf8f3",
+            "slotId": "mod_reciever"
+        },
+        {
+            "_id": "0cfaa819ca9aa9c6708b9e25",
+            "_tpl": "61816734d8e3106d9806c1f3",
+            "parentId": "4a11d5f03379a217ff0bf8f3",
+            "slotId": "mod_stock"
+        },
+        {
+            "_id": "2640961dcbdfb430f900cfdd",
+            "_tpl": "6181688c6c780c1e710c9b04",
+            "parentId": "4a11d5f03379a217ff0bf8f3",
+            "slotId": "mod_charge"
+        },
+        {
+            "_id": "e34db1975efb4ff9cafb71b7",
+            "_tpl": "618b9643526131765025ab35",
+            "parentId": "e0770170983fc45e15d5f93d",
+            "slotId": "mod_scope"
+        },
+        {
+            "_id": "654161f41a33cf38f6b72d0b",
+            "_tpl": "6183b0711cb55961fa0fdcad",
+            "parentId": "e0770170983fc45e15d5f93d",
+            "slotId": "mod_barrel"
+        },
+        {
+            "_id": "053017238d9dc713ddb378f8",
+            "_tpl": "5fb6564947ce63734e3fa1da",
+            "parentId": "e0770170983fc45e15d5f93d",
+            "slotId": "mod_sight_rear",
+            "upd": {
+                "Sight": {
+                    "ScopesCurrentCalibPointIndexes": [
+                        0
+                    ],
+                    "ScopesSelectedModes": [
+                        0
+                    ],
+                    "SelectedScope": 0
+                }
+            }
+        },
+        {
+            "_id": "d774318c95183aa746eb8c9f",
+            "_tpl": "5fb6567747ce63734e3fa1dc",
+            "parentId": "e0770170983fc45e15d5f93d",
+            "slotId": "mod_sight_front",
+            "upd": {
+                "Sight": {
+                    "ScopesCurrentCalibPointIndexes": [
+                        0
+                    ],
+                    "ScopesSelectedModes": [
+                        0
+                    ],
+                    "SelectedScope": 0
+                }
+            }
+        },
+        {
+            "_id": "81e97448a4031d5427d93dd6",
+            "_tpl": "619666f4af1f5202c57a952d",
+            "parentId": "e0770170983fc45e15d5f93d",
+            "slotId": "mod_mount_000"
+        },
+        {
+            "_id": "8c35d0e4b2bcb96c085e7884",
+            "_tpl": "618167528004cc50514c34f9",
+            "parentId": "0cfaa819ca9aa9c6708b9e25",
+            "slotId": "mod_stock_001"
+        },
+        {
+            "_id": "16a80c005e44d0fbfb680b77",
+            "_tpl": "618167441cb55961fa0fdc71",
+            "parentId": "0cfaa819ca9aa9c6708b9e25",
+            "slotId": "mod_stock_002"
+        },
+        {
+            "_id": "04f8db94f94173743a91e975",
+            "_tpl": "618ba27d9008e4636a67f61d",
+            "parentId": "e34db1975efb4ff9cafb71b7",
+            "slotId": "mod_scope",
+            "upd": {
+                "Sight": {
+                    "ScopesCurrentCalibPointIndexes": [
+                        0
+                    ],
+                    "ScopesSelectedModes": [
+                        0
+                    ],
+                    "SelectedScope": 0
+                }
+            }
+        },
+        {
+            "_id": "b94b3208c7a3caf726df8511",
+            "_tpl": "618b9671d14d6d5ab879c5ea",
+            "parentId": "e34db1975efb4ff9cafb71b7",
+            "slotId": "mod_mount"
+        },
+        {
+            "_id": "4dad1d70df7548ab5fad55d7",
+            "_tpl": "6130c43c67085e45ef1405a1",
+            "parentId": "654161f41a33cf38f6b72d0b",
+            "slotId": "mod_muzzle"
+        },
+        {
+            "_id": "fc8ed32468efc139a6a7e861",
+            "_tpl": "5b7be4895acfc400170e2dd5",
+            "parentId": "81e97448a4031d5427d93dd6",
+            "slotId": "mod_foregrip"
+        },
+        {
+            "_id": "22f2d8ee0253ab1eaf026e47",
+            "_tpl": "5b7be47f5acfc400170e2dd2",
+            "parentId": "81e97448a4031d5427d93dd6",
+            "slotId": "mod_mount_002"
+        },
+        {
+            "_id": "13c78a351ba1e61e5174adae",
+            "_tpl": "5dfa3d2b0dee1b22f862eade",
+            "parentId": "4dad1d70df7548ab5fad55d7",
+            "slotId": "mod_muzzle"
+        },
+        {
+            "_id": "33c4196021eaa6414e1dde86",
+            "_tpl": "5b057b4f5acfc4771e1bd3e9",
+            "parentId": "fc8ed32468efc139a6a7e861",
+            "slotId": "mod_foregrip"
+        },
+        {
+            "_id": "f02a5e2be035a21d1413aa87",
+            "_tpl": "6272370ee4013c5d7e31f418",
+            "parentId": "22f2d8ee0253ab1eaf026e47",
+            "slotId": "mod_tactical",
+            "upd": {
+                "Light": {
+                    "IsActive": true,
+                    "SelectedMode": 0
+                }
+            }
+        },
+        {
+            "_id": "c30da6a05a59ba1e76563598",
+            "_tpl": "618167616ef05c2ce828f1a8",
+            "parentId": "8c35d0e4b2bcb96c085e7884",
+            "slotId": "mod_stock"
+        }
+    ]
+}

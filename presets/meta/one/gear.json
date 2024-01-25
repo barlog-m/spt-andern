@@ -19,8 +19,8 @@
     "helmets": [
         {
             "weight": 2,
-            "id": "5a7c4850e899ef00150be885",
-            "name": "6B47 Ratnik-BSh helmet"
+            "id": "5d5e9c74a4b9364855191c40",
+            "name": "MSA ACH TC-2002 MICH Series helmet"
         },
         {
             "weight": 2,
@@ -31,72 +31,87 @@
             "weight": 1,
             "id": "5c06c6a80db834001b735491",
             "name": "SSh-68 steel helmet"
+        },
+        {
+            "weight": 1,
+            "id": "5aa7d03ae5b5b00016327db5",
+            "name": "UNTAR helmet"
         }
     ],
     "armoredRigs": [
         {
-            "weight": 3,
-            "id": "64a5366719bab53bd203bf33",
-            "name": "Eagle Allied Industries MBSS plate carrier"
-        },
-        {
-            "weight": 3,
-            "id": "64a536392d2c4e6e970f4121",
-            "name": "WARTECH TV-115 plate carrier"
-        },
-        {
-            "weight": 2,
+            "weight": 1,
             "id": "544a5caa4bdc2d1a388b4568",
             "name": "Crye Precision AVS plate carrier"
         },
         {
-            "weight": 2,
-            "id": "592c2d1a86f7746dbe2af32a",
-            "name": "ANA Tactical Alpha chest rig"
-        },
-        {
             "weight": 1,
-            "id": "5c0e3eb886f7742015526062",
-            "name": "6B5-16 Zh-86 Uley armored rig"
+            "id": "5c0e722886f7740458316a57",
+            "name": "ANA Tactical M1 plate carrier"
         }
     ],
     "armor": [
         {
-            "weight": 1,
+            "weight": 2,
             "id": "64be79c487d1510151095552",
-            "name": "NPP KlASS Kora-Kulon body armor"
+            "name": "NPP KlASS Kora-Kulon body armor (Black)"
         },
         {
-            "weight": 1,
+            "weight": 2,
             "id": "64be79e2bf8412471d0d9bcc",
             "name": "NPP KlASS Kora-Kulon body armor (Digital Flora)"
         },
         {
-            "weight": 1,
+            "weight": 2,
             "id": "5c0e5edb86f77461f55ed1f7",
             "name": "BNTI Zhuk-3 body armor (Press)"
         },
         {
-            "weight": 1,
+            "weight": 2,
             "id": "5c0e5bab86f77461f55ed1f3",
             "name": "6B23-1 body armor (Digital Flora)"
+        },
+        {
+            "weight": 1,
+            "id": "5c0e53c886f7747fa54205c7",
+            "name": "6B13 assault armor (Digital Flora)"
+        },
+        {
+            "weight": 1,
+            "id": "5c0e655586f774045612eeb2",
+            "name": "HighCom Trooper TFO body armor (Multicam)"
         }
     ],
     "rigs": [
         {
             "weight": 3,
-            "id": "64be7110bf597ba84a0a41ea",
-            "name": "Type 56 Chicom chest harness"
+            "id": "5648a69d4bdc2ded0b8b457b",
+            "name": "BlackRock chest rig"
         },
         {
-            "weight": 2,
+            "weight": 3,
             "id": "6034cf5fffd42c541047f72e",
             "name": "Umka M33-SET1 hunter vest"
         },
         {
             "weight": 2,
-            "id": "5d5d85c586f774279a21cbdb",
-            "name": "Haley Strategic D3CRX Chest Harness"
+            "id": "64be7110bf597ba84a0a41ea",
+            "name": "Type 56 Chicom chest harness"
+        },
+        {
+            "weight": 2,
+            "id": "59e7643b86f7742cbf2c109a",
+            "name": "WARTECH TV-109 + TV-106 chest rig"
+        },
+        {
+            "weight": 2,
+            "id": "6034d0230ca681766b6a0fb5",
+            "name": "CSA chest rig"
+        },
+        {
+            "weight": 2,
+            "id": "5929a2a086f7744f4b234d43",
+            "name": "UMTBS 6sh112 Scout-Sniper"
         },
         {
             "weight": 2,
@@ -110,18 +125,18 @@
         },
         {
             "weight": 1,
-            "id": "59e7643b86f7742cbf2c109a",
-            "name": "WARTECH TV-109 + TV-106 chest rig"
+            "id": "5d5d85c586f774279a21cbdb",
+            "name": "Haley Strategic D3CRX Chest Harness"
         },
         {
             "weight": 1,
-            "id": "6034d0230ca681766b6a0fb5",
-            "name": "CSA chest rig"
+            "id": "5e4abc1f86f774069619fbaa",
+            "name": "Spiritus Systems Bank Robber chest rig"
         },
         {
             "weight": 1,
-            "id": "5929a2a086f7744f4b234d43",
-            "name": "UMTBS 6sh112 Scout-Sniper"
+            "id": "64be7095047e826eae02b0c1",
+            "name": "Zulu Nylon Gear M4 Reduced Signature Chest Rig"
         }
     ],
     "backpacks": [

@@ -1,0 +1,69 @@
+{
+    "id": "65b04fb601001c3ee51171c2",
+    "name": "AUG T1",
+    "root": "0db21af4bd51dcb69f4b3585",
+    "items": [
+        {
+            "_id": "0db21af4bd51dcb69f4b3585",
+            "_tpl": "62e7c4fba689e8c9c50dfc38",
+            "upd": {
+                "Repairable": {
+                    "MaxDurability": 100,
+                    "Durability": 100
+                },
+                "FireMode": {
+                    "FireMode": "single"
+                }
+            }
+        },
+        {
+            "_id": "d4cef9ddf9b77ab84d4e13b0",
+            "_tpl": "62e7c98b550c8218d602cbb4",
+            "parentId": "0db21af4bd51dcb69f4b3585",
+            "slotId": "mod_magazine"
+        },
+        {
+            "_id": "904154c6ef7a8cdb6bf97b2e",
+            "_tpl": "62e7c880f68e7a0676050c7c",
+            "parentId": "0db21af4bd51dcb69f4b3585",
+            "slotId": "mod_charge"
+        },
+        {
+            "_id": "8d614f8285f4ff95311bc86a",
+            "_tpl": "62ea7c793043d74a0306e19f",
+            "parentId": "0db21af4bd51dcb69f4b3585",
+            "slotId": "mod_reciever",
+            "upd": {
+                "Sight": {
+                    "ScopesCurrentCalibPointIndexes": [
+                        0,
+                        0
+                    ],
+                    "ScopesSelectedModes": [
+                        0,
+                        0
+                    ],
+                    "SelectedScope": 0
+                }
+            }
+        },
+        {
+            "_id": "7a90b5b6f46f31ecbcf03311",
+            "_tpl": "62e7c7f3c34ea971710c32fc",
+            "parentId": "8d614f8285f4ff95311bc86a",
+            "slotId": "mod_barrel"
+        },
+        {
+            "_id": "8f06c95190934eb10e0bfe25",
+            "_tpl": "630f2872911356c17d06abc5",
+            "parentId": "7a90b5b6f46f31ecbcf03311",
+            "slotId": "mod_muzzle_000"
+        },
+        {
+            "_id": "11b6b140957001910f92b203",
+            "_tpl": "634e61b0767cb15c4601a877",
+            "parentId": "7a90b5b6f46f31ecbcf03311",
+            "slotId": "mod_foregrip"
+        }
+    ]
+}

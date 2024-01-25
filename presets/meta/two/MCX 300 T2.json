@@ -1,0 +1,169 @@
+{
+    "id": "65b1775001001c3ee5899fff",
+    "name": "MCX 300 T2",
+    "root": "1028920644813db7029e61c9",
+    "items": [
+        {
+            "_id": "1028920644813db7029e61c9",
+            "_tpl": "5fbcc1d9016cce60e8341ab3",
+            "upd": {
+                "Repairable": {
+                    "MaxDurability": 100,
+                    "Durability": 100
+                },
+                "FireMode": {
+                    "FireMode": "single"
+                }
+            }
+        },
+        {
+            "_id": "aa4a78449c1c0a9d1a20e267",
+            "_tpl": "5a339805c4a2826c6e06d73d",
+            "parentId": "1028920644813db7029e61c9",
+            "slotId": "mod_pistol_grip"
+        },
+        {
+            "_id": "eea4fdf48fb53250b1d303b0",
+            "_tpl": "5d1340cad7ad1a0b0b249869",
+            "parentId": "1028920644813db7029e61c9",
+            "slotId": "mod_magazine"
+        },
+        {
+            "_id": "5d758ab845a32490857e8e88",
+            "_tpl": "5fbcc3e4d6fa9c00c571bb58",
+            "parentId": "1028920644813db7029e61c9",
+            "slotId": "mod_reciever"
+        },
+        {
+            "_id": "cf2da0772ae9edc52890bbd2",
+            "_tpl": "5fbcc437d724d907e2077d5c",
+            "parentId": "1028920644813db7029e61c9",
+            "slotId": "mod_stock"
+        },
+        {
+            "_id": "7408263bad3f2c7538577447",
+            "_tpl": "5fbcc640016cce60e8341acc",
+            "parentId": "1028920644813db7029e61c9",
+            "slotId": "mod_charge"
+        },
+        {
+            "_id": "898f72dede30c44e35bbb038",
+            "_tpl": "57aca93d2459771f2c7e26db",
+            "parentId": "5d758ab845a32490857e8e88",
+            "slotId": "mod_scope",
+            "upd": {
+                "Sight": {
+                    "ScopesCurrentCalibPointIndexes": [
+                        0,
+                        0
+                    ],
+                    "ScopesSelectedModes": [
+                        0,
+                        0
+                    ],
+                    "SelectedScope": 0
+                }
+            }
+        },
+        {
+            "_id": "44d2f64ca261e1a1939ee7d4",
+            "_tpl": "5fbbfacda56d053a3543f799",
+            "parentId": "5d758ab845a32490857e8e88",
+            "slotId": "mod_barrel"
+        },
+        {
+            "_id": "4c90290a3de788c06465ef84",
+            "_tpl": "5fbc226eca32ed67276c155d",
+            "parentId": "5d758ab845a32490857e8e88",
+            "slotId": "mod_handguard"
+        },
+        {
+            "_id": "f7121c951e3484d075ede9f7",
+            "_tpl": "5c18b9192e2216398b5a8104",
+            "parentId": "5d758ab845a32490857e8e88",
+            "slotId": "mod_sight_rear",
+            "upd": {
+                "Sight": {
+                    "ScopesCurrentCalibPointIndexes": [
+                        0
+                    ],
+                    "ScopesSelectedModes": [
+                        0
+                    ],
+                    "SelectedScope": 0
+                }
+            }
+        },
+        {
+            "_id": "462600b6ed639a0ff28621fa",
+            "_tpl": "5fbc22ccf24b94483f726483",
+            "parentId": "44d2f64ca261e1a1939ee7d4",
+            "slotId": "mod_muzzle"
+        },
+        {
+            "_id": "e38aced508783cd83e8fbb7d",
+            "_tpl": "5fbc210bf24b94483f726481",
+            "parentId": "44d2f64ca261e1a1939ee7d4",
+            "slotId": "mod_gas_block"
+        },
+        {
+            "_id": "0cd17691de7cd244c4e829bc",
+            "_tpl": "59e0bdb186f774156f04ce82",
+            "parentId": "4c90290a3de788c06465ef84",
+            "slotId": "mod_mount_001"
+        },
+        {
+            "_id": "f86d35a5904232c398960ed3",
+            "_tpl": "5c18b90d2e2216152142466b",
+            "parentId": "4c90290a3de788c06465ef84",
+            "slotId": "mod_sight_front",
+            "upd": {
+                "Sight": {
+                    "ScopesCurrentCalibPointIndexes": [
+                        0
+                    ],
+                    "ScopesSelectedModes": [
+                        0
+                    ],
+                    "SelectedScope": 0
+                }
+            }
+        },
+        {
+            "_id": "d51a2a008b707c9f7f1f2a9d",
+            "_tpl": "59e0bed186f774156f04ce84",
+            "parentId": "4c90290a3de788c06465ef84",
+            "slotId": "mod_foregrip"
+        },
+        {
+            "_id": "71f8297fcb3d0b7a9391bccd",
+            "_tpl": "5fbcbd10ab884124df0cd563",
+            "parentId": "462600b6ed639a0ff28621fa",
+            "slotId": "mod_muzzle_000"
+        },
+        {
+            "_id": "ad76f34aa6f28291d7a4a7cd",
+            "_tpl": "5fbe760793164a5b6278efc8",
+            "parentId": "462600b6ed639a0ff28621fa",
+            "slotId": "mod_muzzle_001"
+        },
+        {
+            "_id": "534f2dfe809f0006273d4c40",
+            "_tpl": "6272370ee4013c5d7e31f418",
+            "parentId": "0cd17691de7cd244c4e829bc",
+            "slotId": "mod_tactical",
+            "upd": {
+                "Light": {
+                    "IsActive": true,
+                    "SelectedMode": 0
+                }
+            }
+        },
+        {
+            "_id": "f7d83de177d80d2dcfff5144",
+            "_tpl": "58c157be86f77403c74b2bb6",
+            "parentId": "d51a2a008b707c9f7f1f2a9d",
+            "slotId": "mod_foregrip"
+        }
+    ]
+}

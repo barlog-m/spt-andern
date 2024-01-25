@@ -1,24 +1,26 @@
-import { inject, injectAll, injectable } from "tsyringe";
+import {inject, injectAll, injectable} from "tsyringe";
 
-import { DatabaseServer } from "@spt-aki/servers/DatabaseServer";
-import { ConfigServer } from "@spt-aki/servers/ConfigServer";
-import { IPmcConfig } from "@spt-aki/models/spt/config/IPmcConfig";
-import { IRepairConfig } from "@spt-aki/models/spt/config/IRepairConfig";
-import { ConfigTypes } from "@spt-aki/models/enums/ConfigTypes";
-import { Item } from "@spt-aki/models/eft/common/tables/IItem";
-import { ITemplateItem } from "@spt-aki/models/eft/common/tables/ITemplateItem";
-import { HashUtil } from "@spt-aki/utils/HashUtil";
-import { ItemHelper } from "@spt-aki/helpers/ItemHelper";
-import { ILogger } from "@spt-aki/models/spt/utils/ILogger";
-import { RandomUtil } from "@spt-aki/utils/RandomUtil";
-import { BotWeaponGeneratorHelper } from "@spt-aki/helpers/BotWeaponGeneratorHelper";
-import { BotGeneratorHelper } from "@spt-aki/helpers/BotGeneratorHelper";
-import { RepairService } from "@spt-aki/services/RepairService";
-import { IInventoryMagGen } from "@spt-aki/generators/weapongen/IInventoryMagGen";
-import { EquipmentSlots } from "@spt-aki/models/enums/EquipmentSlots";
+import {DatabaseServer} from "@spt-aki/servers/DatabaseServer";
+import {ConfigServer} from "@spt-aki/servers/ConfigServer";
+import {IPmcConfig} from "@spt-aki/models/spt/config/IPmcConfig";
+import {IRepairConfig} from "@spt-aki/models/spt/config/IRepairConfig";
+import {ConfigTypes} from "@spt-aki/models/enums/ConfigTypes";
+import {Item} from "@spt-aki/models/eft/common/tables/IItem";
+import {ITemplateItem} from "@spt-aki/models/eft/common/tables/ITemplateItem";
+import {HashUtil} from "@spt-aki/utils/HashUtil";
+import {ItemHelper} from "@spt-aki/helpers/ItemHelper";
+import {ILogger} from "@spt-aki/models/spt/utils/ILogger";
+import {RandomUtil} from "@spt-aki/utils/RandomUtil";
+import {
+    BotWeaponGeneratorHelper
+} from "@spt-aki/helpers/BotWeaponGeneratorHelper";
+import {BotGeneratorHelper} from "@spt-aki/helpers/BotGeneratorHelper";
+import {RepairService} from "@spt-aki/services/RepairService";
+import {IInventoryMagGen} from "@spt-aki/generators/weapongen/IInventoryMagGen";
+import {EquipmentSlots} from "@spt-aki/models/enums/EquipmentSlots";
 
-import { GeneratedWeapon } from "./models";
-import { Data } from "./Data";
+import {GeneratedWeapon} from "./models";
+import {Data} from "./Data";
 
 const MUZZLE_PAIRS = {
     //7.62x51 Tier 4
@@ -30,8 +32,8 @@ const MUZZLE_PAIRS = {
     "5fbc22ccf24b94483f726483": "5fbe760793164a5b6278efc8",
     "612e0d3767085e45ef14057f": "63877c99e785640d436458ea",
     "5d1f819086f7744b355c219b": "5cff9e84d7ad1a049e54ed55",
-    "5d443f8fa4b93678dd4a01aa": "5d44064fa4b9361e4f6eb8b5",
     "5dfa3cd1b33c0951220c079b": "5dfa3d2b0dee1b22f862eade",
+    "5d443f8fa4b93678dd4a01aa": "5d44064fa4b9361e4f6eb8b5",
 
     //5.56x45 Tier 4
     "609269c3b0e443224b421cc1": "60926df0132d4d12c81fd9df",
@@ -42,6 +44,9 @@ const MUZZLE_PAIRS = {
     "612e0cfc8004cc50514c2d9e": "63877c99e785640d436458ea",
     "5c7fb51d2e2216001219ce11": "5ea17bbc09aa976f2e7a51cd",
     "5d440625a4b9361eec4ae6c5": "5d44064fa4b9361e4f6eb8b5",
+
+    //Tier 2 SilencerCo Hybrid 46
+    "59bffc1f86f77435b128b872": "59bffbb386f77435b379b9c2"
 };
 
 @injectable()
@@ -51,7 +56,7 @@ export class WeaponGenerator {
     private readonly MK47 = "606587252535c57a13424cfd";
 
     private readonly X_47_DRUM = "5cfe8010d7ad1a59283b14c6";
-    
+
     private readonly MAGPUL_MOE_CARBINE_RUBBER_BUTTPAD = "58d2912286f7744e27117493";
 
     protected pmcConfig: IPmcConfig;
@@ -135,7 +140,7 @@ export class WeaponGenerator {
                     _tpl: ammoTpl,
                     parentId: weaponWithMods[0]._id,
                     slotId: chamberName,
-                    upd: { StackObjectsCount: 1 },
+                    upd: {StackObjectsCount: 1},
                 });
             } else {
                 for (
@@ -149,7 +154,7 @@ export class WeaponGenerator {
                         _tpl: ammoTpl,
                         parentId: weaponWithMods[0]._id,
                         slotId: slotIdName,
-                        upd: { StackObjectsCount: 1 },
+                        upd: {StackObjectsCount: 1},
                     });
                 }
             }
@@ -175,9 +180,9 @@ export class WeaponGenerator {
     }
 
     fillMagazine(weaponWithMods: Item[], ammoTpl: string): string {
-        for (const magazine of weaponWithMods.filter(
+        weaponWithMods.filter(
             (x) => x.slotId === this.magazineSlotId
-        )) {
+        ).map((magazine) => {
             const magazineTemplate = this.getTemplateById(magazine._tpl);
             const magazineWithCartridges = [magazine];
 
@@ -193,7 +198,8 @@ export class WeaponGenerator {
                 ...magazineWithCartridges
             );
             return magazine._tpl;
-        }
+        });
+        return undefined;
     }
 
     getTemplateById(tpl: string): ITemplateItem {
@@ -266,7 +272,7 @@ export class WeaponGenerator {
         weaponTpl: string
     ): undefined {
         let deleteMagpulRubberButtpad = false;
-        
+
         weapon.forEach((item) => {
             const alternativeTpl = this.data.getAlternativeModule(
                 presetName,
@@ -283,14 +289,14 @@ export class WeaponGenerator {
                     if (item.slotId === "mod_muzzle") {
                         this.alternateSuppressor(weapon, item);
                     }
-                    
+
                     if (item._tpl === this.MAGPUL_MOE_CARBINE_RUBBER_BUTTPAD) {
                         deleteMagpulRubberButtpad = true;
                     }
                 }
             }
         });
-       
+
         if (deleteMagpulRubberButtpad) {
             this.deleteModule(weapon, this.MAGPUL_MOE_CARBINE_RUBBER_BUTTPAD);
         }
@@ -300,7 +306,7 @@ export class WeaponGenerator {
         const suppressor = weapon.find(
             (i) => i.parentId === muzzleItem._id && (i.slotId = "mod_muzzle")
         );
-        
+
         if (suppressor !== undefined) {
             suppressor._tpl = MUZZLE_PAIRS[muzzleItem._tpl];
 
@@ -309,8 +315,8 @@ export class WeaponGenerator {
     }
 
     deleteUnnecessaryMuzzleModules(weapon: Item[]): undefined {
-       const SIG_SAUER_TWO_PORT_BRAKE_762X51_MUZZLE_BRAKE = "5fbcbd10ab884124df0cd563"; 
-       this.deleteModule(weapon, SIG_SAUER_TWO_PORT_BRAKE_762X51_MUZZLE_BRAKE);
+        const SIG_SAUER_TWO_PORT_BRAKE_762X51_MUZZLE_BRAKE = "5fbcbd10ab884124df0cd563";
+        this.deleteModule(weapon, SIG_SAUER_TWO_PORT_BRAKE_762X51_MUZZLE_BRAKE);
     }
 
     deleteModule(weapon: Item[], tpl: string): undefined {

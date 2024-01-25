@@ -93,6 +93,7 @@ export class GearGenerator {
             sortingTable: sortingTableId,
             hideoutAreaStashes: {},
             fastPanel: {},
+            favoriteItems: []
         };
     }
 
@@ -379,7 +380,7 @@ export class GearGenerator {
                 botRole,
                 botInventory,
                 "5b432b965acfc47a8774094e"
-            );
+            )
             return;
         }
 

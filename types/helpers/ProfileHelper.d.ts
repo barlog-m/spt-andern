@@ -28,7 +28,7 @@ export declare class ProfileHelper {
      * @param sessionID Session id
      * @param questConditionId Quest with condition to remove
      */
-    removeCompletedQuestConditionFromProfile(pmcData: IPmcData, questConditionId: Record<string, string>): void;
+    removeQuestConditionFromProfile(pmcData: IPmcData, questConditionId: Record<string, string>): void;
     /**
      * Get all profiles from server
      * @returns Dictionary of profiles

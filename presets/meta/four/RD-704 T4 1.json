@@ -1,11 +1,10 @@
 {
-    "type": "weapon",
-    "id": "db7d7e28ecceea9dcbc7d390",
+    "id": "65b21fcc01001c3ee5f58f2a",
     "name": "RD-704 T4 1",
-    "root": "7c114a266d1da2d936768f68",
+    "root": "ce9e49cf3a78822f8addfd28",
     "items": [
         {
-            "_id": "7c114a266d1da2d936768f68",
+            "_id": "ce9e49cf3a78822f8addfd28",
             "_tpl": "628a60ae6b1d481ff772e9c8",
             "upd": {
                 "Repairable": {
@@ -18,75 +17,94 @@
             }
         },
         {
-            "_id": "8638e8fc692f309458f940a5",
+            "_id": "0eeaf2abfdb1b2e4fd5a8639",
             "_tpl": "628a83c29179c324ed269508",
-            "parentId": "7c114a266d1da2d936768f68",
+            "parentId": "ce9e49cf3a78822f8addfd28",
             "slotId": "mod_gas_block"
         },
         {
-            "_id": "d37910f61f5403e00459a522",
-            "_tpl": "6130c43c67085e45ef1405a1",
-            "parentId": "7c114a266d1da2d936768f68",
+            "_id": "9fafa620f7085e98d28751f4",
+            "_tpl": "5cf78496d7f00c065703d6ca",
+            "parentId": "ce9e49cf3a78822f8addfd28",
             "slotId": "mod_muzzle"
         },
         {
-            "_id": "f4cfc774ebbd3fb38c4440da",
+            "_id": "42170ba174b8ea679ca2028f",
             "_tpl": "6087e663132d4d12c81fd96b",
-            "parentId": "7c114a266d1da2d936768f68",
+            "parentId": "ce9e49cf3a78822f8addfd28",
             "slotId": "mod_pistol_grip"
         },
         {
-            "_id": "db8cf0f62696fd2e4f0d44d5",
+            "_id": "b5751bc705d1c39487dce8bc",
             "_tpl": "5d2c76ed48f03532f2136169",
-            "parentId": "7c114a266d1da2d936768f68",
+            "parentId": "ce9e49cf3a78822f8addfd28",
             "slotId": "mod_reciever"
         },
         {
-            "_id": "92c802d7066581245bac5edc",
+            "_id": "55023535598ab5dcae0cf000",
             "_tpl": "5b0e794b5acfc47a877359b2",
-            "parentId": "7c114a266d1da2d936768f68",
+            "parentId": "ce9e49cf3a78822f8addfd28",
             "slotId": "mod_stock_000"
         },
         {
-            "_id": "c7d347a66bb54083f6f97a7f",
+            "_id": "c5fe995a64dcaa9170143137",
             "_tpl": "59fafc5086f7740dbe19f6c3",
-            "parentId": "7c114a266d1da2d936768f68",
+            "parentId": "ce9e49cf3a78822f8addfd28",
             "slotId": "mod_magazine"
         },
         {
-            "_id": "1f3c3eacff58748d207db598",
+            "_id": "ad97d7301df814fbd4597087",
             "_tpl": "6130ca3fd92c473c77020dbd",
-            "parentId": "7c114a266d1da2d936768f68",
+            "parentId": "ce9e49cf3a78822f8addfd28",
             "slotId": "mod_charge"
         },
         {
-            "_id": "17e88fb71a4c63eb3b0c0509",
+            "_id": "931a8dea41e29ba148f75ea1",
             "_tpl": "5b7be47f5acfc400170e2dd2",
-            "parentId": "8638e8fc692f309458f940a5",
+            "parentId": "0eeaf2abfdb1b2e4fd5a8639",
             "slotId": "mod_mount_001"
         },
         {
-            "_id": "3bf2e80664793f954acc8e70",
+            "_id": "19fbf3843dc3c6effc943275",
             "_tpl": "5b7be4895acfc400170e2dd5",
-            "parentId": "8638e8fc692f309458f940a5",
+            "parentId": "0eeaf2abfdb1b2e4fd5a8639",
             "slotId": "mod_foregrip"
         },
         {
-            "_id": "28f5b4304a14cd73dab4b7c1",
-            "_tpl": "5dfa3d2b0dee1b22f862eade",
-            "parentId": "d37910f61f5403e00459a522",
-            "slotId": "mod_muzzle"
+            "_id": "651be9eb3ece64ba90bed2f8",
+            "_tpl": "5c878e9d2e2216000f201903",
+            "parentId": "9fafa620f7085e98d28751f4",
+            "slotId": "mod_muzzle_000"
         },
         {
-            "_id": "e201ece024b35a89a27f802e",
-            "_tpl": "618b9643526131765025ab35",
-            "parentId": "db8cf0f62696fd2e4f0d44d5",
-            "slotId": "mod_scope"
+            "_id": "dafd99f6a8641e10ae090f97",
+            "_tpl": "5cf78720d7f00c06595bc93e",
+            "parentId": "9fafa620f7085e98d28751f4",
+            "slotId": "mod_muzzle_001"
         },
         {
-            "_id": "cd7476cb14cce1cf14061653",
+            "_id": "4b15e28fa1816fdf8ec2b962",
+            "_tpl": "57ac965c24597706be5f975c",
+            "parentId": "b5751bc705d1c39487dce8bc",
+            "slotId": "mod_scope",
+            "upd": {
+                "Sight": {
+                    "ScopesCurrentCalibPointIndexes": [
+                        0,
+                        0
+                    ],
+                    "ScopesSelectedModes": [
+                        0,
+                        0
+                    ],
+                    "SelectedScope": 0
+                }
+            }
+        },
+        {
+            "_id": "ae508341158146c3a530cbe0",
             "_tpl": "6272370ee4013c5d7e31f418",
-            "parentId": "17e88fb71a4c63eb3b0c0509",
+            "parentId": "931a8dea41e29ba148f75ea1",
             "slotId": "mod_tactical",
             "upd": {
                 "Light": {
@@ -96,30 +114,10 @@
             }
         },
         {
-            "_id": "9a8210aee6d45a4f221599c3",
+            "_id": "2f925d1a5e960548372c9bfa",
             "_tpl": "5b057b4f5acfc4771e1bd3e9",
-            "parentId": "3bf2e80664793f954acc8e70",
+            "parentId": "19fbf3843dc3c6effc943275",
             "slotId": "mod_foregrip"
-        },
-        {
-            "_id": "6d4deeba3be9b1dc1e8b20a0",
-            "_tpl": "618ba27d9008e4636a67f61d",
-            "parentId": "e201ece024b35a89a27f802e",
-            "slotId": "mod_scope",
-            "upd": {
-                "Sight": {
-                    "ScopesCurrentCalibPointIndexes": [0],
-                    "ScopesSelectedModes": [0],
-                    "SelectedScope": 0
-                }
-            }
-        },
-        {
-            "_id": "8544a873cd3c4723f9d23e87",
-            "_tpl": "618b9671d14d6d5ab879c5ea",
-            "parentId": "e201ece024b35a89a27f802e",
-            "slotId": "mod_mount"
         }
-    ],
-    "Parent": "5447b5f14bdc2d61278b4567"
+    ]
 }

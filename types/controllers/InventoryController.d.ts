@@ -1,4 +1,5 @@
 import { LootGenerator } from "@spt-aki/generators/LootGenerator";
+import { HideoutHelper } from "@spt-aki/helpers/HideoutHelper";
 import { InventoryHelper } from "@spt-aki/helpers/InventoryHelper";
 import { ItemHelper } from "@spt-aki/helpers/ItemHelper";
 import { PaymentHelper } from "@spt-aki/helpers/PaymentHelper";
@@ -24,6 +25,7 @@ import { IInventoryToggleRequestData } from "@spt-aki/models/eft/inventory/IInve
 import { IInventoryTransferRequestData } from "@spt-aki/models/eft/inventory/IInventoryTransferRequestData";
 import { IOpenRandomLootContainerRequestData } from "@spt-aki/models/eft/inventory/IOpenRandomLootContainerRequestData";
 import { IRedeemProfileRequestData } from "@spt-aki/models/eft/inventory/IRedeemProfileRequestData";
+import { ISetFavoriteItems } from "@spt-aki/models/eft/inventory/ISetFavoriteItems";
 import { IItemEventRouterResponse } from "@spt-aki/models/eft/itemEvent/IItemEventRouterResponse";
 import { ILogger } from "@spt-aki/models/spt/utils/ILogger";
 import { EventOutputHolder } from "@spt-aki/routers/EventOutputHolder";
@@ -47,6 +49,7 @@ export declare class InventoryController {
     protected presetHelper: PresetHelper;
     protected inventoryHelper: InventoryHelper;
     protected questHelper: QuestHelper;
+    protected hideoutHelper: HideoutHelper;
     protected ragfairOfferService: RagfairOfferService;
     protected profileHelper: ProfileHelper;
     protected paymentHelper: PaymentHelper;
@@ -55,7 +58,7 @@ export declare class InventoryController {
     protected lootGenerator: LootGenerator;
     protected eventOutputHolder: EventOutputHolder;
     protected httpResponseUtil: HttpResponseUtil;
-    constructor(logger: ILogger, hashUtil: HashUtil, jsonUtil: JsonUtil, itemHelper: ItemHelper, randomUtil: RandomUtil, databaseServer: DatabaseServer, fenceService: FenceService, presetHelper: PresetHelper, inventoryHelper: InventoryHelper, questHelper: QuestHelper, ragfairOfferService: RagfairOfferService, profileHelper: ProfileHelper, paymentHelper: PaymentHelper, localisationService: LocalisationService, playerService: PlayerService, lootGenerator: LootGenerator, eventOutputHolder: EventOutputHolder, httpResponseUtil: HttpResponseUtil);
+    constructor(logger: ILogger, hashUtil: HashUtil, jsonUtil: JsonUtil, itemHelper: ItemHelper, randomUtil: RandomUtil, databaseServer: DatabaseServer, fenceService: FenceService, presetHelper: PresetHelper, inventoryHelper: InventoryHelper, questHelper: QuestHelper, hideoutHelper: HideoutHelper, ragfairOfferService: RagfairOfferService, profileHelper: ProfileHelper, paymentHelper: PaymentHelper, localisationService: LocalisationService, playerService: PlayerService, lootGenerator: LootGenerator, eventOutputHolder: EventOutputHolder, httpResponseUtil: HttpResponseUtil);
     /**
      * Move Item
      * change location of item with parentId and slotId
@@ -222,4 +225,5 @@ export declare class InventoryController {
      */
     openRandomLootContainer(pmcData: IPmcData, body: IOpenRandomLootContainerRequestData, sessionID: string): IItemEventRouterResponse;
     redeemProfileReward(pmcData: IPmcData, request: IRedeemProfileRequestData, sessionId: string): IItemEventRouterResponse;
+    setFavoriteItem(pmcData: IPmcData, request: ISetFavoriteItems, sessionId: string): IItemEventRouterResponse;
 }

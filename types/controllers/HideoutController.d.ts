@@ -1,6 +1,7 @@
 import { ScavCaseRewardGenerator } from "@spt-aki/generators/ScavCaseRewardGenerator";
 import { HideoutHelper } from "@spt-aki/helpers/HideoutHelper";
 import { InventoryHelper } from "@spt-aki/helpers/InventoryHelper";
+import { ItemHelper } from "@spt-aki/helpers/ItemHelper";
 import { PaymentHelper } from "@spt-aki/helpers/PaymentHelper";
 import { PresetHelper } from "@spt-aki/helpers/PresetHelper";
 import { ProfileHelper } from "@spt-aki/helpers/ProfileHelper";
@@ -45,6 +46,7 @@ export declare class HideoutController {
     protected databaseServer: DatabaseServer;
     protected randomUtil: RandomUtil;
     protected inventoryHelper: InventoryHelper;
+    protected itemHelper: ItemHelper;
     protected saveServer: SaveServer;
     protected playerService: PlayerService;
     protected presetHelper: PresetHelper;
@@ -58,9 +60,9 @@ export declare class HideoutController {
     protected configServer: ConfigServer;
     protected jsonUtil: JsonUtil;
     protected fenceService: FenceService;
-    protected static nameBackendCountersCrafting: string;
+    protected static nameTaskConditionCountersCrafting: string;
     protected hideoutConfig: IHideoutConfig;
-    constructor(logger: ILogger, hashUtil: HashUtil, timeUtil: TimeUtil, databaseServer: DatabaseServer, randomUtil: RandomUtil, inventoryHelper: InventoryHelper, saveServer: SaveServer, playerService: PlayerService, presetHelper: PresetHelper, paymentHelper: PaymentHelper, eventOutputHolder: EventOutputHolder, httpResponse: HttpResponseUtil, profileHelper: ProfileHelper, hideoutHelper: HideoutHelper, scavCaseRewardGenerator: ScavCaseRewardGenerator, localisationService: LocalisationService, configServer: ConfigServer, jsonUtil: JsonUtil, fenceService: FenceService);
+    constructor(logger: ILogger, hashUtil: HashUtil, timeUtil: TimeUtil, databaseServer: DatabaseServer, randomUtil: RandomUtil, inventoryHelper: InventoryHelper, itemHelper: ItemHelper, saveServer: SaveServer, playerService: PlayerService, presetHelper: PresetHelper, paymentHelper: PaymentHelper, eventOutputHolder: EventOutputHolder, httpResponse: HttpResponseUtil, profileHelper: ProfileHelper, hideoutHelper: HideoutHelper, scavCaseRewardGenerator: ScavCaseRewardGenerator, localisationService: LocalisationService, configServer: ConfigServer, jsonUtil: JsonUtil, fenceService: FenceService);
     /**
      * Handle HideoutUpgrade event
      * Start a hideout area upgrade

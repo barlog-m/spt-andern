@@ -1,0 +1,127 @@
+{
+    "id": "65b1a0b301001c3ee51b0006",
+    "name": "AKM T3 2",
+    "root": "9c4b50e0fc7afa18e26ee004",
+    "items": [
+        {
+            "_id": "9c4b50e0fc7afa18e26ee004",
+            "_tpl": "59d6088586f774275f37482f",
+            "upd": {
+                "Repairable": {
+                    "MaxDurability": 100,
+                    "Durability": 100
+                },
+                "FireMode": {
+                    "FireMode": "single"
+                }
+            }
+        },
+        {
+            "_id": "4b6912fa34a1fd8e0dcb4acb",
+            "_tpl": "59d64ec286f774171d1e0a42",
+            "parentId": "9c4b50e0fc7afa18e26ee004",
+            "slotId": "mod_gas_block"
+        },
+        {
+            "_id": "d84970e17e9312c547ce9981",
+            "_tpl": "5c7951452e221644f31bfd5c",
+            "parentId": "9c4b50e0fc7afa18e26ee004",
+            "slotId": "mod_muzzle"
+        },
+        {
+            "_id": "2ea02d33068f0fa9f3b54e88",
+            "_tpl": "5649ae4a4bdc2d1b2b8b4588",
+            "parentId": "9c4b50e0fc7afa18e26ee004",
+            "slotId": "mod_pistol_grip"
+        },
+        {
+            "_id": "eb3584247541bee70b1d1269",
+            "_tpl": "5d2c76ed48f03532f2136169",
+            "parentId": "9c4b50e0fc7afa18e26ee004",
+            "slotId": "mod_reciever"
+        },
+        {
+            "_id": "867004a3395b1761e0fa706c",
+            "_tpl": "628a6678ccaab13006640e49",
+            "parentId": "9c4b50e0fc7afa18e26ee004",
+            "slotId": "mod_stock"
+        },
+        {
+            "_id": "5506044d1a8c34fb2e13eb55",
+            "_tpl": "59fafc5086f7740dbe19f6c3",
+            "parentId": "9c4b50e0fc7afa18e26ee004",
+            "slotId": "mod_magazine"
+        },
+        {
+            "_id": "af92fc9e6ee27af1a688b3c6",
+            "_tpl": "6130ca3fd92c473c77020dbd",
+            "parentId": "9c4b50e0fc7afa18e26ee004",
+            "slotId": "mod_charge"
+        },
+        {
+            "_id": "1bbcad521d0ec97e1beea59f",
+            "_tpl": "647dd2b8a12ebf96c3031655",
+            "parentId": "4b6912fa34a1fd8e0dcb4acb",
+            "slotId": "mod_handguard"
+        },
+        {
+            "_id": "c813104752a081bd90359546",
+            "_tpl": "5b3b99265acfc4704b4a1afb",
+            "parentId": "eb3584247541bee70b1d1269",
+            "slotId": "mod_scope"
+        },
+        {
+            "_id": "d2ca6dadbb1d982a1856d61c",
+            "_tpl": "5bb20e58d4351e00320205d7",
+            "parentId": "867004a3395b1761e0fa706c",
+            "slotId": "mod_stock"
+        },
+        {
+            "_id": "024cf1ae51f0957b4a656d51",
+            "_tpl": "59fc48e086f77463b1118392",
+            "parentId": "1bbcad521d0ec97e1beea59f",
+            "slotId": "mod_foregrip"
+        },
+        {
+            "_id": "080d89b75dc31b1e3ca779fe",
+            "_tpl": "6272370ee4013c5d7e31f418",
+            "parentId": "1bbcad521d0ec97e1beea59f",
+            "slotId": "mod_tactical_000",
+            "upd": {
+                "Light": {
+                    "IsActive": true,
+                    "SelectedMode": 0
+                }
+            }
+        },
+        {
+            "_id": "f1c884b335a43f67c7989279",
+            "_tpl": "5b3b99475acfc432ff4dcbee",
+            "parentId": "c813104752a081bd90359546",
+            "slotId": "mod_scope",
+            "upd": {
+                "Sight": {
+                    "ScopesCurrentCalibPointIndexes": [
+                        0
+                    ],
+                    "ScopesSelectedModes": [
+                        0
+                    ],
+                    "SelectedScope": 0
+                }
+            }
+        },
+        {
+            "_id": "150252c4fbb097d263bf0929",
+            "_tpl": "56eabf3bd2720b75698b4569",
+            "parentId": "d2ca6dadbb1d982a1856d61c",
+            "slotId": "mod_stock_000"
+        },
+        {
+            "_id": "a8e298cb1d1b31390bd7b4b6",
+            "_tpl": "58d2912286f7744e27117493",
+            "parentId": "150252c4fbb097d263bf0929",
+            "slotId": "mod_stock"
+        }
+    ]
+}

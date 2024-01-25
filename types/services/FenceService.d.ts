@@ -1,9 +1,10 @@
 import { HandbookHelper } from "@spt-aki/helpers/HandbookHelper";
 import { ItemHelper } from "@spt-aki/helpers/ItemHelper";
 import { PresetHelper } from "@spt-aki/helpers/PresetHelper";
-import { IFenceLevel, IPreset } from "@spt-aki/models/eft/common/IGlobals";
+import { MinMax } from "@spt-aki/models/common/MinMax";
+import { IFenceLevel } from "@spt-aki/models/eft/common/IGlobals";
 import { IPmcData } from "@spt-aki/models/eft/common/IPmcData";
-import { Item } from "@spt-aki/models/eft/common/tables/IItem";
+import { Item, Repairable } from "@spt-aki/models/eft/common/tables/IItem";
 import { ITemplateItem } from "@spt-aki/models/eft/common/tables/ITemplateItem";
 import { ITraderAssort } from "@spt-aki/models/eft/common/tables/ITrader";
 import { ITraderConfig } from "@spt-aki/models/spt/config/ITraderConfig";
@@ -35,7 +36,7 @@ export declare class FenceService {
     protected configServer: ConfigServer;
     /** Main assorts you see at all rep levels */
     protected fenceAssort: ITraderAssort;
-    /** Assorts shown on a separte tab when you max out fence rep */
+    /** Assorts shown on a separate tab when you max out fence rep */
     protected fenceDiscountAssort: ITraderAssort;
     protected traderConfig: ITraderConfig;
     protected nextMiniRefreshTimestamp: number;
@@ -47,9 +48,9 @@ export declare class FenceService {
     setFenceAssort(assort: ITraderAssort): void;
     /**
      * Replace high rep level fence assort with new assort
-     * @param assort New assorts to replace old with
+     * @param discountAssort New assorts to replace old with
      */
-    setFenceDiscountAssort(assort: ITraderAssort): void;
+    setFenceDiscountAssort(discountAssort: ITraderAssort): void;
     /**
      * Get assorts player can purchase
      * Adjust prices based on fence level of player
@@ -59,7 +60,7 @@ export declare class FenceService {
     getFenceAssorts(pmcProfile: IPmcData): ITraderAssort;
     /**
      * Adjust all items contained inside an assort by a multiplier
-     * @param assort Assort that contains items with prices to adjust
+     * @param assort (clone)Assort that contains items with prices to adjust
      * @param itemMultipler multipler to use on items
      * @param presetMultiplier preset multipler to use on presets
      */
@@ -122,23 +123,38 @@ export declare class FenceService {
     getOfferCount(): number;
     /**
      * Create trader assorts for fence and store in fenceService cache
+     * Uses fence base cache generatedon server start as a base
      */
     generateFenceAssorts(): void;
     /**
      * Create skeleton to hold assort items
      * @returns ITraderAssort object
      */
-    protected createBaseTraderAssortItem(): ITraderAssort;
+    protected createFenceAssortSkeleton(): ITraderAssort;
     /**
      * Hydrate assorts parameter object with generated assorts
      * @param assortCount Number of assorts to generate
      * @param assorts object to add created assorts to
      */
     protected createAssorts(assortCount: number, assorts: ITraderAssort, loyaltyLevel: number): void;
-    protected addItemAssorts(assortCount: number, fenceAssortIds: string[], assorts: ITraderAssort, fenceAssort: ITraderAssort, itemTypeCounts: Record<string, {
+    protected addItemAssorts(assortCount: number, assorts: ITraderAssort, fenceAssort: ITraderAssort, itemTypeCounts: Record<string, {
         current: number;
         max: number;
     }>, loyaltyLevel: number): void;
+    /**
+     * Find presets in base fence assort and add desired number to 'assorts' parameter
+     * @param desiredPresetCount
+     * @param assorts
+     * @param baseFenceAssort
+     * @param loyaltyLevel Which loyalty level is required to see/buy item
+     */
+    protected addPresetsToAssort(desiredPresetCount: number, assorts: ITraderAssort, baseFenceAssort: ITraderAssort, loyaltyLevel: number): void;
+    /**
+     * Adjust plate / soft insert durability values
+     * @param armor Armor item array to add mods into
+     * @param itemDbDetails Armor items db template
+     */
+    protected randomiseArmorModDurability(armor: Item[], itemDbDetails: ITemplateItem): void;
     /**
      * Get stack size of a singular item (no mods)
      * @param itemDbDetails item being added to fence
@@ -146,18 +162,10 @@ export declare class FenceService {
      */
     protected getSingleItemStackCount(itemDbDetails: ITemplateItem): number;
     /**
-     * Add preset weapons to fence presets
-     * @param assortCount how many assorts to add to assorts
-     * @param defaultWeaponPresets a dictionary of default weapon presets
-     * @param assorts object to add presets to
-     * @param loyaltyLevel loyalty level to requre item at
-     */
-    protected addPresets(desiredPresetCount: number, defaultWeaponPresets: Record<string, IPreset>, assorts: ITraderAssort, loyaltyLevel: number): void;
-    /**
      * Remove parts of a weapon prior to being listed on flea
-     * @param weaponAndMods Weapon to remove parts from
+     * @param itemAndMods Weapon to remove parts from
      */
-    protected removeRandomPartsOfWeapon(weaponAndMods: Item[]): void;
+    protected removeRandomModsOfItem(itemAndMods: Item[]): void;
     /**
      * Roll % chance check to see if item should be removed
      * @param weaponMod Weapon mod being checked
@@ -171,6 +179,13 @@ export declare class FenceService {
      * @param itemToAdjust Item being edited
      */
     protected randomiseItemUpdProperties(itemDetails: ITemplateItem, itemToAdjust: Item): void;
+    /**
+     * Generate a randomised current and max durabiltiy value for an armor item
+     * @param itemDetails Item to create values for
+     * @param maxDurabilityMinMaxPercent Max durabiltiy percent min/max values
+     * @returns Durability + MaxDurability values
+     */
+    protected getRandomisedArmorDurabilityValues(itemDetails: ITemplateItem, maxDurabilityMinMaxPercent: MinMax): Repairable;
     /**
      * Construct item limit record to hold max and current item count
      * @param limits limits as defined in config
@@ -187,6 +202,7 @@ export declare class FenceService {
     getNextFenceUpdateTimestamp(): number;
     /**
      * Get fence refresh time in seconds
+     * @returns Refresh time in seconds
      */
     protected getFenceRefreshTime(): number;
     /**

@@ -112,7 +112,7 @@ export declare class GameController {
     protected flagAllItemsInDbAsSellableOnFlea(): void;
     /**
      * When player logs in, iterate over all active effects and reduce timer
-     * TODO - add body part HP regen
+     * // TODO: Add body part HP regeneration
      * @param pmcProfile
      */
     protected updateProfileHealthValues(pmcProfile: IPmcData): void;
@@ -130,7 +130,8 @@ export declare class GameController {
      */
     protected sendPraporGiftsToNewProfiles(pmcProfile: IPmcData): void;
     /**
-     * Find and split waves with large numbers of bots into smaller waves - BSG appears to reduce the size of these waves to one bot when they're waiting to spawn for too long
+     * Find and split waves with large numbers of bots into smaller waves - BSG appears to reduce the size of these
+     * waves to one bot when they're waiting to spawn for too long
      */
     protected splitBotWavesIntoSingleWaves(): void;
     /**
@@ -139,7 +140,7 @@ export declare class GameController {
      */
     protected saveActiveModsToProfile(fullProfile: IAkiProfile): void;
     /**
-     * Check for any missing assorts inside each traders assort.json data, checking against traders qeustassort.json
+     * Check for any missing assorts inside each traders assort.json data, checking against traders questassort.json
      */
     protected validateQuestAssortUnlocksExist(): void;
     /**

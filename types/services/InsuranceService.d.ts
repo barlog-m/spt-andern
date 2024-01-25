@@ -97,12 +97,11 @@ export declare class InsuranceService {
     /**
      * Take preraid item and update properties to ensure its ready to be given to player in insurance return mail
      * @param pmcData Player profile
-     * @param insuredItem Insured items properties
-     * @param preRaidItem Insured item as it was pre-raid
+     * @param preRaidItemWithChildren Insured item (with children) as it was pre-raid
      * @param insuredItemFromClient Item data when player left raid (durability values)
-     * @returns Item object
+     * @returns Item (with children) to send to player
      */
-    protected getInsuredItemDetails(pmcData: IPmcData, preRaidItem: Item, insuredItemFromClient: IInsuredItemsData): Item;
+    protected getInsuredItemDetails(pmcData: IPmcData, preRaidItemWithChildren: Item[], insuredItemsFromClient: IInsuredItemsData[]): Item[];
     /**
      * Reset slotId property to "hideout" when necessary (used to be in )
      * @param pmcData Players pmcData.Inventory.equipment value
@@ -125,7 +124,7 @@ export declare class InsuranceService {
     protected addGearToSend(gear: {
         sessionID: string;
         pmcData: IPmcData;
-        itemToReturnToPlayer: Item;
+        itemsToReturnToPlayer: Item[];
         traderId: string;
     }): void;
     /**
@@ -145,9 +144,9 @@ export declare class InsuranceService {
      * Store insured item
      * @param sessionId Player id (session id)
      * @param traderId Trader item insured with
-     * @param itemToAdd Insured item
+     * @param itemsToAdd Insured item (with children)
      */
-    addInsuranceItemToArray(sessionId: string, traderId: string, itemToAdd: Item): void;
+    addInsuranceItemToArray(sessionId: string, traderId: string, itemsToAdd: Item[]): void;
     /**
      * Get price of insurance * multiplier from config
      * @param pmcData Player profile

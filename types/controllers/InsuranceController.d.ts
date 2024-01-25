@@ -18,11 +18,13 @@ import { SaveServer } from "@spt-aki/servers/SaveServer";
 import { InsuranceService } from "@spt-aki/services/InsuranceService";
 import { MailSendService } from "@spt-aki/services/MailSendService";
 import { PaymentService } from "@spt-aki/services/PaymentService";
+import { MathUtil } from "@spt-aki/utils/MathUtil";
 import { RandomUtil } from "@spt-aki/utils/RandomUtil";
 import { TimeUtil } from "@spt-aki/utils/TimeUtil";
 export declare class InsuranceController {
     protected logger: ILogger;
     protected randomUtil: RandomUtil;
+    protected mathUtil: MathUtil;
     protected eventOutputHolder: EventOutputHolder;
     protected timeUtil: TimeUtil;
     protected saveServer: SaveServer;
@@ -37,7 +39,7 @@ export declare class InsuranceController {
     protected configServer: ConfigServer;
     protected insuranceConfig: IInsuranceConfig;
     protected roubleTpl: string;
-    constructor(logger: ILogger, randomUtil: RandomUtil, eventOutputHolder: EventOutputHolder, timeUtil: TimeUtil, saveServer: SaveServer, databaseServer: DatabaseServer, itemHelper: ItemHelper, profileHelper: ProfileHelper, dialogueHelper: DialogueHelper, traderHelper: TraderHelper, paymentService: PaymentService, insuranceService: InsuranceService, mailSendService: MailSendService, configServer: ConfigServer);
+    constructor(logger: ILogger, randomUtil: RandomUtil, mathUtil: MathUtil, eventOutputHolder: EventOutputHolder, timeUtil: TimeUtil, saveServer: SaveServer, databaseServer: DatabaseServer, itemHelper: ItemHelper, profileHelper: ProfileHelper, dialogueHelper: DialogueHelper, traderHelper: TraderHelper, paymentService: PaymentService, insuranceService: InsuranceService, mailSendService: MailSendService, configServer: ConfigServer);
     /**
      * Process insurance items of all profiles prior to being given back to the player through the mail service.
      *
@@ -66,6 +68,12 @@ export declare class InsuranceController {
      * @returns void
      */
     protected processInsuredItems(insuranceDetails: Insurance[], sessionID: string): void;
+    /**
+     * Count all items in all insurance packages.
+     * @param insurance
+     * @returns
+     */
+    protected countAllInsuranceItems(insurance: Insurance[]): number;
     /**
      * Remove an insurance package from a profile using the package's system data information.
      *
@@ -110,9 +118,6 @@ export declare class InsuranceController {
     protected processRegularItems(insured: Insurance, toDelete: Set<string>): void;
     /**
      * Process parent items and their attachments, updating the toDelete Set accordingly.
-     *
-     * This method iterates over a map of parent items to their attachments and performs evaluations on each.
-     * It marks items for deletion based on certain conditions and updates the toDelete Set accordingly.
      *
      * @param mainParentToAttachmentsMap A Map object containing parent item IDs to arrays of their attachment items.
      * @param itemsMap A Map object for quick item look-up by item ID.
@@ -190,19 +195,18 @@ export declare class InsuranceController {
      *
      * @param sessionID The session ID that should receive the insurance message.
      * @param insurance The context of insurance to use.
-     * @param noItems Whether or not there are any items to return to the player.
      * @returns void
      */
-    protected sendMail(sessionID: string, insurance: Insurance, noItems: boolean): void;
+    protected sendMail(sessionID: string, insurance: Insurance): void;
     /**
      * Determines whether a insured item should be removed from the player's inventory based on a random roll and
      * trader-specific return chance.
      *
      * @param traderId The ID of the trader who insured the item.
      * @param insuredItem Optional. The item to roll for. Only used for logging.
-     * @returns true if the insured item should be removed from inventory, false otherwise.
+     * @returns true if the insured item should be removed from inventory, false otherwise, or null on error.
      */
-    protected rollForDelete(traderId: string, insuredItem?: Item): boolean;
+    protected rollForDelete(traderId: string, insuredItem?: Item): boolean | null;
     /**
      * Handle Insure event
      * Add insurance to an item

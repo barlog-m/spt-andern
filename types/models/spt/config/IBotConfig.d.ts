@@ -6,6 +6,8 @@ export interface IBotConfig extends IBaseConfig {
     kind: "aki-bot";
     /** How many variants of each bot should be generated on raid start */
     presetBatch: PresetBatch;
+    /** Bot roles that should not have PMC types (sptBear/sptUsec) added as enemies to */
+    botsToNotAddPMCsAsEnemiesTo: string[];
     /** What bot types should be classified as bosses */
     bosses: string[];
     /** Control weapon/armor durability min/max values for each bot type */
@@ -33,6 +35,8 @@ export interface IBotConfig extends IBaseConfig {
     chanceAssaultScavHasPlayerScavName: number;
     /** How many stacks of secret ammo should a bot have in its bot secure container */
     secureContainerAmmoStackCount: number;
+    /** Bot roles in this array will be given a dog tag on generation */
+    botRolesWithDogTags: string[];
 }
 /** Number of bots to generate and store in cache on raid start per bot type */
 export interface PresetBatch {
@@ -90,6 +94,8 @@ export interface EquipmentFilters {
     lightIsActiveNightChancePercent?: number;
     /** Chance gun laser is active during the day */
     laserIsActiveChancePercent?: number;
+    /** Should plates be filtered by level */
+    filterPlatesByLevel?: boolean;
     /** Chance NODS are down/active during the day */
     nvgIsActiveChanceDayPercent?: number;
     /** Chance NODS are down/active during the night */
@@ -106,6 +112,7 @@ export interface EquipmentFilters {
     weightingAdjustmentsByPlayerLevel?: WeightingAdjustmentDetails[];
     /** Should the stock mod be forced to spawn on bot */
     forceStock: boolean;
+    armorPlateWeighting?: IArmorPlateWeights[];
 }
 export interface ModLimits {
     /** How many scopes are allowed on a weapon - hard coded to work with OPTIC_SCOPE, ASSAULT_SCOPE, COLLIMATOR, COMPACT_COLLIMATOR */
@@ -117,14 +124,16 @@ export interface RandomisationDetails {
     /** Between what levels do these randomisation setting apply to */
     levelRange: MinMax;
     generation?: Record<string, GenerationData>;
-    /** Mod slots that should be fully randomisate -ignores mods from bottype.json */
+    /** Mod slots that should be fully randomised -ignores mods from bottype.json and instaed creates a pool using items.json */
     randomisedWeaponModSlots?: string[];
     /** Armor slots that should be randomised e.g. 'Headwear, Armband' */
     randomisedArmorSlots?: string[];
     /** Equipment chances */
     equipment?: Record<string, number>;
-    /** Mod chances */
-    mods?: Record<string, number>;
+    /** Weapon mod chances */
+    weaponMods?: Record<string, number>;
+    /** Equipment mod chances */
+    equipmentMods?: Record<string, number>;
 }
 export interface EquipmentFilterDetails {
     /** Between what levels do these equipment filter setting apply to */
@@ -138,15 +147,21 @@ export interface WeightingAdjustmentDetails {
     /** Between what levels do these weight settings apply to */
     levelRange: MinMax;
     /** Key: ammo type e.g. Caliber556x45NATO, value: item tpl + weight */
-    ammo?: AdjustmentDetails;
+    ammo?: IAdjustmentDetails;
     /** Key: equipment slot e.g. TacticalVest, value: item tpl + weight */
-    equipment?: AdjustmentDetails;
+    equipment?: IAdjustmentDetails;
     /** Key: clothing slot e.g. feet, value: item tpl + weight */
-    clothing?: AdjustmentDetails;
+    clothing?: IAdjustmentDetails;
 }
-export interface AdjustmentDetails {
+export interface IAdjustmentDetails {
     add: Record<string, Record<string, number>>;
     edit: Record<string, Record<string, number>>;
+}
+export interface IArmorPlateWeights {
+    levelRange: MinMax;
+    frontPlateWeights: Record<string, number>;
+    backPlateWeights: Record<string, number>;
+    sidePlateWeights: Record<string, number>;
 }
 export interface IRandomisedResourceDetails {
     food: IRandomisedResourceValues;

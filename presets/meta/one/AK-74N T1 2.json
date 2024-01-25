@@ -1,0 +1,109 @@
+{
+    "id": "65b05b2301001c3ee5b53a0c",
+    "name": "AK-74N T1 2",
+    "root": "5ea035567adcbec38f5e846e",
+    "items": [
+        {
+            "_id": "5ea035567adcbec38f5e846e",
+            "_tpl": "5644bd2b4bdc2d3b4c8b4572",
+            "upd": {
+                "Repairable": {
+                    "MaxDurability": 100,
+                    "Durability": 100
+                },
+                "FireMode": {
+                    "FireMode": "single"
+                }
+            }
+        },
+        {
+            "_id": "af3067d090380dbc46fa6052",
+            "_tpl": "59c6633186f7740cf0493bb9",
+            "parentId": "5ea035567adcbec38f5e846e",
+            "slotId": "mod_gas_block"
+        },
+        {
+            "_id": "21541d1dee843e729e133b4f",
+            "_tpl": "5649aa744bdc2ded0b8b457e",
+            "parentId": "5ea035567adcbec38f5e846e",
+            "slotId": "mod_muzzle"
+        },
+        {
+            "_id": "1a95b5304bff902ff2afd96a",
+            "_tpl": "5649ad3f4bdc2df8348b4585",
+            "parentId": "5ea035567adcbec38f5e846e",
+            "slotId": "mod_pistol_grip"
+        },
+        {
+            "_id": "0c915ecda13ae7d6b63c2521",
+            "_tpl": "5d2c76ed48f03532f2136169",
+            "parentId": "5ea035567adcbec38f5e846e",
+            "slotId": "mod_reciever"
+        },
+        {
+            "_id": "5a540dcbb3d605366706cc84",
+            "_tpl": "5649b1c04bdc2d16268b457c",
+            "parentId": "5ea035567adcbec38f5e846e",
+            "slotId": "mod_stock"
+        },
+        {
+            "_id": "731240103c19a8ec64ab079b",
+            "_tpl": "564ca99c4bdc2d16268b4589",
+            "parentId": "5ea035567adcbec38f5e846e",
+            "slotId": "mod_magazine"
+        },
+        {
+            "_id": "3f48279e4b3af09f9fe39e39",
+            "_tpl": "5648ac824bdc2ded0b8b457d",
+            "parentId": "5ea035567adcbec38f5e846e",
+            "slotId": "mod_charge"
+        },
+        {
+            "_id": "0b6dd74dc4b8fd1097298a2e",
+            "_tpl": "5cbda392ae92155f3c17c39f",
+            "parentId": "af3067d090380dbc46fa6052",
+            "slotId": "mod_handguard"
+        },
+        {
+            "_id": "018f2cda2a4f5aada40651d4",
+            "_tpl": "591c4efa86f7741030027726",
+            "parentId": "0c915ecda13ae7d6b63c2521",
+            "slotId": "mod_scope",
+            "upd": {
+                "Sight": {
+                    "ScopesCurrentCalibPointIndexes": [
+                        0
+                    ],
+                    "ScopesSelectedModes": [
+                        0
+                    ],
+                    "SelectedScope": 0
+                }
+            }
+        },
+        {
+            "_id": "9616f68092e4ba6b637051ed",
+            "_tpl": "5c1bc7752e221602b1779b34",
+            "parentId": "0b6dd74dc4b8fd1097298a2e",
+            "slotId": "mod_foregrip"
+        },
+        {
+            "_id": "7fa6f418f6a41ae3576fce20",
+            "_tpl": "5a800961159bd4315e3a1657",
+            "parentId": "0b6dd74dc4b8fd1097298a2e",
+            "slotId": "mod_tactical_000",
+            "upd": {
+                "Light": {
+                    "IsActive": true,
+                    "SelectedMode": 0
+                }
+            }
+        },
+        {
+            "_id": "75737c371fb614f762d08376",
+            "_tpl": "591c4e1186f77410354b316e",
+            "parentId": "018f2cda2a4f5aada40651d4",
+            "slotId": "mod_tactical"
+        }
+    ]
+}

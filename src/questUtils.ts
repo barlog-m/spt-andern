@@ -1,8 +1,7 @@
 import {DependencyContainer} from "tsyringe";
 import {DatabaseServer} from "@spt-aki/servers/DatabaseServer";
 import {
-    CounterCondition,
-    CounterProps
+    IQuestConditionCounterCondition
 } from "@spt-aki/models/eft/common/tables/IQuest";
 import * as config from "../config/config.json";
 import {ILogger} from "@spt-aki/models/spt/utils/ILogger";
@@ -17,72 +16,72 @@ export default function cheeseQuests(
     const shotySilencerArray = ["5b363dd25acfc4001a598fd2"];
 
     Object.entries(tables.templates.quests).forEach(([questId, quest]) => {
-        const counters = quest.conditions.AvailableForFinish.filter(
-            (c) => c._parent === "CounterCreator"
+        const questConditions = quest.conditions.AvailableForFinish.filter(
+            (questCondition) => questCondition.conditionType === "CounterCreator"
         );
 
-        if (counters !== undefined) {
-            counters.forEach((counter) => {
-                const conditions = counter._props?.counter.conditions.filter((c) =>
-                    (c._parent === "Kills") || (c._parent === "Shots") || (c._parent === "Equipment"));
+        if (questConditions !== undefined) {
+            questConditions.forEach((questCondition) => {
+                const questConditionCounters = questCondition.counter?.conditions.filter((conditionCounter) =>
+                    (conditionCounter.conditionType === "Kills") || (conditionCounter.conditionType === "Shots") || (conditionCounter.conditionType === "Equipment"));
 
-                if (conditions !== undefined) {
-                    const conditionToDelete: CounterCondition[] = [];
-                    conditions.forEach((condition) => {
+                if (questConditionCounters !== undefined) {
+                    const questConditionCountersToDelete: IQuestConditionCounterCondition[] = [];
+                    
+                    questConditionCounters.forEach((conditionCounter) => {
 
-                        const cp = condition._props;
-                        if (cp !== undefined) {
-                            // if quest required silenced shotgun
-                            if (cp.weaponModsInclusive?.some(subArray => subArray.every((value, index) => value === shotySilencerArray[index]))) {
-                                replaceWithAnySilencedWeapon(cp);
-                                if (config.debug) {
-                                    logger.info(`[Andern] quest '${quest.QuestName}' condition set to any silenced weapon`)
-                                }
-                            }
-
-                            // if quest has gear conditions
-                            if (cp.equipmentInclusive?.length > 0) {
-                                conditionToDelete.push(condition)
-                                if (config.debug) {
-                                    logger.info(`[Andern] quest '${quest.QuestName}' gear condition removed`)
-                                }
-                            }
-
-                            // if quest required bolt action rifle
-                            if (cp.weapon?.includes("5bfd297f0db834001a669119")) {
-                                addAllDmr(cp)
-
-                                // if bolty should have suppressor
-                                if (cp.weaponModsInclusive?.length > 0) {
-                                    replaceWithBoltyAndDMRSilencers(cp)
-                                }
-
-                                if (config.debug) {
-                                    logger.info(`[Andern] quest '${quest.QuestName}' weapon condition expanded to DMR`)
-                                }
-                            }
-
-                            // if quest required shotgun
-                            if (cp.weapon?.includes("54491c4f4bdc2db1078b4568")) {
-                                delete cp.weapon;
-                                if (config.debug) {
-                                    logger.info(`[Andern] quest '${quest.QuestName}' weapon condition removed`)
-                                }
+                        // if quest required silenced shotgun
+                        if (conditionCounter.weaponModsInclusive?.some(subArray => subArray.every((value, index) => value === shotySilencerArray[index]))) {
+                            replaceWithAnySilencedWeapon(conditionCounter);
+                            if (config.debug) {
+                                logger.info(`[Andern] quest '${quest.QuestName}' condition set to any silenced weapon`)
                             }
                         }
 
-                        counter._props.counter.conditions = counter._props?.counter.conditions.filter(
-                            c => !conditionToDelete.includes(c)
-                        )
+                        // if quest has gear conditions
+                        if (conditionCounter.equipmentInclusive?.length > 0) {
+                            questConditionCountersToDelete.push(conditionCounter)
+                            if (config.debug) {
+                                logger.info(`[Andern] quest '${quest.QuestName}' gear condition removed`)
+                            }
+                        }
+
+                        // if quest required bolt action rifle
+                        if (conditionCounter.weapon?.includes("5bfd297f0db834001a669119")) {
+                            addAllDmr(conditionCounter)
+
+                            // if bolty should have suppressor
+                            if (conditionCounter.weaponModsInclusive?.length > 0) {
+                                replaceWithBoltyAndDMRSilencers(conditionCounter)
+                            }
+
+                            if (config.debug) {
+                                logger.info(`[Andern] quest '${quest.QuestName}' weapon condition expanded to DMR`)
+                            }
+                        }
+
+                        // if quest required shotgun
+                        if (conditionCounter.weapon?.includes("54491c4f4bdc2db1078b4568")) {
+                            delete conditionCounter.weapon;
+                            if (config.debug) {
+                                logger.info(`[Andern] quest '${quest.QuestName}' weapon condition removed`)
+                            }
+                        }
                     })
+
+                    if (questConditionCountersToDelete.length > 0) {
+                        questCondition.counter.conditions = questCondition.counter.conditions.filter(
+                            c => !questConditionCountersToDelete.includes(c)
+                        )
+                    }
                 }
             });
         }
     });
 }
 
-function addAllDmr(cp: CounterProps): undefined {
-    cp.weapon = cp.weapon.concat([
+function addAllDmr(conditionCounter: IQuestConditionCounterCondition): undefined {
+    conditionCounter.weapon = conditionCounter.weapon.concat([
         "6176aca650224f204c1da3fb",
         "5df8ce05b11454561e39243b",
         "5a367e5dc4a282000e49738f",
@@ -94,11 +93,11 @@ function addAllDmr(cp: CounterProps): undefined {
     ])
 }
 
-function replaceWithAnySilencedWeapon(cp: CounterProps): undefined {
+function replaceWithAnySilencedWeapon(conditionCounter: IQuestConditionCounterCondition): undefined {
     // exclude weapon restrictions
-    delete cp.weapon;
+    delete conditionCounter.weapon;
     // include all silencers
-    cp.weaponModsInclusive = [
+    conditionCounter.weaponModsInclusive = [
         ["59bffc1f86f77435b128b872"],
         ["5a32a064c4a28200741e22de"],
         ["59bffbb386f77435b379b9c2"],
@@ -178,8 +177,8 @@ function replaceWithAnySilencedWeapon(cp: CounterProps): undefined {
     ];
 }
 
-function replaceWithBoltyAndDMRSilencers(cp: CounterProps): undefined {
-    cp.weaponModsInclusive = [
+function replaceWithBoltyAndDMRSilencers(conditionCounter: IQuestConditionCounterCondition): undefined {
+    conditionCounter.weaponModsInclusive = [
         ["5b86a0e586f7745b600ccb23"],
         ["59bffbb386f77435b379b9c2"],
         ["593d489686f7745c6255d58a"],

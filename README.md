@@ -25,6 +25,8 @@ Weapon and gear split by tiers. Tiers is described in `preset_name/preset.json` 
 
 You can disable PMC bot level generator with option `pmcLevel`.
 
+You can disable PMC weapon generator with option `pmcWeapon`.
+
 You can disable PMC bot gear generator with option `pmcGear`. Then mod only generate weapon.
 
 Bots get random weapon from presets. Also, bots use specified ammo for each caliber from presets.
@@ -133,7 +135,11 @@ Works only if `mapBotSettings` set to true.
 
 `cheeseQuests` disable gear and weapon conditions for same quests. For example DMR allowed for any quest required bolt action rifle.
 
-`vssValOverheatMultiplier` change heat modifier for VSS, VAL and all Caliber9x39 ammo. Recommended value is 0.85.
+`vssValOverheatMultiplier` changes heat modifier for VSS, VAL and all Caliber9x39 ammo. Recommended value is 0.85.
+
+`fleaBlacklistDisable` disables Flea blacklist.
+
+`snow` enables snow.
 
 ## Installation
 

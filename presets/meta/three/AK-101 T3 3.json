@@ -1,0 +1,126 @@
+{
+    "id": "65b1a20f01001c3ee5bcebf2",
+    "name": "AK-101 T3 3",
+    "root": "ceca6521c235d5d81c2fec51",
+    "items": [
+        {
+            "_id": "ceca6521c235d5d81c2fec51",
+            "_tpl": "5ac66cb05acfc40198510a10",
+            "upd": {
+                "Repairable": {
+                    "MaxDurability": 100,
+                    "Durability": 100
+                },
+                "Foldable": {
+                    "Folded": false
+                },
+                "FireMode": {
+                    "FireMode": "single"
+                }
+            }
+        },
+        {
+            "_id": "ae94f716c95b7653ae910374",
+            "_tpl": "59c6633186f7740cf0493bb9",
+            "parentId": "ceca6521c235d5d81c2fec51",
+            "slotId": "mod_gas_block"
+        },
+        {
+            "_id": "35fed37d16163df194467feb",
+            "_tpl": "5e21ca18e4d47f0da15e77dd",
+            "parentId": "ceca6521c235d5d81c2fec51",
+            "slotId": "mod_muzzle"
+        },
+        {
+            "_id": "57be627a47edc1a6fcb5e866",
+            "_tpl": "5649ae4a4bdc2d1b2b8b4588",
+            "parentId": "ceca6521c235d5d81c2fec51",
+            "slotId": "mod_pistol_grip"
+        },
+        {
+            "_id": "6ae530943e7a1b23a58eb25f",
+            "_tpl": "5d2c76ed48f03532f2136169",
+            "parentId": "ceca6521c235d5d81c2fec51",
+            "slotId": "mod_reciever"
+        },
+        {
+            "_id": "2613d6f6e79126d7145caf81",
+            "_tpl": "5ac78eaf5acfc4001926317a",
+            "parentId": "ceca6521c235d5d81c2fec51",
+            "slotId": "mod_stock"
+        },
+        {
+            "_id": "2dded2ed8f55961429ffee79",
+            "_tpl": "5c0548ae0db834001966a3c2",
+            "parentId": "ceca6521c235d5d81c2fec51",
+            "slotId": "mod_magazine"
+        },
+        {
+            "_id": "e07b2650e54a343c9246f612",
+            "_tpl": "6130ca3fd92c473c77020dbd",
+            "parentId": "ceca6521c235d5d81c2fec51",
+            "slotId": "mod_charge"
+        },
+        {
+            "_id": "2764e287864bc443a572844c",
+            "_tpl": "647dd2b8a12ebf96c3031655",
+            "parentId": "ae94f716c95b7653ae910374",
+            "slotId": "mod_handguard"
+        },
+        {
+            "_id": "e0acd74bdc587d4cd7fc247e",
+            "_tpl": "5d440625a4b9361eec4ae6c5",
+            "parentId": "35fed37d16163df194467feb",
+            "slotId": "mod_muzzle"
+        },
+        {
+            "_id": "0afa521c27547eb99c260ace",
+            "_tpl": "57ac965c24597706be5f975c",
+            "parentId": "6ae530943e7a1b23a58eb25f",
+            "slotId": "mod_scope",
+            "upd": {
+                "Sight": {
+                    "ScopesCurrentCalibPointIndexes": [
+                        0,
+                        0
+                    ],
+                    "ScopesSelectedModes": [
+                        0,
+                        0
+                    ],
+                    "SelectedScope": 0
+                }
+            }
+        },
+        {
+            "_id": "73b7c9deb1aed410afd06ef0",
+            "_tpl": "59ecc3dd86f7746dc827481c",
+            "parentId": "2613d6f6e79126d7145caf81",
+            "slotId": "mod_stock"
+        },
+        {
+            "_id": "658b7234703a172096705c33",
+            "_tpl": "59fc48e086f77463b1118392",
+            "parentId": "2764e287864bc443a572844c",
+            "slotId": "mod_foregrip"
+        },
+        {
+            "_id": "0a7aa0df494c2199fcff8bc0",
+            "_tpl": "6272370ee4013c5d7e31f418",
+            "parentId": "2764e287864bc443a572844c",
+            "slotId": "mod_tactical_000",
+            "upd": {
+                "Light": {
+                    "IsActive": true,
+                    "SelectedMode": 0
+                }
+            }
+        },
+        {
+            "_id": "b5f60a9ead165b56d4ab9d2b",
+            "_tpl": "5d44064fa4b9361e4f6eb8b5",
+            "parentId": "e0acd74bdc587d4cd7fc247e",
+            "slotId": "mod_muzzle"
+        }
+    ]
+}

@@ -2,8 +2,10 @@ import { BotGeneratorHelper } from "@spt-aki/helpers/BotGeneratorHelper";
 import { BotHelper } from "@spt-aki/helpers/BotHelper";
 import { BotWeaponGeneratorHelper } from "@spt-aki/helpers/BotWeaponGeneratorHelper";
 import { ItemHelper } from "@spt-aki/helpers/ItemHelper";
+import { PresetHelper } from "@spt-aki/helpers/PresetHelper";
 import { ProbabilityHelper } from "@spt-aki/helpers/ProbabilityHelper";
 import { ProfileHelper } from "@spt-aki/helpers/ProfileHelper";
+import { WeightedRandomHelper } from "@spt-aki/helpers/WeightedRandomHelper";
 import { Mods, ModsChances } from "@spt-aki/models/eft/common/tables/IBotType";
 import { Item } from "@spt-aki/models/eft/common/tables/IItem";
 import { ITemplateItem, Slot } from "@spt-aki/models/eft/common/tables/ITemplateItem";
@@ -19,6 +21,8 @@ import { LocalisationService } from "@spt-aki/services/LocalisationService";
 import { HashUtil } from "@spt-aki/utils/HashUtil";
 import { JsonUtil } from "@spt-aki/utils/JsonUtil";
 import { RandomUtil } from "@spt-aki/utils/RandomUtil";
+import { IGenerateEquipmentProperties } from "./BotInventoryGenerator";
+import { IFilterPlateModsForSlotByLevelResult } from "./IFilterPlateModsForSlotByLevelResult";
 export declare class BotEquipmentModGenerator {
     protected logger: ILogger;
     protected jsonUtil: JsonUtil;
@@ -34,23 +38,32 @@ export declare class BotEquipmentModGenerator {
     protected botHelper: BotHelper;
     protected botGeneratorHelper: BotGeneratorHelper;
     protected botWeaponGeneratorHelper: BotWeaponGeneratorHelper;
+    protected weightedRandomHelper: WeightedRandomHelper;
+    protected presetHelper: PresetHelper;
     protected localisationService: LocalisationService;
     protected botEquipmentModPoolService: BotEquipmentModPoolService;
     protected configServer: ConfigServer;
     protected botConfig: IBotConfig;
-    constructor(logger: ILogger, jsonUtil: JsonUtil, hashUtil: HashUtil, randomUtil: RandomUtil, probabilityHelper: ProbabilityHelper, databaseServer: DatabaseServer, itemHelper: ItemHelper, botEquipmentFilterService: BotEquipmentFilterService, itemFilterService: ItemFilterService, profileHelper: ProfileHelper, botWeaponModLimitService: BotWeaponModLimitService, botHelper: BotHelper, botGeneratorHelper: BotGeneratorHelper, botWeaponGeneratorHelper: BotWeaponGeneratorHelper, localisationService: LocalisationService, botEquipmentModPoolService: BotEquipmentModPoolService, configServer: ConfigServer);
+    constructor(logger: ILogger, jsonUtil: JsonUtil, hashUtil: HashUtil, randomUtil: RandomUtil, probabilityHelper: ProbabilityHelper, databaseServer: DatabaseServer, itemHelper: ItemHelper, botEquipmentFilterService: BotEquipmentFilterService, itemFilterService: ItemFilterService, profileHelper: ProfileHelper, botWeaponModLimitService: BotWeaponModLimitService, botHelper: BotHelper, botGeneratorHelper: BotGeneratorHelper, botWeaponGeneratorHelper: BotWeaponGeneratorHelper, weightedRandomHelper: WeightedRandomHelper, presetHelper: PresetHelper, localisationService: LocalisationService, botEquipmentModPoolService: BotEquipmentModPoolService, configServer: ConfigServer);
     /**
      * Check mods are compatible and add to array
      * @param equipment Equipment item to add mods to
      * @param modPool Mod list to choose frm
      * @param parentId parentid of item to add mod to
      * @param parentTemplate template objet of item to add mods to
-     * @param modSpawnChances dictionary of mod items and their chance to spawn for this bot type
-     * @param botRole the bot role being generated for
      * @param forceSpawn should this mod be forced to spawn
      * @returns Item + compatible mods as an array
      */
-    generateModsForEquipment(equipment: Item[], modPool: Mods, parentId: string, parentTemplate: ITemplateItem, modSpawnChances: ModsChances, botRole: string, forceSpawn?: boolean): Item[];
+    generateModsForEquipment(equipment: Item[], parentId: string, parentTemplate: ITemplateItem, settings: IGenerateEquipmentProperties, forceSpawn?: boolean): Item[];
+    /**
+     * Filter a bots plate pool based on its current level
+     * @param settings Bot equipment generation settings
+     * @param modSlot Armor slot being filtered
+     * @param existingPlateTplPool Plates tpls to choose from
+     * @param armorItem
+     * @returns Array of plate tpls to choose from
+     */
+    protected filterPlateModsForSlotByLevel(settings: IGenerateEquipmentProperties, modSlot: string, existingPlateTplPool: string[], armorItem: ITemplateItem): IFilterPlateModsForSlotByLevelResult;
     /**
      * Add mods to a weapon using the provided mod pool
      * @param sessionId session id
@@ -61,8 +74,8 @@ export declare class BotEquipmentModGenerator {
      * @param modSpawnChances Mod spawn chances
      * @param ammoTpl Ammo tpl to use when generating magazines/cartridges
      * @param botRole Role of bot weapon is generated for
-     * @param botLevel lvel of the bot weapon is being generated for
-     * @param modLimits limits placed on certian mod types per gun
+     * @param botLevel Level of the bot weapon is being generated for
+     * @param modLimits limits placed on certain mod types per gun
      * @param botEquipmentRole role of bot when accessing bot.json equipment config settings
      * @returns Weapon + mods array
      */
@@ -128,7 +141,7 @@ export declare class BotEquipmentModGenerator {
      * @param modTpl _tpl
      * @param parentId parentId
      * @param modSlot slotId
-     * @param modTemplate Used to add additional properites in the upd object
+     * @param modTemplate Used to add additional properties in the upd object
      * @returns Item object
      */
     protected createModItem(modId: string, modTpl: string, parentId: string, modSlot: string, modTemplate: ITemplateItem, botRole: string): Item;
@@ -141,7 +154,7 @@ export declare class BotEquipmentModGenerator {
     /**
      * Get a random mod from an items compatible mods Filter array
      * @param modTpl ???? default value to return if nothing found
-     * @param parentSlot item mod will go into, used to get combatible items
+     * @param parentSlot item mod will go into, used to get compatible items
      * @param modSlot Slot to get mod to fill
      * @param items items to ensure picked mod is compatible with
      * @returns item tpl
@@ -153,9 +166,10 @@ export declare class BotEquipmentModGenerator {
      * @param itemSlot slot the item will be placed in
      * @param modSlot slot the mod will fill
      * @param parentTemplate template of the mods parent item
+     * @param botRole
      * @returns true if valid
      */
-    protected isModValidForSlot(modToAdd: [boolean, ITemplateItem], itemSlot: Slot, modSlot: string, parentTemplate: ITemplateItem): boolean;
+    protected isModValidForSlot(modToAdd: [boolean, ITemplateItem], itemSlot: Slot, modSlot: string, parentTemplate: ITemplateItem, botRole: string): boolean;
     /**
      * Find mod tpls of a provided type and add to modPool
      * @param desiredSlotName slot to look up and add we are adding tpls for (e.g mod_scope)
@@ -191,9 +205,9 @@ export declare class BotEquipmentModGenerator {
      */
     protected fillCamora(items: Item[], modPool: Mods, parentId: string, parentTemplate: ITemplateItem): void;
     /**
-     * Take a record of camoras and merge the compatable shells into one array
+     * Take a record of camoras and merge the compatible shells into one array
      * @param camorasWithShells camoras we want to merge into one array
-     * @returns string array of shells fro luitple camora sources
+     * @returns string array of shells for multiple camora sources
      */
     protected mergeCamoraPoolsTogether(camorasWithShells: Record<string, string[]>): string[];
     /**

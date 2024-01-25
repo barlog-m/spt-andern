@@ -66,7 +66,7 @@ export declare class BotLootGenerator {
      */
     protected getRandomisedCount(min: number, max: number, nValue: number): number;
     /**
-     * Take random items from a pool and add to an inventory until totalItemCount or totalValueLimit is reached
+     * Take random items from a pool and add to an inventory until totalItemCount or totalValueLimit or space limit is reached
      * @param pool Pool of items to pick from
      * @param equipmentSlots What equipment slot will the loot items be added to
      * @param totalItemCount Max count of items to add
@@ -77,6 +77,13 @@ export declare class BotLootGenerator {
      * @param isPmc Is bot being generated for a pmc
      */
     protected addLootFromPool(pool: ITemplateItem[], equipmentSlots: string[], totalItemCount: number, inventoryToAddItemsTo: PmcInventory, botRole: string, useLimits?: boolean, totalValueLimitRub?: number, isPmc?: boolean): void;
+    /**
+     * Some items need child items to function, add them to the itemToAddChildrenTo array
+     * @param itemToAddTemplate Db template of item to check
+     * @param itemToAddChildrenTo Item to add children to
+     * @param isPmc Is the item being generated for a pmc (affects money/ammo stack sizes)
+     */
+    protected addRequiredChildItemsToParent(itemToAddTemplate: ITemplateItem, itemToAddChildrenTo: Item[], isPmc: boolean): void;
     /**
      * Add generated weapons to inventory as loot
      * @param botInventory inventory to add preset to
@@ -93,7 +100,7 @@ export declare class BotLootGenerator {
      * @param isPmc Is the bot being created a pmc
      * @returns ITemplateItem object
      */
-    protected getRandomItemFromPoolByRole(pool: ITemplateItem[], botRole: string): ITemplateItem;
+    protected getRandomItemFromPoolByBotRole(pool: ITemplateItem[], botRole: string): ITemplateItem;
     /**
      * Get the loot nvalue from botconfig
      * @param botRole Role of bot e.g. assault/bosstagilla/sptBear

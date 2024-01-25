@@ -2,13 +2,13 @@ import { InventoryHelper } from "@spt-aki/helpers/InventoryHelper";
 import { ProfileHelper } from "@spt-aki/helpers/ProfileHelper";
 import { IPmcData } from "@spt-aki/models/eft/common/IPmcData";
 import { HideoutArea, IHideoutImprovement, Production, Productive } from "@spt-aki/models/eft/common/tables/IBotBase";
-import { Upd } from "@spt-aki/models/eft/common/tables/IItem";
+import { Item, Upd } from "@spt-aki/models/eft/common/tables/IItem";
 import { StageBonus } from "@spt-aki/models/eft/hideout/IHideoutArea";
 import { IHideoutContinuousProductionStartRequestData } from "@spt-aki/models/eft/hideout/IHideoutContinuousProductionStartRequestData";
 import { IHideoutProduction } from "@spt-aki/models/eft/hideout/IHideoutProduction";
 import { IHideoutSingleProductionStartRequestData } from "@spt-aki/models/eft/hideout/IHideoutSingleProductionStartRequestData";
 import { IHideoutTakeProductionRequestData } from "@spt-aki/models/eft/hideout/IHideoutTakeProductionRequestData";
-import { IAddItemRequestData } from "@spt-aki/models/eft/inventory/IAddItemRequestData";
+import { IAddItemDirectRequest } from "@spt-aki/models/eft/inventory/IAddItemDirectRequest";
 import { IItemEventRouterResponse } from "@spt-aki/models/eft/itemEvent/IItemEventRouterResponse";
 import { IHideoutConfig } from "@spt-aki/models/spt/config/IHideoutConfig";
 import { ILogger } from "@spt-aki/models/spt/utils/ILogger";
@@ -230,11 +230,11 @@ export declare class HideoutHelper {
      */
     getBTC(pmcData: IPmcData, request: IHideoutTakeProductionRequestData, sessionId: string): IItemEventRouterResponse;
     /**
-     * Create a single bitcoin request object
+     * Create a bitcoin request object
      * @param pmcData Player profile
      * @returns IAddItemRequestData
      */
-    protected createBitcoinRequest(pmcData: IPmcData): IAddItemRequestData;
+    protected createBitcoinRequest(pmcData: IPmcData, coinSlotCount: number): IAddItemDirectRequest;
     /**
      * Upgrade hideout wall from starting level to interactable level if necessary stations have been upgraded
      * @param pmcProfile Profile to upgrade wall in
@@ -251,4 +251,17 @@ export declare class HideoutHelper {
      * @param pmcProfile Profile to adjust
      */
     setHideoutImprovementsToCompleted(pmcProfile: IPmcData): void;
+    /**
+     * Add/remove bonus combat skill based on number of dogtags in place of fame hideout area
+     * @param pmcData Player profile
+     */
+    applyPlaceOfFameDogtagBonus(pmcData: IPmcData): void;
+    /**
+     * Calculate the raw dogtag combat skill bonus for place of fame based on number of dogtags
+     * Reverse engineered from client code
+     * @param pmcData Player profile
+     * @param activeDogtags Active dogtags in place of fame dogtag slots
+     * @returns combat bonus
+     */
+    protected getDogtagCombatSkillBonusPercent(pmcData: IPmcData, activeDogtags: Item[]): number;
 }

@@ -52,6 +52,20 @@ export declare class ItemHelper {
      */
     isOfBaseclasses(tpl: string, baseClassTpls: string[]): boolean;
     /**
+     * Does the provided item have the chance to require soft armor inserts
+     * Only applies to helmets/vest/armors.
+     * Not all head gear needs them
+     * @param itemTpl item to check
+     * @returns Does item have the possibility ot need soft inserts
+     */
+    armorItemCanHoldMods(itemTpl: string): boolean;
+    /**
+     * Does the provided item tpl require soft inserts to become a valid armor item
+     * @param itemTpl Item tpl to check
+     * @returns True if it needs armor inserts
+     */
+    itemRequiresSoftInserts(itemTpl: string): boolean;
+    /**
      * Returns the item price based on the handbook or as a fallback from the prices.json if the item is not
      * found in the handbook. If the price can't be found at all return 0
      * @param tpl Item to look price up of
@@ -84,43 +98,6 @@ export declare class ItemHelper {
      */
     fixItemStackCount(item: Item): Item;
     /**
-     * AmmoBoxes contain StackSlots which need to be filled for the AmmoBox to have content.
-     * Here's what a filled AmmoBox looks like:
-     *   {
-     *       "_id": "b1bbe982daa00ac841d4ae4d",
-     *       "_tpl": "57372c89245977685d4159b1",
-     *       "parentId": "5fe49a0e2694b0755a504876",
-     *       "slotId": "hideout",
-     *       "location": {
-     *           "x": 3,
-     *           "y": 4,
-     *           "r": 0
-     *       },
-     *       "upd": {
-     *           "StackObjectsCount": 1
-     *       }
-     *   },
-     *   {
-     *       "_id": "b997b4117199033afd274a06",
-     *       "_tpl": "56dff061d2720bb5668b4567",
-     *       "parentId": "b1bbe982daa00ac841d4ae4d",
-     *       "slotId": "cartridges",
-     *       "location": 0,
-     *       "upd": {
-     *           "StackObjectsCount": 30
-     *       }
-     *   }
-     * Given the AmmoBox Item (first object) this function generates the StackSlot (second object) and returns it.
-     * StackSlots are only used for AmmoBoxes which only have one element in StackSlots. However, it seems to be generic
-     * to possibly also have more than one StackSlot. As good as possible, without seeing items having more than one
-     * StackSlot, this function takes account of this and creates and returns an array of StackSlotItems
-     *
-     * @param {object}      item            The item template of the AmmoBox as given in items.json
-     * @param {string}      parentId        The id of the AmmoBox instance these StackSlotItems should be children of
-     * @returns {array}                     The array of StackSlotItems
-     */
-    generateItemsFromStackSlot(item: ITemplateItem, parentId: string): Item[];
-    /**
      * Get cloned copy of all item data from items.json
      * @returns array of ITemplateItem objects
      */
@@ -149,14 +126,14 @@ export declare class ItemHelper {
     /**
      * Recursive function that looks at every item from parameter and gets their childrens Ids + includes parent item in results
      * @param items Array of items (item + possible children)
-     * @param itemId Parent items id
+     * @param baseItemId Parent items id
      * @returns an array of strings
      */
-    findAndReturnChildrenByItems(items: Item[], itemId: string): string[];
+    findAndReturnChildrenByItems(items: Item[], baseItemId: string): string[];
     /**
      * A variant of findAndReturnChildren where the output is list of item objects instead of their ids.
-     * @param items
-     * @param baseItemId
+     * @param items Array of items (item + possible children)
+     * @param baseItemId Parent items id
      * @returns An array of Item objects
      */
     findAndReturnChildrenAsItems(items: Item[], baseItemId: string): Item[];
@@ -200,11 +177,11 @@ export declare class ItemHelper {
     /**
      * Find Barter items from array of items
      * @param {string} by tpl or id
-     * @param {Item[]} items Array of items to iterate over
-     * @param {string} barterItemId
+     * @param {Item[]} itemsToSearch Array of items to iterate over
+     * @param {string} desiredBarterItemIds
      * @returns Array of Item objects
      */
-    findBarterItems(by: "tpl" | "id", items: Item[], barterItemId: string): Item[];
+    findBarterItems(by: "tpl" | "id", itemsToSearch: Item[], desiredBarterItemIds: string | string[]): Item[];
     /**
      * Regenerate all guids with new ids, exceptions are for items that cannot be altered (e.g. stash/sorting table)
      * @param pmcData Player profile
@@ -281,7 +258,7 @@ export declare class ItemHelper {
      * @param item Db item template to look up Cartridge filter values from
      * @returns Caliber of cartridge
      */
-    getRandomCompatibleCaliberTemplateId(item: ITemplateItem): string;
+    getRandomCompatibleCaliberTemplateId(item: ITemplateItem): string | null;
     /**
      * Add cartridges to the ammo box with correct max stack sizes
      * @param ammoBox Box to add cartridges to
@@ -332,9 +309,10 @@ export declare class ItemHelper {
      * @param ammoTpl Cartridge to insert
      * @param stackCount Count of cartridges inside parent
      * @param location Location inside parent (e.g. 0, 1)
+     * @param foundInRaid OPTIONAL - Are cartridges found in raid (SpawnedInSession)
      * @returns Item
      */
-    createCartridges(parentId: string, ammoTpl: string, stackCount: number, location: number): Item;
+    createCartridges(parentId: string, ammoTpl: string, stackCount: number, location: number, foundInRaid?: boolean): Item;
     /**
      * Get the size of a stack, return 1 if no stack object count property found
      * @param item Item to get stack size of
@@ -348,6 +326,46 @@ export declare class ItemHelper {
      */
     getItemName(itemTpl: string): string;
     getItemTplsOfBaseType(desiredBaseType: string): string[];
+    /**
+     * Add child slot items to an item, chooses random child item if multiple choices exist
+     * @param itemToAdd array with single object (root item)
+     * @param itemToAddTemplate Db tempalte for root item
+     * @param modSpawnChanceDict Optional dictionary of mod name + % chance mod will be included in item (e.g. front_plate: 100)
+     * @param requiredOnly Only add required mods
+     * @returns Item with children
+     */
+    addChildSlotItems(itemToAdd: Item[], itemToAddTemplate: ITemplateItem, modSpawnChanceDict?: Record<string, number>, requiredOnly?: boolean): Item[];
+    /**
+     * Get a compatible tpl from the array provided where it is not found in the provided incompatible mod tpls parameter
+     * @param possibleTpls Tpls to randomply choose from
+     * @param incompatibleModTpls Incompatible tpls to not allow
+     * @returns Chosen tpl or null
+     */
+    getCompatibleTplFromArray(possibleTpls: string[], incompatibleModTpls: Set<string>): string;
+    /**
+     * Is the provided item._props.Slots._name property a plate slot
+     * @param slotName Name of slot (_name) of Items Slot array
+     * @returns True if its a slot that holds a removable palte
+     */
+    isRemovablePlateSlot(slotName: string): boolean;
+    /**
+     * Get a list of slot names that hold removable plates
+     * @returns Array of slot ids (e.g. front_plate)
+     */
+    getRemovablePlateSlotIds(): string[];
+    /**
+     * Generate new unique ids for child items while preserving hierarchy
+     * @param rootItem Base/primary item
+     * @param itemWithChildren Primary item + children of primary item
+     * @returns Item array with updated IDs
+     */
+    reparentItemAndChildren(rootItem: Item, itemWithChildren: Item[]): Item[];
+    /**
+     * Update a root items _id property value to be unique
+     * @param itemWithChildren Item to update root items _id property
+     * @param newId Optional: new id to use
+     */
+    remapRootItemId(itemWithChildren: Item[], newId?: string): void;
 }
 declare namespace ItemHelper {
     interface ItemSize {

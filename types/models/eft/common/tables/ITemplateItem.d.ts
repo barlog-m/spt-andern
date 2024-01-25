@@ -82,6 +82,7 @@ export interface Props {
     EffectiveDistance?: number;
     Ergonomics?: number;
     Velocity?: number;
+    WithAnimatorAiming?: boolean;
     RaidModdable?: boolean;
     ToolModdable?: boolean;
     UniqueAnimationModID?: number;
@@ -155,6 +156,8 @@ export interface Props {
     BlocksArmorVest?: boolean;
     speedPenaltyPercent?: number;
     GridLayoutName?: string;
+    ContainerSpawnChanceModifier?: number;
+    SpawnExcludedFilter?: string[];
     SpawnFilter?: any[];
     containType?: any[];
     sizeWidth?: number;
@@ -179,14 +182,17 @@ export interface Props {
     weapUseType?: string;
     ammoCaliber?: string;
     OperatingResource?: number;
+    PostRecoilHorizontalRangeHandRotation?: Ixyz;
+    PostRecoilVerticalRangeHandRotation?: Ixyz;
+    ProgressRecoilAngleOnStable?: Ixyz;
     RepairComplexity?: number;
     durabSpawnMin?: number;
     durabSpawnMax?: number;
     isFastReload?: boolean;
     RecoilForceUp?: number;
     RecoilForceBack?: number;
-    Convergence?: number;
     RecoilAngle?: number;
+    RecoilCamera?: number;
     weapFireType?: string[];
     RecolDispersion?: number;
     SingleFireRate?: number;
@@ -194,6 +200,7 @@ export interface Props {
     bFirerate?: number;
     bEffDist?: number;
     bHearDist?: number;
+    blockLeftStance?: boolean;
     isChamberLoad?: boolean;
     chamberAmmoCount?: number;
     isBoltCatch?: boolean;
@@ -202,8 +209,9 @@ export interface Props {
     AdjustCollimatorsToTrajectory?: boolean;
     shotgunDispersion?: number;
     Chambers?: Slot[];
-    CameraRecoil?: number;
     CameraSnap?: number;
+    CameraToWeaponAngleSpeedRange?: Ixyz;
+    CameraToWeaponAngleStep?: number;
     ReloadMode?: string;
     AimPlane?: number;
     TacticalReloadStiffnes?: Ixyz;
@@ -211,6 +219,7 @@ export interface Props {
     RecoilCenter?: Ixyz;
     RotationCenter?: Ixyz;
     RotationCenterNoStock?: Ixyz;
+    ShotsGroupSettings?: IShotsGroupSettings[];
     FoldedSlot?: string;
     CompactHandling?: boolean;
     MinRepairDegradation?: number;
@@ -242,6 +251,11 @@ export interface Props {
     AllowOverheat?: boolean;
     DoubleActionAccuracyPenalty?: number;
     RecoilPosZMult?: number;
+    RecoilReturnPathDampingHandRotation?: number;
+    RecoilReturnPathOffsetHandRotation?: number;
+    RecoilReturnSpeedHandRotation?: number;
+    RecoilStableAngleIncreaseStep?: number;
+    RecoilStableIndexShot?: number;
     MinRepairKitDegradation?: number;
     MaxRepairKitDegradation?: number;
     BlocksEarpiece?: boolean;
@@ -430,6 +444,10 @@ export interface SlotProps {
 }
 export interface SlotFilter {
     Shift?: number;
+    locked?: boolean;
+    Plate?: string;
+    armorColliders?: string[];
+    armorPlateColliders?: string[];
     Filter: string[];
     AnimationIndex?: number;
 }
@@ -489,4 +507,11 @@ export interface IColor {
     g: number;
     b: number;
     a: number;
+}
+export interface IShotsGroupSettings {
+    EndShotIndex: number;
+    ShotRecoilPositionStrength: Ixyz;
+    ShotRecoilRadianRange: Ixyz;
+    ShotRecoilRotationStrength: Ixyz;
+    StartShotIndex: number;
 }

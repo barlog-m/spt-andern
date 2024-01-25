@@ -1,9 +1,9 @@
-import { inject, injectable } from "tsyringe";
+import {inject, injectable} from "tsyringe";
 
-import { ILogger } from "@spt-aki/models/spt/utils/ILogger";
-import { Item } from "@spt-aki/models/eft/common/tables/IItem";
-import { RandomUtil } from "@spt-aki/utils/RandomUtil";
-import { HashUtil } from "@spt-aki/utils/HashUtil";
+import {ILogger} from "@spt-aki/models/spt/utils/ILogger";
+import {Item} from "@spt-aki/models/eft/common/tables/IItem";
+import {RandomUtil} from "@spt-aki/utils/RandomUtil";
+import {HashUtil} from "@spt-aki/utils/HashUtil";
 import {
     PresetData,
     PresetConfig,
@@ -144,11 +144,11 @@ export class Data {
             gear: {},
             weapon: {},
             ammo: {},
-            modules: {},
+            modules: {}
         };
 
         try {
-            const files = fs.readdirSync(presetDir, { withFileTypes: true });
+            const files = fs.readdirSync(presetDir, {withFileTypes: true});
             files.forEach((dir) => {
                 if (dir.isDirectory()) {
                     const tierDirName = `${presetDir}/${dir.name}`;

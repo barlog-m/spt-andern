@@ -131,12 +131,13 @@ export declare class RandomUtil {
         [x: string]: any;
     }): any;
     /**
-     * Draw from normal distribution
-     * @param   {number}    mu      Mean of the normal distribution
+     * Generate a normally distributed random number
+     * Uses the Box-Muller transform
+     * @param   {number}    mean    Mean of the normal distribution
      * @param   {number}    sigma   Standard deviation of the normal distribution
      * @returns {number}            The value drawn
      */
-    randn(mu: number, sigma: number): number;
+    getNormallyDistributedRandomNumber(mean: number, sigma: number, attempt?: number): number;
     /**
      * Draw Random integer low inclusive, high exclusive
      * if high is not set we draw from 0 to low (exclusive)
@@ -170,4 +171,12 @@ export declare class RandomUtil {
      * @returns Shuffled array
      */
     shuffle<T>(array: Array<T>): Array<T>;
+    /**
+     * Rolls for a probability based on chance
+     * @param number Probability Chance as float (0-1)
+     * @returns If roll succeed or not
+     * @example
+     * rollForChanceProbability(0.25); // returns true 25% probability
+     */
+    rollForChanceProbability(probabilityChance: number): boolean;
 }

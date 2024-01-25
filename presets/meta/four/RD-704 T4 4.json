@@ -1,0 +1,127 @@
+{
+    "id": "65b21fe801001c3ee513ef0f",
+    "name": "RD-704 T4 4",
+    "root": "a6ece311082d17d6de56b17d",
+    "items": [
+        {
+            "_id": "a6ece311082d17d6de56b17d",
+            "_tpl": "628a60ae6b1d481ff772e9c8",
+            "upd": {
+                "Repairable": {
+                    "MaxDurability": 100,
+                    "Durability": 100
+                },
+                "FireMode": {
+                    "FireMode": "single"
+                }
+            }
+        },
+        {
+            "_id": "5127ae72e0dca33a2fc39854",
+            "_tpl": "628a83c29179c324ed269508",
+            "parentId": "a6ece311082d17d6de56b17d",
+            "slotId": "mod_gas_block"
+        },
+        {
+            "_id": "f723345902f5a5f4e1433e62",
+            "_tpl": "6130c43c67085e45ef1405a1",
+            "parentId": "a6ece311082d17d6de56b17d",
+            "slotId": "mod_muzzle"
+        },
+        {
+            "_id": "23276385857906825139140b",
+            "_tpl": "6087e663132d4d12c81fd96b",
+            "parentId": "a6ece311082d17d6de56b17d",
+            "slotId": "mod_pistol_grip"
+        },
+        {
+            "_id": "b6034a3e8f37e6aa8fa81c32",
+            "_tpl": "5d2c76ed48f03532f2136169",
+            "parentId": "a6ece311082d17d6de56b17d",
+            "slotId": "mod_reciever"
+        },
+        {
+            "_id": "488ad16fe2addc01672cbb27",
+            "_tpl": "5b0e794b5acfc47a877359b2",
+            "parentId": "a6ece311082d17d6de56b17d",
+            "slotId": "mod_stock_000"
+        },
+        {
+            "_id": "d6df6aba880bda4000f06e99",
+            "_tpl": "59fafc5086f7740dbe19f6c3",
+            "parentId": "a6ece311082d17d6de56b17d",
+            "slotId": "mod_magazine"
+        },
+        {
+            "_id": "639b0eaceef0e2dcc07c9fe6",
+            "_tpl": "6130ca3fd92c473c77020dbd",
+            "parentId": "a6ece311082d17d6de56b17d",
+            "slotId": "mod_charge"
+        },
+        {
+            "_id": "012cdb6a14216db29f279558",
+            "_tpl": "5b7be47f5acfc400170e2dd2",
+            "parentId": "5127ae72e0dca33a2fc39854",
+            "slotId": "mod_mount_001"
+        },
+        {
+            "_id": "8312524de637d9e1aa8714cc",
+            "_tpl": "5b7be4895acfc400170e2dd5",
+            "parentId": "5127ae72e0dca33a2fc39854",
+            "slotId": "mod_foregrip"
+        },
+        {
+            "_id": "c909204156525404c5dbff48",
+            "_tpl": "5dfa3d2b0dee1b22f862eade",
+            "parentId": "f723345902f5a5f4e1433e62",
+            "slotId": "mod_muzzle"
+        },
+        {
+            "_id": "e47ab9ebbddfc9ab4666a8c9",
+            "_tpl": "618b9643526131765025ab35",
+            "parentId": "b6034a3e8f37e6aa8fa81c32",
+            "slotId": "mod_scope"
+        },
+        {
+            "_id": "fc66db2f7e96644f2296545b",
+            "_tpl": "6272370ee4013c5d7e31f418",
+            "parentId": "012cdb6a14216db29f279558",
+            "slotId": "mod_tactical",
+            "upd": {
+                "Light": {
+                    "IsActive": true,
+                    "SelectedMode": 0
+                }
+            }
+        },
+        {
+            "_id": "fd46a7f2836176340aff4ee4",
+            "_tpl": "5b057b4f5acfc4771e1bd3e9",
+            "parentId": "8312524de637d9e1aa8714cc",
+            "slotId": "mod_foregrip"
+        },
+        {
+            "_id": "c7ffa243329fa4bb6e28a238",
+            "_tpl": "618ba27d9008e4636a67f61d",
+            "parentId": "e47ab9ebbddfc9ab4666a8c9",
+            "slotId": "mod_scope",
+            "upd": {
+                "Sight": {
+                    "ScopesCurrentCalibPointIndexes": [
+                        0
+                    ],
+                    "ScopesSelectedModes": [
+                        0
+                    ],
+                    "SelectedScope": 0
+                }
+            }
+        },
+        {
+            "_id": "6783a3f6bd0efd592b0a5865",
+            "_tpl": "618b9671d14d6d5ab879c5ea",
+            "parentId": "e47ab9ebbddfc9ab4666a8c9",
+            "slotId": "mod_mount"
+        }
+    ]
+}

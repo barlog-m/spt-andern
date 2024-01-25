@@ -1,60 +1,12 @@
 {
     "one": [
         {
-            "tpl": "5648ae314bdc2d3d1c8b457f",
-            "name": "AK CAA RS47 handguard"
-        },
-        {
-            "tpl": "570fd6c2d2720bc6458b457f",
-            "name": "EOTech 553 holographic sight"
-        },
-        {
-            "tpl": "593d493f86f7745e6b2ceb22",
-            "name": "AK-74 Hexagon 5.45x39 sound suppressor"
-        },
-        {
-            "tpl": "593d489686f7745c6255d58a",
-            "name": "AKM Hexagon 7.62x39 sound suppressor"
-        },
-        {
-            "tpl": "593d490386f7745ee97a1555",
-            "name": "SKS Hexagon 7.62x39 sound suppressor"
-        },
-        {
-            "tpl": "5a9fbb84a2750c00137fa685",
-            "name": "Rotor 43 5.56x45 muzzle brake-compensator"
-        },
-        {
-            "tpl": "5a9fbacda2750c00141e080f",
-            "name": "Rotor 43 7.62x39 muzzle brake-compensator"
-        },
-        {
-            "tpl": "59d625f086f774661516605d",
-            "name": "AK 7.62x39 30-round magazine (issued '55 or later)"
-        },
-        {
-            "tpl": "64a536392d2c4e6e970f4121",
-            "name": "WARTECH TV-115 plate carrier"
-        },
-        {
-            "tpl": "64a5366719bab53bd203bf33",
-            "name": "Eagle Allied Industries MBSS plate carrier"
-        },
-        {
             "tpl": "5b44d22286f774172b0c9de8",
             "name": "BNTI Kirasa-N body armor"
         },
         {
-            "tpl": "5e023e53d4353e3302577c4c",
-            "name": "patron_762x51_bpz_fmj"
-        },
-        {
             "tpl": "59387a4986f77401cc236e62",
             "name": "Dorm room 114 key"
-        },
-        {
-            "tpl": "5938144586f77473c2087145",
-            "name": "Portable bunkhouse key"
         },
         {
             "tpl": "591afe0186f77431bd616a11",
@@ -177,41 +129,7 @@
             "name": "Radar station commandant room key"
         }
     ],
-    "two": [
-        {
-            "tpl": "59e6906286f7746c9f75e847",
-            "name": "patron_556x45_M856A1"
-        }
-    ],
+    "two": [],
     "three": [],
-    "four": [
-        {
-            "tpl": "5fd20ff893a8961fc660a954",
-            "name": "patron_762x35_blackout_ap"
-        },
-        {
-            "tpl": "59e0d99486f7744a32234762",
-            "name": "patron_762x39_BP"
-        },
-        {
-            "tpl": "61962b617c6c7b169525f168",
-            "name": "patron_545x39_7n40"
-        },
-        {
-            "tpl": "54527ac44bdc2d36668b4567",
-            "name": "patron_556x45_M855A1"
-        },
-        {
-            "tpl": "58dd3ad986f77403051cba8f",
-            "name": "patron_762x51_M80"
-        },
-        {
-            "tpl": "5cadf6eeae921500134b2799",
-            "name": "patron_127x55_ps12b"
-        },
-        {
-            "tpl": "57a0e5022459774d1673f889",
-            "name": "patron_9x39_sp6"
-        }
-    ]
+    "four": []
 }

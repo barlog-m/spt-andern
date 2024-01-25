@@ -1,8 +1,12 @@
 {
-    "Caliber545x39": ["56dff3afd2720bba668b4567"],
-    "Caliber762x39": ["64b7af5a8532cf95ee0a0dbd"],
-    "Caliber556x45NATO": ["59e6920f86f77411d82aa167"],
-    "Caliber366TKM": ["59e655cb86f77411dc52a77b"],
-    "Caliber762x51": ["5e023e6e34d52a55c3304f71"],
-    "Caliber762x54R": ["64b8f7968532cf95ee0a0dbf"]
+    "Caliber545x39": [
+        "56dff4ecd2720b5f5a8b4568",
+        "56dff421d2720b5f5a8b4567"
+    ],
+    "Caliber762x39": [
+        "64b7af734b75259c590fa895"
+    ],
+    "Caliber556x45NATO": [
+        "59e6918f86f7746c9f75e849"
+    ]
 }

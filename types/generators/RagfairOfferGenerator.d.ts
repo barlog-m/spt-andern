@@ -119,22 +119,28 @@ export declare class RagfairOfferGenerator {
      * Create multiple offers for items by using a unique list of items we've generated previously
      * @param expiredOffers optional, expired offers to regenerate
      */
-    generateDynamicOffers(expiredOffers?: Item[]): Promise<void>;
+    generateDynamicOffers(expiredOffers?: Item[][]): Promise<void>;
     /**
-     * @param assortItemIndex Index of assort item
-     * @param assortItemsToProcess Item array containing index
-     * @param expiredOffers Currently expired offers on flea
+     * @param assortItemWithChildren Item with its children to process into offers
+     * @param isExpiredOffer is an expired offer
      * @param config Ragfair dynamic config
      */
-    protected createOffersForItems(assortItemIndex: string, assortItemsToProcess: Item[], expiredOffers: Item[], config: Dynamic): Promise<void>;
+    protected createOffersFromAssort(assortItemWithChildren: Item[], isExpiredOffer: boolean, config: Dynamic): Promise<void>;
+    /**
+     * iterate over an items chidren and look for plates above desired level and remove them
+     * @param presetWithChildren preset to check for plates
+     * @param plateProtectionLimit Max level of plates an armor can have without being removed
+     * @returns True if plate removed
+     */
+    protected removeBannedPlatesFromPreset(presetWithChildren: Item[], plateProtectionLimit: number): boolean;
     /**
      * Create one flea offer for a specific item
-     * @param items Item to create offer for
+     * @param itemWithChildren Item to create offer for
      * @param isPreset Is item a weapon preset
      * @param itemDetails raw db item details
      * @returns Item array
      */
-    protected createSingleOfferForItem(items: Item[], isPreset: boolean, itemDetails: [boolean, ITemplateItem]): Promise<void>;
+    protected createSingleOfferForItem(itemWithChildren: Item[], isPreset: boolean, itemDetails: [boolean, ITemplateItem]): Promise<void>;
     /**
      * Generate trader offers on flea using the traders assort data
      * @param traderID Trader to generate offers for
@@ -158,16 +164,21 @@ export declare class RagfairOfferGenerator {
     /**
      * Alter an items condition based on its item base type
      * @param conditionSettingsId also the parentId of item being altered
-     * @param item Item to adjust condition details of
+     * @param itemWithMods Item to adjust condition details of
      * @param itemDetails db item details of first item in array
      */
-    protected randomiseItemCondition(conditionSettingsId: string, item: Item, itemDetails: ITemplateItem): void;
+    protected randomiseItemCondition(conditionSettingsId: string, itemWithMods: Item[], itemDetails: ITemplateItem): void;
     /**
      * Adjust an items durability/maxDurability value
      * @param item item (weapon/armor) to adjust
      * @param multiplier Value to multiple durability by
      */
-    protected randomiseDurabilityValues(item: Item, multiplier: number): void;
+    protected randomiseWeaponDurabilityValues(item: Item, multiplier: number): void;
+    /**
+     * Randomise the durabiltiy values for an armors plates and soft inserts
+     * @param armorWithMods Armor item with its child mods
+     */
+    protected randomiseArmorDurabilityValues(armorWithMods: Item[]): void;
     /**
      * Add missing conditions to an item if needed
      * Durabiltiy for repairable items
@@ -192,10 +203,10 @@ export declare class RagfairOfferGenerator {
     }[];
     /**
      * Create a random currency-based barter scheme for an array of items
-     * @param offerItems Items on offer
+     * @param offerWithChildren Items on offer
      * @param isPackOffer Is the barter scheme being created for a pack offer
      * @param multipler What to multiply the resulting price by
      * @returns Barter scheme for offer
      */
-    protected createCurrencyBarterScheme(offerItems: Item[], isPackOffer: boolean, multipler?: number): IBarterScheme[];
+    protected createCurrencyBarterScheme(offerWithChildren: Item[], isPackOffer: boolean, multipler?: number): IBarterScheme[];
 }

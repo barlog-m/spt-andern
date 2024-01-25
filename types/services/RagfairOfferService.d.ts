@@ -25,6 +25,7 @@ export declare class RagfairOfferService {
     protected localisationService: LocalisationService;
     protected configServer: ConfigServer;
     protected playerOffersLoaded: boolean;
+    /** Offer id + offer object */
     protected expiredOffers: Record<string, IRagfairOffer>;
     protected ragfairConfig: IRagfairConfig;
     protected ragfairOfferHandler: RagfairOfferHolder;
@@ -38,12 +39,19 @@ export declare class RagfairOfferService {
     getOffersOfType(templateId: string): IRagfairOffer[];
     addOffer(offer: IRagfairOffer): void;
     addOfferToExpired(staleOffer: IRagfairOffer): void;
+    /**
+     * Get total count of current expired offers
+     * @returns Number of expired offers
+     */
     getExpiredOfferCount(): number;
     /**
-     * Get an array of expired items not yet processed into new offers
-     * @returns items that need to be turned into offers
+     * Get an array of arrays of expired offer items + children
+     * @returns Expired offer assorts
      */
-    getExpiredOfferItems(): Item[];
+    getExpiredOfferAssorts(): Item[][];
+    /**
+     * Clear out internal expiredOffers dictionary of all items
+     */
     resetExpiredOffers(): void;
     /**
      * Does the offer exist on the ragfair

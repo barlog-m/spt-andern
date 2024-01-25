@@ -7,7 +7,10 @@ import { TraderHelper } from "@spt-aki/helpers/TraderHelper";
 import { IPmcData } from "@spt-aki/models/eft/common/IPmcData";
 import { IItemEventRouterResponse } from "@spt-aki/models/eft/itemEvent/IItemEventRouterResponse";
 import { IMiniProfile } from "@spt-aki/models/eft/launcher/IMiniProfile";
+import { GetProfileStatusResponseData } from "@spt-aki/models/eft/profile/GetProfileStatusResponseData";
 import { IAkiProfile } from "@spt-aki/models/eft/profile/IAkiProfile";
+import { IGetOtherProfileRequest } from "@spt-aki/models/eft/profile/IGetOtherProfileRequest";
+import { IGetOtherProfileResponse } from "@spt-aki/models/eft/profile/IGetOtherProfileResponse";
 import { IProfileChangeNicknameRequestData } from "@spt-aki/models/eft/profile/IProfileChangeNicknameRequestData";
 import { IProfileChangeVoiceRequestData } from "@spt-aki/models/eft/profile/IProfileChangeVoiceRequestData";
 import { IProfileCreateRequestData } from "@spt-aki/models/eft/profile/IProfileCreateRequestData";
@@ -60,6 +63,11 @@ export declare class ProfileController {
      */
     createProfile(info: IProfileCreateRequestData, sessionID: string): string;
     /**
+     * make profiles pmcData.Inventory.equipment unique
+     * @param pmcData Profile to update
+     */
+    protected updateInventoryEquipmentId(pmcData: IPmcData): void;
+    /**
      * Delete a profile
      * @param sessionID Id of profile to delete
      */
@@ -101,4 +109,9 @@ export declare class ProfileController {
      * Handle client/game/profile/search
      */
     getFriends(info: ISearchFriendRequestData, sessionID: string): ISearchFriendResponse[];
+    /**
+     * Handle client/profile/status
+     */
+    getProfileStatus(sessionId: string): GetProfileStatusResponseData;
+    getOtherProfile(sessionId: string, request: IGetOtherProfileRequest): IGetOtherProfileResponse;
 }

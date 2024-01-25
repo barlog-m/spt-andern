@@ -18,21 +18,6 @@
     ],
     "helmets": [
         {
-            "weight": 2,
-            "id": "5c17a7ed2e2216152142459c",
-            "name": "Crye Precision AirFrame helmet (Tan)"
-        },
-        {
-            "weight": 2,
-            "id": "5e00c1ad86f774747333222c",
-            "name": "Team Wendy EXFIL Ballistic Helmet (Black)"
-        },
-        {
-            "weight": 2,
-            "id": "5e01ef6886f77445f643baa4",
-            "name": "Team Wendy EXFIL Ballistic Helmet (Coyote Brown)"
-        },
-        {
             "weight": 1,
             "id": "5ac8d6885acfc400180ae7b0",
             "name": "Ops-Core FAST MT Super High Cut helmet (Tan)"
@@ -41,78 +26,98 @@
             "weight": 1,
             "id": "5a154d5cfcdbcb001a3b00da",
             "name": "Ops-Core FAST MT Super High Cut helmet (Black)"
+        },
+        {
+            "weight": 1,
+            "id": "5c17a7ed2e2216152142459c",
+            "name": "Crye Precision AirFrame helmet (Tan)"
+        },
+        {
+            "weight": 1,
+            "id": "5e00c1ad86f774747333222c",
+            "name": "Team Wendy EXFIL Ballistic Helmet (Black)"
+        },
+        {
+            "weight": 1,
+            "id": "5e01ef6886f77445f643baa4",
+            "name": "Team Wendy EXFIL Ballistic Helmet (Coyote Brown)"
+        },
+        {
+            "weight": 1,
+            "id": "5b40e1525acfc4771e1c6611",
+            "name": "HighCom Striker ULACH IIIA helmet (Black)"
+        },
+        {
+            "weight": 1,
+            "id": "5b40e2bc5acfc40016388216",
+            "name": "HighCom Striker ULACH IIIA helmet (Desert Tan)"
         }
     ],
     "armoredRigs": [
         {
             "weight": 2,
-            "id": "628cd624459354321c4b7fa2",
-            "name": "Tasmanian Tiger SK plate carrier (Multicam Black)"
-        },
-        {
-            "weight": 2,
-            "id": "609e860ebd219504d8507525",
-            "name": "Crye Precision AVS plate carrier (Tagilla Edition)"
-        },
-        {
-            "weight": 1,
-            "id": "5e4ac41886f77406a511c9a8",
-            "name": "Ars Arma CPC MOD.1 plate carrier"
-        },
-        {
-            "weight": 1,
-            "id": "628b9c7d45122232a872358f",
-            "name": "Crye Precision CPC plate carrier (Goons Edition)"
-        },
-        {
-            "weight": 1,
-            "id": "628b9784bcf6e2659e09b8a2",
-            "name": "S&S Precision PlateFrame plate carrier (Goons Edition)"
-        },
-        {
-            "weight": 1,
             "id": "60a3c68c37ea821725773ef5",
             "name": "CQC Osprey MK4A plate carrier (Protection, MTP)"
+        },
+        {
+            "weight": 1,
+            "id": "544a5caa4bdc2d1a388b4568",
+            "name": "Crye Precision AVS plate carrier"
+        },
+        {
+            "weight": 1,
+            "id": "628dc750b910320f4c27a732",
+            "name": "ECLiPSE RBAV-AF plate carrier (Ranger Green)"
         }
     ],
     "armor": [
         {
             "weight": 2,
-            "id": "5fd4c474dd870108a754b241",
-            "name": "5.11 Tactical Hexgrid plate carrier"
-        },
-        {
-            "weight": 2,
-            "id": "6038b4ca92ec1c3103795a0d",
-            "name": "LBT-6094A Slick Plate Carrier (Olive Drab)"
-        },
-        {
-            "weight": 2,
-            "id": "6038b4b292ec1c3103795a0b",
-            "name": "LBT-6094A Slick Plate Carrier (Tan)"
-        },
-        {
-            "weight": 2,
-            "id": "5e4abb5086f77406975c9342",
-            "name": "LBT-6094A Slick Plate Carrier"
-        },
-        {
-            "weight": 2,
-            "id": "5c0e541586f7747fa54205c9",
-            "name": "6B13 M modified assault armor (Tan)"
-        },
-        {
-            "weight": 1,
-            "id": "63737f448b28897f2802b874",
-            "name": "Hexatac HPC Plate Carrier (Multicam Black)"
-        },
-        {
-            "weight": 1,
             "id": "5e9dacf986f774054d6b89f4",
             "name": "FORT Defender-2 body armor"
+        },
+        {
+            "weight": 2,
+            "id": "5b44cf1486f77431723e3d05",
+            "name": "IOTV Gen4 body armor (Assault Kit)"
+        },
+        {
+            "weight": 2,
+            "id": "5ca2151486f774244a3b8d30",
+            "name": "FORT Redut-M body armor"
+        },
+        {
+            "weight": 2,
+            "id": "5b44d0de86f774503d30cba8",
+            "name": "IOTV Gen4 body armor (High Mobility Kit)"
+        },
+        {
+            "weight": 2,
+            "id": "5c0e625a86f7742d77340f62",
+            "name": "BNTI Zhuk-6a body armor"
+        },
+        {
+            "weight": 1,
+            "id": "5f5f41476bdad616ad46d631",
+            "name": "NPP KlASS Korund-VM body armor"
+        },
+        {
+            "weight": 1,
+            "id": "5ab8e79e86f7742d8b372e78",
+            "name": "BNTI Gzhel-K body armor"
+        },
+        {
+            "weight": 1,
+            "id": "5c0e541586f7747fa54205c9",
+            "name": "6B13 M modified assault armor (Tan)"
         }
     ],
     "rigs": [
+        {
+            "weight": 1,
+            "id": "5f5f41f56760b4138443b352",
+            "name": "Direct Action Thunderbolt compact chest rig"
+        },
         {
             "weight": 1,
             "id": "5648a69d4bdc2ded0b8b457b",
@@ -125,18 +130,8 @@
         },
         {
             "weight": 1,
-            "id": "60a621c49c197e4e8c4455e6",
-            "name": "Stich Profi Chest Rig MK2 (Assault, A-TACS FG)"
-        },
-        {
-            "weight": 1,
-            "id": "5df8a42886f77412640e2e75",
-            "name": "Velocity Systems MPPV Multi-Purpose Patrol Vest"
-        },
-        {
-            "weight": 1,
-            "id": "5fd4c60f875c30179f5d04c2",
-            "name": "Gear Craft GC-BSS-MK1 chest rig"
+            "id": "592c2d1a86f7746dbe2af32a",
+            "name": "ANA Tactical Alpha chest rig"
         },
         {
             "weight": 1,
@@ -150,8 +145,23 @@
         },
         {
             "weight": 1,
+            "id": "60a621c49c197e4e8c4455e6",
+            "name": "Stich Profi Chest Rig MK2 (Assault, A-TACS FG)"
+        },
+        {
+            "weight": 1,
             "id": "60a6220e953894617404b00a",
             "name": "Stich Profi Chest Rig MK2 (Recon, A-TACS FG)"
+        },
+        {
+            "weight": 1,
+            "id": "5fd4c60f875c30179f5d04c2",
+            "name": "Gear Craft GC-BSS-MK1 chest rig"
+        },
+        {
+            "weight": 1,
+            "id": "5df8a42886f77412640e2e75",
+            "name": "Velocity Systems MPPV Multi-Purpose Patrol Vest"
         },
         {
             "weight": 1,
@@ -161,49 +171,39 @@
     ],
     "backpacks": [
         {
-            "weight": 1,
-            "id": "5ca20d5986f774331e7c9602",
-            "name": "WARTECH Berkut BB-102 backpack"
-        },
-        {
-            "weight": 1,
-            "id": "5e9dcf5986f7746c417435b3",
-            "name": "LBT-8005A Day Pack backpack"
-        },
-        {
-            "weight": 1,
-            "id": "5f5e467b0bc58666c37e7821",
-            "name": "Eberlestock F5 Switchblade backpack (Dry Earth)"
-        },
-        {
-            "weight": 1,
-            "id": "6038d614d10cbf667352dd44",
-            "name": "Hazard 4 Takedown sling backpack (Multicam)"
-        },
-        {
-            "weight": 1,
-            "id": "619cf0335771dd3c390269ae",
-            "name": "Gruppa 99 T20 backpack (Multicam)"
-        },
-        {
-            "weight": 1,
+            "weight": 2,
             "id": "62a1b7fbc30cfa1d366af586",
             "name": "Gruppa 99 T30 backpack (Multicam)"
         },
         {
-            "weight": 1,
+            "weight": 2,
+            "id": "628e1ffc83ec92260c0f437f",
+            "name": "Gruppa 99 T30 backpack"
+        },
+        {
+            "weight": 2,
             "id": "639346cc1c8f182ad90c8972",
             "name": "Tasmanian Tiger Trooper 35 backpack"
         },
         {
             "weight": 1,
-            "id": "618cfae774bb2d036a049e7c",
-            "name": "LBT-1476A 3Day Pack (Woodland)"
+            "id": "5c0e805e86f774683f3dd637",
+            "name": "3V Gear Paratus 3-Day Operators Tactical backpack"
         },
         {
             "weight": 1,
-            "id": "5c0e805e86f774683f3dd637",
-            "name": "3V Gear Paratus 3-Day Operators Tactical backpack"
+            "id": "6034d2d697633951dc245ea6",
+            "name": "Eberlestock G2 Gunslinger II backpack (Dry Earth)"
+        },
+        {
+            "weight": 1,
+            "id": "5c0e774286f77468413cc5b2",
+            "name": "Mystery Ranch Blackjack 50 backpack (Multicam)"
+        },
+        {
+            "weight": 1,
+            "id": "5df8a4d786f77412672a1e3b",
+            "name": "6Sh118 raid backpack"
         }
     ],
     "face": [
@@ -257,21 +257,6 @@
             "weight": 1,
             "id": "60a7ad2a2198820d95707a2e",
             "name": "Tagilla's welding mask 'UBEY'"
-        },
-        {
-            "weight": 1,
-            "id": "62a09e08de7ac81993580532",
-            "name": "Glorious E lightweight armored mask"
-        },
-        {
-            "weight": 1,
-            "id": "5b432b2f5acfc4771e1c6622",
-            "name": "Shattered lightweight armored mask"
-        },
-        {
-            "weight": 1,
-            "id": "62963c18dbc8ab5f0d382d0b",
-            "name": "Death Knight mask"
         }
     ],
     "chadHelmets": [
@@ -299,23 +284,28 @@
             "weight": 1,
             "id": "5ca20ee186f774799474abc2",
             "name": "Vulkan-5 (LShZ-5) bulletproof helmet"
-        },
-        {
-            "weight": 1,
-            "id": "5d6d3716a4b9361bc8618872",
-            "name": "BNTI LShZ-2DTM helmet"
         }
     ],
     "chadArmor": [
         {
-            "weight": 1,
+            "weight": 2,
             "id": "545cdb794bdc2d3a198b456a",
             "name": "6B43 6A Zabralo-Sh body armor"
         },
         {
-            "weight": 1,
+            "weight": 2,
             "id": "60a283193cb70855c43a381d",
             "name": "NFM THOR Integrated Carrier body armor"
+        },
+        {
+            "weight": 1,
+            "id": "5ca21c6986f77479963115a7",
+            "name": "FORT Redut-T5 body armor"
+        },
+        {
+            "weight": 1,
+            "id": "5b44cd8b86f774503d30cba2",
+            "name": "IOTV Gen4 body armor (Full Protection Kit)"
         }
     ]
 }

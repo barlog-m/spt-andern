@@ -1,12 +1,14 @@
-import { inject, injectable } from "tsyringe";
+import {inject, injectable} from "tsyringe";
 
-import { ILogger } from "@spt-aki/models/spt/utils/ILogger";
-import { HashUtil } from "@spt-aki/utils/HashUtil";
-import { RandomUtil } from "@spt-aki/utils/RandomUtil";
-import { Inventory as PmcInventory } from "@spt-aki/models/eft/common/tables/IBotBase";
-import { EquipmentSlots } from "@spt-aki/models/enums/EquipmentSlots";
+import {ILogger} from "@spt-aki/models/spt/utils/ILogger";
+import {HashUtil} from "@spt-aki/utils/HashUtil";
+import {RandomUtil} from "@spt-aki/utils/RandomUtil";
+import {
+    Inventory as PmcInventory
+} from "@spt-aki/models/eft/common/tables/IBotBase";
+import {EquipmentSlots} from "@spt-aki/models/enums/EquipmentSlots";
 
-import { GearGeneratorHelper } from "./GearGeneratorHelper";
+import {GearGeneratorHelper} from "./GearGeneratorHelper";
 
 @injectable()
 export class HelmetGenerator {
@@ -82,7 +84,8 @@ export class HelmetGenerator {
         @inject("RandomUtil") protected randomUtil: RandomUtil,
         @inject("AndernGearGeneratorHelper")
         protected gearGeneratorHelper: GearGeneratorHelper
-    ) {}
+    ) {
+    }
 
     public generateHelmet(
         botLevel: number,

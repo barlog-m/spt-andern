@@ -3,11 +3,12 @@ import { ProfileHelper } from "@spt-aki/helpers/ProfileHelper";
 import { TradeHelper } from "@spt-aki/helpers/TradeHelper";
 import { TraderHelper } from "@spt-aki/helpers/TraderHelper";
 import { IPmcData } from "@spt-aki/models/eft/common/IPmcData";
-import { Item, Upd } from "@spt-aki/models/eft/common/tables/IItem";
+import { Item } from "@spt-aki/models/eft/common/tables/IItem";
 import { ITraderBase } from "@spt-aki/models/eft/common/tables/ITrader";
 import { IItemEventRouterResponse } from "@spt-aki/models/eft/itemEvent/IItemEventRouterResponse";
+import { IRagfairOffer } from "@spt-aki/models/eft/ragfair/IRagfairOffer";
 import { IProcessBaseTradeRequestData } from "@spt-aki/models/eft/trade/IProcessBaseTradeRequestData";
-import { IProcessRagfairTradeRequestData } from "@spt-aki/models/eft/trade/IProcessRagfairTradeRequestData";
+import { IOfferRequest, IProcessRagfairTradeRequestData } from "@spt-aki/models/eft/trade/IProcessRagfairTradeRequestData";
 import { ISellScavItemsToFenceRequestData } from "@spt-aki/models/eft/trade/ISellScavItemsToFenceRequestData";
 import { Traders } from "@spt-aki/models/enums/Traders";
 import { IRagfairConfig } from "@spt-aki/models/spt/config/IRagfairConfig";
@@ -39,7 +40,33 @@ export declare class TradeController {
     /** Handle TradingConfirm event */
     confirmTrading(pmcData: IPmcData, request: IProcessBaseTradeRequestData, sessionID: string): IItemEventRouterResponse;
     /** Handle RagFairBuyOffer event */
-    confirmRagfairTrading(pmcData: IPmcData, body: IProcessRagfairTradeRequestData, sessionID: string): IItemEventRouterResponse;
+    confirmRagfairTrading(pmcData: IPmcData, request: IProcessRagfairTradeRequestData, sessionID: string): IItemEventRouterResponse;
+    /**
+     * Buy an item off the flea sold by a trader
+     * @param sessionId Session id
+     * @param pmcData Player profile
+     * @param fleaOffer Offer being purchased
+     * @param requestOffer request data from client
+     * @param output Output to send back to client
+     */
+    protected buyTraderItemFromRagfair(sessionId: string, pmcData: IPmcData, fleaOffer: IRagfairOffer, requestOffer: IOfferRequest, output: IItemEventRouterResponse): void;
+    /**
+     * Buy an item off the flea sold by a PMC
+     * @param sessionId Session id
+     * @param pmcData Player profile
+     * @param fleaOffer Offer being purchased
+     * @param requestOffer Request data from client
+     * @param output Output to send back to client
+     */
+    protected buyPmcItemFromRagfair(sessionId: string, pmcData: IPmcData, fleaOffer: IRagfairOffer, requestOffer: IOfferRequest, output: IItemEventRouterResponse): void;
+    /**
+     * Does Player have necessary trader loyalty to purchase flea offer
+     * @param sellerIsTrader is seller trader
+     * @param fleaOffer FLea offer being bought
+     * @param pmcData Player profile
+     * @returns True if player can buy offer
+     */
+    protected playerLacksTraderLoyaltyLevelToBuyOffer(fleaOffer: IRagfairOffer, pmcData: IPmcData): boolean;
     /** Handle SellAllFromSavage event */
     sellScavItemsToFence(pmcData: IPmcData, request: ISellScavItemsToFenceRequestData, sessionId: string): IItemEventRouterResponse;
     /**
@@ -49,9 +76,9 @@ export declare class TradeController {
      * @param profileWithItemsToSell Profile with items to be sold to trader
      * @param profileThatGetsMoney Profile that gets the money after selling items
      * @param trader Trader to sell items to
-     * @returns IItemEventRouterResponse
+     * @param output IItemEventRouterResponse
      */
-    protected sellInventoryToTrader(sessionId: string, profileWithItemsToSell: IPmcData, profileThatGetsMoney: IPmcData, trader: Traders): IItemEventRouterResponse;
+    protected sellInventoryToTrader(sessionId: string, profileWithItemsToSell: IPmcData, profileThatGetsMoney: IPmcData, trader: Traders, output: IItemEventRouterResponse): void;
     /**
      * Looks up an items children and gets total handbook price for them
      * @param parentItemId parent item that has children we want to sum price of
@@ -61,5 +88,4 @@ export declare class TradeController {
      * @returns Rouble price
      */
     protected getPriceOfItemAndChildren(parentItemId: string, items: Item[], handbookPrices: Record<string, number>, traderDetails: ITraderBase): number;
-    protected confirmTradingInternal(pmcData: IPmcData, body: IProcessBaseTradeRequestData, sessionID: string, foundInRaid?: boolean, upd?: Upd): IItemEventRouterResponse;
 }

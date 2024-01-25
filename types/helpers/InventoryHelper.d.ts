@@ -2,11 +2,13 @@ import { ContainerHelper } from "@spt-aki/helpers/ContainerHelper";
 import { DialogueHelper } from "@spt-aki/helpers/DialogueHelper";
 import { ItemHelper } from "@spt-aki/helpers/ItemHelper";
 import { PaymentHelper } from "@spt-aki/helpers/PaymentHelper";
+import { PresetHelper } from "@spt-aki/helpers/PresetHelper";
 import { ProfileHelper } from "@spt-aki/helpers/ProfileHelper";
 import { TraderAssortHelper } from "@spt-aki/helpers/TraderAssortHelper";
 import { IPmcData } from "@spt-aki/models/eft/common/IPmcData";
 import { Inventory } from "@spt-aki/models/eft/common/tables/IBotBase";
-import { Item } from "@spt-aki/models/eft/common/tables/IItem";
+import { Item, Upd } from "@spt-aki/models/eft/common/tables/IItem";
+import { IAddItemDirectRequest } from "@spt-aki/models/eft/inventory/IAddItemDirectRequest";
 import { AddItem, IAddItemRequestData } from "@spt-aki/models/eft/inventory/IAddItemRequestData";
 import { IAddItemTempObject } from "@spt-aki/models/eft/inventory/IAddItemTempObject";
 import { IInventoryMergeRequestData } from "@spt-aki/models/eft/inventory/IInventoryMergeRequestData";
@@ -44,23 +46,46 @@ export declare class InventoryHelper {
     protected itemHelper: ItemHelper;
     protected containerHelper: ContainerHelper;
     protected profileHelper: ProfileHelper;
+    protected presetHelper: PresetHelper;
     protected localisationService: LocalisationService;
     protected configServer: ConfigServer;
     protected inventoryConfig: IInventoryConfig;
-    constructor(logger: ILogger, jsonUtil: JsonUtil, hashUtil: HashUtil, httpResponse: HttpResponseUtil, fenceService: FenceService, databaseServer: DatabaseServer, paymentHelper: PaymentHelper, traderAssortHelper: TraderAssortHelper, dialogueHelper: DialogueHelper, itemHelper: ItemHelper, containerHelper: ContainerHelper, profileHelper: ProfileHelper, localisationService: LocalisationService, configServer: ConfigServer);
+    constructor(logger: ILogger, jsonUtil: JsonUtil, hashUtil: HashUtil, httpResponse: HttpResponseUtil, fenceService: FenceService, databaseServer: DatabaseServer, paymentHelper: PaymentHelper, traderAssortHelper: TraderAssortHelper, dialogueHelper: DialogueHelper, itemHelper: ItemHelper, containerHelper: ContainerHelper, profileHelper: ProfileHelper, presetHelper: PresetHelper, localisationService: LocalisationService, configServer: ConfigServer);
     /**
+     * Add whatever is passed in `request.itemWithModsToAdd` into player inventory (if it fits)
+     * @param sessionId Session id
+     * @param request addItemDirect request
+     * @param pmcData Player profile
+     * @param output Client response object
+     */
+    addItemToStash(sessionId: string, request: IAddItemDirectRequest, pmcData: IPmcData, output: IItemEventRouterResponse): void;
+    /**
+     * Set FiR status for an item + its children
+     * @param itemWithChildren An item
+     * @param foundInRaid Item was found in raid
+     */
+    private setFindInRaidStatusForItem;
+    /**
+     * @deprecated - use addItemToStash()
+     *
      * BUG: Passing the same item multiple times with a count of 1 will cause multiples of that item to be added (e.g. x3 separate objects of tar cola with count of 1 = 9 tarcolas being added to inventory)
      * @param pmcData Profile to add items to
      * @param request request data to add items
      * @param output response to send back to client
      * @param sessionID Session id
      * @param callback Code to execute later (function)
-     * @param foundInRaid Will results added to inventory be set as found in raid
+     * @param foundInRaid Item added will be flagged as found in raid
      * @param addUpd Additional upd properties for items being added to inventory
      * @param useSortingTable Allow items to go into sorting table when stash has no space
      * @returns IItemEventRouterResponse
      */
     addItem(pmcData: IPmcData, request: IAddItemRequestData, output: IItemEventRouterResponse, sessionID: string, callback: () => void, foundInRaid?: boolean, addUpd?: any, useSortingTable?: boolean): IItemEventRouterResponse;
+    /**
+     * Remove properties from a Upd object used by a trader/ragfair
+     * @param upd Object to update
+     */
+    protected removeTraderRagfairRelatedUpdProperties(upd: Upd): void;
+    protected placeItemInInventory(stashFS2D: number[][], sortingTableFS2D: number[][], itemWithChildren: Item[], playerInventory: Inventory, useSortingTable: boolean, output: IItemEventRouterResponse): void;
     /**
      * Take the given item, find a free slot in passed in inventory and place it there
      * If no space in inventory, place in sorting table
@@ -73,7 +98,7 @@ export declare class InventoryHelper {
      * @param output Client output object
      * @returns Client error output if placing item failed
      */
-    protected placeItemInInventory(itemToAdd: IAddItemTempObject, stashFS2D: number[][], sortingTableFS2D: number[][], itemLib: Item[], playerInventory: Inventory, useSortingTable: boolean, output: IItemEventRouterResponse): IItemEventRouterResponse;
+    protected placeItemInInventoryLegacy(itemToAdd: IAddItemTempObject, stashFS2D: number[][], sortingTableFS2D: number[][], itemLib: Item[], playerInventory: Inventory, useSortingTable: boolean, output: IItemEventRouterResponse): IItemEventRouterResponse;
     /**
      * Add ammo to ammo boxes
      * @param itemToAdd Item to check is ammo box
@@ -102,9 +127,9 @@ export declare class InventoryHelper {
      * @returns IItemEventRouterResponse
      */
     removeItem(profile: IPmcData, itemId: string, sessionID: string, output?: IItemEventRouterResponse): IItemEventRouterResponse;
-    removeItemAndChildrenFromMailRewards(sessionId: string, removeRequest: IInventoryRemoveRequestData, output: IItemEventRouterResponse): IItemEventRouterResponse;
+    removeItemAndChildrenFromMailRewards(sessionId: string, removeRequest: IInventoryRemoveRequestData, output: IItemEventRouterResponse): void;
     removeItemByCount(pmcData: IPmcData, itemId: string, count: number, sessionID: string, output?: IItemEventRouterResponse): IItemEventRouterResponse;
-    getItemSize(itemTpl: string, itemID: string, inventoryItem: Item[]): number[];
+    getItemSize(itemTpl: string, itemID: string, inventoryItems: Item[]): number[];
     protected getSizeByInventoryItemHash(itemTpl: string, itemID: string, inventoryItemHash: InventoryHelper.InventoryItemHash): number[];
     protected getInventoryItemHash(inventoryItem: Item[]): InventoryHelper.InventoryItemHash;
     getContainerMap(containerW: number, containerH: number, itemList: Item[], containerId: string): number[][];
@@ -172,6 +197,15 @@ export declare class InventoryHelper {
      */
     getRandomLootContainerRewardDetails(itemTpl: string): RewardDetails;
     getInventoryConfig(): IInventoryConfig;
+    /**
+     * Recursively checks if the given item is
+     * inside the stash, that is it has the stash as
+     * ancestor with slotId=hideout
+     * @param pmcData Player profile
+     * @param itemToCheck Item to look for
+     * @returns True if item exists inside stash
+     */
+    isItemInStash(pmcData: IPmcData, itemToCheck: Item): boolean;
 }
 declare namespace InventoryHelper {
     interface InventoryItemHash {

@@ -1,4 +1,5 @@
 import { InventoryController } from "@spt-aki/controllers/InventoryController";
+import { QuestController } from "@spt-aki/controllers/QuestController";
 import { IPmcData } from "@spt-aki/models/eft/common/IPmcData";
 import { IInventoryBindRequestData } from "@spt-aki/models/eft/inventory/IInventoryBindRequestData";
 import { IInventoryCreateMarkerRequestData } from "@spt-aki/models/eft/inventory/IInventoryCreateMarkerRequestData";
@@ -18,11 +19,14 @@ import { IInventoryToggleRequestData } from "@spt-aki/models/eft/inventory/IInve
 import { IInventoryTransferRequestData } from "@spt-aki/models/eft/inventory/IInventoryTransferRequestData";
 import { IOpenRandomLootContainerRequestData } from "@spt-aki/models/eft/inventory/IOpenRandomLootContainerRequestData";
 import { IRedeemProfileRequestData } from "@spt-aki/models/eft/inventory/IRedeemProfileRequestData";
+import { ISetFavoriteItems } from "@spt-aki/models/eft/inventory/ISetFavoriteItems";
 import { IItemEventRouterResponse } from "@spt-aki/models/eft/itemEvent/IItemEventRouterResponse";
+import { IFailQuestRequestData } from "@spt-aki/models/eft/quests/IFailQuestRequestData";
 export declare class InventoryCallbacks {
     protected inventoryController: InventoryController;
-    constructor(inventoryController: InventoryController);
-    /** Handle Move event */
+    protected questController: QuestController;
+    constructor(inventoryController: InventoryController, questController: QuestController);
+    /** Handle client/game/profile/items/moving Move event */
     moveItem(pmcData: IPmcData, body: IInventoryMoveRequestData, sessionID: string): IItemEventRouterResponse;
     /** Handle Remove event */
     removeItem(pmcData: IPmcData, body: IInventoryRemoveRequestData, sessionID: string): IItemEventRouterResponse;
@@ -48,4 +52,10 @@ export declare class InventoryCallbacks {
     /** Handle OpenRandomLootContainer */
     openRandomLootContainer(pmcData: IPmcData, body: IOpenRandomLootContainerRequestData, sessionID: string): IItemEventRouterResponse;
     redeemProfileReward(pmcData: IPmcData, body: IRedeemProfileRequestData, sessionId: string): IItemEventRouterResponse;
+    setFavoriteItem(pmcData: IPmcData, body: ISetFavoriteItems, sessionId: string): IItemEventRouterResponse;
+    /**
+     * TODO - MOVE INTO QUEST CODE
+     * Handle game/profile/items/moving - QuestFail
+     */
+    failQuest(pmcData: IPmcData, request: IFailQuestRequestData, sessionID: string): IItemEventRouterResponse;
 }

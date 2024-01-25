@@ -1,34 +1,39 @@
-import { DependencyContainer, Lifecycle } from "tsyringe";
+import {DependencyContainer, Lifecycle} from "tsyringe";
 
-import { IPreAkiLoadMod } from "@spt-aki/models/external/IPreAkiLoadMod";
-import { IPostAkiLoadMod } from "@spt-aki/models/external/IPostAkiLoadMod";
-import { IPostDBLoadMod } from "@spt-aki/models/external/IPostDBLoadMod";
-import { ILogger } from "@spt-aki/models/spt/utils/ILogger";
-import { PreAkiModLoader } from "@spt-aki/loaders/PreAkiModLoader";
-import { DatabaseServer } from "@spt-aki/servers/DatabaseServer";
-import { ILocationBase } from "@spt-aki/models/eft/common/ILocationBase";
-import { ConfigServer } from "@spt-aki/servers/ConfigServer";
-import { ConfigTypes } from "@spt-aki/models/enums/ConfigTypes";
-import { IPmcConfig } from "@spt-aki/models/spt/config/IPmcConfig";
-import { MemberCategory } from "@spt-aki/models/enums/MemberCategory";
-import { ISeasonalEventConfig } from "@spt-aki/models/spt/config/ISeasonalEventConfig";
-import { ModConfig } from "./ModConfig";
-import { DoeTrader } from "./DoeTrader";
-import { Data } from "./Data";
-import { WeaponGenerator } from "./WeaponGenerator";
-import { GearGenerator } from "./GearGenerator";
-import { GearGeneratorHelper } from "./GearGeneratorHelper";
-import { HelmetGenerator } from "./HelmetGenerator";
+import {IPreAkiLoadMod} from "@spt-aki/models/external/IPreAkiLoadMod";
+import {IPostAkiLoadMod} from "@spt-aki/models/external/IPostAkiLoadMod";
+import {IPostDBLoadMod} from "@spt-aki/models/external/IPostDBLoadMod";
+import {ILogger} from "@spt-aki/models/spt/utils/ILogger";
+import {PreAkiModLoader} from "@spt-aki/loaders/PreAkiModLoader";
+import {DatabaseServer} from "@spt-aki/servers/DatabaseServer";
+import {ILocationBase} from "@spt-aki/models/eft/common/ILocationBase";
+import {ConfigServer} from "@spt-aki/servers/ConfigServer";
+import {ConfigTypes} from "@spt-aki/models/enums/ConfigTypes";
+import {IPmcConfig} from "@spt-aki/models/spt/config/IPmcConfig";
+import {MemberCategory} from "@spt-aki/models/enums/MemberCategory";
+import {
+    ISeasonalEventConfig
+} from "@spt-aki/models/spt/config/ISeasonalEventConfig";
+import {ModConfig} from "./ModConfig";
+import {DoeTrader} from "./DoeTrader";
+import {Data} from "./Data";
+import {WeaponGenerator} from "./WeaponGenerator";
+import {GearGenerator} from "./GearGenerator";
+import {GearGeneratorHelper} from "./GearGeneratorHelper";
+import {HelmetGenerator} from "./HelmetGenerator";
 import registerInfoUpdater from "./registerInfoUpdater";
 import registerBotLevelGenerator from "./registerBotLevelGenerator";
 import registerBotInventoryGenerator from "./registerBotInventoryGenerator";
 import registerBotWeaponGenerator from "./registerBotWeaponGenerator";
-import { RaidInfo } from "./RaidInfo";
-import { lootConfig } from "./lootUtils";
-import { mapBotTuning, setPmcForceHealingItems } from "./mapBotTuning";
+import {RaidInfo} from "./RaidInfo";
+import {lootConfig} from "./lootUtils";
+import {mapBotTuning, setPmcForceHealingItems} from "./mapBotTuning";
 import cheeseQuests from "./questUtils";
 import vssOverheatFix from "./weaponUtils";
 import * as config from "../config/config.json";
+import {IRagfairConfig} from "@spt-aki/models/spt/config/IRagfairConfig";
+import {DoeTraderArmorGenerator} from "./DoeTraderArmorGenerator";
+import {SeasonalEventService} from "@spt-aki/services/SeasonalEventService";
 
 export class Andern implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
     private readonly fullModName: string;
@@ -46,7 +51,7 @@ export class Andern implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
             container.resolve<PreAkiModLoader>("PreAkiModLoader");
 
         this.modPath = `./${preAkiModLoader.getModPath(this.fullModName)}`;
-        container.register("AndernModPath", { useValue: this.modPath });
+        container.register("AndernModPath", {useValue: this.modPath});
 
         container.register<RaidInfo>("AndernRaidInfo", RaidInfo, {
             lifecycle: Lifecycle.Singleton
@@ -88,6 +93,13 @@ export class Andern implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
             }
         );
 
+        container.register<DoeTraderArmorGenerator>(
+            "AndernDoeTraderArmorGenerator",
+            DoeTraderArmorGenerator,
+            {
+                lifecycle: Lifecycle.Singleton
+            }
+        );
         container.register<DoeTrader>("AndernDoeTrader", DoeTrader, {
             lifecycle: Lifecycle.Singleton
         });
@@ -101,7 +113,7 @@ export class Andern implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
 
         if (config.pmcGear) {
             registerBotInventoryGenerator(container);
-        } else {
+        } else if (config.pmcWeapon) {
             registerBotWeaponGenerator(container);
         }
 
@@ -111,6 +123,10 @@ export class Andern implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
     public postDBLoad(container: DependencyContainer): void {
         lootConfig(container);
         this.doeTrader.registerTrader();
+
+        if (config.fleaBlacklistDisable) {
+            this.disableFleaBlacklist(container);
+        }
     }
 
     postAkiLoad(container: DependencyContainer): void {
@@ -119,7 +135,7 @@ export class Andern implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
         if (config.trader && config.traderInsurance) {
             this.doeTrader.traderInsurance();
         }
-        
+
         if (config.trader && config.traderRepair) {
             this.doeTrader.traderRepair();
         }
@@ -144,20 +160,26 @@ export class Andern implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
         if (config.disableEmissaryPmcBots) {
             this.disableEmissaryPmcBots(container);
         }
-        
+
         if (config.disableSeasonalEvents) {
             this.disableSeasonalEvents(container);
         }
-        
+
         if (config.insuranceIncreaseStorageTime || config.insuranceDecreaseReturnTime) {
             this.insuranceTune(container);
         }
-        
+
         if (config.cheeseQuests) {
             cheeseQuests(container);
         }
 
         vssOverheatFix(container);
+        
+        if (config.snow) {
+            const seasonalEventService: SeasonalEventService =
+                container.resolve<SeasonalEventService>("SeasonalEventService");
+            seasonalEventService.enableSnow();
+        }
     }
 
     private setMinFleaLevel(container: DependencyContainer): undefined {
@@ -197,7 +219,7 @@ export class Andern implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
         const configServer = container.resolve<ConfigServer>("ConfigServer");
         const pmcConfig = configServer.getConfig<IPmcConfig>(ConfigTypes.PMC);
         pmcConfig.looseWeaponInBackpackChancePercent = 0;
-        pmcConfig.looseWeaponInBackpackLootMinMax = { min: 0, max: 0 };
+        pmcConfig.looseWeaponInBackpackLootMinMax = {min: 0, max: 0};
     }
 
     disableSeasonalEvents(container: DependencyContainer): undefined {
@@ -217,21 +239,28 @@ export class Andern implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
 
         const praporId = "54cb50c76803fa8b248b4571";
         const therapistId = "54cb57776803fa99248b456e";
-       
+
         if (config.insuranceDecreaseReturnTime) {
             traders[praporId].base.insurance.min_return_hour = 2;
             traders[praporId].base.insurance.max_return_hour = 3;
-            
+
             traders[therapistId].base.insurance.min_return_hour = 1;
             traders[therapistId].base.insurance.max_return_hour = 2;
         }
-        
+
         if (config.insuranceIncreaseStorageTime) {
             traders[praporId].base.insurance.max_storage_time = 336;
             traders[therapistId].base.insurance.max_storage_time = 336;
         }
-        
+
+    }
+
+    disableFleaBlacklist(container: DependencyContainer): undefined {
+        const configServer = container.resolve<ConfigServer>("ConfigServer");
+        const ragfairConfig = configServer.getConfig<IRagfairConfig>(ConfigTypes.RAGFAIR);
+        ragfairConfig.dynamic.blacklist.enableBsgList = false;
+        ragfairConfig.dynamic.blacklist.traderItems = true;
     }
 }
 
-module.exports = { mod: new Andern() };
+module.exports = {mod: new Andern()};

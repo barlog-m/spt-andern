@@ -9,6 +9,7 @@ export type PresetAmmo = Record<string, Ammo>;
 export type PresetModules = Record<string, Modules>;
 export type Ammo = Record<string, string[]>;
 export type Modules = Record<string, string[]>;
+export type Mods = Record<string, string[]>;
 
 export class PresetData {
     public config: PresetConfig;

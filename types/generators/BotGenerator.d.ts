@@ -48,12 +48,12 @@ export declare class BotGenerator {
      */
     generatePlayerScav(sessionId: string, role: string, difficulty: string, botTemplate: IBotType): IBotBase;
     /**
-     * Create x number of bots of the type/side/difficulty defined in botGenerationDetails
+     * Create 1  bots of the type/side/difficulty defined in botGenerationDetails
      * @param sessionId Session id
      * @param botGenerationDetails details on how to generate bots
-     * @returns array of bots
+     * @returns constructed bot
      */
-    prepareAndGenerateBots(sessionId: string, botGenerationDetails: BotGenerationDetails): IBotBase[];
+    prepareAndGenerateBot(sessionId: string, botGenerationDetails: BotGenerationDetails): IBotBase;
     /**
      * Get a clone of the database\bots\base.json file
      * @returns IBotBase object
@@ -127,5 +127,5 @@ export declare class BotGenerator {
      * @param bot bot to add dogtag to
      * @returns Bot with dogtag added
      */
-    protected generateDogtag(bot: IBotBase): IBotBase;
+    protected addDogtagToBot(bot: IBotBase): void;
 }

@@ -1,0 +1,149 @@
+{
+    "id": "65b2998701001c3ee573063b",
+    "name": "MDR 762 T4 4",
+    "root": "483935df963b16ae3bb89869",
+    "items": [
+        {
+            "_id": "483935df963b16ae3bb89869",
+            "_tpl": "5dcbd56fdbd3d91b3e5468d5",
+            "upd": {
+                "Repairable": {
+                    "MaxDurability": 100,
+                    "Durability": 100
+                },
+                "FireMode": {
+                    "FireMode": "single"
+                }
+            }
+        },
+        {
+            "_id": "2673694fe4d89e722d9c6312",
+            "_tpl": "5dcbd6dddbd3d91b3e5468de",
+            "parentId": "483935df963b16ae3bb89869",
+            "slotId": "mod_pistol_grip"
+        },
+        {
+            "_id": "b5f09652e8787749c22cd3a0",
+            "_tpl": "5a3501acc4a282000d72293a",
+            "parentId": "483935df963b16ae3bb89869",
+            "slotId": "mod_magazine"
+        },
+        {
+            "_id": "a8c70253743b4276bae296b1",
+            "_tpl": "5dcbd6b46ec07c0c4347a564",
+            "parentId": "483935df963b16ae3bb89869",
+            "slotId": "mod_handguard"
+        },
+        {
+            "_id": "3479411343269ff7dfe14de9",
+            "_tpl": "5dcbe9431e1f4616d354987e",
+            "parentId": "483935df963b16ae3bb89869",
+            "slotId": "mod_barrel"
+        },
+        {
+            "_id": "d7320431cf88d97744b2775c",
+            "_tpl": "618b9643526131765025ab35",
+            "parentId": "483935df963b16ae3bb89869",
+            "slotId": "mod_scope"
+        },
+        {
+            "_id": "480140ea198367dbfbfd6dbc",
+            "_tpl": "5fb6564947ce63734e3fa1da",
+            "parentId": "483935df963b16ae3bb89869",
+            "slotId": "mod_sight_rear",
+            "upd": {
+                "Sight": {
+                    "ScopesCurrentCalibPointIndexes": [
+                        0
+                    ],
+                    "ScopesSelectedModes": [
+                        0
+                    ],
+                    "SelectedScope": 0
+                }
+            }
+        },
+        {
+            "_id": "b9259044087bf6acde6f6bb0",
+            "_tpl": "5b7be4895acfc400170e2dd5",
+            "parentId": "a8c70253743b4276bae296b1",
+            "slotId": "mod_mount_000"
+        },
+        {
+            "_id": "e826d6facd85fb1ef39f2d0d",
+            "_tpl": "6269220d70b6c02e665f2635",
+            "parentId": "a8c70253743b4276bae296b1",
+            "slotId": "mod_mount_002"
+        },
+        {
+            "_id": "b92e40b62fd2aadc4096de74",
+            "_tpl": "5fb6567747ce63734e3fa1dc",
+            "parentId": "a8c70253743b4276bae296b1",
+            "slotId": "mod_sight_front",
+            "upd": {
+                "Sight": {
+                    "ScopesCurrentCalibPointIndexes": [
+                        0
+                    ],
+                    "ScopesSelectedModes": [
+                        0
+                    ],
+                    "SelectedScope": 0
+                }
+            }
+        },
+        {
+            "_id": "2568a7c88d8ef47485086ddb",
+            "_tpl": "6130c43c67085e45ef1405a1",
+            "parentId": "3479411343269ff7dfe14de9",
+            "slotId": "mod_muzzle"
+        },
+        {
+            "_id": "00d2d358af712803432b03cb",
+            "_tpl": "618ba27d9008e4636a67f61d",
+            "parentId": "d7320431cf88d97744b2775c",
+            "slotId": "mod_scope",
+            "upd": {
+                "Sight": {
+                    "ScopesCurrentCalibPointIndexes": [
+                        0
+                    ],
+                    "ScopesSelectedModes": [
+                        0
+                    ],
+                    "SelectedScope": 0
+                }
+            }
+        },
+        {
+            "_id": "4c8257650700d2144da11d91",
+            "_tpl": "618b9671d14d6d5ab879c5ea",
+            "parentId": "d7320431cf88d97744b2775c",
+            "slotId": "mod_mount"
+        },
+        {
+            "_id": "2965239251c6243db8d931f4",
+            "_tpl": "5b057b4f5acfc4771e1bd3e9",
+            "parentId": "b9259044087bf6acde6f6bb0",
+            "slotId": "mod_foregrip"
+        },
+        {
+            "_id": "ea451905714b7ae08903196d",
+            "_tpl": "6272370ee4013c5d7e31f418",
+            "parentId": "e826d6facd85fb1ef39f2d0d",
+            "slotId": "mod_tactical",
+            "upd": {
+                "Light": {
+                    "IsActive": true,
+                    "SelectedMode": 0
+                }
+            }
+        },
+        {
+            "_id": "be0bb807f36f2de246a9ea8b",
+            "_tpl": "5dfa3d2b0dee1b22f862eade",
+            "parentId": "2568a7c88d8ef47485086ddb",
+            "slotId": "mod_muzzle"
+        }
+    ]
+}

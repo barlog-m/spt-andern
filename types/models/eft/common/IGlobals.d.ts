@@ -70,6 +70,10 @@ export interface IConfig {
     SkillPointsBeforeFatigue: number;
     SkillFatigueReset: number;
     DiscardLimitsEnabled: boolean;
+    EventSettings: IEventSettings;
+    FavoriteItemsSettings: IFavoriteItemsSettings;
+    VaultingSettings: IVaultingSettings;
+    BTRSettings: IBTRSettings;
     EventType: string[];
     WalkSpeed: Ixyz;
     SprintSpeed: Ixyz;
@@ -101,6 +105,27 @@ export interface IWeaponFastDrawSettings {
     WeaponFastSwitchMinSpeedMult: number;
     WeaponPistolFastSwitchMaxSpeedMult: number;
     WeaponPistolFastSwitchMinSpeedMult: number;
+}
+export interface IEventSettings {
+    EventActive: boolean;
+    EventTime: number;
+    EventWeather: IEventWeather;
+    ExitTimeMultiplier: number;
+    StaminaMultiplier: number;
+    SummonFailedWeather: IEventWeather;
+    SummonSuccessWeather: IEventWeather;
+    WeatherChangeTime: number;
+}
+export interface IEventWeather {
+    Cloudness: number;
+    Hour: number;
+    Minute: number;
+    Rain: number;
+    RainRandomness: number;
+    ScaterringFogDensity: number;
+    TopWindDirection: Ixyz;
+    Wind: number;
+    WindDirection: number;
 }
 export interface IGraphicSettings {
     ExperimentalFogInCity: boolean;
@@ -826,6 +851,83 @@ export interface IRestrictionsInRaid {
     TemplateId: string;
     Value: number;
 }
+export interface IFavoriteItemsSettings {
+    WeaponStandMaxItemsCount: number;
+    PlaceOfFameMaxItemsCount: number;
+}
+export interface IVaultingSettings {
+    IsActive: boolean;
+    VaultingInputTime: number;
+    GridSettings: IVaultingGridSettings;
+    MovesSettings: IVaultingMovesSettings;
+}
+export interface IVaultingGridSettings {
+    GridSizeX: number;
+    GridSizeY: number;
+    GridSizeZ: number;
+    SteppingLengthX: number;
+    SteppingLengthY: number;
+    SteppingLengthZ: number;
+    GridOffsetX: number;
+    GridOffsetY: number;
+    GridOffsetZ: number;
+    OffsetFactor: number;
+}
+export interface IVaultingMovesSettings {
+    VaultSettings: IVaultingSubMoveSettings;
+    ClimbSettings: IVaultingSubMoveSettings;
+}
+export interface IVaultingSubMoveSettings {
+    IsActive: boolean;
+    MaxWithoutHandHeight: number;
+    SpeedRange: Ixyz;
+    MoveRestrictions: IMoveRestrictions;
+    AutoMoveRestrictions: IMoveRestrictions;
+}
+export interface IMoveRestrictions {
+    IsActive: boolean;
+    MinDistantToInteract: number;
+    MinHeight: number;
+    MaxHeight: number;
+    MinLength: number;
+    MaxLength: number;
+}
+export interface IBTRSettings {
+    LocationsWithBTR: string[];
+    BasePriceTaxi: number;
+    AddPriceTaxi: number;
+    CleanUpPrice: number;
+    DeliveryPrice: number;
+    ModDeliveryCost: number;
+    BearPriceMod: number;
+    UsecPriceMod: number;
+    ScavPriceMod: number;
+    CoefficientDiscountCharisma: number;
+    DeliveryMinPrice: number;
+    TaxiMinPrice: number;
+    BotCoverMinPrice: number;
+    MapsConfigs: Record<string, IBtrMapConfig>;
+    DiameterWheel: number;
+    HeightWheel: number;
+    HeightWheelMaxPosLimit: number;
+    HeightWheelMinPosLimit: number;
+    SnapToSurfaceWheelsSpeed: number;
+    CheckSurfaceForWheelsTimer: number;
+    HeightWheelOffset: number;
+}
+export interface IBtrMapConfig {
+    mapID: string;
+    pathsConfigurations: IBtrMapConfig[];
+}
+export interface IBtrMapConfig {
+    id: string;
+    enterPoint: string;
+    exitPoint: string;
+    pathPoints: string[];
+    once: boolean;
+    circle: boolean;
+    circleCount: number;
+}
 export interface ISquadSettings {
     CountOfRequestsToOnePlayer: number;
     SecondsForExpiredRequest: number;
@@ -1240,6 +1342,11 @@ export interface IFenceLevel {
     BotHelpChance: number;
     BotSpreadoutChance: number;
     BotStopChance: number;
+    PriceModTaxi: number;
+    PriceModDelivery: number;
+    PriceModCleanUp: number;
+    DeliveryGridSize: Ixyz;
+    CanInteractWithBtr: boolean;
 }
 export interface IInertia {
     InertiaLimits: Ixyz;

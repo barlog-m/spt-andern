@@ -1,0 +1,126 @@
+{
+    "id": "65b2192c01001c3ee52c563c",
+    "name": "AK-74M T4 7",
+    "root": "820c6178249cb0ef6fb640e5",
+    "items": [
+        {
+            "_id": "820c6178249cb0ef6fb640e5",
+            "_tpl": "5ac4cd105acfc40016339859",
+            "upd": {
+                "Repairable": {
+                    "MaxDurability": 100,
+                    "Durability": 100
+                },
+                "Foldable": {
+                    "Folded": false
+                },
+                "FireMode": {
+                    "FireMode": "single"
+                }
+            }
+        },
+        {
+            "_id": "b0032d1ef8a7e0ce7677a732",
+            "_tpl": "5cf656f2d7f00c06585fb6eb",
+            "parentId": "820c6178249cb0ef6fb640e5",
+            "slotId": "mod_gas_block"
+        },
+        {
+            "_id": "4e2b073a1e5ab5bc8e2f14ff",
+            "_tpl": "615d8f5dd92c473c770212ef",
+            "parentId": "820c6178249cb0ef6fb640e5",
+            "slotId": "mod_muzzle"
+        },
+        {
+            "_id": "7cde0ab197b1398b6c3c120c",
+            "_tpl": "6087e663132d4d12c81fd96b",
+            "parentId": "820c6178249cb0ef6fb640e5",
+            "slotId": "mod_pistol_grip"
+        },
+        {
+            "_id": "6fb488b6bb42f16d73e12f1f",
+            "_tpl": "5d2c76ed48f03532f2136169",
+            "parentId": "820c6178249cb0ef6fb640e5",
+            "slotId": "mod_reciever"
+        },
+        {
+            "_id": "2ee4d37095225a5a9e9b4339",
+            "_tpl": "5ac78eaf5acfc4001926317a",
+            "parentId": "820c6178249cb0ef6fb640e5",
+            "slotId": "mod_stock"
+        },
+        {
+            "_id": "b74c7370fdc787e06e87ad30",
+            "_tpl": "649ec30cb013f04a700e60fb",
+            "parentId": "820c6178249cb0ef6fb640e5",
+            "slotId": "mod_magazine"
+        },
+        {
+            "_id": "87019e66e9fc082054c18dcb",
+            "_tpl": "6130ca3fd92c473c77020dbd",
+            "parentId": "820c6178249cb0ef6fb640e5",
+            "slotId": "mod_charge"
+        },
+        {
+            "_id": "72fa634ea16c4ba05934aeee",
+            "_tpl": "59e0bdb186f774156f04ce82",
+            "parentId": "b0032d1ef8a7e0ce7677a732",
+            "slotId": "mod_mount_002"
+        },
+        {
+            "_id": "23bfc812a129bec55ed0ac7c",
+            "_tpl": "59e0bed186f774156f04ce84",
+            "parentId": "b0032d1ef8a7e0ce7677a732",
+            "slotId": "mod_foregrip"
+        },
+        {
+            "_id": "24193959d1c096e0011b9b2d",
+            "_tpl": "615d8f8567085e45ef1409ca",
+            "parentId": "4e2b073a1e5ab5bc8e2f14ff",
+            "slotId": "mod_muzzle"
+        },
+        {
+            "_id": "50102d2e497391d54cc7ce00",
+            "_tpl": "57ac965c24597706be5f975c",
+            "parentId": "6fb488b6bb42f16d73e12f1f",
+            "slotId": "mod_scope",
+            "upd": {
+                "Sight": {
+                    "ScopesCurrentCalibPointIndexes": [
+                        0,
+                        0
+                    ],
+                    "ScopesSelectedModes": [
+                        0,
+                        0
+                    ],
+                    "SelectedScope": 0
+                }
+            }
+        },
+        {
+            "_id": "aa070fc29fedfd8acb3a27df",
+            "_tpl": "59ecc3dd86f7746dc827481c",
+            "parentId": "2ee4d37095225a5a9e9b4339",
+            "slotId": "mod_stock"
+        },
+        {
+            "_id": "2ec1b0ae034a10bdb02195fe",
+            "_tpl": "6272370ee4013c5d7e31f418",
+            "parentId": "72fa634ea16c4ba05934aeee",
+            "slotId": "mod_tactical",
+            "upd": {
+                "Light": {
+                    "IsActive": true,
+                    "SelectedMode": 0
+                }
+            }
+        },
+        {
+            "_id": "0953e30ca1495eb233f07d54",
+            "_tpl": "5b057b4f5acfc4771e1bd3e9",
+            "parentId": "23bfc812a129bec55ed0ac7c",
+            "slotId": "mod_foregrip"
+        }
+    ]
+}

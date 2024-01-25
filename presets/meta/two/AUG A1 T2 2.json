@@ -1,0 +1,97 @@
+{
+    "id": "65b12a2501001c3ee5c6dad8",
+    "name": "AUG A1 T2 2",
+    "root": "245d421f606063a69794feec",
+    "items": [
+        {
+            "_id": "245d421f606063a69794feec",
+            "_tpl": "62e7c4fba689e8c9c50dfc38",
+            "upd": {
+                "Repairable": {
+                    "MaxDurability": 100,
+                    "Durability": 100
+                },
+                "FireMode": {
+                    "FireMode": "single"
+                }
+            }
+        },
+        {
+            "_id": "694511eb2611fe5342d133f2",
+            "_tpl": "62e7c98b550c8218d602cbb4",
+            "parentId": "245d421f606063a69794feec",
+            "slotId": "mod_magazine"
+        },
+        {
+            "_id": "b3243fc5a41dbbbd0ba2d30e",
+            "_tpl": "62e7c880f68e7a0676050c7c",
+            "parentId": "245d421f606063a69794feec",
+            "slotId": "mod_charge"
+        },
+        {
+            "_id": "b7c12752ca1cf225219db75f",
+            "_tpl": "62e7c72df68e7a0676050c77",
+            "parentId": "245d421f606063a69794feec",
+            "slotId": "mod_reciever"
+        },
+        {
+            "_id": "9d8b6d5a356602c1745de81f",
+            "_tpl": "62e7c7f3c34ea971710c32fc",
+            "parentId": "b7c12752ca1cf225219db75f",
+            "slotId": "mod_barrel"
+        },
+        {
+            "_id": "b52018c1845058590eea4655",
+            "_tpl": "62e7c8f91cd3fde4d503d690",
+            "parentId": "b7c12752ca1cf225219db75f",
+            "slotId": "mod_mount"
+        },
+        {
+            "_id": "1d41cce82dc00a995506a357",
+            "_tpl": "6272370ee4013c5d7e31f418",
+            "parentId": "b7c12752ca1cf225219db75f",
+            "slotId": "mod_tactical",
+            "upd": {
+                "Light": {
+                    "IsActive": true,
+                    "SelectedMode": 0
+                }
+            }
+        },
+        {
+            "_id": "66446c1503e60578dba2e6f7",
+            "_tpl": "634eba08f69c710e0108d386",
+            "parentId": "9d8b6d5a356602c1745de81f",
+            "slotId": "mod_muzzle_000"
+        },
+        {
+            "_id": "c833041c55d7b380ce51d917",
+            "_tpl": "634e61b0767cb15c4601a877",
+            "parentId": "9d8b6d5a356602c1745de81f",
+            "slotId": "mod_foregrip"
+        },
+        {
+            "_id": "4da9c1a5de89d9470e6665e9",
+            "_tpl": "57c69dd424597774c03b7bbc",
+            "parentId": "b52018c1845058590eea4655",
+            "slotId": "mod_scope"
+        },
+        {
+            "_id": "8bf7fb4621fc95721f832134",
+            "_tpl": "5b2388675acfc4771e1be0be",
+            "parentId": "4da9c1a5de89d9470e6665e9",
+            "slotId": "mod_scope",
+            "upd": {
+                "Sight": {
+                    "ScopesCurrentCalibPointIndexes": [
+                        0
+                    ],
+                    "ScopesSelectedModes": [
+                        0
+                    ],
+                    "SelectedScope": 0
+                }
+            }
+        }
+    ]
+}

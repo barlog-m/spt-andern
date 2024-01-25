@@ -90,7 +90,7 @@ export declare class RagfairController {
      * Get categories for the type of search being performed, linked/required/all
      * @param searchRequest Client search request data
      * @param offers ragfair offers to get categories for
-     * @returns record with tpls + counts
+     * @returns record with templates + counts
      */
     protected getSpecificCategories(pmcProfile: IPmcData, searchRequest: ISearchRequestData, offers: IRagfairOffer[]): Record<string, number>;
     /**
@@ -163,7 +163,7 @@ export declare class RagfairController {
      */
     protected calculateRequirementsPriceInRub(requirements: Requirement[]): number;
     /**
-     * Using item ids from flea offer request, find corrispnding items from player inventory and return as array
+     * Using item ids from flea offer request, find corresponding items from player inventory and return as array
      * @param pmcData Player profile
      * @param itemIdsFromFleaOfferRequest Ids from request
      * @param errorMessage if item is not found, add error message to this parameter

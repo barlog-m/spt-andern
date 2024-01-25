@@ -1,10 +1,12 @@
 {
     "presets": {
-        "meta": 1,
+        "meta": 0,
         "live": 0,
-        "test": 0
+        "test": 0,
+        "dev": 1
     },
     "pmcLevels": true,
+    "pmcWeapon": true,
     "pmcGear": true,
     "pmcBotLevelDownDelta": 10,
     "pmcBotLevelUpDelta": 10,
@@ -35,7 +37,7 @@
     "mapMaxBotBuffExcludeStreets": true,
     "mapStreetsMaxBotCap": 0,
     "mapPmcBotDifficulty": "normal",
-    "mapBotAccuracyMultiplier": 0.8,
+    "mapBotAccuracyMultiplier": 0.9,
     "mapBossChanceBuff": 0,
     "mapScavToPmcConvertMultiplier": 0.8,
     "mapMakePmcAlwaysHostile": true,
@@ -51,5 +53,7 @@
     "insuranceIncreaseStorageTime": false,
     "cheeseQuests": false,
     "vssValOverheatMultiplier": 0.85,
+    "fleaBlacklistDisable": false,
+    "snow": false,
     "debug": false
 }

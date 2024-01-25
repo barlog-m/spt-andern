@@ -1,0 +1,130 @@
+{
+    "id": "65b1a21901001c3ee57e5518",
+    "name": "AK-101 T3 4",
+    "root": "6d006a32451680af7644b6e1",
+    "items": [
+        {
+            "_id": "6d006a32451680af7644b6e1",
+            "_tpl": "5ac66cb05acfc40198510a10",
+            "upd": {
+                "Repairable": {
+                    "MaxDurability": 100,
+                    "Durability": 100
+                },
+                "Foldable": {
+                    "Folded": false
+                },
+                "FireMode": {
+                    "FireMode": "single"
+                }
+            }
+        },
+        {
+            "_id": "46ad0bbeb66e65bce33a6329",
+            "_tpl": "59c6633186f7740cf0493bb9",
+            "parentId": "6d006a32451680af7644b6e1",
+            "slotId": "mod_gas_block"
+        },
+        {
+            "_id": "69f3e95b6848d7e8f6950d43",
+            "_tpl": "5e21ca18e4d47f0da15e77dd",
+            "parentId": "6d006a32451680af7644b6e1",
+            "slotId": "mod_muzzle"
+        },
+        {
+            "_id": "4bc88162ff7e060573f252fd",
+            "_tpl": "5649ae4a4bdc2d1b2b8b4588",
+            "parentId": "6d006a32451680af7644b6e1",
+            "slotId": "mod_pistol_grip"
+        },
+        {
+            "_id": "85eef6a8be85149e18b3229e",
+            "_tpl": "5d2c76ed48f03532f2136169",
+            "parentId": "6d006a32451680af7644b6e1",
+            "slotId": "mod_reciever"
+        },
+        {
+            "_id": "e41390546fbfd2dfeb470c05",
+            "_tpl": "5ac78eaf5acfc4001926317a",
+            "parentId": "6d006a32451680af7644b6e1",
+            "slotId": "mod_stock"
+        },
+        {
+            "_id": "2d27da9a7cc12ed30adeaa8e",
+            "_tpl": "5c0548ae0db834001966a3c2",
+            "parentId": "6d006a32451680af7644b6e1",
+            "slotId": "mod_magazine"
+        },
+        {
+            "_id": "1de57e37fc605afb61d004a1",
+            "_tpl": "6130ca3fd92c473c77020dbd",
+            "parentId": "6d006a32451680af7644b6e1",
+            "slotId": "mod_charge"
+        },
+        {
+            "_id": "d1ea7d214ec55620f8d3556f",
+            "_tpl": "647dd2b8a12ebf96c3031655",
+            "parentId": "46ad0bbeb66e65bce33a6329",
+            "slotId": "mod_handguard"
+        },
+        {
+            "_id": "4411a44100700921b24dabdf",
+            "_tpl": "5d440625a4b9361eec4ae6c5",
+            "parentId": "69f3e95b6848d7e8f6950d43",
+            "slotId": "mod_muzzle"
+        },
+        {
+            "_id": "9c4639d712d0662c7b53c6d6",
+            "_tpl": "5b3b99265acfc4704b4a1afb",
+            "parentId": "85eef6a8be85149e18b3229e",
+            "slotId": "mod_scope"
+        },
+        {
+            "_id": "967e38909e846ae2b582cafa",
+            "_tpl": "59ecc3dd86f7746dc827481c",
+            "parentId": "e41390546fbfd2dfeb470c05",
+            "slotId": "mod_stock"
+        },
+        {
+            "_id": "f8d3a9ced48d973befcc076b",
+            "_tpl": "59fc48e086f77463b1118392",
+            "parentId": "d1ea7d214ec55620f8d3556f",
+            "slotId": "mod_foregrip"
+        },
+        {
+            "_id": "b6296ef77d3f76a4a3c897ef",
+            "_tpl": "6272370ee4013c5d7e31f418",
+            "parentId": "d1ea7d214ec55620f8d3556f",
+            "slotId": "mod_tactical_000",
+            "upd": {
+                "Light": {
+                    "IsActive": true,
+                    "SelectedMode": 0
+                }
+            }
+        },
+        {
+            "_id": "209e11898960b891f8a20e0f",
+            "_tpl": "5d44064fa4b9361e4f6eb8b5",
+            "parentId": "4411a44100700921b24dabdf",
+            "slotId": "mod_muzzle"
+        },
+        {
+            "_id": "2aad6f1749f77ef4e0f6de91",
+            "_tpl": "5b3b99475acfc432ff4dcbee",
+            "parentId": "9c4639d712d0662c7b53c6d6",
+            "slotId": "mod_scope",
+            "upd": {
+                "Sight": {
+                    "ScopesCurrentCalibPointIndexes": [
+                        0
+                    ],
+                    "ScopesSelectedModes": [
+                        0
+                    ],
+                    "SelectedScope": 0
+                }
+            }
+        }
+    ]
+}
