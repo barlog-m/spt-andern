@@ -141,6 +141,8 @@ Works only if `mapBotSettings` set to true.
 
 `snow` enables snow.
 
+`disableBtr` disables on all maps BTR.
+
 ## Installation
 
 Put folder `BarlogM-Andern` from zip file into your `user/mods` folder

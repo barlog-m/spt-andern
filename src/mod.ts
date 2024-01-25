@@ -176,9 +176,11 @@ export class Andern implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
         vssOverheatFix(container);
         
         if (config.snow) {
-            const seasonalEventService: SeasonalEventService =
-                container.resolve<SeasonalEventService>("SeasonalEventService");
-            seasonalEventService.enableSnow();
+            this.enableSnow(container);
+        }
+        
+        if (config.disableBtr) {
+            this.disableBtr(container);
         }
     }
 
@@ -260,6 +262,18 @@ export class Andern implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
         const ragfairConfig = configServer.getConfig<IRagfairConfig>(ConfigTypes.RAGFAIR);
         ragfairConfig.dynamic.blacklist.enableBsgList = false;
         ragfairConfig.dynamic.blacklist.traderItems = true;
+    }
+
+    private enableSnow(container: DependencyContainer) {
+        const seasonalEventService: SeasonalEventService =
+            container.resolve<SeasonalEventService>("SeasonalEventService");
+        seasonalEventService.enableSnow();
+    }
+    
+    private disableBtr(container: DependencyContainer) {
+        const databaseServer: DatabaseServer =
+            container.resolve<DatabaseServer>("DatabaseServer");
+        databaseServer.getTables().globals.config.BTRSettings.LocationsWithBTR = []
     }
 }
 

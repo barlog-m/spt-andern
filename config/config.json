@@ -55,5 +55,6 @@
     "vssValOverheatMultiplier": 0.85,
     "fleaBlacklistDisable": false,
     "snow": false,
+    "disableBtr": false,
     "debug": false
 }
