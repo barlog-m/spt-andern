@@ -823,29 +823,28 @@ export class HelmetGenerator {
     }
 
     tierOneNightHelmet(): string {
-        return this.randomUtil.getBool()
-            ? this._6B47_RATNIK_BSH_HELMET
-            : this._6B47_RATNIK_BSH_HELMET_DIGITAL;
+        return this._6B47_RATNIK_BSH_HELMET_DIGITAL;
     }
 
     tierTwoNightHelmet(): string {
         const helmets = [
+            this._6B47_RATNIK_BSH_HELMET,
             this.TC_2001_HELMET,
-            this.CAIMAN_HYBRID_HELMET,
+            this.TC_2002_HELMET,
             this.TC800_HELMET,
-            this.BASTION_HELMET,
+            this.CAIMAN_HYBRID_HELMET,
             this.LSHZ_LIGHT_HELMET,
-            this.HJELM_HELMET,
+            this.HJELM_HELMET
         ];
         return this.randomUtil.getArrayValue(helmets);
     }
 
     tierThreeNightHelmet(): string {
         const helmets = [
-            this.FAST_TAN_HELMET,
-            this.FAST_BLACK_HELMET,
+            this.CAIMAN_HYBRID_HELMET,
             this.TC800_HELMET,
             this.BASTION_HELMET,
+            this.TC_2001_HELMET,
             this.TC_2002_HELMET,
         ];
         return this.randomUtil.getArrayValue(helmets);
@@ -865,20 +864,20 @@ export class HelmetGenerator {
     selectNightHelmet(botLevel: number): string {
         if (botLevel < 15) {
             return this.tierOneNightHelmet();
-        } else if (botLevel >= 15 && botLevel < 28) {
+        } else if (botLevel >= 15 && botLevel < 32) {
             return this.tierTwoNightHelmet();
-        } else if (botLevel >= 28 && botLevel < 40) {
+        } else if (botLevel >= 32 && botLevel < 42) {
             return this.tierThreeNightHelmet();
         } else {
             return this.tierFourNightHelmet();
         }
     }
 
-    public isEarpiceIncompatable(headwearTpl: string): boolean {
-        return this.headphonesIncompatableHelmets.includes(headwearTpl);
+    public isEarpieceIncompatible(helmetTpl: string): boolean {
+        return this.headphonesIncompatableHelmets.includes(helmetTpl);
     }
 
-    public isEarpiceNotFullyCompatable(headwearTpl: string): boolean {
-        return this.headphonesNotFullyCompatableHelmets.includes(headwearTpl);
+    public isEarpieceNotFullyCompatible(helmetTpl: string): boolean {
+        return this.headphonesNotFullyCompatableHelmets.includes(helmetTpl);
     }
 }

@@ -12,7 +12,9 @@ import {
     Ammo,
     Modules,
 } from "./models";
+
 import * as fs from "fs";
+import JSON5 from "json5";
 
 import * as config from "../config/config.json";
 
@@ -172,11 +174,11 @@ export class Data {
     }
 
     loadTierGear(tierDir: string): Gear {
-        const gearFileName = `${tierDir}/gear.json`;
+        const gearFileName = `${tierDir}/gear.json5`;
         const gear = new Gear();
         try {
             const jsonData = fs.readFileSync(gearFileName, "utf-8");
-            Object.assign(gear, JSON.parse(jsonData));
+            Object.assign(gear, JSON5.parse(jsonData));
         } catch (err) {
             this.logger.error(`[Andern] error read file '${gearFileName}'`);
             this.logger.error(err.message);
@@ -185,11 +187,11 @@ export class Data {
     }
 
     loadTierAmmo(tierDir: string): Ammo {
-        const ammoFileName = `${tierDir}/ammo.json`;
+        const ammoFileName = `${tierDir}/ammo.json5`;
         const ammo: Ammo = {};
         try {
             const jsonData = fs.readFileSync(ammoFileName, "utf-8");
-            Object.assign(ammo, JSON.parse(jsonData));
+            Object.assign(ammo, JSON5.parse(jsonData));
         } catch (err) {
             this.logger.error(`[Andern] error read file '${ammoFileName}'`);
             this.logger.error(err.message);
@@ -198,12 +200,12 @@ export class Data {
     }
 
     loadTierModules(tierDir: string): Modules {
-        const modulesFileName = `${tierDir}/modules.json`;
+        const modulesFileName = `${tierDir}/modules.json5`;
         const modules: Modules = {};
         if (fs.existsSync(modulesFileName)) {
             try {
                 const jsonData = fs.readFileSync(modulesFileName, "utf-8");
-                Object.assign(modules, JSON.parse(jsonData));
+                Object.assign(modules, JSON5.parse(jsonData));
             } catch (err) {
                 this.logger.error(
                     `[Andern] error read file '${modulesFileName}'`
@@ -223,13 +225,6 @@ export class Data {
             files
                 .filter((f) => f.endsWith(".json"))
                 .forEach((f) => {
-                    if (
-                        f === "ammo.json" ||
-                        f === "gear.json" ||
-                        f === "modules.json"
-                    )
-                        return;
-
                     const fullWeaponPresetName = `${tierDir}/${f}`;
 
                     try {

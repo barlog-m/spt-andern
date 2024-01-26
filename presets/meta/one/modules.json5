@@ -1,17 +1,22 @@
 {
+    // Glock GTL 21 tactical flashlight with laser
     "5a800961159bd4315e3a1657": [
         "5cc9c20cd7f00c001336c65d"
     ],
+    // Axion Kobra EKP-8-18 reflex sight
     "591c4efa86f7741030027726": [
         "570fd721d2720bc5458b4596",
         "6477772ea8a38bb2050ed4db"
     ],
+    // Zenit RK-6 tactical foregrip
     "5c1bc7752e221602b1779b34": [
         "5c87ca002e221600114cb150"
     ],
+    // AR-15 Colt A2 pistol grip
     "55d4b9964bdc2d1d4e8b456e": [
         "602e71bd53a60014f9705bfa"
     ],
+    // AK-74 5.45x39 6L20 30-round magazine
     "564ca99c4bdc2d16268b4589": [
         "55d480c04bdc2d1d4e8b456a",
         "55d482194bdc2d1d4e8b456b"

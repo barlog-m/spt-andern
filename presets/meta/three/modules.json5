@@ -1,17 +1,21 @@
 {
+    // EOTech Vudu 1-6x24 30mm riflescope
     "5b3b99475acfc432ff4dcbee": [
         "5b2388675acfc4771e1be0be"
     ],
+    // ELCAN SpecterDR 1x/4x scope
     "57ac965c24597706be5f975c": [
         "57aca93d2459771f2c7e26db",
         "5d2dc3e548f035404a1a4798",
         "570fd6c2d2720bc6458b457f"
     ],
+    // Olight Baldr Pro tactical flashlight with laser
     "6272370ee4013c5d7e31f418": [
         "56def37dd2720bec348b456a",
         "560d657b4bdc2da74d8b4572",
         "6272379924e29f06af4d5ecb"
     ],
+    // Magpul RVG foregrip (Black)
     "59fc48e086f77463b1118392": [
         "5fce0cf655375d18a253eff0",
         "5b07db875acfc40dc528a5f6",
@@ -22,28 +26,34 @@
         "64807a29e5ffe165600abc97",
         "591af28e86f77414a27a9e1d"
     ],
+    // AR-15 F1 Firearms Skeletonized Style 1 pistol grip
     "6113c3586c780c1e710c90bc": [
         "59db3acc86f7742a2c4ab912",
         "59db3b0886f77429d72fb895"
     ],
+    // AK Zenit RK-3 pistol grip
     "5649ae4a4bdc2d1b2b8b4588": [
         "628a664bccaab13006640e47",
         "628c9ab845c59e5b80768a81"
     ],
+    // AR-15 Thunder Beast Arms 223CB 5.56x45 muzzle brake
     "5d440625a4b9361eec4ae6c5": [
         "5c7fb51d2e2216001219ce11",
         "612e0cfc8004cc50514c2d9e"
     ],
+    // AR-10 Thunder Beast Arms 30CB 7.62x51 muzzle brake
     "5d443f8fa4b93678dd4a01aa": [
         "5dfa3cd1b33c0951220c079b",
         "5d1f819086f7744b355c219b",
         "612e0d3767085e45ef14057f",
         "5fbc22ccf24b94483f726483"
     ],
+    // Magpul MOE Carbine stock (Black)
     "56eabf3bd2720b75698b4569": [
         "58d2946386f774496974c37e",
         "58d2947e86f77447aa070d53"
     ],
+    // 5.56x45 Magpul PMAG 30 GEN M3 STANAG 30-round magazine
     "5aaa5dfee5b5b000140293d3": [
         "5d1340b3d7ad1a0b52682ed7",
         "55802d5f4bdc2dac148b458e",
@@ -51,10 +61,12 @@
         "5c6d42cb2e2216000e69d7d1",
         "5d1340cad7ad1a0b0b249869"
     ],
+    // AK-12 5.45x39 30-round magazine
     "5bed61680db834001d2c45ab": [
         "5aaa4194e5b5b055d06310a5",
         "55d482194bdc2d1d4e8b456b"
     ],
+    // AK 7.62x39 US Palm "AK30" 30-round magazine (Black)
     "59fafc5086f7740dbe19f6c3": [
         "59fafc9386f774067d462453",
         "59d6272486f77466146386ff",

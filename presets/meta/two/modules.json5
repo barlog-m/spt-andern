@@ -1,35 +1,44 @@
 {
+    // ELCAN SpecterDR 1x/4x scope (FDE)
     "57aca93d2459771f2c7e26db": [
         "5d2dc3e548f035404a1a4798"
     ],
+    // Olight Baldr Pro tactical flashlight with laser
     "6272370ee4013c5d7e31f418": [
         "56def37dd2720bec348b456a",
         "560d657b4bdc2da74d8b4572"
     ],
+    // TangoDown Stubby BGV-MK46K foregrip (FDE)
     "58c157be86f77403c74b2bb6": [
         "5c1bc5fb2e221602b1779b32",
         "5c7fc87d2e221644f31c0298",
         "5cf4fb76d7f00c065703d3ac"
     ],
+    // TangoDown Stubby BGV-MK46K foregrip (Black)
     "558032614bdc2de7118b4585": [
         "5c1bc5fb2e221602b1779b32",
         "5c7fc87d2e221644f31c0298",
         "648067db042be0705c0b3009"
     ],
+    // 5.56x45 Magpul PMAG 30 GEN M3 STANAG 30-round magazine (FDE)
     "5d1340b3d7ad1a0b52682ed7": [
         "5aaa5dfee5b5b000140293d3",
         "5c6d450c2e221600114c997d"
     ],
+    // AK-74 5.45x39 Magpul PMAG 30 GEN M3 30-round magazine
     "5aaa4194e5b5b055d06310a5": [
         "55d482194bdc2d1d4e8b456b"
     ],
+    // AK-74 PWS CQB 74 5.45x39 muzzle brake
     "5943eeeb86f77412d6384f6b": [
         "564caa3d4bdc2d17108b458e",
         "59bffc1f86f77435b128b872"
     ],
+    // AK-74 TGP-A 5.45x39 sound suppressor
     "564caa3d4bdc2d17108b458e": [
         "59bffc1f86f77435b128b872"
     ],
+    // Rotor 43 7.62x39 muzzle brake-compensator 
     "5a9fbacda2750c00141e080f": [
         "59bffc1f86f77435b128b872"
     ]

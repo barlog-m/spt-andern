@@ -11,6 +11,7 @@
         "buildinfo": "node ./build.mjs --verbose"
     },
     "devDependencies": {
+        "@types/json5": "^2.2.0",
         "@types/node": "18.18.4",
         "@typescript-eslint/eslint-plugin": "6.7.5",
         "@typescript-eslint/parser": "6.7.5",
@@ -22,5 +23,8 @@
         "tsyringe": "4.8.0",
         "typescript": "5.2.2",
         "winston": "3.11.0"
+    },
+    "dependencies": {
+        "json5": "^2.2"
     }
 }

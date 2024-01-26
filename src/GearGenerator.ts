@@ -384,7 +384,7 @@ export class GearGenerator {
             return;
         }
 
-        if (this.helmetGenerator.isEarpiceIncompatable(headwearItem.id)) {
+        if (this.helmetGenerator.isEarpieceIncompatible(headwearItem.id)) {
             return;
         }
 
@@ -394,7 +394,7 @@ export class GearGenerator {
             EquipmentSlots.EARPIECE
         );
 
-        const earpieceTpl = this.helmetGenerator.isEarpiceNotFullyCompatable(
+        const earpieceTpl = this.helmetGenerator.isEarpieceNotFullyCompatible(
             headwearItem.id
         )
             ? this.gearGeneratorHelper.replaceEarpiece(earpieceItem.id)
