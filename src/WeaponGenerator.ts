@@ -287,7 +287,7 @@ export class WeaponGenerator {
                     item._tpl = alternativeTpl;
 
                     if (item.slotId === "mod_muzzle") {
-                        this.alternateSuppressor(weapon, item);
+                        this.alternateOrAddSuppressor(weapon, item);
                     }
 
                     if (item._tpl === this.MAGPUL_MOE_CARBINE_RUBBER_BUTTPAD) {
@@ -302,15 +302,28 @@ export class WeaponGenerator {
         }
     }
 
-    alternateSuppressor(weapon: Item[], muzzleItem: Item): undefined {
+    alternateOrAddSuppressor(weapon: Item[], muzzleItem: Item): undefined {
         const suppressor = weapon.find(
             (i) => i.parentId === muzzleItem._id && (i.slotId = "mod_muzzle")
         );
 
         if (suppressor !== undefined) {
-            suppressor._tpl = MUZZLE_PAIRS[muzzleItem._tpl];
-
-            this.deleteUnnecessaryMuzzleModules(weapon);
+            const suppressorTpl = MUZZLE_PAIRS[muzzleItem._tpl]
+            if (suppressorTpl !== undefined) {
+                suppressor._tpl = MUZZLE_PAIRS[muzzleItem._tpl];
+                this.deleteUnnecessaryMuzzleModules(weapon);
+            }
+        } else {
+            const suppressorTpl = MUZZLE_PAIRS[muzzleItem._tpl]
+            if (suppressorTpl !== undefined) {
+                const suppressorItem: Item = {
+                    _id: this.hashUtil.generate(),
+                    _tpl: suppressorTpl,
+                    parentId: muzzleItem._id,
+                    slotId: "mod_muzzle"
+                }
+                weapon.push(suppressorItem)
+            }
         }
     }
 
