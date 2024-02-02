@@ -1,16 +1,16 @@
-import { DependencyContainer } from "tsyringe";
-import { DatabaseServer } from "@spt-aki/servers/DatabaseServer";
-import { ConfigServer } from "@spt-aki/servers/ConfigServer";
-import { ConfigTypes } from "@spt-aki/models/enums/ConfigTypes";
-import { ItemHelper } from "@spt-aki/helpers/ItemHelper";
-import { Spawnpoint } from "@spt-aki/models/eft/common/ILooseLoot";
-import { BaseClasses } from "@spt-aki/models/enums/BaseClasses";
-import { ILocationConfig } from "@spt-aki/models/spt/config/ILocationConfig";
-import { IDatabaseTables } from "@spt-aki/models/spt/server/IDatabaseTables";
-import { ILocations } from "@spt-aki/models/spt/server/ILocations";
-import { IStaticLootDetails } from "@spt-aki/models/eft/common/tables/ILootBase";
-import { Item } from "@spt-aki/models/eft/common/tables/IItem";
-import { IScavCaseConfig } from "@spt-aki/models/spt/config/IScavCaseConfig";
+import {DependencyContainer} from "tsyringe";
+import {DatabaseServer} from "@spt-aki/servers/DatabaseServer";
+import {ConfigServer} from "@spt-aki/servers/ConfigServer";
+import {ConfigTypes} from "@spt-aki/models/enums/ConfigTypes";
+import {ItemHelper} from "@spt-aki/helpers/ItemHelper";
+import {Spawnpoint} from "@spt-aki/models/eft/common/ILooseLoot";
+import {BaseClasses} from "@spt-aki/models/enums/BaseClasses";
+import {ILocationConfig} from "@spt-aki/models/spt/config/ILocationConfig";
+import {IDatabaseTables} from "@spt-aki/models/spt/server/IDatabaseTables";
+import {ILocations} from "@spt-aki/models/spt/server/ILocations";
+import {IStaticLootDetails} from "@spt-aki/models/eft/common/tables/ILootBase";
+import {Item} from "@spt-aki/models/eft/common/tables/IItem";
+import {IScavCaseConfig} from "@spt-aki/models/spt/config/IScavCaseConfig";
 
 import config from "../config/config.json";
 
@@ -45,16 +45,21 @@ function increaseStaticLootKeysSpawnChance(
     staticLootDistribution: Record<string, IStaticLootDetails>,
     itemHelper: ItemHelper
 ): undefined {
-    const DRAWER_TPL = "578f87b7245977356274f2cd";
-    const JACKET_TPL = "578f8778245977358849a9b5";
+    const drawers = ["578f87b7245977356274f2cd"];
+    const jackets = [
+        "578f8778245977358849a9b5",
+        "5914944186f774189e5e76c2",
+        "59387ac686f77401442ddd61",
+        "5937ef2b86f77408a47244b3"
+    ];
+    const containers = [...drawers, ...jackets];
 
     const drawersAndJackets = Object.fromEntries(
         Object.entries(staticLootDistribution).filter(
             ([staticLootTpl, staticLootDetails]) => {
                 return (
                     staticLootDetails.itemDistribution &&
-                    (staticLootTpl === DRAWER_TPL ||
-                        staticLootTpl === JACKET_TPL)
+                    containers.includes(staticLootTpl)
                 );
             }
         )
@@ -73,6 +78,9 @@ function increaseStaticLootKeysSpawnChance(
                         itemDistribution.relativeProbability <
                         config.staticLootKeysRelativeProbability
                     ) {
+                        if (config.debug) {
+                            console.log(`[Andern] ${itemDistribution.tpl} relative probability ${itemDistribution.relativeProbability} -> ${config.staticLootKeysRelativeProbability}`);
+                        }
                         itemDistribution.relativeProbability =
                             config.staticLootKeysRelativeProbability;
                     }

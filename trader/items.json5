@@ -61,7 +61,13 @@
         // Mysterious room marked key
         "64ccc25f95763a1ae376e447",
         // Radar station commandant room key
-        "62987c658081af308d7558c6"
+        "62987c658081af308d7558c6",
+        // Rusted bloody key
+        "64d4b23dc1b37504b41ac2b6",
+        // 'Negotiation' room key
+        "6582dbe43a2e5248357dbe9a",
+        // Relaxation room key
+        "6582dbf0b8d7830efc45016f",
     ],
     "two": [],
     "three": [],
