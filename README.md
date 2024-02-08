@@ -73,19 +73,23 @@ Settings in config 'chadsOnFactoryAndLabOnly', 'chadsPercentage' and 'chadsMinim
 
 `chadsMinimumLevel` means bot can wear chads armor only if his level `chadsMinimumLevel` or higher.
 
-## Keys spawn settings
+## Loot settings
 
-`looseLootKeyAndCardsSettings` disables or enable any keys and keycards settings
+`looseLootMultiplier` loose loot multiplier
 
-`looseLootKeysRelativeProbabilityThreshold` modified only keys with multiplier below this value. Some keys already has high relative probability chance. Mod don't increase probability for keys above this value because places for loose loot are limited.
+`staticLootMultiplier` static loot multiplier
 
-`looseLootKeysRelativeProbabilityMultiplier` spawn multiplier. If value is 1 than nothing changes.
+`increaseStaticLootKeysSpawn` increases static loot keys spawn (for Jackets and Drawers)
 
-`looseLootKeysPercentage` loose loot keys spawn percentage. Percent is from origin SPT-AKI value. Default is different for different keys.
+`increaseLooseLootKeysSpawn` increases loose loot keys spawn
 
-`looseLootCardsPercentage` loose loot cards spawn percentage. Same for cards. Cards is different type of loot
+`increaseLooseLootCardsSpawn` increases loose loot cards spawn
 
-`staticLootKeysRelativeProbability` containers keys spawn chance. Key containers is drawers and jackets. The value is based on biggest among other keys.
+`increaseRareLootSpawn` increases rare loose loot spawn (Some electronics on Labs and Lighthouse)
+
+`scavCaseLootValueMultiplier` multiplies each value range to improve Scav Case loot.
+
+increaseLooseLootKeysSpawn
 
 ## Settings for bot generation on maps
 
@@ -126,8 +130,6 @@ Works only if `mapBotSettings` set to true.
 `disableSeasonalEvents` disables all seasonal events like Halloween etc.
 
 `lootingBotsCompatibility` disable loot generation in PMC's backpack for compatibility with Looting Bots mod. Works only if `pmcGear` enabled.
-
-`scavCaseLootValueMultiplier` multiplies each value range to improve Scav Case loot.
 
 `insuranceDecreaseReturnTime` decrease return time for Prapor (2 - 3 hours) and Therapist (1 - 2 hours).
 

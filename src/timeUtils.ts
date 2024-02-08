@@ -3,10 +3,11 @@ import { IWeatherData } from "@spt-aki/models/eft/weather/IWeatherData";
 
 export function getCurrentTime(weatherGenerator: WeatherGenerator): string {
     let result: IWeatherData = {
+        winterEventEnabled: false,
         acceleration: 0,
         time: "",
         date: "",
-        weather: null,
+        weather: null
     };
     result = weatherGenerator.calculateGameTime(result);
     return result.time;

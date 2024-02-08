@@ -5,6 +5,7 @@ import {Item} from "@spt-aki/models/eft/common/tables/IItem";
 
 @injectable()
 export class DoeTraderArmorGenerator {
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     readonly KIRASA_N = "5b44d22286f774172b0c9de8";
     readonly allArmor = [this.KIRASA_N];
 

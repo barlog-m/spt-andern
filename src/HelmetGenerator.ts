@@ -12,55 +12,90 @@ import {GearGeneratorHelper} from "./GearGeneratorHelper";
 
 @injectable()
 export class HelmetGenerator {
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     readonly ALTYN_HELMET = "5aa7e276e5b5b000171d0647";
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     readonly RYS_HELMET = "5f60c74e3b85f6263c145586";
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     readonly MASKA_OLIVE_HELMET = "5c091a4e0db834001d5addc8";
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     readonly MASKA_KILLA_HELMET = "5c0e874186f7745dc7616606";
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     readonly VULKAN_HELMET = "5ca20ee186f774799474abc2";
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     readonly LSHZ_2DTM_HELMET = "5d6d3716a4b9361bc8618872";
 
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     readonly AIRFRAME_HELMET = "5c17a7ed2e2216152142459c";
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     readonly CAIMAN_HYBRID_HELMET = "5f60b34a41e30a4ab12a6947";
 
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     readonly _6B47_RATNIK_BSH_HELMET = "5a7c4850e899ef00150be885";
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     readonly _6B47_RATNIK_BSH_HELMET_DIGITAL = "5aa7cfc0e5b5b00015693143";
 
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     readonly LSHZ_LIGHT_HELMET = "5b432d215acfc4771e1c6624";
 
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     readonly TC_2001_HELMET = "5d5e7d28a4b936645d161203";
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     readonly TC_2002_HELMET = "5d5e9c74a4b9364855191c40";
 
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     readonly EXFIL_BLACK_HELMET = "5e00c1ad86f774747333222c";
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     readonly EXFIL_EAR_COVERS_BLACK = "5e00cfa786f77469dc6e5685";
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     readonly EXFIL_FACE_SHIELD_BLACK = "5e00cdd986f7747473332240";
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     readonly EXFIL_BROWN_HELMET = "5e01ef6886f77445f643baa4";
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     readonly EXFIL_EAR_COVERS_BROWN = "5e01f31d86f77465cf261343";
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     readonly EXFIL_FACE_SHIELD_BROWN = "5e01f37686f774773c6f6c15";
 
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     readonly HJELM_HELMET = "61bca7cda0eae612383adf57";
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     readonly TC800_HELMET = "5e4bfc1586f774264f7582d3";
 
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     readonly BASTION_HELMET = "5ea17ca01412a1425304d1c0";
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     readonly BASTION_ARMOR_PLATE = "5ea18c84ecf1982c7712d9a2";
 
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     readonly FAST_TAN_HELMET = "5ac8d6885acfc400180ae7b0";
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     readonly FAST_BLACK_HELMET = "5a154d5cfcdbcb001a3b00da";
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     readonly FAST_BALLISTIC_FACE_SHIELD = "5a16b7e1fcdbcb00165aa6c9";
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     readonly FAST_SIDE_ARMOR = "5a16badafcdbcb001865f72d";
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     readonly FAST_SLAAP_HELMET_PLATE = "5c0e66e2d174af02a96252f4";
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     readonly FAST_GUNSIGHT_MANDIBLE = "5a16ba61fcdbcb098008728a";
 
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     readonly HEAVY_TROOPER_MASK = "5ea058e01dbce517f324b3e2";
 
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     readonly NVG_SLOT_ID = "mod_nvg";
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     readonly GPNVG_18_NIGHT_VISION_GOGGLES = "5c0558060db834001b735271";
 
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     readonly PNV_10T_NIGHT_VISION_GOGGLES = "5c0696830db834001d23f5da";
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     readonly NOROTOS_TITANIUM_ADVANCED_TACTICAL_MOUNT =
         "5a16b8a9fcdbcb00165aa6ca";
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     readonly PNV_10T_DOVETAIL_ADAPTER = "5c0695860db834001b735461";
 
-    readonly headphonesIncompatableHelmets = [
+    readonly headphonesIncompatibleHelmets = [
         this.ALTYN_HELMET,
         this.RYS_HELMET,
         this.MASKA_OLIVE_HELMET,
@@ -874,7 +909,7 @@ export class HelmetGenerator {
     }
 
     public isEarpieceIncompatible(helmetTpl: string): boolean {
-        return this.headphonesIncompatableHelmets.includes(helmetTpl);
+        return this.headphonesIncompatibleHelmets.includes(helmetTpl);
     }
 
     public isEarpieceNotFullyCompatible(helmetTpl: string): boolean {

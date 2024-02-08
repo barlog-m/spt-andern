@@ -239,20 +239,22 @@ export class Andern implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
 
         const traders = databaseServer.getTables().traders
 
-        const praporId = "54cb50c76803fa8b248b4571";
-        const therapistId = "54cb57776803fa99248b456e";
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        const PRAPOR_ID = "54cb50c76803fa8b248b4571";
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        const THERAPIST_ID = "54cb57776803fa99248b456e";
 
         if (config.insuranceDecreaseReturnTime) {
-            traders[praporId].base.insurance.min_return_hour = 2;
-            traders[praporId].base.insurance.max_return_hour = 3;
+            traders[PRAPOR_ID].base.insurance.min_return_hour = 2;
+            traders[PRAPOR_ID].base.insurance.max_return_hour = 3;
 
-            traders[therapistId].base.insurance.min_return_hour = 1;
-            traders[therapistId].base.insurance.max_return_hour = 2;
+            traders[THERAPIST_ID].base.insurance.min_return_hour = 1;
+            traders[THERAPIST_ID].base.insurance.max_return_hour = 2;
         }
 
         if (config.insuranceIncreaseStorageTime) {
-            traders[praporId].base.insurance.max_storage_time = 336;
-            traders[therapistId].base.insurance.max_storage_time = 336;
+            traders[PRAPOR_ID].base.insurance.max_storage_time = 336;
+            traders[THERAPIST_ID].base.insurance.max_storage_time = 336;
         }
 
     }

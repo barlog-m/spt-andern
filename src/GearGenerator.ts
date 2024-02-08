@@ -24,7 +24,9 @@ import * as config from "../config/config.json";
 
 @injectable()
 export class GearGenerator {
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     private readonly SECURED_CONTAINER_BOSS = "5c0a794586f77461c458f892";
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     private readonly POCKETS_1x4 = "557ffd194bdc2d28148b457f";
 
     constructor(
