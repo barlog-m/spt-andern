@@ -12,7 +12,7 @@ import {BotGeneratorHelper} from "@spt-aki/helpers/BotGeneratorHelper";
 import {DatabaseServer} from "@spt-aki/servers/DatabaseServer";
 import {Data} from "./Data";
 import {Mods as PmcMods} from "@spt-aki/models/eft/common/tables/IBotType";
-import {Mods} from "./models";
+import {GearItem, Mods} from "./models";
 
 @injectable()
 export class GearGeneratorHelper {
@@ -34,6 +34,40 @@ export class GearGeneratorHelper {
         "soft_armor_left",
         "soft_armor_right"
     ]
+
+    readonly weightedModSlots = [
+        "front_plate",
+        "back_plate",
+        "left_side_plate",
+        "right_side_plate"
+    ]
+
+    readonly platesWeights = {
+        "one": {
+            3: 60,
+            4: 40,
+            5: 0,
+            6: 0
+        },
+        "two": {
+            3: 20,
+            4: 80,
+            5: 0,
+            6: 0
+        },
+        "three": {
+            3: 0,
+            4: 40,
+            5: 50,
+            6: 10
+        },
+        "four": {
+            3: 0,
+            4: 20,
+            5: 50,
+            6: 30
+        },
+    }
 
     modsData: PmcMods;
 
@@ -59,7 +93,9 @@ export class GearGeneratorHelper {
         equipmentSlot: EquipmentSlots,
         botRole: string,
         botInventory: PmcInventory,
-        equipmentItemTpl: string
+        equipmentItemTpl: string,
+        useWeights: boolean,
+        botLevel: number
     ): string {
         const id = this.hashUtil.generate();
 
@@ -95,7 +131,7 @@ export class GearGeneratorHelper {
             equipmentSlot === EquipmentSlots.ARMOR_VEST ||
             equipmentSlot === EquipmentSlots.TACTICAL_VEST
         ) {
-            this.addNecessaryMods(botRole, botInventory, equipmentItemTpl, id);
+            this.addNecessaryMods(botRole, botInventory, equipmentItemTpl, id, useWeights, botLevel);
         }
 
         botInventory.items.push(item);
@@ -167,13 +203,18 @@ export class GearGeneratorHelper {
         return tpl;
     }
 
-    addNecessaryMods(botRole: string,
-                     botInventory: PmcInventory,
-                     tpl: string,
-                     id: string): undefined {
+    addNecessaryMods(
+        botRole: string,
+        botInventory: PmcInventory,
+        tpl: string,
+        id: string,
+        useWeights: boolean,
+        botLevel: number
+    ): undefined {
         if (this.modsData === undefined) {
             this.setModsData();
         }
+
         const mods: Mods = this.modsData[tpl];
 
         if (mods === undefined) {
@@ -181,12 +222,57 @@ export class GearGeneratorHelper {
         }
 
         Object.entries(mods).forEach(([modSlot, modsArray]) => {
-            if (this.necessaryModSlots.includes(modSlot.toLowerCase())) {
-                const keys = Object.keys(modsArray);
-                const randomKey = this.randomUtil.getArrayValue(keys);
-                const selectedMod = modsArray[randomKey];
-                this.putModItemToInventory(botRole, botInventory, selectedMod, modSlot, id)
+            const modSlotName = modSlot.toLowerCase();
+            let selectedModTpl: string;
+            if (this.necessaryModSlots.includes(modSlotName)) {
+
+                if (useWeights && this.weightedModSlots.includes(modSlotName)) {
+                    const plateWeights = this.plateWeightsByLevel(botLevel);
+
+                    const plateItems: GearItem[] = modsArray
+                        .map((tpl) => [tpl, this.data.getPlateArmorClassByPlateTpl(tpl)])
+                        .map(([tpl, armorClass]) => {
+                            return {
+                                weight: plateWeights[armorClass],
+                                id: tpl as string,
+                                name: ""
+                            }
+                        });
+
+                    selectedModTpl = this.weightedRandomGearItem(plateItems).id;
+
+                } else {
+                    const keys = Object.keys(modsArray);
+                    const randomKey = this.randomUtil.getArrayValue(keys);
+                    selectedModTpl = modsArray[randomKey];
+                }
+
+                this.putModItemToInventory(botRole, botInventory, selectedModTpl, modSlot, id)
             }
         })
+    }
+
+    plateWeightsByLevel(level: number): Record<number, number> {
+        if (level < 15) {
+            return this.platesWeights.one;
+        } else if (level >= 15 && level < 32) {
+            return this.platesWeights.two;
+        } else if (level >= 32 && level < 42) {
+            return this.platesWeights.three;
+        } else {
+            return this.platesWeights.four;
+        }
+    }
+
+    public weightedRandomGearItem(items: GearItem[]): GearItem {
+        const totalWeight = items.reduce((sum, item) => sum + item.weight, 0);
+        let random = Math.random() * totalWeight;
+        for (const item of items) {
+            random -= item.weight;
+            if (random <= 0) {
+                return item;
+            }
+        }
+        return items[0];
     }
 }

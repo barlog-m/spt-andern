@@ -127,6 +127,8 @@ export class Andern implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
         if (config.fleaBlacklistDisable) {
             this.disableFleaBlacklist(container);
         }
+
+        container.resolve<Data>("AndernData").fillArmorPlatesData();
     }
 
     postAkiLoad(container: DependencyContainer): void {

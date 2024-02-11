@@ -4,6 +4,7 @@ import {ILogger} from "@spt-aki/models/spt/utils/ILogger";
 import {Item} from "@spt-aki/models/eft/common/tables/IItem";
 import {RandomUtil} from "@spt-aki/utils/RandomUtil";
 import {HashUtil} from "@spt-aki/utils/HashUtil";
+import {DatabaseServer} from "@spt-aki/servers/DatabaseServer";
 import {
     PresetData,
     PresetConfig,
@@ -22,11 +23,13 @@ import * as config from "../config/config.json";
 export class Data {
     private presets = config.presets;
     private data: Record<string, PresetData> = {};
+    private armorPlatesData: Record<string, number>;
 
     constructor(
         @inject("WinstonLogger") protected logger: ILogger,
         @inject("HashUtil") protected hashUtil: HashUtil,
         @inject("RandomUtil") protected randomUtil: RandomUtil,
+        @inject("DatabaseServer") protected databaseServer: DatabaseServer,
         @inject("AndernModPath") protected modPath: string
     ) {
         this.load();
@@ -321,5 +324,19 @@ export class Data {
             }
         }
         return Object.keys(this.presets)[0];
+    }
+
+    public fillArmorPlatesData(): undefined {
+        this.armorPlatesData = Object.entries(this.databaseServer.getTables().templates.items)
+            .filter(([tpl, item]) => item._parent === "644120aa86ffbe10ee032b6f" && item._id !== "65649eb40bf0ed77b8044453")
+            .map(([tpl, item]) => [tpl, item._props.armorClass])
+            .reduce((acc, [tpl, value]) => {
+                acc[tpl] = value;
+                return acc;
+            }, {} as Record<string, any>);
+    }
+    
+    public getPlateArmorClassByPlateTpl(tpl: string): number {
+        return this.armorPlatesData[tpl]
     }
 }

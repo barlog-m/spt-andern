@@ -31,6 +31,8 @@ const MUZZLE_PAIRS = {
     "618178aa1cb55961fa0fdc80": "5a34fe59c4a282000b1521a2",
     // eslint-disable-next-line @typescript-eslint/naming-convention
     "5a34fd2bc4a282329a73b4c5": "5a34fe59c4a282000b1521a2",
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    "5cf78496d7f00c065703d6ca": "5cf78720d7f00c06595bc93e",
 
     //7.62x51 Tier 3
     // eslint-disable-next-line @typescript-eslint/naming-convention
@@ -51,6 +53,8 @@ const MUZZLE_PAIRS = {
     "6386120cd6baa055ad1e201c": "638612b607dfed1ccb7206ba",
     // eslint-disable-next-line @typescript-eslint/naming-convention
     "626667e87379c44d557b7550": "626673016f1edc06f30cf6d5",
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    "5f6372e2865db925d54f3869": "5f6339d53ada5942720e2dc3",
 
     //5.56x45 Tier 3
     // eslint-disable-next-line @typescript-eslint/naming-convention
@@ -77,6 +81,20 @@ export class WeaponGenerator {
 
     // eslint-disable-next-line @typescript-eslint/naming-convention
     readonly MAGPUL_MOE_CARBINE_RUBBER_BUTTPAD = "58d2912286f7744e27117493";
+
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    readonly SIG_SAUER_TAPER_LOK_762X51_300_BLK_MUZZLE_ADAPTER = "5fbc22ccf24b94483f726483";
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    readonly SIG_SAUER_TWO_PORT_BRAKE_762X51_MUZZLE_BRAKE = "5fbcbd10ab884124df0cd563";
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    readonly SIG_SAUER_SRD762_QD_762X51_SOUND_SUPPRESSOR = "5fbe760793164a5b6278efc8";
+
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    readonly LANTAC_BMD_BLAST_MITIGATION_DEVICE_A3_DIRECT_THREAD_ADAPTER = "5cf78496d7f00c065703d6ca";
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    readonly AR_10_LANTAC_DRAGON_762X51_MUZZLE_BRAKE_COMPENSATOR = "5c878e9d2e2216000f201903"
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    readonly LANTAC_BMD_762X51_BLAST_MITIGATION_DEVICE = "5cf78720d7f00c06595bc93e";
 
     pmcConfig: IPmcConfig;
     repairConfig: IRepairConfig;
@@ -294,6 +312,8 @@ export class WeaponGenerator {
         weaponTpl: string
     ): undefined {
         let deleteMagpulRubberButtpad = false;
+        let deleteSigSauerMuzzleParts = false;
+        let deleteLantacBmdPart = false;
 
         weapon.forEach((item) => {
             const alternativeTpl = this.data.getAlternativeModule(
@@ -306,14 +326,24 @@ export class WeaponGenerator {
                     weaponTpl !== this.MK47 &&
                     alternativeTpl !== this.X_47_DRUM
                 ) {
-                    item._tpl = alternativeTpl;
-
-                    if (item.slotId === "mod_muzzle") {
-                        this.alternateOrAddSuppressor(weapon, item);
+                    if ((item.slotId === "mod_muzzle") &&
+                        (item._tpl === this.SIG_SAUER_TAPER_LOK_762X51_300_BLK_MUZZLE_ADAPTER)) {
+                        deleteSigSauerMuzzleParts = true;
+                    }
+                    
+                    if ((item.slotId === "mod_muzzle") &&
+                        (item._tpl === this.LANTAC_BMD_BLAST_MITIGATION_DEVICE_A3_DIRECT_THREAD_ADAPTER)) {
+                        deleteLantacBmdPart = true;
                     }
 
                     if (item._tpl === this.MAGPUL_MOE_CARBINE_RUBBER_BUTTPAD) {
                         deleteMagpulRubberButtpad = true;
+                    }
+
+                    item._tpl = alternativeTpl;
+
+                    if (item.slotId === "mod_muzzle") {
+                        this.alternateOrAddSuppressor(weapon, item);
                     }
                 }
             }
@@ -322,37 +352,64 @@ export class WeaponGenerator {
         if (deleteMagpulRubberButtpad) {
             this.deleteModule(weapon, this.MAGPUL_MOE_CARBINE_RUBBER_BUTTPAD);
         }
+
+        if (deleteSigSauerMuzzleParts) {
+            this.deleteModule(weapon, this.SIG_SAUER_TWO_PORT_BRAKE_762X51_MUZZLE_BRAKE);
+            this.deleteModule(weapon, this.SIG_SAUER_SRD762_QD_762X51_SOUND_SUPPRESSOR);
+        }
+        
+        if (deleteLantacBmdPart) {
+            this.deleteModule(weapon, this.AR_10_LANTAC_DRAGON_762X51_MUZZLE_BRAKE_COMPENSATOR);
+            this.deleteModule(weapon, this.LANTAC_BMD_762X51_BLAST_MITIGATION_DEVICE);
+        }
     }
 
     alternateOrAddSuppressor(weapon: Item[], muzzleItem: Item): undefined {
         const suppressor = weapon.find(
-            (i) => i.parentId === muzzleItem._id && (i.slotId = "mod_muzzle")
+            (i) => (i.parentId === muzzleItem._id) && (i.slotId === "mod_muzzle")
         );
 
         if (suppressor !== undefined) {
-            const suppressorTpl = MUZZLE_PAIRS[muzzleItem._tpl]
-            if (suppressorTpl !== undefined) {
+            const alternativeSuppressorTpl = MUZZLE_PAIRS[muzzleItem._tpl]
+            if (alternativeSuppressorTpl !== undefined) {
+                if (alternativeSuppressorTpl === this.SIG_SAUER_SRD762_QD_762X51_SOUND_SUPPRESSOR) {
+                    suppressor.slotId = "mod_muzzle_001"
+                    weapon.push({
+                        _id: this.hashUtil.generate(),
+                        _tpl: this.SIG_SAUER_TWO_PORT_BRAKE_762X51_MUZZLE_BRAKE,
+                        parentId: muzzleItem._id,
+                        slotId: "mod_muzzle_000"
+                    })
+                } else if (alternativeSuppressorTpl === this.LANTAC_BMD_762X51_BLAST_MITIGATION_DEVICE) {
+                    suppressor.slotId = "mod_muzzle_001"
+                    weapon.push({
+                        _id: this.hashUtil.generate(),
+                        _tpl: this.AR_10_LANTAC_DRAGON_762X51_MUZZLE_BRAKE_COMPENSATOR,
+                        parentId: muzzleItem._id,
+                        slotId: "mod_muzzle_000"
+                    })
+                }
+
                 suppressor._tpl = MUZZLE_PAIRS[muzzleItem._tpl];
-                this.deleteUnnecessaryMuzzleModules(weapon);
             }
         } else {
-            const suppressorTpl = MUZZLE_PAIRS[muzzleItem._tpl]
-            if (suppressorTpl !== undefined) {
-                const suppressorItem: Item = {
-                    _id: this.hashUtil.generate(),
-                    _tpl: suppressorTpl,
-                    parentId: muzzleItem._id,
-                    slotId: "mod_muzzle"
+            const alternativeSuppressorTpl = MUZZLE_PAIRS[muzzleItem._tpl]
+            if (alternativeSuppressorTpl !== undefined) {
+                if (alternativeSuppressorTpl === this.SIG_SAUER_SRD762_QD_762X51_SOUND_SUPPRESSOR) {
+                    this.constructSigSauerSuppressor(weapon, muzzleItem)
+                } else if (alternativeSuppressorTpl === this.LANTAC_BMD_762X51_BLAST_MITIGATION_DEVICE) {
+                    this.constructLantacBmd(weapon, muzzleItem)
+                } else {
+                    const suppressorItem: Item = {
+                        _id: this.hashUtil.generate(),
+                        _tpl: alternativeSuppressorTpl,
+                        parentId: muzzleItem._id,
+                        slotId: "mod_muzzle"
+                    }
+                    weapon.push(suppressorItem)
                 }
-                weapon.push(suppressorItem)
             }
         }
-    }
-
-    deleteUnnecessaryMuzzleModules(weapon: Item[]): undefined {
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        const SIG_SAUER_TWO_PORT_BRAKE_762X51_MUZZLE_BRAKE = "5fbcbd10ab884124df0cd563";
-        this.deleteModule(weapon, SIG_SAUER_TWO_PORT_BRAKE_762X51_MUZZLE_BRAKE);
     }
 
     deleteModule(weapon: Item[], tpl: string): undefined {
@@ -362,6 +419,42 @@ export class WeaponGenerator {
         if (i > -1) {
             weapon.splice(i, 1);
         }
+    }
+
+    constructSigSauerSuppressor(weapon: Item[], muzzleItem: Item): undefined {
+        const muzzleBrakeItem: Item = {
+            _id: this.hashUtil.generate(),
+            _tpl: this.SIG_SAUER_TWO_PORT_BRAKE_762X51_MUZZLE_BRAKE,
+            parentId: muzzleItem._id,
+            slotId: "mod_muzzle_000"
+        }
+        weapon.push(muzzleBrakeItem)
+        
+        const suppressorItem: Item = {
+            _id: this.hashUtil.generate(),
+            _tpl: this.SIG_SAUER_SRD762_QD_762X51_SOUND_SUPPRESSOR,
+            parentId: muzzleItem._id,
+            slotId: "mod_muzzle_001"
+        }
+        weapon.push(suppressorItem)
+    }
+    
+    constructLantacBmd(weapon: Item[], muzzleItem: Item): undefined {
+        const muzzleBrakeItem: Item = {
+            _id: this.hashUtil.generate(),
+            _tpl: this.AR_10_LANTAC_DRAGON_762X51_MUZZLE_BRAKE_COMPENSATOR,
+            parentId: muzzleItem._id,
+            slotId: "mod_muzzle_000"
+        }
+        weapon.push(muzzleBrakeItem)
+
+        const suppressorItem: Item = {
+            _id: this.hashUtil.generate(),
+            _tpl: this.LANTAC_BMD_762X51_BLAST_MITIGATION_DEVICE,
+            parentId: muzzleItem._id,
+            slotId: "mod_muzzle_001"
+        }
+        weapon.push(suppressorItem)
     }
 
     addRandomEnhancement(weapon: Item[]): undefined {
