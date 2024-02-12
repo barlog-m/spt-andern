@@ -65,15 +65,15 @@ export class Data {
         const presets = this.data[presetName].weapon[tier];
         const keys = Object.keys(presets);
         const randomKey = this.randomUtil.getArrayValue(keys);
-        const preset = presets[randomKey];
+        const preset: WeaponPreset = presets[randomKey];
 
         if (config.debug) {
             this.logger.info(
-                `[Andern] for bot level ${botLevel} selected tier '${tier}' weapon '${preset.name}'`
+                `[Andern] for bot level ${botLevel} selected tier '${tier}' weapon '${preset.Name}'`
             );
         }
 
-        return JSON.parse(JSON.stringify(preset.items)) as Item[];
+        return JSON.parse(JSON.stringify(preset.Items)) as Item[];
     }
 
     public getGear(presetName: string, level: number): Gear {
