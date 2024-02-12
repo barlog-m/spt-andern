@@ -1,8 +1,8 @@
 {
-    "id": "65b21c4001001c3ee52960cf",
-    "name": "AK-103 T4 1",
-    "root": "f7e57302ed18abafb4a36fa8",
-    "items": [
+    "Id": "021200285996081835784f70",
+    "Name": "AK-103 T4 1",
+    "Root": "f7e57302ed18abafb4a36fa8",
+    "Items": [
         {
             "_id": "f7e57302ed18abafb4a36fa8",
             "_tpl": "5ac66d2e5acfc43b321d4b53",
@@ -122,5 +122,6 @@
                 }
             }
         }
-    ]
+    ],
+    "Parent": "5447b5f14bdc2d61278b4567"
 }

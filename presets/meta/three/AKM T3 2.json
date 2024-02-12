@@ -1,8 +1,8 @@
 {
-    "id": "65b1a0b301001c3ee51b0006",
-    "name": "AKM T3 2",
-    "root": "9c4b50e0fc7afa18e26ee004",
-    "items": [
+    "Id": "65b1a0b301001c3ee51b0006",
+    "Name": "AKM T3 2",
+    "Root": "9c4b50e0fc7afa18e26ee004",
+    "Items": [
         {
             "_id": "9c4b50e0fc7afa18e26ee004",
             "_tpl": "59d6088586f774275f37482f",

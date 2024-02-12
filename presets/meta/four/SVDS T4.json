@@ -1,8 +1,8 @@
 {
-    "id": "65b21d9f01001c3ee59a96d7",
-    "name": "SVDS T4",
-    "root": "9675f33fdc3ff1e541913daa",
-    "items": [
+    "Id": "0212002859274742895cdd14",
+    "Name": "SVDS T4",
+    "Root": "9675f33fdc3ff1e541913daa",
+    "Items": [
         {
             "_id": "9675f33fdc3ff1e541913daa",
             "_tpl": "5c46fbd72e2216398b5a8c9c",
@@ -173,5 +173,6 @@
             "parentId": "f1970846f267a75e0aa84a3e",
             "slotId": "mod_foregrip"
         }
-    ]
+    ],
+    "Parent": "5447b6194bdc2d67278b4567"
 }

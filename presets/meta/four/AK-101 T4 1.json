@@ -1,8 +1,8 @@
 {
-    "id": "65b21e4201001c3ee5401121",
-    "name": "AK-101 T4 1",
-    "root": "b38c9c62d8c9facb1d5fe654",
-    "items": [
+    "Id": "0212002859576404379e919d",
+    "Name": "AK-101 T4 1",
+    "Root": "b38c9c62d8c9facb1d5fe654",
+    "Items": [
         {
             "_id": "b38c9c62d8c9facb1d5fe654",
             "_tpl": "5ac66cb05acfc40198510a10",
@@ -122,5 +122,6 @@
                 }
             }
         }
-    ]
+    ],
+    "Parent": "5447b5f14bdc2d61278b4567"
 }

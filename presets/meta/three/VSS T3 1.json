@@ -1,8 +1,8 @@
 {
-    "id": "65b1a3ea01001c3ee51e3cb5",
-    "name": "VSS T3 1",
-    "root": "8b32400d03fafdb6908c6210",
-    "items": [
+    "Id": "65b1a3ea01001c3ee51e3cb5",
+    "Name": "VSS T3 1",
+    "Root": "8b32400d03fafdb6908c6210",
+    "Items": [
         {
             "_id": "8b32400d03fafdb6908c6210",
             "_tpl": "57838ad32459774a17445cd2",

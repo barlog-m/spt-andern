@@ -1,8 +1,8 @@
 {
-    "id": "65b218bc01001c3ee5c40499",
-    "name": "AK-74M T4 2",
-    "root": "d14af1e35a57056651fd5cbe",
-    "items": [
+    "Id": "02120028587718932540f5e9",
+    "Name": "AK-74M T4 2",
+    "Root": "d14af1e35a57056651fd5cbe",
+    "Items": [
         {
             "_id": "d14af1e35a57056651fd5cbe",
             "_tpl": "5ac4cd105acfc40016339859",
@@ -132,5 +132,6 @@
             "parentId": "535841773f5396fb89215784",
             "slotId": "mod_mount"
         }
-    ]
+    ],
+    "Parent": "5447b5f14bdc2d61278b4567"
 }

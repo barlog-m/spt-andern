@@ -1,8 +1,8 @@
 {
-    "id": "65b21b8d01001c3ee58ed62f",
-    "name": "AKM T4 5",
-    "root": "8b89176d73b2954da65d7fa9",
-    "items": [
+    "Id": "02120028596588044091ae8d",
+    "Name": "AKM T4 5",
+    "Root": "8b89176d73b2954da65d7fa9",
+    "Items": [
         {
             "_id": "8b89176d73b2954da65d7fa9",
             "_tpl": "59d6088586f774275f37482f",
@@ -107,5 +107,6 @@
             "parentId": "1022b0ce17c603d76d876ff8",
             "slotId": "mod_foregrip"
         }
-    ]
+    ],
+    "Parent": "5447b5f14bdc2d61278b4567"
 }

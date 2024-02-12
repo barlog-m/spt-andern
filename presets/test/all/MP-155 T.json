@@ -1,9 +1,9 @@
 {
     "type": "weapon",
-    "id": "dc911b9711ed8d2317c7904e",
-    "name": "MP-155 T",
-    "root": "5d622f6e6c6e9d511ca80a13",
-    "items": [
+    "Id": "dc911b9711ed8d2317c7904e",
+    "Name": "MP-155 T",
+    "Root": "5d622f6e6c6e9d511ca80a13",
+    "Items": [
         {
             "_id": "5d622f6e6c6e9d511ca80a13",
             "_tpl": "606dae0ab0e443224b421bb7",

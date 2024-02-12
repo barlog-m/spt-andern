@@ -1,8 +1,8 @@
 {
-    "id": "65b123d401001c3ee5e102f1",
-    "name": "M4A1 T2 1",
-    "root": "43d4c759b3699d70f8c72630",
-    "items": [
+    "Id": "0211190457554899875e7bd1",
+    "Name": "M4A1 T2 1",
+    "Root": "43d4c759b3699d70f8c72630",
+    "Items": [
         {
             "_id": "43d4c759b3699d70f8c72630",
             "_tpl": "5447a9cd4bdc2dbd208b4567",
@@ -194,5 +194,6 @@
             "parentId": "7c9ccfe90e41f633ae80892a",
             "slotId": "mod_stock"
         }
-    ]
+    ],
+    "Parent": "5447b5f14bdc2d61278b4567"
 }

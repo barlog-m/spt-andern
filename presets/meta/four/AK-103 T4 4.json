@@ -1,8 +1,8 @@
 {
-    "id": "65b21cf201001c3ee58b99f7",
-    "name": "AK-103 T4 4",
-    "root": "04254080efd2ba9e2bf90d0a",
-    "items": [
+    "Id": "0212002859753747624ed7bc",
+    "Name": "AK-103 T4 4",
+    "Root": "04254080efd2ba9e2bf90d0a",
+    "Items": [
         {
             "_id": "04254080efd2ba9e2bf90d0a",
             "_tpl": "5ac66d2e5acfc43b321d4b53",
@@ -126,5 +126,6 @@
             "parentId": "65e4172a2415b668dcff8557",
             "slotId": "mod_mount"
         }
-    ]
+    ],
+    "Parent": "5447b5f14bdc2d61278b4567"
 }

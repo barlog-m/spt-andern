@@ -1,8 +1,8 @@
 {
-    "id": "65b04fb601001c3ee51171c2",
-    "name": "AUG T1",
-    "root": "0db21af4bd51dcb69f4b3585",
-    "items": [
+    "Id": "65b04fb601001c3ee51171c2",
+    "Name": "AUG T1",
+    "Root": "0db21af4bd51dcb69f4b3585",
+    "Items": [
         {
             "_id": "0db21af4bd51dcb69f4b3585",
             "_tpl": "62e7c4fba689e8c9c50dfc38",

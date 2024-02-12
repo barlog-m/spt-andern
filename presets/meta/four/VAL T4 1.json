@@ -1,8 +1,8 @@
 {
-    "id": "65b2138e01001c3ee546dca2",
-    "name": "VAL T4 1",
-    "root": "51e271dabf05c97cd3f68b03",
-    "items": [
+    "Id": "02120028594456335822b973",
+    "Name": "VAL T4 1",
+    "Root": "51e271dabf05c97cd3f68b03",
+    "Items": [
         {
             "_id": "51e271dabf05c97cd3f68b03",
             "_tpl": "57c44b372459772d2b39b8ce",
@@ -121,5 +121,6 @@
             "parentId": "f1526168d2593938b81e666a",
             "slotId": "mod_stock"
         }
-    ]
+    ],
+    "Parent": "5447b5fc4bdc2d87278b4567"
 }

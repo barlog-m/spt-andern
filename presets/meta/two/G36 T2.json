@@ -1,10 +1,10 @@
 {
-    "id": "65b12aeb01001c3ee51f2181",
-    "name": "G36 T2",
-    "root": "6ff9a47f34999ef21376cb15",
-    "items": [
+    "Id": "0211190457136720531cc39b",
+    "Name": "G36 T2",
+    "Root": "02d3b3770d5da2ba264769cd",
+    "Items": [
         {
-            "_id": "6ff9a47f34999ef21376cb15",
+            "_id": "02d3b3770d5da2ba264769cd",
             "_tpl": "623063e994fc3f7b302a9696",
             "upd": {
                 "Repairable": {
@@ -20,75 +20,75 @@
             }
         },
         {
-            "_id": "1d02451512046aa97695f50d",
+            "_id": "936e6e9d11315d7af6a183c3",
             "_tpl": "5d1340cad7ad1a0b0b249869",
-            "parentId": "6ff9a47f34999ef21376cb15",
+            "parentId": "02d3b3770d5da2ba264769cd",
             "slotId": "mod_magazine"
         },
         {
-            "_id": "d62f3f1935ac91f8b7c2c91f",
+            "_id": "1256f3571e1d437136385b8e",
             "_tpl": "622f14e899892a7f9e08f6c5",
-            "parentId": "6ff9a47f34999ef21376cb15",
+            "parentId": "02d3b3770d5da2ba264769cd",
             "slotId": "mod_stock"
         },
         {
-            "_id": "ee1be910debb4e22d3613ea0",
+            "_id": "41e54004323f1959192179a4",
             "_tpl": "622b379bf9cfc87d675d2de5",
-            "parentId": "6ff9a47f34999ef21376cb15",
+            "parentId": "02d3b3770d5da2ba264769cd",
             "slotId": "mod_barrel"
         },
         {
-            "_id": "3dd58e95e5297bb7855ae47a",
+            "_id": "7acb47cb8d10b0f7bc03d324",
             "_tpl": "62386b2adf47d66e835094b2",
-            "parentId": "6ff9a47f34999ef21376cb15",
+            "parentId": "02d3b3770d5da2ba264769cd",
             "slotId": "mod_handguard"
         },
         {
-            "_id": "edf8dba0cb01bec3d34b2243",
+            "_id": "d6afb7d590f453678e61b7ed",
             "_tpl": "622f039199f4ea1a4d6c9a17",
-            "parentId": "6ff9a47f34999ef21376cb15",
+            "parentId": "02d3b3770d5da2ba264769cd",
             "slotId": "mod_mount"
         },
         {
-            "_id": "80c1b97452af1dfc9387719f",
+            "_id": "599c20b26fb7dd802d3f069e",
             "_tpl": "622b3c081b89c677a33bcda6",
-            "parentId": "6ff9a47f34999ef21376cb15",
+            "parentId": "02d3b3770d5da2ba264769cd",
             "slotId": "mod_scope"
         },
         {
-            "_id": "521995418aeaf483f1bb4691",
-            "_tpl": "5c6d710d2e22165df16b81e7",
-            "parentId": "ee1be910debb4e22d3613ea0",
+            "_id": "aa0e9eb4e6d18f31ecf4f8fa",
+            "_tpl": "5b3a16655acfc40016387a2a",
+            "parentId": "41e54004323f1959192179a4",
             "slotId": "mod_muzzle"
         },
         {
-            "_id": "7df8d36f299a80ca68b51a1a",
+            "_id": "f9a82000f9e2d6ea93649d08",
             "_tpl": "622b327b267a1b13a44abea3",
-            "parentId": "ee1be910debb4e22d3613ea0",
+            "parentId": "41e54004323f1959192179a4",
             "slotId": "mod_gas_block"
         },
         {
-            "_id": "7b7e48efbd307b65f0f12a8f",
+            "_id": "91e69638d13e15250216bb38",
             "_tpl": "62444cb99f47004c781903eb",
-            "parentId": "3dd58e95e5297bb7855ae47a",
+            "parentId": "7acb47cb8d10b0f7bc03d324",
             "slotId": "mod_mount_000"
         },
         {
-            "_id": "6b79e28a022d6c16ebb6f145",
+            "_id": "bb8c6a9858b5c22b1f008c77",
             "_tpl": "62444cd3674028188b052799",
-            "parentId": "3dd58e95e5297bb7855ae47a",
+            "parentId": "7acb47cb8d10b0f7bc03d324",
             "slotId": "mod_mount_002"
         },
         {
-            "_id": "aafa9459e8f7cf9add4245f2",
+            "_id": "8d185e87122bb327129f6526",
             "_tpl": "622f16a1a5958f63c67f1737",
-            "parentId": "3dd58e95e5297bb7855ae47a",
+            "parentId": "7acb47cb8d10b0f7bc03d324",
             "slotId": "mod_tactical"
         },
         {
-            "_id": "0ad1b41d31758c6c273c7cba",
+            "_id": "8027a64fbe027a42a5078028",
             "_tpl": "57aca93d2459771f2c7e26db",
-            "parentId": "80c1b97452af1dfc9387719f",
+            "parentId": "599c20b26fb7dd802d3f069e",
             "slotId": "mod_scope",
             "upd": {
                 "Sight": {
@@ -105,9 +105,9 @@
             }
         },
         {
-            "_id": "4662bd88a9d019c14a3d31c5",
+            "_id": "dfe309cf7a034e0dd212474d",
             "_tpl": "623166e08c43374ca1567195",
-            "parentId": "80c1b97452af1dfc9387719f",
+            "parentId": "599c20b26fb7dd802d3f069e",
             "slotId": "mod_sight_front",
             "upd": {
                 "Sight": {
@@ -122,9 +122,9 @@
             }
         },
         {
-            "_id": "df1427c824fb49243d3b60d8",
+            "_id": "4d30bdfd6d42f776e261142c",
             "_tpl": "6231670f0b8aa5472d060095",
-            "parentId": "80c1b97452af1dfc9387719f",
+            "parentId": "599c20b26fb7dd802d3f069e",
             "slotId": "mod_sight_rear",
             "upd": {
                 "Sight": {
@@ -139,21 +139,15 @@
             }
         },
         {
-            "_id": "59d6c18b02fd22b7ac8006f5",
-            "_tpl": "55d6190f4bdc2d87028b4567",
-            "parentId": "521995418aeaf483f1bb4691",
-            "slotId": "mod_muzzle"
-        },
-        {
-            "_id": "99d2e47ba395fef821a6aca2",
+            "_id": "d6c9300cc39025de57a0e507",
             "_tpl": "558032614bdc2de7118b4585",
-            "parentId": "7b7e48efbd307b65f0f12a8f",
+            "parentId": "91e69638d13e15250216bb38",
             "slotId": "mod_foregrip"
         },
         {
-            "_id": "3fa41b75fa61f2146c413b01",
+            "_id": "ae50ca9eb05bfabe6ffd10d5",
             "_tpl": "6272370ee4013c5d7e31f418",
-            "parentId": "6b79e28a022d6c16ebb6f145",
+            "parentId": "bb8c6a9858b5c22b1f008c77",
             "slotId": "mod_tactical",
             "upd": {
                 "Light": {
@@ -162,5 +156,6 @@
                 }
             }
         }
-    ]
+    ],
+    "Parent": "5447b5f14bdc2d61278b4567"
 }

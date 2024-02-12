@@ -1,8 +1,8 @@
 {
-    "id": "65b21bb201001c3ee561c346",
-    "name": "AKM T4 6",
-    "root": "4fef1fcf461a03dec956649e",
-    "items": [
+    "Id": "021200285923866335149de3",
+    "Name": "AKM T4 6",
+    "Root": "4fef1fcf461a03dec956649e",
+    "Items": [
         {
             "_id": "4fef1fcf461a03dec956649e",
             "_tpl": "59d6088586f774275f37482f",
@@ -117,5 +117,6 @@
             "parentId": "7f09d5a230bc6b450ca23463",
             "slotId": "mod_mount"
         }
-    ]
+    ],
+    "Parent": "5447b5f14bdc2d61278b4567"
 }

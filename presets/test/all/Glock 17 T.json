@@ -1,9 +1,9 @@
 {
     "type": "weapon",
-    "id": "c1e35fcbd88bcc83bada1cd6",
-    "name": "Glock 17 T",
-    "root": "ef605694fb59a27cdf28207f",
-    "items": [
+    "Id": "c1e35fcbd88bcc83bada1cd6",
+    "Name": "Glock 17 T",
+    "Root": "ef605694fb59a27cdf28207f",
+    "Items": [
         {
             "_id": "ef605694fb59a27cdf28207f",
             "_tpl": "5a7ae0c351dfba0017554310",

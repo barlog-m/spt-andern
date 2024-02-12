@@ -1,9 +1,9 @@
 {
     "type": "weapon",
-    "id": "ad455e63282dbf917ffc2bbe",
-    "name": "RSh-12 T",
-    "root": "4d8380bafeb7f9a3051a529d",
-    "items": [
+    "Id": "ad455e63282dbf917ffc2bbe",
+    "Name": "RSh-12 T",
+    "Root": "4d8380bafeb7f9a3051a529d",
+    "Items": [
         {
             "_id": "4d8380bafeb7f9a3051a529d",
             "_tpl": "633ec7c2a6918cb895019c6c",

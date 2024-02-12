@@ -1,8 +1,8 @@
 {
-    "id": "65b2ba0201001c3ee573ec90",
-    "name": "MCX SPEAR T4 1",
-    "root": "d4990156446033125d709ffc",
-    "items": [
+    "Id": "0212002859442629681a84d0",
+    "Name": "MCX SPEAR T4 1",
+    "Root": "d4990156446033125d709ffc",
+    "Items": [
         {
             "_id": "d4990156446033125d709ffc",
             "_tpl": "65290f395ae2ae97b80fdf2d",
@@ -183,5 +183,6 @@
             "parentId": "79e77ff7def1a1abc10b823d",
             "slotId": "mod_stock"
         }
-    ]
+    ],
+    "Parent": "5447b5f14bdc2d61278b4567"
 }

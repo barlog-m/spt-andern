@@ -1,9 +1,9 @@
 {
     "type": "weapon",
-    "id": "9a918b6fbd432164034dd297",
-    "name": "MP-43-1C T",
-    "root": "eb25b6443a809825c3e6f7ef",
-    "items": [
+    "Id": "9a918b6fbd432164034dd297",
+    "Name": "MP-43-1C T",
+    "Root": "eb25b6443a809825c3e6f7ef",
+    "Items": [
         {
             "_id": "eb25b6443a809825c3e6f7ef",
             "_tpl": "5580223e4bdc2d1c128b457f",

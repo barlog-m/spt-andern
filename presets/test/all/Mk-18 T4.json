@@ -1,9 +1,9 @@
 {
     "type": "weapon",
-    "id": "dee75c59555f3eeeed5d10fe",
-    "name": "Mk-18 T4",
-    "root": "fb618f3adca209e1ae87c88a",
-    "items": [
+    "Id": "dee75c59555f3eeeed5d10fe",
+    "Name": "Mk-18 T4",
+    "Root": "fb618f3adca209e1ae87c88a",
+    "Items": [
         {
             "_id": "fb618f3adca209e1ae87c88a",
             "_tpl": "5fc22d7c187fea44d52eda44",

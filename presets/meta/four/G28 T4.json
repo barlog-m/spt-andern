@@ -1,8 +1,8 @@
 {
-    "id": "65b2975601001c3ee595c53e",
-    "name": "G28 T4",
-    "root": "ed0b9df9d1affe00a6950034",
-    "items": [
+    "Id": "0212002859116284435e7958",
+    "Name": "G28 T4",
+    "Root": "ed0b9df9d1affe00a6950034",
+    "Items": [
         {
             "_id": "ed0b9df9d1affe00a6950034",
             "_tpl": "6176aca650224f204c1da3fb",
@@ -152,5 +152,6 @@
             "parentId": "7a9c7c095bbcb132fa7165c7",
             "slotId": "mod_muzzle"
         }
-    ]
+    ],
+    "Parent": "5447b6194bdc2d67278b4567"
 }

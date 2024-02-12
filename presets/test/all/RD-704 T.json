@@ -1,9 +1,9 @@
 {
     "type": "weapon",
-    "id": "606e7697ad1b0e96b6112960",
-    "name": "RD-704 T",
-    "root": "70cb10901bd1b0f63b47f107",
-    "items": [
+    "Id": "606e7697ad1b0e96b6112960",
+    "Name": "RD-704 T",
+    "Root": "70cb10901bd1b0f63b47f107",
+    "Items": [
         {
             "_id": "70cb10901bd1b0f63b47f107",
             "_tpl": "628a60ae6b1d481ff772e9c8",

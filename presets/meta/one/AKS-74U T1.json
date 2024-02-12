@@ -1,8 +1,8 @@
 {
-    "id": "65b051d901001c3ee588bbac",
-    "name": "AKS-74U T1",
-    "root": "c3c884c0468c73e5df1af1aa",
-    "items": [
+    "Id": "65b051d901001c3ee588bbac",
+    "Name": "AKS-74U T1",
+    "Root": "c3c884c0468c73e5df1af1aa",
+    "Items": [
         {
             "_id": "c3c884c0468c73e5df1af1aa",
             "_tpl": "57dc2fa62459775949412633",

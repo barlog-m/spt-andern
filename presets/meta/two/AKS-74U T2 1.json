@@ -1,8 +1,8 @@
 {
-    "id": "65b1495901001c3ee5c6ac1a",
-    "name": "AKS-74U T2 1",
-    "root": "fedf917d569d0f567cf0cb3a",
-    "items": [
+    "Id": "021119045738336717757592",
+    "Name": "AKS-74U T2 1",
+    "Root": "fedf917d569d0f567cf0cb3a",
+    "Items": [
         {
             "_id": "fedf917d569d0f567cf0cb3a",
             "_tpl": "57dc2fa62459775949412633",
@@ -122,5 +122,6 @@
                 }
             }
         }
-    ]
+    ],
+    "Parent": "5447b5f14bdc2d61278b4567"
 }

@@ -1,8 +1,8 @@
 {
-    "id": "65b1a6dd01001c3ee5e321bb",
-    "name": "MCX 300 T3 1",
-    "root": "1e2475f20ded56b1a505d8c7",
-    "items": [
+    "Id": "65b1a6dd01001c3ee5e321bb",
+    "Name": "MCX 300 T3 1",
+    "Root": "1e2475f20ded56b1a505d8c7",
+    "Items": [
         {
             "_id": "1e2475f20ded56b1a505d8c7",
             "_tpl": "5fbcc1d9016cce60e8341ab3",

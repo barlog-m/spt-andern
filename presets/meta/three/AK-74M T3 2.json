@@ -1,8 +1,8 @@
 {
-    "id": "65b19d8f01001c3ee54a0e50",
-    "name": "AK-74M T3 2",
-    "root": "cd02e8f9dd7576b60bd9b637",
-    "items": [
+    "Id": "65b19d8f01001c3ee54a0e50",
+    "Name": "AK-74M T3 2",
+    "Root": "cd02e8f9dd7576b60bd9b637",
+    "Items": [
         {
             "_id": "cd02e8f9dd7576b60bd9b637",
             "_tpl": "5ac4cd105acfc40016339859",

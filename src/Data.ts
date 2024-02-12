@@ -260,7 +260,7 @@ export class Data {
         let hasMagazine = false;
         let hasTacticalDevice = false;
 
-        for (const i of weaponPreset.items) {
+        for (const i of weaponPreset.Items) {
             if (!i.slotId) {
                 continue;
             }

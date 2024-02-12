@@ -1,8 +1,8 @@
 {
-    "id": "65b21cfc01001c3ee5f29922",
-    "name": "AK-103 T4 3",
-    "root": "18df304832242c8d2dbfcc1e",
-    "items": [
+    "Id": "021200285959678913741a11",
+    "Name": "AK-103 T4 3",
+    "Root": "18df304832242c8d2dbfcc1e",
+    "Items": [
         {
             "_id": "18df304832242c8d2dbfcc1e",
             "_tpl": "5ac66d2e5acfc43b321d4b53",
@@ -116,5 +116,6 @@
             "parentId": "5b6075b73f36b8cbfcaf6963",
             "slotId": "mod_foregrip"
         }
-    ]
+    ],
+    "Parent": "5447b5f14bdc2d61278b4567"
 }

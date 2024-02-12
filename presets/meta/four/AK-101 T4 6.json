@@ -1,8 +1,8 @@
 {
-    "id": "65b21f2c01001c3ee52dcb31",
-    "name": "AK-101 T4 6",
-    "root": "4f33dfac94879cf5301a1a0c",
-    "items": [
+    "Id": "02120028596952709716c94b",
+    "Name": "AK-101 T4 6",
+    "Root": "4f33dfac94879cf5301a1a0c",
+    "Items": [
         {
             "_id": "4f33dfac94879cf5301a1a0c",
             "_tpl": "5ac66cb05acfc40198510a10",
@@ -126,5 +126,6 @@
             "parentId": "bdd74811ce013c6e1ca5b9cd",
             "slotId": "mod_mount"
         }
-    ]
+    ],
+    "Parent": "5447b5f14bdc2d61278b4567"
 }

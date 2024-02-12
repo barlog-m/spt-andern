@@ -1,8 +1,8 @@
 {
-    "id": "65b05b2301001c3ee5b53a0c",
-    "name": "AK-74N T1 2",
-    "root": "5ea035567adcbec38f5e846e",
-    "items": [
+    "Id": "65b05b2301001c3ee5b53a0c",
+    "Name": "AK-74N T1 2",
+    "Root": "5ea035567adcbec38f5e846e",
+    "Items": [
         {
             "_id": "5ea035567adcbec38f5e846e",
             "_tpl": "5644bd2b4bdc2d3b4c8b4572",

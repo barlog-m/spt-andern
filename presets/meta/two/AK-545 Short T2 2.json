@@ -1,8 +1,8 @@
 {
-    "id": "65b1475801001c3ee59173a6",
-    "name": "AK-545 Short T2 2",
-    "root": "cd5579a17cc966ceb8d5cffb",
-    "items": [
+    "Id": "021119045768046786937e69",
+    "Name": "AK-545 Short T2 2",
+    "Root": "cd5579a17cc966ceb8d5cffb",
+    "Items": [
         {
             "_id": "cd5579a17cc966ceb8d5cffb",
             "_tpl": "628b9c37a733087d0d7fe84b",
@@ -134,5 +134,6 @@
                 }
             }
         }
-    ]
+    ],
+    "Parent": "5447b5f14bdc2d61278b4567"
 }

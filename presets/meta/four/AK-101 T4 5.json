@@ -1,8 +1,8 @@
 {
-    "id": "65b21f1901001c3ee551d14a",
-    "name": "AK-101 T4 5",
-    "root": "591c296893d5b49587ba1200",
-    "items": [
+    "Id": "02120028599194039828c38a",
+    "Name": "AK-101 T4 5",
+    "Root": "591c296893d5b49587ba1200",
+    "Items": [
         {
             "_id": "591c296893d5b49587ba1200",
             "_tpl": "5ac66cb05acfc40198510a10",
@@ -116,5 +116,6 @@
             "parentId": "6ac6f49d4032fb8f7cd3c012",
             "slotId": "mod_foregrip"
         }
-    ]
+    ],
+    "Parent": "5447b5f14bdc2d61278b4567"
 }

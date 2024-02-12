@@ -1,9 +1,9 @@
 {
   "type": "weapon",
-  "id": "ebc4fc437e7b35a3c2235d3e",
-  "name": "FN40GL T",
-  "root": "4a037d50a5979eff075498eb",
-  "items": [
+  "Id": "ebc4fc437e7b35a3c2235d3e",
+  "Name": "FN40GL T",
+  "Root": "4a037d50a5979eff075498eb",
+  "Items": [
     {
       "_id": "4a037d50a5979eff075498eb",
       "_tpl": "5e81ebcd8e146c7080625e15",

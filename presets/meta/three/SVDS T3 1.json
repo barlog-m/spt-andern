@@ -1,8 +1,8 @@
 {
-    "id": "65b1a4de01001c3ee524a754",
-    "name": "SVDS T3 1",
-    "root": "d8ac829c8c6e048545cd0096",
-    "items": [
+    "Id": "65b1a4de01001c3ee524a754",
+    "Name": "SVDS T3 1",
+    "Root": "d8ac829c8c6e048545cd0096",
+    "Items": [
         {
             "_id": "d8ac829c8c6e048545cd0096",
             "_tpl": "5c46fbd72e2216398b5a8c9c",

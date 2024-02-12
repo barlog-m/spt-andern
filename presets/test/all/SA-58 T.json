@@ -1,9 +1,9 @@
 {
     "type": "weapon",
-    "id": "116d9bbf08445cf235c4ae7d",
-    "name": "SA-58 T",
-    "root": "f3d522d0e8b306453f9f0cd3",
-    "items": [
+    "Id": "116d9bbf08445cf235c4ae7d",
+    "Name": "SA-58 T",
+    "Root": "f3d522d0e8b306453f9f0cd3",
+    "Items": [
         {
             "_id": "f3d522d0e8b306453f9f0cd3",
             "_tpl": "5b0bbe4e5acfc40dc528a72d",

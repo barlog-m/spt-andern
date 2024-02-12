@@ -20,10 +20,10 @@ export class PresetData {
 }
 
 export class WeaponPreset {
-    id: string;
-    name: string;
-    root: string;
-    items: Item[];
+    Id: string;
+    Name: string;
+    Root: string;
+    Items: Item[];
 }
 
 export class GeneratedWeapon {

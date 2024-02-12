@@ -1,8 +1,8 @@
 {
-    "id": "65b1775001001c3ee5899fff",
-    "name": "MCX 300 T2",
-    "root": "1028920644813db7029e61c9",
-    "items": [
+    "Id": "02111904578921633211f850",
+    "Name": "MCX 300 T2",
+    "Root": "1028920644813db7029e61c9",
+    "Items": [
         {
             "_id": "1028920644813db7029e61c9",
             "_tpl": "5fbcc1d9016cce60e8341ab3",
@@ -165,5 +165,6 @@
             "parentId": "d51a2a008b707c9f7f1f2a9d",
             "slotId": "mod_foregrip"
         }
-    ]
+    ],
+    "Parent": "5447b5f14bdc2d61278b4567"
 }

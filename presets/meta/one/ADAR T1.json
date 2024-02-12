@@ -1,8 +1,8 @@
 {
-    "id": "65b058e701001c3ee5e3b728",
-    "name": "ADAR T1",
-    "root": "979fcb90aa1a0c88cd6c4752",
-    "items": [
+    "Id": "65b058e701001c3ee5e3b728",
+    "Name": "ADAR T1",
+    "Root": "979fcb90aa1a0c88cd6c4752",
+    "Items": [
         {
             "_id": "979fcb90aa1a0c88cd6c4752",
             "_tpl": "5c07c60e0db834002330051f",

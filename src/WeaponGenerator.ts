@@ -66,7 +66,11 @@ const MUZZLE_PAIRS = {
 
     //Tier 2 SilencerCo Hybrid 46
     // eslint-disable-next-line @typescript-eslint/naming-convention
-    "59bffc1f86f77435b128b872": "59bffbb386f77435b379b9c2"
+    "59bffc1f86f77435b128b872": "59bffbb386f77435b379b9c2",
+
+    //AK Hexagon Reactor 5.45x39 muzzle brake
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    "615d8f5dd92c473c770212ef": "615d8f8567085e45ef1409ca"
 };
 
 @injectable()
@@ -330,7 +334,7 @@ export class WeaponGenerator {
                         (item._tpl === this.SIG_SAUER_TAPER_LOK_762X51_300_BLK_MUZZLE_ADAPTER)) {
                         deleteSigSauerMuzzleParts = true;
                     }
-                    
+
                     if ((item.slotId === "mod_muzzle") &&
                         (item._tpl === this.LANTAC_BMD_BLAST_MITIGATION_DEVICE_A3_DIRECT_THREAD_ADAPTER)) {
                         deleteLantacBmdPart = true;
@@ -357,7 +361,7 @@ export class WeaponGenerator {
             this.deleteModule(weapon, this.SIG_SAUER_TWO_PORT_BRAKE_762X51_MUZZLE_BRAKE);
             this.deleteModule(weapon, this.SIG_SAUER_SRD762_QD_762X51_SOUND_SUPPRESSOR);
         }
-        
+
         if (deleteLantacBmdPart) {
             this.deleteModule(weapon, this.AR_10_LANTAC_DRAGON_762X51_MUZZLE_BRAKE_COMPENSATOR);
             this.deleteModule(weapon, this.LANTAC_BMD_762X51_BLAST_MITIGATION_DEVICE);
@@ -429,7 +433,7 @@ export class WeaponGenerator {
             slotId: "mod_muzzle_000"
         }
         weapon.push(muzzleBrakeItem)
-        
+
         const suppressorItem: Item = {
             _id: this.hashUtil.generate(),
             _tpl: this.SIG_SAUER_SRD762_QD_762X51_SOUND_SUPPRESSOR,
@@ -438,7 +442,7 @@ export class WeaponGenerator {
         }
         weapon.push(suppressorItem)
     }
-    
+
     constructLantacBmd(weapon: Item[], muzzleItem: Item): undefined {
         const muzzleBrakeItem: Item = {
             _id: this.hashUtil.generate(),

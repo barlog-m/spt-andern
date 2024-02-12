@@ -1,8 +1,8 @@
 {
-    "id": "65b2133401001c3ee57e4b84",
-    "name": "VSS T4 1",
-    "root": "f93e9098584da6c296988e52",
-    "items": [
+    "Id": "0212002859769250183df9ea",
+    "Name": "VSS T4 1",
+    "Root": "f93e9098584da6c296988e52",
+    "Items": [
         {
             "_id": "f93e9098584da6c296988e52",
             "_tpl": "57838ad32459774a17445cd2",
@@ -112,5 +112,6 @@
             "parentId": "ffe6968b1d632c9ffb8321a4",
             "slotId": "mod_foregrip"
         }
-    ]
+    ],
+    "Parent": "5447b6194bdc2d67278b4567"
 }

@@ -25,21 +25,36 @@
         "5aaa5dfee5b5b000140293d3",
         "5c6d450c2e221600114c997d"
     ],
+    // AR-15 Yankee Hill Annihilator multi-caliber flash hider
+    "5b3a16655acfc40016387a2a": [
+        "5c6d710d2e22165df16b81e7"
+    ],
+    // FN SCAR-L 5.56x45 flash hider
+    "618407a850224f204c1da549": [
+        "5b3a16655acfc40016387a2a",
+        "5c6d710d2e22165df16b81e7"
+    ],
     // AK-74 5.45x39 Magpul PMAG 30 GEN M3 30-round magazine
     "5aaa4194e5b5b055d06310a5": [
         "55d482194bdc2d1d4e8b456b"
     ],
-    // AK-74 PWS CQB 74 5.45x39 muzzle brake
+    // AK-545 AK-74 PWS CQB 74 5.45x39 muzzle brake
     "5943eeeb86f77412d6384f6b": [
         "564caa3d4bdc2d17108b458e",
         "59bffc1f86f77435b128b872"
     ],
-    // AK-74 TGP-A 5.45x39 sound suppressor
-    "564caa3d4bdc2d17108b458e": [
+    // AK-74N AK Zenit DTK-1 7.62x39/5.45x39 muzzle brake-compensator
+    "5649ab884bdc2ded0b8b457f": [
+        "564caa3d4bdc2d17108b458e",
         "59bffc1f86f77435b128b872"
     ],
-    // Rotor 43 7.62x39 muzzle brake-compensator 
-    "5a9fbacda2750c00141e080f": [
+    // AKM AK Spikes Tactical Dynacomp 7.62x39 muzzle brake-compensator 
+    "5a9ea27ca2750c00137fa672": [
+        "5a9fbacda2750c00141e080f",
+        "59bffc1f86f77435b128b872"
+    ],
+    // AKS-74U AK-74 TGP-A 5.45x39 sound suppressor
+    "564caa3d4bdc2d17108b458e": [
         "59bffc1f86f77435b128b872"
     ]
 }

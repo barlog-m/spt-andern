@@ -1,8 +1,8 @@
 {
-    "id": "65b05c6a01001c3ee501d27c",
-    "name": "VPO-136 T1",
-    "root": "db98bf7cf9f95c43e5269e5c",
-    "items": [
+    "Id": "65b05c6a01001c3ee501d27c",
+    "Name": "VPO-136 T1",
+    "Root": "db98bf7cf9f95c43e5269e5c",
+    "Items": [
         {
             "_id": "db98bf7cf9f95c43e5269e5c",
             "_tpl": "59e6152586f77473dc057aa1",

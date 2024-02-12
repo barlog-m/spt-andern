@@ -1,8 +1,8 @@
 {
-    "id": "65b220d301001c3ee570bf64",
-    "name": "MCX 300 T4 1",
-    "root": "6f038668137ef089abbd48cd",
-    "items": [
+    "Id": "0212002859642094229b0a77",
+    "Name": "MCX 300 T4 1",
+    "Root": "6f038668137ef089abbd48cd",
+    "Items": [
         {
             "_id": "6f038668137ef089abbd48cd",
             "_tpl": "5fbcc1d9016cce60e8341ab3",
@@ -183,5 +183,6 @@
             "parentId": "e4283c582695a44e0db19b6c",
             "slotId": "mod_stock"
         }
-    ]
+    ],
+    "Parent": "5447b5f14bdc2d61278b4567"
 }

@@ -1,8 +1,8 @@
 {
-    "id": "65b05bf601001c3ee5ccd7ad",
-    "name": "AKM T1",
-    "root": "d370018a313f13a7843a3920",
-    "items": [
+    "Id": "65b05bf601001c3ee5ccd7ad",
+    "Name": "AKM T1",
+    "Root": "d370018a313f13a7843a3920",
+    "Items": [
         {
             "_id": "d370018a313f13a7843a3920",
             "_tpl": "59d6088586f774275f37482f",

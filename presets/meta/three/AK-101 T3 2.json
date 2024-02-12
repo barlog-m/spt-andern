@@ -1,8 +1,8 @@
 {
-    "id": "65b1a1f001001c3ee52cb196",
-    "name": "AK-101 T3 2",
-    "root": "d6242155b7b7ec3d1bdaa76a",
-    "items": [
+    "Id": "65b1a1f001001c3ee52cb196",
+    "Name": "AK-101 T3 2",
+    "Root": "d6242155b7b7ec3d1bdaa76a",
+    "Items": [
         {
             "_id": "d6242155b7b7ec3d1bdaa76a",
             "_tpl": "5ac66cb05acfc40198510a10",
