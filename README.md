@@ -121,6 +121,10 @@ Works only if `mapBotSettings` set to true.
 
 `mapPmcBrainsConfig` if set to "default" then does nothing. Loads `brains/[value].json` file with config which brain will be selected as PMC brain. For example "noboss" will load `brains/noboss.json` as brains config.
 
+`mapBotBrainsTuning` slightly decreases PMC and Raider accuracy.
+
+`mapBotDisablePmcTalkativeness` disables PMC talkativeness for normal difficulty.
+
 ## Other settings
 
 `disablePmcBackpackWeapon` disables chance that PMC can have extra weapon in their backpack.
@@ -144,6 +148,8 @@ Works only if `mapBotSettings` set to true.
 `snow` enables snow.
 
 `disableBtr` disables on all maps BTR.
+
+`playerScavAlwaysHasBackpack` if true player scav always spawns with backpack.
 
 ## Installation
 

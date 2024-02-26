@@ -150,11 +150,11 @@ export declare class RandomUtil {
      * Draw a random element of the provided list N times to return an array of N random elements
      * Drawing can be with or without replacement
      * @param   {array}     list            The array we want to draw randomly from
-     * @param   {integer}   count               The number of times we want to draw
-     * @param   {boolean}   replacement     Draw with or without replacement from the input array(defult true)
+     * @param   {integer}   count           The number of times we want to draw
+     * @param   {boolean}   replacement     Draw with or without replacement from the input array(default true)
      * @return  {array}                     Array consisting of N random elements
      */
-    drawRandomFromList<T>(list: Array<T>, count?: number, replacement?: boolean): Array<T>;
+    drawRandomFromList<T>(originalList: Array<T>, count?: number, replacement?: boolean): Array<T>;
     /**
      * Draw a random (top level) element of the provided dictionary N times to return an array of N random dictionary keys
      * Drawing can be with or without replacement

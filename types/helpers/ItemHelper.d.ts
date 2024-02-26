@@ -32,8 +32,8 @@ export declare class ItemHelper {
     constructor(logger: ILogger, hashUtil: HashUtil, jsonUtil: JsonUtil, randomUtil: RandomUtil, objectId: ObjectId, mathUtil: MathUtil, databaseServer: DatabaseServer, handbookHelper: HandbookHelper, itemBaseClassService: ItemBaseClassService, itemFilterService: ItemFilterService, localisationService: LocalisationService, localeService: LocaleService);
     /**
      * Checks if an id is a valid item. Valid meaning that it's an item that be stored in stash
-     * @param       {string}    tpl       the template id / tpl
-     * @returns                             boolean; true for items that may be in player possession and not quest items
+     * @param    {string}  tpl  the template id / tpl
+     * @returns                 boolean; true for items that may be in player possession and not quest items
      */
     isValidItem(tpl: string, invalidBaseTypes?: string[]): boolean;
     /**
@@ -60,11 +60,25 @@ export declare class ItemHelper {
      */
     armorItemCanHoldMods(itemTpl: string): boolean;
     /**
+     * Does the pased in tpl have ability to hold removable plate items
+     * @param itemTpl item tpl to check for plate support
+     * @returns True when armor can hold plates
+     */
+    armorItemHasRemovablePlateSlots(itemTpl: string): boolean;
+    /**
      * Does the provided item tpl require soft inserts to become a valid armor item
      * @param itemTpl Item tpl to check
      * @returns True if it needs armor inserts
      */
     itemRequiresSoftInserts(itemTpl: string): boolean;
+    getSoftInsertSlotIds(): string[];
+    /**
+     * Returns the items total price based on the handbook or as a fallback from the prices.json if the item is not
+     * found in the handbook. If the price can't be found at all return 0
+     * @param tpls item tpls to look up the price of
+     * @returns Total price in roubles
+     */
+    getItemAndChildrenPrice(tpls: string[]): number;
     /**
      * Returns the item price based on the handbook or as a fallback from the prices.json if the item is not
      * found in the handbook. If the price can't be found at all return 0
@@ -108,7 +122,14 @@ export declare class ItemHelper {
      * @returns bool - is valid + template item object as array
      */
     getItem(tpl: string): [boolean, ITemplateItem];
+    itemHasSlots(itemTpl: string): boolean;
     isItemInDb(tpl: string): boolean;
+    /**
+     * Calcualte the average quality of an item and its children
+     * @param items An offers item to process
+     * @returns % quality modifer between 0 and 1
+     */
+    getItemQualityModifierForOfferItems(items: Item[]): number;
     /**
      * get normalized value (0-1) based on item condition
      * @param item
@@ -134,9 +155,10 @@ export declare class ItemHelper {
      * A variant of findAndReturnChildren where the output is list of item objects instead of their ids.
      * @param items Array of items (item + possible children)
      * @param baseItemId Parent items id
+     * @param modsOnly Include only mod items, exclude items stored inside root item
      * @returns An array of Item objects
      */
-    findAndReturnChildrenAsItems(items: Item[], baseItemId: string): Item[];
+    findAndReturnChildrenAsItems(items: Item[], baseItemId: string, modsOnly?: boolean): Item[];
     /**
      * Find children of the item in a given assort (weapons parts for example, need recursive loop function)
      * @param itemIdToFind Template id of item to check for
@@ -169,11 +191,17 @@ export declare class ItemHelper {
      */
     isItemTplStackable(tpl: string): boolean;
     /**
-     * split item stack if it exceeds its items StackMaxSize property
+     * Split item stack if it exceeds its items StackMaxSize property into child items of passed in parent
      * @param itemToSplit Item to split into smaller stacks
-     * @returns Array of split items
+     * @returns Array of root item + children
      */
     splitStack(itemToSplit: Item): Item[];
+    /**
+     * Turn items like money into separate stacks that adhere to max stack size
+     * @param itemToSplit Item to split into smaller stacks
+     * @returns
+     */
+    splitStackIntoSeparateItems(itemToSplit: Item): Item[][];
     /**
      * Find Barter items from array of items
      * @param {string} by tpl or id
@@ -183,14 +211,16 @@ export declare class ItemHelper {
      */
     findBarterItems(by: "tpl" | "id", itemsToSearch: Item[], desiredBarterItemIds: string | string[]): Item[];
     /**
-     * Regenerate all guids with new ids, exceptions are for items that cannot be altered (e.g. stash/sorting table)
+     * Regenerate all GUIDs with new IDs, for the exception of special item types (e.g. quest, sorting table, etc.) This
+     * function will not mutate the original items array, but will return a new array with new GUIDs.
+     *
+     * @param originalItems Items to adjust the IDs of
      * @param pmcData Player profile
-     * @param items Items to adjust ID values of
-     * @param insuredItems insured items to not replace ids for
-     * @param fastPanel
+     * @param insuredItems Insured items that should not have their IDs replaced
+     * @param fastPanel Quick slot panel
      * @returns Item[]
      */
-    replaceIDs(pmcData: IPmcData, items: Item[], insuredItems?: InsuredItem[], fastPanel?: any): Item[];
+    replaceIDs(originalItems: Item[], pmcData?: IPmcData | null, insuredItems?: InsuredItem[] | null, fastPanel?: any): Item[];
     /**
      * WARNING, SLOW. Recursively loop down through an items hierarchy to see if any of the ids match the supplied list, return true if any do
      * @param {string} tpl Items tpl to check parents of
@@ -228,12 +258,6 @@ export declare class ItemHelper {
      * to traverse, where the keys are the item IDs and the values are the corresponding Item objects. This alleviates
      * some of the performance concerns, as it allows for quick lookups of items by ID.
      *
-     * To generate the map:
-     * ```
-     * const itemsMap = new Map<string, Item>();
-     * items.forEach(item => itemsMap.set(item._id, item));
-     * ```
-     *
      * @param itemId - The unique identifier of the item for which to find the main parent.
      * @param itemsMap - A Map containing item IDs mapped to their corresponding Item objects for quick lookup.
      * @returns The Item object representing the top-most parent of the given item, or `null` if no such parent exists.
@@ -246,6 +270,22 @@ export declare class ItemHelper {
      * @returns true if the item is attached attachment, otherwise false.
      */
     isAttachmentAttached(item: Item): boolean;
+    /**
+     * Retrieves the equipment parent item for a given item.
+     *
+     * This method traverses up the hierarchy of items starting from a given `itemId`, until it finds the equipment
+     * parent item. In other words, if you pass it an item id of a suppressor, it will traverse up the muzzle brake,
+     * barrel, upper receiver, gun, nested backpack, and finally return the backpack Item that is equipped.
+     *
+     * It's important to note that traversal is expensive, so this method requires that you pass it a Map of the items
+     * to traverse, where the keys are the item IDs and the values are the corresponding Item objects. This alleviates
+     * some of the performance concerns, as it allows for quick lookups of items by ID.
+     *
+     * @param itemId - The unique identifier of the item for which to find the equipment parent.
+     * @param itemsMap - A Map containing item IDs mapped to their corresponding Item objects for quick lookup.
+     * @returns The Item object representing the equipment parent of the given item, or `null` if no such parent exists.
+     */
+    getEquipmentParent(itemId: string, itemsMap: Map<string, Item>): Item | null;
     /**
      * Get the inventory size of an item
      * @param items Item with children
@@ -266,6 +306,12 @@ export declare class ItemHelper {
      */
     addCartridgesToAmmoBox(ammoBox: Item[], ammoBoxDetails: ITemplateItem): void;
     /**
+     * Add a single stack of cartridges to the ammo box
+     * @param ammoBox Box to add cartridges to
+     * @param ammoBoxDetails Item template from items db
+     */
+    addSingleStackCartridgesToAmmoBox(ammoBox: Item[], ammoBoxDetails: ITemplateItem): void;
+    /**
      * Check if item is stored inside of a container
      * @param item Item to check is inside of container
      * @param desiredContainerSlotId Name of slot to check item is in e.g. SecuredContainer/Backpack
@@ -280,16 +326,17 @@ export declare class ItemHelper {
      * @param staticAmmoDist Cartridge distribution
      * @param caliber Caliber of cartridge to add to magazine
      * @param minSizePercent % the magazine must be filled to
+     * @param weapon Weapon the magazine will be used for (if passed in uses Chamber as whitelist)
      */
-    fillMagazineWithRandomCartridge(magazine: Item[], magTemplate: ITemplateItem, staticAmmoDist: Record<string, IStaticAmmoDetails[]>, caliber?: string, minSizePercent?: number): void;
+    fillMagazineWithRandomCartridge(magazine: Item[], magTemplate: ITemplateItem, staticAmmoDist: Record<string, IStaticAmmoDetails[]>, caliber?: string, minSizePercent?: number, weapon?: ITemplateItem): void;
     /**
      * Add child items to a magazine of a specific cartridge
-     * @param magazine Magazine to add child items to
+     * @param magazineWithChildCartridges Magazine to add child items to
      * @param magTemplate Db template of magazine
      * @param cartridgeTpl Cartridge to add to magazine
      * @param minSizePercent % the magazine must be filled to
      */
-    fillMagazineWithCartridge(magazine: Item[], magTemplate: ITemplateItem, cartridgeTpl: string, minSizePercent?: number): void;
+    fillMagazineWithCartridge(magazineWithChildCartridges: Item[], magTemplate: ITemplateItem, cartridgeTpl: string, minSizePercent?: number): void;
     /**
      * Choose a random bullet type from the list of possible a magazine has
      * @param magTemplate Magazine template from Db
@@ -300,9 +347,10 @@ export declare class ItemHelper {
      * Chose a randomly weighted cartridge that fits
      * @param caliber Desired caliber
      * @param staticAmmoDist Cartridges and thier weights
+     * @param cartridgeWhitelist OPTIONAL whitelist for cartridges
      * @returns Tpl of cartridge
      */
-    protected drawAmmoTpl(caliber: string, staticAmmoDist: Record<string, IStaticAmmoDetails[]>): string;
+    protected drawAmmoTpl(caliber: string, staticAmmoDist: Record<string, IStaticAmmoDetails[]>, cartridgeWhitelist?: string[]): string;
     /**
      * Create a basic cartrige object
      * @param parentId container cartridges will be placed in
@@ -364,8 +412,26 @@ export declare class ItemHelper {
      * Update a root items _id property value to be unique
      * @param itemWithChildren Item to update root items _id property
      * @param newId Optional: new id to use
+     * @returns New root id
      */
-    remapRootItemId(itemWithChildren: Item[], newId?: string): void;
+    remapRootItemId(itemWithChildren: Item[], newId?: string): string;
+    /**
+     * Adopts orphaned items by resetting them as root "hideout" items. Helpful in situations where a parent has been
+     * deleted from a group of items and there are children still referencing the missing parent. This method will
+     * remove the reference from the children to the parent and set item properties to root values.
+     *
+     * @param rootId The ID of the "root" of the container.
+     * @param items Array of Items that should be adjusted.
+     * @returns Array of Items that have been adopted.
+     */
+    adoptOrphanedItems(rootId: string, items: Item[]): Item[];
+    /**
+     * Populate a Map object of items for quick lookup using their ID.
+     *
+     * @param items An array of Items that should be added to a Map.
+     * @returns A Map where the keys are the item IDs and the values are the corresponding Item objects.
+     */
+    generateItemsMap(items: Item[]): Map<string, Item>;
 }
 declare namespace ItemHelper {
     interface ItemSize {

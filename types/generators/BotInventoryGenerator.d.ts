@@ -58,10 +58,21 @@ export declare class BotInventoryGenerator {
      */
     protected generateAndAddEquipmentToBot(templateInventory: Inventory, wornItemChances: Chances, botRole: string, botInventory: PmcInventory, botLevel: number): void;
     /**
+     * Remove non-armored rigs from parameter data
+     * @param templateInventory
+     */
+    protected filterRigsToThoseWithProtection(templateInventory: Inventory): void;
+    /**
+     * Remove armored rigs from parameter data
+     * @param templateInventory
+     */
+    protected filterRigsToThoseWithoutProtection(templateInventory: Inventory): void;
+    /**
      * Add a piece of equipment with mods to inventory from the provided pools
      * @param settings Values to adjust how item is chosen and added to bot
+     * @returns true when item added
      */
-    protected generateEquipment(settings: IGenerateEquipmentProperties): void;
+    protected generateEquipment(settings: IGenerateEquipmentProperties): boolean;
     /**
      * Get all possible mods for item and filter down based on equipment blacklist from bot.json config
      * @param itemTpl Item mod pool is being retrieved and filtered

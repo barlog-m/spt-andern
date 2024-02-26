@@ -161,6 +161,7 @@ export interface ModDetails {
     version: string;
     author: string;
     dateAdded: number;
+    url: string;
 }
 export interface ReceivedGift {
     giftId: string;
@@ -216,17 +217,11 @@ export interface Inraid {
 export interface Insurance {
     scheduledTime: number;
     traderId: string;
-    messageContent: MessageContent;
+    maxStorageTime: number;
+    systemData: ISystemData;
+    messageType: MessageType;
+    messageTemplateId: string;
     items: Item[];
-}
-export interface MessageContent {
-    ragfair?: MessageContentRagfair;
-    text?: string;
-    templateId: string;
-    type: MessageType;
-    maxStorageTime?: number;
-    profileChangeEvents?: any[];
-    systemData?: ISystemData;
 }
 export interface MessageContentRagfair {
     offerId: string;

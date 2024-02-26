@@ -62,4 +62,6 @@ export declare class InraidCallbacks {
      * Handle singleplayer/traderServices/itemDelivery
      */
     itemDelivery(url: string, request: IItemDeliveryRequestData, sessionId: string): INullResponseData;
+    getTraitorScavHostileChance(url: string, info: IEmptyRequestData, sessionId: string): string;
+    getSandboxMaxPatrolValue(url: string, info: IEmptyRequestData, sessionId: string): string;
 }

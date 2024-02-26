@@ -8,7 +8,7 @@ import { IGetInsuranceCostRequestData } from "@spt-aki/models/eft/insurance/IGet
 import { IGetInsuranceCostResponseData } from "@spt-aki/models/eft/insurance/IGetInsuranceCostResponseData";
 import { IInsureRequestData } from "@spt-aki/models/eft/insurance/IInsureRequestData";
 import { IItemEventRouterResponse } from "@spt-aki/models/eft/itemEvent/IItemEventRouterResponse";
-import { ISystemData, Insurance } from "@spt-aki/models/eft/profile/IAkiProfile";
+import { Insurance } from "@spt-aki/models/eft/profile/IAkiProfile";
 import { IInsuranceConfig } from "@spt-aki/models/spt/config/IInsuranceConfig";
 import { ILogger } from "@spt-aki/models/spt/utils/ILogger";
 import { EventOutputHolder } from "@spt-aki/routers/EventOutputHolder";
@@ -18,6 +18,7 @@ import { SaveServer } from "@spt-aki/servers/SaveServer";
 import { InsuranceService } from "@spt-aki/services/InsuranceService";
 import { MailSendService } from "@spt-aki/services/MailSendService";
 import { PaymentService } from "@spt-aki/services/PaymentService";
+import { HashUtil } from "@spt-aki/utils/HashUtil";
 import { MathUtil } from "@spt-aki/utils/MathUtil";
 import { RandomUtil } from "@spt-aki/utils/RandomUtil";
 import { TimeUtil } from "@spt-aki/utils/TimeUtil";
@@ -25,6 +26,7 @@ export declare class InsuranceController {
     protected logger: ILogger;
     protected randomUtil: RandomUtil;
     protected mathUtil: MathUtil;
+    protected hashUtil: HashUtil;
     protected eventOutputHolder: EventOutputHolder;
     protected timeUtil: TimeUtil;
     protected saveServer: SaveServer;
@@ -39,7 +41,7 @@ export declare class InsuranceController {
     protected configServer: ConfigServer;
     protected insuranceConfig: IInsuranceConfig;
     protected roubleTpl: string;
-    constructor(logger: ILogger, randomUtil: RandomUtil, mathUtil: MathUtil, eventOutputHolder: EventOutputHolder, timeUtil: TimeUtil, saveServer: SaveServer, databaseServer: DatabaseServer, itemHelper: ItemHelper, profileHelper: ProfileHelper, dialogueHelper: DialogueHelper, traderHelper: TraderHelper, paymentService: PaymentService, insuranceService: InsuranceService, mailSendService: MailSendService, configServer: ConfigServer);
+    constructor(logger: ILogger, randomUtil: RandomUtil, mathUtil: MathUtil, hashUtil: HashUtil, eventOutputHolder: EventOutputHolder, timeUtil: TimeUtil, saveServer: SaveServer, databaseServer: DatabaseServer, itemHelper: ItemHelper, profileHelper: ProfileHelper, dialogueHelper: DialogueHelper, traderHelper: TraderHelper, paymentService: PaymentService, insuranceService: InsuranceService, mailSendService: MailSendService, configServer: ConfigServer);
     /**
      * Process insurance items of all profiles prior to being given back to the player through the mail service.
      *
@@ -81,31 +83,35 @@ export declare class InsuranceController {
      * @param index The array index of the insurance package to remove.
      * @returns void
      */
-    protected removeInsurancePackageFromProfile(sessionID: string, packageInfo: ISystemData): void;
+    protected removeInsurancePackageFromProfile(sessionID: string, insPackage: Insurance): void;
     /**
      * Finds the items that should be deleted based on the given Insurance object.
      *
-     * @param insured The insurance object containing the items to evaluate for deletion.
+     * @param rootItemParentID - The ID that should be assigned to all "hideout"/root items.
+     * @param insured - The insurance object containing the items to evaluate for deletion.
      * @returns A Set containing the IDs of items that should be deleted.
      */
-    protected findItemsToDelete(insured: Insurance): Set<string>;
-    /**
-     * Populate a Map object of items for quick lookup by their ID.
-     *
-     * @param insured The insurance object containing the items to populate the map with.
-     * @returns A Map where the keys are the item IDs and the values are the corresponding Item objects.
-     */
-    protected populateItemsMap(insured: Insurance): Map<string, Item>;
+    protected findItemsToDelete(rootItemParentID: string, insured: Insurance): Set<string>;
     /**
      * Initialize a Map object that holds main-parents to all of their attachments. Note that "main-parent" in this
      * context refers to the parent item that an attachment is attached to. For example, a suppressor attached to a gun,
      * not the backpack that the gun is located in (the gun's parent).
      *
+     * @param rootItemParentID - The ID that should be assigned to all "hideout"/root items.
      * @param insured - The insurance object containing the items to evaluate.
      * @param itemsMap - A Map object for quick item look-up by item ID.
      * @returns A Map object containing parent item IDs to arrays of their attachment items.
      */
-    protected populateParentAttachmentsMap(insured: Insurance, itemsMap: Map<string, Item>): Map<string, Item[]>;
+    protected populateParentAttachmentsMap(rootItemParentID: string, insured: Insurance, itemsMap: Map<string, Item>): Map<string, Item[]>;
+    /**
+     * Remove attachments that can not be moddable in-raid from the parentAttachmentsMap. If no moddable attachments
+     * remain, the parent is removed from the map as well.
+     *
+     * @param parentAttachmentsMap - A Map object containing parent item IDs to arrays of their attachment items.
+     * @param itemsMap - A Map object for quick item look-up by item ID.
+     * @returns A Map object containing parent item IDs to arrays of their attachment items which are not moddable in-raid.
+     */
+    protected removeNonModdableAttachments(parentAttachmentsMap: Map<string, Item[]>, itemsMap: Map<string, Item>): Map<string, Item[]>;
     /**
      * Process "regular" insurance items. Any insured item that is not an attached, attachment is considered a "regular"
      * item. This method iterates over them, preforming item deletion rolls to see if they should be deleted. If so,
@@ -113,9 +119,10 @@ export declare class InsuranceController {
      *
      * @param insured The insurance object containing the items to evaluate.
      * @param toDelete A Set to keep track of items marked for deletion.
+     * @param parentAttachmentsMap A Map object containing parent item IDs to arrays of their attachment items.
      * @returns void
      */
-    protected processRegularItems(insured: Insurance, toDelete: Set<string>): void;
+    protected processRegularItems(insured: Insurance, toDelete: Set<string>, parentAttachmentsMap: Map<string, Item[]>): void;
     /**
      * Process parent items and their attachments, updating the toDelete Set accordingly.
      *
@@ -174,22 +181,6 @@ export declare class InsuranceController {
      * @returns void
      */
     protected removeItemsFromInsurance(insured: Insurance, toDelete: Set<string>): void;
-    /**
-     * Adopts orphaned items by resetting them as base-level items. Helpful in situations where a parent has been
-     * deleted from insurance, but any insured items within the parent should remain. This method will remove the
-     * reference from the children to the parent and set item properties to main-level values.
-     *
-     * @param insured Insurance object containing items.
-     */
-    protected adoptOrphanedItems(insured: Insurance): void;
-    /**
-     * Fetches the parentId property of an item with a slotId "hideout". Not sure if this is actually dynamic, but this
-     * method should be a reliable way to fetch it, if it ever does change.
-     *
-     * @param items Array of items to search through.
-     * @returns The parentId of an item with slotId 'hideout'. Empty string if not found.
-     */
-    protected fetchHideoutItemParent(items: Item[]): string;
     /**
      * Handle sending the insurance message to the user that potentially contains the valid insurance items.
      *

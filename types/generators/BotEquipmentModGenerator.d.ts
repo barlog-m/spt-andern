@@ -6,10 +6,13 @@ import { PresetHelper } from "@spt-aki/helpers/PresetHelper";
 import { ProbabilityHelper } from "@spt-aki/helpers/ProbabilityHelper";
 import { ProfileHelper } from "@spt-aki/helpers/ProfileHelper";
 import { WeightedRandomHelper } from "@spt-aki/helpers/WeightedRandomHelper";
+import { IPreset } from "@spt-aki/models/eft/common/IGlobals";
 import { Mods, ModsChances } from "@spt-aki/models/eft/common/tables/IBotType";
 import { Item } from "@spt-aki/models/eft/common/tables/IItem";
 import { ITemplateItem, Slot } from "@spt-aki/models/eft/common/tables/ITemplateItem";
-import { EquipmentFilterDetails, IBotConfig } from "@spt-aki/models/spt/config/IBotConfig";
+import { ModSpawn } from "@spt-aki/models/enums/ModSpawn";
+import { IChooseRandomCompatibleModResult } from "@spt-aki/models/spt/bots/IChooseRandomCompatibleModResult";
+import { EquipmentFilterDetails, EquipmentFilters, IBotConfig } from "@spt-aki/models/spt/config/IBotConfig";
 import { ILogger } from "@spt-aki/models/spt/utils/ILogger";
 import { ConfigServer } from "@spt-aki/servers/ConfigServer";
 import { DatabaseServer } from "@spt-aki/servers/DatabaseServer";
@@ -54,7 +57,7 @@ export declare class BotEquipmentModGenerator {
      * @param forceSpawn should this mod be forced to spawn
      * @returns Item + compatible mods as an array
      */
-    generateModsForEquipment(equipment: Item[], parentId: string, parentTemplate: ITemplateItem, settings: IGenerateEquipmentProperties, forceSpawn?: boolean): Item[];
+    generateModsForEquipment(equipment: Item[], parentId: string, parentTemplate: ITemplateItem, settings: IGenerateEquipmentProperties, shouldForceSpawn?: boolean): Item[];
     /**
      * Filter a bots plate pool based on its current level
      * @param settings Bot equipment generation settings
@@ -69,7 +72,7 @@ export declare class BotEquipmentModGenerator {
      * @param sessionId session id
      * @param weapon Weapon to add mods to
      * @param modPool Pool of compatible mods to attach to weapon
-     * @param weaponParentId parentId of weapon
+     * @param weaponId parentId of weapon
      * @param parentTemplate Weapon which mods will be generated on
      * @param modSpawnChances Mod spawn chances
      * @param ammoTpl Ammo tpl to use when generating magazines/cartridges
@@ -79,7 +82,7 @@ export declare class BotEquipmentModGenerator {
      * @param botEquipmentRole role of bot when accessing bot.json equipment config settings
      * @returns Weapon + mods array
      */
-    generateModsForWeapon(sessionId: string, weapon: Item[], modPool: Mods, weaponParentId: string, parentTemplate: ITemplateItem, modSpawnChances: ModsChances, ammoTpl: string, botRole: string, botLevel: number, modLimits: BotModLimits, botEquipmentRole: string): Item[];
+    generateModsForWeapon(sessionId: string, weapon: Item[], modPool: Mods, weaponId: string, parentTemplate: ITemplateItem, modSpawnChances: ModsChances, ammoTpl: string, botRole: string, botLevel: number, modLimits: BotModLimits, botEquipmentRole: string): Item[];
     /**
      * Is this modslot a front or rear sight
      * @param modSlot Slot to check
@@ -106,16 +109,16 @@ export declare class BotEquipmentModGenerator {
      * @param parentTemplate item template
      * @returns Slot item
      */
-    protected getModItemSlot(modSlot: string, parentTemplate: ITemplateItem): Slot;
+    protected getModItemSlotFromDb(modSlot: string, parentTemplate: ITemplateItem): Slot;
     /**
      * Randomly choose if a mod should be spawned, 100% for required mods OR mod is ammo slot
-     * never return true for an item that has 0% spawn chance
      * @param itemSlot slot the item sits in
      * @param modSlot slot the mod sits in
      * @param modSpawnChances Chances for various mod spawns
-     * @returns boolean true if it should spawn
+     * @param botEquipConfig Various config settings for generating this type of bot
+     * @returns ModSpawn.SPAWN when mod should be spawned, ModSpawn.DEFAULT_MOD when default mod should spawn, ModSpawn.SKIP when mod is skipped
      */
-    protected shouldModBeSpawned(itemSlot: Slot, modSlot: string, modSpawnChances: ModsChances): boolean;
+    protected shouldModBeSpawned(itemSlot: Slot, modSlot: string, modSpawnChances: ModsChances, botEquipConfig: EquipmentFilters): ModSpawn;
     /**
      * @param modSlot Slot mod will fit into
      * @param isRandomisableSlot Will generate a randomised mod pool if true
@@ -125,9 +128,32 @@ export declare class BotEquipmentModGenerator {
      * @param weapon array with only weapon tpl in it, ready for mods to be added
      * @param ammoTpl ammo tpl to use if slot requires a cartridge to be added (e.g. mod_magazine)
      * @param parentTemplate Parent item the mod will go into
-     * @returns ITemplateItem
+     * @returns itemHelper.getItem() result
      */
-    protected chooseModToPutIntoSlot(modSlot: string, isRandomisableSlot: boolean, botWeaponSightWhitelist: Record<string, string[]>, botEquipBlacklist: EquipmentFilterDetails, itemModPool: Record<string, string[]>, weapon: Item[], ammoTpl: string, parentTemplate: ITemplateItem): [boolean, ITemplateItem];
+    protected chooseModToPutIntoSlot(modSlot: string, isRandomisableSlot: boolean, botWeaponSightWhitelist: Record<string, string[]>, botEquipBlacklist: EquipmentFilterDetails, itemModPool: Record<string, string[]>, weapon: Item[], ammoTpl: string, parentTemplate: ITemplateItem, modSpawnResult: ModSpawn): [boolean, ITemplateItem];
+    protected pickWeaponModTplForSlotFromPool(modPool: string[], parentSlot: Slot, modSpawnResult: ModSpawn, weapon: Item[], modSlotname: string): IChooseRandomCompatibleModResult;
+    /**
+     * Filter mod pool down based on various criteria:
+     * Is slot flagged as randomisable
+     * Is slot required
+     * Is slot flagged as default mod only
+     * @param itemModPool Existing pool of mods to choose
+     * @param modSpawnResult outcome of random roll to select if mod should be added
+     * @param parentTemplate Mods parent
+     * @param weaponTemplate Mods root parent (weapon/equipment)
+     * @param modSlot name of mod slot to choose for
+     * @param botEquipBlacklist
+     * @param isRandomisableSlot is flagged as a randomisable slot
+     * @returns
+     */
+    protected getModPoolForSlot(itemModPool: Record<string, string[]>, modSpawnResult: ModSpawn, parentTemplate: ITemplateItem, weaponTemplate: ITemplateItem, modSlot: string, botEquipBlacklist: EquipmentFilterDetails, isRandomisableSlot: boolean): string[];
+    /**
+     * Get default preset for weapon, get specific weapon presets for edge cases (mp5/silenced dvl)
+     * @param weaponTemplate
+     * @param parentItemTpl
+     * @returns
+     */
+    protected getMatchingPreset(weaponTemplate: ITemplateItem, parentItemTpl: string): IPreset;
     /**
      * Temp fix to prevent certain combinations of weapons with mods that are known to be incompatible
      * @param weapon Weapon
@@ -159,17 +185,17 @@ export declare class BotEquipmentModGenerator {
      * @param items items to ensure picked mod is compatible with
      * @returns item tpl
      */
-    protected getModTplFromItemDb(modTpl: string, parentSlot: Slot, modSlot: string, items: Item[]): string;
+    protected getRandomModTplFromItemDb(modTpl: string, parentSlot: Slot, modSlot: string, items: Item[]): string;
     /**
      * Log errors if mod is not compatible with slot
      * @param modToAdd template of mod to check
-     * @param itemSlot slot the item will be placed in
+     * @param slotAddedToTemplate slot the item will be placed in
      * @param modSlot slot the mod will fill
-     * @param parentTemplate template of the mods parent item
+     * @param parentTemplate template of the mods being added
      * @param botRole
      * @returns true if valid
      */
-    protected isModValidForSlot(modToAdd: [boolean, ITemplateItem], itemSlot: Slot, modSlot: string, parentTemplate: ITemplateItem, botRole: string): boolean;
+    protected isModValidForSlot(modToAdd: [boolean, ITemplateItem], slotAddedToTemplate: Slot, modSlot: string, parentTemplate: ITemplateItem, botRole: string): boolean;
     /**
      * Find mod tpls of a provided type and add to modPool
      * @param desiredSlotName slot to look up and add we are adding tpls for (e.g mod_scope)

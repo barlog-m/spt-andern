@@ -27,12 +27,12 @@ export declare class PaymentService {
     constructor(logger: ILogger, hashUtil: HashUtil, httpResponse: HttpResponseUtil, databaseServer: DatabaseServer, handbookHelper: HandbookHelper, traderHelper: TraderHelper, itemHelper: ItemHelper, inventoryHelper: InventoryHelper, localisationService: LocalisationService, paymentHelper: PaymentHelper);
     /**
      * Take money and insert items into return to server request
-     * @param {IPmcData} pmcData Player profile
-     * @param {IProcessBuyTradeRequestData} request
-     * @param {string} sessionID
-     * @returns IItemEventRouterResponse
+     * @param pmcData Pmc profile
+     * @param request Buy item request
+     * @param sessionID Session id
+     * @param output Client response
      */
-    payMoney(pmcData: IPmcData, request: IProcessBuyTradeRequestData, sessionID: string, output: IItemEventRouterResponse): IItemEventRouterResponse;
+    payMoney(pmcData: IPmcData, request: IProcessBuyTradeRequestData, sessionID: string, output: IItemEventRouterResponse): void;
     /**
      * Get the item price of a specific traders assort
      * @param traderAssortId Id of assort to look up

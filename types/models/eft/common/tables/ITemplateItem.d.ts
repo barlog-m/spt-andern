@@ -173,6 +173,9 @@ export interface Props {
     MaxDurability?: number;
     armorZone?: string[];
     armorClass?: string | number;
+    armorColliders?: string[];
+    armorPlateColliders?: string[];
+    bluntDamageReduceFromSoftArmor?: boolean;
     mousePenalty?: number;
     weaponErgonomicPenalty?: number;
     BluntThroughput?: number;
@@ -400,6 +403,15 @@ export interface Props {
     LinkedWeapon?: string;
     UseAmmoWithoutShell?: boolean;
     RandomLootSettings?: IRandomLootSettings;
+    RecoilCategoryMultiplierHandRotation?: number;
+    RecoilDampingHandRotation?: number;
+    LeanWeaponAgainstBody?: boolean;
+    RemoveShellAfterFire?: boolean;
+    RepairStrategyTypes?: string[];
+    IsEncoded?: boolean;
+    LayoutName?: string;
+    Lower75Prefab?: Prefab;
+    MaxUsages?: number;
 }
 export interface IHealthEffect {
     type: string;

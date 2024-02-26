@@ -17,7 +17,7 @@ export declare class ExternalInventoryMagGen implements IInventoryMagGen {
     canHandleInventoryMagGen(inventoryMagGen: InventoryMagGen): boolean;
     process(inventoryMagGen: InventoryMagGen): void;
     /**
-     * Get a random compatible external magazine for a weapon, excluses internal magazines from possible pool
+     * Get a random compatible external magazine for a weapon, exclude internal magazines from possible pool
      * @param weaponTpl Weapon to get mag for
      * @returns tpl of magazine
      */

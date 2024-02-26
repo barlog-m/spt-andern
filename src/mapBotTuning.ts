@@ -12,6 +12,8 @@ import {
     ILocationBase,
     BossLocationSpawn,
 } from "@spt-aki/models/eft/common/ILocationBase";
+import {Difficulty, IBotType} from "@spt-aki/models/eft/common/tables/IBotType";
+
 import * as fs from "fs";
 
 import config from "../config/config.json";
@@ -64,6 +66,10 @@ export function mapBotTuning(
 
     if (config.mapPmcBrainsConfig !== "default") {
         setPmcBrains(configServer, databaseTables, logger, modPath);
+    }
+
+    if (config.mapBotBrainsTuning) {
+        botBrainsTuning(databaseTables);
     }
 }
 
@@ -435,4 +441,50 @@ function loadPmcBrains(
         logger.error(`[Andern] error read file '${brainsFileName}'`);
         logger.error(err.message);
     }
+}
+
+function botBrainsTuning(databaseTables: IDatabaseTables): undefined {
+    assaultBrainTuning(databaseTables);
+    pmcbotBrainTuning(databaseTables);
+    pmcBrainTuning(databaseTables);
+}
+
+function assaultBrainTuning(databaseTables: IDatabaseTables): undefined {
+    const assault: IBotType = databaseTables.bots.types["assault"];
+
+    Object.entries(assault.difficulty).forEach(([name, difficulty]: [string, Difficulty]) => {
+        difficulty.Shoot["CHANCE_TO_CHANGE_WEAPON"] = 80;
+        difficulty.Shoot["CHANCE_TO_CHANGE_WEAPON_WITH_HELMET"] = 40;
+    });
+}
+
+function pmcbotBrainTuning(databaseTables: IDatabaseTables): undefined {
+    const pmcbot: IBotType = databaseTables.bots.types["pmcbot"];
+
+    Object.entries(pmcbot.difficulty).forEach(([name, difficulty]: [string, Difficulty]) => {
+        brainTunning(difficulty);
+    });
+}
+
+function pmcBrainTuning(databaseTables: IDatabaseTables): undefined {
+    const usec: IBotType = databaseTables.bots.types["usec"];
+    const bear: IBotType = databaseTables.bots.types["bear"];
+
+    brainTunning(usec.difficulty.normal);
+    brainTunning(bear.difficulty.normal);
+}
+
+function brainTunning(difficulty: Difficulty): undefined {
+    if (config.mapBotDisablePmcTalkativeness) {
+        difficulty.Mind["CAN_TALK"] = false
+        difficulty.Mind["TALK_WITH_QUERY"] = false
+    }
+
+    difficulty.Core["AccuratySpeed"] = 0.2;
+    difficulty.Core["GainSightCoef"] = 0.1;
+
+    difficulty.Shoot["HORIZONT_RECOIL_COEF"] = 0.1;
+    difficulty.Shoot["MAX_RECOIL_PER_METER"] = 0.1;
+    difficulty.Shoot["RECOIL_PER_METER"] = 0.05;
+    difficulty.Shoot["RECOIL_TIME_NORMALIZE"] = 1.2;
 }

@@ -14,6 +14,10 @@ import {MemberCategory} from "@spt-aki/models/enums/MemberCategory";
 import {
     ISeasonalEventConfig
 } from "@spt-aki/models/spt/config/ISeasonalEventConfig";
+import {IRagfairConfig} from "@spt-aki/models/spt/config/IRagfairConfig";
+import {DoeTraderArmorGenerator} from "./DoeTraderArmorGenerator";
+import {SeasonalEventService} from "@spt-aki/services/SeasonalEventService";
+import {IPlayerScavConfig} from "@spt-aki/models/spt/config/IPlayerScavConfig";
 import {ModConfig} from "./ModConfig";
 import {DoeTrader} from "./DoeTrader";
 import {Data} from "./Data";
@@ -31,9 +35,7 @@ import {mapBotTuning, setPmcForceHealingItems} from "./mapBotTuning";
 import cheeseQuests from "./questUtils";
 import vssOverheatFix from "./weaponUtils";
 import * as config from "../config/config.json";
-import {IRagfairConfig} from "@spt-aki/models/spt/config/IRagfairConfig";
-import {DoeTraderArmorGenerator} from "./DoeTraderArmorGenerator";
-import {SeasonalEventService} from "@spt-aki/services/SeasonalEventService";
+import botBrainsTuning from "./botBrainsTuning";
 
 export class Andern implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
     private readonly fullModName: string;
@@ -184,6 +186,10 @@ export class Andern implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
         if (config.disableBtr) {
             this.disableBtr(container);
         }
+        
+        if (config.playerScavAlwaysHasBackpack) {
+            this.playerScavAlwaysHasBackpack(container);
+        }
     }
 
     private setMinFleaLevel(container: DependencyContainer): undefined {
@@ -268,16 +274,24 @@ export class Andern implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
         ragfairConfig.dynamic.blacklist.traderItems = true;
     }
 
-    private enableSnow(container: DependencyContainer) {
+    enableSnow(container: DependencyContainer): undefined {
         const seasonalEventService: SeasonalEventService =
             container.resolve<SeasonalEventService>("SeasonalEventService");
         seasonalEventService.enableSnow();
     }
     
-    private disableBtr(container: DependencyContainer) {
+    disableBtr(container: DependencyContainer): undefined {
         const databaseServer: DatabaseServer =
             container.resolve<DatabaseServer>("DatabaseServer");
         databaseServer.getTables().globals.config.BTRSettings.LocationsWithBTR = []
+    }
+
+    playerScavAlwaysHasBackpack(container: DependencyContainer): undefined {
+        const configServer = container.resolve<ConfigServer>("ConfigServer");
+        const playerScavConfig = configServer.getConfig<IPlayerScavConfig>(ConfigTypes.PLAYERSCAV);
+        Object.entries(playerScavConfig.karmaLevel).forEach(([karmaLevel, karmaValues]) => {
+            karmaValues.modifiers.equipment["Backpack"] = 100;
+        });
     }
 }
 

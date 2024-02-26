@@ -1,4 +1,5 @@
 import { ProfileController } from "@spt-aki/controllers/ProfileController";
+import { ProfileHelper } from "@spt-aki/helpers/ProfileHelper";
 import { IEmptyRequestData } from "@spt-aki/models/eft/common/IEmptyRequestData";
 import { IPmcData } from "@spt-aki/models/eft/common/IPmcData";
 import { IGetBodyResponseData } from "@spt-aki/models/eft/httpResponse/IGetBodyResponseData";
@@ -22,7 +23,8 @@ export declare class ProfileCallbacks {
     protected httpResponse: HttpResponseUtil;
     protected timeUtil: TimeUtil;
     protected profileController: ProfileController;
-    constructor(httpResponse: HttpResponseUtil, timeUtil: TimeUtil, profileController: ProfileController);
+    protected profileHelper: ProfileHelper;
+    constructor(httpResponse: HttpResponseUtil, timeUtil: TimeUtil, profileController: ProfileController, profileHelper: ProfileHelper);
     /**
      * Handle client/game/profile/create
      */

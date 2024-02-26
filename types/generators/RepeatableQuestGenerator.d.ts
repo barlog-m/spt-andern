@@ -156,15 +156,17 @@ export declare class RepeatableQuestGenerator {
      *
      * There's also a random variation of the reward the spread of which can be also defined in the config.
      *
-     * Additonaly, a scaling factor w.r.t. quest difficulty going from 0.2...1 can be used
+     * Additionally, a scaling factor w.r.t. quest difficulty going from 0.2...1 can be used
      *
      * @param   {integer}   pmcLevel            player's level
-     * @param   {number}    difficulty          a reward scaling factor goint from 0.2 to 1
+     * @param   {number}    difficulty          a reward scaling factor from 0.2 to 1
      * @param   {string}    traderId            the trader for reputation gain (and possible in the future filtering of reward item type based on trader)
-     * @param   {object}    repeatableConfig    The configuration for the repeatably kind (daily, weekly) as configured in QuestConfig for the requestd quest
+     * @param   {object}    repeatableConfig    The configuration for the repeatable kind (daily, weekly) as configured in QuestConfig for the requested quest
      * @returns {object}                        object of "Reward"-type that can be given for a repeatable mission
      */
     protected generateReward(pmcLevel: number, difficulty: number, traderId: string, repeatableConfig: IRepeatableQuestConfig, questConfig: IBaseQuestConfig): IQuestRewards;
+    protected addMoneyReward(traderId: string, rewards: IQuestRewards, rewardRoubles: number, rewardIndex: number): void;
+    protected calculateAmmoStackSizeThatFitsBudget(itemSelected: ITemplateItem, roublesBudget: number, rewardNumItems: number): number;
     /**
      * Should reward item have stack size increased (25% chance)
      * @param item Item to possibly increase stack size of

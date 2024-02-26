@@ -204,6 +204,11 @@
             "weight": 1,
             "id": "5df8a4d786f77412672a1e3b",
             "name": "6Sh118 raid backpack"
+        },
+        {
+            "weight": 1,
+            "id": "656e0436d44a1bb4220303a0",
+            "name": "Mystery Ranch SATL Bridger Assault Pack (Foliage)"
         }
     ],
     "face": [
@@ -216,6 +221,11 @@
             "weight": 1,
             "id": "5b432f3d5acfc4704b4a1dfb",
             "name": "Momex balaclava"
+        },
+        {
+            "weight": 1,
+            "id": "6570aead4d84f81fd002a033",
+            "name": "Death Shadow lightweight armored mask"
         }
     ],
     "eyewear": [

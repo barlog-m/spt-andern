@@ -28,18 +28,14 @@ export declare class FenceBaseAssortGenerator {
      * Create base fence assorts dynamically and store in memory
      */
     generateFenceBaseAssorts(): void;
+    protected getItemPrice(itemTpl: string, items: Item[]): number;
+    protected getAmmoBoxPrice(items: Item[]): number;
     /**
      * Add soft inserts + armor plates to an armor
      * @param armor Armor item array to add mods into
      * @param itemDbDetails Armor items db template
      */
     protected addChildrenToArmorModSlots(armor: Item[], itemDbDetails: ITemplateItem): void;
-    /**
-     * Calculate and return the price of an item and its child mods
-     * @param itemWithChildren Item + mods to calcualte price of
-     * @returns price
-     */
-    protected getHandbookItemPriceWithChildren(itemWithChildren: Item[]): number;
     /**
      * Check if item is valid for being added to fence assorts
      * @param item Item to check

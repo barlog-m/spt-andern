@@ -78,11 +78,11 @@ export declare class BotGenerator {
     /**
      * Create a bot nickname
      * @param botJsonTemplate x.json from database
-     * @param isPlayerScav Will bot be player scav
+     * @param botGenerationDetails
      * @param botRole role of bot e.g. assault
      * @returns Nickname for bot
      */
-    protected generateBotNickname(botJsonTemplate: IBotType, isPlayerScav: boolean, botRole: string, sessionId: string): string;
+    protected generateBotNickname(botJsonTemplate: IBotType, botGenerationDetails: BotGenerationDetails, botRole: string, sessionId: string): string;
     /**
      * Log the number of PMCs generated to the debug console
      * @param output Generated bot array, ready to send to client
@@ -113,8 +113,8 @@ export declare class BotGenerator {
      * @param bot bot to update
      * @returns updated IBotBase object
      */
-    protected generateId(bot: IBotBase): IBotBase;
-    protected generateInventoryID(profile: IBotBase): IBotBase;
+    protected generateId(bot: IBotBase): void;
+    protected generateInventoryID(profile: IBotBase): void;
     /**
      * Randomise a bots game version and account category
      * Chooses from all the game versions (standard, eod etc)

@@ -51,7 +51,6 @@ export declare class ProfileFixerService {
     protected ensureGunStandLevelsMatch(pmcProfile: IPmcData): void;
     protected addHideoutAreaStashes(pmcProfile: IPmcData): void;
     protected addMissingHideoutWallAreas(pmcProfile: IPmcData): void;
-    protected adjustUnreasonableModFleaPrices(): void;
     /**
      * Add tag to profile to indicate when it was made
      * @param fullProfile

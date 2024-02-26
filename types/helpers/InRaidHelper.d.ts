@@ -15,8 +15,8 @@ import { SaveServer } from "@spt-aki/servers/SaveServer";
 import { LocalisationService } from "@spt-aki/services/LocalisationService";
 import { ProfileFixerService } from "@spt-aki/services/ProfileFixerService";
 import { JsonUtil } from "@spt-aki/utils/JsonUtil";
-import { TimeUtil } from "@spt-aki/utils/TimeUtil";
 import { RandomUtil } from "@spt-aki/utils/RandomUtil";
+import { TimeUtil } from "@spt-aki/utils/TimeUtil";
 import { ProfileHelper } from "./ProfileHelper";
 export declare class InRaidHelper {
     protected logger: ILogger;
@@ -53,7 +53,8 @@ export declare class InRaidHelper {
      * @param victims Array of kills player performed
      * @returns adjusted karma level after kills are taken into account
      */
-    calculateFenceStandingChangeFromKills(existingFenceStanding: number, victims: Victim[]): number;
+    calculateFenceStandingChangeFromKillsAsScav(existingFenceStanding: number, victims: Victim[]): number;
+    protected getAdditionalLossForKill(fenceStanding: number, repChangeForKill: number): number;
     /**
      * Get the standing gain/loss for killing an npc
      * @param victim Who was killed by player
@@ -137,16 +138,15 @@ export declare class InRaidHelper {
      * @param sessionID Session id
      * @param serverProfile Profile to update
      * @param postRaidProfile Profile returned by client after a raid
-     * @returns Updated profile
      */
-    setInventory(sessionID: string, serverProfile: IPmcData, postRaidProfile: IPmcData): IPmcData;
+    setInventory(sessionID: string, serverProfile: IPmcData, postRaidProfile: IPmcData): void;
     /**
-     * Clear pmc inventory of all items except those that are exempt
+     * Clear PMC inventory of all items except those that are exempt
      * Used post-raid to remove items after death
      * @param pmcData Player profile
-     * @param sessionID Session id
+     * @param sessionId Session id
      */
-    deleteInventory(pmcData: IPmcData, sessionID: string): void;
+    deleteInventory(pmcData: IPmcData, sessionId: string): void;
     /**
      * Get an array of items from a profile that will be lost on death
      * @param pmcProfile Profile to get items from

@@ -5,6 +5,7 @@ export interface IGlobals {
     config: IConfig;
     bot_presets: IBotPreset[];
     AudioSettings: IAudioSettings;
+    EnvironmentSettings: IEnvironmentSettings;
     BotWeaponScatterings: IBotWeaponScattering[];
     ItemPresets: Record<string, IPreset>;
 }
@@ -39,6 +40,7 @@ export interface IConfig {
     BaseLoadTime: number;
     BaseUnloadTime: number;
     BaseCheckTime: number;
+    BluntDamageReduceFromSoftArmorMod: number;
     Customization: ICustomization;
     UncheckOnShot: boolean;
     BotsEnabled: boolean;
@@ -681,6 +683,7 @@ export interface IBodyPartsSetting {
     Minimum: number;
     Maximum: number;
     Default: number;
+    EnvironmentDamageMultiplier: number;
     OverDamageReceivedMultiplier: number;
 }
 export interface IHealthFactorsSettings {
@@ -1441,6 +1444,14 @@ export interface IAudioGroupPreset {
     OcclusionEnabled: boolean;
     OcclusionIntensity: number;
     OverallVolume: number;
+}
+export interface IEnvironmentSettings {
+    SnowStepsVolumeMultiplier: number;
+    SurfaceMultipliers: ISurfaceMultiplier[];
+}
+export interface ISurfaceMultiplier {
+    SurfaceType: string;
+    VolumeMult: number;
 }
 export interface IBotWeaponScattering {
     Name: string;

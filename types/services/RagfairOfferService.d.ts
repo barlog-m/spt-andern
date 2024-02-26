@@ -1,7 +1,6 @@
 import { ProfileHelper } from "@spt-aki/helpers/ProfileHelper";
 import { RagfairServerHelper } from "@spt-aki/helpers/RagfairServerHelper";
 import { Item } from "@spt-aki/models/eft/common/tables/IItem";
-import { IItemEventRouterResponse } from "@spt-aki/models/eft/itemEvent/IItemEventRouterResponse";
 import { IRagfairOffer } from "@spt-aki/models/eft/ragfair/IRagfairOffer";
 import { IRagfairConfig } from "@spt-aki/models/spt/config/IRagfairConfig";
 import { ILogger } from "@spt-aki/models/spt/utils/ILogger";
@@ -84,5 +83,5 @@ export declare class RagfairOfferService {
      * @param staleOffer Stale offer to process
      */
     protected processStaleOffer(staleOffer: IRagfairOffer): void;
-    protected returnPlayerOffer(offer: IRagfairOffer): IItemEventRouterResponse;
+    protected returnPlayerOffer(playerOffer: IRagfairOffer): void;
 }

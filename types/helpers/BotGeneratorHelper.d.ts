@@ -3,6 +3,7 @@ import { DurabilityLimitsHelper } from "@spt-aki/helpers/DurabilityLimitsHelper"
 import { ItemHelper } from "@spt-aki/helpers/ItemHelper";
 import { Item, Repairable, Upd } from "@spt-aki/models/eft/common/tables/IItem";
 import { ITemplateItem } from "@spt-aki/models/eft/common/tables/ITemplateItem";
+import { IChooseRandomCompatibleModResult } from "@spt-aki/models/spt/bots/IChooseRandomCompatibleModResult";
 import { EquipmentFilters, IBotConfig, IRandomisedResourceValues } from "@spt-aki/models/spt/config/IBotConfig";
 import { IPmcConfig } from "@spt-aki/models/spt/config/IPmcConfig";
 import { ILogger } from "@spt-aki/models/spt/utils/ILogger";
@@ -62,6 +63,7 @@ export declare class BotGeneratorHelper {
      * @returns Repairable object
      */
     protected generateArmorRepairableProperties(itemTemplate: ITemplateItem, botRole: string): Repairable;
+    isWeaponModIncompatibleWithCurrentMods(itemsEquipped: Item[], tplToCheck: string, modSlot: string): IChooseRandomCompatibleModResult;
     /**
      * Can item be added to another item without conflict
      * @param itemsEquipped Items to check compatibilities with
@@ -69,11 +71,7 @@ export declare class BotGeneratorHelper {
      * @param equipmentSlot Slot the item will be placed into
      * @returns false if no incompatibilities, also has incompatibility reason
      */
-    isItemIncompatibleWithCurrentItems(itemsEquipped: Item[], tplToCheck: string, equipmentSlot: string): {
-        incompatible: boolean;
-        reason: string;
-        slotBlocked?: boolean;
-    };
+    isItemIncompatibleWithCurrentItems(itemsEquipped: Item[], tplToCheck: string, equipmentSlot: string): IChooseRandomCompatibleModResult;
     /**
      * Convert a bots role to the equipment role used in config/bot.json
      * @param botRole Role to convert

@@ -22,7 +22,7 @@
     "chadsPercentage": 30,
     "chadsMinimumLevel": 42,
     "looseLootMultiplier": 1.2,
-    "staticLootMultiplier": 2,
+    "staticLootMultiplier": 4,
     "increaseStaticLootKeysSpawn": true,
     "increaseLooseLootKeysSpawn": true,
     "increaseLooseLootCardsSpawn": true,
@@ -35,7 +35,7 @@
     "mapMaxBotBuffExcludeStreets": true,
     "mapStreetsMaxBotCap": 0,
     "mapPmcBotDifficulty": "normal",
-    "mapBotAccuracyMultiplier": 0.9,
+    "mapBotAccuracyMultiplier": 0.85,
     "mapBossChanceBuff": 0,
     "mapScavToPmcConvertMultiplier": 0.8,
     "mapMakePmcAlwaysHostile": true,
@@ -43,6 +43,8 @@
     "mapDisableRaiderConvertToPmc": false,
     "mapDisableRogueConvertToPmc": true,
     "mapPmcBrainsConfig": "default",
+    "mapBotBrainsTuning": false,
+    "mapBotDisablePmcTalkativeness": true,
     "disablePmcBackpackWeapon": true,
     "disableEmissaryPmcBots": true,
     "disableSeasonalEvents": false,
@@ -54,5 +56,6 @@
     "fleaBlacklistDisable": false,
     "snow": false,
     "disableBtr": false,
+    "playerScavAlwaysHasBackpack": true,
     "debug": false
 }

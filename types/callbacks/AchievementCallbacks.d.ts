@@ -12,12 +12,10 @@ export declare class AchievementCallbacks {
     constructor(achievementController: AchievementController, profileController: ProfileController, httpResponse: HttpResponseUtil);
     /**
      * Handle client/achievement/list
-     *
      */
     getAchievements(url: string, info: IEmptyRequestData, sessionID: string): IGetBodyResponseData<IGetAchievementsResponse>;
     /**
      * Handle client/achievement/statistic
-     *
      */
     statistic(url: string, info: IEmptyRequestData, sessionID: string): IGetBodyResponseData<ICompletedAchievementsResponse>;
 }

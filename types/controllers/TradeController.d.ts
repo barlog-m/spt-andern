@@ -16,15 +16,24 @@ import { ITraderConfig } from "@spt-aki/models/spt/config/ITraderConfig";
 import { ILogger } from "@spt-aki/models/spt/utils/ILogger";
 import { EventOutputHolder } from "@spt-aki/routers/EventOutputHolder";
 import { ConfigServer } from "@spt-aki/servers/ConfigServer";
+import { DatabaseServer } from "@spt-aki/servers/DatabaseServer";
 import { RagfairServer } from "@spt-aki/servers/RagfairServer";
 import { LocalisationService } from "@spt-aki/services/LocalisationService";
+import { MailSendService } from "@spt-aki/services/MailSendService";
 import { RagfairPriceService } from "@spt-aki/services/RagfairPriceService";
+import { HashUtil } from "@spt-aki/utils/HashUtil";
 import { HttpResponseUtil } from "@spt-aki/utils/HttpResponseUtil";
 import { JsonUtil } from "@spt-aki/utils/JsonUtil";
+import { RandomUtil } from "@spt-aki/utils/RandomUtil";
+import { TimeUtil } from "@spt-aki/utils/TimeUtil";
 export declare class TradeController {
     protected logger: ILogger;
+    protected databaseServer: DatabaseServer;
     protected eventOutputHolder: EventOutputHolder;
     protected tradeHelper: TradeHelper;
+    protected timeUtil: TimeUtil;
+    protected randomUtil: RandomUtil;
+    protected hashUtil: HashUtil;
     protected itemHelper: ItemHelper;
     protected profileHelper: ProfileHelper;
     protected traderHelper: TraderHelper;
@@ -33,10 +42,12 @@ export declare class TradeController {
     protected httpResponse: HttpResponseUtil;
     protected localisationService: LocalisationService;
     protected ragfairPriceService: RagfairPriceService;
+    protected mailSendService: MailSendService;
     protected configServer: ConfigServer;
+    protected roubleTpl: string;
     protected ragfairConfig: IRagfairConfig;
     protected traderConfig: ITraderConfig;
-    constructor(logger: ILogger, eventOutputHolder: EventOutputHolder, tradeHelper: TradeHelper, itemHelper: ItemHelper, profileHelper: ProfileHelper, traderHelper: TraderHelper, jsonUtil: JsonUtil, ragfairServer: RagfairServer, httpResponse: HttpResponseUtil, localisationService: LocalisationService, ragfairPriceService: RagfairPriceService, configServer: ConfigServer);
+    constructor(logger: ILogger, databaseServer: DatabaseServer, eventOutputHolder: EventOutputHolder, tradeHelper: TradeHelper, timeUtil: TimeUtil, randomUtil: RandomUtil, hashUtil: HashUtil, itemHelper: ItemHelper, profileHelper: ProfileHelper, traderHelper: TraderHelper, jsonUtil: JsonUtil, ragfairServer: RagfairServer, httpResponse: HttpResponseUtil, localisationService: LocalisationService, ragfairPriceService: RagfairPriceService, mailSendService: MailSendService, configServer: ConfigServer);
     /** Handle TradingConfirm event */
     confirmTrading(pmcData: IPmcData, request: IProcessBaseTradeRequestData, sessionID: string): IItemEventRouterResponse;
     /** Handle RagFairBuyOffer event */
@@ -70,15 +81,12 @@ export declare class TradeController {
     /** Handle SellAllFromSavage event */
     sellScavItemsToFence(pmcData: IPmcData, request: ISellScavItemsToFenceRequestData, sessionId: string): IItemEventRouterResponse;
     /**
-     * Sell all sellable items to a trader from inventory
-     * WILL DELETE ITEMS FROM INVENTORY + CHILDREN OF ITEMS SOLD
+     * Send the specified rouble total to player as mail
      * @param sessionId Session id
-     * @param profileWithItemsToSell Profile with items to be sold to trader
-     * @param profileThatGetsMoney Profile that gets the money after selling items
      * @param trader Trader to sell items to
      * @param output IItemEventRouterResponse
      */
-    protected sellInventoryToTrader(sessionId: string, profileWithItemsToSell: IPmcData, profileThatGetsMoney: IPmcData, trader: Traders, output: IItemEventRouterResponse): void;
+    protected mailMoneyToPlayer(sessionId: string, roublesToSend: number, trader: Traders): void;
     /**
      * Looks up an items children and gets total handbook price for them
      * @param parentItemId parent item that has children we want to sum price of

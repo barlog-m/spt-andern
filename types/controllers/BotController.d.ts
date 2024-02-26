@@ -18,6 +18,7 @@ import { LocalisationService } from "@spt-aki/services/LocalisationService";
 import { MatchBotDetailsCacheService } from "@spt-aki/services/MatchBotDetailsCacheService";
 import { SeasonalEventService } from "@spt-aki/services/SeasonalEventService";
 import { JsonUtil } from "@spt-aki/utils/JsonUtil";
+import { RandomUtil } from "@spt-aki/utils/RandomUtil";
 export declare class BotController {
     protected logger: ILogger;
     protected databaseServer: DatabaseServer;
@@ -31,10 +32,11 @@ export declare class BotController {
     protected profileHelper: ProfileHelper;
     protected configServer: ConfigServer;
     protected applicationContext: ApplicationContext;
+    protected randomUtil: RandomUtil;
     protected jsonUtil: JsonUtil;
     protected botConfig: IBotConfig;
     protected pmcConfig: IPmcConfig;
-    constructor(logger: ILogger, databaseServer: DatabaseServer, botGenerator: BotGenerator, botHelper: BotHelper, botDifficultyHelper: BotDifficultyHelper, botGenerationCacheService: BotGenerationCacheService, matchBotDetailsCacheService: MatchBotDetailsCacheService, localisationService: LocalisationService, seasonalEventService: SeasonalEventService, profileHelper: ProfileHelper, configServer: ConfigServer, applicationContext: ApplicationContext, jsonUtil: JsonUtil);
+    constructor(logger: ILogger, databaseServer: DatabaseServer, botGenerator: BotGenerator, botHelper: BotHelper, botDifficultyHelper: BotDifficultyHelper, botGenerationCacheService: BotGenerationCacheService, matchBotDetailsCacheService: MatchBotDetailsCacheService, localisationService: LocalisationService, seasonalEventService: SeasonalEventService, profileHelper: ProfileHelper, configServer: ConfigServer, applicationContext: ApplicationContext, randomUtil: RandomUtil, jsonUtil: JsonUtil);
     /**
      * Return the number of bot load-out varieties to be generated
      * @param type bot Type we want the load-out gen count for
@@ -51,10 +53,10 @@ export declare class BotController {
      * Get bot difficulty settings
      * adjust PMC settings to ensure they engage the correct bot types
      * @param type what bot the server is requesting settings for
-     * @param difficulty difficulty level server requested settings for
+     * @param diffLevel difficulty level server requested settings for
      * @returns Difficulty object
      */
-    getBotDifficulty(type: string, difficulty: string): Difficulty;
+    getBotDifficulty(type: string, diffLevel: string): Difficulty;
     /**
      * Generate bot profiles and store in cache
      * @param sessionId Session id

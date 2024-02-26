@@ -8,7 +8,7 @@ import { Item } from "@spt-aki/models/eft/common/tables/IItem";
 import { ITemplateItem } from "@spt-aki/models/eft/common/tables/ITemplateItem";
 import { IBarterScheme } from "@spt-aki/models/eft/common/tables/ITrader";
 import { IRagfairOffer, OfferRequirement } from "@spt-aki/models/eft/ragfair/IRagfairOffer";
-import { Dynamic, IRagfairConfig } from "@spt-aki/models/spt/config/IRagfairConfig";
+import { Dynamic, IArmorPlateBlacklistSettings, IRagfairConfig } from "@spt-aki/models/spt/config/IRagfairConfig";
 import { ILogger } from "@spt-aki/models/spt/utils/ILogger";
 import { ConfigServer } from "@spt-aki/servers/ConfigServer";
 import { DatabaseServer } from "@spt-aki/servers/DatabaseServer";
@@ -129,10 +129,10 @@ export declare class RagfairOfferGenerator {
     /**
      * iterate over an items chidren and look for plates above desired level and remove them
      * @param presetWithChildren preset to check for plates
-     * @param plateProtectionLimit Max level of plates an armor can have without being removed
+     * @param plateSettings Settings
      * @returns True if plate removed
      */
-    protected removeBannedPlatesFromPreset(presetWithChildren: Item[], plateProtectionLimit: number): boolean;
+    protected removeBannedPlatesFromPreset(presetWithChildren: Item[], plateSettings: IArmorPlateBlacklistSettings): boolean;
     /**
      * Create one flea offer for a specific item
      * @param itemWithChildren Item to create offer for
@@ -150,11 +150,10 @@ export declare class RagfairOfferGenerator {
      * Get array of an item with its mods + condition properties (e.g durability)
      * Apply randomisation adjustments to condition if item base is found in ragfair.json/dynamic/condition
      * @param userID id of owner of item
-     * @param itemWithMods Item and mods, get condition of first item (only first array item is used)
+     * @param itemWithMods Item and mods, get condition of first item (only first array item is modified)
      * @param itemDetails db details of first item
-     * @returns
      */
-    protected randomiseItemUpdProperties(userID: string, itemWithMods: Item[], itemDetails: ITemplateItem): Item[];
+    protected randomiseOfferItemUpdProperties(userID: string, itemWithMods: Item[], itemDetails: ITemplateItem): void;
     /**
      * Get the relevant condition id if item tpl matches in ragfair.json/condition
      * @param tpl Item to look for matching condition object
@@ -170,23 +169,26 @@ export declare class RagfairOfferGenerator {
     protected randomiseItemCondition(conditionSettingsId: string, itemWithMods: Item[], itemDetails: ITemplateItem): void;
     /**
      * Adjust an items durability/maxDurability value
-     * @param item item (weapon/armor) to adjust
-     * @param multiplier Value to multiple durability by
+     * @param item item (weapon/armor) to Adjust
+     * @param itemDbDetails Weapon details from db
+     * @param maxMultiplier Value to multiply max durability by
+     * @param currentMultiplier Value to multiply current durability by
      */
-    protected randomiseWeaponDurabilityValues(item: Item, multiplier: number): void;
+    protected randomiseWeaponDurability(item: Item, itemDbDetails: ITemplateItem, maxMultiplier: number, currentMultiplier: number): void;
     /**
      * Randomise the durabiltiy values for an armors plates and soft inserts
      * @param armorWithMods Armor item with its child mods
+     * @param currentMultiplier Chosen multipler to use for current durability value
+     * @param maxMultiplier Chosen multipler to use for max durability value
      */
-    protected randomiseArmorDurabilityValues(armorWithMods: Item[]): void;
+    protected randomiseArmorDurabilityValues(armorWithMods: Item[], currentMultiplier: number, maxMultiplier: number): void;
     /**
      * Add missing conditions to an item if needed
      * Durabiltiy for repairable items
      * HpResource for medical items
      * @param item item to add conditions to
-     * @returns Item with conditions added
      */
-    protected addMissingConditions(item: Item): Item;
+    protected addMissingConditions(item: Item): void;
     /**
      * Create a barter-based barter scheme, if not possible, fall back to making barter scheme currency based
      * @param offerItems Items for sale in offer

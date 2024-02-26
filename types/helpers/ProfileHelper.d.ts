@@ -121,4 +121,5 @@ export declare class ProfileHelper {
      */
     addSkillPointsToPlayer(pmcProfile: IPmcData, skill: SkillTypes, pointsToAdd: number, useSkillProgressRateMultipler?: boolean): void;
     getSkillFromProfile(pmcData: IPmcData, skill: SkillTypes): Common;
+    isDeveloperAccount(sessionID: string): boolean;
 }

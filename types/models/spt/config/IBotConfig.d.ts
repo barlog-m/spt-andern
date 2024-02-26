@@ -14,8 +14,6 @@ export interface IBotConfig extends IBaseConfig {
     durability: IBotDurability;
     /** Controls the percentage values of randomization item resources */
     lootItemResourceRandomization: Record<string, IRandomisedResourceDetails>;
-    /** Control the weighting of how expensive an average loot item is on a PMC or Scav */
-    lootNValue: LootNvalue;
     /** Control what bots are added to a bots revenge list key: bottype, value: bottypes to revenge on seeing their death */
     revenge: Record<string, string[]>;
     /** Control how many items are allowed to spawn on a bot
@@ -37,6 +35,8 @@ export interface IBotConfig extends IBaseConfig {
     secureContainerAmmoStackCount: number;
     /** Bot roles in this array will be given a dog tag on generation */
     botRolesWithDogTags: string[];
+    /** Settings to control the items that get added into wallets on bots */
+    walletLoot: IWalletLootSettings;
 }
 /** Number of bots to generate and store in cache on raid start per bot type */
 export interface PresetBatch {
@@ -77,9 +77,9 @@ export interface PresetBatch {
     sptUsec: number;
     sptBear: number;
 }
-export interface LootNvalue {
-    scav: number;
-    pmc: number;
+export interface IWalletLootSettings {
+    itemCount: number;
+    stackSizeWeight: Record<string, number>;
 }
 export interface EquipmentFilters {
     /** Limits for mod types per weapon .e.g. scopes */
@@ -94,12 +94,15 @@ export interface EquipmentFilters {
     lightIsActiveNightChancePercent?: number;
     /** Chance gun laser is active during the day */
     laserIsActiveChancePercent?: number;
-    /** Should plates be filtered by level */
-    filterPlatesByLevel?: boolean;
     /** Chance NODS are down/active during the day */
     nvgIsActiveChanceDayPercent?: number;
     /** Chance NODS are down/active during the night */
     nvgIsActiveChanceNightPercent?: number;
+    forceOnlyArmoredRigWhenNoArmor?: boolean;
+    /** Should plates be filtered by level */
+    filterPlatesByLevel?: boolean;
+    /** What additional slot ids should be seen as required when choosing a mod to add to a weapon */
+    weaponSlotIdsToMakeRequired?: string[];
     /** Adjust weighting/chances of items on bot by level of bot */
     randomisation: RandomisationDetails[];
     /** Blacklist equipment by level of bot */
@@ -111,7 +114,7 @@ export interface EquipmentFilters {
     /** Same as weightingAdjustments but based on player level instead of bot level */
     weightingAdjustmentsByPlayerLevel?: WeightingAdjustmentDetails[];
     /** Should the stock mod be forced to spawn on bot */
-    forceStock: boolean;
+    forceStock?: boolean;
     armorPlateWeighting?: IArmorPlateWeights[];
 }
 export interface ModLimits {

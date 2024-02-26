@@ -20,11 +20,12 @@ export interface FenceConfig {
     partialRefreshTimeSeconds: number;
     partialRefreshChangePercent: number;
     assortSize: number;
-    maxPresetsPercent: number;
+    weaponPresetMinMax: MinMax;
+    equipmentPresetMinMax: MinMax;
     itemPriceMult: number;
     presetPriceMult: number;
-    armorMaxDurabilityPercentMinMax: MinMax;
-    presetMaxDurabilityPercentMinMax: MinMax;
+    armorMaxDurabilityPercentMinMax: IItemDurabilityCurrentMax;
+    weaponDurabilityPercentMinMax: IItemDurabilityCurrentMax;
     chancePlateExistsInArmorPercent: number;
     /** Key: item tpl */
     itemStackSizeOverrideMinMax: Record<string, MinMax>;
@@ -40,6 +41,10 @@ export interface FenceConfig {
     coopExtractGift: CoopExtractReward;
     btrDeliveryExpireHours: number;
 }
+export interface IItemDurabilityCurrentMax {
+    current: MinMax;
+    max: MinMax;
+}
 export interface CoopExtractReward extends LootRequest {
     sendGift: boolean;
     messageLocaleIds: string[];
@@ -49,4 +54,6 @@ export interface DiscountOptions {
     assortSize: number;
     itemPriceMult: number;
     presetPriceMult: number;
+    weaponPresetMinMax: MinMax;
+    equipmentPresetMinMax: MinMax;
 }

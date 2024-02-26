@@ -5,7 +5,7 @@ import { BotWeaponGeneratorHelper } from "@spt-aki/helpers/BotWeaponGeneratorHel
 import { ItemHelper } from "@spt-aki/helpers/ItemHelper";
 import { ProfileHelper } from "@spt-aki/helpers/ProfileHelper";
 import { IPmcData } from "@spt-aki/models/eft/common/IPmcData";
-import { Skills, Stats } from "@spt-aki/models/eft/common/tables/IBotBase";
+import { IBotBase, Skills, Stats } from "@spt-aki/models/eft/common/tables/IBotBase";
 import { IBotType } from "@spt-aki/models/eft/common/tables/IBotType";
 import { IPlayerScavConfig, KarmaLevel } from "@spt-aki/models/spt/config/IPlayerScavConfig";
 import { ILogger } from "@spt-aki/models/spt/utils/ILogger";
@@ -43,6 +43,13 @@ export declare class PlayerScavGenerator {
      * @returns profile object
      */
     generate(sessionID: string): IPmcData;
+    /**
+     * Add items picked from `playerscav.lootItemsToAddChancePercent`
+     * @param possibleItemsToAdd dict of tpl + % chance to be added
+     * @param scavData
+     * @param containersToAddTo Possible slotIds to add loot to
+     */
+    protected addAdditionalLootToPlayerScavContainers(possibleItemsToAdd: Record<string, number>, scavData: IBotBase, containersToAddTo: string[]): void;
     /**
      * Get the scav karama level for a profile
      * Is also the fence trader rep level

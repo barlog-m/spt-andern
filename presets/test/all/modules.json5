@@ -39,17 +39,25 @@
         "628c9ab845c59e5b80768a81",
         "5f6341043ada5942720e2dc5"
     ],
-    // AR-15 SilencerCo ASR 5.56x45 flash hider
-    "609269c3b0e443224b421cc1": [
+    // AR-15 AlienTech 5.56x45 muzzle brake
+    "63ac5c9658d0485fc039f0b8": [
+        "615d8e2f1cb55961fa0fd9a4",
+        "64943b74e9998d641b0412ed",
+        "5f6372e2865db925d54f3869",
+        "609269c3b0e443224b421cc1",
         "6386120cd6baa055ad1e201c",
         "626667e87379c44d557b7550",
         "5d440625a4b9361eec4ae6c5"
     ],
-    // AR-10 KAC QDC 7.62x51 Muzzle Brake Kit
-    "6130c43c67085e45ef1405a1": [
+    // AR-10 Odin Works ATLAS-7 7.62x51 muzzle brake
+    "5bbdb8bdd4351e4502011460": [
+        "5d026791d7ad1a04a067ea63",
+        "5c878e9d2e2216000f201903",
+        "6130c43c67085e45ef1405a1",
         "618178aa1cb55961fa0fdc80",
         "5a34fd2bc4a282329a73b4c5",
-        "5d443f8fa4b93678dd4a01aa"
+        "5d443f8fa4b93678dd4a01aa",
+        "5cf78496d7f00c065703d6ca"
     ],
     // 5.56x45 TROY BattleMag STANAG 30-round magazine
     "5c6d46132e221601da357d56": [
@@ -121,7 +129,8 @@
     "5f633f791b231926f2329f13": [
         "5943eeeb86f77412d6384f6b",
         "5cc9a96cd7f00c011c04e04a",
-        "5649ab884bdc2ded0b8b457f"
+        "5649ab884bdc2ded0b8b457f",
+        "615d8f5dd92c473c770212ef"
     ],
     // AKM thread type JMac Customs RRD-4C 7.62x39 muzzle brake
     "5f633f68f5750b524b45f112": [
@@ -157,5 +166,14 @@
     // AR-10 7.62x51 18 inch barrel
     "5a34f7f1c4a2826c6e06d75d": [
         "5a34fae7c4a2826c6e06d760"
+    ],
+    // AR-15 HK BLITZ 5.56x45 flash hider
+    "615d8e2f1cb55961fa0fd9a4": [
+        "63ac5c9658d0485fc039f0b8",
+        "5d02676dd7ad1a049e54f6dc"
+    ],
+    // 5.56x45 Magpul PMAG D-60 STANAG 60-round magazine
+    "59c1383d86f774290a37e0ca": [
+        "544a37c44bdc2d25388b4567"
     ]
 }
