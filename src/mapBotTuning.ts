@@ -483,8 +483,8 @@ function brainTunning(difficulty: Difficulty): undefined {
     difficulty.Core["AccuratySpeed"] = 0.2;
     difficulty.Core["GainSightCoef"] = 0.1;
 
-    difficulty.Shoot["HORIZONT_RECOIL_COEF"] = 0.1;
-    difficulty.Shoot["MAX_RECOIL_PER_METER"] = 0.1;
-    difficulty.Shoot["RECOIL_PER_METER"] = 0.05;
-    difficulty.Shoot["RECOIL_TIME_NORMALIZE"] = 1.2;
+    difficulty.Shoot["HORIZONT_RECOIL_COEF"] = 0.08;
+    difficulty.Shoot["MAX_RECOIL_PER_METER"] = 0.08;
+    difficulty.Shoot["RECOIL_PER_METER"] = 0.04;
+    difficulty.Shoot["RECOIL_TIME_NORMALIZE"] = 1.1;
 }
