@@ -144,7 +144,7 @@ export class DoeTrader {
             this.imageRouter,
             "doetrader.jpg"
         );
-        this.traderHelper.setTraderUpdateTime(traderConfig, baseJson, 3600);
+        this.traderHelper.setTraderUpdateTime(traderConfig, baseJson, 2400, 3600);
 
         Traders[baseJson._id] = baseJson._id;
     }

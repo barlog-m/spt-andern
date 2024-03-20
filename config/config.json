@@ -1,9 +1,7 @@
 {
     "presets": {
-        "meta": 0,
-        "live": 0,
-        "test": 0,
-        "dev": 1
+        "meta": 1,
+        "test": 0
     },
     "pmcLevels": true,
     "pmcWeapon": true,

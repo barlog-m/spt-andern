@@ -4,11 +4,17 @@ export interface IRagfairConfig extends IBaseConfig {
     kind: "aki-ragfair";
     /** How many seconds should pass before expired offers and procesed + player offers checked if sold */
     runIntervalSeconds: number;
+    /** Default values used to hydrate `runIntervalSeconds` with */
+    runIntervalValues: IRunIntervalValues;
     /** Player listing settings */
     sell: Sell;
     /** Trader ids + should their assorts be listed on flea*/
     traders: Record<string, boolean>;
     dynamic: Dynamic;
+}
+export interface IRunIntervalValues {
+    inRaid: number;
+    outOfRaid: number;
 }
 export interface Sell {
     /** Should a fee be deducted from player when liting an item for sale */
@@ -16,9 +22,7 @@ export interface Sell {
     /** Settings to control chances of offer being sold */
     chance: Chance;
     /** Settings to control how long it takes for a player offer to sell */
-    time: Time;
-    /** Player offer reputation gain/loss settings */
-    reputation: Reputation;
+    time: MinMax;
     /**Seconds from clicking remove to remove offer from market */
     expireSeconds: number;
 }
@@ -31,13 +35,6 @@ export interface Chance {
     maxSellChancePercent: number;
     /** Min possible sell chance % for a player listed offer */
     minSellChancePercent: number;
-}
-export interface Time extends MinMax {
-    base: number;
-}
-export interface Reputation {
-    gain: number;
-    loss: number;
 }
 export interface Dynamic {
     purchasesAreFoundInRaid: boolean;
@@ -138,6 +135,10 @@ export interface Blacklist {
     traderItems: boolean;
     /** Maximum level an armor plate can be found in a flea-listed armor item */
     armorPlate: IArmorPlateBlacklistSettings;
+    /** Should specific categories be blacklisted from the flea, true = use blacklist */
+    enableCustomItemCategoryList: boolean;
+    /** Custom category blacklist for parent Ids */
+    customItemCategoryList: string[];
 }
 export interface IArmorPlateBlacklistSettings {
     /** Max level of plates an armor can have without being removed */

@@ -123,7 +123,7 @@ export declare class InventoryController {
     /**
      * Handles folding of Weapons
      */
-    foldItem(pmcData: IPmcData, body: IInventoryFoldRequestData, sessionID: string): IItemEventRouterResponse;
+    foldItem(pmcData: IPmcData, request: IInventoryFoldRequestData, sessionID: string): IItemEventRouterResponse;
     /**
      * Toggles "Toggleable" items like night vision goggles and face shields.
      * @param pmcData player profile

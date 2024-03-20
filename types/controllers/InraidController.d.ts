@@ -15,6 +15,7 @@ import { IAirdropConfig } from "@spt-aki/models/spt/config/IAirdropConfig";
 import { IBTRConfig } from "@spt-aki/models/spt/config/IBTRConfig";
 import { IInRaidConfig } from "@spt-aki/models/spt/config/IInRaidConfig";
 import { ILocationConfig } from "@spt-aki/models/spt/config/ILocationConfig";
+import { IRagfairConfig } from "@spt-aki/models/spt/config/IRagfairConfig";
 import { ITraderConfig } from "@spt-aki/models/spt/config/ITraderConfig";
 import { ITraderServiceModel } from "@spt-aki/models/spt/services/ITraderServiceModel";
 import { ILogger } from "@spt-aki/models/spt/utils/ILogger";
@@ -58,6 +59,7 @@ export declare class InraidController {
     protected inRaidConfig: IInRaidConfig;
     protected traderConfig: ITraderConfig;
     protected locationConfig: ILocationConfig;
+    protected ragfairConfig: IRagfairConfig;
     constructor(logger: ILogger, saveServer: SaveServer, jsonUtil: JsonUtil, timeUtil: TimeUtil, databaseServer: DatabaseServer, pmcChatResponseService: PmcChatResponseService, matchBotDetailsCacheService: MatchBotDetailsCacheService, questHelper: QuestHelper, itemHelper: ItemHelper, profileHelper: ProfileHelper, playerScavGenerator: PlayerScavGenerator, healthHelper: HealthHelper, traderHelper: TraderHelper, traderServicesService: TraderServicesService, insuranceService: InsuranceService, inRaidHelper: InRaidHelper, applicationContext: ApplicationContext, configServer: ConfigServer, mailSendService: MailSendService, randomUtil: RandomUtil);
     /**
      * Save locationId to active profiles inraid object AND app context
@@ -113,6 +115,13 @@ export declare class InraidController {
      * @param secondary Secondary dictionary
      */
     protected mergePmcAndScavEncyclopedias(primary: IPmcData, secondary: IPmcData): void;
+    /**
+     * Post-scav-raid any charisma increase must be propigated into PMC profile
+     * @param postRaidServerScavProfile Scav profile after adjustments made from raid
+     * @param postRaidServerPmcProfile Pmc profile after raid
+     * @param preRaidScavCharismaProgress charisma progress value pre-raid
+     */
+    protected updatePmcCharismaSkillPostScavRaid(postRaidServerScavProfile: IPmcData, postRaidServerPmcProfile: IPmcData, preRaidScavCharismaProgress: number): void;
     /**
      * Does provided profile contain any condition counters
      * @param profile Profile to check for condition counters

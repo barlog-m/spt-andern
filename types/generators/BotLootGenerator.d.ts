@@ -1,7 +1,6 @@
 import { BotWeaponGenerator } from "@spt-aki/generators/BotWeaponGenerator";
 import { BotGeneratorHelper } from "@spt-aki/helpers/BotGeneratorHelper";
 import { BotHelper } from "@spt-aki/helpers/BotHelper";
-import { BotWeaponGeneratorHelper } from "@spt-aki/helpers/BotWeaponGeneratorHelper";
 import { HandbookHelper } from "@spt-aki/helpers/HandbookHelper";
 import { InventoryHelper } from "@spt-aki/helpers/InventoryHelper";
 import { ItemHelper } from "@spt-aki/helpers/ItemHelper";
@@ -33,7 +32,6 @@ export declare class BotLootGenerator {
     protected handbookHelper: HandbookHelper;
     protected botGeneratorHelper: BotGeneratorHelper;
     protected botWeaponGenerator: BotWeaponGenerator;
-    protected botWeaponGeneratorHelper: BotWeaponGeneratorHelper;
     protected weightedRandomHelper: WeightedRandomHelper;
     protected botHelper: BotHelper;
     protected botLootCacheService: BotLootCacheService;
@@ -41,7 +39,7 @@ export declare class BotLootGenerator {
     protected configServer: ConfigServer;
     protected botConfig: IBotConfig;
     protected pmcConfig: IPmcConfig;
-    constructor(logger: ILogger, hashUtil: HashUtil, randomUtil: RandomUtil, itemHelper: ItemHelper, jsonUtil: JsonUtil, inventoryHelper: InventoryHelper, databaseServer: DatabaseServer, handbookHelper: HandbookHelper, botGeneratorHelper: BotGeneratorHelper, botWeaponGenerator: BotWeaponGenerator, botWeaponGeneratorHelper: BotWeaponGeneratorHelper, weightedRandomHelper: WeightedRandomHelper, botHelper: BotHelper, botLootCacheService: BotLootCacheService, localisationService: LocalisationService, configServer: ConfigServer);
+    constructor(logger: ILogger, hashUtil: HashUtil, randomUtil: RandomUtil, itemHelper: ItemHelper, jsonUtil: JsonUtil, inventoryHelper: InventoryHelper, databaseServer: DatabaseServer, handbookHelper: HandbookHelper, botGeneratorHelper: BotGeneratorHelper, botWeaponGenerator: BotWeaponGenerator, weightedRandomHelper: WeightedRandomHelper, botHelper: BotHelper, botLootCacheService: BotLootCacheService, localisationService: LocalisationService, configServer: ConfigServer);
     protected getItemSpawnLimitsForBot(botRole: string): IItemSpawnLimitSettings;
     /**
      * Add loot to bots containers
@@ -91,8 +89,9 @@ export declare class BotLootGenerator {
      * @param itemToAddTemplate Db template of item to check
      * @param itemToAddChildrenTo Item to add children to
      * @param isPmc Is the item being generated for a pmc (affects money/ammo stack sizes)
+     * @param botRole role bot has that owns item
      */
-    protected addRequiredChildItemsToParent(itemToAddTemplate: ITemplateItem, itemToAddChildrenTo: Item[], isPmc: boolean): void;
+    protected addRequiredChildItemsToParent(itemToAddTemplate: ITemplateItem, itemToAddChildrenTo: Item[], isPmc: boolean, botRole: string): void;
     /**
      * Add generated weapons to inventory as loot
      * @param botInventory inventory to add preset to
@@ -120,11 +119,11 @@ export declare class BotLootGenerator {
     protected itemHasReachedSpawnLimit(itemTemplate: ITemplateItem, botRole: string, itemSpawnLimits: IItemSpawnLimitSettings): boolean;
     /**
      * Randomise the stack size of a money object, uses different values for pmc or scavs
-     * @param isPmc Is money on a PMC bot
+     * @param botRole Role bot has that has money stack
      * @param itemTemplate item details from db
      * @param moneyItem Money item to randomise
      */
-    protected randomiseMoneyStackSize(isPmc: boolean, itemTemplate: ITemplateItem, moneyItem: Item): void;
+    protected randomiseMoneyStackSize(botRole: string, itemTemplate: ITemplateItem, moneyItem: Item): void;
     /**
      * Randomise the size of an ammo stack
      * @param isPmc Is ammo on a PMC bot

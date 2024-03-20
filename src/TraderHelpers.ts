@@ -19,40 +19,29 @@ export class TraderHelper {
      * @param imageRouter image router class - used to register the trader image path so we see their image on trader page
      * @param traderImageName Filename of the trader icon to use
      */
-    public registerProfileImage(
-        baseJson: any,
-        fullModName: string,
-        preAkiModLoader: PreAkiModLoader,
-        imageRouter: ImageRouter,
-        traderImageName: string
-    ): void {
+    public registerProfileImage(baseJson: any, modName: string, preAkiModLoader: PreAkiModLoader, imageRouter: ImageRouter, traderImageName: string): void {
         // Reference the mod "res" folder
-        const imageFilepath = `./${preAkiModLoader.getModPath(
-            fullModName
-        )}trader`;
+        const imageFilepath = `./${preAkiModLoader.getModPath(modName)}trader`;
 
         // Register a route to point to the profile picture - remember to remove the .jpg from it
-        imageRouter.addRoute(
-            baseJson.avatar.replace(".jpg", ""),
-            `${imageFilepath}/${traderImageName}`
-        );
+        imageRouter.addRoute(baseJson.avatar.replace(".jpg", ""), `${imageFilepath}/${traderImageName}`);
     }
 
     /**
      * Add record to trader config to set the refresh time of trader in seconds (default is 60 minutes)
      * @param traderConfig trader config to add our trader to
      * @param baseJson json file for trader (db/base.json)
-     * @param refreshTimeSeconds How many sections between trader stock refresh
+     * @param refreshTimeSecondsMin How many seconds between trader stock refresh min time
+     * @param refreshTimeSecondsMax How many seconds between trader stock refresh max time
      */
-    public setTraderUpdateTime(
-        traderConfig: ITraderConfig,
-        baseJson: any,
-        refreshTimeSeconds: number
-    ): void {
+    public setTraderUpdateTime(traderConfig: ITraderConfig, baseJson: any, refreshTimeSecondsMin: number, refreshTimeSecondsMax: number): void {
         // Add refresh time in seconds to config
         const traderRefreshRecord: UpdateTime = {
             traderId: baseJson._id,
-            seconds: refreshTimeSeconds
+            seconds: {
+                min: refreshTimeSecondsMin,
+                max: refreshTimeSecondsMax
+            }
         };
 
         traderConfig.updateTime.push(traderRefreshRecord);
@@ -65,17 +54,11 @@ export class TraderHelper {
      * @param jsonUtil json utility class
      */
     // rome-ignore lint/suspicious/noExplicitAny: traderDetailsToAdd comes from base.json, so no type
-    public addTraderToDb(
-        traderDetailsToAdd: any,
-        tables: IDatabaseTables,
-        jsonUtil: JsonUtil
-    ): void {
+    public addTraderToDb(traderDetailsToAdd: any, tables: IDatabaseTables, jsonUtil: JsonUtil): void {
         // Add trader to trader table, key is the traders id
         tables.traders[traderDetailsToAdd._id] = {
             assort: this.createAssortTable(), // assorts are the 'offers' trader sells, can be a single item (e.g. carton of milk) or multiple items as a collection (e.g. a gun)
-            base: jsonUtil.deserialize(
-                jsonUtil.serialize(traderDetailsToAdd)
-            ) as ITraderBase, // Deserialise/serialise creates a copy of the json and allows us to cast it as an ITraderBase
+            base: jsonUtil.deserialize(jsonUtil.serialize(traderDetailsToAdd)) as ITraderBase, // Deserialise/serialise creates a copy of the json and allows us to cast it as an ITraderBase
             questassort: {
                 started: {},
                 success: {},
@@ -97,7 +80,7 @@ export class TraderHelper {
             items: [],
             barter_scheme: {},
             loyal_level_items: {}
-        };
+        }
 
         return assortTable;
     }
@@ -112,15 +95,7 @@ export class TraderHelper {
      * @param location Location of trader (e.g. "Here in the cat shop")
      * @param description Description of trader
      */
-    public addTraderToLocales(
-        baseJson: any,
-        tables: IDatabaseTables,
-        fullName: string,
-        firstName: string,
-        nickName: string,
-        location: string,
-        description: string
-    ): undefined {
+    public addTraderToLocales(baseJson: any, tables: IDatabaseTables, fullName: string, firstName: string, nickName: string, location: string, description: string) {
         // For each language, add locale for the new trader
         const locales = Object.values(tables.locales.global) as Record<string, string>[];
         for (const locale of locales) {

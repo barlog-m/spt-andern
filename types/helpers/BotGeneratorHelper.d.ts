@@ -1,8 +1,12 @@
 import { ApplicationContext } from "@spt-aki/context/ApplicationContext";
+import { ContainerHelper } from "@spt-aki/helpers/ContainerHelper";
 import { DurabilityLimitsHelper } from "@spt-aki/helpers/DurabilityLimitsHelper";
+import { InventoryHelper } from "@spt-aki/helpers/InventoryHelper";
 import { ItemHelper } from "@spt-aki/helpers/ItemHelper";
+import { Inventory } from "@spt-aki/models/eft/common/tables/IBotBase";
 import { Item, Repairable, Upd } from "@spt-aki/models/eft/common/tables/IItem";
-import { ITemplateItem } from "@spt-aki/models/eft/common/tables/ITemplateItem";
+import { Grid, ITemplateItem } from "@spt-aki/models/eft/common/tables/ITemplateItem";
+import { ItemAddedResult } from "@spt-aki/models/enums/ItemAddedResult";
 import { IChooseRandomCompatibleModResult } from "@spt-aki/models/spt/bots/IChooseRandomCompatibleModResult";
 import { EquipmentFilters, IBotConfig, IRandomisedResourceValues } from "@spt-aki/models/spt/config/IBotConfig";
 import { IPmcConfig } from "@spt-aki/models/spt/config/IPmcConfig";
@@ -10,7 +14,6 @@ import { ILogger } from "@spt-aki/models/spt/utils/ILogger";
 import { ConfigServer } from "@spt-aki/servers/ConfigServer";
 import { DatabaseServer } from "@spt-aki/servers/DatabaseServer";
 import { LocalisationService } from "@spt-aki/services/LocalisationService";
-import { JsonUtil } from "@spt-aki/utils/JsonUtil";
 import { RandomUtil } from "@spt-aki/utils/RandomUtil";
 export declare class BotGeneratorHelper {
     protected logger: ILogger;
@@ -18,12 +21,14 @@ export declare class BotGeneratorHelper {
     protected databaseServer: DatabaseServer;
     protected durabilityLimitsHelper: DurabilityLimitsHelper;
     protected itemHelper: ItemHelper;
+    protected inventoryHelper: InventoryHelper;
+    protected containerHelper: ContainerHelper;
     protected applicationContext: ApplicationContext;
     protected localisationService: LocalisationService;
     protected configServer: ConfigServer;
     protected botConfig: IBotConfig;
     protected pmcConfig: IPmcConfig;
-    constructor(logger: ILogger, randomUtil: RandomUtil, databaseServer: DatabaseServer, durabilityLimitsHelper: DurabilityLimitsHelper, itemHelper: ItemHelper, applicationContext: ApplicationContext, localisationService: LocalisationService, configServer: ConfigServer);
+    constructor(logger: ILogger, randomUtil: RandomUtil, databaseServer: DatabaseServer, durabilityLimitsHelper: DurabilityLimitsHelper, itemHelper: ItemHelper, inventoryHelper: InventoryHelper, containerHelper: ContainerHelper, applicationContext: ApplicationContext, localisationService: LocalisationService, configServer: ConfigServer);
     /**
      * Adds properties to an item
      * e.g. Repairable / HasHinge / Foldable / MaxDurability
@@ -78,15 +83,21 @@ export declare class BotGeneratorHelper {
      * @returns Equipment role (e.g. pmc / assault / bossTagilla)
      */
     getBotEquipmentRole(botRole: string): string;
-}
-/** TODO - move into own class */
-export declare class ExhaustableArray<T> {
-    private itemPool;
-    private randomUtil;
-    private jsonUtil;
-    private pool;
-    constructor(itemPool: T[], randomUtil: RandomUtil, jsonUtil: JsonUtil);
-    getRandomValue(): T;
-    getFirstValue(): T;
-    hasValues(): boolean;
+    /**
+     * Adds an item with all its children into specified equipmentSlots, wherever it fits.
+     * @param equipmentSlots Slot to add item+children into
+     * @param rootItemId Root item id to use as mod items parentid
+     * @param rootItemTplId Root itms tpl id
+     * @param itemWithChildren Item to add
+     * @param inventory Inventory to add item+children into
+     * @returns ItemAddedResult result object
+     */
+    addItemWithChildrenToEquipmentSlot(equipmentSlots: string[], rootItemId: string, rootItemTplId: string, itemWithChildren: Item[], inventory: Inventory): ItemAddedResult;
+    /**
+     * Is the provided item allowed inside a container
+     * @param slotGrid Items sub-grid we want to place item inside
+     * @param itemTpl Item tpl being placed
+     * @returns True if allowed
+     */
+    protected itemAllowedInContainer(slotGrid: Grid, itemTpl: string): boolean;
 }
