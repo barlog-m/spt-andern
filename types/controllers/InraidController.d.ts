@@ -13,6 +13,7 @@ import { ISaveProgressRequestData } from "@spt-aki/models/eft/inRaid/ISaveProgre
 import { PlayerRaidEndState } from "@spt-aki/models/enums/PlayerRaidEndState";
 import { IAirdropConfig } from "@spt-aki/models/spt/config/IAirdropConfig";
 import { IBTRConfig } from "@spt-aki/models/spt/config/IBTRConfig";
+import { IHideoutConfig } from "@spt-aki/models/spt/config/IHideoutConfig";
 import { IInRaidConfig } from "@spt-aki/models/spt/config/IInRaidConfig";
 import { ILocationConfig } from "@spt-aki/models/spt/config/ILocationConfig";
 import { IRagfairConfig } from "@spt-aki/models/spt/config/IRagfairConfig";
@@ -60,6 +61,7 @@ export declare class InraidController {
     protected traderConfig: ITraderConfig;
     protected locationConfig: ILocationConfig;
     protected ragfairConfig: IRagfairConfig;
+    protected hideoutConfig: IHideoutConfig;
     constructor(logger: ILogger, saveServer: SaveServer, jsonUtil: JsonUtil, timeUtil: TimeUtil, databaseServer: DatabaseServer, pmcChatResponseService: PmcChatResponseService, matchBotDetailsCacheService: MatchBotDetailsCacheService, questHelper: QuestHelper, itemHelper: ItemHelper, profileHelper: ProfileHelper, playerScavGenerator: PlayerScavGenerator, healthHelper: HealthHelper, traderHelper: TraderHelper, traderServicesService: TraderServicesService, insuranceService: InsuranceService, inRaidHelper: InRaidHelper, applicationContext: ApplicationContext, configServer: ConfigServer, mailSendService: MailSendService, randomUtil: RandomUtil);
     /**
      * Save locationId to active profiles inraid object AND app context
@@ -158,8 +160,9 @@ export declare class InraidController {
      * Update profile with scav karma values based on in-raid actions
      * @param pmcData Pmc profile
      * @param offraidData Post-raid save request
+     * @param scavData Scav profile
      */
-    protected handlePostRaidPlayerScavKarmaChanges(pmcData: IPmcData, offraidData: ISaveProgressRequestData): void;
+    protected handlePostRaidPlayerScavKarmaChanges(pmcData: IPmcData, offraidData: ISaveProgressRequestData, scavData: IPmcData): void;
     /**
      * Get the inraid config from configs/inraid.json
      * @returns InRaid Config
