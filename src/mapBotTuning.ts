@@ -1,13 +1,13 @@
-import { DependencyContainer } from "tsyringe";
-import { ILogger } from "@spt-aki/models/spt/utils/ILogger";
-import { ConfigServer } from "@spt-aki/servers/ConfigServer";
-import { ConfigTypes } from "@spt-aki/models/enums/ConfigTypes";
-import { IBotConfig } from "@spt-aki/models/spt/config/IBotConfig";
-import { IPmcConfig } from "@spt-aki/models/spt/config/IPmcConfig";
-import { DatabaseServer } from "@spt-aki/servers/DatabaseServer";
-import { IGlobals } from "@spt-aki/models/eft/common/IGlobals";
-import { IDatabaseTables } from "@spt-aki/models/spt/server/IDatabaseTables";
-import { ILocationData } from "@spt-aki/models/spt/server/ILocations";
+import {DependencyContainer} from "tsyringe";
+import {ILogger} from "@spt-aki/models/spt/utils/ILogger";
+import {ConfigServer} from "@spt-aki/servers/ConfigServer";
+import {ConfigTypes} from "@spt-aki/models/enums/ConfigTypes";
+import {IBotConfig} from "@spt-aki/models/spt/config/IBotConfig";
+import {IPmcConfig} from "@spt-aki/models/spt/config/IPmcConfig";
+import {DatabaseServer} from "@spt-aki/servers/DatabaseServer";
+import {IGlobals} from "@spt-aki/models/eft/common/IGlobals";
+import {IDatabaseTables} from "@spt-aki/models/spt/server/IDatabaseTables";
+import {ILocation} from "@spt-aki/models/eft/common/ILocation";
 import {
     ILocationBase,
     BossLocationSpawn,
@@ -84,7 +84,7 @@ function setLocationBaseBotMax(
             continue;
         }
 
-        const location: ILocationData = locationObj;
+        const location: ILocation = locationObj;
         if (location.base) {
             const locationBase: ILocationBase = location.base;
 
@@ -224,7 +224,7 @@ function mapsTuning(
             continue;
         }
 
-        const location: ILocationData = locationObj;
+        const location: ILocation = locationObj;
         if (location.base) {
             const locationBase: ILocationBase = location.base;
 
@@ -306,7 +306,7 @@ function tuneScavConvertToPmcRatio(
 
         pmcConfig.convertIntoPmcChance[botType].min = Math.ceil(
             pmcConfig.convertIntoPmcChance[botType].min *
-                config.mapScavToPmcConvertMultiplier
+            config.mapScavToPmcConvertMultiplier
         );
 
         if (pmcConfig.convertIntoPmcChance[botType].min > 100) {
@@ -315,7 +315,7 @@ function tuneScavConvertToPmcRatio(
 
         pmcConfig.convertIntoPmcChance[botType].max = Math.ceil(
             pmcConfig.convertIntoPmcChance[botType].max *
-                config.mapScavToPmcConvertMultiplier
+            config.mapScavToPmcConvertMultiplier
         );
 
         if (pmcConfig.convertIntoPmcChance[botType].max > 100) {
@@ -352,7 +352,7 @@ function disableBotTypeConvertToPmc(
     pmcConfig: IPmcConfig,
     logger: ILogger
 ): undefined {
-    pmcConfig.convertIntoPmcChance[botType] = { min: 0, max: 0 };
+    pmcConfig.convertIntoPmcChance[botType] = {min: 0, max: 0};
 }
 
 function increaseSpawnGroupsSize(
@@ -362,7 +362,7 @@ function increaseSpawnGroupsSize(
     for (const [locationName, locationObj] of Object.entries(
         databaseTables.locations
     )) {
-        const location: ILocationData = locationObj;
+        const location: ILocation = locationObj;
         if (location.base) {
             const locationBase: ILocationBase = location.base;
             if (

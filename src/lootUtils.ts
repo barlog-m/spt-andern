@@ -7,7 +7,8 @@ import {Spawnpoint} from "@spt-aki/models/eft/common/ILooseLoot";
 import {BaseClasses} from "@spt-aki/models/enums/BaseClasses";
 import {ILocationConfig} from "@spt-aki/models/spt/config/ILocationConfig";
 import {IDatabaseTables} from "@spt-aki/models/spt/server/IDatabaseTables";
-import {ILocationData, ILocations} from "@spt-aki/models/spt/server/ILocations";
+import {ILocations} from "@spt-aki/models/spt/server/ILocations";
+import {ILocation} from "@spt-aki/models/eft/common/ILocation";
 import {Item} from "@spt-aki/models/eft/common/tables/IItem";
 import {IScavCaseConfig} from "@spt-aki/models/spt/config/IScavCaseConfig";
 
@@ -248,7 +249,7 @@ function increaseLooseLootCardsSpawn(
 
 function increaseRareLooseLootSpawn(container: DependencyContainer, databaseServer: DatabaseServer) {
     const database: IDatabaseTables = databaseServer.getTables();
-    const locations: ILocationData[] = Object.entries(database.locations)
+    const locations: ILocation[] = Object.entries(database.locations)
         .filter(([locationName, locationData]) => LOCATIONS.includes(locationName))
         .map(([locationName, locationData]) => locationData);
 
@@ -264,9 +265,9 @@ function increaseRareLooseLootSpawn(container: DependencyContainer, databaseServ
 }
 
 function increaseLooseLootRareItemsSpawnChance(
-    locations: ILocationData[]
+    locations: ILocation[]
 ): undefined {
-    locations.forEach((location: ILocationData) => {
+    locations.forEach((location: ILocation) => {
         if (location.looseLoot) {
             location.looseLoot?.spawnpoints.forEach((spawnPoint: Spawnpoint) => {
                 increaseLooseLootProbability(
