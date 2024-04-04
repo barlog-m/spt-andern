@@ -51,12 +51,6 @@ Player level - `pmcBotLevelDownDelta`. Player level + `pmcBotLevelUpDelta`
 
 if `useFixedPmcBotLevelRange` true then pmc bots level in fixed range from `pmcBotMinLevel` to `pmcBotMaxLevel`
 
-## Trader sells after level 40 this ammo
-
-* https://escapefromtarkov.fandom.com/wiki/.300_Blackout_AP
-* https://escapefromtarkov.fandom.com/wiki/7.62x39mm_BP_gzh
-* https://escapefromtarkov.fandom.com/wiki/5.45x39mm_7N40
-
 Trader assortment for each tier is on file `trader.json`
 
 You can disable trader by set `trader` to false in config.json
@@ -88,8 +82,6 @@ Settings in config 'chadsOnFactoryAndLabOnly', 'chadsPercentage' and 'chadsMinim
 `increaseRareLootSpawn` increases rare loose loot spawn (Some electronics on Labs and Lighthouse)
 
 `scavCaseLootValueMultiplier` multiplies each value range to improve Scav Case loot.
-
-increaseLooseLootKeysSpawn
 
 ## Settings for bot generation on maps
 

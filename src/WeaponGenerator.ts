@@ -21,6 +21,7 @@ import {EquipmentSlots} from "@spt-aki/models/enums/EquipmentSlots";
 
 import {GeneratedWeapon} from "./models";
 import {Data} from "./Data";
+import {BaseClasses} from "@spt-aki/models/enums/BaseClasses";
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
 const MUZZLE_PAIRS = {
@@ -270,7 +271,9 @@ export class WeaponGenerator {
         };
 
         this.replaceId(weaponWithMods, 0);
-        if (isNight) this.replaceTacticalDevice(weaponWithMods);
+        if (isNight) {
+            this.replaceTacticalDevice(weaponWithMods);
+        }
         this.setTacticalDeviceMode(weaponWithMods);
     }
 
@@ -292,7 +295,9 @@ export class WeaponGenerator {
 
     replaceTacticalDevice(weaponWithMods: Item[]): undefined {
         for (const item of weaponWithMods) {
-            if (item.slotId.startsWith("mod_tactical")) {
+            if (item.slotId.startsWith("mod_tactical") &&
+                this.itemHelper.isOfBaseclass(item._tpl, BaseClasses.TACTICAL_COMBO)
+            ) {
                 item._tpl = "5a5f1ce64f39f90b401987bc";
             }
         }
