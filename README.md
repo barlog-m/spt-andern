@@ -11,6 +11,8 @@ Idea of this mod is to rebalance a bit the game for better single player experie
 
 * Gives PMC good gear. Every PMC wear armor, helmet, rig, headphones, face cover and glasses.
 
+* Gives PMC better backpack loot.
+
 * Generates PMC with levels in configurable range.
 
 * Add trader that sell you couple weapon modules to make weapon until level 15 a bit less crap. And sells you keys for quests witch hard to find because of high randomness of loot in the game.
@@ -66,6 +68,32 @@ PMC bots can use "chads" armor. It possible only in day raids.
 Settings in config 'chadsOnFactoryAndLabOnly', 'chadsPercentage' and 'chadsMinimumLevel',
 
 `chadsMinimumLevel` means bot can wear chads armor only if his level `chadsMinimumLevel` or higher.
+
+## PMC backpack loot settings
+
+`pmcBackpackLoot` enable/disable custom backpack loot pools
+
+`disableBotBackpackLoot` disable backpack loot completley
+
+##### Backpack Loot Extended Config: `backpack_config.json`
+
+`include_weapons` enable/disable loose weapons in backpack
+
+`duplicate_item_limit` Limit the amount of the same item that can spawn in a backpack
+
+`custom_map_loot_tables` Use map specific backpack loot configs. `Use the laboratory example to see how this can be done. Note: If you have a config for a map, it overwrites the global weights`
+
+`global`Settings for global map config
+
+`global.weights` Weights for each loot table, see loot_tables for how they relate with each other.
+
+`global.keycard_chance` Chance a keycard could spawn in a backpack
+
+`global.rare_key_chance` Chance a rare key could spawn in a backpack
+
+`global.include_normal_keys` Enable normal key loot pool in backpacks.
+
+`loot_tables` extremely rare, rare, valuable and common are all that are used in par with the weights array and in that order. You can add or remove items from the loot pools here.
 
 ## Loot settings
 
@@ -149,5 +177,6 @@ Put folder `BarlogM-Andern` from zip file into your `user/mods` folder
 
 ## Known issues
 
-* If you close game client with Alt+F4 you have to restart server becouse mod stops working.
+* If you close game client with Alt+F4 you have to restart server because mod stops working.
 * Mod does not work with [Algorithmic Level Progression](https://hub.sp-tarkov.com/files/file/1400-algorithmic-level-progression/)
+
