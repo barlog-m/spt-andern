@@ -53,3 +53,35 @@ export class Gear {
     chadHelmets: GearItem[];
     chadArmor: GearItem[];
 }
+
+export interface mapPmcBackpackLootData {
+  min_level: number;
+  max_level: number;
+  min_items: number;
+  max_items: number;
+  weights: [
+    number,
+    number?,
+    number?,
+    number?
+  ];
+  keycard_chance: number;
+  rare_key_chance: number;
+  include_normal_keys: boolean;
+}
+
+export type mapPmcBackpackLootDataGroup = mapPmcBackpackLootData[];
+
+export interface mapPmcBackpackLootTable {
+    extremely_rare: string[],
+    rare: string[],
+    valuable: string[],
+    common: string[],
+}
+
+export enum LootTableIndexs {
+    EXTREMELY_RARE = 0,
+    RARE = 1,
+    VALUABLE =  2,
+    COMMON = 3
+}

@@ -6,6 +6,8 @@
     "pmcLevels": true,
     "pmcWeapon": true,
     "pmcGear": true,
+    "pmcBackpackLoot": true,
+    "disableBotBackpackLoot": false,
     "pmcBotLevelDownDelta": 10,
     "pmcBotLevelUpDelta": 10,
     "useFixedPmcBotLevelRange": false,

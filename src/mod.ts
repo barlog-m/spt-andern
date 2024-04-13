@@ -21,11 +21,13 @@ import {IPlayerScavConfig} from "@spt-aki/models/spt/config/IPlayerScavConfig";
 import {ModConfig} from "./ModConfig";
 import {DoeTrader} from "./DoeTrader";
 import {Data} from "./Data";
+import {LootGenerator} from "./lootGenerator";
 import {WeaponGenerator} from "./WeaponGenerator";
 import {GearGenerator} from "./GearGenerator";
 import {GearGeneratorHelper} from "./GearGeneratorHelper";
 import {HelmetGenerator} from "./HelmetGenerator";
 import registerInfoUpdater from "./registerInfoUpdater";
+import registerBotLootGenerator from "./registerBotLootGenerator";
 import registerBotLevelGenerator from "./registerBotLevelGenerator";
 import registerBotInventoryGenerator from "./registerBotInventoryGenerator";
 import registerBotWeaponGenerator from "./registerBotWeaponGenerator";
@@ -35,7 +37,6 @@ import {mapBotTuning, setPmcForceHealingItems} from "./mapBotTuning";
 import cheeseQuests from "./questUtils";
 import vssOverheatFix from "./weaponUtils";
 import * as config from "../config/config.json";
-import botBrainsTuning from "./botBrainsTuning";
 
 export class Andern implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
     private readonly fullModName: string;
@@ -62,6 +63,15 @@ export class Andern implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
         container.register<Data>("AndernData", Data, {
             lifecycle: Lifecycle.Singleton
         });
+
+
+        container.register<LootGenerator>(
+            "AndernLootGenerator",
+            LootGenerator,
+            {
+                lifecycle: Lifecycle.Singleton
+            }
+        );
 
         container.register<WeaponGenerator>(
             "AndernWeaponGenerator",
@@ -102,12 +112,17 @@ export class Andern implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
                 lifecycle: Lifecycle.Singleton
             }
         );
+
         container.register<DoeTrader>("AndernDoeTrader", DoeTrader, {
             lifecycle: Lifecycle.Singleton
         });
         this.doeTrader = container.resolve<DoeTrader>("AndernDoeTrader");
 
         registerInfoUpdater(container);
+
+        if (config.pmcBackpackLoot || config.disableBotBackpackLoot) {
+            registerBotLootGenerator(container);
+        }
 
         if (config.pmcLevels) {
             registerBotLevelGenerator(container);
@@ -178,15 +193,15 @@ export class Andern implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
         }
 
         vssOverheatFix(container);
-        
+
         if (config.snow) {
             this.enableSnow(container);
         }
-        
+
         if (config.disableBtr) {
             this.disableBtr(container);
         }
-        
+
         if (config.playerScavAlwaysHasBackpack) {
             this.playerScavAlwaysHasBackpack(container);
         }
@@ -279,7 +294,7 @@ export class Andern implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
             container.resolve<SeasonalEventService>("SeasonalEventService");
         seasonalEventService.enableSnow();
     }
-    
+
     disableBtr(container: DependencyContainer): undefined {
         const databaseServer: DatabaseServer =
             container.resolve<DatabaseServer>("DatabaseServer");
