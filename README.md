@@ -73,7 +73,7 @@ Settings in config 'chadsOnFactoryAndLabOnly', 'chadsPercentage' and 'chadsMinim
 
 `pmcBackpackLoot` enable/disable custom backpack loot pools
 
-`disableBotBackpackLoot` disable backpack loot completley
+`disableBotBackpackLoot` disable backpack loot completely
 
 ##### Backpack Loot Extended Config: `backpack_config.json`
 

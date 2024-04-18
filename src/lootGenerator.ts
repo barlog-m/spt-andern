@@ -1,34 +1,39 @@
-import { inject, injectable } from "tsyringe";
+import {inject, injectable} from "tsyringe";
 
-import { RaidInfo } from './RaidInfo';
-import { HashUtil } from '@spt-aki/utils/HashUtil';
-import { BotLootGenerator } from "@spt-aki/generators/BotLootGenerator";
-import { RandomUtil } from '@spt-aki/utils/RandomUtil';
-import { WeightedRandomHelper } from "@spt-aki/helpers/WeightedRandomHelper";
-import { mapPmcBackpackLootData, mapPmcBackpackLootDataGroup  } from "./models";
-import { combineGlobalItemListIntoArray, combineMapItemListIntoArray } from "./lootGeneratorHelper";
-import { ConfigServer } from "@spt-aki/servers/ConfigServer";
-import { ItemHelper } from "@spt-aki/helpers/ItemHelper";
-import { JsonUtil } from "@spt-aki/utils/JsonUtil";
-import { InventoryHelper } from "@spt-aki/helpers/InventoryHelper";
-import { DatabaseServer } from "@spt-aki/servers/DatabaseServer";
-import { HandbookHelper } from "@spt-aki/helpers/HandbookHelper";
-import { BotGeneratorHelper } from "@spt-aki/helpers/BotGeneratorHelper";
-import { BotWeaponGenerator } from "@spt-aki/generators/BotWeaponGenerator";
-import { BotHelper } from "@spt-aki/helpers/BotHelper";
-import { BotLootCacheService } from "@spt-aki/services/BotLootCacheService";
-import { LocalisationService } from "@spt-aki/services/LocalisationService";
+import {RaidInfo} from "./RaidInfo";
+import {HashUtil} from "@spt-aki/utils/HashUtil";
+import {BotLootGenerator} from "@spt-aki/generators/BotLootGenerator";
+import {RandomUtil} from "@spt-aki/utils/RandomUtil";
+import {WeightedRandomHelper} from "@spt-aki/helpers/WeightedRandomHelper";
+import {mapPmcBackpackLootData, mapPmcBackpackLootDataGroup} from "./models";
+import {
+    combineGlobalItemListIntoArray,
+    combineMapItemListIntoArray
+} from "./lootGeneratorHelper";
+import {ConfigServer} from "@spt-aki/servers/ConfigServer";
+import {ItemHelper} from "@spt-aki/helpers/ItemHelper";
+import {JsonUtil} from "@spt-aki/utils/JsonUtil";
+import {InventoryHelper} from "@spt-aki/helpers/InventoryHelper";
+import {DatabaseServer} from "@spt-aki/servers/DatabaseServer";
+import {HandbookHelper} from "@spt-aki/helpers/HandbookHelper";
+import {BotGeneratorHelper} from "@spt-aki/helpers/BotGeneratorHelper";
+import {BotWeaponGenerator} from "@spt-aki/generators/BotWeaponGenerator";
+import {BotHelper} from "@spt-aki/helpers/BotHelper";
+import {BotLootCacheService} from "@spt-aki/services/BotLootCacheService";
+import {LocalisationService} from "@spt-aki/services/LocalisationService";
 
-import { Inventory as pmcInventory } from '@spt-aki/models/eft/common/tables/IBotBase';
-import { IBotType } from "@spt-aki/models/eft/common/tables/IBotType";
-import { ILogger } from '@spt-aki/models/spt/utils/ILogger';
-import { EquipmentSlots } from "@spt-aki/models/enums/EquipmentSlots";
-import { LootCacheType } from "@spt-aki/models/spt/bots/IBotLootCache";
-import { ItemAddedResult } from "@spt-aki/models/enums/ItemAddedResult";
-import { Item } from "@spt-aki/models/eft/common/tables/IItem";
+import {
+    Inventory as pmcInventory
+} from "@spt-aki/models/eft/common/tables/IBotBase";
+import {IBotType} from "@spt-aki/models/eft/common/tables/IBotType";
+import {ILogger} from "@spt-aki/models/spt/utils/ILogger";
+import {EquipmentSlots} from "@spt-aki/models/enums/EquipmentSlots";
+import {LootCacheType} from "@spt-aki/models/spt/bots/IBotLootCache";
+import {ItemAddedResult} from "@spt-aki/models/enums/ItemAddedResult";
+import {Item} from "@spt-aki/models/eft/common/tables/IItem";
 
 import * as config from "../config/config.json";
-import * as backpackLootConfig from '../config/backpack_config.json';
+import * as backpackLootConfig from "../config/backpack.json";
 
 @injectable()
 export class LootGenerator extends BotLootGenerator {
@@ -71,7 +76,7 @@ export class LootGenerator extends BotLootGenerator {
         const vestLootCount = Number(
             this.weightedRandomHelper.getWeightedValue<number>(itemCounts.vestLoot.weights),
         );
-        const speicalLootCount = Number(
+        const specialLootCount = Number(
             this.weightedRandomHelper.getWeightedValue<number>(itemCounts.specialItems.weights),
         );
         const healingItemCount = Number(
@@ -95,7 +100,7 @@ export class LootGenerator extends BotLootGenerator {
         this.addLootFromPool(
             this.botLootCacheService.getLootFromCache(botRole, isPmc, LootCacheType.SPECIAL, botJsonTemplate),
             containersBotHasAvailable,
-            speicalLootCount,
+            specialLootCount,
             botInventory,
             botRole,
             botItemLimits
@@ -152,7 +157,7 @@ export class LootGenerator extends BotLootGenerator {
         // Backpack
         this.generateBackpackLoot(sessionId, botLevel, botRole, botInventory, botJsonTemplate, isPmc, raidInfo);
 
-        // Tatical vestLoot
+        // Tactical vestLoot
         if (containersBotHasAvailable.includes(EquipmentSlots.TACTICAL_VEST)) {
             this.addLootFromPool(
                 this.botLootCacheService.getLootFromCache(botRole, isPmc, LootCacheType.VEST, botJsonTemplate),
@@ -191,7 +196,7 @@ export class LootGenerator extends BotLootGenerator {
         )
     }
 
-    protected generateBackpackLoot(sessionId: string, botLevel: number, botRole: string, botInventory: pmcInventory,botJsonTemplate: IBotType,  isPmc: boolean, raidInfo: RaidInfo) {
+    protected generateBackpackLoot(sessionId: string, botLevel: number, botRole: string, botInventory: pmcInventory, botJsonTemplate: IBotType, isPmc: boolean, raidInfo: RaidInfo): undefined {
         const mapLootTable = this.getMapData(raidInfo);
         const globalLootTableAvailable = backpackLootConfig.global.weights.length > 0;
         let selectedLootDataForBot: mapPmcBackpackLootData;
@@ -333,7 +338,7 @@ export class LootGenerator extends BotLootGenerator {
         inventoryToAddItemsTo: pmcInventory,
         botRole: string,
         isPmc: boolean
-    ) {
+    ): undefined {
         const itemListSize = itemList.length;
 
         if (itemListSize > 0) {
@@ -412,7 +417,7 @@ export class LootGenerator extends BotLootGenerator {
                             Tried ${fitItemIntoContainerAttempts} times, reason: ${ItemAddedResult[itemAddedResult]}, skipping`
                         );
 
-                        // Orignal method breaks here, but the next item could fit
+                        // Original method breaks here, but the next item could fit
                         fitItemIntoContainerAttempts = 0;
                         continue;
                     }
