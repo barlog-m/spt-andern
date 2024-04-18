@@ -282,7 +282,7 @@ export class LootGenerator extends BotLootGenerator {
             return;
         }
 
-        if (globalLootTableAvailable) {
+        if (globalLootTableAvailable && backpackLootCount > 0) {
             const combinedLootTable = combineGlobalItemListIntoArray();
             const itemTplsAdded: Record<string, number> = {};
 
@@ -328,8 +328,8 @@ export class LootGenerator extends BotLootGenerator {
         return selectedItemTpl;
     }
 
-    protected getBackpackLootItemList(lootTableArray: string[][], weights: number[], length: number, botAddedBackpackItems: Record<string, number>): string[] {
-        return new Array<string>(length).fill("").map(() => this.getBackpackLootItem(lootTableArray, weights, botAddedBackpackItems));
+    protected getBackpackLootItemList(lootTableArray: string[][], weights: number[], amountToAdd: number, botAddedBackpackItems: Record<string, number>): string[] {
+        return Array.from({length: amountToAdd}, () => "").map(() => this.getBackpackLootItem(lootTableArray, weights, botAddedBackpackItems))
     }
 
     protected addLootFromList(
