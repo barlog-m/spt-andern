@@ -1,8 +1,8 @@
-import { Item } from "@spt-aki/models/eft/common/tables/IItem";
-import { ITemplateItem } from "@spt-aki/models/eft/common/tables/ITemplateItem";
-import { MinMax } from "@spt-aki/models/common/MinMax";
+import {Item} from "@spt-aki/models/eft/common/tables/IItem";
+import {ITemplateItem} from "@spt-aki/models/eft/common/tables/ITemplateItem";
+import {MinMax} from "@spt-aki/models/common/MinMax";
 
-export type PresetConfig = Record<string, MinMax>;
+export type PresetConfig = Record<string, Config>;
 export type PresetGear = Record<string, Gear>;
 export type PresetWeapon = Record<string, WeaponPreset[]>;
 export type PresetAmmo = Record<string, Ammo>;
@@ -17,6 +17,20 @@ export class PresetData {
     public weapon: PresetWeapon;
     public ammo: PresetAmmo;
     public modules: PresetModules;
+}
+
+export class Config {
+    minLevel: number;
+    maxLevel: number;
+    kittedHelmetPercent: number;
+    nightVisionPercent: number;
+
+    public getMinMax(): MinMax {
+        return {
+            min: this.minLevel,
+            max: this.maxLevel,
+        }
+    }
 }
 
 export class WeaponPreset {
@@ -55,19 +69,19 @@ export class Gear {
 }
 
 export interface mapPmcBackpackLootData {
-  min_level: number;
-  max_level: number;
-  min_items: number;
-  max_items: number;
-  weights: [
-    number,
-    number?,
-    number?,
-    number?
-  ];
-  keycard_chance: number;
-  rare_key_chance: number;
-  include_normal_keys: boolean;
+    min_level: number;
+    max_level: number;
+    min_items: number;
+    max_items: number;
+    weights: [
+        number,
+        number?,
+        number?,
+        number?
+    ];
+    keycard_chance: number;
+    rare_key_chance: number;
+    include_normal_keys: boolean;
 }
 
 export type mapPmcBackpackLootDataGroup = mapPmcBackpackLootData[];
@@ -82,6 +96,6 @@ export interface mapPmcBackpackLootTable {
 export enum LootTableIndexs {
     EXTREMELY_RARE = 0,
     RARE = 1,
-    VALUABLE =  2,
+    VALUABLE = 2,
     COMMON = 3
 }

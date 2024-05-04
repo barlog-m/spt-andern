@@ -8,7 +8,7 @@ import {DatabaseServer} from "@spt-aki/servers/DatabaseServer";
 import {BaseClasses} from "@spt-aki/models/enums/BaseClasses";
 import {
     PresetData,
-    PresetConfig,
+    Config,
     WeaponPreset,
     Gear,
     Ammo,
@@ -105,6 +105,11 @@ export class Data {
 
         return moduleTpl;
     }
+    
+    public getConfig(presetName: string, level: number): Config {
+        const tier = this.tierByLevel(presetName, level);
+        return this.data[presetName].config[tier];
+    }
 
     getPresetsDir(): string {
         return `${this.modPath}presets`;
@@ -112,9 +117,7 @@ export class Data {
 
     load(): undefined {
         for (const [presetName, presetWeight] of this.readAllPresetsList()) {
-            const config = this.loadPresetConfig(presetName);
             const presetData = this.loadData(presetName);
-            presetData.config = config;
             this.data[presetName] = presetData;
             this.logger.info(`[Andern] Loaded preset '${presetName}'`);
         }
@@ -124,23 +127,6 @@ export class Data {
         return Object.entries(this.presets).filter(([name, weight]) => {
             return weight > 0;
         });
-    }
-
-    loadPresetConfig(presetName: string): PresetConfig {
-        const presetConfigFileName = `${this.getPresetsDir()}/${presetName}/preset.json`;
-        const presetConfig: PresetConfig = {};
-
-        try {
-            const jsonData = fs.readFileSync(presetConfigFileName, "utf-8");
-            Object.assign(presetConfig, JSON.parse(jsonData));
-        } catch (err) {
-            this.logger.error(
-                `[Andern] Error read file '${presetConfigFileName}'`
-            );
-            this.logger.error(err.message);
-        }
-
-        return presetConfig;
     }
 
     loadData(presetName: string): PresetData {
@@ -160,6 +146,7 @@ export class Data {
                     const tierDirName = `${presetDir}/${dir.name}`;
                     const tierName = dir.name;
 
+                    presetData.config[tierName] = this.loadTierConfig(tierDirName);
                     presetData.gear[tierName] = this.loadTierGear(tierDirName);
                     presetData.ammo[tierName] = this.loadTierAmmo(tierDirName);
                     presetData.modules[tierName] =
@@ -257,6 +244,19 @@ export class Data {
         return weapon;
     }
 
+    loadTierConfig(tierDir: string): Config {
+        const configFileName = `${tierDir}/config.json5`;
+        const config = new Config();
+        try {
+            const jsonData = fs.readFileSync(configFileName, "utf-8");
+            Object.assign(config, JSON5.parse(jsonData));
+        } catch (err) {
+            this.logger.error(`[Andern] error read file '${configFileName}'`);
+            this.logger.error(err.message);
+        }
+        return config;
+    }
+
     isPresetValid(weaponPreset: WeaponPreset, fileName: string): boolean {
         let hasMagazine = false;
         let hasTacticalDevice = false;
@@ -302,8 +302,8 @@ export class Data {
 
         for (const tier in presetConfig) {
             if (
-                level >= presetConfig[tier].min &&
-                level <= presetConfig[tier].max
+                level >= presetConfig[tier].minLevel &&
+                level <= presetConfig[tier].maxLevel
             ) {
                 result = tier;
                 break;

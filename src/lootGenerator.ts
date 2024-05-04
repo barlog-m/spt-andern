@@ -96,7 +96,7 @@ export class LootGenerator extends BotLootGenerator {
 
         const containersBotHasAvailable = this.getAvailableContainersBotCanStoreItemsIn(botInventory);
 
-        // Speical items
+        // Special items
         this.addLootFromPool(
             this.botLootCacheService.getLootFromCache(botRole, isPmc, LootCacheType.SPECIAL, botJsonTemplate),
             containersBotHasAvailable,

@@ -8,7 +8,6 @@ import {
 import { GenerateWeaponResult } from "@spt-aki/models/spt/bots/GenerateWeaponResult";
 import { WeaponGenerator } from "./WeaponGenerator";
 import { GeneratedWeapon } from "./models";
-import { RaidInfo } from "./RaidInfo";
 import * as config from "../config/config.json";
 
 export default function registerBotWeaponGenerator(
@@ -20,7 +19,6 @@ export default function registerBotWeaponGenerator(
     const pmcWeaponGenerator = container.resolve<WeaponGenerator>(
         "AndernWeaponGenerator"
     );
-    const raidInfo = container.resolve<RaidInfo>("AndernRaidInfo");
 
     container.afterResolution(
         "BotWeaponGenerator",
@@ -43,7 +41,7 @@ export default function registerBotWeaponGenerator(
                             "",
                             botLevel,
                             weaponParentId,
-                            raidInfo.isNight
+                            false
                         );
 
                     const res = {

@@ -1,10 +1,12 @@
-import { DependencyContainer } from 'tsyringe'
-import { BotLootGenerator } from '@spt-aki/generators/BotLootGenerator';
-import { IBotType } from '@spt-aki/models/eft/common/tables/IBotType';
-import { Inventory as PmcInventory } from "@spt-aki/models/eft/common/tables/IBotBase";
-import { LootGenerator } from "./lootGenerator"
-import { RaidInfo } from './RaidInfo';
-import { ILogger } from '@spt-aki/models/spt/utils/ILogger';
+import {DependencyContainer} from "tsyringe"
+import {BotLootGenerator} from "@spt-aki/generators/BotLootGenerator";
+import {IBotType} from "@spt-aki/models/eft/common/tables/IBotType";
+import {
+    Inventory as PmcInventory
+} from "@spt-aki/models/eft/common/tables/IBotBase";
+import {ILogger} from "@spt-aki/models/spt/utils/ILogger";
+import {LootGenerator} from "./lootGenerator"
+import {RaidInfo} from "./RaidInfo";
 
 export default function registerBotLootGenerator(
     container: DependencyContainer
@@ -38,8 +40,8 @@ export default function registerBotLootGenerator(
                 return lootGenerator.generateLoot(sessionId, botJsonTemplate, isPmc, botRole, botInventory, botLevel, raidInfo);
             }
         },
-        { frequency: 'Always' }
+        {frequency: "Always"}
     )
 
-    logger.info("[Andern] PMC Bot  Loot Generator registered")
+    logger.info("[Andern] PMC Bot Loot Generator registered")
 }

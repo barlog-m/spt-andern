@@ -101,6 +101,9 @@ export class WeaponGenerator {
     // eslint-disable-next-line @typescript-eslint/naming-convention
     readonly LANTAC_BMD_762X51_BLAST_MITIGATION_DEVICE = "5cf78720d7f00c06595bc93e";
 
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    readonly ZENIT_KLESCH_2IKS = "5a5f1ce64f39f90b401987bc";
+   
     pmcConfig: IPmcConfig;
     repairConfig: IRepairConfig;
 
@@ -254,8 +257,8 @@ export class WeaponGenerator {
     updateWeaponInfo(
         weaponWithMods: Item[],
         weaponParentId: string,
+        weaponTpl: string,
         isNight: boolean,
-        weaponTpl: string
     ): undefined {
         weaponWithMods[0].slotId = this.getWeaponSlotByWeaponClass(
             this.getWeaponClassByTemplateId(weaponTpl)
@@ -298,7 +301,7 @@ export class WeaponGenerator {
             if (item.slotId.startsWith("mod_tactical") &&
                 this.itemHelper.isOfBaseclass(item._tpl, BaseClasses.TACTICAL_COMBO)
             ) {
-                item._tpl = "5a5f1ce64f39f90b401987bc";
+                item._tpl = this.ZENIT_KLESCH_2IKS;
             }
         }
     }
@@ -485,18 +488,20 @@ export class WeaponGenerator {
         presetName: string = "",
         botLevel: number,
         weaponParentId: string,
-        isNight: boolean
+        isNightVision: boolean,
     ): GeneratedWeapon {
         if (presetName.length == 0) {
             presetName = this.data.getPresetName();
         }
+        
         const weaponWithMods = this.data.getRandomWeapon(presetName, botLevel);
         const weaponTpl = this.getTemplateIdFromWeaponItems(weaponWithMods);
+        
         this.updateWeaponInfo(
             weaponWithMods,
             weaponParentId,
-            isNight,
-            weaponTpl
+            weaponTpl,
+            isNightVision,
         );
         this.alternateModules(presetName, botLevel, weaponWithMods, weaponTpl);
         this.addRandomEnhancement(weaponWithMods);

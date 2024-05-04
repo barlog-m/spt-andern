@@ -312,7 +312,7 @@ export class GearGenerator {
         botLevel: number,
         botRole: string,
         botInventory: PmcInventory,
-        isNight: boolean
+        isNightVision: boolean
     ): undefined {
         let helmets = this.data.getGear(presetName, botLevel).chadHelmets;
         if (helmets.length == 0) {
@@ -325,7 +325,8 @@ export class GearGenerator {
             botRole,
             botInventory,
             selectedHelmet.id,
-            isNight
+            isNightVision,
+            true
         );
     }
 
@@ -376,7 +377,8 @@ export class GearGenerator {
         botLevel: number,
         botRole: string,
         botInventory: PmcInventory,
-        isNight: boolean
+        isNightVision: boolean,
+        isKittedHelmet: boolean
     ): undefined {
         const headwearItem = this.getGearItem(
             presetName,
@@ -389,7 +391,8 @@ export class GearGenerator {
             botRole,
             botInventory,
             headwearItem.id,
-            isNight
+            isNightVision,
+            isKittedHelmet
         );
 
         // for "SSh-68 steel helmet" only one earpiece "GSSh-01 active headset"
@@ -442,6 +445,11 @@ export class GearGenerator {
         const presetName = this.data.getPresetName();
         const botInventory = this.generateInventoryBase();
 
+        const presetTierConfig = this.data.getConfig(presetName, botLevel);
+        const isNightVision = (raidInfo.isNight) ? this.randomUtil.getChance100(presetTierConfig.nightVisionPercent) : false;
+
+        const isKittedHelmet = this.randomUtil.getChance100(presetTierConfig.kittedHelmetPercent);
+
         this.gearGeneratorHelper.putGearItemToInventory(
             EquipmentSlots.POCKETS,
             botRole,
@@ -474,7 +482,8 @@ export class GearGenerator {
                 botLevel,
                 botRole,
                 botInventory,
-                raidInfo.isNight
+                isNightVision,
+                isKittedHelmet
             );
 
             this.generateArmor(presetName, botLevel, botRole, botInventory);
@@ -515,7 +524,7 @@ export class GearGenerator {
             presetName,
             botLevel,
             botInventory.equipment,
-            raidInfo.isNight
+            isNightVision
         );
 
         botInventory.items.push(...generatedWeapon.weaponWithMods);
@@ -537,7 +546,7 @@ export class GearGenerator {
 
         if (config.lootingBotsCompatibility) {
             botJsonTemplate.generation.items.backpackLoot.weights = {"0": 1};
-            botJsonTemplate.generation.items.backpackLoot.whitelist = [];
+            botJsonTemplate.generation.items.backpackLoot.whitelist = {};
         }
 
         this.botLootGenerator.generateLoot(
