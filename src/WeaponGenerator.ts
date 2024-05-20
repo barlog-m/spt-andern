@@ -103,6 +103,11 @@ export class WeaponGenerator {
 
     // eslint-disable-next-line @typescript-eslint/naming-convention
     readonly ZENIT_KLESCH_2IKS = "5a5f1ce64f39f90b401987bc";
+
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    readonly TACTICAL_DEVICE_LIGHT_AND_LASER_MODE = 1;
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    readonly TACTICAL_DEVICE_LASER_ONLY_MODE = 2;
    
     pmcConfig: IPmcConfig;
     repairConfig: IRepairConfig;
@@ -311,7 +316,7 @@ export class WeaponGenerator {
             if (item.slotId.startsWith("mod_tactical")) {
                 if (item.upd?.Light) {
                     item.upd.Light.IsActive = false;
-                    item.upd.Light.SelectedMode = 1;
+                    item.upd.Light.SelectedMode = this.TACTICAL_DEVICE_LASER_ONLY_MODE;
                 }
             }
         }
@@ -515,7 +520,7 @@ export class WeaponGenerator {
 
         this.addCartridgeToChamber(weaponWithMods, ammoTpl, weaponTemplate);
         const magazineTpl = this.fillMagazine(weaponWithMods, ammoTpl);
-
+        
         return {
             weaponWithMods: weaponWithMods,
             weaponTemplate: weaponTemplate,

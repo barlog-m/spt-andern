@@ -204,6 +204,11 @@
             "weight": 1,
             "id": "5df8a4d786f77412672a1e3b",
             "name": "6Sh118 raid backpack"
+        },
+        {
+            "weight": 1,
+            "id": "656e0436d44a1bb4220303a0",
+            "name": "Mystery Ranch SATL Bridger Assault Pack (Foliage)"
         }
     ],
     "face": [
@@ -225,9 +230,14 @@
     ],
     "eyewear": [
         {
-            "weight": 1,
+            "weight": 2,
             "id": "62a61c988ec41a51b34758d5",
             "name": "Oakley SI Batwolf glasses"
+        },
+        {
+            "weight": 1,
+            "id": "603409c80ca681766b6a0fb2",
+            "name": "NPP KlASS Condor glasses"
         }
     ],
     "sheath": [

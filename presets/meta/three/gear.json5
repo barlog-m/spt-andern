@@ -205,9 +205,14 @@
     ],
     "eyewear": [
         {
-            "weight": 1,
+            "weight": 2,
             "id": "603409c80ca681766b6a0fb2",
             "name": "NPP KlASS Condor glasses"
+        },
+        {
+            "weight": 1,
+            "id": "62a61c988ec41a51b34758d5",
+            "name": "Oakley SI Batwolf glasses"
         }
     ],
     "sheath": [
