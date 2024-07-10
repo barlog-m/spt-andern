@@ -1,17 +1,17 @@
 import {inject, injectable} from "tsyringe";
 
-import {ILogger} from "@spt-aki/models/spt/utils/ILogger";
-import {HashUtil} from "@spt-aki/utils/HashUtil";
-import {RandomUtil} from "@spt-aki/utils/RandomUtil";
+import {ILogger} from "@spt/models/spt/utils/ILogger";
+import {HashUtil} from "@spt/utils/HashUtil";
+import {RandomUtil} from "@spt/utils/RandomUtil";
 import {
     Inventory as PmcInventory
-} from "@spt-aki/models/eft/common/tables/IBotBase";
-import {EquipmentSlots} from "@spt-aki/models/enums/EquipmentSlots";
-import {ItemHelper} from "@spt-aki/helpers/ItemHelper";
-import {BotGeneratorHelper} from "@spt-aki/helpers/BotGeneratorHelper";
-import {DatabaseServer} from "@spt-aki/servers/DatabaseServer";
+} from "@spt/models/eft/common/tables/IBotBase";
+import {EquipmentSlots} from "@spt/models/enums/EquipmentSlots";
+import {ItemHelper} from "@spt/helpers/ItemHelper";
+import {BotGeneratorHelper} from "@spt/helpers/BotGeneratorHelper";
+import {DatabaseServer} from "@spt/servers/DatabaseServer";
 import {Data} from "./Data";
-import {Mods as PmcMods} from "@spt-aki/models/eft/common/tables/IBotType";
+import {Mods as PmcMods} from "@spt/models/eft/common/tables/IBotType";
 import {GearItem, Mods} from "./models";
 
 @injectable()

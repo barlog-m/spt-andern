@@ -1,8 +1,8 @@
 import { DependencyContainer } from "tsyringe";
-import { ILogger } from "@spt-aki/models/spt/utils/ILogger";
-import { BotInventoryGenerator } from "@spt-aki/generators/BotInventoryGenerator";
-import { Inventory as PmcInventory } from "@spt-aki/models/eft/common/tables/IBotBase";
-import { IBotType } from "@spt-aki/models/eft/common/tables/IBotType";
+import { ILogger } from "@spt/models/spt/utils/ILogger";
+import { BotInventoryGenerator } from "@spt/generators/BotInventoryGenerator";
+import { Inventory as PmcInventory } from "@spt/models/eft/common/tables/IBotBase";
+import { IBotType } from "@spt/models/eft/common/tables/IBotType";
 import { RaidInfo } from "./RaidInfo";
 import { GearGenerator } from "./GearGenerator";
 

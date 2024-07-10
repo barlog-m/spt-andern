@@ -1,6 +1,6 @@
-import {Item} from "@spt-aki/models/eft/common/tables/IItem";
-import {ITemplateItem} from "@spt-aki/models/eft/common/tables/ITemplateItem";
-import {MinMax} from "@spt-aki/models/common/MinMax";
+import {Item} from "@spt/models/eft/common/tables/IItem";
+import {ITemplateItem} from "@spt/models/eft/common/tables/ITemplateItem";
+import {MinMax} from "@spt/models/common/MinMax";
 
 export type PresetConfig = Record<string, Config>;
 export type PresetGear = Record<string, Gear>;

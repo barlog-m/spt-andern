@@ -11,6 +11,7 @@
 /.nvmrc
 /.prettierrc
 /.vscode
+/.idea
 /build.mjs
 /dist
 /node_modules

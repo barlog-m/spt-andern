@@ -1,11 +1,11 @@
 import {inject, injectable} from "tsyringe";
 
-import {ILogger} from "@spt-aki/models/spt/utils/ILogger";
-import {Item} from "@spt-aki/models/eft/common/tables/IItem";
-import {RandomUtil} from "@spt-aki/utils/RandomUtil";
-import {HashUtil} from "@spt-aki/utils/HashUtil";
-import {DatabaseServer} from "@spt-aki/servers/DatabaseServer";
-import {BaseClasses} from "@spt-aki/models/enums/BaseClasses";
+import {ILogger} from "@spt/models/spt/utils/ILogger";
+import {Item} from "@spt/models/eft/common/tables/IItem";
+import {RandomUtil} from "@spt/utils/RandomUtil";
+import {HashUtil} from "@spt/utils/HashUtil";
+import {DatabaseServer} from "@spt/servers/DatabaseServer";
+import {BaseClasses} from "@spt/models/enums/BaseClasses";
 import {
     PresetData,
     Config,

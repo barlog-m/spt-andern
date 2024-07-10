@@ -1,18 +1,18 @@
 import {DependencyContainer} from "tsyringe";
-import {ILogger} from "@spt-aki/models/spt/utils/ILogger";
-import {ConfigServer} from "@spt-aki/servers/ConfigServer";
-import {ConfigTypes} from "@spt-aki/models/enums/ConfigTypes";
-import {IBotConfig} from "@spt-aki/models/spt/config/IBotConfig";
-import {IPmcConfig} from "@spt-aki/models/spt/config/IPmcConfig";
-import {DatabaseServer} from "@spt-aki/servers/DatabaseServer";
-import {IGlobals} from "@spt-aki/models/eft/common/IGlobals";
-import {IDatabaseTables} from "@spt-aki/models/spt/server/IDatabaseTables";
-import {ILocation} from "@spt-aki/models/eft/common/ILocation";
+import {ILogger} from "@spt/models/spt/utils/ILogger";
+import {ConfigServer} from "@spt/servers/ConfigServer";
+import {ConfigTypes} from "@spt/models/enums/ConfigTypes";
+import {IBotConfig} from "@spt/models/spt/config/IBotConfig";
+import {IPmcConfig} from "@spt/models/spt/config/IPmcConfig";
+import {DatabaseServer} from "@spt/servers/DatabaseServer";
+import {IGlobals} from "@spt/models/eft/common/IGlobals";
+import {IDatabaseTables} from "@spt/models/spt/server/IDatabaseTables";
+import {ILocation} from "@spt/models/eft/common/ILocation";
 import {
     ILocationBase,
     BossLocationSpawn,
-} from "@spt-aki/models/eft/common/ILocationBase";
-import {Difficulty, IBotType} from "@spt-aki/models/eft/common/tables/IBotType";
+} from "@spt/models/eft/common/ILocationBase";
+import {Difficulty, IBotType} from "@spt/models/eft/common/tables/IBotType";
 
 import * as fs from "fs";
 
@@ -413,8 +413,8 @@ function setPmcBrains(
             continue;
         }
 
-        pmcConfig.pmcType["sptbear"][locationName] = pmcBrains;
-        pmcConfig.pmcType["sptusec"][locationName] = pmcBrains;
+        pmcConfig.pmcType["pmcbear"][locationName] = pmcBrains;
+        pmcConfig.pmcType["pmcusec"][locationName] = pmcBrains;
     }
 
     if (config.debug) {

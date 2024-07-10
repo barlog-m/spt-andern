@@ -1,5 +1,5 @@
 import {DependencyContainer} from "tsyringe";
-import {DatabaseServer} from "@spt-aki/servers/DatabaseServer";
+import {DatabaseServer} from "@spt/servers/DatabaseServer";
 import * as config from "../config/config.json";
 
 export default function vssOverheatFix(container: DependencyContainer): undefined {

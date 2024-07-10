@@ -1,23 +1,22 @@
 import {DependencyContainer, Lifecycle} from "tsyringe";
 
-import {IPreAkiLoadMod} from "@spt-aki/models/external/IPreAkiLoadMod";
-import {IPostAkiLoadMod} from "@spt-aki/models/external/IPostAkiLoadMod";
-import {IPostDBLoadMod} from "@spt-aki/models/external/IPostDBLoadMod";
-import {ILogger} from "@spt-aki/models/spt/utils/ILogger";
-import {PreAkiModLoader} from "@spt-aki/loaders/PreAkiModLoader";
-import {DatabaseServer} from "@spt-aki/servers/DatabaseServer";
-import {ILocationBase} from "@spt-aki/models/eft/common/ILocationBase";
-import {ConfigServer} from "@spt-aki/servers/ConfigServer";
-import {ConfigTypes} from "@spt-aki/models/enums/ConfigTypes";
-import {IPmcConfig} from "@spt-aki/models/spt/config/IPmcConfig";
-import {MemberCategory} from "@spt-aki/models/enums/MemberCategory";
+import {IPreSptLoadMod} from "@spt/models/external/IPreSptLoadMod";
+import {IPostSptLoadMod} from "@spt/models/external/IPostSptLoadMod";
+import {IPostDBLoadMod} from "@spt/models/external/IPostDBLoadMod";
+import {ILogger} from "@spt/models/spt/utils/ILogger";
+import {PreSptModLoader} from "@spt/loaders/PreSptModLoader";
+import {DatabaseServer} from "@spt/servers/DatabaseServer";
+import {ILocationBase} from "@spt/models/eft/common/ILocationBase";
+import {ConfigServer} from "@spt/servers/ConfigServer";
+import {ConfigTypes} from "@spt/models/enums/ConfigTypes";
+import {IPmcConfig} from "@spt/models/spt/config/IPmcConfig";
+import {MemberCategory} from "@spt/models/enums/MemberCategory";
 import {
     ISeasonalEventConfig
-} from "@spt-aki/models/spt/config/ISeasonalEventConfig";
-import {IRagfairConfig} from "@spt-aki/models/spt/config/IRagfairConfig";
+} from "@spt/models/spt/config/ISeasonalEventConfig";
+import {IRagfairConfig} from "@spt/models/spt/config/IRagfairConfig";
 import {DoeTraderArmorGenerator} from "./DoeTraderArmorGenerator";
-import {SeasonalEventService} from "@spt-aki/services/SeasonalEventService";
-import {IPlayerScavConfig} from "@spt-aki/models/spt/config/IPlayerScavConfig";
+import {IPlayerScavConfig} from "@spt/models/spt/config/IPlayerScavConfig";
 import {ModConfig} from "./ModConfig";
 import {DoeTrader} from "./DoeTrader";
 import {Data} from "./Data";
@@ -36,9 +35,11 @@ import {lootConfig} from "./lootUtils";
 import {mapBotTuning, setPmcForceHealingItems} from "./mapBotTuning";
 import cheeseQuests from "./questUtils";
 import vssOverheatFix from "./weaponUtils";
+import {setSeasonFromConfig, setSeasonRandom} from "./seasonUtils";
 import * as config from "../config/config.json";
+import registerRandomSeason from "./registerRandomSeason";
 
-export class Andern implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
+export class Andern implements IPreSptLoadMod, IPostSptLoadMod, IPostDBLoadMod {
     private readonly fullModName: string;
     private modPath: string;
     private logger: ILogger;
@@ -48,12 +49,12 @@ export class Andern implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
         this.fullModName = `${ModConfig.authorName}-${ModConfig.modName}`;
     }
 
-    public preAkiLoad(container: DependencyContainer): void {
+    public preSptLoad(container: DependencyContainer): void {
         this.logger = container.resolve<ILogger>("WinstonLogger");
-        const preAkiModLoader: PreAkiModLoader =
-            container.resolve<PreAkiModLoader>("PreAkiModLoader");
+        const preSptModLoader: PreSptModLoader =
+            container.resolve<PreSptModLoader>("PreSptModLoader");
 
-        this.modPath = `./${preAkiModLoader.getModPath(this.fullModName)}`;
+        this.modPath = `./${preSptModLoader.getModPath(this.fullModName)}`;
         container.register("AndernModPath", {useValue: this.modPath});
 
         container.register<RaidInfo>("AndernRaidInfo", RaidInfo, {
@@ -120,6 +121,10 @@ export class Andern implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
 
         registerInfoUpdater(container);
 
+        if (config.seasonRandom) {
+            registerRandomSeason(container);
+        }
+
         if (config.pmcBackpackLoot || config.disableBotBackpackLoot) {
             registerBotLootGenerator(container);
         }
@@ -134,7 +139,7 @@ export class Andern implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
             registerBotWeaponGenerator(container);
         }
 
-        this.doeTrader.prepareTrader(preAkiModLoader, this.fullModName);
+        this.doeTrader.prepareTrader(preSptModLoader, this.fullModName);
     }
 
     public postDBLoad(container: DependencyContainer): void {
@@ -148,7 +153,7 @@ export class Andern implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
         container.resolve<Data>("AndernData").fillArmorPlatesData();
     }
 
-    postAkiLoad(container: DependencyContainer): void {
+    postSptLoad(container: DependencyContainer): void {
         this.setMinFleaLevel(container);
 
         if (config.trader && config.traderInsurance) {
@@ -194,8 +199,10 @@ export class Andern implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
 
         vssOverheatFix(container);
 
-        if (config.snow) {
-            this.enableSnow(container);
+        if (config.seasonRandom) {
+            setSeasonRandom(container);
+        } else {
+            setSeasonFromConfig(container);
         }
 
         if (config.disableBtr) {
@@ -287,12 +294,6 @@ export class Andern implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
         const ragfairConfig = configServer.getConfig<IRagfairConfig>(ConfigTypes.RAGFAIR);
         ragfairConfig.dynamic.blacklist.enableBsgList = false;
         ragfairConfig.dynamic.blacklist.traderItems = true;
-    }
-
-    enableSnow(container: DependencyContainer): undefined {
-        const seasonalEventService: SeasonalEventService =
-            container.resolve<SeasonalEventService>("SeasonalEventService");
-        seasonalEventService.enableSnow();
     }
 
     disableBtr(container: DependencyContainer): undefined {

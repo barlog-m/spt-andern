@@ -1,21 +1,20 @@
 import {inject, injectable} from "tsyringe";
 
-import {ILogger} from "@spt-aki/models/spt/utils/ILogger";
-import {HashUtil} from "@spt-aki/utils/HashUtil";
-import {JsonUtil} from "@spt-aki/utils/JsonUtil";
-import {DatabaseServer} from "@spt-aki/servers/DatabaseServer";
-import {ConfigServer} from "@spt-aki/servers/ConfigServer";
-import {ConfigTypes} from "@spt-aki/models/enums/ConfigTypes";
-import {IInsuranceConfig} from "@spt-aki/models/spt/config/IInsuranceConfig";
-import {IRagfairConfig} from "@spt-aki/models/spt/config/IRagfairConfig";
-import {ImageRouter} from "@spt-aki/routers/ImageRouter";
-import {Money} from "@spt-aki/models/enums/Money";
-import {IDatabaseTables} from "@spt-aki/models/spt/server/IDatabaseTables";
-import {ItemHelper} from "@spt-aki/helpers/ItemHelper";
-import {ITraderConfig} from "@spt-aki/models/spt/config/ITraderConfig";
-import {Traders} from "@spt-aki/models/enums/Traders";
-import {PreAkiModLoader} from "@spt-aki/loaders/PreAkiModLoader";
-import {Item} from "@spt-aki/models/eft/common/tables/IItem";
+import {ILogger} from "@spt/models/spt/utils/ILogger";
+import {HashUtil} from "@spt/utils/HashUtil";
+import {JsonUtil} from "@spt/utils/JsonUtil";
+import {DatabaseServer} from "@spt/servers/DatabaseServer";
+import {ConfigServer} from "@spt/servers/ConfigServer";
+import {ConfigTypes} from "@spt/models/enums/ConfigTypes";
+import {IInsuranceConfig} from "@spt/models/spt/config/IInsuranceConfig";
+import {IRagfairConfig} from "@spt/models/spt/config/IRagfairConfig";
+import {ImageRouter} from "@spt/routers/ImageRouter";
+import {Money} from "@spt/models/enums/Money";
+import {IDatabaseTables} from "@spt/models/spt/server/IDatabaseTables";
+import {ItemHelper} from "@spt/helpers/ItemHelper";
+import {ITraderConfig} from "@spt/models/spt/config/ITraderConfig";
+import {Traders} from "@spt/models/enums/Traders";
+import {PreSptModLoader} from "@spt/loaders/PreSptModLoader";
 import {TraderHelper} from "./TraderHelpers";
 import {FluentAssortConstructor} from "./FluentTraderAssortCreator";
 import {DoeTraderArmorGenerator} from "./DoeTraderArmorGenerator";
@@ -101,8 +100,9 @@ export class DoeTrader {
         items.forEach((itemTpl) => {
             if (this.traderArmorGenerator.isArmor(itemTpl)) {
                 const items = this.traderArmorGenerator.getArmor(itemTpl);
+                const itemTpls = items.map(i => i._tpl)
                 fluentTraderAssortHeper.createComplexAssortItem(items)
-                    .addMoneyCost(Money.ROUBLES, this.getComplexItemPrice(items))
+                    .addMoneyCost(Money.ROUBLES, this.itemHelper.getItemAndChildrenPrice(itemTpls))
                     .addLoyaltyLevel(loyaltyLevel)
                     .export(tables.traders[baseJson._id]);
 
@@ -117,16 +117,16 @@ export class DoeTrader {
     }
 
     public prepareTrader(
-        preAkiModLoader: PreAkiModLoader,
+        preSptModLoader: PreSptModLoader,
         fullModName: string
     ): undefined {
         if (config.trader) {
-            this.prepareTraderImpl(preAkiModLoader, fullModName);
+            this.prepareTraderImpl(preSptModLoader, fullModName);
         }
     }
 
     prepareTraderImpl(
-        preAkiModLoader: PreAkiModLoader,
+        preSptModLoader: PreSptModLoader,
         fullModName: string
     ): undefined {
         const traderConfig: ITraderConfig =
@@ -140,7 +140,7 @@ export class DoeTrader {
         this.traderHelper.registerProfileImage(
             baseJson,
             fullModName,
-            preAkiModLoader,
+            preSptModLoader,
             this.imageRouter,
             "doetrader.jpg"
         );
@@ -148,14 +148,7 @@ export class DoeTrader {
 
         Traders[baseJson._id] = baseJson._id;
     }
-
-    getComplexItemPrice(items: Item[]): number {
-        return items
-            .map((item) => this.itemHelper.getItemPrice(item._tpl))
-            .reduce((acc, price) => acc + price
-            );
-    }
-
+    
     public registerTrader(): undefined {
         if (config.trader) {
             this.registerTraderImpl();
@@ -204,7 +197,6 @@ export class DoeTrader {
         );
 
         insuranceConfig.returnChancePercent[doeTraderId] = 100;
-        insuranceConfig.insuranceMultiplier[doeTraderId] = 0.1;
         insuranceConfig.runIntervalSeconds = 60;
     }
 

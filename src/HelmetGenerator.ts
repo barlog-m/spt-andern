@@ -1,12 +1,12 @@
 import {inject, injectable} from "tsyringe";
 
-import {ILogger} from "@spt-aki/models/spt/utils/ILogger";
-import {HashUtil} from "@spt-aki/utils/HashUtil";
-import {RandomUtil} from "@spt-aki/utils/RandomUtil";
+import {ILogger} from "@spt/models/spt/utils/ILogger";
+import {HashUtil} from "@spt/utils/HashUtil";
+import {RandomUtil} from "@spt/utils/RandomUtil";
 import {
     Inventory as PmcInventory
-} from "@spt-aki/models/eft/common/tables/IBotBase";
-import {EquipmentSlots} from "@spt-aki/models/enums/EquipmentSlots";
+} from "@spt/models/eft/common/tables/IBotBase";
+import {EquipmentSlots} from "@spt/models/enums/EquipmentSlots";
 
 import {GearGeneratorHelper} from "./GearGeneratorHelper";
 

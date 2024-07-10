@@ -165,9 +165,11 @@ Works only if `mapBotSettings` set to true.
 
 `fleaBlacklistDisable` disables Flea blacklist.
 
-`snow` enables snow.
+`season` set season, can be winter, spring, summer and autumn.
 
-`disableBtr` disables on all maps BTR.
+`seasonRandom` season set randomly after every raid.
+
+`disableBtr` disables BTR on all maps.
 
 `playerScavAlwaysHasBackpack` if true player scav always spawns with backpack.
 

@@ -1,5 +1,5 @@
-import { WeatherGenerator } from "@spt-aki/generators/WeatherGenerator";
-import { IWeatherData } from "@spt-aki/models/eft/weather/IWeatherData";
+import { WeatherGenerator } from "@spt/generators/WeatherGenerator";
+import { IWeatherData } from "@spt/models/eft/weather/IWeatherData";
 
 export function getCurrentTime(weatherGenerator: WeatherGenerator): string {
     let result: IWeatherData = {

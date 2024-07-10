@@ -1,12 +1,12 @@
 import { DependencyContainer } from "tsyringe";
-import { ILogger } from "@spt-aki/models/spt/utils/ILogger";
-import { IBotBase } from "@spt-aki/models/eft/common/tables/IBotBase";
-import { BotGenerationDetails } from "@spt-aki/models/spt/bots/BotGenerationDetails";
-import { IRandomisedBotLevelResult } from "@spt-aki/models/eft/bot/IRandomisedBotLevelResult";
-import { MinMax } from "@spt-aki/models/common/MinMax";
-import { BotLevelGenerator } from "@spt-aki/generators/BotLevelGenerator";
-import { ProfileHelper } from "@spt-aki/helpers/ProfileHelper";
-import { RandomUtil } from "@spt-aki/utils/RandomUtil";
+import { ILogger } from "@spt/models/spt/utils/ILogger";
+import { IBotBase } from "@spt/models/eft/common/tables/IBotBase";
+import { BotGenerationDetails } from "@spt/models/spt/bots/BotGenerationDetails";
+import { IRandomisedBotLevelResult } from "@spt/models/eft/bot/IRandomisedBotLevelResult";
+import { MinMax } from "@spt/models/common/MinMax";
+import { BotLevelGenerator } from "@spt/generators/BotLevelGenerator";
+import { ProfileHelper } from "@spt/helpers/ProfileHelper";
+import { RandomUtil } from "@spt/utils/RandomUtil";
 import * as config from "../config/config.json";
 
 export default function registerBotLevelGenerator(

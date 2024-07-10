@@ -1,11 +1,11 @@
 import { DependencyContainer } from "tsyringe";
-import { ILogger } from "@spt-aki/models/spt/utils/ILogger";
-import { BotWeaponGenerator } from "@spt-aki/generators/BotWeaponGenerator";
+import { ILogger } from "@spt/models/spt/utils/ILogger";
+import { BotWeaponGenerator } from "@spt/generators/BotWeaponGenerator";
 import {
     Inventory,
     ModsChances,
-} from "@spt-aki/models/eft/common/tables/IBotType";
-import { GenerateWeaponResult } from "@spt-aki/models/spt/bots/GenerateWeaponResult";
+} from "@spt/models/eft/common/tables/IBotType";
+import { GenerateWeaponResult } from "@spt/models/spt/bots/GenerateWeaponResult";
 import { WeaponGenerator } from "./WeaponGenerator";
 import { GeneratedWeapon } from "./models";
 import * as config from "../config/config.json";

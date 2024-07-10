@@ -1,40 +1,40 @@
 import {DependencyContainer} from "tsyringe";
-import {DatabaseServer} from "@spt-aki/servers/DatabaseServer";
-import {ConfigServer} from "@spt-aki/servers/ConfigServer";
-import {ConfigTypes} from "@spt-aki/models/enums/ConfigTypes";
-import {ItemHelper} from "@spt-aki/helpers/ItemHelper";
-import {Spawnpoint} from "@spt-aki/models/eft/common/ILooseLoot";
-import {BaseClasses} from "@spt-aki/models/enums/BaseClasses";
-import {ILocationConfig} from "@spt-aki/models/spt/config/ILocationConfig";
-import {IDatabaseTables} from "@spt-aki/models/spt/server/IDatabaseTables";
-import {ILocations} from "@spt-aki/models/spt/server/ILocations";
-import {ILocation} from "@spt-aki/models/eft/common/ILocation";
-import {Item} from "@spt-aki/models/eft/common/tables/IItem";
-import {IScavCaseConfig} from "@spt-aki/models/spt/config/IScavCaseConfig";
+import {DatabaseServer} from "@spt/servers/DatabaseServer";
+import {ConfigServer} from "@spt/servers/ConfigServer";
+import {ConfigTypes} from "@spt/models/enums/ConfigTypes";
+import {ItemHelper} from "@spt/helpers/ItemHelper";
+import {Spawnpoint} from "@spt/models/eft/common/ILooseLoot";
+import {BaseClasses} from "@spt/models/enums/BaseClasses";
+import {ILocationConfig} from "@spt/models/spt/config/ILocationConfig";
+import {IDatabaseTables} from "@spt/models/spt/server/IDatabaseTables";
+import {ILocations} from "@spt/models/spt/server/ILocations";
+import {ILocation, IStaticLootDetails} from "@spt/models/eft/common/ILocation";
+import {Item} from "@spt/models/eft/common/tables/IItem";
+import {IScavCaseConfig} from "@spt/models/spt/config/IScavCaseConfig";
 
 import config from "../config/config.json";
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
-const LOOSE_LOOT_KEYS_RELATIVE_PROBABILITY_THRESHOLD = 10;
+const LOOSE_LOOT_KEYS_RELATIVE_PROBABILITY_THRESHOLD = 4;
 // eslint-disable-next-line @typescript-eslint/naming-convention
-const LOOSE_LOOT_KEYS_RELATIVE_PROBABILITY_MULTIPLIER = 10;
+const LOOSE_LOOT_KEYS_RELATIVE_PROBABILITY_MULTIPLIER = 8;
 // eslint-disable-next-line @typescript-eslint/naming-convention
-const LOOSE_LOOT_KEYS_SPAWN_POINT_PROBABILITY = 0.2;
+const LOOSE_LOOT_KEYS_SPAWN_POINT_PROBABILITY = 0.1;
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
-const LOOSE_LOOT_CARDS_RELATIVE_PROBABILITY_THRESHOLD = 8;
+const LOOSE_LOOT_CARDS_RELATIVE_PROBABILITY_THRESHOLD = 4;
 // eslint-disable-next-line @typescript-eslint/naming-convention
-const LOOSE_LOOT_CARDS_RELATIVE_PROBABILITY_MULTIPLIER = 10;
+const LOOSE_LOOT_CARDS_RELATIVE_PROBABILITY_MULTIPLIER = 8;
 // eslint-disable-next-line @typescript-eslint/naming-convention
-const LOOSE_LOOT_CARDS_SPAWN_POINT_PROBABILITY = 0.2;
+const LOOSE_LOOT_CARDS_SPAWN_POINT_PROBABILITY = 0.1;
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
-const STATIC_LOOT_KEYS_RELATIVE_PROBABILITY = 2000;
+const STATIC_LOOT_KEYS_RELATIVE_PROBABILITY = 1500;
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
-const LOOSE_LOOT_RARE_ITEMS_RELATIVE_PROBABILITY_THRESHOLD = 5;
+const LOOSE_LOOT_RARE_ITEMS_RELATIVE_PROBABILITY_THRESHOLD = 4;
 // eslint-disable-next-line @typescript-eslint/naming-convention
-const LOOSE_LOOT_RARE_ITEMS_RELATIVE_PROBABILITY_MULTIPLIER = 10;
+const LOOSE_LOOT_RARE_ITEMS_RELATIVE_PROBABILITY_MULTIPLIER = 8;
 // eslint-disable-next-line @typescript-eslint/naming-convention
 const LOOSE_LOOT_RARE_ITEMS_SPAWN_POINT_PROBABILITY = 0.8;
 
@@ -57,6 +57,17 @@ const LOCATIONS = [
     "laboratory",
     "lighthouse"
 ]
+
+// eslint-disable-next-line @typescript-eslint/naming-convention
+const IGNORE_LOCATIONS = [
+    "base",
+    "develop",
+    "hideout",
+    "privatearea",
+    "suburbs",
+    "terminal",
+    "town",
+];
 
 export function lootConfig(container: DependencyContainer): undefined {
     const databaseServer: DatabaseServer =
@@ -130,42 +141,50 @@ function increaseStaticLootKeysSpawn(
 
     const itemHelper = container.resolve<ItemHelper>("ItemHelper");
     const database: IDatabaseTables = databaseServer.getTables();
-    const staticLootDistribution = database.loot.staticLoot;
 
-    const drawersAndJackets = Object.fromEntries(
-        Object.entries(staticLootDistribution).filter(
-            ([staticLootTpl, staticLootDetails]) => {
-                return (
-                    staticLootDetails.itemDistribution &&
-                    containers.includes(staticLootTpl)
-                );
-            }
-        )
-    );
-
-    Object.entries(drawersAndJackets).forEach(
-        ([staticLootTpl, staticLootDetails]) => {
-            staticLootDetails.itemDistribution.forEach((itemDistribution) => {
-                if (
-                    itemHelper.isOfBaseclass(
-                        itemDistribution.tpl,
-                        BaseClasses.KEY_MECHANICAL
-                    )
-                ) {
-                    if (
-                        itemDistribution.relativeProbability <
-                        STATIC_LOOT_KEYS_RELATIVE_PROBABILITY
-                    ) {
-                        if (config.debug) {
-                            console.log(`[Andern] ${itemDistribution.tpl} relative probability ${itemDistribution.relativeProbability} -> ${STATIC_LOOT_KEYS_RELATIVE_PROBABILITY}`);
-                        }
-                        itemDistribution.relativeProbability =
-                            STATIC_LOOT_KEYS_RELATIVE_PROBABILITY;
-                    }
-                }
-            });
+    for (const [locationName, locationObj] of Object.entries(database.locations)) {
+        if (IGNORE_LOCATIONS.includes(locationName)) {
+            continue;
         }
-    );
+
+        const staticLootDistribution: Record<string, IStaticLootDetails>
+            = locationObj.staticLoot;
+
+        const drawersAndJackets = Object.fromEntries(
+            Object.entries(staticLootDistribution).filter(
+                ([staticLootTpl, staticLootDetails]) => {
+                    return (
+                        staticLootDetails.itemDistribution &&
+                        containers.includes(staticLootTpl)
+                    );
+                }
+            )
+        );
+
+        Object.entries(drawersAndJackets).forEach(
+            ([staticLootTpl, staticLootDetails]) => {
+                staticLootDetails.itemDistribution.forEach((itemDistribution) => {
+                    if (
+                        itemHelper.isOfBaseclass(
+                            itemDistribution.tpl,
+                            BaseClasses.KEY_MECHANICAL
+                        )
+                    ) {
+                        if (
+                            itemDistribution.relativeProbability <
+                            STATIC_LOOT_KEYS_RELATIVE_PROBABILITY
+                        ) {
+                            if (config.debug) {
+                                console.log(`[Andern] ${itemDistribution.tpl} relative probability ${itemDistribution.relativeProbability} -> ${STATIC_LOOT_KEYS_RELATIVE_PROBABILITY}`);
+                            }
+                            itemDistribution.relativeProbability =
+                                STATIC_LOOT_KEYS_RELATIVE_PROBABILITY;
+                        }
+                    }
+                });
+            }
+        );
+    }
 }
 
 function increaseLooseLootProbabilityForKeysAndCards(

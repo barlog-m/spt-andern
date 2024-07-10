@@ -1,15 +1,15 @@
-import {PreAkiModLoader} from "@spt-aki/loaders/PreAkiModLoader";
+import {PreAkiModLoader} from "@spt/loaders/PreAkiModLoader";
 import {
     ITraderBase,
     ITraderAssort
-} from "@spt-aki/models/eft/common/tables/ITrader";
+} from "@spt/models/eft/common/tables/ITrader";
 import {
     ITraderConfig,
     UpdateTime
-} from "@spt-aki/models/spt/config/ITraderConfig";
-import {IDatabaseTables} from "@spt-aki/models/spt/server/IDatabaseTables";
-import {ImageRouter} from "@spt-aki/routers/ImageRouter";
-import {JsonUtil} from "@spt-aki/utils/JsonUtil";
+} from "@spt/models/spt/config/ITraderConfig";
+import {IDatabaseTables} from "@spt/models/spt/server/IDatabaseTables";
+import {ImageRouter} from "@spt/routers/ImageRouter";
+import {JsonUtil} from "@spt/utils/JsonUtil";
 
 export class TraderHelper {
     /**

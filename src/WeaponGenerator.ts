@@ -1,27 +1,27 @@
 import {inject, injectAll, injectable} from "tsyringe";
 
-import {DatabaseServer} from "@spt-aki/servers/DatabaseServer";
-import {ConfigServer} from "@spt-aki/servers/ConfigServer";
-import {IPmcConfig} from "@spt-aki/models/spt/config/IPmcConfig";
-import {IRepairConfig} from "@spt-aki/models/spt/config/IRepairConfig";
-import {ConfigTypes} from "@spt-aki/models/enums/ConfigTypes";
-import {Item} from "@spt-aki/models/eft/common/tables/IItem";
-import {ITemplateItem} from "@spt-aki/models/eft/common/tables/ITemplateItem";
-import {HashUtil} from "@spt-aki/utils/HashUtil";
-import {ItemHelper} from "@spt-aki/helpers/ItemHelper";
-import {ILogger} from "@spt-aki/models/spt/utils/ILogger";
-import {RandomUtil} from "@spt-aki/utils/RandomUtil";
+import {DatabaseServer} from "@spt/servers/DatabaseServer";
+import {ConfigServer} from "@spt/servers/ConfigServer";
+import {IPmcConfig} from "@spt/models/spt/config/IPmcConfig";
+import {IRepairConfig} from "@spt/models/spt/config/IRepairConfig";
+import {ConfigTypes} from "@spt/models/enums/ConfigTypes";
+import {Item} from "@spt/models/eft/common/tables/IItem";
+import {ITemplateItem} from "@spt/models/eft/common/tables/ITemplateItem";
+import {HashUtil} from "@spt/utils/HashUtil";
+import {ItemHelper} from "@spt/helpers/ItemHelper";
+import {ILogger} from "@spt/models/spt/utils/ILogger";
+import {RandomUtil} from "@spt/utils/RandomUtil";
 import {
     BotWeaponGeneratorHelper
-} from "@spt-aki/helpers/BotWeaponGeneratorHelper";
-import {BotGeneratorHelper} from "@spt-aki/helpers/BotGeneratorHelper";
-import {RepairService} from "@spt-aki/services/RepairService";
-import {IInventoryMagGen} from "@spt-aki/generators/weapongen/IInventoryMagGen";
-import {EquipmentSlots} from "@spt-aki/models/enums/EquipmentSlots";
+} from "@spt/helpers/BotWeaponGeneratorHelper";
+import {BotGeneratorHelper} from "@spt/helpers/BotGeneratorHelper";
+import {RepairService} from "@spt/services/RepairService";
+import {IInventoryMagGen} from "@spt/generators/weapongen/IInventoryMagGen";
+import {EquipmentSlots} from "@spt/models/enums/EquipmentSlots";
 
 import {GeneratedWeapon} from "./models";
 import {Data} from "./Data";
-import {BaseClasses} from "@spt-aki/models/enums/BaseClasses";
+import {BaseClasses} from "@spt/models/enums/BaseClasses";
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
 const MUZZLE_PAIRS = {

@@ -1,10 +1,11 @@
 {
     "name": "Andern",
-    "version": "2.2.1",
-    "main": "src/mod.js",
+    "version": "2.3.0",
+    "sptVersion": "~3.9",
+    "incompatibilities": [],
     "license": "MIT",
     "author": "BarlogM",
-    "akiVersion": "~3.8",
+    "main": "src/mod.js",
     "scripts": {
         "setup": "npm i",
         "build": "node ./build.mjs",

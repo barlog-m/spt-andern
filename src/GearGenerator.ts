@@ -1,20 +1,20 @@
 import {inject, injectable} from "tsyringe";
 
-import {ILogger} from "@spt-aki/models/spt/utils/ILogger";
-import {HashUtil} from "@spt-aki/utils/HashUtil";
-import {RandomUtil} from "@spt-aki/utils/RandomUtil";
+import {ILogger} from "@spt/models/spt/utils/ILogger";
+import {HashUtil} from "@spt/utils/HashUtil";
+import {RandomUtil} from "@spt/utils/RandomUtil";
 import {
     Inventory as PmcInventory
-} from "@spt-aki/models/eft/common/tables/IBotBase";
-import {IBotType} from "@spt-aki/models/eft/common/tables/IBotType";
-import {EquipmentSlots} from "@spt-aki/models/enums/EquipmentSlots";
-import {ItemHelper} from "@spt-aki/helpers/ItemHelper";
-import {BotGeneratorHelper} from "@spt-aki/helpers/BotGeneratorHelper";
-import {BotLootGenerator} from "@spt-aki/generators/BotLootGenerator";
-import {BotWeaponGenerator} from "@spt-aki/generators/BotWeaponGenerator";
+} from "@spt/models/eft/common/tables/IBotBase";
+import {IBotType} from "@spt/models/eft/common/tables/IBotType";
+import {EquipmentSlots} from "@spt/models/enums/EquipmentSlots";
+import {ItemHelper} from "@spt/helpers/ItemHelper";
+import {BotGeneratorHelper} from "@spt/helpers/BotGeneratorHelper";
+import {BotLootGenerator} from "@spt/generators/BotLootGenerator";
+import {BotWeaponGenerator} from "@spt/generators/BotWeaponGenerator";
 import {
     GenerateWeaponResult
-} from "@spt-aki/models/spt/bots/GenerateWeaponResult";
+} from "@spt/models/spt/bots/GenerateWeaponResult";
 
 import {RaidInfo} from "./RaidInfo";
 import {WeaponGenerator} from "./WeaponGenerator";

@@ -1,36 +1,36 @@
 import {inject, injectable} from "tsyringe";
 
 import {RaidInfo} from "./RaidInfo";
-import {HashUtil} from "@spt-aki/utils/HashUtil";
-import {BotLootGenerator} from "@spt-aki/generators/BotLootGenerator";
-import {RandomUtil} from "@spt-aki/utils/RandomUtil";
-import {WeightedRandomHelper} from "@spt-aki/helpers/WeightedRandomHelper";
+import {HashUtil} from "@spt/utils/HashUtil";
+import {BotLootGenerator} from "@spt/generators/BotLootGenerator";
+import {RandomUtil} from "@spt/utils/RandomUtil";
+import {WeightedRandomHelper} from "@spt/helpers/WeightedRandomHelper";
 import {mapPmcBackpackLootData, mapPmcBackpackLootDataGroup} from "./models";
 import {
     combineGlobalItemListIntoArray,
     combineMapItemListIntoArray
 } from "./lootGeneratorHelper";
-import {ConfigServer} from "@spt-aki/servers/ConfigServer";
-import {ItemHelper} from "@spt-aki/helpers/ItemHelper";
-import {JsonUtil} from "@spt-aki/utils/JsonUtil";
-import {InventoryHelper} from "@spt-aki/helpers/InventoryHelper";
-import {DatabaseServer} from "@spt-aki/servers/DatabaseServer";
-import {HandbookHelper} from "@spt-aki/helpers/HandbookHelper";
-import {BotGeneratorHelper} from "@spt-aki/helpers/BotGeneratorHelper";
-import {BotWeaponGenerator} from "@spt-aki/generators/BotWeaponGenerator";
-import {BotHelper} from "@spt-aki/helpers/BotHelper";
-import {BotLootCacheService} from "@spt-aki/services/BotLootCacheService";
-import {LocalisationService} from "@spt-aki/services/LocalisationService";
+import {ConfigServer} from "@spt/servers/ConfigServer";
+import {ItemHelper} from "@spt/helpers/ItemHelper";
+import {InventoryHelper} from "@spt/helpers/InventoryHelper";
+import {DatabaseService} from "@spt/services/DatabaseService";
+import {HandbookHelper} from "@spt/helpers/HandbookHelper";
+import {BotGeneratorHelper} from "@spt/helpers/BotGeneratorHelper";
+import {BotWeaponGenerator} from "@spt/generators/BotWeaponGenerator";
+import {BotHelper} from "@spt/helpers/BotHelper";
+import {BotLootCacheService} from "@spt/services/BotLootCacheService";
+import {LocalisationService} from "@spt/services/LocalisationService";
 
 import {
     Inventory as pmcInventory
-} from "@spt-aki/models/eft/common/tables/IBotBase";
-import {IBotType} from "@spt-aki/models/eft/common/tables/IBotType";
-import {ILogger} from "@spt-aki/models/spt/utils/ILogger";
-import {EquipmentSlots} from "@spt-aki/models/enums/EquipmentSlots";
-import {LootCacheType} from "@spt-aki/models/spt/bots/IBotLootCache";
-import {ItemAddedResult} from "@spt-aki/models/enums/ItemAddedResult";
-import {Item} from "@spt-aki/models/eft/common/tables/IItem";
+} from "@spt/models/eft/common/tables/IBotBase";
+import {IBotType} from "@spt/models/eft/common/tables/IBotType";
+import {ILogger} from "@spt/models/spt/utils/ILogger";
+import {EquipmentSlots} from "@spt/models/enums/EquipmentSlots";
+import {LootCacheType} from "@spt/models/spt/bots/IBotLootCache";
+import {ItemAddedResult} from "@spt/models/enums/ItemAddedResult";
+import {Item} from "@spt/models/eft/common/tables/IItem";
+import {ICloner} from "@spt/utils/cloners/ICloner";
 
 import * as config from "../config/config.json";
 import * as backpackLootConfig from "../config/backpack.json";
@@ -38,13 +38,12 @@ import * as backpackLootConfig from "../config/backpack.json";
 @injectable()
 export class LootGenerator extends BotLootGenerator {
     constructor(
-        @inject("WinstonLogger") logger: ILogger,
+        @inject("PrimaryLogger") logger: ILogger,
         @inject("HashUtil") hashUtil: HashUtil,
         @inject("RandomUtil") randomUtil: RandomUtil,
         @inject("ItemHelper") itemHelper: ItemHelper,
-        @inject("JsonUtil") jsonUtil: JsonUtil,
         @inject("InventoryHelper") inventoryHelper: InventoryHelper,
-        @inject("DatabaseServer") databaseServer: DatabaseServer,
+        @inject("DatabaseService") databaseService: DatabaseService,
         @inject("HandbookHelper") handbookHelper: HandbookHelper,
         @inject("BotGeneratorHelper") botGeneratorHelper: BotGeneratorHelper,
         @inject("BotWeaponGenerator") botWeaponGenerator: BotWeaponGenerator,
@@ -53,13 +52,14 @@ export class LootGenerator extends BotLootGenerator {
         @inject("BotLootCacheService") botLootCacheService: BotLootCacheService,
         @inject("LocalisationService") localisationService: LocalisationService,
         @inject("ConfigServer") configServer: ConfigServer,
+        @inject("PrimaryCloner") cloner: ICloner,
     ) {
         super(
             logger, hashUtil, randomUtil,
-            itemHelper, jsonUtil, inventoryHelper,
-            databaseServer, handbookHelper, botGeneratorHelper,
+            itemHelper, inventoryHelper,
+            databaseService, handbookHelper, botGeneratorHelper,
             botWeaponGenerator, weightedRandomHelper, botHelper,
-            botLootCacheService, localisationService, configServer
+            botLootCacheService, localisationService, configServer, cloner
         );
     }
 
@@ -375,7 +375,7 @@ export class LootGenerator extends BotLootGenerator {
                         const containerGrid = this.inventoryHelper.getContainerSlotMap(itemTpl);
 
                         const canAddToContainer = this.inventoryHelper.canPlaceItemsInContainer(
-                            this.jsonUtil.clone(containerGrid),
+                            this.cloner.clone(containerGrid),
                             itemsToAdd
                         )
 

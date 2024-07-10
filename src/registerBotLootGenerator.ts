@@ -1,10 +1,10 @@
 import {DependencyContainer} from "tsyringe"
-import {BotLootGenerator} from "@spt-aki/generators/BotLootGenerator";
-import {IBotType} from "@spt-aki/models/eft/common/tables/IBotType";
+import {BotLootGenerator} from "@spt/generators/BotLootGenerator";
+import {IBotType} from "@spt/models/eft/common/tables/IBotType";
 import {
     Inventory as PmcInventory
-} from "@spt-aki/models/eft/common/tables/IBotBase";
-import {ILogger} from "@spt-aki/models/spt/utils/ILogger";
+} from "@spt/models/eft/common/tables/IBotBase";
+import {ILogger} from "@spt/models/spt/utils/ILogger";
 import {LootGenerator} from "./lootGenerator"
 import {RaidInfo} from "./RaidInfo";
 
