@@ -10,11 +10,12 @@
     "followerBully": 0,
     "followerBigPipe": 0,
     "followerSanitar": 0,
-    "assault": 1,
+    "assault": 0,
     "cursedAssault": 0,
     "exUsec": 0,
     "arenaFighter": 0,
     "arenaFighterEvent": 0,
     "crazyAssaultEvent": 0,
-    "pmcBot": 1
+    "pmcBot": 1,
+    "pmcUSEC": 0
 }

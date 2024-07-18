@@ -404,7 +404,8 @@ function setPmcBrains(
 ): undefined {
     const pmcConfig = configServer.getConfig<IPmcConfig>(ConfigTypes.PMC);
 
-    const pmcBrains = loadPmcBrains(config.mapPmcBrainsConfig, modPath, logger);
+    const pmcBrainsBear = loadPmcBrains(config.mapPmcBrainsConfig, "bear", modPath, logger);
+    const pmcBrainsUsec = loadPmcBrains(config.mapPmcBrainsConfig, "usec", modPath, logger);
 
     for (const [locationName, locationObj] of Object.entries(
         databaseTables.locations
@@ -413,14 +414,19 @@ function setPmcBrains(
             continue;
         }
 
-        pmcConfig.pmcType["pmcbear"][locationName] = pmcBrains;
-        pmcConfig.pmcType["pmcusec"][locationName] = pmcBrains;
+        pmcConfig.pmcType["pmcbear"][locationName] = pmcBrainsBear;
+        pmcConfig.pmcType["pmcusec"][locationName] = pmcBrainsUsec;
     }
 
     if (config.debug) {
         logger.info(
-            `[Andern] PmcConfig.pmcType[every pmc][every location] ${JSON.stringify(
-                pmcBrains
+            `[Andern] PmcConfig.pmcType[pmcbear][every location] ${JSON.stringify(
+                pmcBrainsBear
+            )}`
+        );
+        logger.info(
+            `[Andern] PmcConfig.pmcType[pmcusec][every location] ${JSON.stringify(
+                pmcBrainsUsec
             )}`
         );
     }
@@ -428,10 +434,11 @@ function setPmcBrains(
 
 function loadPmcBrains(
     brains: string,
+    pmcType: string,
     modPath: string,
     logger: ILogger
 ): Record<string, number> {
-    const brainsFileName = `${modPath}/brains/${brains}.json`;
+    const brainsFileName = `${modPath}/brains/${pmcType}/${brains}.json`;
     try {
         const jsonData = fs.readFileSync(brainsFileName, "utf-8");
         const brainsData: Record<string, number> = {};
