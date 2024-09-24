@@ -12,10 +12,10 @@ import { DatabaseService } from "@spt/services/DatabaseService";
 import { ItemFilterService } from "@spt/services/ItemFilterService";
 import { LocalisationService } from "@spt/services/LocalisationService";
 import { SeasonalEventService } from "@spt/services/SeasonalEventService";
-import { ICloner } from "@spt/utils/cloners/ICloner";
 import { MathUtil } from "@spt/utils/MathUtil";
 import { ObjectId } from "@spt/utils/ObjectId";
 import { ProbabilityObjectArray, RandomUtil } from "@spt/utils/RandomUtil";
+import { ICloner } from "@spt/utils/cloners/ICloner";
 export interface IContainerItem {
     items: Item[];
     width: number;
@@ -27,7 +27,7 @@ export interface IContainerGroupCount {
     /** How many containers the map should spawn with this group id */
     chosenCount: number;
 }
-export declare class LocationGenerator {
+export declare class LocationLootGenerator {
     protected logger: ILogger;
     protected databaseService: DatabaseService;
     protected objectId: ObjectId;
@@ -133,12 +133,6 @@ export declare class LocationGenerator {
      * @returns IContainerItem
      */
     protected createDynamicLootItem(chosenComposedKey: string, spawnPoint: Spawnpoint, staticAmmoDist: Record<string, IStaticAmmoDetails[]>): IContainerItem;
-    /**
-     * Replace the _id value for base item + all children items parentid value
-     * @param itemWithChildren Item with mods to update
-     * @param newId new id to add on chidren of base item
-     */
-    protected reparentItemAndChildren(itemWithChildren: Item[], newId?: string): void;
     /**
      * Find an item in array by its _tpl, handle differently if chosenTpl is a weapon
      * @param items Items array to search

@@ -1,4 +1,4 @@
-import { LootTableIndexs, mapPmcBackpackLootData } from "./models";
+import {LootTableIndexs, mapPmcBackpackLootData} from "./models";
 import * as backpackLootConfig from "../config/backpack.json";
 
 export function combineMapItemListIntoArray(selectedMapLootData: mapPmcBackpackLootData): string[][] {
@@ -18,7 +18,7 @@ export function combineMapItemListIntoArray(selectedMapLootData: mapPmcBackpackL
     return mapPmcBackpackLootTables.slice(0, weightArrayLength);
 }
 
-export function combineGlobalItemListIntoArray() : string[][] {
+export function combineGlobalItemListIntoArray(): string[][] {
     const mapPmcBackpackLootTables: string[][] = [
         [...backpackLootConfig.loot_tables.extremely_rare],
         [...backpackLootConfig.loot_tables.rare],

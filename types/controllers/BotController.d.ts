@@ -10,6 +10,7 @@ import { IPmcData } from "@spt/models/eft/common/IPmcData";
 import { IBotBase } from "@spt/models/eft/common/tables/IBotBase";
 import { IBotCore } from "@spt/models/eft/common/tables/IBotCore";
 import { Difficulty } from "@spt/models/eft/common/tables/IBotType";
+import { IGetRaidConfigurationRequestData } from "@spt/models/eft/match/IGetRaidConfigurationRequestData";
 import { BotGenerationDetails } from "@spt/models/spt/bots/BotGenerationDetails";
 import { IBotConfig } from "@spt/models/spt/config/IBotConfig";
 import { IPmcConfig } from "@spt/models/spt/config/IPmcConfig";
@@ -20,8 +21,8 @@ import { DatabaseService } from "@spt/services/DatabaseService";
 import { LocalisationService } from "@spt/services/LocalisationService";
 import { MatchBotDetailsCacheService } from "@spt/services/MatchBotDetailsCacheService";
 import { SeasonalEventService } from "@spt/services/SeasonalEventService";
-import { ICloner } from "@spt/utils/cloners/ICloner";
 import { RandomUtil } from "@spt/utils/RandomUtil";
+import { ICloner } from "@spt/utils/cloners/ICloner";
 export declare class BotController {
     protected logger: ILogger;
     protected databaseService: DatabaseService;
@@ -58,10 +59,11 @@ export declare class BotController {
      * Adjust PMC settings to ensure they engage the correct bot types
      * @param type what bot the server is requesting settings for
      * @param diffLevel difficulty level server requested settings for
+     * @param raidConfig OPTIONAL - applicationContext Data stored at start of raid
      * @param ignoreRaidSettings should raid settings chosen pre-raid be ignored
      * @returns Difficulty object
      */
-    getBotDifficulty(type: string, diffLevel: string, ignoreRaidSettings?: boolean): Difficulty;
+    getBotDifficulty(type: string, diffLevel: string, raidConfig?: IGetRaidConfigurationRequestData, ignoreRaidSettings?: boolean): Difficulty;
     getAllBotDifficulties(): Record<string, any>;
     /**
      * Generate bot profiles and store in cache
@@ -75,20 +77,27 @@ export declare class BotController {
      * @param request Bot generation request object
      * @param pmcProfile Player profile
      * @param sessionId Session id
-     * @returns
+     * @returns IBotBase[]
      */
-    protected generateBotsFirstTime(request: IGenerateBotsRequestData, pmcProfile: IPmcData, sessionId: string): Promise<IBotBase[]>;
+    protected generateMultipleBotsAndCache(request: IGenerateBotsRequestData, pmcProfile: IPmcData, sessionId: string): Promise<IBotBase[]>;
+    protected getMostRecentRaidSettings(): IGetRaidConfigurationRequestData;
+    /**
+     * Get min/max level range values for a specific map
+     * @param location Map name e.g. factory4_day
+     * @returns MinMax
+     */
+    protected getPmcLevelRangeForMap(location: string): MinMax;
     /**
      * Create a BotGenerationDetails for the bot generator to use
      * @param condition Client data defining bot type and difficulty
      * @param pmcProfile Player who is generating bots
      * @param allPmcsHaveSameNameAsPlayer Should all PMCs have same name as player
-     * @param pmcLevelRangeForMap Min/max levels for PMCs to generate within
+     * @param raidSettings Settings chosen pre-raid by player
      * @param botCountToGenerate How many bots to generate
      * @param generateAsPmc Force bot being generated a PMC
      * @returns BotGenerationDetails
      */
-    protected getBotGenerationDetailsForWave(condition: Condition, pmcProfile: IPmcData, allPmcsHaveSameNameAsPlayer: boolean, pmcLevelRangeForMap: MinMax, botCountToGenerate: number, generateAsPmc: boolean): BotGenerationDetails;
+    protected getBotGenerationDetailsForWave(condition: Condition, pmcProfile: IPmcData, allPmcsHaveSameNameAsPlayer: boolean, raidSettings: IGetRaidConfigurationRequestData, botCountToGenerate: number, generateAsPmc: boolean): BotGenerationDetails;
     /**
      * Get players profile level
      * @param pmcProfile Profile to get level from
@@ -118,6 +127,7 @@ export declare class BotController {
      * @returns Single IBotBase object
      */
     protected returnSingleBotFromCache(sessionId: string, request: IGenerateBotsRequestData): Promise<IBotBase[]>;
+    protected getPmcConversionMinMaxForLocation(requestedBotRole: string, location: string): MinMax;
     protected updateBotGenerationDetailsToRandomBoss(botGenerationDetails: BotGenerationDetails, possibleBossTypeWeights: Record<string, number>): void;
     /**
      * Get the difficulty passed in, if its not "asonline", get selected difficulty from config

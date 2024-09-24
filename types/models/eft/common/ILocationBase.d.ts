@@ -76,6 +76,7 @@ export interface ILocationBase {
     EscapeTimeLimitCoop: number;
     EscapeTimeLimitPVE: number;
     exit_access_time: number;
+    ForceOnlineRaidInPVE: boolean;
     exit_count: number;
     exit_time: number;
     exits: Exit[];
@@ -86,11 +87,22 @@ export interface ILocationBase {
     maxItemCountInLocation: MaxItemCountInLocation[];
     sav_summon_seconds: number;
     tmp_location_field_remove_me: number;
+    transits: ITransit[];
     users_gather_seconds: number;
     users_spawn_seconds_n: number;
     users_spawn_seconds_n2: number;
     users_summon_seconds: number;
     waves: Wave[];
+}
+export interface ITransit {
+    activateAfterSec: string;
+    active: boolean;
+    conditions: string;
+    description: string;
+    id: number;
+    location: string;
+    target: string;
+    time: number;
 }
 export interface INonWaveGroupScenario {
     Chance: number;
@@ -135,6 +147,8 @@ export interface BossLocationSpawn {
     TriggerId: string;
     TriggerName: string;
     Delay?: number;
+    DependKarma?: boolean;
+    DependKarmaPVE?: boolean;
     ForceSpawn?: boolean;
     IgnoreMaxBots?: boolean;
     Supports?: BossSupport[];
@@ -148,15 +162,38 @@ export interface BossSupport {
 }
 export interface BotLocationModifier {
     AccuracySpeed: number;
+    AdditionalHostilitySettings: IAdditionalHostilitySettings[];
     DistToActivate: number;
+    DistToActivatePvE: number;
     DistToPersueAxemanCoef: number;
     DistToSleep: number;
+    DistToSleepPvE: number;
     GainSight: number;
     KhorovodChance: number;
     MagnetPower: number;
     MarksmanAccuratyCoef: number;
     Scattering: number;
     VisibleDistance: number;
+    MaxExfiltrationTime: number;
+    MinExfiltrationTime: number;
+}
+export interface IAdditionalHostilitySettings {
+    AlwaysEnemies: string[];
+    AlwaysFriends: string[];
+    BearEnemyChance: number;
+    BearPlayerBehaviour: string;
+    BotRole: string;
+    ChancedEnemies: IChancedEnemy[];
+    Neutral: string[];
+    SavagePlayerBehaviour: string;
+    SavageEnemyChance?: number;
+    UsecEnemyChance: number;
+    UsecPlayerBehaviour: string;
+    Warn: string[];
+}
+export interface IChancedEnemy {
+    EnemyChance: number;
+    Role: string;
 }
 export interface MinMaxBot extends MinMax {
     WildSpawnType: WildSpawnType | string;
@@ -234,6 +271,7 @@ export interface Wave {
     time_min: number;
     sptId?: string;
     ChanceGroup?: number;
+    SpawnMode: string[];
 }
 export declare enum WildSpawnType {
     ASSAULT = "assault",

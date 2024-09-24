@@ -133,6 +133,7 @@ export interface EquipmentFilters {
     /** Should the stock mod be forced to spawn on bot */
     forceStock?: boolean;
     armorPlateWeighting?: IArmorPlateWeights[];
+    forceRigWhenNoVest?: boolean;
 }
 export interface ModLimits {
     /** How many scopes are allowed on a weapon - hard coded to work with OPTIC_SCOPE, ASSAULT_SCOPE, COLLIMATOR, COMPACT_COLLIMATOR */

@@ -1,13 +1,13 @@
-import { DependencyContainer } from "tsyringe";
-import { ILogger } from "@spt/models/spt/utils/ILogger";
-import { BotWeaponGenerator } from "@spt/generators/BotWeaponGenerator";
+import {DependencyContainer} from "tsyringe";
+import {ILogger} from "@spt/models/spt/utils/ILogger";
+import {BotWeaponGenerator} from "@spt/generators/BotWeaponGenerator";
 import {
     Inventory,
     ModsChances,
 } from "@spt/models/eft/common/tables/IBotType";
-import { GenerateWeaponResult } from "@spt/models/spt/bots/GenerateWeaponResult";
-import { WeaponGenerator } from "./WeaponGenerator";
-import { GeneratedWeapon } from "./models";
+import {GenerateWeaponResult} from "@spt/models/spt/bots/GenerateWeaponResult";
+import {WeaponGenerator} from "./WeaponGenerator";
+import {GeneratedWeapon} from "./models";
 import * as config from "../config/config.json";
 
 export default function registerBotWeaponGenerator(
@@ -70,7 +70,7 @@ export default function registerBotWeaponGenerator(
                 );
             };
         },
-        { frequency: "Always" }
+        {frequency: "Always"}
     );
 
     logger.info("[Andern] PMC Bot Weapon Generator registered");

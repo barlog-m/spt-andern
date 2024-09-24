@@ -3,6 +3,7 @@ import { IPmcData } from "@spt/models/eft/common/IPmcData";
 import { Common, CounterKeyValue, Stats } from "@spt/models/eft/common/tables/IBotBase";
 import { ISptProfile } from "@spt/models/eft/profile/ISptProfile";
 import { IValidateNicknameRequestData } from "@spt/models/eft/profile/IValidateNicknameRequestData";
+import { BonusType } from "@spt/models/enums/BonusType";
 import { SkillTypes } from "@spt/models/enums/SkillTypes";
 import { IInventoryConfig } from "@spt/models/spt/config/IInventoryConfig";
 import { ILogger } from "@spt/models/spt/utils/ILogger";
@@ -11,10 +12,10 @@ import { SaveServer } from "@spt/servers/SaveServer";
 import { DatabaseService } from "@spt/services/DatabaseService";
 import { LocalisationService } from "@spt/services/LocalisationService";
 import { ProfileSnapshotService } from "@spt/services/ProfileSnapshotService";
-import { ICloner } from "@spt/utils/cloners/ICloner";
 import { HashUtil } from "@spt/utils/HashUtil";
 import { TimeUtil } from "@spt/utils/TimeUtil";
 import { Watermark } from "@spt/utils/Watermark";
+import { ICloner } from "@spt/utils/cloners/ICloner";
 export declare class ProfileHelper {
     protected logger: ILogger;
     protected hashUtil: HashUtil;
@@ -58,7 +59,12 @@ export declare class ProfileHelper {
      * @param scavProfile post-raid scav profile
      * @returns Updated profile array
      */
-    protected postRaidXpWorkaroundFix(sessionId: string, pmcProfile: IPmcData, scavProfile: IPmcData, output: IPmcData[]): IPmcData[];
+    protected postRaidXpWorkaroundFix(sessionId: string, clonedPmc: IPmcData, clonedScav: IPmcData, output: IPmcData[]): IPmcData[];
+    /**
+     * Sanitize any information from the profile that the client does not expect to receive
+     * @param clonedProfile A clone of the full player profile
+     */
+    protected sanitizeProfileForClient(clonedProfile: ISptProfile): void;
     /**
      * Check if a nickname is used by another profile loaded by the server
      * @param nicknameRequest nickname request object
@@ -190,6 +196,13 @@ export declare class ProfileHelper {
      * @param rowsToAdd How many rows to give profile
      */
     addStashRowsBonusToProfile(sessionId: string, rowsToAdd: number): void;
+    /**
+     * Iterate over all bonuses and sum up all bonuses of desired type in provided profile
+     * @param pmcProfile Player profile
+     * @param desiredBonus Bonus to sum up
+     * @returns Summed bonus value or 0 if no bonus found
+     */
+    getBonusValueFromProfile(pmcProfile: IPmcData, desiredBonus: BonusType): number;
     playerIsFleaBanned(pmcProfile: IPmcData): boolean;
     /**
      * Add an achievement to player profile
@@ -198,4 +211,10 @@ export declare class ProfileHelper {
      */
     addAchievementToProfile(pmcProfile: IPmcData, achievementId: string): void;
     hasAccessToRepeatableFreeRefreshSystem(pmcProfile: IPmcData): boolean;
+    /**
+     * Find a profiles "Pockets" item and replace its tpl with passed in value
+     * @param pmcProfile Player profile
+     * @param newPocketTpl New tpl to set profiles Pockets to
+     */
+    replaceProfilePocketTpl(pmcProfile: IPmcData, newPocketTpl: string): void;
 }

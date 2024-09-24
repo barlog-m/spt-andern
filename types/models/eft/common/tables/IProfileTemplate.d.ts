@@ -1,12 +1,12 @@
 import { IPmcData } from "@spt/models/eft/common/IPmcData";
 import { Dialogue, IUserBuilds } from "@spt/models/eft/profile/ISptProfile";
 export interface IProfileTemplates {
-    "Standard": IProfileSides;
+    Standard: IProfileSides;
     "Left Behind": IProfileSides;
     "Prepare To Escape": IProfileSides;
     "Edge Of Darkness": IProfileSides;
-    "Unheard": IProfileSides;
-    "Tournament": IProfileSides;
+    Unheard: IProfileSides;
+    Tournament: IProfileSides;
     "SPT Developer": IProfileSides;
     "SPT Easy start": IProfileSides;
     "SPT Zero to hero": IProfileSides;
@@ -21,9 +21,9 @@ export interface ITemplateSide {
     suits: string[];
     dialogues: Record<string, Dialogue>;
     userbuilds: IUserBuilds;
-    trader: ProfileTraderTemplate;
+    trader: IProfileTraderTemplate;
 }
-export interface ProfileTraderTemplate {
+export interface IProfileTraderTemplate {
     initialLoyaltyLevel: Record<string, number>;
     initialStanding: Record<string, number>;
     setQuestsAvailableForStart?: boolean;

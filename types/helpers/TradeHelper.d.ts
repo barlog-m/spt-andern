@@ -13,14 +13,16 @@ import { ILogger } from "@spt/models/spt/utils/ILogger";
 import { EventOutputHolder } from "@spt/routers/EventOutputHolder";
 import { ConfigServer } from "@spt/servers/ConfigServer";
 import { RagfairServer } from "@spt/servers/RagfairServer";
+import { DatabaseService } from "@spt/services/DatabaseService";
 import { FenceService } from "@spt/services/FenceService";
 import { LocalisationService } from "@spt/services/LocalisationService";
 import { PaymentService } from "@spt/services/PaymentService";
 import { TraderPurchasePersisterService } from "@spt/services/TraderPurchasePersisterService";
-import { ICloner } from "@spt/utils/cloners/ICloner";
 import { HttpResponseUtil } from "@spt/utils/HttpResponseUtil";
+import { ICloner } from "@spt/utils/cloners/ICloner";
 export declare class TradeHelper {
     protected logger: ILogger;
+    protected databaseService: DatabaseService;
     protected eventOutputHolder: EventOutputHolder;
     protected traderHelper: TraderHelper;
     protected itemHelper: ItemHelper;
@@ -36,7 +38,7 @@ export declare class TradeHelper {
     protected cloner: ICloner;
     protected traderConfig: ITraderConfig;
     protected inventoryConfig: IInventoryConfig;
-    constructor(logger: ILogger, eventOutputHolder: EventOutputHolder, traderHelper: TraderHelper, itemHelper: ItemHelper, paymentService: PaymentService, fenceService: FenceService, localisationService: LocalisationService, httpResponse: HttpResponseUtil, inventoryHelper: InventoryHelper, ragfairServer: RagfairServer, traderAssortHelper: TraderAssortHelper, traderPurchasePersisterService: TraderPurchasePersisterService, configServer: ConfigServer, cloner: ICloner);
+    constructor(logger: ILogger, databaseService: DatabaseService, eventOutputHolder: EventOutputHolder, traderHelper: TraderHelper, itemHelper: ItemHelper, paymentService: PaymentService, fenceService: FenceService, localisationService: LocalisationService, httpResponse: HttpResponseUtil, inventoryHelper: InventoryHelper, ragfairServer: RagfairServer, traderAssortHelper: TraderAssortHelper, traderPurchasePersisterService: TraderPurchasePersisterService, configServer: ConfigServer, cloner: ICloner);
     /**
      * Buy item from flea or trader
      * @param pmcData Player profile
@@ -56,6 +58,7 @@ export declare class TradeHelper {
      * @param output IItemEventRouterResponse
      */
     sellItem(profileWithItemsToSell: IPmcData, profileToReceiveMoney: IPmcData, sellRequest: IProcessSellTradeRequestData, sessionID: string, output: IItemEventRouterResponse): void;
+    protected incrementCirculateSoldToTraderCounter(profileWithItemsToSell: IPmcData, profileToReceiveMoney: IPmcData, sellRequest: IProcessSellTradeRequestData): void;
     /**
      * Traders allow a limited number of purchases per refresh cycle (default 60 mins)
      * @param sessionId Session id

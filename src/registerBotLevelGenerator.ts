@@ -1,12 +1,14 @@
-import { DependencyContainer } from "tsyringe";
-import { ILogger } from "@spt/models/spt/utils/ILogger";
-import { IBotBase } from "@spt/models/eft/common/tables/IBotBase";
-import { BotGenerationDetails } from "@spt/models/spt/bots/BotGenerationDetails";
-import { IRandomisedBotLevelResult } from "@spt/models/eft/bot/IRandomisedBotLevelResult";
-import { MinMax } from "@spt/models/common/MinMax";
-import { BotLevelGenerator } from "@spt/generators/BotLevelGenerator";
-import { ProfileHelper } from "@spt/helpers/ProfileHelper";
-import { RandomUtil } from "@spt/utils/RandomUtil";
+import {DependencyContainer} from "tsyringe";
+import {ILogger} from "@spt/models/spt/utils/ILogger";
+import {IBotBase} from "@spt/models/eft/common/tables/IBotBase";
+import {BotGenerationDetails} from "@spt/models/spt/bots/BotGenerationDetails";
+import {
+    IRandomisedBotLevelResult
+} from "@spt/models/eft/bot/IRandomisedBotLevelResult";
+import {MinMax} from "@spt/models/common/MinMax";
+import {BotLevelGenerator} from "@spt/generators/BotLevelGenerator";
+import {ProfileHelper} from "@spt/helpers/ProfileHelper";
+import {RandomUtil} from "@spt/utils/RandomUtil";
 import * as config from "../config/config.json";
 
 export default function registerBotLevelGenerator(
@@ -33,7 +35,7 @@ export default function registerBotLevelGenerator(
                         bot
                     );
 
-                const { playerLevel } = botGenerationDetails;
+                const {playerLevel} = botGenerationDetails;
 
                 let level = 1;
 
@@ -72,7 +74,7 @@ export default function registerBotLevelGenerator(
                 return res;
             };
         },
-        { frequency: "Always" }
+        {frequency: "Always"}
     );
     logger.info("[Andern] PMC Bot Level Generator registered");
 }

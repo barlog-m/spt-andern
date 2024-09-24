@@ -18,9 +18,9 @@ import { ConfigServer } from "@spt/servers/ConfigServer";
 import { BotLootCacheService } from "@spt/services/BotLootCacheService";
 import { DatabaseService } from "@spt/services/DatabaseService";
 import { LocalisationService } from "@spt/services/LocalisationService";
-import { ICloner } from "@spt/utils/cloners/ICloner";
 import { HashUtil } from "@spt/utils/HashUtil";
 import { RandomUtil } from "@spt/utils/RandomUtil";
+import { ICloner } from "@spt/utils/cloners/ICloner";
 export declare class BotLootGenerator {
     protected logger: ILogger;
     protected hashUtil: HashUtil;
@@ -51,6 +51,14 @@ export declare class BotLootGenerator {
      * @param botLevel Level of bot
      */
     generateLoot(sessionId: string, botJsonTemplate: IBotType, isPmc: boolean, botRole: string, botInventory: PmcInventory, botLevel: number): void;
+    /**
+     * Gets the rouble cost total for loot in a bots backpack by the bots levl
+     * Will return 0 for non PMCs
+     * @param botLevel Bots level
+     * @param isPmc Is the bot a PMC
+     * @returns number
+     */
+    protected getBackpackRoubleTotalByLevel(botLevel: number, isPmc: boolean): number;
     /**
      * Get an array of the containers a bot has on them (pockets/backpack/vest)
      * @param botInventory Bot to check

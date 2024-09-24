@@ -67,7 +67,19 @@
         // Relaxation room key
         "6582dbf0b8d7830efc45016f",
         // Real estate agency office room key
-        "6582dc5740562727a654ebb1"
+        "6582dc5740562727a654ebb1",
+        // Kirasa-N
+        "5b44d22286f774172b0c9de8",
+        // WARTECH TV-115 plate carrier (Olive Drab)
+        "64a536392d2c4e6e970f4121", 
+        // SILENCER_AK74_HEXAGON_AK74_545X39
+        "593d493f86f7745e6b2ceb22",
+        //SILENCER_ALL_ROTOR_43_V2_556X45
+        "5a9fbb84a2750c00137fa685",
+        //SILENCER_ALL_ROTOR_43_V2_762X39
+        "5a9fbacda2750c00141e080f",
+        //MAG_AK_IZHMASH_AK_STD_55_762X39_30
+        "59d625f086f774661516605d",
     ],
     "two": [],
     "three": [],

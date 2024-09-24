@@ -1,13 +1,13 @@
-import { WeatherGenerator } from "@spt/generators/WeatherGenerator";
-import { IWeatherData } from "@spt/models/eft/weather/IWeatherData";
+import {WeatherGenerator} from "@spt/generators/WeatherGenerator";
+import {IWeatherData} from "@spt/models/eft/weather/IWeatherData";
 
 export function getCurrentTime(weatherGenerator: WeatherGenerator): string {
     let result: IWeatherData = {
-        winterEventEnabled: false,
         acceleration: 0,
         time: "",
         date: "",
-        weather: null
+        weather: null,
+        season: null
     };
     result = weatherGenerator.calculateGameTime(result);
     return result.time;

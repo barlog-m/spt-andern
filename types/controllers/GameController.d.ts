@@ -1,6 +1,7 @@
 import { ApplicationContext } from "@spt/context/ApplicationContext";
 import { HideoutHelper } from "@spt/helpers/HideoutHelper";
 import { HttpServerHelper } from "@spt/helpers/HttpServerHelper";
+import { InventoryHelper } from "@spt/helpers/InventoryHelper";
 import { ProfileHelper } from "@spt/helpers/ProfileHelper";
 import { PreSptModLoader } from "@spt/loaders/PreSptModLoader";
 import { IEmptyRequestData } from "@spt/models/eft/common/IEmptyRequestData";
@@ -34,10 +35,10 @@ import { ProfileActivityService } from "@spt/services/ProfileActivityService";
 import { ProfileFixerService } from "@spt/services/ProfileFixerService";
 import { RaidTimeAdjustmentService } from "@spt/services/RaidTimeAdjustmentService";
 import { SeasonalEventService } from "@spt/services/SeasonalEventService";
-import { ICloner } from "@spt/utils/cloners/ICloner";
 import { HashUtil } from "@spt/utils/HashUtil";
 import { RandomUtil } from "@spt/utils/RandomUtil";
 import { TimeUtil } from "@spt/utils/TimeUtil";
+import { ICloner } from "@spt/utils/cloners/ICloner";
 export declare class GameController {
     protected logger: ILogger;
     protected databaseService: DatabaseService;
@@ -45,6 +46,7 @@ export declare class GameController {
     protected hashUtil: HashUtil;
     protected preSptModLoader: PreSptModLoader;
     protected httpServerHelper: HttpServerHelper;
+    protected inventoryHelper: InventoryHelper;
     protected randomUtil: RandomUtil;
     protected hideoutHelper: HideoutHelper;
     protected profileHelper: ProfileHelper;
@@ -68,12 +70,13 @@ export declare class GameController {
     protected pmcConfig: IPmcConfig;
     protected lootConfig: ILootConfig;
     protected botConfig: IBotConfig;
-    constructor(logger: ILogger, databaseService: DatabaseService, timeUtil: TimeUtil, hashUtil: HashUtil, preSptModLoader: PreSptModLoader, httpServerHelper: HttpServerHelper, randomUtil: RandomUtil, hideoutHelper: HideoutHelper, profileHelper: ProfileHelper, profileFixerService: ProfileFixerService, localisationService: LocalisationService, customLocationWaveService: CustomLocationWaveService, openZoneService: OpenZoneService, seasonalEventService: SeasonalEventService, itemBaseClassService: ItemBaseClassService, giftService: GiftService, raidTimeAdjustmentService: RaidTimeAdjustmentService, profileActivityService: ProfileActivityService, applicationContext: ApplicationContext, configServer: ConfigServer, cloner: ICloner);
+    constructor(logger: ILogger, databaseService: DatabaseService, timeUtil: TimeUtil, hashUtil: HashUtil, preSptModLoader: PreSptModLoader, httpServerHelper: HttpServerHelper, inventoryHelper: InventoryHelper, randomUtil: RandomUtil, hideoutHelper: HideoutHelper, profileHelper: ProfileHelper, profileFixerService: ProfileFixerService, localisationService: LocalisationService, customLocationWaveService: CustomLocationWaveService, openZoneService: OpenZoneService, seasonalEventService: SeasonalEventService, itemBaseClassService: ItemBaseClassService, giftService: GiftService, raidTimeAdjustmentService: RaidTimeAdjustmentService, profileActivityService: ProfileActivityService, applicationContext: ApplicationContext, configServer: ConfigServer, cloner: ICloner);
     load(): void;
     /**
      * Handle client/game/start
      */
     gameStart(_url: string, _info: IEmptyRequestData, sessionID: string, startTimeStampMS: number): void;
+    protected migrate39xProfile(fullProfile: ISptProfile): void;
     protected adjustHideoutCraftTimes(overrideSeconds: number): void;
     /**
      * Adjust all hideout craft times to be no higher than the override

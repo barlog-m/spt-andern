@@ -21,11 +21,11 @@ import { LocalisationService } from "@spt/services/LocalisationService";
 import { MailSendService } from "@spt/services/MailSendService";
 import { PaymentService } from "@spt/services/PaymentService";
 import { RagfairPriceService } from "@spt/services/RagfairPriceService";
-import { ICloner } from "@spt/utils/cloners/ICloner";
 import { HashUtil } from "@spt/utils/HashUtil";
 import { MathUtil } from "@spt/utils/MathUtil";
 import { RandomUtil } from "@spt/utils/RandomUtil";
 import { TimeUtil } from "@spt/utils/TimeUtil";
+import { ICloner } from "@spt/utils/cloners/ICloner";
 export declare class InsuranceController {
     protected logger: ILogger;
     protected randomUtil: RandomUtil;
@@ -195,6 +195,14 @@ export declare class InsuranceController {
      * @returns IItemEventRouterResponse object to send to client
      */
     insure(pmcData: IPmcData, body: IInsureRequestData, sessionID: string): IItemEventRouterResponse;
+    /**
+     *  Insure softinserts of Armor that has softinsert slots
+     * Allows armors to come back after being lost correctly
+     * @param item Armor item to be insured
+     * @param pmcData Player profile
+     * @param body Insurance request data
+     */
+    insureSoftInserts(item: Item, pmcData: IPmcData, body: IInsureRequestData): void;
     /**
      * Handle client/insurance/items/list/cost
      * Calculate insurance cost

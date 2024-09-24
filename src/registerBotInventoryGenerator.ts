@@ -1,10 +1,12 @@
-import { DependencyContainer } from "tsyringe";
-import { ILogger } from "@spt/models/spt/utils/ILogger";
-import { BotInventoryGenerator } from "@spt/generators/BotInventoryGenerator";
-import { Inventory as PmcInventory } from "@spt/models/eft/common/tables/IBotBase";
-import { IBotType } from "@spt/models/eft/common/tables/IBotType";
-import { RaidInfo } from "./RaidInfo";
-import { GearGenerator } from "./GearGenerator";
+import {DependencyContainer} from "tsyringe";
+import {ILogger} from "@spt/models/spt/utils/ILogger";
+import {BotInventoryGenerator} from "@spt/generators/BotInventoryGenerator";
+import {
+    Inventory as PmcInventory
+} from "@spt/models/eft/common/tables/IBotBase";
+import {IBotType} from "@spt/models/eft/common/tables/IBotType";
+import {RaidInfo} from "./RaidInfo";
+import {GearGenerator} from "./GearGenerator";
 
 export default function registerBotInventoryGenerator(
     container: DependencyContainer
@@ -27,7 +29,8 @@ export default function registerBotInventoryGenerator(
                 botJsonTemplate: IBotType,
                 botRole: string,
                 isPmc: boolean,
-                botLevel: number
+                botLevel: number,
+                chosenGameVersion: string
             ): PmcInventory => {
                 if (isPmc) {
                     const inventory = gearGenerator.generateInventory(
@@ -46,11 +49,12 @@ export default function registerBotInventoryGenerator(
                     botJsonTemplate,
                     botRole,
                     isPmc,
-                    botLevel
+                    botLevel,
+                    chosenGameVersion
                 );
             };
         },
-        { frequency: "Always" }
+        {frequency: "Always"}
     );
 
     logger.info("[Andern] PMC Bot Inventory Generator registered");

@@ -93,6 +93,7 @@ export interface IUserDialogDetails {
     Side: string;
     Level: number;
     MemberCategory: MemberCategory;
+    SelectedMemberCategory: MemberCategory;
 }
 export interface DialogueInfo {
     attachmentsNew: number;
@@ -165,11 +166,13 @@ export interface Spt {
     /** What mods has this profile loaded at any point in time */
     mods?: ModDetails[];
     /** What gifts has this profile received and how many */
-    receivedGifts: ReceivedGift[];
+    receivedGifts?: ReceivedGift[];
     /** item TPLs blacklisted from being sold on flea for this profile */
     blacklistedItemTpls?: string[];
     /** key: daily type */
-    freeRepeatableRefreshUsedCount: Record<string, number>;
+    freeRepeatableRefreshUsedCount?: Record<string, number>;
+    /** When was a profile migrated, value is timestamp */
+    migrations?: Record<string, number>;
 }
 export interface ModDetails {
     name: string;
@@ -208,12 +211,9 @@ export interface Effects {
     LeftLeg: LeftLeg;
     RightLeg: RightLeg;
 }
-export interface Head {
-}
-export interface Chest {
-}
-export interface Stomach {
-}
+export type Head = {};
+export type Chest = {};
+export type Stomach = {};
 export interface LeftArm {
     Fracture?: number;
 }

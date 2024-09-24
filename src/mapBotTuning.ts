@@ -3,7 +3,10 @@ import {ILogger} from "@spt/models/spt/utils/ILogger";
 import {ConfigServer} from "@spt/servers/ConfigServer";
 import {ConfigTypes} from "@spt/models/enums/ConfigTypes";
 import {IBotConfig} from "@spt/models/spt/config/IBotConfig";
-import {IPmcConfig} from "@spt/models/spt/config/IPmcConfig";
+import {
+    IHostilitySettings,
+    IPmcConfig
+} from "@spt/models/spt/config/IPmcConfig";
 import {DatabaseServer} from "@spt/servers/DatabaseServer";
 import {IGlobals} from "@spt/models/eft/common/IGlobals";
 import {IDatabaseTables} from "@spt/models/spt/server/IDatabaseTables";
@@ -282,10 +285,24 @@ function makePmcAlwaysHostile(
     logger: ILogger
 ): undefined {
     const pmcConfig = configServer.getConfig<IPmcConfig>(ConfigTypes.PMC);
-    pmcConfig.chanceSameSideIsHostilePercent = 100;
+    
+    util(pmcConfig.hostilitySettings["pmcusec"]);
+    util(pmcConfig.hostilitySettings["pmcbear"]);
+    
+    function util(hostilitySettings: IHostilitySettings): undefined {
+        hostilitySettings.bearEnemyChance = 100;
+        hostilitySettings.usecEnemyChance = 100;
+        hostilitySettings.savageEnemyChance = 100;
+        hostilitySettings.savagePlayerBehaviour = "AlwaysEnemies";
+
+        for (const chanceEnimes of hostilitySettings.chancedEnemies) {
+            chanceEnimes.EnemyChance = 100;
+        }
+    }
+    
     if (config.debug) {
         logger.info(
-            `[Andern] pmcConfig.chanceSameSideIsHostilePercent: ${pmcConfig.chanceSameSideIsHostilePercent}`
+            `[Andern] pmcConfig.chanceSameSideIsHostilePercent: ${JSON.stringify(pmcConfig.hostilitySettings)}`
         );
     }
 }
@@ -296,36 +313,38 @@ function tuneScavConvertToPmcRatio(
 ): undefined {
     const pmcConfig = configServer.getConfig<IPmcConfig>(ConfigTypes.PMC);
 
-    for (const botType in pmcConfig.convertIntoPmcChance) {
-        const baseMin = pmcConfig.convertIntoPmcChance[botType].min;
-        const baseMax = pmcConfig.convertIntoPmcChance[botType].max;
+    for (const map of Object.keys(pmcConfig.convertIntoPmcChance)) {
+        for (const botType in pmcConfig.convertIntoPmcChance[map]) {
+            const baseMin = pmcConfig.convertIntoPmcChance[map][botType].min;
+            const baseMax = pmcConfig.convertIntoPmcChance[map][botType].max;
 
-        if (baseMin === 0 && baseMax === 0) {
-            continue;
-        }
+            if (baseMin === 0 && baseMax === 0) {
+                continue;
+            }
 
-        pmcConfig.convertIntoPmcChance[botType].min = Math.ceil(
-            pmcConfig.convertIntoPmcChance[botType].min *
-            config.mapScavToPmcConvertMultiplier
-        );
-
-        if (pmcConfig.convertIntoPmcChance[botType].min > 100) {
-            pmcConfig.convertIntoPmcChance[botType].min = 100;
-        }
-
-        pmcConfig.convertIntoPmcChance[botType].max = Math.ceil(
-            pmcConfig.convertIntoPmcChance[botType].max *
-            config.mapScavToPmcConvertMultiplier
-        );
-
-        if (pmcConfig.convertIntoPmcChance[botType].max > 100) {
-            pmcConfig.convertIntoPmcChance[botType].max = 100;
-        }
-
-        if (config.debug) {
-            logger.info(
-                `[Andern] pmcConfig.convertIntoPmcChance[${botType}] min: ${baseMin} -> ${pmcConfig.convertIntoPmcChance[botType].min}, max: ${baseMax} -> ${pmcConfig.convertIntoPmcChance[botType].max}`
+            pmcConfig.convertIntoPmcChance[map][botType].min = Math.ceil(
+                pmcConfig.convertIntoPmcChance[map][botType].min *
+                config.mapScavToPmcConvertMultiplier
             );
+
+            if (pmcConfig.convertIntoPmcChance[map][botType].min > 100) {
+                pmcConfig.convertIntoPmcChance[map][botType].min = 100;
+            }
+
+            pmcConfig.convertIntoPmcChance[map][botType].max = Math.ceil(
+                pmcConfig.convertIntoPmcChance[map][botType].max *
+                config.mapScavToPmcConvertMultiplier
+            );
+
+            if (pmcConfig.convertIntoPmcChance[map][botType].max > 100) {
+                pmcConfig.convertIntoPmcChance[map][botType].max = 100;
+            }
+
+            if (config.debug) {
+                logger.info(
+                    `[Andern] pmcConfig.convertIntoPmcChance[${botType}] min: ${baseMin} -> ${pmcConfig.convertIntoPmcChance[map][botType].min}, max: ${baseMax} -> ${pmcConfig.convertIntoPmcChance[map][botType].max}`
+                );
+            }
         }
     }
 }
@@ -352,7 +371,9 @@ function disableBotTypeConvertToPmc(
     pmcConfig: IPmcConfig,
     logger: ILogger
 ): undefined {
-    pmcConfig.convertIntoPmcChance[botType] = {min: 0, max: 0};
+    for (const map of Object.keys(pmcConfig.convertIntoPmcChance)) {
+        pmcConfig.convertIntoPmcChance[map][botType] = {min: 0, max: 0};
+    }
 }
 
 function increaseSpawnGroupsSize(

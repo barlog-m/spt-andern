@@ -1,7 +1,7 @@
 import { HandbookHelper } from "@spt/helpers/HandbookHelper";
 import { IStaticAmmoDetails } from "@spt/models/eft/common/ILocation";
 import { IPmcData } from "@spt/models/eft/common/IPmcData";
-import { InsuredItem } from "@spt/models/eft/common/tables/IBotBase";
+import { IInsuredItem } from "@spt/models/eft/common/tables/IBotBase";
 import { Item, Repairable, Upd } from "@spt/models/eft/common/tables/IItem";
 import { ITemplateItem } from "@spt/models/eft/common/tables/ITemplateItem";
 import { ItemTpl } from "@spt/models/enums/ItemTpl";
@@ -11,13 +11,13 @@ import { ItemBaseClassService } from "@spt/services/ItemBaseClassService";
 import { ItemFilterService } from "@spt/services/ItemFilterService";
 import { LocaleService } from "@spt/services/LocaleService";
 import { LocalisationService } from "@spt/services/LocalisationService";
-import { ICloner } from "@spt/utils/cloners/ICloner";
 import { CompareUtil } from "@spt/utils/CompareUtil";
 import { HashUtil } from "@spt/utils/HashUtil";
 import { JsonUtil } from "@spt/utils/JsonUtil";
 import { MathUtil } from "@spt/utils/MathUtil";
 import { ObjectId } from "@spt/utils/ObjectId";
 import { RandomUtil } from "@spt/utils/RandomUtil";
+import { ICloner } from "@spt/utils/cloners/ICloner";
 export declare class ItemHelper {
     protected logger: ILogger;
     protected hashUtil: HashUtil;
@@ -76,7 +76,13 @@ export declare class ItemHelper {
      */
     generateUpdForItem(itemTemplate: ITemplateItem): Upd;
     /**
-     * Checks if an id is a valid item. Valid meaning that it's an item that be stored in stash
+     * Checks if a tpl is a valid item. Valid meaning that it's an item that be stored in stash
+     * Valid means:
+     *  Not quest item
+     *  'Item' type
+     *  Not on the invalid base types array
+     *  Price above 0 roubles
+     *  Not on item config blacklist
      * @param    {string}  tpl  the template id / tpl
      * @returns                 boolean; true for items that may be in player possession and not quest items
      */
@@ -269,6 +275,13 @@ export declare class ItemHelper {
      */
     findBarterItems(by: "tpl" | "id", itemsToSearch: Item[], desiredBarterItemIds: string | string[]): Item[];
     /**
+     * Replace the _id value for base item + all children that are children of it
+     * REPARENTS ROOT ITEM ID, NOTHING ELSE
+     * @param itemWithChildren Item with mods to update
+     * @param newId new id to add on chidren of base item
+     */
+    replaceRootItemID(itemWithChildren: Item[], newId?: string): void;
+    /**
      * Regenerate all GUIDs with new IDs, for the exception of special item types (e.g. quest, sorting table, etc.) This
      * function will not mutate the original items array, but will return a new array with new GUIDs.
      *
@@ -278,7 +291,7 @@ export declare class ItemHelper {
      * @param fastPanel Quick slot panel
      * @returns Item[]
      */
-    replaceIDs(originalItems: Item[], pmcData?: IPmcData, insuredItems?: InsuredItem[], fastPanel?: any): Item[];
+    replaceIDs(originalItems: Item[], pmcData?: IPmcData, insuredItems?: IInsuredItem[], fastPanel?: any): Item[];
     /**
      * Mark the passed in array of items as found in raid.
      * Modifies passed in items
@@ -377,12 +390,12 @@ export declare class ItemHelper {
     addSingleStackCartridgesToAmmoBox(ammoBox: Item[], ammoBoxDetails: ITemplateItem): void;
     /**
      * Check if item is stored inside of a container
-     * @param item Item to check is inside of container
+     * @param itemToCheck Item to check is inside of container
      * @param desiredContainerSlotId Name of slot to check item is in e.g. SecuredContainer/Backpack
      * @param items Inventory with child parent items to check
      * @returns True when item is in container
      */
-    itemIsInsideContainer(item: Item, desiredContainerSlotId: string, items: Item[]): boolean;
+    itemIsInsideContainer(itemToCheck: Item, desiredContainerSlotId: string, items: Item[]): boolean;
     /**
      * Add child items (cartridges) to a magazine
      * @param magazine Magazine to add child items to
@@ -399,9 +412,9 @@ export declare class ItemHelper {
      * @param magazineWithChildCartridges Magazine to add child items to
      * @param magTemplate Db template of magazine
      * @param cartridgeTpl Cartridge to add to magazine
-     * @param minSizePercent % the magazine must be filled to
+     * @param minSizeMultiplier % the magazine must be filled to
      */
-    fillMagazineWithCartridge(magazineWithChildCartridges: Item[], magTemplate: ITemplateItem, cartridgeTpl: string, minSizePercent?: number): void;
+    fillMagazineWithCartridge(magazineWithChildCartridges: Item[], magTemplate: ITemplateItem, cartridgeTpl: string, minSizeMultiplier?: number): void;
     /**
      * Choose a random bullet type from the list of possible a magazine has
      * @param magTemplate Magazine template from Db
@@ -510,6 +523,18 @@ export declare class ItemHelper {
      * @returns True when upd object was added
      */
     addUpdObjectToItem(item: Item, warningMessageWhenMissing?: string): boolean;
+    /**
+     * Return all tpls from Money enum
+     * @returns string tpls
+     */
+    getMoneyTpls(): string[];
+    /**
+     * Get a randomsied stack size for the passed in ammo
+     * @param ammoItemTemplate Ammo to get stack size for
+     * @param maxLimit default: Limit to 60 to prevent crazy values when players use stack increase mods
+     * @returns number
+     */
+    getRandomisedAmmoStackSize(ammoItemTemplate: ITemplateItem, maxLimit?: number): number;
 }
 declare namespace ItemHelper {
     interface ItemSize {

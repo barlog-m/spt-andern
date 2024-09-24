@@ -1,9 +1,11 @@
-import { DependencyContainer } from "tsyringe";
-import { StaticRouterModService } from "@spt/services/mod/staticRouter/StaticRouterModService";
-import { ILogger } from "@spt/models/spt/utils/ILogger";
-import { WeatherGenerator } from "@spt/generators/WeatherGenerator";
-import { RaidInfo } from "./RaidInfo";
-import { isNight, getCurrentTime } from "./timeUtils";
+import {DependencyContainer} from "tsyringe";
+import {
+    StaticRouterModService
+} from "@spt/services/mod/staticRouter/StaticRouterModService";
+import {ILogger} from "@spt/models/spt/utils/ILogger";
+import {WeatherGenerator} from "@spt/generators/WeatherGenerator";
+import {RaidInfo} from "./RaidInfo";
+import {isNight, getCurrentTime} from "./timeUtils";
 
 export default function registerInfoUpdater(
     container: DependencyContainer

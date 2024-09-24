@@ -7,7 +7,8 @@ import {Item} from "@spt/models/eft/common/tables/IItem";
 export class DoeTraderArmorGenerator {
     // eslint-disable-next-line @typescript-eslint/naming-convention
     readonly KIRASA_N = "5b44d22286f774172b0c9de8";
-    readonly allArmor = [this.KIRASA_N];
+    readonly TV_115 = "64a536392d2c4e6e970f4121";
+    readonly allArmor = [this.KIRASA_N, this.TV_115];
 
     constructor(
         @inject("WinstonLogger") protected logger: ILogger,
@@ -19,6 +20,9 @@ export class DoeTraderArmorGenerator {
         switch (tpl) {
             case this.KIRASA_N: {
                 return this.kirasaN();
+            }
+            case this.TV_115: {
+                return this.tv115();
             }
             default: {
                 return this.anyOtherArmor(tpl);
@@ -88,6 +92,43 @@ export class DoeTraderArmorGenerator {
         armor.push({
             _id: this.hashUtil.generate(),
             _tpl: "656f9d5900d62bcd2e02407c",
+            parentId: id,
+            slotId: "Back_plate"
+        });
+
+        return armor;
+    }
+    
+    private tv115(): Item[] {
+        const id = this.hashUtil.generate();
+        const armor: Item[] = [];
+
+        armor.push({
+            _id: id,
+            _tpl: this.TV_115
+        });
+
+        armor.push({
+            _id: this.hashUtil.generate(),
+            _tpl: "6570653e89fd4926380b733e",
+            parentId: id,
+            slotId: "Soft_armor_front"
+        });
+        armor.push({
+            _id: this.hashUtil.generate(),
+            _tpl: "6570658a89fd4926380b7346",
+            parentId: id,
+            slotId: "Soft_armor_back"
+        });
+        armor.push({
+            _id: this.hashUtil.generate(),
+            _tpl: "656fac30c6baea13cd07e10c",
+            parentId: id,
+            slotId: "Front_plate"
+        });
+        armor.push({
+            _id: this.hashUtil.generate(),
+            _tpl: "656fac30c6baea13cd07e10c",
             parentId: id,
             slotId: "Back_plate"
         });

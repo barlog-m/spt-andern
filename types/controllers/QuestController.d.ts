@@ -23,9 +23,9 @@ import { LocaleService } from "@spt/services/LocaleService";
 import { LocalisationService } from "@spt/services/LocalisationService";
 import { MailSendService } from "@spt/services/MailSendService";
 import { PlayerService } from "@spt/services/PlayerService";
-import { ICloner } from "@spt/utils/cloners/ICloner";
 import { HttpResponseUtil } from "@spt/utils/HttpResponseUtil";
 import { TimeUtil } from "@spt/utils/TimeUtil";
+import { ICloner } from "@spt/utils/cloners/ICloner";
 export declare class QuestController {
     protected logger: ILogger;
     protected timeUtil: TimeUtil;
@@ -72,6 +72,13 @@ export declare class QuestController {
      * @returns Client response
      */
     acceptQuest(pmcData: IPmcData, acceptedQuest: IAcceptQuestRequestData, sessionID: string): IItemEventRouterResponse;
+    /**
+     *
+     * @param questConditions Conditions to iterate over and possibly add to profile
+     * @param pmcData Profile to add to
+     * @param questId Quest conditions came from
+     */
+    protected addTaskConditionCountersToProfile(questConditions: IQuestCondition[], pmcData: IPmcData, questId: string): void;
     /**
      * Handle the client accepting a repeatable quest and starting it
      * Send starting rewards if any to player and

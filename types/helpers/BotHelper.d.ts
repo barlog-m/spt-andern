@@ -40,13 +40,8 @@ export declare class BotHelper {
      * @param typesToAdd bot type to add to revenge list
      */
     addBotToRevengeList(difficultySettings: Difficulty, typesToAdd: string[]): void;
-    /**
-     * Choose if a bot should become a PMC by checking if bot type is allowed to become a Pmc in botConfig.convertFromChances and doing a random int check
-     * @param botRole the bot role to check if should be a pmc
-     * @returns true if should be a pmc
-     */
-    shouldBotBePmc(botRole: string): boolean;
-    rollChanceToBePmc(role: string, botConvertMinMax: MinMax): boolean;
+    rollChanceToBePmc(botConvertMinMax: MinMax): boolean;
+    protected getPmcConversionValuesForLocation(location: string): Record<string, MinMax>;
     /**
      * is the provided role a PMC, case-agnostic
      * @param botRole Role to check

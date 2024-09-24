@@ -1,4 +1,4 @@
-import {PreAkiModLoader} from "@spt/loaders/PreAkiModLoader";
+import {PreSptModLoader} from "@spt/loaders/PreSptModLoader";
 import {
     ITraderBase,
     ITraderAssort
@@ -19,7 +19,7 @@ export class TraderHelper {
      * @param imageRouter image router class - used to register the trader image path so we see their image on trader page
      * @param traderImageName Filename of the trader icon to use
      */
-    public registerProfileImage(baseJson: any, modName: string, preAkiModLoader: PreAkiModLoader, imageRouter: ImageRouter, traderImageName: string): void {
+    public registerProfileImage(baseJson: any, modName: string, preAkiModLoader: PreSptModLoader, imageRouter: ImageRouter, traderImageName: string): void {
         // Reference the mod "res" folder
         const imageFilepath = `./${preAkiModLoader.getModPath(modName)}trader`;
 

@@ -61,8 +61,11 @@ export interface IQuestCondition {
     dispersion?: number;
     onlyFoundInRaid?: boolean;
     oneSessionOnly?: boolean;
+    isResetOnConditionFailed?: boolean;
+    isNecessary?: boolean;
     doNotResetIfCounterCompleted?: boolean;
     dogtagLevel?: number;
+    traderId?: string;
     maxDurability?: number;
     minDurability?: number;
     counter?: IQuestConditionCounter;
