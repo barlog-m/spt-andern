@@ -1,7 +1,7 @@
 import {inject, injectable} from "tsyringe";
 
 import {ILogger} from "@spt/models/spt/utils/ILogger";
-import {Item} from "@spt/models/eft/common/tables/IItem";
+import {IItem} from "@spt/models/eft/common/tables/IItem";
 import {RandomUtil} from "@spt/utils/RandomUtil";
 import {HashUtil} from "@spt/utils/HashUtil";
 import {DatabaseServer} from "@spt/servers/DatabaseServer";
@@ -60,7 +60,7 @@ export class Data {
         }
     }
 
-    public getRandomWeapon(presetName: string, botLevel: number): Item[] {
+    public getRandomWeapon(presetName: string, botLevel: number): IItem[] {
         const tier = this.tierByLevel(presetName, botLevel);
 
         const presets = this.data[presetName].weapon[tier];
@@ -74,7 +74,7 @@ export class Data {
             );
         }
 
-        return JSON.parse(JSON.stringify(preset.Items)) as Item[];
+        return JSON.parse(JSON.stringify(preset.Items)) as IItem[];
     }
 
     public getGear(presetName: string, level: number): Gear {

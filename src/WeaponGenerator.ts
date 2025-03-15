@@ -5,7 +5,7 @@ import {ConfigServer} from "@spt/servers/ConfigServer";
 import {IPmcConfig} from "@spt/models/spt/config/IPmcConfig";
 import {IRepairConfig} from "@spt/models/spt/config/IRepairConfig";
 import {ConfigTypes} from "@spt/models/enums/ConfigTypes";
-import {Item} from "@spt/models/eft/common/tables/IItem";
+import {IItem} from "@spt/models/eft/common/tables/IItem";
 import {ITemplateItem} from "@spt/models/eft/common/tables/ITemplateItem";
 import {HashUtil} from "@spt/utils/HashUtil";
 import {ItemHelper} from "@spt/helpers/ItemHelper";
@@ -136,7 +136,7 @@ export class WeaponGenerator {
         return this.databaseServer.getTables().templates.items;
     }
 
-    getTemplateIdFromWeaponItems(weaponWithMods: Item[]): string {
+    getTemplateIdFromWeaponItems(weaponWithMods: IItem[]): string {
         return weaponWithMods[0]._tpl;
     }
 
@@ -157,12 +157,12 @@ export class WeaponGenerator {
         }
     }
 
-    getWeaponMagazine(weaponWithMods: Item[]): Item {
+    getWeaponMagazine(weaponWithMods: IItem[]): IItem {
         return weaponWithMods.find((item) => item.slotId === "mod_magazine");
     }
 
     addCartridgeToChamber(
-        weaponWithMods: Item[],
+        weaponWithMods: IItem[],
         ammoTpl: string,
         weaponTemplate: ITemplateItem
     ): undefined {
@@ -232,7 +232,7 @@ export class WeaponGenerator {
         return chamberName;
     }
 
-    fillMagazine(weaponWithMods: Item[], ammoTpl: string): string {
+    fillMagazine(weaponWithMods: IItem[], ammoTpl: string): string {
         weaponWithMods.filter(
             (x) => x.slotId === this.magazineSlotId
         ).map((magazine) => {
@@ -260,7 +260,7 @@ export class WeaponGenerator {
     }
 
     updateWeaponInfo(
-        weaponWithMods: Item[],
+        weaponWithMods: IItem[],
         weaponParentId: string,
         weaponTpl: string,
         isNight: boolean,
@@ -285,7 +285,7 @@ export class WeaponGenerator {
         this.setTacticalDeviceMode(weaponWithMods);
     }
 
-    replaceId(weaponWithMods: Item[], i: number): undefined {
+    replaceId(weaponWithMods: IItem[], i: number): undefined {
         const oldId = weaponWithMods[i]._id;
         const newId = this.hashUtil.generate();
         weaponWithMods[i]._id = newId;
@@ -301,7 +301,7 @@ export class WeaponGenerator {
         }
     }
 
-    replaceTacticalDevice(weaponWithMods: Item[]): undefined {
+    replaceTacticalDevice(weaponWithMods: IItem[]): undefined {
         for (const item of weaponWithMods) {
             if (item.slotId.startsWith("mod_tactical") &&
                 this.itemHelper.isOfBaseclass(item._tpl, BaseClasses.TACTICAL_COMBO)
@@ -311,7 +311,7 @@ export class WeaponGenerator {
         }
     }
 
-    setTacticalDeviceMode(weaponWithMods: Item[]): undefined {
+    setTacticalDeviceMode(weaponWithMods: IItem[]): undefined {
         for (const item of weaponWithMods) {
             if (item.slotId.startsWith("mod_tactical")) {
                 if (item.upd?.Light) {
@@ -325,7 +325,7 @@ export class WeaponGenerator {
     alternateModules(
         presetName: string,
         botLevel: number,
-        weapon: Item[],
+        weapon: IItem[],
         weaponTpl: string
     ): undefined {
         let deleteMagpulRubberButtpad = false;
@@ -381,7 +381,7 @@ export class WeaponGenerator {
         }
     }
 
-    alternateOrAddSuppressor(weapon: Item[], muzzleItem: Item): undefined {
+    alternateOrAddSuppressor(weapon: IItem[], muzzleItem: IItem): undefined {
         const suppressor = weapon.find(
             (i) => (i.parentId === muzzleItem._id) && (i.slotId === "mod_muzzle")
         );
@@ -417,7 +417,7 @@ export class WeaponGenerator {
                 } else if (alternativeSuppressorTpl === this.LANTAC_BMD_762X51_BLAST_MITIGATION_DEVICE) {
                     this.constructLantacBmd(weapon, muzzleItem)
                 } else {
-                    const suppressorItem: Item = {
+                    const suppressorItem: IItem = {
                         _id: this.hashUtil.generate(),
                         _tpl: alternativeSuppressorTpl,
                         parentId: muzzleItem._id,
@@ -429,7 +429,7 @@ export class WeaponGenerator {
         }
     }
 
-    deleteModule(weapon: Item[], tpl: string): undefined {
+    deleteModule(weapon: IItem[], tpl: string): undefined {
         const i = weapon.findIndex(
             (item) => item._tpl === tpl
         );
@@ -438,8 +438,8 @@ export class WeaponGenerator {
         }
     }
 
-    constructSigSauerSuppressor(weapon: Item[], muzzleItem: Item): undefined {
-        const muzzleBrakeItem: Item = {
+    constructSigSauerSuppressor(weapon: IItem[], muzzleItem: IItem): undefined {
+        const muzzleBrakeItem: IItem = {
             _id: this.hashUtil.generate(),
             _tpl: this.SIG_SAUER_TWO_PORT_BRAKE_762X51_MUZZLE_BRAKE,
             parentId: muzzleItem._id,
@@ -447,7 +447,7 @@ export class WeaponGenerator {
         }
         weapon.push(muzzleBrakeItem)
 
-        const suppressorItem: Item = {
+        const suppressorItem: IItem = {
             _id: this.hashUtil.generate(),
             _tpl: this.SIG_SAUER_SRD762_QD_762X51_SOUND_SUPPRESSOR,
             parentId: muzzleItem._id,
@@ -456,8 +456,8 @@ export class WeaponGenerator {
         weapon.push(suppressorItem)
     }
 
-    constructLantacBmd(weapon: Item[], muzzleItem: Item): undefined {
-        const muzzleBrakeItem: Item = {
+    constructLantacBmd(weapon: IItem[], muzzleItem: IItem): undefined {
+        const muzzleBrakeItem: IItem = {
             _id: this.hashUtil.generate(),
             _tpl: this.AR_10_LANTAC_DRAGON_762X51_MUZZLE_BRAKE_COMPENSATOR,
             parentId: muzzleItem._id,
@@ -465,7 +465,7 @@ export class WeaponGenerator {
         }
         weapon.push(muzzleBrakeItem)
 
-        const suppressorItem: Item = {
+        const suppressorItem: IItem = {
             _id: this.hashUtil.generate(),
             _tpl: this.LANTAC_BMD_762X51_BLAST_MITIGATION_DEVICE,
             parentId: muzzleItem._id,
@@ -474,7 +474,7 @@ export class WeaponGenerator {
         weapon.push(suppressorItem)
     }
 
-    addRandomEnhancement(weapon: Item[]): undefined {
+    addRandomEnhancement(weapon: IItem[]): undefined {
         if (
             this.randomUtil.getChance100(
                 this.pmcConfig.weaponHasEnhancementChancePercent

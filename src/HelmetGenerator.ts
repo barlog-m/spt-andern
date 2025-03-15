@@ -4,7 +4,7 @@ import {ILogger} from "@spt/models/spt/utils/ILogger";
 import {HashUtil} from "@spt/utils/HashUtil";
 import {RandomUtil} from "@spt/utils/RandomUtil";
 import {
-    Inventory as PmcInventory
+    IInventory as PmcInventory
 } from "@spt/models/eft/common/tables/IBotBase";
 import {EquipmentSlots} from "@spt/models/enums/EquipmentSlots";
 

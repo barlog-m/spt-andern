@@ -3,13 +3,13 @@ import {DatabaseServer} from "@spt/servers/DatabaseServer";
 import {ConfigServer} from "@spt/servers/ConfigServer";
 import {ConfigTypes} from "@spt/models/enums/ConfigTypes";
 import {ItemHelper} from "@spt/helpers/ItemHelper";
-import {Spawnpoint} from "@spt/models/eft/common/ILooseLoot";
+import {ISpawnpoint} from "@spt/models/eft/common/ILooseLoot";
 import {BaseClasses} from "@spt/models/enums/BaseClasses";
 import {ILocationConfig} from "@spt/models/spt/config/ILocationConfig";
 import {IDatabaseTables} from "@spt/models/spt/server/IDatabaseTables";
 import {ILocations} from "@spt/models/spt/server/ILocations";
 import {ILocation, IStaticLootDetails} from "@spt/models/eft/common/ILocation";
-import {Item} from "@spt/models/eft/common/tables/IItem";
+import {IItem} from "@spt/models/eft/common/tables/IItem";
 import {IScavCaseConfig} from "@spt/models/spt/config/IScavCaseConfig";
 
 import config from "../config/config.json";
@@ -29,7 +29,7 @@ const LOOSE_LOOT_CARDS_RELATIVE_PROBABILITY_MULTIPLIER = 8;
 const LOOSE_LOOT_CARDS_SPAWN_POINT_PROBABILITY = 0.1;
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
-const STATIC_LOOT_KEYS_RELATIVE_PROBABILITY = 1500;
+const STATIC_LOOT_KEYS_RELATIVE_PROBABILITY = 1400;
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
 const LOOSE_LOOT_RARE_ITEMS_RELATIVE_PROBABILITY_THRESHOLD = 4;
@@ -76,7 +76,7 @@ export function lootConfig(container: DependencyContainer): undefined {
     setScavCaseLootValueMultiplier(container);
 
     if (config.increaseStaticLootKeysSpawn) {
-        increaseStaticLootKeysSpawn(container, databaseServer);
+        //increaseStaticLootKeysSpawn(container, databaseServer);
     }
 
     if (config.increaseLooseLootKeysSpawn) {
@@ -189,13 +189,13 @@ function increaseStaticLootKeysSpawn(
 
 function increaseLooseLootProbabilityForKeysAndCards(
     itemHelper: ItemHelper,
-    spawnPoint: Spawnpoint,
+    spawnPoint: ISpawnpoint,
     itemClass: BaseClasses,
     targetProbability: number,
     probabilityThreshold: number,
     probabilityMultiplier: number
 ): undefined {
-    const items: Item[] = spawnPoint.template.Items.filter((item) =>
+    const items: IItem[] = spawnPoint.template.Items.filter((item) =>
         itemHelper.isOfBaseclass(item._tpl, itemClass)
     );
     items.forEach((item) => {
@@ -228,7 +228,7 @@ function increaseLooseLootKeysSpawn(
 
     Object.entries(locations).forEach(([locationName, location]) => {
         if (location.looseLoot) {
-            location.looseLoot?.spawnpoints.forEach((spawnPoint: Spawnpoint) => {
+            location.looseLoot?.spawnpoints.forEach((spawnPoint: ISpawnpoint) => {
                 increaseLooseLootProbabilityForKeysAndCards(
                     itemHelper,
                     spawnPoint,
@@ -252,7 +252,7 @@ function increaseLooseLootCardsSpawn(
 
     Object.entries(locations).forEach(([locationName, location]) => {
         if (location.looseLoot) {
-            location.looseLoot?.spawnpoints.forEach((spawnPoint: Spawnpoint) => {
+            location.looseLoot?.spawnpoints.forEach((spawnPoint: ISpawnpoint) => {
                 increaseLooseLootProbabilityForKeysAndCards(
                     itemHelper,
                     spawnPoint,
@@ -288,7 +288,7 @@ function increaseLooseLootRareItemsSpawnChance(
 ): undefined {
     locations.forEach((location: ILocation) => {
         if (location.looseLoot) {
-            location.looseLoot?.spawnpoints.forEach((spawnPoint: Spawnpoint) => {
+            location.looseLoot?.spawnpoints.forEach((spawnPoint: ISpawnpoint) => {
                 increaseLooseLootProbability(
                     spawnPoint,
                     RARE_ITEMS,
@@ -302,17 +302,17 @@ function increaseLooseLootRareItemsSpawnChance(
 }
 
 function increaseLooseLootProbability(
-    spawnPoint: Spawnpoint,
+    spawnPoint: ISpawnpoint,
     itemFilter: string[],
     targetProbability: number,
     probabilityThreshold: number,
     probabilityMultiplier: number
 ): undefined {
-    const itemsToIncreaseSpawn: Item[] = spawnPoint.template.Items.filter((item) =>
+    const itemsToIncreaseSpawn: IItem[] = spawnPoint.template.Items.filter((item) =>
         itemFilter.includes(item._tpl)
     );
 
-    const itemsToDecreaseSpawn: Item[] = spawnPoint.template.Items.filter((item) =>
+    const itemsToDecreaseSpawn: IItem[] = spawnPoint.template.Items.filter((item) =>
         !itemFilter.includes(item._tpl)
     );
 

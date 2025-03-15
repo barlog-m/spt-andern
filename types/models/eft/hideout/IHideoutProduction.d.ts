@@ -7,7 +7,7 @@ export interface IHideoutProductionData {
 export interface IHideoutProduction {
     _id: string;
     areaType: number;
-    requirements: Requirement[];
+    requirements: IRequirement[];
     productionTime: number;
     /** Tpl of item being crafted */
     endProduct: string;
@@ -17,12 +17,14 @@ export interface IHideoutProduction {
     continuous: boolean;
     count: number;
     productionLimitCount: number;
+    isCodeProduction: boolean;
 }
-export interface Requirement extends IRequirementBase {
+export interface IRequirement extends IRequirementBase {
     templateId?: string;
     count?: number;
     isEncoded?: boolean;
     isFunctional?: boolean;
+    isSpawnedInSession?: boolean;
     areaType?: number;
     requiredLevel?: number;
     resource?: number;
@@ -33,7 +35,7 @@ export interface IRequirementBase {
 }
 export type IScavRecipe = {
     _id: string;
-    requirements: Requirement[];
+    requirements: IRequirement[];
     productionTime: number;
     endProducts: IEndProducts;
 };

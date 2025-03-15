@@ -1,4 +1,4 @@
-import {Item} from "@spt/models/eft/common/tables/IItem";
+import {IItem} from "@spt/models/eft/common/tables/IItem";
 import {ITemplateItem} from "@spt/models/eft/common/tables/ITemplateItem";
 import {MinMax} from "@spt/models/common/MinMax";
 
@@ -37,11 +37,11 @@ export class WeaponPreset {
     Id: string;
     Name: string;
     Root: string;
-    Items: Item[];
+    Items: IItem[];
 }
 
 export class GeneratedWeapon {
-    weaponWithMods: Item[];
+    weaponWithMods: IItem[];
     weaponTemplate: ITemplateItem;
     ammoTpl: string;
     magazineTpl: string;

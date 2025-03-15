@@ -1,6 +1,6 @@
-import { SellResult } from "@spt/models/eft/ragfair/IRagfairOffer";
+import { ISellResult } from "@spt/models/eft/ragfair/IRagfairOffer";
 import { IRagfairConfig } from "@spt/models/spt/config/IRagfairConfig";
-import { ILogger } from "@spt/models/spt/utils/ILogger";
+import type { ILogger } from "@spt/models/spt/utils/ILogger";
 import { ConfigServer } from "@spt/servers/ConfigServer";
 import { DatabaseService } from "@spt/services/DatabaseService";
 import { RandomUtil } from "@spt/utils/RandomUtil";
@@ -28,5 +28,5 @@ export declare class RagfairSellHelper {
      * @param sellInOneGo All items listed get sold at once
      * @returns Array of purchases of item(s) listed
      */
-    rollForSale(sellChancePercent: number, itemSellCount: number, sellInOneGo?: boolean): SellResult[];
+    rollForSale(sellChancePercent: number, itemSellCount: number, sellInOneGo?: boolean): ISellResult[];
 }

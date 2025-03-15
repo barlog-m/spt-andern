@@ -3,13 +3,13 @@ import { ItemHelper } from "@spt/helpers/ItemHelper";
 import { TraderAssortHelper } from "@spt/helpers/TraderAssortHelper";
 import { TraderHelper } from "@spt/helpers/TraderHelper";
 import { IPmcData } from "@spt/models/eft/common/IPmcData";
-import { Item } from "@spt/models/eft/common/tables/IItem";
+import { IItem } from "@spt/models/eft/common/tables/IItem";
 import { IItemEventRouterResponse } from "@spt/models/eft/itemEvent/IItemEventRouterResponse";
 import { IProcessBuyTradeRequestData } from "@spt/models/eft/trade/IProcessBuyTradeRequestData";
 import { IProcessSellTradeRequestData } from "@spt/models/eft/trade/IProcessSellTradeRequestData";
 import { IInventoryConfig } from "@spt/models/spt/config/IInventoryConfig";
 import { ITraderConfig } from "@spt/models/spt/config/ITraderConfig";
-import { ILogger } from "@spt/models/spt/utils/ILogger";
+import type { ILogger } from "@spt/models/spt/utils/ILogger";
 import { EventOutputHolder } from "@spt/routers/EventOutputHolder";
 import { ConfigServer } from "@spt/servers/ConfigServer";
 import { RagfairServer } from "@spt/servers/RagfairServer";
@@ -19,7 +19,7 @@ import { LocalisationService } from "@spt/services/LocalisationService";
 import { PaymentService } from "@spt/services/PaymentService";
 import { TraderPurchasePersisterService } from "@spt/services/TraderPurchasePersisterService";
 import { HttpResponseUtil } from "@spt/utils/HttpResponseUtil";
-import { ICloner } from "@spt/utils/cloners/ICloner";
+import type { ICloner } from "@spt/utils/cloners/ICloner";
 export declare class TradeHelper {
     protected logger: ILogger;
     protected databaseService: DatabaseService;
@@ -68,5 +68,5 @@ export declare class TradeHelper {
      * @param assortId Id of assort being purchased
      * @param count How many of the item are being bought
      */
-    protected checkPurchaseIsWithinTraderItemLimit(sessionId: string, pmcData: IPmcData, traderId: string, assortBeingPurchased: Item, assortId: string, count: number): void;
+    protected checkPurchaseIsWithinTraderItemLimit(sessionId: string, pmcData: IPmcData, traderId: string, assortBeingPurchased: IItem, assortId: string, count: number): void;
 }

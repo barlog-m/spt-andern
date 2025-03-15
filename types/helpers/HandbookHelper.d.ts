@@ -1,9 +1,9 @@
 import { IHandbookCategory } from "@spt/models/eft/common/tables/IHandbookBase";
-import { Item } from "@spt/models/eft/common/tables/IItem";
+import { IItem } from "@spt/models/eft/common/tables/IItem";
 import { IItemConfig } from "@spt/models/spt/config/IItemConfig";
 import { ConfigServer } from "@spt/servers/ConfigServer";
 import { DatabaseService } from "@spt/services/DatabaseService";
-import { ICloner } from "@spt/utils/cloners/ICloner";
+import type { ICloner } from "@spt/utils/cloners/ICloner";
 declare class LookupItem<T, I> {
     readonly byId: Map<string, T>;
     readonly byParent: Map<string, I[]>;
@@ -33,7 +33,7 @@ export declare class HandbookHelper {
      * @returns price in roubles
      */
     getTemplatePrice(tpl: string): number;
-    getTemplatePriceForItems(items: Item[]): number;
+    getTemplatePriceForItems(items: IItem[]): number;
     /**
      * Get all items in template with the given parent category
      * @param parentId

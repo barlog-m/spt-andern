@@ -2,7 +2,7 @@ import {DependencyContainer} from "tsyringe";
 import {ILogger} from "@spt/models/spt/utils/ILogger";
 import {BotInventoryGenerator} from "@spt/generators/BotInventoryGenerator";
 import {
-    Inventory as PmcInventory
+    IInventory as PmcInventory
 } from "@spt/models/eft/common/tables/IBotBase";
 import {IBotType} from "@spt/models/eft/common/tables/IBotType";
 import {RaidInfo} from "./RaidInfo";
@@ -39,7 +39,8 @@ export default function registerBotInventoryGenerator(
                         botRole,
                         isPmc,
                         botLevel,
-                        raidInfo
+                        raidInfo,
+                        chosenGameVersion
                     );
                     return inventory;
                 }

@@ -13,6 +13,10 @@ export interface IQuestConfig extends IBaseConfig {
     locationIdMap: Record<string, string>;
     bearOnlyQuests: string[];
     usecOnlyQuests: string[];
+    /** Quests that the keyed game version do not see/access */
+    profileBlacklist: Record<string, string[]>;
+    /** key=questid, gameversions that can see/access quest */
+    profileWhitelist: Record<string, string[]>;
 }
 export interface IPlayerTypeQuestIds {
     pmc: IQuestTypeIds;
@@ -50,6 +54,8 @@ export interface IRepeatableQuestConfig {
     freeChangesAvailable: number;
     freeChanges: number;
     keepDailyQuestTypeOnReplacement: boolean;
+    /** Reputation standing price for replacing a repeatable */
+    standingChangeCost: number[];
 }
 export interface IRewardScaling {
     levels: number[];

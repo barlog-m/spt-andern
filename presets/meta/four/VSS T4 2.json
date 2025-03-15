@@ -53,6 +53,12 @@
             "slotId": "mod_charge"
         },
         {
+            "_id": "67c9298c15286f06120f14e1",
+            "_tpl": "6565bb7eb4b12a56eb04b084",
+            "parentId": "3de494ce68247a3269107dd7",
+            "slotId": "mod_handguard"
+        },
+        {
             "_id": "4e17fee218b94af73482798f",
             "_tpl": "618b9643526131765025ab35",
             "parentId": "36fc080ef2950e55c568388c",
@@ -122,6 +128,5 @@
             "parentId": "c0e7df286192206554f00709",
             "slotId": "mod_foregrip"
         }
-    ],
-    "Parent": "5447b6194bdc2d67278b4567"
+    ]
 }

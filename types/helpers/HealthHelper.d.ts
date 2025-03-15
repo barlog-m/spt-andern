@@ -1,21 +1,23 @@
 import { IPmcData } from "@spt/models/eft/common/IPmcData";
-import { BodyPartsHealth, Health } from "@spt/models/eft/common/tables/IBotBase";
+import { IBodyPartsHealth, IHealth } from "@spt/models/eft/common/tables/IBotBase";
 import { ISyncHealthRequestData } from "@spt/models/eft/health/ISyncHealthRequestData";
-import { Effects, ISptProfile } from "@spt/models/eft/profile/ISptProfile";
+import { IEffects, ISptProfile } from "@spt/models/eft/profile/ISptProfile";
 import { IHealthConfig } from "@spt/models/spt/config/IHealthConfig";
-import { ILogger } from "@spt/models/spt/utils/ILogger";
+import type { ILogger } from "@spt/models/spt/utils/ILogger";
 import { ConfigServer } from "@spt/servers/ConfigServer";
 import { SaveServer } from "@spt/servers/SaveServer";
+import { DatabaseService } from "@spt/services/DatabaseService";
 import { TimeUtil } from "@spt/utils/TimeUtil";
-import { ICloner } from "@spt/utils/cloners/ICloner";
+import type { ICloner } from "@spt/utils/cloners/ICloner";
 export declare class HealthHelper {
     protected logger: ILogger;
     protected timeUtil: TimeUtil;
     protected saveServer: SaveServer;
+    protected databaseService: DatabaseService;
     protected configServer: ConfigServer;
     protected cloner: ICloner;
     protected healthConfig: IHealthConfig;
-    constructor(logger: ILogger, timeUtil: TimeUtil, saveServer: SaveServer, configServer: ConfigServer, cloner: ICloner);
+    constructor(logger: ILogger, timeUtil: TimeUtil, saveServer: SaveServer, databaseService: DatabaseService, configServer: ConfigServer, cloner: ICloner);
     /**
      * Resets the profiles vitality/health and vitality/effects properties to their defaults
      * @param sessionID Session Id
@@ -31,14 +33,14 @@ export declare class HealthHelper {
      * @param addEffects Should effects be added to profile (default - true)
      * @param deleteExistingEffects Should all prior effects be removed before apply new ones  (default - true)
      */
-    updateProfileHealthPostRaid(pmcData: IPmcData, postRaidHealth: Health, sessionID: string, isDead: boolean): void;
+    updateProfileHealthPostRaid(pmcData: IPmcData, postRaidHealth: IHealth, sessionID: string, isDead: boolean): void;
     protected storeHydrationEnergyTempInProfile(fullProfile: ISptProfile, hydration: number, energy: number, temprature: number): void;
     /**
      * Take body part effects from client profile and apply to server profile
      * @param postRaidBodyParts Post-raid body part data
      * @param profileData Player profile on server
      */
-    protected transferPostRaidLimbEffectsToProfile(postRaidBodyParts: BodyPartsHealth, profileData: IPmcData): void;
+    protected transferPostRaidLimbEffectsToProfile(postRaidBodyParts: IBodyPartsHealth, profileData: IPmcData): void;
     /**
      * Update player profile vitality values with changes from client request object
      * @param pmcData Player profile
@@ -63,7 +65,7 @@ export declare class HealthHelper {
      * @param bodyPartsWithEffects dict of body parts with effects that should be added to profile
      * @param addEffects Should effects be added back to profile
      */
-    protected saveEffects(pmcData: IPmcData, sessionId: string, bodyPartsWithEffects: Effects, deleteExistingEffects?: boolean): void;
+    protected saveEffects(pmcData: IPmcData, sessionId: string, bodyPartsWithEffects: IEffects, deleteExistingEffects?: boolean): void;
     /**
      * Add effect to body part in profile
      * @param pmcData Player profile

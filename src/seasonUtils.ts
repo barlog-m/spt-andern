@@ -41,6 +41,7 @@ function setSeason(container: DependencyContainer, season: Season): undefined {
     const weatherConfig: IWeatherConfig = configServer.getConfig(ConfigTypes.WEATHER);
 
     weatherConfig.overrideSeason = season;
+    console.log(`[Andern] season set to ${Season[season]}`);
 }
 
 function getRandomSeason(container: DependencyContainer): Season {

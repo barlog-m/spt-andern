@@ -22,14 +22,14 @@ import {BotLootCacheService} from "@spt/services/BotLootCacheService";
 import {LocalisationService} from "@spt/services/LocalisationService";
 
 import {
-    Inventory as pmcInventory
+    IInventory as pmcInventory
 } from "@spt/models/eft/common/tables/IBotBase";
 import {IBotType} from "@spt/models/eft/common/tables/IBotType";
 import {ILogger} from "@spt/models/spt/utils/ILogger";
 import {EquipmentSlots} from "@spt/models/enums/EquipmentSlots";
 import {LootCacheType} from "@spt/models/spt/bots/IBotLootCache";
 import {ItemAddedResult} from "@spt/models/enums/ItemAddedResult";
-import {Item} from "@spt/models/eft/common/tables/IItem";
+import {IItem} from "@spt/models/eft/common/tables/IItem";
 import {ICloner} from "@spt/utils/cloners/ICloner";
 
 import * as config from "../config/config.json";
@@ -361,7 +361,7 @@ export class LootGenerator extends BotLootGenerator {
                 }
 
                 const newRootItemId = this.hashUtil.generate();
-                const itemWithChildrenToAdd: Item[] = [{
+                const itemWithChildrenToAdd: IItem[] = [{
                     _id: newRootItemId,
                     _tpl: itemToAddTemplate._id,
                     ...this.botGeneratorHelper.generateExtraPropertiesForItem(itemToAddTemplate, botRole)

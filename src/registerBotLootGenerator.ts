@@ -2,7 +2,7 @@ import {DependencyContainer} from "tsyringe"
 import {BotLootGenerator} from "@spt/generators/BotLootGenerator";
 import {IBotType} from "@spt/models/eft/common/tables/IBotType";
 import {
-    Inventory as PmcInventory
+    IInventory as PmcInventory
 } from "@spt/models/eft/common/tables/IBotBase";
 import {ILogger} from "@spt/models/spt/utils/ILogger";
 import {LootGenerator} from "./lootGenerator"

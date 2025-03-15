@@ -17,7 +17,7 @@ export default function registerRandomSeason(
         "AndernSeasonUpdate",
         [
             {
-                url: "/client/match/offline/end",
+                url: "/client/match/local/end",
                 action: (_url, _info, _sessionId, output) => {
                     return new Promise((resolve) => {
                         setSeasonRandom(container);

@@ -1,4 +1,4 @@
-import { Item } from "@spt/models/eft/common/tables/IItem";
+import { IItem } from "@spt/models/eft/common/tables/IItem";
 import { DogtagExchangeSide } from "@spt/models/enums/DogtagExchangeSide";
 import { ITraderServiceModel } from "@spt/models/spt/services/ITraderServiceModel";
 export interface ITrader {
@@ -74,7 +74,7 @@ export interface ITraderRepair {
 }
 export interface ITraderAssort {
     nextResupply: number;
-    items: Item[];
+    items: IItem[];
     barter_scheme: Record<string, IBarterScheme[][]>;
     loyal_level_items: Record<string, number>;
 }
@@ -88,21 +88,28 @@ export interface IBarterScheme {
 }
 export interface ISuit {
     _id: string;
+    externalObtain: boolean;
+    internalObtain: boolean;
+    isHiddenInPVE: boolean;
     tid: string;
     suiteId: string;
     isActive: boolean;
     requirements: ISuitRequirements;
 }
 export interface ISuitRequirements {
+    achievementRequirements: string[];
     loyaltyLevel: number;
     profileLevel: number;
     standing: number;
     skillRequirements: string[];
     questRequirements: string[];
     itemRequirements: ItemRequirement[];
+    requiredTid: string;
 }
 export interface ItemRequirement {
     count: number;
     _tpl: string;
+    id: string;
     onlyFunctional: boolean;
+    type: string;
 }

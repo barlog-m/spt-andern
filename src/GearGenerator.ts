@@ -4,7 +4,7 @@ import {ILogger} from "@spt/models/spt/utils/ILogger";
 import {HashUtil} from "@spt/utils/HashUtil";
 import {RandomUtil} from "@spt/utils/RandomUtil";
 import {
-    Inventory as PmcInventory
+    IInventory as PmcInventory
 } from "@spt/models/eft/common/tables/IBotBase";
 import {IBotType} from "@spt/models/eft/common/tables/IBotType";
 import {EquipmentSlots} from "@spt/models/enums/EquipmentSlots";
@@ -13,9 +13,10 @@ import {BotGeneratorHelper} from "@spt/helpers/BotGeneratorHelper";
 import {BotLootGenerator} from "@spt/generators/BotLootGenerator";
 import {BotWeaponGenerator} from "@spt/generators/BotWeaponGenerator";
 import {
-    GenerateWeaponResult
-} from "@spt/models/spt/bots/GenerateWeaponResult";
-
+    IGenerateWeaponResult
+} from "@spt/models/spt/bots/IGenerateWeaponResult";
+import { ItemTpl } from "@spt/models/enums/ItemTpl";
+import { GameEditions } from "@spt/models/enums/GameEditions";
 import {RaidInfo} from "./RaidInfo";
 import {WeaponGenerator} from "./WeaponGenerator";
 import {isFactoryOrLab} from "./mapUtils";
@@ -56,42 +57,18 @@ export class GearGenerator {
 
     generateInventoryBase(): PmcInventory {
         const equipmentId = this.hashUtil.generate();
-        const equipmentTpl = "55d7217a4bdc2d86028b456d";
-
         const stashId = this.hashUtil.generate();
-        const stashTpl = "566abbc34bdc2d92178b4576";
-
         const questRaidItemsId = this.hashUtil.generate();
-        const questRaidItemsTpl = "5963866286f7747bf429b572";
-
         const questStashItemsId = this.hashUtil.generate();
-        const questStashItemsTpl = "5963866b86f7747bfa1c4462";
-
         const sortingTableId = this.hashUtil.generate();
-        const sortingTableTpl = "602543c13fee350cd564d032";
 
         return {
             items: [
-                {
-                    _id: equipmentId,
-                    _tpl: equipmentTpl,
-                },
-                {
-                    _id: stashId,
-                    _tpl: stashTpl,
-                },
-                {
-                    _id: questRaidItemsId,
-                    _tpl: questRaidItemsTpl,
-                },
-                {
-                    _id: questStashItemsId,
-                    _tpl: questStashItemsTpl,
-                },
-                {
-                    _id: sortingTableId,
-                    _tpl: sortingTableTpl,
-                },
+                { _id: equipmentId, _tpl: ItemTpl.INVENTORY_DEFAULT },
+                { _id: stashId, _tpl: ItemTpl.STASH_STANDARD_STASH_10X30 },
+                { _id: questRaidItemsId, _tpl: ItemTpl.STASH_QUESTRAID },
+                { _id: questStashItemsId, _tpl: ItemTpl.STASH_QUESTOFFLINE },
+                { _id: sortingTableId, _tpl: ItemTpl.SORTINGTABLE_SORTING_TABLE },
             ],
             equipment: equipmentId,
             stash: stashId,
@@ -100,7 +77,8 @@ export class GearGenerator {
             sortingTable: sortingTableId,
             hideoutAreaStashes: {},
             fastPanel: {},
-            favoriteItems: []
+            favoriteItems: [],
+            hideoutCustomizationStashId: "",
         };
     }
 
@@ -440,7 +418,8 @@ export class GearGenerator {
         botRole: string,
         isPmc: boolean,
         botLevel: number,
-        raidInfo: RaidInfo
+        raidInfo: RaidInfo,
+        chosenGameVersion: string,
     ): PmcInventory {
         const presetName = this.data.getPresetName();
         const botInventory = this.generateInventoryBase();
@@ -454,7 +433,7 @@ export class GearGenerator {
             EquipmentSlots.POCKETS,
             botRole,
             botInventory,
-            this.POCKETS_1x4,
+            chosenGameVersion === GameEditions.UNHEARD && isPmc ? ItemTpl.POCKETS_1X4_TUE : ItemTpl.POCKETS_1X4,
             false,
             botLevel
         );
@@ -529,7 +508,7 @@ export class GearGenerator {
 
         botInventory.items.push(...generatedWeapon.weaponWithMods);
 
-        const generatedWeaponResult: GenerateWeaponResult = {
+        const generatedWeaponResult: IGenerateWeaponResult = {
             weapon: generatedWeapon.weaponWithMods,
             chosenAmmoTpl: generatedWeapon.ammoTpl,
             chosenUbglAmmoTpl: undefined,

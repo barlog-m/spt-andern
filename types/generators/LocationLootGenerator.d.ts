@@ -1,23 +1,24 @@
 import { ContainerHelper } from "@spt/helpers/ContainerHelper";
 import { ItemHelper } from "@spt/helpers/ItemHelper";
 import { PresetHelper } from "@spt/helpers/PresetHelper";
-import { IContainerMinMax, IStaticAmmoDetails, IStaticContainer, IStaticContainerData, IStaticForcedProps, IStaticLootDetails } from "@spt/models/eft/common/ILocation";
+import { IStaticAmmoDetails, IStaticContainer, IStaticContainerData, IStaticForcedProps, IStaticLootDetails } from "@spt/models/eft/common/ILocation";
 import { ILocationBase } from "@spt/models/eft/common/ILocationBase";
-import { ILooseLoot, Spawnpoint, SpawnpointTemplate, SpawnpointsForced } from "@spt/models/eft/common/ILooseLoot";
-import { Item } from "@spt/models/eft/common/tables/IItem";
+import { ILooseLoot, ISpawnpointTemplate, ISpawnpointsForced } from "@spt/models/eft/common/ILooseLoot";
+import { IItem } from "@spt/models/eft/common/tables/IItem";
 import { ILocationConfig } from "@spt/models/spt/config/ILocationConfig";
-import { ILogger } from "@spt/models/spt/utils/ILogger";
+import { ISeasonalEventConfig } from "@spt/models/spt/config/ISeasonalEventConfig";
+import type { ILogger } from "@spt/models/spt/utils/ILogger";
 import { ConfigServer } from "@spt/servers/ConfigServer";
 import { DatabaseService } from "@spt/services/DatabaseService";
 import { ItemFilterService } from "@spt/services/ItemFilterService";
 import { LocalisationService } from "@spt/services/LocalisationService";
 import { SeasonalEventService } from "@spt/services/SeasonalEventService";
+import { HashUtil } from "@spt/utils/HashUtil";
 import { MathUtil } from "@spt/utils/MathUtil";
-import { ObjectId } from "@spt/utils/ObjectId";
 import { ProbabilityObjectArray, RandomUtil } from "@spt/utils/RandomUtil";
-import { ICloner } from "@spt/utils/cloners/ICloner";
+import type { ICloner } from "@spt/utils/cloners/ICloner";
 export interface IContainerItem {
-    items: Item[];
+    items: IItem[];
     width: number;
     height: number;
 }
@@ -29,8 +30,8 @@ export interface IContainerGroupCount {
 }
 export declare class LocationLootGenerator {
     protected logger: ILogger;
+    protected hashUtil: HashUtil;
     protected databaseService: DatabaseService;
-    protected objectId: ObjectId;
     protected randomUtil: RandomUtil;
     protected itemHelper: ItemHelper;
     protected mathUtil: MathUtil;
@@ -42,14 +43,15 @@ export declare class LocationLootGenerator {
     protected configServer: ConfigServer;
     protected cloner: ICloner;
     protected locationConfig: ILocationConfig;
-    constructor(logger: ILogger, databaseService: DatabaseService, objectId: ObjectId, randomUtil: RandomUtil, itemHelper: ItemHelper, mathUtil: MathUtil, seasonalEventService: SeasonalEventService, containerHelper: ContainerHelper, presetHelper: PresetHelper, localisationService: LocalisationService, itemFilterService: ItemFilterService, configServer: ConfigServer, cloner: ICloner);
+    protected seasonalEventConfig: ISeasonalEventConfig;
+    constructor(logger: ILogger, hashUtil: HashUtil, databaseService: DatabaseService, randomUtil: RandomUtil, itemHelper: ItemHelper, mathUtil: MathUtil, seasonalEventService: SeasonalEventService, containerHelper: ContainerHelper, presetHelper: PresetHelper, localisationService: LocalisationService, itemFilterService: ItemFilterService, configServer: ConfigServer, cloner: ICloner);
     /**
      * Create an array of container objects with randomised loot
      * @param locationBase Map base to generate containers for
      * @param staticAmmoDist Static ammo distribution
      * @returns Array of container objects
      */
-    generateStaticContainers(locationBase: ILocationBase, staticAmmoDist: Record<string, IStaticAmmoDetails[]>): SpawnpointTemplate[];
+    generateStaticContainers(locationBase: ILocationBase, staticAmmoDist: Record<string, IStaticAmmoDetails[]>): ISpawnpointTemplate[];
     /**
      * Get containers with a non-100% chance to spawn OR are NOT on the container type randomistion blacklist
      * @param staticContainers
@@ -74,7 +76,7 @@ export declare class LocationLootGenerator {
      * @param containersGroups Container group values
      * @returns dictionary keyed by groupId
      */
-    protected getGroupIdToContainerMappings(staticContainerGroupData: IStaticContainer | Record<string, IContainerMinMax>, staticContainersOnMap: IStaticContainerData[]): Record<string, IContainerGroupCount>;
+    protected getGroupIdToContainerMappings(staticContainerGroupData: IStaticContainer, staticContainersOnMap: IStaticContainerData[]): Record<string, IContainerGroupCount>;
     /**
      * Choose loot to put into a static container based on weighting
      * Handle forced items + seasonal item removal when not in season
@@ -117,14 +119,14 @@ export declare class LocationLootGenerator {
      * @param locationName Location to generate loot for
      * @returns Array of spawn points with loot in them
      */
-    generateDynamicLoot(dynamicLootDist: ILooseLoot, staticAmmoDist: Record<string, IStaticAmmoDetails[]>, locationName: string): SpawnpointTemplate[];
+    generateDynamicLoot(dynamicLootDist: ILooseLoot, staticAmmoDist: Record<string, IStaticAmmoDetails[]>, locationName: string): ISpawnpointTemplate[];
     /**
      * Add forced spawn point loot into loot parameter array
      * @param lootLocationTemplates array to add forced loot spawn locations to
      * @param forcedSpawnPoints forced Forced loot locations that must be added
      * @param locationName Name of map currently having force loot created for
      */
-    protected addForcedLoot(lootLocationTemplates: SpawnpointTemplate[], forcedSpawnPoints: SpawnpointsForced[], locationName: string): void;
+    protected addForcedLoot(lootLocationTemplates: ISpawnpointTemplate[], forcedSpawnPoints: ISpawnpointsForced[], locationName: string, staticAmmoDist: Record<string, IStaticAmmoDetails[]>): void;
     /**
      * Create array of item (with child items) and return
      * @param chosenComposedKey Key we want to look up items for
@@ -132,13 +134,13 @@ export declare class LocationLootGenerator {
      * @param staticAmmoDist ammo distributions
      * @returns IContainerItem
      */
-    protected createDynamicLootItem(chosenComposedKey: string, spawnPoint: Spawnpoint, staticAmmoDist: Record<string, IStaticAmmoDetails[]>): IContainerItem;
+    protected createDynamicLootItem(chosenComposedKey: string, items: IItem[], staticAmmoDist: Record<string, IStaticAmmoDetails[]>): IContainerItem;
     /**
      * Find an item in array by its _tpl, handle differently if chosenTpl is a weapon
      * @param items Items array to search
      * @param chosenTpl Tpl we want to get item with
      * @returns Item object
      */
-    protected getItemInArray(items: Item[], chosenTpl: string): Item | undefined;
-    protected createStaticLootItem(chosenTpl: string, staticAmmoDist: Record<string, IStaticAmmoDetails[]>, parentId?: string): IContainerItem;
+    protected getItemInArray(items: IItem[], chosenTpl: string): IItem | undefined;
+    protected createStaticLootItem(chosenTpl: string, staticAmmoDist: Record<string, IStaticAmmoDetails[]>, parentId?: string): IContainerItem | undefined;
 }

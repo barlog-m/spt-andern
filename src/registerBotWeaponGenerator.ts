@@ -2,10 +2,10 @@ import {DependencyContainer} from "tsyringe";
 import {ILogger} from "@spt/models/spt/utils/ILogger";
 import {BotWeaponGenerator} from "@spt/generators/BotWeaponGenerator";
 import {
-    Inventory,
-    ModsChances,
+    IInventory,
+    IModsChances,
 } from "@spt/models/eft/common/tables/IBotType";
-import {GenerateWeaponResult} from "@spt/models/spt/bots/GenerateWeaponResult";
+import {IGenerateWeaponResult} from "@spt/models/spt/bots/IGenerateWeaponResult";
 import {WeaponGenerator} from "./WeaponGenerator";
 import {GeneratedWeapon} from "./models";
 import * as config from "../config/config.json";
@@ -26,13 +26,13 @@ export default function registerBotWeaponGenerator(
             result.generateRandomWeapon = (
                 sessionId: string,
                 equipmentSlot: string,
-                botTemplateInventory: Inventory,
+                botTemplateInventory: IInventory,
                 weaponParentId: string,
-                modChances: ModsChances,
+                modChances: IModsChances,
                 botRole: string,
                 isPmc: boolean,
                 botLevel: number
-            ): GenerateWeaponResult => {
+            ): IGenerateWeaponResult => {
                 if (isPmc) {
                     const modPool = botTemplateInventory.mods;
 

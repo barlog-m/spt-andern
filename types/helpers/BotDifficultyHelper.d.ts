@@ -1,13 +1,13 @@
 import { BotHelper } from "@spt/helpers/BotHelper";
-import { Difficulty } from "@spt/models/eft/common/tables/IBotType";
+import { IDifficultyCategories } from "@spt/models/eft/common/tables/IBotType";
 import { IBots } from "@spt/models/spt/bots/IBots";
 import { IPmcConfig } from "@spt/models/spt/config/IPmcConfig";
-import { ILogger } from "@spt/models/spt/utils/ILogger";
+import type { ILogger } from "@spt/models/spt/utils/ILogger";
 import { ConfigServer } from "@spt/servers/ConfigServer";
 import { DatabaseService } from "@spt/services/DatabaseService";
 import { LocalisationService } from "@spt/services/LocalisationService";
 import { RandomUtil } from "@spt/utils/RandomUtil";
-import { ICloner } from "@spt/utils/cloners/ICloner";
+import type { ICloner } from "@spt/utils/cloners/ICloner";
 export declare class BotDifficultyHelper {
     protected logger: ILogger;
     protected databaseService: DatabaseService;
@@ -25,14 +25,14 @@ export declare class BotDifficultyHelper {
      * @param botDb bots from database
      * @returns Difficulty object
      */
-    getBotDifficultySettings(type: string, difficulty: string, botDb: IBots): Difficulty;
+    getBotDifficultySettings(type: string, difficulty: string, botDb: IBots): IDifficultyCategories;
     /**
      * Get difficulty settings for a PMC
      * @param type "usec" / "bear"
      * @param difficulty what difficulty to retrieve
      * @returns Difficulty object
      */
-    protected getDifficultySettings(type: string, difficulty: string): Difficulty;
+    protected getDifficultySettings(type: string, difficulty: string): IDifficultyCategories;
     /**
      * Translate chosen value from pre-raid difficulty dropdown into bot difficulty value
      * @param dropDownDifficulty Dropdown difficulty value to convert

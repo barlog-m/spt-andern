@@ -13,9 +13,9 @@ import {IDatabaseTables} from "@spt/models/spt/server/IDatabaseTables";
 import {ILocation} from "@spt/models/eft/common/ILocation";
 import {
     ILocationBase,
-    BossLocationSpawn,
+    IBossLocationSpawn,
 } from "@spt/models/eft/common/ILocationBase";
-import {Difficulty, IBotType} from "@spt/models/eft/common/tables/IBotType";
+import {IDifficulties, IDifficultyCategories, IBotType} from "@spt/models/eft/common/tables/IBotType";
 
 import * as fs from "fs";
 
@@ -56,12 +56,6 @@ export function mapBotTuning(
     if (config.mapMakePmcAlwaysHostile) {
         makePmcAlwaysHostile(configServer, logger);
     }
-
-    if (config.mapScavToPmcConvertMultiplier !== 1) {
-        tuneScavConvertToPmcRatio(configServer, logger);
-    }
-
-    disableScavConvertToPmc(configServer, logger);
 
     if (config.mapIncreaseSpawnGroupsSize) {
         increaseSpawnGroupsSize(databaseTables, logger);
@@ -241,6 +235,10 @@ function mapsTuning(
             if (config.mapBossChanceBuff != 0) {
                 bossChanceChange(locationBase, logger);
             }
+
+            if (config.mapBossDisablePartisan) {
+                bossDisablePartisan(locationBase);
+            }
         }
     }
 }
@@ -251,8 +249,10 @@ function bossChanceChange(
 ): undefined {
     Object.entries(locationBase.BossLocationSpawn).forEach(
         ([spawnKey, spawnObj]) => {
-            const bossLocationSpawn: BossLocationSpawn = spawnObj;
+            const bossLocationSpawn: IBossLocationSpawn = spawnObj;
             if (
+                bossLocationSpawn.BossName !== "pmcUSEC" &&
+                bossLocationSpawn.BossName !== "pmcBEAR" &&
                 bossLocationSpawn.BossName !== "pmcBot" &&
                 bossLocationSpawn.BossName !== "crazyAssaultEvent" &&
                 bossLocationSpawn.BossName !== "exUsec"
@@ -275,6 +275,17 @@ function bossChanceChange(
                         `[Andern] location '${locationBase.Name}' boss '${bossLocationSpawn.BossName}' chance ${chance}`
                     );
                 }
+            }
+        }
+    );
+}
+
+function bossDisablePartisan(locationBase: ILocationBase): undefined {
+    Object.entries(locationBase.BossLocationSpawn).forEach(
+        ([spawnKey, spawnObj]) => {
+            const bossLocationSpawn: IBossLocationSpawn = spawnObj;
+            if (bossLocationSpawn.BossName === "bossPartisan") {
+                bossLocationSpawn.BossChance = 0;
             }
         }
     );
@@ -304,75 +315,6 @@ function makePmcAlwaysHostile(
         logger.info(
             `[Andern] pmcConfig.chanceSameSideIsHostilePercent: ${JSON.stringify(pmcConfig.hostilitySettings)}`
         );
-    }
-}
-
-function tuneScavConvertToPmcRatio(
-    configServer: ConfigServer,
-    logger: ILogger
-): undefined {
-    const pmcConfig = configServer.getConfig<IPmcConfig>(ConfigTypes.PMC);
-
-    for (const map of Object.keys(pmcConfig.convertIntoPmcChance)) {
-        for (const botType in pmcConfig.convertIntoPmcChance[map]) {
-            const baseMin = pmcConfig.convertIntoPmcChance[map][botType].min;
-            const baseMax = pmcConfig.convertIntoPmcChance[map][botType].max;
-
-            if (baseMin === 0 && baseMax === 0) {
-                continue;
-            }
-
-            pmcConfig.convertIntoPmcChance[map][botType].min = Math.ceil(
-                pmcConfig.convertIntoPmcChance[map][botType].min *
-                config.mapScavToPmcConvertMultiplier
-            );
-
-            if (pmcConfig.convertIntoPmcChance[map][botType].min > 100) {
-                pmcConfig.convertIntoPmcChance[map][botType].min = 100;
-            }
-
-            pmcConfig.convertIntoPmcChance[map][botType].max = Math.ceil(
-                pmcConfig.convertIntoPmcChance[map][botType].max *
-                config.mapScavToPmcConvertMultiplier
-            );
-
-            if (pmcConfig.convertIntoPmcChance[map][botType].max > 100) {
-                pmcConfig.convertIntoPmcChance[map][botType].max = 100;
-            }
-
-            if (config.debug) {
-                logger.info(
-                    `[Andern] pmcConfig.convertIntoPmcChance[${botType}] min: ${baseMin} -> ${pmcConfig.convertIntoPmcChance[map][botType].min}, max: ${baseMax} -> ${pmcConfig.convertIntoPmcChance[map][botType].max}`
-                );
-            }
-        }
-    }
-}
-
-function disableScavConvertToPmc(
-    configServer: ConfigServer,
-    logger: ILogger
-): undefined {
-    const pmcConfig = configServer.getConfig<IPmcConfig>(ConfigTypes.PMC);
-
-    if (config.mapDisableRaiderConvertToPmc) {
-        const botType = "pmcbot";
-        disableBotTypeConvertToPmc(botType, pmcConfig, logger);
-    }
-
-    if (config.mapDisableRogueConvertToPmc) {
-        const botType = "exusec";
-        disableBotTypeConvertToPmc(botType, pmcConfig, logger);
-    }
-}
-
-function disableBotTypeConvertToPmc(
-    botType: string,
-    pmcConfig: IPmcConfig,
-    logger: ILogger
-): undefined {
-    for (const map of Object.keys(pmcConfig.convertIntoPmcChance)) {
-        pmcConfig.convertIntoPmcChance[map][botType] = {min: 0, max: 0};
     }
 }
 
@@ -480,7 +422,7 @@ function botBrainsTuning(databaseTables: IDatabaseTables): undefined {
 function assaultBrainTuning(databaseTables: IDatabaseTables): undefined {
     const assault: IBotType = databaseTables.bots.types["assault"];
 
-    Object.entries(assault.difficulty).forEach(([name, difficulty]: [string, Difficulty]) => {
+    Object.entries(assault.difficulty).forEach(([name, difficulty]: [string, IDifficultyCategories]) => {
         difficulty.Shoot["CHANCE_TO_CHANGE_WEAPON"] = 80;
         difficulty.Shoot["CHANCE_TO_CHANGE_WEAPON_WITH_HELMET"] = 40;
     });
@@ -489,7 +431,7 @@ function assaultBrainTuning(databaseTables: IDatabaseTables): undefined {
 function pmcbotBrainTuning(databaseTables: IDatabaseTables): undefined {
     const pmcbot: IBotType = databaseTables.bots.types["pmcbot"];
 
-    Object.entries(pmcbot.difficulty).forEach(([name, difficulty]: [string, Difficulty]) => {
+    Object.entries(pmcbot.difficulty).forEach(([name, difficulty]: [string, IDifficultyCategories]) => {
         brainTunning(difficulty);
     });
 }
@@ -502,7 +444,7 @@ function pmcBrainTuning(databaseTables: IDatabaseTables): undefined {
     brainTunning(bear.difficulty.normal);
 }
 
-function brainTunning(difficulty: Difficulty): undefined {
+function brainTunning(difficulty: IDifficultyCategories): undefined {
     if (config.mapBotDisablePmcTalkativeness) {
         difficulty.Mind["CAN_TALK"] = false
         difficulty.Mind["TALK_WITH_QUERY"] = false

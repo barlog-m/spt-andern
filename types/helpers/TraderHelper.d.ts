@@ -2,13 +2,13 @@ import { HandbookHelper } from "@spt/helpers/HandbookHelper";
 import { ItemHelper } from "@spt/helpers/ItemHelper";
 import { ProfileHelper } from "@spt/helpers/ProfileHelper";
 import { IPmcData } from "@spt/models/eft/common/IPmcData";
-import { Item } from "@spt/models/eft/common/tables/IItem";
+import { IItem } from "@spt/models/eft/common/tables/IItem";
 import { IProfileTraderTemplate } from "@spt/models/eft/common/tables/IProfileTemplate";
 import { ITraderAssort, ITraderBase, ITraderLoyaltyLevel } from "@spt/models/eft/common/tables/ITrader";
 import { ISptProfile } from "@spt/models/eft/profile/ISptProfile";
 import { Traders } from "@spt/models/enums/Traders";
 import { ITraderConfig } from "@spt/models/spt/config/ITraderConfig";
-import { ILogger } from "@spt/models/spt/utils/ILogger";
+import type { ILogger } from "@spt/models/spt/utils/ILogger";
 import { ConfigServer } from "@spt/servers/ConfigServer";
 import { DatabaseService } from "@spt/services/DatabaseService";
 import { FenceService } from "@spt/services/FenceService";
@@ -39,7 +39,7 @@ export declare class TraderHelper {
      * @param sessionID Players id
      * @returns Trader base
      */
-    getTrader(traderID: string, sessionID: string): ITraderBase | undefined;
+    getTrader(traderID: string, sessionID: string): ITraderBase | any;
     /**
      * Get all assort data for a particular trader
      * @param traderId Trader to get assorts for
@@ -52,7 +52,7 @@ export declare class TraderHelper {
      * @param assortId Id of assort to find
      * @returns Item object
      */
-    getTraderAssortItemByAssortId(traderId: string, assortId: string): Item | undefined;
+    getTraderAssortItemByAssortId(traderId: string, assortId: string): IItem | undefined;
     /**
      * Reset a profiles trader data back to its initial state as seen by a level 1 player
      * Does NOT take into account different profile levels
@@ -130,7 +130,7 @@ export declare class TraderHelper {
             count: number;
         }[];
         traderId: string;
-    }, itemPurchased: Item): void;
+    }, itemPurchased: IItem): void;
     /**
      * EoD and Unheard get a 20% bonus to personal trader limit purchases
      * @param buyRestrictionMax Existing value from trader item

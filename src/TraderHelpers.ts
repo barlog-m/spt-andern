@@ -5,7 +5,7 @@ import {
 } from "@spt/models/eft/common/tables/ITrader";
 import {
     ITraderConfig,
-    UpdateTime
+    IUpdateTime
 } from "@spt/models/spt/config/ITraderConfig";
 import {IDatabaseTables} from "@spt/models/spt/server/IDatabaseTables";
 import {ImageRouter} from "@spt/routers/ImageRouter";
@@ -36,7 +36,7 @@ export class TraderHelper {
      */
     public setTraderUpdateTime(traderConfig: ITraderConfig, baseJson: any, refreshTimeSecondsMin: number, refreshTimeSecondsMax: number): void {
         // Add refresh time in seconds to config
-        const traderRefreshRecord: UpdateTime = {
+        const traderRefreshRecord: IUpdateTime = {
             traderId: baseJson._id,
             seconds: {
                 min: refreshTimeSecondsMin,

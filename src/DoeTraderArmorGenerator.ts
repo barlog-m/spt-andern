@@ -1,7 +1,7 @@
 import {inject, injectable} from "tsyringe";
 import {ILogger} from "@spt/models/spt/utils/ILogger";
 import {HashUtil} from "@spt/utils/HashUtil";
-import {Item} from "@spt/models/eft/common/tables/IItem";
+import {IItem} from "@spt/models/eft/common/tables/IItem";
 
 @injectable()
 export class DoeTraderArmorGenerator {
@@ -16,7 +16,7 @@ export class DoeTraderArmorGenerator {
     ) {
     }
 
-    public getArmor(tpl: string): Item[] {
+    public getArmor(tpl: string): IItem[] {
         switch (tpl) {
             case this.KIRASA_N: {
                 return this.kirasaN();
@@ -36,17 +36,17 @@ export class DoeTraderArmorGenerator {
     }
 
 
-    private anyOtherArmor(tpl: string): Item[] {
-        const item: Item = {
+    private anyOtherArmor(tpl: string): IItem[] {
+        const item: IItem = {
             _id: this.hashUtil.generate(),
             _tpl: tpl
         }
         return [item];
     }
 
-    private kirasaN(): Item[] {
+    private kirasaN(): IItem[] {
         const id = this.hashUtil.generate();
-        const armor: Item[] = [];
+        const armor: IItem[] = [];
 
         armor.push({
             _id: id,
@@ -99,9 +99,9 @@ export class DoeTraderArmorGenerator {
         return armor;
     }
     
-    private tv115(): Item[] {
+    private tv115(): IItem[] {
         const id = this.hashUtil.generate();
-        const armor: Item[] = [];
+        const armor: IItem[] = [];
 
         armor.push({
             _id: id,

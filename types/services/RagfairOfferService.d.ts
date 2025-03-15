@@ -1,10 +1,10 @@
 import { ItemHelper } from "@spt/helpers/ItemHelper";
 import { ProfileHelper } from "@spt/helpers/ProfileHelper";
 import { RagfairServerHelper } from "@spt/helpers/RagfairServerHelper";
-import { Item } from "@spt/models/eft/common/tables/IItem";
+import { IItem } from "@spt/models/eft/common/tables/IItem";
 import { IRagfairOffer } from "@spt/models/eft/ragfair/IRagfairOffer";
 import { IRagfairConfig } from "@spt/models/spt/config/IRagfairConfig";
-import { ILogger } from "@spt/models/spt/utils/ILogger";
+import type { ILogger } from "@spt/models/spt/utils/ILogger";
 import { EventOutputHolder } from "@spt/routers/EventOutputHolder";
 import { ConfigServer } from "@spt/servers/ConfigServer";
 import { SaveServer } from "@spt/servers/SaveServer";
@@ -14,7 +14,7 @@ import { HashUtil } from "@spt/utils/HashUtil";
 import { HttpResponseUtil } from "@spt/utils/HttpResponseUtil";
 import { RagfairOfferHolder } from "@spt/utils/RagfairOfferHolder";
 import { TimeUtil } from "@spt/utils/TimeUtil";
-import { ICloner } from "@spt/utils/cloners/ICloner";
+import type { ICloner } from "@spt/utils/cloners/ICloner";
 export declare class RagfairOfferService {
     protected logger: ILogger;
     protected timeUtil: TimeUtil;
@@ -53,7 +53,7 @@ export declare class RagfairOfferService {
      * Get an array of arrays of expired offer items + children
      * @returns Expired offer assorts
      */
-    getExpiredOfferAssorts(): Item[][];
+    getExpiredOfferAssorts(): IItem[][];
     /**
      * Clear out internal expiredOffers dictionary of all items
      */
@@ -74,7 +74,7 @@ export declare class RagfairOfferService {
      * @param offerId Offer to adjust stack size of
      * @param amount How much to deduct from offers stack size
      */
-    removeOfferStack(offerId: string, amount: number): void;
+    reduceOfferQuantity(offerId: string, amount: number): void;
     removeAllOffersByTrader(traderId: string): void;
     /**
      * Do the trader offers on flea need to be refreshed
@@ -97,5 +97,5 @@ export declare class RagfairOfferService {
      * @param items Offer items to unstack
      * @returns Unstacked array of items
      */
-    protected unstackOfferItems(items: Item[]): Item[];
+    protected unstackOfferItems(items: IItem[]): IItem[];
 }

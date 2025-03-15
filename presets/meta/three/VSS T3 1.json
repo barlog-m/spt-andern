@@ -53,6 +53,12 @@
             "slotId": "mod_charge"
         },
         {
+            "_id": "67c9298c15286f06120f14e1",
+            "_tpl": "6565bb7eb4b12a56eb04b084",
+            "parentId": "8b32400d03fafdb6908c6210",
+            "slotId": "mod_handguard"
+        },
+        {
             "_id": "cc6d871c964aa56fa7a73917",
             "_tpl": "57ac965c24597706be5f975c",
             "parentId": "9d25038ba47c8b5d5a3c79c6",

@@ -4,14 +4,14 @@ import {ILogger} from "@spt/models/spt/utils/ILogger";
 import {HashUtil} from "@spt/utils/HashUtil";
 import {RandomUtil} from "@spt/utils/RandomUtil";
 import {
-    Inventory as PmcInventory
+    IInventory as PmcInventory
 } from "@spt/models/eft/common/tables/IBotBase";
 import {EquipmentSlots} from "@spt/models/enums/EquipmentSlots";
 import {ItemHelper} from "@spt/helpers/ItemHelper";
 import {BotGeneratorHelper} from "@spt/helpers/BotGeneratorHelper";
 import {DatabaseServer} from "@spt/servers/DatabaseServer";
 import {Data} from "./Data";
-import {Mods as PmcMods} from "@spt/models/eft/common/tables/IBotType";
+import {IMods as PmcMods} from "@spt/models/eft/common/tables/IBotType";
 import {GearItem, Mods} from "./models";
 
 @injectable()
@@ -44,15 +44,15 @@ export class GearGeneratorHelper {
 
     readonly platesWeights = {
         "one": {
-            3: 60,
+            3: 50,
             4: 40,
-            5: 0,
+            5: 10,
             6: 0
         },
         "two": {
             3: 20,
-            4: 80,
-            5: 0,
+            4: 60,
+            5: 20,
             6: 0
         },
         "three": {

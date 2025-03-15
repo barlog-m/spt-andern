@@ -21,7 +21,7 @@ export declare class InraidCallbacks {
      */
     registerPlayer(url: string, info: IRegisterPlayerRequestData, sessionID: string): INullResponseData;
     /**
-     * Handle raid/profile/save
+     * Handle raid/profile/scavsave
      * @param url
      * @param info Save progress request
      * @param sessionID Session id
@@ -34,5 +34,5 @@ export declare class InraidCallbacks {
      */
     getRaidMenuSettings(): string;
     getTraitorScavHostileChance(url: string, info: IEmptyRequestData, sessionId: string): string;
-    getBossConvertSettings(url: string, info: IEmptyRequestData, sessionId: string): string;
+    getBossTypes(url: string, info: IEmptyRequestData, sessionId: string): string;
 }

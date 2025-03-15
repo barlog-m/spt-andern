@@ -1,5 +1,6 @@
 import { MatchController } from "@spt/controllers/MatchController";
 import { IEmptyRequestData } from "@spt/models/eft/common/IEmptyRequestData";
+import { IMetrics } from "@spt/models/eft/common/tables/IMatch";
 import { IGetBodyResponseData } from "@spt/models/eft/httpResponse/IGetBodyResponseData";
 import { INullResponseData } from "@spt/models/eft/httpResponse/INullResponseData";
 import { IEndLocalRaidRequestData } from "@spt/models/eft/match/IEndLocalRaidRequestData";
@@ -31,9 +32,12 @@ export declare class MatchCallbacks {
     updatePing(url: string, info: IUpdatePingRequestData, sessionID: string): INullResponseData;
     exitMatch(url: string, info: IEmptyRequestData, sessionID: string): INullResponseData;
     /** Handle client/match/group/exit_from_menu */
-    exitToMenu(url: string, info: IEmptyRequestData, sessionID: string): INullResponseData;
+    exitFromMenu(url: string, info: IEmptyRequestData, sessionID: string): INullResponseData;
+    /** Handle client/match/group/current */
     groupCurrent(url: string, info: IEmptyRequestData, sessionID: string): IGetBodyResponseData<IMatchGroupCurrentResponse>;
+    /** Handle client/match/group/looking/start */
     startGroupSearch(url: string, info: IEmptyRequestData, sessionID: string): INullResponseData;
+    /** Handle client/match/group/looking/stop */
     stopGroupSearch(url: string, info: IEmptyRequestData, sessionID: string): INullResponseData;
     /** Handle client/match/group/invite/send */
     sendGroupInvite(url: string, info: IMatchGroupInviteSendRequest, sessionID: string): IGetBodyResponseData<string>;
@@ -47,12 +51,15 @@ export declare class MatchCallbacks {
     transferGroup(url: string, info: IMatchGroupTransferRequest, sessionId: string): IGetBodyResponseData<boolean>;
     /** Handle client/match/group/invite/cancel-all */
     cancelAllGroupInvite(url: string, info: IEmptyRequestData, sessionId: string): IGetBodyResponseData<boolean>;
+    /** Handle client/putMetrics */
     putMetrics(url: string, request: IPutMetricsRequestData, sessionId: string): INullResponseData;
+    /** Handle client/analytics/event-disconnect */
+    eventDisconnect(url: string, request: IPutMetricsRequestData, sessionId: string): INullResponseData;
     serverAvailable(url: string, info: IEmptyRequestData, sessionId: string): IGetBodyResponseData<boolean>;
     /** Handle match/group/start_game */
     joinMatch(url: string, info: IMatchGroupStartGameRequest, sessionID: string): IGetBodyResponseData<IProfileStatusResponse>;
     /** Handle client/getMetricsConfig */
-    getMetrics(url: string, info: any, sessionID: string): IGetBodyResponseData<string>;
+    getMetrics(url: string, info: any, sessionID: string): IGetBodyResponseData<IMetrics>;
     /**
      * Called periodically while in a group
      * Handle client/match/group/status
