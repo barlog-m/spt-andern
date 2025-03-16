@@ -15,7 +15,7 @@ import {
     ILocationBase,
     IBossLocationSpawn,
 } from "@spt/models/eft/common/ILocationBase";
-import {IDifficulties, IDifficultyCategories, IBotType} from "@spt/models/eft/common/tables/IBotType";
+import {IDifficultyCategories, IBotType} from "@spt/models/eft/common/tables/IBotType";
 
 import * as fs from "fs";
 
@@ -271,8 +271,13 @@ function bossChanceChange(
                         chance = 0;
                     }
                     bossLocationSpawn.BossChance = chance;
+
+                    if (config.mapBossDisablePartisan && (bossLocationSpawn.BossName === "bossPartisan")) {
+                        bossLocationSpawn.BossChance = 0;
+                    }
+                    
                     logger.info(
-                        `[Andern] location '${locationBase.Name}' boss '${bossLocationSpawn.BossName}' chance ${chance}`
+                        `[Andern] location '${locationBase.Name}' boss '${bossLocationSpawn.BossName}' chance ${bossLocationSpawn.BossChance}`
                     );
                 }
             }
