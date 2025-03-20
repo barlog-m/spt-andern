@@ -1,13 +1,11 @@
-import {DependencyContainer} from "tsyringe";
-import {DatabaseServer} from "@spt/servers/DatabaseServer";
-import {
-    IQuestConditionCounterCondition
-} from "@spt/models/eft/common/tables/IQuest";
+import { DependencyContainer } from "tsyringe";
+import { DatabaseServer } from "@spt/servers/DatabaseServer";
+import { IQuestConditionCounterCondition } from "@spt/models/eft/common/tables/IQuest";
 import * as config from "../config/config.json";
-import {ILogger} from "@spt/models/spt/utils/ILogger";
+import { ILogger } from "@spt/models/spt/utils/ILogger";
 
 export default function cheeseQuests(
-    container: DependencyContainer
+    container: DependencyContainer,
 ): undefined {
     const logger = container.resolve<ILogger>("WinstonLogger");
     const databaseServer: DatabaseServer =
@@ -17,62 +15,100 @@ export default function cheeseQuests(
 
     Object.entries(tables.templates.quests).forEach(([questId, quest]) => {
         const questConditions = quest.conditions.AvailableForFinish.filter(
-            (questCondition) => questCondition.conditionType === "CounterCreator"
+            (questCondition) =>
+                questCondition.conditionType === "CounterCreator",
         );
 
         if (questConditions !== undefined) {
             questConditions.forEach((questCondition) => {
-                const questConditionCounters = questCondition.counter?.conditions.filter((conditionCounter) =>
-                    (conditionCounter.conditionType === "Kills") || (conditionCounter.conditionType === "Shots") || (conditionCounter.conditionType === "Equipment"));
+                const questConditionCounters =
+                    questCondition.counter?.conditions.filter(
+                        (conditionCounter) =>
+                            conditionCounter.conditionType === "Kills" ||
+                            conditionCounter.conditionType === "Shots" ||
+                            conditionCounter.conditionType === "Equipment",
+                    );
 
                 if (questConditionCounters !== undefined) {
-                    const questConditionCountersToDelete: IQuestConditionCounterCondition[] = [];
-                    
-                    questConditionCounters.forEach((conditionCounter) => {
+                    const questConditionCountersToDelete: IQuestConditionCounterCondition[] =
+                        [];
 
+                    questConditionCounters.forEach((conditionCounter) => {
                         // if quest required silenced shotgun
-                        if (conditionCounter.weaponModsInclusive?.some(subArray => subArray.every((value, index) => value === shotySilencerArray[index]))) {
+                        if (
+                            conditionCounter.weaponModsInclusive?.some(
+                                (subArray) =>
+                                    subArray.every(
+                                        (value, index) =>
+                                            value === shotySilencerArray[index],
+                                    ),
+                            )
+                        ) {
                             replaceWithAnySilencedWeapon(conditionCounter);
                             if (config.debug) {
-                                logger.info(`[Andern] quest '${quest.QuestName}' condition set to any silenced weapon`)
+                                logger.info(
+                                    `[Andern] quest '${quest.QuestName}' condition set to any silenced weapon`,
+                                );
                             }
                         }
 
                         // if quest has gear conditions
                         if (conditionCounter.equipmentInclusive?.length > 0) {
-                            questConditionCountersToDelete.push(conditionCounter)
+                            questConditionCountersToDelete.push(
+                                conditionCounter,
+                            );
                             if (config.debug) {
-                                logger.info(`[Andern] quest '${quest.QuestName}' gear condition removed`)
+                                logger.info(
+                                    `[Andern] quest '${quest.QuestName}' gear condition removed`,
+                                );
                             }
                         }
 
                         // if quest required bolt action rifle
-                        if (conditionCounter.weapon?.includes("5bfd297f0db834001a669119")) {
-                            addAllDmr(conditionCounter)
+                        if (
+                            conditionCounter.weapon?.includes(
+                                "5bfd297f0db834001a669119",
+                            )
+                        ) {
+                            addAllDmr(conditionCounter);
 
                             // if bolty should have suppressor
-                            if (conditionCounter.weaponModsInclusive?.length > 0) {
-                                replaceWithBoltyAndDMRSilencers(conditionCounter)
+                            if (
+                                conditionCounter.weaponModsInclusive?.length > 0
+                            ) {
+                                replaceWithBoltyAndDMRSilencers(
+                                    conditionCounter,
+                                );
                             }
 
                             if (config.debug) {
-                                logger.info(`[Andern] quest '${quest.QuestName}' weapon condition expanded to DMR`)
+                                logger.info(
+                                    `[Andern] quest '${quest.QuestName}' weapon condition expanded to DMR`,
+                                );
                             }
                         }
 
                         // if quest required shotgun
-                        if (conditionCounter.weapon?.includes("54491c4f4bdc2db1078b4568")) {
+                        if (
+                            conditionCounter.weapon?.includes(
+                                "54491c4f4bdc2db1078b4568",
+                            )
+                        ) {
                             delete conditionCounter.weapon;
                             if (config.debug) {
-                                logger.info(`[Andern] quest '${quest.QuestName}' weapon condition removed`)
+                                logger.info(
+                                    `[Andern] quest '${quest.QuestName}' weapon condition removed`,
+                                );
                             }
                         }
-                    })
+                    });
 
                     if (questConditionCountersToDelete.length > 0) {
-                        questCondition.counter.conditions = questCondition.counter.conditions.filter(
-                            c => !questConditionCountersToDelete.includes(c)
-                        )
+                        questCondition.counter.conditions =
+                            questCondition.counter.conditions.filter(
+                                (c) =>
+                                    !questConditionCountersToDelete.includes(c),
+                            );
                     }
                 }
             });
@@ -80,7 +116,9 @@ export default function cheeseQuests(
     });
 }
 
-function addAllDmr(conditionCounter: IQuestConditionCounterCondition): undefined {
+function addAllDmr(
+    conditionCounter: IQuestConditionCounterCondition,
+): undefined {
     conditionCounter.weapon = conditionCounter.weapon.concat([
         "6176aca650224f204c1da3fb",
         "5df8ce05b11454561e39243b",
@@ -89,11 +127,13 @@ function addAllDmr(conditionCounter: IQuestConditionCounterCondition): undefined
         "5c46fbd72e2216398b5a8c9c",
         "5fc22d7c187fea44d52eda44",
         "57838ad32459774a17445cd2",
-        "5c501a4d2e221602b412b540"
-    ])
+        "5c501a4d2e221602b412b540",
+    ]);
 }
 
-function replaceWithAnySilencedWeapon(conditionCounter: IQuestConditionCounterCondition): undefined {
+function replaceWithAnySilencedWeapon(
+    conditionCounter: IQuestConditionCounterCondition,
+): undefined {
     // exclude weapon restrictions
     delete conditionCounter.weapon;
     // include all silencers
@@ -177,7 +217,9 @@ function replaceWithAnySilencedWeapon(conditionCounter: IQuestConditionCounterCo
     ];
 }
 
-function replaceWithBoltyAndDMRSilencers(conditionCounter: IQuestConditionCounterCondition): undefined {
+function replaceWithBoltyAndDMRSilencers(
+    conditionCounter: IQuestConditionCounterCondition,
+): undefined {
     conditionCounter.weaponModsInclusive = [
         ["5b86a0e586f7745b600ccb23"],
         ["59bffbb386f77435b379b9c2"],
@@ -208,7 +250,6 @@ function replaceWithBoltyAndDMRSilencers(conditionCounter: IQuestConditionCounte
         ["6171367e1cb55961fa0fdb36"],
         ["5fbe7618d6fa9c00c571bb6c"],
         ["5f63407e1b231926f2329f15"],
-        ["5e01ea19e9dc277128008c0b"]
+        ["5e01ea19e9dc277128008c0b"],
     ];
 }
-

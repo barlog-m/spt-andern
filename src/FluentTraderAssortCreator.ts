@@ -1,11 +1,8 @@
-import {IItem} from "@spt/models/eft/common/tables/IItem";
-import {
-    IBarterScheme,
-    ITrader,
-} from "@spt/models/eft/common/tables/ITrader";
-import {Money} from "@spt/models/enums/Money";
-import {ILogger} from "@spt/models/spt/utils/ILogger";
-import {HashUtil} from "@spt/utils/HashUtil";
+import { IItem } from "@spt/models/eft/common/tables/IItem";
+import { IBarterScheme, ITrader } from "@spt/models/eft/common/tables/ITrader";
+import { Money } from "@spt/models/enums/Money";
+import { ILogger } from "@spt/models/spt/utils/ILogger";
+import { HashUtil } from "@spt/utils/HashUtil";
 
 export class FluentAssortConstructor {
     protected itemsToSell: IItem[] = [];
@@ -21,7 +18,7 @@ export class FluentAssortConstructor {
 
     public createSingleAssortItem(
         itemTpl: string,
-        itemId = undefined
+        itemId = undefined,
     ): FluentAssortConstructor {
         const newItemToAdd: IItem = {
             _id: !itemId ? this.hashUtil.generate() : itemId,
@@ -87,7 +84,7 @@ export class FluentAssortConstructor {
 
     public addMoneyCost(
         currencyType: Money,
-        amount: number
+        amount: number,
     ): FluentAssortConstructor {
         this.barterScheme[this.itemsToSell[0]._id] = [
             [
@@ -103,7 +100,7 @@ export class FluentAssortConstructor {
 
     public addBarterCost(
         itemTpl: string,
-        count: number
+        count: number,
     ): FluentAssortConstructor {
         const sellableItemId = this.itemsToSell[0]._id;
 
@@ -120,7 +117,7 @@ export class FluentAssortConstructor {
         } else {
             // Item already exists, add to
             const existingData = this.barterScheme[sellableItemId][0].find(
-                (x) => x._tpl === itemTpl
+                (x) => x._tpl === itemTpl,
             );
             if (existingData) {
                 // itemtpl already a barter for item, add to count
@@ -145,7 +142,7 @@ export class FluentAssortConstructor {
         const itemBeingSoldId = this.itemsToSell[0]._id;
         if (data.assort.items.find((x) => x._id === itemBeingSoldId)) {
             this.logger.error(
-                `Unable to add complex item with item key ${this.itemsToSell[0]._id}, key already used`
+                `Unable to add complex item with item key ${this.itemsToSell[0]._id}, key already used`,
             );
 
             return;

@@ -1,24 +1,24 @@
-import {inject, injectable} from "tsyringe";
+import { inject, injectable } from "tsyringe";
 
-import {ILogger} from "@spt/models/spt/utils/ILogger";
-import {HashUtil} from "@spt/utils/HashUtil";
-import {JsonUtil} from "@spt/utils/JsonUtil";
-import {DatabaseServer} from "@spt/servers/DatabaseServer";
-import {ConfigServer} from "@spt/servers/ConfigServer";
-import {ConfigTypes} from "@spt/models/enums/ConfigTypes";
-import {IInsuranceConfig} from "@spt/models/spt/config/IInsuranceConfig";
-import {IRagfairConfig} from "@spt/models/spt/config/IRagfairConfig";
-import {ImageRouter} from "@spt/routers/ImageRouter";
-import {Money} from "@spt/models/enums/Money";
-import {IDatabaseTables} from "@spt/models/spt/server/IDatabaseTables";
-import {ItemHelper} from "@spt/helpers/ItemHelper";
-import {ITraderConfig} from "@spt/models/spt/config/ITraderConfig";
-import {Traders} from "@spt/models/enums/Traders";
-import {PreSptModLoader} from "@spt/loaders/PreSptModLoader";
-import {TraderHelper} from "./TraderHelpers";
-import {FluentAssortConstructor} from "./FluentTraderAssortCreator";
-import {DoeTraderArmorGenerator} from "./DoeTraderArmorGenerator";
-import {ModConfig} from "./ModConfig";
+import { ILogger } from "@spt/models/spt/utils/ILogger";
+import { HashUtil } from "@spt/utils/HashUtil";
+import { JsonUtil } from "@spt/utils/JsonUtil";
+import { DatabaseServer } from "@spt/servers/DatabaseServer";
+import { ConfigServer } from "@spt/servers/ConfigServer";
+import { ConfigTypes } from "@spt/models/enums/ConfigTypes";
+import { IInsuranceConfig } from "@spt/models/spt/config/IInsuranceConfig";
+import { IRagfairConfig } from "@spt/models/spt/config/IRagfairConfig";
+import { ImageRouter } from "@spt/routers/ImageRouter";
+import { Money } from "@spt/models/enums/Money";
+import { IDatabaseTables } from "@spt/models/spt/server/IDatabaseTables";
+import { ItemHelper } from "@spt/helpers/ItemHelper";
+import { ITraderConfig } from "@spt/models/spt/config/ITraderConfig";
+import { Traders } from "@spt/models/enums/Traders";
+import { PreSptModLoader } from "@spt/loaders/PreSptModLoader";
+import { TraderHelper } from "./TraderHelpers";
+import { FluentAssortConstructor } from "./FluentTraderAssortCreator";
+import { DoeTraderArmorGenerator } from "./DoeTraderArmorGenerator";
+import { ModConfig } from "./ModConfig";
 import * as baseJson from "../trader/base.json";
 import * as config from "../config/config.json";
 
@@ -46,8 +46,9 @@ export class DoeTrader {
         @inject("ConfigServer") protected configServer: ConfigServer,
         @inject("JsonUtil") protected jsonUtil: JsonUtil,
         @inject("ItemHelper") protected itemHelper: ItemHelper,
-        @inject("AndernDoeTraderArmorGenerator") protected traderArmorGenerator: DoeTraderArmorGenerator,
-        @inject("AndernModPath") protected modPath: string
+        @inject("AndernDoeTraderArmorGenerator")
+        protected traderArmorGenerator: DoeTraderArmorGenerator,
+        @inject("AndernModPath") protected modPath: string,
     ) {
         if (config.trader) {
             this.loadData();
@@ -65,51 +66,37 @@ export class DoeTrader {
         fluentTraderAssortHeper: FluentAssortConstructor,
         tables: IDatabaseTables,
     ): undefined {
-        this.addTierItems(
-            fluentTraderAssortHeper,
-            tables,
-            this.items.one,
-            1,
-        );
-        this.addTierItems(
-            fluentTraderAssortHeper,
-            tables,
-            this.items.two,
-            2,
-        );
-        this.addTierItems(
-            fluentTraderAssortHeper,
-            tables,
-            this.items.three,
-            3,
-        );
-        this.addTierItems(
-            fluentTraderAssortHeper,
-            tables,
-            this.items.four,
-            4,
-        );
+        this.addTierItems(fluentTraderAssortHeper, tables, this.items.one, 1);
+        this.addTierItems(fluentTraderAssortHeper, tables, this.items.two, 2);
+        this.addTierItems(fluentTraderAssortHeper, tables, this.items.three, 3);
+        this.addTierItems(fluentTraderAssortHeper, tables, this.items.four, 4);
     }
 
     addTierItems(
         fluentTraderAssortHeper: FluentAssortConstructor,
         tables: IDatabaseTables,
         items: string[],
-        loyaltyLevel: number
+        loyaltyLevel: number,
     ): undefined {
         items.forEach((itemTpl) => {
             if (this.traderArmorGenerator.isArmor(itemTpl)) {
                 const items = this.traderArmorGenerator.getArmor(itemTpl);
-                const itemTpls = items.map(i => i._tpl)
-                fluentTraderAssortHeper.createComplexAssortItem(items)
-                    .addMoneyCost(Money.ROUBLES, this.itemHelper.getItemAndChildrenPrice(itemTpls))
+                const itemTpls = items.map((i) => i._tpl);
+                fluentTraderAssortHeper
+                    .createComplexAssortItem(items)
+                    .addMoneyCost(
+                        Money.ROUBLES,
+                        this.itemHelper.getItemAndChildrenPrice(itemTpls),
+                    )
                     .addLoyaltyLevel(loyaltyLevel)
                     .export(tables.traders[baseJson._id]);
-
             } else {
                 fluentTraderAssortHeper
                     .createSingleAssortItem(itemTpl)
-                    .addMoneyCost(Money.ROUBLES, this.itemHelper.getItemPrice(itemTpl))
+                    .addMoneyCost(
+                        Money.ROUBLES,
+                        this.itemHelper.getItemPrice(itemTpl),
+                    )
                     .addLoyaltyLevel(loyaltyLevel)
                     .export(tables.traders[baseJson._id]);
             }
@@ -118,7 +105,7 @@ export class DoeTrader {
 
     public prepareTrader(
         preSptModLoader: PreSptModLoader,
-        fullModName: string
+        fullModName: string,
     ): undefined {
         if (config.trader) {
             this.prepareTraderImpl(preSptModLoader, fullModName);
@@ -127,7 +114,7 @@ export class DoeTrader {
 
     prepareTraderImpl(
         preSptModLoader: PreSptModLoader,
-        fullModName: string
+        fullModName: string,
     ): undefined {
         const traderConfig: ITraderConfig =
             this.configServer.getConfig<ITraderConfig>(ConfigTypes.TRADER);
@@ -135,20 +122,25 @@ export class DoeTrader {
         this.traderHelper = new TraderHelper();
         this.fluentTraderAssortHelper = new FluentAssortConstructor(
             this.hashUtil,
-            this.logger
+            this.logger,
         );
         this.traderHelper.registerProfileImage(
             baseJson,
             fullModName,
             preSptModLoader,
             this.imageRouter,
-            "doetrader.jpg"
+            "doetrader.jpg",
         );
-        this.traderHelper.setTraderUpdateTime(traderConfig, baseJson, 2400, 3600);
+        this.traderHelper.setTraderUpdateTime(
+            traderConfig,
+            baseJson,
+            2400,
+            3600,
+        );
 
         Traders[baseJson._id] = baseJson._id;
     }
-    
+
     public registerTrader(): undefined {
         if (config.trader) {
             this.registerTraderImpl();
@@ -169,11 +161,11 @@ export class DoeTrader {
             ModConfig.traderName,
             baseJson.nickname,
             baseJson.location,
-            ModConfig.traderDescription
+            ModConfig.traderDescription,
         );
 
         const ragfairConfig = this.configServer.getConfig<IRagfairConfig>(
-            ConfigTypes.RAGFAIR
+            ConfigTypes.RAGFAIR,
         );
         ragfairConfig.traders[baseJson._id] = true;
 
@@ -185,7 +177,7 @@ export class DoeTrader {
         const traders = this.databaseServer.getTables().traders;
         const doeTraderId = baseJson._id;
         const praporDialogs = JSON.parse(
-            JSON.stringify(traders[praporId].dialogue)
+            JSON.stringify(traders[praporId].dialogue),
         ) as Record<string, string[]>;
 
         const trader = traders[doeTraderId];
@@ -193,7 +185,7 @@ export class DoeTrader {
         trader.base.insurance.availability = true;
 
         const insuranceConfig: IInsuranceConfig = this.configServer.getConfig(
-            ConfigTypes.INSURANCE
+            ConfigTypes.INSURANCE,
         );
 
         insuranceConfig.returnChancePercent[doeTraderId] = 100;

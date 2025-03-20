@@ -1,5 +1,5 @@
-import {WeatherGenerator} from "@spt/generators/WeatherGenerator";
-import {IWeatherData} from "@spt/models/eft/weather/IWeatherData";
+import { WeatherGenerator } from "@spt/generators/WeatherGenerator";
+import { IWeatherData } from "@spt/models/eft/weather/IWeatherData";
 
 export function getCurrentTime(weatherGenerator: WeatherGenerator): string {
     let result: IWeatherData = {
@@ -7,7 +7,7 @@ export function getCurrentTime(weatherGenerator: WeatherGenerator): string {
         time: "",
         date: "",
         weather: null,
-        season: null
+        season: null,
     };
     result = weatherGenerator.calculateGameTime(result);
     return result.time;
@@ -15,7 +15,7 @@ export function getCurrentTime(weatherGenerator: WeatherGenerator): string {
 
 export function getCurrentHour(
     currentTime: string,
-    timeVariant: string
+    timeVariant: string,
 ): number {
     const [hourStr, minStr, secStr] = currentTime.split(":");
     const hour = parseInt(hourStr);
@@ -29,7 +29,7 @@ export function getCurrentHour(
 export function isNight(
     currentTime: string,
     timeVariant: string,
-    location: string
+    location: string,
 ): boolean {
     if (location === "factory4_night") {
         return true;

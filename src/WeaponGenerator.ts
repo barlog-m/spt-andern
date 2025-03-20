@@ -1,27 +1,25 @@
-import {inject, injectAll, injectable} from "tsyringe";
+import { inject, injectAll, injectable } from "tsyringe";
 
-import {DatabaseServer} from "@spt/servers/DatabaseServer";
-import {ConfigServer} from "@spt/servers/ConfigServer";
-import {IPmcConfig} from "@spt/models/spt/config/IPmcConfig";
-import {IRepairConfig} from "@spt/models/spt/config/IRepairConfig";
-import {ConfigTypes} from "@spt/models/enums/ConfigTypes";
-import {IItem} from "@spt/models/eft/common/tables/IItem";
-import {ITemplateItem} from "@spt/models/eft/common/tables/ITemplateItem";
-import {HashUtil} from "@spt/utils/HashUtil";
-import {ItemHelper} from "@spt/helpers/ItemHelper";
-import {ILogger} from "@spt/models/spt/utils/ILogger";
-import {RandomUtil} from "@spt/utils/RandomUtil";
-import {
-    BotWeaponGeneratorHelper
-} from "@spt/helpers/BotWeaponGeneratorHelper";
-import {BotGeneratorHelper} from "@spt/helpers/BotGeneratorHelper";
-import {RepairService} from "@spt/services/RepairService";
-import {IInventoryMagGen} from "@spt/generators/weapongen/IInventoryMagGen";
-import {EquipmentSlots} from "@spt/models/enums/EquipmentSlots";
+import { DatabaseServer } from "@spt/servers/DatabaseServer";
+import { ConfigServer } from "@spt/servers/ConfigServer";
+import { IPmcConfig } from "@spt/models/spt/config/IPmcConfig";
+import { IRepairConfig } from "@spt/models/spt/config/IRepairConfig";
+import { ConfigTypes } from "@spt/models/enums/ConfigTypes";
+import { IItem } from "@spt/models/eft/common/tables/IItem";
+import { ITemplateItem } from "@spt/models/eft/common/tables/ITemplateItem";
+import { HashUtil } from "@spt/utils/HashUtil";
+import { ItemHelper } from "@spt/helpers/ItemHelper";
+import { ILogger } from "@spt/models/spt/utils/ILogger";
+import { RandomUtil } from "@spt/utils/RandomUtil";
+import { BotWeaponGeneratorHelper } from "@spt/helpers/BotWeaponGeneratorHelper";
+import { BotGeneratorHelper } from "@spt/helpers/BotGeneratorHelper";
+import { RepairService } from "@spt/services/RepairService";
+import { IInventoryMagGen } from "@spt/generators/weapongen/IInventoryMagGen";
+import { EquipmentSlots } from "@spt/models/enums/EquipmentSlots";
 
-import {GeneratedWeapon} from "./models";
-import {Data} from "./Data";
-import {BaseClasses} from "@spt/models/enums/BaseClasses";
+import { GeneratedWeapon } from "./models";
+import { Data } from "./Data";
+import { BaseClasses } from "@spt/models/enums/BaseClasses";
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
 const MUZZLE_PAIRS = {
@@ -71,7 +69,7 @@ const MUZZLE_PAIRS = {
 
     //AK Hexagon Reactor 5.45x39 muzzle brake
     // eslint-disable-next-line @typescript-eslint/naming-convention
-    "615d8f5dd92c473c770212ef": "615d8f8567085e45ef1409ca"
+    "615d8f5dd92c473c770212ef": "615d8f8567085e45ef1409ca",
 };
 
 @injectable()
@@ -88,18 +86,24 @@ export class WeaponGenerator {
     readonly MAGPUL_MOE_CARBINE_RUBBER_BUTTPAD = "58d2912286f7744e27117493";
 
     // eslint-disable-next-line @typescript-eslint/naming-convention
-    readonly SIG_SAUER_TAPER_LOK_762X51_300_BLK_MUZZLE_ADAPTER = "5fbc22ccf24b94483f726483";
+    readonly SIG_SAUER_TAPER_LOK_762X51_300_BLK_MUZZLE_ADAPTER =
+        "5fbc22ccf24b94483f726483";
     // eslint-disable-next-line @typescript-eslint/naming-convention
-    readonly SIG_SAUER_TWO_PORT_BRAKE_762X51_MUZZLE_BRAKE = "5fbcbd10ab884124df0cd563";
+    readonly SIG_SAUER_TWO_PORT_BRAKE_762X51_MUZZLE_BRAKE =
+        "5fbcbd10ab884124df0cd563";
     // eslint-disable-next-line @typescript-eslint/naming-convention
-    readonly SIG_SAUER_SRD762_QD_762X51_SOUND_SUPPRESSOR = "5fbe760793164a5b6278efc8";
+    readonly SIG_SAUER_SRD762_QD_762X51_SOUND_SUPPRESSOR =
+        "5fbe760793164a5b6278efc8";
 
     // eslint-disable-next-line @typescript-eslint/naming-convention
-    readonly LANTAC_BMD_BLAST_MITIGATION_DEVICE_A3_DIRECT_THREAD_ADAPTER = "5cf78496d7f00c065703d6ca";
+    readonly LANTAC_BMD_BLAST_MITIGATION_DEVICE_A3_DIRECT_THREAD_ADAPTER =
+        "5cf78496d7f00c065703d6ca";
     // eslint-disable-next-line @typescript-eslint/naming-convention
-    readonly AR_10_LANTAC_DRAGON_762X51_MUZZLE_BRAKE_COMPENSATOR = "5c878e9d2e2216000f201903"
+    readonly AR_10_LANTAC_DRAGON_762X51_MUZZLE_BRAKE_COMPENSATOR =
+        "5c878e9d2e2216000f201903";
     // eslint-disable-next-line @typescript-eslint/naming-convention
-    readonly LANTAC_BMD_762X51_BLAST_MITIGATION_DEVICE = "5cf78720d7f00c06595bc93e";
+    readonly LANTAC_BMD_762X51_BLAST_MITIGATION_DEVICE =
+        "5cf78720d7f00c06595bc93e";
 
     // eslint-disable-next-line @typescript-eslint/naming-convention
     readonly ZENIT_KLESCH_2IKS = "5a5f1ce64f39f90b401987bc";
@@ -108,7 +112,7 @@ export class WeaponGenerator {
     readonly TACTICAL_DEVICE_LIGHT_AND_LASER_MODE = 1;
     // eslint-disable-next-line @typescript-eslint/naming-convention
     readonly TACTICAL_DEVICE_LASER_ONLY_MODE = 2;
-   
+
     pmcConfig: IPmcConfig;
     repairConfig: IRepairConfig;
 
@@ -126,7 +130,7 @@ export class WeaponGenerator {
         protected botGeneratorHelper: BotGeneratorHelper,
         @injectAll("InventoryMagGen")
         protected inventoryMagGenComponents: IInventoryMagGen[],
-        @inject("AndernData") protected data: Data
+        @inject("AndernData") protected data: Data,
     ) {
         this.pmcConfig = this.configServer.getConfig(ConfigTypes.PMC);
         this.repairConfig = this.configServer.getConfig(ConfigTypes.REPAIR);
@@ -164,7 +168,7 @@ export class WeaponGenerator {
     addCartridgeToChamber(
         weaponWithMods: IItem[],
         ammoTpl: string,
-        weaponTemplate: ITemplateItem
+        weaponTemplate: ITemplateItem,
     ): undefined {
         const chambersAmount =
             this.getChambersAmountFromWeaponTemplate(weaponTemplate);
@@ -173,7 +177,7 @@ export class WeaponGenerator {
             this.getChamberNameFromWeaponTemplate(weaponTemplate);
 
         const existingItemWithSlot = weaponWithMods.filter((item) =>
-            item.slotId.startsWith(chamberName)
+            item.slotId.startsWith(chamberName),
         );
 
         if (existingItemWithSlot.length > 0) {
@@ -190,7 +194,7 @@ export class WeaponGenerator {
                     _tpl: ammoTpl,
                     parentId: weaponWithMods[0]._id,
                     slotId: chamberName,
-                    upd: {StackObjectsCount: 1},
+                    upd: { StackObjectsCount: 1 },
                 });
             } else {
                 for (
@@ -204,7 +208,7 @@ export class WeaponGenerator {
                         _tpl: ammoTpl,
                         parentId: weaponWithMods[0]._id,
                         slotId: slotIdName,
-                        upd: {StackObjectsCount: 1},
+                        upd: { StackObjectsCount: 1 },
                     });
                 }
             }
@@ -233,25 +237,25 @@ export class WeaponGenerator {
     }
 
     fillMagazine(weaponWithMods: IItem[], ammoTpl: string): string {
-        weaponWithMods.filter(
-            (x) => x.slotId === this.magazineSlotId
-        ).map((magazine) => {
-            const magazineTemplate = this.getTemplateById(magazine._tpl);
-            const magazineWithCartridges = [magazine];
+        weaponWithMods
+            .filter((x) => x.slotId === this.magazineSlotId)
+            .map((magazine) => {
+                const magazineTemplate = this.getTemplateById(magazine._tpl);
+                const magazineWithCartridges = [magazine];
 
-            this.itemHelper.fillMagazineWithCartridge(
-                magazineWithCartridges,
-                magazineTemplate,
-                ammoTpl,
-                1
-            );
-            weaponWithMods.splice(
-                weaponWithMods.indexOf(magazine),
-                1,
-                ...magazineWithCartridges
-            );
-            return magazine._tpl;
-        });
+                this.itemHelper.fillMagazineWithCartridge(
+                    magazineWithCartridges,
+                    magazineTemplate,
+                    ammoTpl,
+                    1,
+                );
+                weaponWithMods.splice(
+                    weaponWithMods.indexOf(magazine),
+                    1,
+                    ...magazineWithCartridges,
+                );
+                return magazine._tpl;
+            });
         return undefined;
     }
 
@@ -266,7 +270,7 @@ export class WeaponGenerator {
         isNight: boolean,
     ): undefined {
         weaponWithMods[0].slotId = this.getWeaponSlotByWeaponClass(
-            this.getWeaponClassByTemplateId(weaponTpl)
+            this.getWeaponClassByTemplateId(weaponTpl),
         );
         weaponWithMods[0].parentId = weaponParentId;
 
@@ -274,7 +278,7 @@ export class WeaponGenerator {
             ...weaponWithMods[0],
             ...this.botGeneratorHelper.generateExtraPropertiesForItem(
                 this.getTemplateById(weaponTpl),
-                "pmc"
+                "pmc",
             ),
         };
 
@@ -303,8 +307,12 @@ export class WeaponGenerator {
 
     replaceTacticalDevice(weaponWithMods: IItem[]): undefined {
         for (const item of weaponWithMods) {
-            if (item.slotId.startsWith("mod_tactical") &&
-                this.itemHelper.isOfBaseclass(item._tpl, BaseClasses.TACTICAL_COMBO)
+            if (
+                item.slotId.startsWith("mod_tactical") &&
+                this.itemHelper.isOfBaseclass(
+                    item._tpl,
+                    BaseClasses.TACTICAL_COMBO,
+                )
             ) {
                 item._tpl = this.ZENIT_KLESCH_2IKS;
             }
@@ -316,7 +324,8 @@ export class WeaponGenerator {
             if (item.slotId.startsWith("mod_tactical")) {
                 if (item.upd?.Light) {
                     item.upd.Light.IsActive = false;
-                    item.upd.Light.SelectedMode = this.TACTICAL_DEVICE_LASER_ONLY_MODE;
+                    item.upd.Light.SelectedMode =
+                        this.TACTICAL_DEVICE_LASER_ONLY_MODE;
                 }
             }
         }
@@ -326,7 +335,7 @@ export class WeaponGenerator {
         presetName: string,
         botLevel: number,
         weapon: IItem[],
-        weaponTpl: string
+        weaponTpl: string,
     ): undefined {
         let deleteMagpulRubberButtpad = false;
         let deleteSigSauerMuzzleParts = false;
@@ -336,20 +345,28 @@ export class WeaponGenerator {
             const alternativeTpl = this.data.getAlternativeModule(
                 presetName,
                 botLevel,
-                item._tpl
+                item._tpl,
             );
             if (alternativeTpl != item._tpl) {
                 if (
                     weaponTpl !== this.MK47 &&
                     alternativeTpl !== this.X_47_DRUM
                 ) {
-                    if ((item.slotId === "mod_muzzle") &&
-                        (item._tpl === this.SIG_SAUER_TAPER_LOK_762X51_300_BLK_MUZZLE_ADAPTER)) {
+                    if (
+                        item.slotId === "mod_muzzle" &&
+                        item._tpl ===
+                            this
+                                .SIG_SAUER_TAPER_LOK_762X51_300_BLK_MUZZLE_ADAPTER
+                    ) {
                         deleteSigSauerMuzzleParts = true;
                     }
 
-                    if ((item.slotId === "mod_muzzle") &&
-                        (item._tpl === this.LANTAC_BMD_BLAST_MITIGATION_DEVICE_A3_DIRECT_THREAD_ADAPTER)) {
+                    if (
+                        item.slotId === "mod_muzzle" &&
+                        item._tpl ===
+                            this
+                                .LANTAC_BMD_BLAST_MITIGATION_DEVICE_A3_DIRECT_THREAD_ADAPTER
+                    ) {
                         deleteLantacBmdPart = true;
                     }
 
@@ -371,68 +388,91 @@ export class WeaponGenerator {
         }
 
         if (deleteSigSauerMuzzleParts) {
-            this.deleteModule(weapon, this.SIG_SAUER_TWO_PORT_BRAKE_762X51_MUZZLE_BRAKE);
-            this.deleteModule(weapon, this.SIG_SAUER_SRD762_QD_762X51_SOUND_SUPPRESSOR);
+            this.deleteModule(
+                weapon,
+                this.SIG_SAUER_TWO_PORT_BRAKE_762X51_MUZZLE_BRAKE,
+            );
+            this.deleteModule(
+                weapon,
+                this.SIG_SAUER_SRD762_QD_762X51_SOUND_SUPPRESSOR,
+            );
         }
 
         if (deleteLantacBmdPart) {
-            this.deleteModule(weapon, this.AR_10_LANTAC_DRAGON_762X51_MUZZLE_BRAKE_COMPENSATOR);
-            this.deleteModule(weapon, this.LANTAC_BMD_762X51_BLAST_MITIGATION_DEVICE);
+            this.deleteModule(
+                weapon,
+                this.AR_10_LANTAC_DRAGON_762X51_MUZZLE_BRAKE_COMPENSATOR,
+            );
+            this.deleteModule(
+                weapon,
+                this.LANTAC_BMD_762X51_BLAST_MITIGATION_DEVICE,
+            );
         }
     }
 
     alternateOrAddSuppressor(weapon: IItem[], muzzleItem: IItem): undefined {
         const suppressor = weapon.find(
-            (i) => (i.parentId === muzzleItem._id) && (i.slotId === "mod_muzzle")
+            (i) => i.parentId === muzzleItem._id && i.slotId === "mod_muzzle",
         );
 
         if (suppressor !== undefined) {
-            const alternativeSuppressorTpl = MUZZLE_PAIRS[muzzleItem._tpl]
+            const alternativeSuppressorTpl = MUZZLE_PAIRS[muzzleItem._tpl];
             if (alternativeSuppressorTpl !== undefined) {
-                if (alternativeSuppressorTpl === this.SIG_SAUER_SRD762_QD_762X51_SOUND_SUPPRESSOR) {
-                    suppressor.slotId = "mod_muzzle_001"
+                if (
+                    alternativeSuppressorTpl ===
+                    this.SIG_SAUER_SRD762_QD_762X51_SOUND_SUPPRESSOR
+                ) {
+                    suppressor.slotId = "mod_muzzle_001";
                     weapon.push({
                         _id: this.hashUtil.generate(),
                         _tpl: this.SIG_SAUER_TWO_PORT_BRAKE_762X51_MUZZLE_BRAKE,
                         parentId: muzzleItem._id,
-                        slotId: "mod_muzzle_000"
-                    })
-                } else if (alternativeSuppressorTpl === this.LANTAC_BMD_762X51_BLAST_MITIGATION_DEVICE) {
-                    suppressor.slotId = "mod_muzzle_001"
+                        slotId: "mod_muzzle_000",
+                    });
+                } else if (
+                    alternativeSuppressorTpl ===
+                    this.LANTAC_BMD_762X51_BLAST_MITIGATION_DEVICE
+                ) {
+                    suppressor.slotId = "mod_muzzle_001";
                     weapon.push({
                         _id: this.hashUtil.generate(),
-                        _tpl: this.AR_10_LANTAC_DRAGON_762X51_MUZZLE_BRAKE_COMPENSATOR,
+                        _tpl: this
+                            .AR_10_LANTAC_DRAGON_762X51_MUZZLE_BRAKE_COMPENSATOR,
                         parentId: muzzleItem._id,
-                        slotId: "mod_muzzle_000"
-                    })
+                        slotId: "mod_muzzle_000",
+                    });
                 }
 
                 suppressor._tpl = MUZZLE_PAIRS[muzzleItem._tpl];
             }
         } else {
-            const alternativeSuppressorTpl = MUZZLE_PAIRS[muzzleItem._tpl]
+            const alternativeSuppressorTpl = MUZZLE_PAIRS[muzzleItem._tpl];
             if (alternativeSuppressorTpl !== undefined) {
-                if (alternativeSuppressorTpl === this.SIG_SAUER_SRD762_QD_762X51_SOUND_SUPPRESSOR) {
-                    this.constructSigSauerSuppressor(weapon, muzzleItem)
-                } else if (alternativeSuppressorTpl === this.LANTAC_BMD_762X51_BLAST_MITIGATION_DEVICE) {
-                    this.constructLantacBmd(weapon, muzzleItem)
+                if (
+                    alternativeSuppressorTpl ===
+                    this.SIG_SAUER_SRD762_QD_762X51_SOUND_SUPPRESSOR
+                ) {
+                    this.constructSigSauerSuppressor(weapon, muzzleItem);
+                } else if (
+                    alternativeSuppressorTpl ===
+                    this.LANTAC_BMD_762X51_BLAST_MITIGATION_DEVICE
+                ) {
+                    this.constructLantacBmd(weapon, muzzleItem);
                 } else {
                     const suppressorItem: IItem = {
                         _id: this.hashUtil.generate(),
                         _tpl: alternativeSuppressorTpl,
                         parentId: muzzleItem._id,
-                        slotId: "mod_muzzle"
-                    }
-                    weapon.push(suppressorItem)
+                        slotId: "mod_muzzle",
+                    };
+                    weapon.push(suppressorItem);
                 }
             }
         }
     }
 
     deleteModule(weapon: IItem[], tpl: string): undefined {
-        const i = weapon.findIndex(
-            (item) => item._tpl === tpl
-        );
+        const i = weapon.findIndex((item) => item._tpl === tpl);
         if (i > -1) {
             weapon.splice(i, 1);
         }
@@ -443,17 +483,17 @@ export class WeaponGenerator {
             _id: this.hashUtil.generate(),
             _tpl: this.SIG_SAUER_TWO_PORT_BRAKE_762X51_MUZZLE_BRAKE,
             parentId: muzzleItem._id,
-            slotId: "mod_muzzle_000"
-        }
-        weapon.push(muzzleBrakeItem)
+            slotId: "mod_muzzle_000",
+        };
+        weapon.push(muzzleBrakeItem);
 
         const suppressorItem: IItem = {
             _id: this.hashUtil.generate(),
             _tpl: this.SIG_SAUER_SRD762_QD_762X51_SOUND_SUPPRESSOR,
             parentId: muzzleItem._id,
-            slotId: "mod_muzzle_001"
-        }
-        weapon.push(suppressorItem)
+            slotId: "mod_muzzle_001",
+        };
+        weapon.push(suppressorItem);
     }
 
     constructLantacBmd(weapon: IItem[], muzzleItem: IItem): undefined {
@@ -461,23 +501,23 @@ export class WeaponGenerator {
             _id: this.hashUtil.generate(),
             _tpl: this.AR_10_LANTAC_DRAGON_762X51_MUZZLE_BRAKE_COMPENSATOR,
             parentId: muzzleItem._id,
-            slotId: "mod_muzzle_000"
-        }
-        weapon.push(muzzleBrakeItem)
+            slotId: "mod_muzzle_000",
+        };
+        weapon.push(muzzleBrakeItem);
 
         const suppressorItem: IItem = {
             _id: this.hashUtil.generate(),
             _tpl: this.LANTAC_BMD_762X51_BLAST_MITIGATION_DEVICE,
             parentId: muzzleItem._id,
-            slotId: "mod_muzzle_001"
-        }
-        weapon.push(suppressorItem)
+            slotId: "mod_muzzle_001",
+        };
+        weapon.push(suppressorItem);
     }
 
     addRandomEnhancement(weapon: IItem[]): undefined {
         if (
             this.randomUtil.getChance100(
-                this.pmcConfig.weaponHasEnhancementChancePercent
+                this.pmcConfig.weaponHasEnhancementChancePercent,
             )
         ) {
             const weaponConfig = this.repairConfig.repairKit.weapon;
@@ -498,10 +538,10 @@ export class WeaponGenerator {
         if (presetName.length == 0) {
             presetName = this.data.getPresetName();
         }
-        
+
         const weaponWithMods = this.data.getRandomWeapon(presetName, botLevel);
         const weaponTpl = this.getTemplateIdFromWeaponItems(weaponWithMods);
-        
+
         this.updateWeaponInfo(
             weaponWithMods,
             weaponParentId,
@@ -515,12 +555,12 @@ export class WeaponGenerator {
         const ammoTpl = this.data.getRandomAmmoByCaliber(
             presetName,
             botLevel,
-            caliber
+            caliber,
         );
 
         this.addCartridgeToChamber(weaponWithMods, ammoTpl, weaponTemplate);
         const magazineTpl = this.fillMagazine(weaponWithMods, ammoTpl);
-        
+
         return {
             weaponWithMods: weaponWithMods,
             weaponTemplate: weaponTemplate,

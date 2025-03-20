@@ -1,14 +1,12 @@
-import {inject, injectable} from "tsyringe";
+import { inject, injectable } from "tsyringe";
 
-import {ILogger} from "@spt/models/spt/utils/ILogger";
-import {HashUtil} from "@spt/utils/HashUtil";
-import {RandomUtil} from "@spt/utils/RandomUtil";
-import {
-    IInventory as PmcInventory
-} from "@spt/models/eft/common/tables/IBotBase";
-import {EquipmentSlots} from "@spt/models/enums/EquipmentSlots";
+import { ILogger } from "@spt/models/spt/utils/ILogger";
+import { HashUtil } from "@spt/utils/HashUtil";
+import { RandomUtil } from "@spt/utils/RandomUtil";
+import { IInventory as PmcInventory } from "@spt/models/eft/common/tables/IBotBase";
+import { EquipmentSlots } from "@spt/models/enums/EquipmentSlots";
 
-import {GearGeneratorHelper} from "./GearGeneratorHelper";
+import { GearGeneratorHelper } from "./GearGeneratorHelper";
 
 @injectable()
 export class HelmetGenerator {
@@ -118,9 +116,8 @@ export class HelmetGenerator {
         @inject("HashUtil") protected hashUtil: HashUtil,
         @inject("RandomUtil") protected randomUtil: RandomUtil,
         @inject("AndernGearGeneratorHelper")
-        protected gearGeneratorHelper: GearGeneratorHelper
-    ) {
-    }
+        protected gearGeneratorHelper: GearGeneratorHelper,
+    ) {}
 
     public generateHelmet(
         botLevel: number,
@@ -128,7 +125,7 @@ export class HelmetGenerator {
         botInventory: PmcInventory,
         tpl: string,
         isNightVision: boolean,
-        isKittedHelmet: boolean
+        isKittedHelmet: boolean,
     ): undefined {
         if (isNightVision) {
             tpl = this.selectNightHelmet(botLevel);
@@ -148,7 +145,7 @@ export class HelmetGenerator {
                     this.MASKA_OLIVE_HELMET,
                     botLevel,
                     botRole,
-                    botInventory
+                    botInventory,
                 );
                 break;
             }
@@ -157,7 +154,7 @@ export class HelmetGenerator {
                     this.MASKA_KILLA_HELMET,
                     botLevel,
                     botRole,
-                    botInventory
+                    botInventory,
                 );
                 break;
             }
@@ -166,11 +163,22 @@ export class HelmetGenerator {
                 break;
             }
             case this.LSHZ_2DTM_HELMET: {
-                this.lshz2dtmHelmet(botLevel, botRole, botInventory, isKittedHelmet);
+                this.lshz2dtmHelmet(
+                    botLevel,
+                    botRole,
+                    botInventory,
+                    isKittedHelmet,
+                );
                 break;
             }
             case this.AIRFRAME_HELMET: {
-                this.airFrameHelmet(botLevel, botRole, botInventory, isNightVision, isKittedHelmet);
+                this.airFrameHelmet(
+                    botLevel,
+                    botRole,
+                    botInventory,
+                    isNightVision,
+                    isKittedHelmet,
+                );
                 break;
             }
             case this.CAIMAN_HYBRID_HELMET: {
@@ -179,7 +187,7 @@ export class HelmetGenerator {
                     botRole,
                     botInventory,
                     isNightVision,
-                    isKittedHelmet
+                    isKittedHelmet,
                 );
                 break;
             }
@@ -189,7 +197,7 @@ export class HelmetGenerator {
                     botLevel,
                     botRole,
                     botInventory,
-                    isNightVision
+                    isNightVision,
                 );
                 break;
             }
@@ -199,12 +207,18 @@ export class HelmetGenerator {
                     botLevel,
                     botRole,
                     botInventory,
-                    isNightVision
+                    isNightVision,
                 );
                 break;
             }
             case this.LSHZ_LIGHT_HELMET: {
-                this.lshzLightHelmet(botLevel, botRole, botInventory, isNightVision, isKittedHelmet);
+                this.lshzLightHelmet(
+                    botLevel,
+                    botRole,
+                    botInventory,
+                    isNightVision,
+                    isKittedHelmet,
+                );
                 break;
             }
             case this.TC_2001_HELMET: {
@@ -214,7 +228,7 @@ export class HelmetGenerator {
                     botRole,
                     botInventory,
                     isNightVision,
-                    isKittedHelmet
+                    isKittedHelmet,
                 );
                 break;
             }
@@ -225,28 +239,58 @@ export class HelmetGenerator {
                     botRole,
                     botInventory,
                     isNightVision,
-                    isKittedHelmet
+                    isKittedHelmet,
                 );
                 break;
             }
             case this.EXFIL_BLACK_HELMET: {
-                this.exfilBlackHelmet(botLevel, botRole, botInventory, isNightVision, isKittedHelmet);
+                this.exfilBlackHelmet(
+                    botLevel,
+                    botRole,
+                    botInventory,
+                    isNightVision,
+                    isKittedHelmet,
+                );
                 break;
             }
             case this.EXFIL_BROWN_HELMET: {
-                this.exfilBrownHelmet(botLevel, botRole, botInventory, isNightVision, isKittedHelmet);
+                this.exfilBrownHelmet(
+                    botLevel,
+                    botRole,
+                    botInventory,
+                    isNightVision,
+                    isKittedHelmet,
+                );
                 break;
             }
             case this.HJELM_HELMET: {
-                this.hjelmHelmet(botLevel, botRole, botInventory, isNightVision, isKittedHelmet);
+                this.hjelmHelmet(
+                    botLevel,
+                    botRole,
+                    botInventory,
+                    isNightVision,
+                    isKittedHelmet,
+                );
                 break;
             }
             case this.TC800_HELMET: {
-                this.tc800Helmet(botLevel, botRole, botInventory, isNightVision, isKittedHelmet);
+                this.tc800Helmet(
+                    botLevel,
+                    botRole,
+                    botInventory,
+                    isNightVision,
+                    isKittedHelmet,
+                );
                 break;
             }
             case this.BASTION_HELMET: {
-                this.bastionHelmet(botLevel, botRole, botInventory, isNightVision, isKittedHelmet);
+                this.bastionHelmet(
+                    botLevel,
+                    botRole,
+                    botInventory,
+                    isNightVision,
+                    isKittedHelmet,
+                );
                 break;
             }
             case this.FAST_TAN_HELMET: {
@@ -256,7 +300,7 @@ export class HelmetGenerator {
                     botRole,
                     botInventory,
                     isNightVision,
-                    isKittedHelmet
+                    isKittedHelmet,
                 );
                 break;
             }
@@ -267,7 +311,7 @@ export class HelmetGenerator {
                     botRole,
                     botInventory,
                     isNightVision,
-                    isKittedHelmet
+                    isKittedHelmet,
                 );
                 break;
             }
@@ -282,7 +326,7 @@ export class HelmetGenerator {
         tpl: string,
         botLevel: number,
         botRole: string,
-        botInventory: PmcInventory
+        botInventory: PmcInventory,
     ): undefined {
         this.gearGeneratorHelper.putGearItemToInventory(
             EquipmentSlots.HEADWEAR,
@@ -290,11 +334,15 @@ export class HelmetGenerator {
             botInventory,
             tpl,
             false,
-            botLevel
+            botLevel,
         );
     }
 
-    altynHelmet(botLevel: number, botRole: string, botInventory: PmcInventory): undefined {
+    altynHelmet(
+        botLevel: number,
+        botRole: string,
+        botInventory: PmcInventory,
+    ): undefined {
         const ALTYN_FACE_SHIELD = "5aa7e373e5b5b000137b76f0";
 
         const helmetItemId = this.gearGeneratorHelper.putGearItemToInventory(
@@ -303,7 +351,7 @@ export class HelmetGenerator {
             botInventory,
             this.ALTYN_HELMET,
             false,
-            botLevel
+            botLevel,
         );
 
         this.gearGeneratorHelper.putModItemToInventory(
@@ -311,11 +359,15 @@ export class HelmetGenerator {
             botInventory,
             ALTYN_FACE_SHIELD,
             "mod_equipment",
-            helmetItemId
+            helmetItemId,
         );
     }
 
-    rysHelmet(botLevel: number, botRole: string, botInventory: PmcInventory): undefined {
+    rysHelmet(
+        botLevel: number,
+        botRole: string,
+        botInventory: PmcInventory,
+    ): undefined {
         const RYS_FACE_SHIELD = "5f60c85b58eff926626a60f7";
 
         const helmetItemId = this.gearGeneratorHelper.putGearItemToInventory(
@@ -324,7 +376,7 @@ export class HelmetGenerator {
             botInventory,
             this.RYS_HELMET,
             false,
-            botLevel
+            botLevel,
         );
 
         this.gearGeneratorHelper.putModItemToInventory(
@@ -332,7 +384,7 @@ export class HelmetGenerator {
             botInventory,
             RYS_FACE_SHIELD,
             "mod_equipment",
-            helmetItemId
+            helmetItemId,
         );
     }
 
@@ -340,7 +392,7 @@ export class HelmetGenerator {
         helmetTpl: string,
         botLevel: number,
         botRole: string,
-        botInventory: PmcInventory
+        botInventory: PmcInventory,
     ): undefined {
         const MASKA_OLIVE_FACE_SHIELD = "5c0919b50db834001b7ce3b9";
         const MASKA_KILLA_FACE_SHIELD = "5c0e842486f77443a74d2976";
@@ -356,7 +408,7 @@ export class HelmetGenerator {
             botInventory,
             helmetTpl,
             false,
-            botLevel
+            botLevel,
         );
 
         this.gearGeneratorHelper.putModItemToInventory(
@@ -364,11 +416,15 @@ export class HelmetGenerator {
             botInventory,
             faceShieldTpl,
             "mod_equipment",
-            helmetItemId
+            helmetItemId,
         );
     }
 
-    vulkanHelmet(botLevel: number, botRole: string, botInventory: PmcInventory): undefined {
+    vulkanHelmet(
+        botLevel: number,
+        botRole: string,
+        botInventory: PmcInventory,
+    ): undefined {
         const VULKAN_FACE_SHIELD = "5ca2113f86f7740b2547e1d2";
 
         const helmetItemId = this.gearGeneratorHelper.putGearItemToInventory(
@@ -377,7 +433,7 @@ export class HelmetGenerator {
             botInventory,
             this.VULKAN_HELMET,
             false,
-            botLevel
+            botLevel,
         );
 
         this.gearGeneratorHelper.putModItemToInventory(
@@ -385,11 +441,16 @@ export class HelmetGenerator {
             botInventory,
             VULKAN_FACE_SHIELD,
             "mod_equipment",
-            helmetItemId
+            helmetItemId,
         );
     }
 
-    lshz2dtmHelmet(botLevel: number, botRole: string, botInventory: PmcInventory, isKittedHelmet: boolean): undefined {
+    lshz2dtmHelmet(
+        botLevel: number,
+        botRole: string,
+        botInventory: PmcInventory,
+        isKittedHelmet: boolean,
+    ): undefined {
         const LSHZ_2DTM_FACE_SHIELD = "5d6d3829a4b9361bc8618943";
         const LSHZ_2DTM_AVENTAIL = "5d6d3be5a4b9361bc73bc763";
         const LSHZ_2DTM_COVER = "5d6d3943a4b9360dbc46d0cc";
@@ -400,17 +461,16 @@ export class HelmetGenerator {
             botInventory,
             this.LSHZ_2DTM_HELMET,
             false,
-            botLevel
+            botLevel,
         );
 
         if (isKittedHelmet) {
-
             this.gearGeneratorHelper.putModItemToInventory(
                 botRole,
                 botInventory,
                 LSHZ_2DTM_FACE_SHIELD,
                 "mod_equipment_000",
-                helmetItemId
+                helmetItemId,
             );
 
             this.gearGeneratorHelper.putModItemToInventory(
@@ -418,7 +478,7 @@ export class HelmetGenerator {
                 botInventory,
                 LSHZ_2DTM_AVENTAIL,
                 "mod_equipment_001",
-                helmetItemId
+                helmetItemId,
             );
 
             this.gearGeneratorHelper.putModItemToInventory(
@@ -426,7 +486,7 @@ export class HelmetGenerator {
                 botInventory,
                 LSHZ_2DTM_COVER,
                 "mod_equipment_002",
-                helmetItemId
+                helmetItemId,
             );
         }
     }
@@ -444,7 +504,7 @@ export class HelmetGenerator {
             botInventory,
             this.AIRFRAME_HELMET,
             false,
-            botLevel
+            botLevel,
         );
 
         if (isKittedHelmet) {
@@ -455,7 +515,7 @@ export class HelmetGenerator {
                 botInventory,
                 AIRFRAME_CHOPS,
                 "mod_equipment_001",
-                helmetItemId
+                helmetItemId,
             );
         }
 
@@ -467,7 +527,7 @@ export class HelmetGenerator {
                 botInventory,
                 this.FAST_BALLISTIC_FACE_SHIELD,
                 "mod_equipment_000",
-                helmetItemId
+                helmetItemId,
             );
         }
     }
@@ -485,7 +545,7 @@ export class HelmetGenerator {
             botInventory,
             this.CAIMAN_HYBRID_HELMET,
             false,
-            botLevel
+            botLevel,
         );
 
         if (isKittedHelmet) {
@@ -495,7 +555,7 @@ export class HelmetGenerator {
                 botInventory,
                 CAIMAN_BALLISTIC_MANDIBLE_GUARD,
                 "mod_equipment_000",
-                helmetItemId
+                helmetItemId,
             );
 
             const CAIMAN_BALLISTIC_APPLIQUE = "5f60b85bbdb8e27dee3dc985";
@@ -504,7 +564,7 @@ export class HelmetGenerator {
                 botInventory,
                 CAIMAN_BALLISTIC_APPLIQUE,
                 "mod_equipment_002",
-                helmetItemId
+                helmetItemId,
             );
         }
 
@@ -517,7 +577,7 @@ export class HelmetGenerator {
                 botInventory,
                 CAIMAN_FIXED_ARM_VISOR,
                 this.NVG_SLOT_ID,
-                helmetItemId
+                helmetItemId,
             );
         }
     }
@@ -527,7 +587,7 @@ export class HelmetGenerator {
         botLevel: number,
         botRole: string,
         botInventory: PmcInventory,
-        isNightVision: boolean
+        isNightVision: boolean,
     ): undefined {
         const helmetItemId = this.gearGeneratorHelper.putGearItemToInventory(
             EquipmentSlots.HEADWEAR,
@@ -535,7 +595,7 @@ export class HelmetGenerator {
             botInventory,
             helmetTpl,
             false,
-            botLevel
+            botLevel,
         );
 
         if (isNightVision) {
@@ -556,7 +616,7 @@ export class HelmetGenerator {
             botInventory,
             this.LSHZ_LIGHT_HELMET,
             false,
-            botLevel
+            botLevel,
         );
 
         if (!isNightVision && isKittedHelmet) {
@@ -565,19 +625,18 @@ export class HelmetGenerator {
                 botInventory,
                 this.FAST_BALLISTIC_FACE_SHIELD,
                 this.NVG_SLOT_ID,
-                helmetItemId
+                helmetItemId,
             );
             return;
         }
 
         if (isKittedHelmet) {
-
             const sideArmorId = this.gearGeneratorHelper.putModItemToInventory(
                 botRole,
                 botInventory,
                 this.FAST_SIDE_ARMOR,
                 "mod_equipment_000",
-                helmetItemId
+                helmetItemId,
             );
 
             if (this.randomUtil.getBool()) {
@@ -586,7 +645,7 @@ export class HelmetGenerator {
                     botInventory,
                     this.HEAVY_TROOPER_MASK,
                     this.NVG_SLOT_ID,
-                    helmetItemId
+                    helmetItemId,
                 );
 
                 if (isNightVision) {
@@ -598,11 +657,16 @@ export class HelmetGenerator {
                     botInventory,
                     this.FAST_GUNSIGHT_MANDIBLE,
                     "mod_equipment",
-                    sideArmorId
+                    sideArmorId,
                 );
 
                 if (isNightVision) {
-                    this.generateNvg(botLevel, botRole, botInventory, helmetItemId);
+                    this.generateNvg(
+                        botLevel,
+                        botRole,
+                        botInventory,
+                        helmetItemId,
+                    );
                 }
             }
         } else if (isNightVision) {
@@ -624,16 +688,16 @@ export class HelmetGenerator {
             botInventory,
             helmetTpl,
             false,
-            botLevel
+            botLevel,
         );
-        
+
         if (isKittedHelmet) {
             this.gearGeneratorHelper.putModItemToInventory(
                 botRole,
                 botInventory,
                 this.FAST_SLAAP_HELMET_PLATE,
                 "mod_equipment_002",
-                helmetItemId
+                helmetItemId,
             );
         }
 
@@ -655,7 +719,7 @@ export class HelmetGenerator {
             botInventory,
             this.EXFIL_BLACK_HELMET,
             false,
-            botLevel
+            botLevel,
         );
 
         if (isKittedHelmet) {
@@ -664,7 +728,7 @@ export class HelmetGenerator {
                 botInventory,
                 this.EXFIL_EAR_COVERS_BLACK,
                 "mod_equipment_000",
-                helmetItemId
+                helmetItemId,
             );
         }
 
@@ -679,7 +743,7 @@ export class HelmetGenerator {
                 botInventory,
                 faceShieldId,
                 "mod_equipment_001",
-                helmetItemId
+                helmetItemId,
             );
         }
     }
@@ -697,7 +761,7 @@ export class HelmetGenerator {
             botInventory,
             this.EXFIL_BROWN_HELMET,
             false,
-            botLevel
+            botLevel,
         );
 
         if (isKittedHelmet) {
@@ -706,7 +770,7 @@ export class HelmetGenerator {
                 botInventory,
                 this.EXFIL_EAR_COVERS_BROWN,
                 "mod_equipment_000",
-                helmetItemId
+                helmetItemId,
             );
         }
 
@@ -728,7 +792,7 @@ export class HelmetGenerator {
             botInventory,
             this.HJELM_HELMET,
             false,
-            botLevel
+            botLevel,
         );
 
         if (isNightVision) {
@@ -739,7 +803,7 @@ export class HelmetGenerator {
                 botInventory,
                 this.FAST_BALLISTIC_FACE_SHIELD,
                 "mod_equipment_000",
-                helmetItemId
+                helmetItemId,
             );
         }
     }
@@ -757,7 +821,7 @@ export class HelmetGenerator {
             botInventory,
             this.TC800_HELMET,
             false,
-            botLevel
+            botLevel,
         );
 
         if (isNightVision) {
@@ -768,7 +832,7 @@ export class HelmetGenerator {
                 botInventory,
                 this.FAST_BALLISTIC_FACE_SHIELD,
                 "mod_equipment_000",
-                helmetItemId
+                helmetItemId,
             );
         }
     }
@@ -786,17 +850,16 @@ export class HelmetGenerator {
             botInventory,
             this.BASTION_HELMET,
             false,
-            botLevel
+            botLevel,
         );
 
         if (isKittedHelmet) {
-
             const plateId = this.gearGeneratorHelper.putModItemToInventory(
                 botRole,
                 botInventory,
                 this.BASTION_ARMOR_PLATE,
                 this.NVG_SLOT_ID,
-                helmetItemId
+                helmetItemId,
             );
 
             if (isNightVision) {
@@ -823,7 +886,7 @@ export class HelmetGenerator {
             botInventory,
             helmetTpl,
             false,
-            botLevel
+            botLevel,
         );
 
         if (!isNightVision && isKittedHelmet && this.randomUtil.getBool()) {
@@ -832,7 +895,7 @@ export class HelmetGenerator {
                 botInventory,
                 this.FAST_BALLISTIC_FACE_SHIELD,
                 "mod_equipment_000",
-                helmetItemId
+                helmetItemId,
             );
             return;
         }
@@ -843,7 +906,7 @@ export class HelmetGenerator {
                 botInventory,
                 this.FAST_SIDE_ARMOR,
                 "mod_equipment_000",
-                helmetItemId
+                helmetItemId,
             );
 
             if (this.randomUtil.getBool()) {
@@ -852,7 +915,7 @@ export class HelmetGenerator {
                     botInventory,
                     this.HEAVY_TROOPER_MASK,
                     this.NVG_SLOT_ID,
-                    helmetItemId
+                    helmetItemId,
                 );
 
                 if (isNightVision) {
@@ -864,17 +927,22 @@ export class HelmetGenerator {
                     botInventory,
                     this.FAST_GUNSIGHT_MANDIBLE,
                     "mod_equipment",
-                    sideArmorId
+                    sideArmorId,
                 );
                 this.gearGeneratorHelper.putModItemToInventory(
                     botRole,
                     botInventory,
                     this.FAST_SLAAP_HELMET_PLATE,
                     "mod_equipment_002",
-                    helmetItemId
+                    helmetItemId,
                 );
                 if (isNightVision) {
-                    this.generateNvg(botLevel, botRole, botInventory, helmetItemId);
+                    this.generateNvg(
+                        botLevel,
+                        botRole,
+                        botInventory,
+                        helmetItemId,
+                    );
                 }
             }
         } else {
@@ -884,7 +952,12 @@ export class HelmetGenerator {
         }
     }
 
-    generateNvg(botLevel: number, botRole: string, botInventory: PmcInventory, helmetItemId: string): undefined {
+    generateNvg(
+        botLevel: number,
+        botRole: string,
+        botInventory: PmcInventory,
+        helmetItemId: string,
+    ): undefined {
         if (botLevel <= 28) {
             this.generatePnvNvg(botRole, botInventory, helmetItemId);
         } else {
@@ -895,14 +968,14 @@ export class HelmetGenerator {
     generatePnvNvg(
         botRole: string,
         botInventory: PmcInventory,
-        parentId: string
+        parentId: string,
     ): undefined {
         const mountId = this.gearGeneratorHelper.putModItemToInventory(
             botRole,
             botInventory,
             this.NOROTOS_TITANIUM_ADVANCED_TACTICAL_MOUNT,
             this.NVG_SLOT_ID,
-            parentId
+            parentId,
         );
 
         const adapterId = this.gearGeneratorHelper.putModItemToInventory(
@@ -910,7 +983,7 @@ export class HelmetGenerator {
             botInventory,
             this.PNV_10T_DOVETAIL_ADAPTER,
             this.NVG_SLOT_ID,
-            mountId
+            mountId,
         );
 
         this.gearGeneratorHelper.putModItemToInventory(
@@ -918,21 +991,21 @@ export class HelmetGenerator {
             botInventory,
             this.PNV_10T_NIGHT_VISION_GOGGLES,
             this.NVG_SLOT_ID,
-            adapterId
+            adapterId,
         );
     }
 
     generateGpNvg(
         botRole: string,
         botInventory: PmcInventory,
-        parentId: string
+        parentId: string,
     ): undefined {
         this.gearGeneratorHelper.putModItemToInventory(
             botRole,
             botInventory,
             this.GPNVG_18_NIGHT_VISION_GOGGLES,
             this.NVG_SLOT_ID,
-            parentId
+            parentId,
         );
     }
 
@@ -948,7 +1021,7 @@ export class HelmetGenerator {
             this.TC800_HELMET,
             this.CAIMAN_HYBRID_HELMET,
             this.LSHZ_LIGHT_HELMET,
-            this.HJELM_HELMET
+            this.HJELM_HELMET,
         ];
         return this.randomUtil.getArrayValue(helmets);
     }

@@ -1,0 +1,93 @@
+{
+  "Id": "67db61a4010016d23a9242d6",
+  "Name": "Velociraptor T4 2",
+  "Root": "67db61ae82ed8e24c0036167",
+  "Items": [
+    {
+      "_id": "67db61ae82ed8e24c0036167",
+      "_tpl": "674d6121c09f69dfb201a888",
+      "upd": {
+        "Repairable": {
+          "MaxDurability": 100,
+          "Durability": 100
+        },
+        "FireMode": {
+          "FireMode": "single"
+        }
+      }
+    },
+    {
+      "_id": "67db61ae82ed8e24c0036168",
+      "_tpl": "6087e663132d4d12c81fd96b",
+      "slotId": "mod_pistol_grip",
+      "parentId": "67db61ae82ed8e24c0036167"
+    },
+    {
+      "_id": "67db61ae82ed8e24c0036169",
+      "_tpl": "628a665a86cbd9750d2ff5e5",
+      "slotId": "mod_reciever",
+      "parentId": "67db61ae82ed8e24c0036167"
+    },
+    {
+      "_id": "67db61ae82ed8e24c003616a",
+      "_tpl": "5b0e794b5acfc47a877359b2",
+      "slotId": "mod_stock_000",
+      "parentId": "67db61ae82ed8e24c0036167"
+    },
+    {
+      "_id": "67db61ae82ed8e24c003616b",
+      "_tpl": "5c0548ae0db834001966a3c2",
+      "slotId": "mod_magazine",
+      "parentId": "67db61ae82ed8e24c0036167"
+    },
+    {
+      "_id": "67db61ae82ed8e24c003616c",
+      "_tpl": "5c90c3622e221601da359851",
+      "slotId": "mod_mount_000",
+      "parentId": "67db61ae82ed8e24c0036167"
+    },
+    {
+      "_id": "67db61ae82ed8e24c003616d",
+      "_tpl": "6130ca3fd92c473c77020dbd",
+      "slotId": "mod_charge",
+      "parentId": "67db61ae82ed8e24c0036167"
+    },
+    {
+      "_id": "67db61ae82ed8e24c003616e",
+      "_tpl": "674d5e287075e056160e0176",
+      "slotId": "mod_handguard",
+      "parentId": "67db61ae82ed8e24c0036167"
+    },
+    {
+      "_id": "67db61ae82ed8e24c003616f",
+      "_tpl": "618b9643526131765025ab35",
+      "slotId": "mod_scope",
+      "parentId": "67db61ae82ed8e24c003616c"
+    },
+    {
+      "_id": "67db61ae82ed8e24c0036170",
+      "_tpl": "618ba27d9008e4636a67f61d",
+      "slotId": "mod_scope",
+      "upd": {
+        "Sight": {
+          "ScopesCurrentCalibPointIndexes": [
+            0
+          ],
+          "ScopesSelectedModes": [
+            0
+          ],
+          "SelectedScope": 0,
+          "ScopeZoomValue": 0
+        }
+      },
+      "parentId": "67db61ae82ed8e24c003616f"
+    },
+    {
+      "_id": "67db61ae82ed8e24c0036171",
+      "_tpl": "618b9671d14d6d5ab879c5ea",
+      "slotId": "mod_mount",
+      "parentId": "67db61ae82ed8e24c003616f"
+    }
+  ],
+  "Parent": "5447b5f14bdc2d61278b4567"
+}

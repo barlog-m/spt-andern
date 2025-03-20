@@ -1,18 +1,16 @@
-import {inject, injectable} from "tsyringe";
+import { inject, injectable } from "tsyringe";
 
-import {ILogger} from "@spt/models/spt/utils/ILogger";
-import {HashUtil} from "@spt/utils/HashUtil";
-import {RandomUtil} from "@spt/utils/RandomUtil";
-import {
-    IInventory as PmcInventory
-} from "@spt/models/eft/common/tables/IBotBase";
-import {EquipmentSlots} from "@spt/models/enums/EquipmentSlots";
-import {ItemHelper} from "@spt/helpers/ItemHelper";
-import {BotGeneratorHelper} from "@spt/helpers/BotGeneratorHelper";
-import {DatabaseServer} from "@spt/servers/DatabaseServer";
-import {Data} from "./Data";
-import {IMods as PmcMods} from "@spt/models/eft/common/tables/IBotType";
-import {GearItem, Mods} from "./models";
+import { ILogger } from "@spt/models/spt/utils/ILogger";
+import { HashUtil } from "@spt/utils/HashUtil";
+import { RandomUtil } from "@spt/utils/RandomUtil";
+import { IInventory as PmcInventory } from "@spt/models/eft/common/tables/IBotBase";
+import { EquipmentSlots } from "@spt/models/enums/EquipmentSlots";
+import { ItemHelper } from "@spt/helpers/ItemHelper";
+import { BotGeneratorHelper } from "@spt/helpers/BotGeneratorHelper";
+import { DatabaseServer } from "@spt/servers/DatabaseServer";
+import { Data } from "./Data";
+import { IMods as PmcMods } from "@spt/models/eft/common/tables/IBotType";
+import { GearItem, Mods } from "./models";
 
 @injectable()
 export class GearGeneratorHelper {
@@ -32,48 +30,48 @@ export class GearGeneratorHelper {
         "soft_armor_front",
         "soft_armor_back",
         "soft_armor_left",
-        "soft_armor_right"
-    ]
+        "soft_armor_right",
+    ];
 
     readonly weightedModSlots = [
         "front_plate",
         "back_plate",
         "left_side_plate",
-        "right_side_plate"
-    ]
+        "right_side_plate",
+    ];
 
     readonly platesWeights = {
-        "one": {
+        one: {
             3: 50,
             4: 40,
             5: 10,
-            6: 0
+            6: 0,
         },
-        "two": {
+        two: {
             3: 20,
             4: 60,
             5: 20,
-            6: 0
+            6: 0,
         },
-        "three": {
+        three: {
             3: 0,
             4: 40,
             5: 50,
-            6: 10
+            6: 10,
         },
-        "four": {
+        four: {
             3: 0,
             4: 20,
             5: 50,
-            6: 30
+            6: 30,
         },
-    }
+    };
 
     modsData: PmcMods;
 
     setModsData(): undefined {
         const tables = this.databaseServer.getTables();
-        this.modsData = tables.bots.types["usec"].inventory.mods
+        this.modsData = tables.bots.types["usec"].inventory.mods;
     }
 
     constructor(
@@ -85,9 +83,8 @@ export class GearGeneratorHelper {
         protected botGeneratorHelper: BotGeneratorHelper,
         @inject("DatabaseServer")
         protected databaseServer: DatabaseServer,
-        @inject("AndernData") protected data: Data
-    ) {
-    }
+        @inject("AndernData") protected data: Data,
+    ) {}
 
     public putGearItemToInventory(
         equipmentSlot: EquipmentSlots,
@@ -95,7 +92,7 @@ export class GearGeneratorHelper {
         botInventory: PmcInventory,
         equipmentItemTpl: string,
         useWeights: boolean,
-        botLevel: number
+        botLevel: number,
     ): string {
         const id = this.hashUtil.generate();
 
@@ -103,7 +100,7 @@ export class GearGeneratorHelper {
             this.itemHelper.getItem(equipmentItemTpl);
         if (!isItemExists) {
             this.logger.error(
-                `[Andern] wrong template id ${equipmentItemTpl} for slot ${equipmentSlot}`
+                `[Andern] wrong template id ${equipmentItemTpl} for slot ${equipmentSlot}`,
             );
         }
 
@@ -111,11 +108,11 @@ export class GearGeneratorHelper {
         try {
             extraProps = this.botGeneratorHelper.generateExtraPropertiesForItem(
                 itemTemplate,
-                botRole
+                botRole,
             );
         } catch (e) {
             this.logger.error(
-                `[Andern] wrong template id ${equipmentItemTpl} for slot ${equipmentSlot}`
+                `[Andern] wrong template id ${equipmentItemTpl} for slot ${equipmentSlot}`,
             );
         }
 
@@ -127,11 +124,19 @@ export class GearGeneratorHelper {
             ...extraProps,
         };
 
-        if (equipmentSlot === EquipmentSlots.HEADWEAR ||
+        if (
+            equipmentSlot === EquipmentSlots.HEADWEAR ||
             equipmentSlot === EquipmentSlots.ARMOR_VEST ||
             equipmentSlot === EquipmentSlots.TACTICAL_VEST
         ) {
-            this.addNecessaryMods(botRole, botInventory, equipmentItemTpl, id, useWeights, botLevel);
+            this.addNecessaryMods(
+                botRole,
+                botInventory,
+                equipmentItemTpl,
+                id,
+                useWeights,
+                botLevel,
+            );
         }
 
         botInventory.items.push(item);
@@ -143,7 +148,7 @@ export class GearGeneratorHelper {
         botInventory: PmcInventory,
         equipmentItemTpl: string,
         slotId: string,
-        parentId: string
+        parentId: string,
     ): string {
         const id = this.hashUtil.generate();
 
@@ -151,7 +156,7 @@ export class GearGeneratorHelper {
             this.itemHelper.getItem(equipmentItemTpl);
         if (!isItemExists) {
             this.logger.error(
-                `[Andern] wrong template id ${equipmentItemTpl} for slot ${slotId}`
+                `[Andern] wrong template id ${equipmentItemTpl} for slot ${slotId}`,
             );
         }
 
@@ -162,7 +167,7 @@ export class GearGeneratorHelper {
             slotId,
             ...this.botGeneratorHelper.generateExtraPropertiesForItem(
                 itemTemplate,
-                botRole
+                botRole,
             ),
         };
 
@@ -209,7 +214,7 @@ export class GearGeneratorHelper {
         tpl: string,
         id: string,
         useWeights: boolean,
-        botLevel: number
+        botLevel: number,
     ): undefined {
         if (this.modsData === undefined) {
             this.setModsData();
@@ -225,31 +230,38 @@ export class GearGeneratorHelper {
             const modSlotName = modSlot.toLowerCase();
             let selectedModTpl: string;
             if (this.necessaryModSlots.includes(modSlotName)) {
-
                 if (useWeights && this.weightedModSlots.includes(modSlotName)) {
                     const plateWeights = this.plateWeightsByLevel(botLevel);
 
                     const plateItems: GearItem[] = modsArray
-                        .map((tpl) => [tpl, this.data.getPlateArmorClassByPlateTpl(tpl)])
+                        .map((tpl) => [
+                            tpl,
+                            this.data.getPlateArmorClassByPlateTpl(tpl),
+                        ])
                         .map(([tpl, armorClass]) => {
                             return {
                                 weight: plateWeights[armorClass],
                                 id: tpl as string,
-                                name: ""
-                            }
+                                name: "",
+                            };
                         });
 
                     selectedModTpl = this.weightedRandomGearItem(plateItems).id;
-
                 } else {
                     const keys = Object.keys(modsArray);
                     const randomKey = this.randomUtil.getArrayValue(keys);
                     selectedModTpl = modsArray[randomKey];
                 }
 
-                this.putModItemToInventory(botRole, botInventory, selectedModTpl, modSlot, id)
+                this.putModItemToInventory(
+                    botRole,
+                    botInventory,
+                    selectedModTpl,
+                    modSlot,
+                    id,
+                );
             }
-        })
+        });
     }
 
     plateWeightsByLevel(level: number): Record<number, number> {

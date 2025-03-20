@@ -1,23 +1,23 @@
-import {DependencyContainer} from "tsyringe";
-import {ILogger} from "@spt/models/spt/utils/ILogger";
-import {BotWeaponGenerator} from "@spt/generators/BotWeaponGenerator";
+import { DependencyContainer } from "tsyringe";
+import { ILogger } from "@spt/models/spt/utils/ILogger";
+import { BotWeaponGenerator } from "@spt/generators/BotWeaponGenerator";
 import {
     IInventory,
     IModsChances,
 } from "@spt/models/eft/common/tables/IBotType";
-import {IGenerateWeaponResult} from "@spt/models/spt/bots/IGenerateWeaponResult";
-import {WeaponGenerator} from "./WeaponGenerator";
-import {GeneratedWeapon} from "./models";
+import { IGenerateWeaponResult } from "@spt/models/spt/bots/IGenerateWeaponResult";
+import { WeaponGenerator } from "./WeaponGenerator";
+import { GeneratedWeapon } from "./models";
 import * as config from "../config/config.json";
 
 export default function registerBotWeaponGenerator(
-    container: DependencyContainer
+    container: DependencyContainer,
 ): undefined {
     const logger = container.resolve<ILogger>("WinstonLogger");
     const botWeaponGenerator =
         container.resolve<BotWeaponGenerator>("BotWeaponGenerator");
     const pmcWeaponGenerator = container.resolve<WeaponGenerator>(
-        "AndernWeaponGenerator"
+        "AndernWeaponGenerator",
     );
 
     container.afterResolution(
@@ -31,7 +31,7 @@ export default function registerBotWeaponGenerator(
                 modChances: IModsChances,
                 botRole: string,
                 isPmc: boolean,
-                botLevel: number
+                botLevel: number,
             ): IGenerateWeaponResult => {
                 if (isPmc) {
                     const modPool = botTemplateInventory.mods;
@@ -41,7 +41,7 @@ export default function registerBotWeaponGenerator(
                             "",
                             botLevel,
                             weaponParentId,
-                            false
+                            false,
                         );
 
                     const res = {
@@ -53,7 +53,7 @@ export default function registerBotWeaponGenerator(
                     };
                     if (config.debug)
                         logger.info(
-                            `[Andern] weapon generated: ${JSON.stringify(res)}`
+                            `[Andern] weapon generated: ${JSON.stringify(res)}`,
                         );
                     return res;
                 }
@@ -66,11 +66,11 @@ export default function registerBotWeaponGenerator(
                     modChances,
                     botRole,
                     isPmc,
-                    botLevel
+                    botLevel,
                 );
             };
         },
-        {frequency: "Always"}
+        { frequency: "Always" },
     );
 
     logger.info("[Andern] PMC Bot Weapon Generator registered");

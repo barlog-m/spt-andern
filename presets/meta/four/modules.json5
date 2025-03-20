@@ -179,5 +179,9 @@
     // VSS/VAL 9x39 SR3M.130 30-round magazine
     "5a9e81fba2750c00164f6b11": [
         "65118f531b90b4fc77015083"
+    ],
+    // AR-10 7.62x51 Lancer L7AWM 25-round magazine
+    "65293c7a17e14363030ad308": [
+        "6761770e48fa5c377e06fc3c"
     ]
 }

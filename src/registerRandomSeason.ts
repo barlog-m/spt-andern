@@ -1,16 +1,14 @@
-import {DependencyContainer} from "tsyringe";
-import {
-    StaticRouterModService
-} from "@spt/services/mod/staticRouter/StaticRouterModService";
-import {ILogger} from "@spt/models/spt/utils/ILogger";
-import {setSeasonRandom} from "./seasonUtils";
+import { DependencyContainer } from "tsyringe";
+import { StaticRouterModService } from "@spt/services/mod/staticRouter/StaticRouterModService";
+import { ILogger } from "@spt/models/spt/utils/ILogger";
+import { setSeasonRandom } from "./seasonUtils";
 
 export default function registerRandomSeason(
-    container: DependencyContainer
+    container: DependencyContainer,
 ): undefined {
     const logger = container.resolve<ILogger>("WinstonLogger");
     const staticRouterModService = container.resolve<StaticRouterModService>(
-        "StaticRouterModService"
+        "StaticRouterModService",
     );
 
     staticRouterModService.registerStaticRouter(
@@ -22,11 +20,11 @@ export default function registerRandomSeason(
                     return new Promise((resolve) => {
                         setSeasonRandom(container);
                         resolve(output);
-                    })
+                    });
                 },
             },
         ],
-        "spt"
+        "spt",
     );
 
     logger.info("[Andern] Season randomizer registered");

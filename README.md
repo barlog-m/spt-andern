@@ -147,6 +147,12 @@ Works only if `mapBotSettings` set to true.
 
 `mapBotDisablePmcTalkativeness` disables PMC talkativeness for normal difficulty.
 
+`mapScavsAlwaysHasBackpack` Regualr scavs always has backpack.
+
+`mapScavsAlwaysHasArmor` Regular scavs always has (their crap) armor.
+
+`mapScavsAlwaysHasHeadwear` Regular scavs always has (their crap) 
+
 ## Other settings
 
 `disablePmcBackpackWeapon` disables chance that PMC can have extra weapon in their backpack.

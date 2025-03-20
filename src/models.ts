@@ -1,6 +1,6 @@
-import {IItem} from "@spt/models/eft/common/tables/IItem";
-import {ITemplateItem} from "@spt/models/eft/common/tables/ITemplateItem";
-import {MinMax} from "@spt/models/common/MinMax";
+import { IItem } from "@spt/models/eft/common/tables/IItem";
+import { ITemplateItem } from "@spt/models/eft/common/tables/ITemplateItem";
+import { MinMax } from "@spt/models/common/MinMax";
 
 export type PresetConfig = Record<string, Config>;
 export type PresetGear = Record<string, Gear>;
@@ -29,7 +29,7 @@ export class Config {
         return {
             min: this.minLevel,
             max: this.maxLevel,
-        }
+        };
     }
 }
 
@@ -73,12 +73,7 @@ export interface mapPmcBackpackLootData {
     max_level: number;
     min_items: number;
     max_items: number;
-    weights: [
-        number,
-        number?,
-        number?,
-        number?
-    ];
+    weights: [number, number?, number?, number?];
     keycard_chance: number;
     rare_key_chance: number;
     include_normal_keys: boolean;
@@ -87,15 +82,15 @@ export interface mapPmcBackpackLootData {
 export type mapPmcBackpackLootDataGroup = mapPmcBackpackLootData[];
 
 export interface mapPmcBackpackLootTable {
-    extremely_rare: string[],
-    rare: string[],
-    valuable: string[],
-    common: string[],
+    extremely_rare: string[];
+    rare: string[];
+    valuable: string[];
+    common: string[];
 }
 
 export enum LootTableIndexs {
     EXTREMELY_RARE = 0,
     RARE = 1,
     VALUABLE = 2,
-    COMMON = 3
+    COMMON = 3,
 }

@@ -1,9 +1,14 @@
 {
     "headsets": [
         {
-            "weight": 3,
+            "weight": 2,
             "id": "628e4e576d783146b124c64d",
             "name": "Peltor ComTac IV Hybrid headset (Coyote Brown)"
+        },
+        {
+            "weight": 2,
+            "id": "66b5f68de98be930d701c00e",
+            "name": "Safariland Liberator HP 2.0 Hearing Protection Headset (FDE)"
         },
         {
             "weight": 2,

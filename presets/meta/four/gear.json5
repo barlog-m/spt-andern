@@ -68,6 +68,16 @@
             "weight": 1,
             "id": "628dc750b910320f4c27a732",
             "name": "ECLiPSE RBAV-AF plate carrier (Ranger Green)"
+        },
+        {
+            "weight": 1,
+            "id": "66b6295178bbc0200425f995",
+            "name": "Stich Profi Stich Defense mod.2 plate carrier (MultiCam)"
+        },
+        {
+            "weight": 1,
+            "id": "66b6295a8ca68c6461709efa",
+            "name": "Tasmanian Tiger Plate Carrier MKIII (Coyote Brown)"
         }
     ],
     "armor": [
@@ -209,6 +219,11 @@
             "weight": 1,
             "id": "656e0436d44a1bb4220303a0",
             "name": "Mystery Ranch SATL Bridger Assault Pack (Foliage)"
+        },
+        {
+            "weight": 1,
+            "id": "67458730df3c1da90b0b052b",
+            "name": "5.11 Tactical RUSH 100 backpack (Black)"
         }
     ],
     "face": [

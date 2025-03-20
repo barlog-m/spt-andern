@@ -1,11 +1,11 @@
-import {inject, injectable} from "tsyringe";
+import { inject, injectable } from "tsyringe";
 
-import {ILogger} from "@spt/models/spt/utils/ILogger";
-import {IItem} from "@spt/models/eft/common/tables/IItem";
-import {RandomUtil} from "@spt/utils/RandomUtil";
-import {HashUtil} from "@spt/utils/HashUtil";
-import {DatabaseServer} from "@spt/servers/DatabaseServer";
-import {BaseClasses} from "@spt/models/enums/BaseClasses";
+import { ILogger } from "@spt/models/spt/utils/ILogger";
+import { IItem } from "@spt/models/eft/common/tables/IItem";
+import { RandomUtil } from "@spt/utils/RandomUtil";
+import { HashUtil } from "@spt/utils/HashUtil";
+import { DatabaseServer } from "@spt/servers/DatabaseServer";
+import { BaseClasses } from "@spt/models/enums/BaseClasses";
 import {
     PresetData,
     Config,
@@ -31,7 +31,7 @@ export class Data {
         @inject("HashUtil") protected hashUtil: HashUtil,
         @inject("RandomUtil") protected randomUtil: RandomUtil,
         @inject("DatabaseServer") protected databaseServer: DatabaseServer,
-        @inject("AndernModPath") protected modPath: string
+        @inject("AndernModPath") protected modPath: string,
     ) {
         this.load();
     }
@@ -39,14 +39,14 @@ export class Data {
     public getRandomAmmoByCaliber(
         presetName: string,
         botLevel: number,
-        caliber: string
+        caliber: string,
     ): string | undefined {
         const tier = this.tierByLevel(presetName, botLevel);
         const ammo = this.data[presetName].ammo[tier][caliber];
 
         if (ammo === undefined) {
             this.logger.error(
-                `[Andern] no ammo record for tier '${tier}' with caliber '${caliber}'`
+                `[Andern] no ammo record for tier '${tier}' with caliber '${caliber}'`,
             );
             return undefined;
         }
@@ -70,7 +70,7 @@ export class Data {
 
         if (config.debug) {
             this.logger.info(
-                `[Andern] for bot level ${botLevel} selected tier '${tier}' weapon '${preset.Name}'`
+                `[Andern] for bot level ${botLevel} selected tier '${tier}' weapon '${preset.Name}'`,
             );
         }
 
@@ -85,7 +85,7 @@ export class Data {
     public getAlternativeModule(
         presetName: string,
         botLevel: number,
-        moduleTpl: string
+        moduleTpl: string,
     ): string {
         const tier = this.tierByLevel(presetName, botLevel);
         const alternativesData = this.data[presetName].modules[tier];
@@ -105,7 +105,7 @@ export class Data {
 
         return moduleTpl;
     }
-    
+
     public getConfig(presetName: string, level: number): Config {
         const tier = this.tierByLevel(presetName, level);
         return this.data[presetName].config[tier];
@@ -136,17 +136,18 @@ export class Data {
             gear: {},
             weapon: {},
             ammo: {},
-            modules: {}
+            modules: {},
         };
 
         try {
-            const files = fs.readdirSync(presetDir, {withFileTypes: true});
+            const files = fs.readdirSync(presetDir, { withFileTypes: true });
             files.forEach((dir) => {
                 if (dir.isDirectory()) {
                     const tierDirName = `${presetDir}/${dir.name}`;
                     const tierName = dir.name;
 
-                    presetData.config[tierName] = this.loadTierConfig(tierDirName);
+                    presetData.config[tierName] =
+                        this.loadTierConfig(tierDirName);
                     presetData.gear[tierName] = this.loadTierGear(tierDirName);
                     presetData.ammo[tierName] = this.loadTierAmmo(tierDirName);
                     presetData.modules[tierName] =
@@ -157,7 +158,7 @@ export class Data {
             });
         } catch (err) {
             this.logger.error(
-                `[Andern] Error reading directory: ${err.message}`
+                `[Andern] Error reading directory: ${err.message}`,
             );
         }
 
@@ -199,7 +200,7 @@ export class Data {
                 Object.assign(modules, JSON5.parse(jsonData));
             } catch (err) {
                 this.logger.error(
-                    `[Andern] error read file '${modulesFileName}'`
+                    `[Andern] error read file '${modulesFileName}'`,
                 );
                 this.logger.error(err.message);
             }
@@ -221,7 +222,7 @@ export class Data {
                     try {
                         const jsonData = fs.readFileSync(
                             fullWeaponPresetName,
-                            "utf-8"
+                            "utf-8",
                         );
                         const preset = new WeaponPreset();
                         Object.assign(preset, JSON.parse(jsonData));
@@ -230,14 +231,14 @@ export class Data {
                         }
                     } catch (err) {
                         this.logger.error(
-                            `[Andern] error read file '${fullWeaponPresetName}'`
+                            `[Andern] error read file '${fullWeaponPresetName}'`,
                         );
                         this.logger.error(err.message);
                     }
                 });
         } catch (err) {
             this.logger.error(
-                `[Andern] Error reading directory: ${err.message}`
+                `[Andern] Error reading directory: ${err.message}`,
             );
         }
 
@@ -267,7 +268,7 @@ export class Data {
             }
             if (i.slotId === "cartridges") {
                 this.logger.error(
-                    `[Andern] preset's magazine is not empty '${fileName}'`
+                    `[Andern] preset's magazine is not empty '${fileName}'`,
                 );
                 return false;
             }
@@ -281,14 +282,14 @@ export class Data {
 
         if (!hasMagazine) {
             this.logger.warning(
-                `[Andern] preset doesn't have magazine '${fileName}'`
+                `[Andern] preset doesn't have magazine '${fileName}'`,
             );
             return true;
         }
 
         if (!hasTacticalDevice) {
             this.logger.warning(
-                `[Andern] preset doesn't have tactical device '${fileName}'`
+                `[Andern] preset doesn't have tactical device '${fileName}'`,
             );
             return true;
         }
@@ -314,7 +315,7 @@ export class Data {
 
     getPresetName(): string {
         const totalWeight = Object.values(this.presets).reduce(
-            (sum, item) => sum + item
+            (sum, item) => sum + item,
         );
 
         let random = Math.random() * totalWeight;
@@ -328,16 +329,25 @@ export class Data {
     }
 
     public fillArmorPlatesData(): undefined {
-        this.armorPlatesData = Object.entries(this.databaseServer.getTables().templates.items)
-            .filter(([tpl, item]) => item._parent === BaseClasses.ARMOR_PLATE && item._id !== BaseClasses.BUILT_IN_INSERTS)
+        this.armorPlatesData = Object.entries(
+            this.databaseServer.getTables().templates.items,
+        )
+            .filter(
+                ([tpl, item]) =>
+                    item._parent === BaseClasses.ARMOR_PLATE &&
+                    item._id !== BaseClasses.BUILT_IN_INSERTS,
+            )
             .map(([tpl, item]) => [tpl, item._props.armorClass])
-            .reduce((acc, [tpl, value]) => {
-                acc[tpl] = value;
-                return acc;
-            }, {} as Record<string, any>);
+            .reduce(
+                (acc, [tpl, value]) => {
+                    acc[tpl] = value;
+                    return acc;
+                },
+                {} as Record<string, any>,
+            );
     }
 
     public getPlateArmorClassByPlateTpl(tpl: string): number {
-        return this.armorPlatesData[tpl]
+        return this.armorPlatesData[tpl];
     }
 }
