@@ -1,6 +1,6 @@
 import { inject, injectable } from "tsyringe";
 
-import { ILogger } from "@spt/models/spt/utils/ILogger";
+import type { ILogger } from "@spt/models/spt/utils/ILogger";
 import { HashUtil } from "@spt/utils/HashUtil";
 import { JsonUtil } from "@spt/utils/JsonUtil";
 import { DatabaseServer } from "@spt/servers/DatabaseServer";
@@ -14,14 +14,12 @@ import { IDatabaseTables } from "@spt/models/spt/server/IDatabaseTables";
 import { ItemHelper } from "@spt/helpers/ItemHelper";
 import { ITraderConfig } from "@spt/models/spt/config/ITraderConfig";
 import { Traders } from "@spt/models/enums/Traders";
-import { PreSptModLoader } from "@spt/loaders/PreSptModLoader";
 import { TraderHelper } from "./TraderHelpers";
 import { FluentAssortConstructor } from "./FluentTraderAssortCreator";
 import { DoeTraderArmorGenerator } from "./DoeTraderArmorGenerator";
 import { ModConfig } from "./ModConfig";
 import * as baseJson from "../trader/base.json";
 import * as config from "../config/config.json";
-
 import * as fs from "fs";
 import JSON5 from "json5";
 
@@ -34,6 +32,7 @@ class TraderItems {
 
 @injectable()
 export class DoeTrader {
+    readonly doeTraderId = baseJson._id;
     items: TraderItems;
     traderHelper: TraderHelper;
     fluentTraderAssortHelper: FluentAssortConstructor;
@@ -48,7 +47,7 @@ export class DoeTrader {
         @inject("ItemHelper") protected itemHelper: ItemHelper,
         @inject("AndernDoeTraderArmorGenerator")
         protected traderArmorGenerator: DoeTraderArmorGenerator,
-        @inject("AndernModPath") protected modPath: string,
+        @inject("AndernModPath") protected modPath: string
     ) {
         if (config.trader) {
             this.loadData();
@@ -64,7 +63,7 @@ export class DoeTrader {
 
     addAllItems(
         fluentTraderAssortHeper: FluentAssortConstructor,
-        tables: IDatabaseTables,
+        tables: IDatabaseTables
     ): undefined {
         this.addTierItems(fluentTraderAssortHeper, tables, this.items.one, 1);
         this.addTierItems(fluentTraderAssortHeper, tables, this.items.two, 2);
@@ -76,7 +75,7 @@ export class DoeTrader {
         fluentTraderAssortHeper: FluentAssortConstructor,
         tables: IDatabaseTables,
         items: string[],
-        loyaltyLevel: number,
+        loyaltyLevel: number
     ): undefined {
         items.forEach((itemTpl) => {
             if (this.traderArmorGenerator.isArmor(itemTpl)) {
@@ -86,7 +85,7 @@ export class DoeTrader {
                     .createComplexAssortItem(items)
                     .addMoneyCost(
                         Money.ROUBLES,
-                        this.itemHelper.getItemAndChildrenPrice(itemTpls),
+                        this.itemHelper.getItemAndChildrenPrice(itemTpls)
                     )
                     .addLoyaltyLevel(loyaltyLevel)
                     .export(tables.traders[baseJson._id]);
@@ -95,7 +94,7 @@ export class DoeTrader {
                     .createSingleAssortItem(itemTpl)
                     .addMoneyCost(
                         Money.ROUBLES,
-                        this.itemHelper.getItemPrice(itemTpl),
+                        this.itemHelper.getItemPrice(itemTpl)
                     )
                     .addLoyaltyLevel(loyaltyLevel)
                     .export(tables.traders[baseJson._id]);
@@ -103,51 +102,44 @@ export class DoeTrader {
         });
     }
 
-    public prepareTrader(
-        preSptModLoader: PreSptModLoader,
-        fullModName: string,
-    ): undefined {
-        if (config.trader) {
-            this.prepareTraderImpl(preSptModLoader, fullModName);
-        }
-    }
-
-    prepareTraderImpl(
-        preSptModLoader: PreSptModLoader,
-        fullModName: string,
-    ): undefined {
+    public prepareTrader(): undefined {
         const traderConfig: ITraderConfig =
             this.configServer.getConfig<ITraderConfig>(ConfigTypes.TRADER);
 
         this.traderHelper = new TraderHelper();
         this.fluentTraderAssortHelper = new FluentAssortConstructor(
             this.hashUtil,
-            this.logger,
+            this.logger
         );
-        this.traderHelper.registerProfileImage(
-            baseJson,
-            fullModName,
-            preSptModLoader,
-            this.imageRouter,
-            "doetrader.jpg",
+
+        this.imageRouter.addRoute(
+            baseJson.avatar.replace(".jpg", ""),
+            `${this.modPath}/trader/doetrader.jpg`
         );
+
         this.traderHelper.setTraderUpdateTime(
             traderConfig,
             baseJson,
             2400,
-            3600,
+            3600
         );
 
         Traders[baseJson._id] = baseJson._id;
     }
 
-    public registerTrader(): undefined {
-        if (config.trader) {
-            this.registerTraderImpl();
-        }
+    copyDialogs() {
+        const traders = this.databaseServer.getTables().traders;
+
+        const praporId = "54cb50c76803fa8b248b4571";
+        const praporDialogs = JSON.parse(
+            JSON.stringify(traders[praporId].dialogue)
+        ) as Record<string, string[]>;
+
+        const trader = traders[this.doeTraderId];
+        trader.dialogue = praporDialogs;
     }
 
-    registerTraderImpl(): undefined {
+    public registerTrader(): undefined {
         const tables = this.databaseServer.getTables();
 
         this.traderHelper.addTraderToDb(baseJson, tables, this.jsonUtil);
@@ -161,41 +153,36 @@ export class DoeTrader {
             ModConfig.traderName,
             baseJson.nickname,
             baseJson.location,
-            ModConfig.traderDescription,
+            ModConfig.traderDescription
         );
 
         const ragfairConfig = this.configServer.getConfig<IRagfairConfig>(
-            ConfigTypes.RAGFAIR,
+            ConfigTypes.RAGFAIR
         );
-        ragfairConfig.traders[baseJson._id] = true;
+        ragfairConfig.traders[this.doeTraderId] = true;
+
+        this.copyDialogs();
 
         this.logger.info("[Andern] Doe trader registered");
     }
 
     public traderInsurance(): undefined {
-        const praporId = "54cb50c76803fa8b248b4571";
         const traders = this.databaseServer.getTables().traders;
-        const doeTraderId = baseJson._id;
-        const praporDialogs = JSON.parse(
-            JSON.stringify(traders[praporId].dialogue),
-        ) as Record<string, string[]>;
+        const trader = traders[this.doeTraderId];
 
-        const trader = traders[doeTraderId];
-        trader.dialogue = praporDialogs;
         trader.base.insurance.availability = true;
 
         const insuranceConfig: IInsuranceConfig = this.configServer.getConfig(
-            ConfigTypes.INSURANCE,
+            ConfigTypes.INSURANCE
         );
 
-        insuranceConfig.returnChancePercent[doeTraderId] = 100;
+        insuranceConfig.returnChancePercent[this.doeTraderId] = 100;
         insuranceConfig.runIntervalSeconds = 60;
     }
 
     public traderRepair(): undefined {
-        const doeTraderId = baseJson._id;
-
-        const trader = this.databaseServer.getTables().traders[doeTraderId];
+        const trader =
+            this.databaseServer.getTables().traders[this.doeTraderId];
         trader.base.repair.availability = true;
     }
 }

@@ -1,5 +1,5 @@
 import { DependencyContainer } from "tsyringe";
-import { ILogger } from "@spt/models/spt/utils/ILogger";
+import type { ILogger } from "@spt/models/spt/utils/ILogger";
 import { BotWeaponGenerator } from "@spt/generators/BotWeaponGenerator";
 import {
     IInventory,

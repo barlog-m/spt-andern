@@ -1,4 +1,3 @@
-import { PreSptModLoader } from "@spt/loaders/PreSptModLoader";
 import {
     ITraderBase,
     ITraderAssort,
@@ -8,34 +7,9 @@ import {
     IUpdateTime,
 } from "@spt/models/spt/config/ITraderConfig";
 import { IDatabaseTables } from "@spt/models/spt/server/IDatabaseTables";
-import { ImageRouter } from "@spt/routers/ImageRouter";
 import { JsonUtil } from "@spt/utils/JsonUtil";
 
 export class TraderHelper {
-    /**
-     * Add profile picture to our trader
-     * @param baseJson json file for trader (db/base.json)
-     * @param preAkiModLoader mod loader class - used to get the mods file path
-     * @param imageRouter image router class - used to register the trader image path so we see their image on trader page
-     * @param traderImageName Filename of the trader icon to use
-     */
-    public registerProfileImage(
-        baseJson: any,
-        modName: string,
-        preAkiModLoader: PreSptModLoader,
-        imageRouter: ImageRouter,
-        traderImageName: string,
-    ): void {
-        // Reference the mod "res" folder
-        const imageFilepath = `./${preAkiModLoader.getModPath(modName)}trader`;
-
-        // Register a route to point to the profile picture - remember to remove the .jpg from it
-        imageRouter.addRoute(
-            baseJson.avatar.replace(".jpg", ""),
-            `${imageFilepath}/${traderImageName}`,
-        );
-    }
-
     /**
      * Add record to trader config to set the refresh time of trader in seconds (default is 60 minutes)
      * @param traderConfig trader config to add our trader to
@@ -47,7 +21,7 @@ export class TraderHelper {
         traderConfig: ITraderConfig,
         baseJson: any,
         refreshTimeSecondsMin: number,
-        refreshTimeSecondsMax: number,
+        refreshTimeSecondsMax: number
     ): void {
         // Add refresh time in seconds to config
         const traderRefreshRecord: IUpdateTime = {
@@ -71,13 +45,13 @@ export class TraderHelper {
     public addTraderToDb(
         traderDetailsToAdd: any,
         tables: IDatabaseTables,
-        jsonUtil: JsonUtil,
+        jsonUtil: JsonUtil
     ): void {
         // Add trader to trader table, key is the traders id
         tables.traders[traderDetailsToAdd._id] = {
             assort: this.createAssortTable(), // assorts are the 'offers' trader sells, can be a single item (e.g. carton of milk) or multiple items as a collection (e.g. a gun)
             base: jsonUtil.deserialize(
-                jsonUtil.serialize(traderDetailsToAdd),
+                jsonUtil.serialize(traderDetailsToAdd)
             ) as ITraderBase, // Deserialise/serialise creates a copy of the json and allows us to cast it as an ITraderBase
             questassort: {
                 started: {},
@@ -122,7 +96,7 @@ export class TraderHelper {
         firstName: string,
         nickName: string,
         location: string,
-        description: string,
+        description: string
     ) {
         // For each language, add locale for the new trader
         const locales = Object.values(tables.locales.global) as Record<

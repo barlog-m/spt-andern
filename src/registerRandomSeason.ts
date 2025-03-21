@@ -1,6 +1,6 @@
 import { DependencyContainer } from "tsyringe";
 import { StaticRouterModService } from "@spt/services/mod/staticRouter/StaticRouterModService";
-import { ILogger } from "@spt/models/spt/utils/ILogger";
+import type { ILogger } from "@spt/models/spt/utils/ILogger";
 import { setSeasonRandom } from "./seasonUtils";
 
 export default function registerRandomSeason(

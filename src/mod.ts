@@ -3,7 +3,7 @@ import { DependencyContainer, Lifecycle } from "tsyringe";
 import { IPreSptLoadMod } from "@spt/models/external/IPreSptLoadMod";
 import { IPostSptLoadMod } from "@spt/models/external/IPostSptLoadMod";
 import { IPostDBLoadMod } from "@spt/models/external/IPostDBLoadMod";
-import { ILogger } from "@spt/models/spt/utils/ILogger";
+import type { ILogger } from "@spt/models/spt/utils/ILogger";
 import { PreSptModLoader } from "@spt/loaders/PreSptModLoader";
 import { DatabaseServer } from "@spt/servers/DatabaseServer";
 import { ILocationBase } from "@spt/models/eft/common/ILocationBase";
@@ -18,13 +18,11 @@ import { IPlayerScavConfig } from "@spt/models/spt/config/IPlayerScavConfig";
 import { ModConfig } from "./ModConfig";
 import { DoeTrader } from "./DoeTrader";
 import { Data } from "./Data";
-import { LootGenerator } from "./lootGenerator";
 import { WeaponGenerator } from "./WeaponGenerator";
 import { GearGenerator } from "./GearGenerator";
 import { GearGeneratorHelper } from "./GearGeneratorHelper";
 import { HelmetGenerator } from "./HelmetGenerator";
 import registerInfoUpdater from "./registerInfoUpdater";
-import registerBotLootGenerator from "./registerBotLootGenerator";
 import registerBotLevelGenerator from "./registerBotLevelGenerator";
 import registerBotInventoryGenerator from "./registerBotInventoryGenerator";
 import registerBotWeaponGenerator from "./registerBotWeaponGenerator";
@@ -36,6 +34,7 @@ import vssOverheatFix from "./weaponUtils";
 import { setSeasonFromConfig, setSeasonRandom } from "./seasonUtils";
 import * as config from "../config/config.json";
 import registerRandomSeason from "./registerRandomSeason";
+import { GpCoinsLootGenerator } from "./GpCoinsLootGenerator";
 
 export class Andern implements IPreSptLoadMod, IPostSptLoadMod, IPostDBLoadMod {
     private readonly fullModName: string;
@@ -63,20 +62,12 @@ export class Andern implements IPreSptLoadMod, IPostSptLoadMod, IPostDBLoadMod {
             lifecycle: Lifecycle.Singleton,
         });
 
-        container.register<LootGenerator>(
-            "AndernLootGenerator",
-            LootGenerator,
-            {
-                lifecycle: Lifecycle.Singleton,
-            },
-        );
-
         container.register<WeaponGenerator>(
             "AndernWeaponGenerator",
             WeaponGenerator,
             {
                 lifecycle: Lifecycle.Singleton,
-            },
+            }
         );
 
         container.register<GearGeneratorHelper>(
@@ -84,7 +75,7 @@ export class Andern implements IPreSptLoadMod, IPostSptLoadMod, IPostDBLoadMod {
             GearGeneratorHelper,
             {
                 lifecycle: Lifecycle.Singleton,
-            },
+            }
         );
 
         container.register<HelmetGenerator>(
@@ -92,7 +83,7 @@ export class Andern implements IPreSptLoadMod, IPostSptLoadMod, IPostDBLoadMod {
             HelmetGenerator,
             {
                 lifecycle: Lifecycle.Singleton,
-            },
+            }
         );
 
         container.register<GearGenerator>(
@@ -100,7 +91,7 @@ export class Andern implements IPreSptLoadMod, IPostSptLoadMod, IPostDBLoadMod {
             GearGenerator,
             {
                 lifecycle: Lifecycle.Singleton,
-            },
+            }
         );
 
         container.register<DoeTraderArmorGenerator>(
@@ -108,7 +99,7 @@ export class Andern implements IPreSptLoadMod, IPostSptLoadMod, IPostDBLoadMod {
             DoeTraderArmorGenerator,
             {
                 lifecycle: Lifecycle.Singleton,
-            },
+            }
         );
 
         container.register<DoeTrader>("AndernDoeTrader", DoeTrader, {
@@ -116,14 +107,18 @@ export class Andern implements IPreSptLoadMod, IPostSptLoadMod, IPostDBLoadMod {
         });
         this.doeTrader = container.resolve<DoeTrader>("AndernDoeTrader");
 
+        container.register<GpCoinsLootGenerator>(
+            "BotLootGenerator",
+            GpCoinsLootGenerator,
+            {
+                lifecycle: Lifecycle.Singleton,
+            }
+        );
+
         registerInfoUpdater(container);
 
         if (config.seasonRandom) {
             registerRandomSeason(container);
-        }
-
-        if (config.pmcBackpackLoot || config.disableBotBackpackLoot) {
-            registerBotLootGenerator(container);
         }
 
         if (config.pmcLevels) {
@@ -135,13 +130,15 @@ export class Andern implements IPreSptLoadMod, IPostSptLoadMod, IPostDBLoadMod {
         } else if (config.pmcWeapon) {
             registerBotWeaponGenerator(container);
         }
-
-        this.doeTrader.prepareTrader(preSptModLoader, this.fullModName);
     }
 
     public postDBLoad(container: DependencyContainer): void {
         lootConfig(container);
-        this.doeTrader.registerTrader();
+
+        if (config.trader) {
+            this.doeTrader.prepareTrader();
+            this.doeTrader.registerTrader();
+        }
 
         if (config.fleaBlacklistDisable) {
             this.disableFleaBlacklist(container);
@@ -222,7 +219,7 @@ export class Andern implements IPreSptLoadMod, IPostSptLoadMod, IPostDBLoadMod {
         if (config.fleaMinUserLevel) {
             fleaMarket.minUserLevel = config.fleaMinUserLevel;
             this.logger.info(
-                `[Andern] Flea Market minimal user level set to ${config.fleaMinUserLevel}`,
+                `[Andern] Flea Market minimal user level set to ${config.fleaMinUserLevel}`
             );
         }
     }
@@ -240,7 +237,7 @@ export class Andern implements IPreSptLoadMod, IPostSptLoadMod, IPostDBLoadMod {
         const pmcConfig = configServer.getConfig<IPmcConfig>(ConfigTypes.PMC);
 
         for (const memberCategoryKey of Object.keys(MemberCategory).filter(
-            (key) => !isNaN(Number(key)),
+            (key) => !isNaN(Number(key))
         )) {
             pmcConfig.accountTypeWeight[memberCategoryKey] = 0;
         }
@@ -258,7 +255,7 @@ export class Andern implements IPreSptLoadMod, IPostSptLoadMod, IPostDBLoadMod {
         const configServer = container.resolve<ConfigServer>("ConfigServer");
         const seasonalEventConfig =
             configServer.getConfig<ISeasonalEventConfig>(
-                ConfigTypes.SEASONAL_EVENT,
+                ConfigTypes.SEASONAL_EVENT
             );
         seasonalEventConfig.enableSeasonalEventDetection = false;
     }
@@ -291,7 +288,7 @@ export class Andern implements IPreSptLoadMod, IPostSptLoadMod, IPostDBLoadMod {
     disableFleaBlacklist(container: DependencyContainer): undefined {
         const configServer = container.resolve<ConfigServer>("ConfigServer");
         const ragfairConfig = configServer.getConfig<IRagfairConfig>(
-            ConfigTypes.RAGFAIR,
+            ConfigTypes.RAGFAIR
         );
         ragfairConfig.dynamic.blacklist.enableBsgList = false;
         ragfairConfig.dynamic.blacklist.traderItems = true;
@@ -307,12 +304,12 @@ export class Andern implements IPreSptLoadMod, IPostSptLoadMod, IPostDBLoadMod {
     playerScavAlwaysHasBackpack(container: DependencyContainer): undefined {
         const configServer = container.resolve<ConfigServer>("ConfigServer");
         const playerScavConfig = configServer.getConfig<IPlayerScavConfig>(
-            ConfigTypes.PLAYERSCAV,
+            ConfigTypes.PLAYERSCAV
         );
         Object.entries(playerScavConfig.karmaLevel).forEach(
             ([karmaLevel, karmaValues]) => {
                 karmaValues.modifiers.equipment["Backpack"] = 100;
-            },
+            }
         );
     }
 }

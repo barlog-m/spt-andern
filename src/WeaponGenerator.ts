@@ -9,7 +9,7 @@ import { IItem } from "@spt/models/eft/common/tables/IItem";
 import { ITemplateItem } from "@spt/models/eft/common/tables/ITemplateItem";
 import { HashUtil } from "@spt/utils/HashUtil";
 import { ItemHelper } from "@spt/helpers/ItemHelper";
-import { ILogger } from "@spt/models/spt/utils/ILogger";
+import type { ILogger } from "@spt/models/spt/utils/ILogger";
 import { RandomUtil } from "@spt/utils/RandomUtil";
 import { BotWeaponGeneratorHelper } from "@spt/helpers/BotWeaponGeneratorHelper";
 import { BotGeneratorHelper } from "@spt/helpers/BotGeneratorHelper";

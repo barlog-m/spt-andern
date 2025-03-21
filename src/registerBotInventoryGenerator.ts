@@ -1,5 +1,5 @@
 import { DependencyContainer } from "tsyringe";
-import { ILogger } from "@spt/models/spt/utils/ILogger";
+import type { ILogger } from "@spt/models/spt/utils/ILogger";
 import { BotInventoryGenerator } from "@spt/generators/BotInventoryGenerator";
 import { IInventory as PmcInventory } from "@spt/models/eft/common/tables/IBotBase";
 import { IBotType } from "@spt/models/eft/common/tables/IBotType";

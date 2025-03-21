@@ -2,7 +2,7 @@ import { DependencyContainer } from "tsyringe";
 import { DatabaseServer } from "@spt/servers/DatabaseServer";
 import { IQuestConditionCounterCondition } from "@spt/models/eft/common/tables/IQuest";
 import * as config from "../config/config.json";
-import { ILogger } from "@spt/models/spt/utils/ILogger";
+import type { ILogger } from "@spt/models/spt/utils/ILogger";
 
 export default function cheeseQuests(
     container: DependencyContainer,

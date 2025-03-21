@@ -7,23 +7,21 @@
 
 Idea of this mod is to rebalance a bit the game for better single player experience.
 
-* Gives PMC bots decent weapon from handmade presets.
+-   Gives PMC bots decent weapon from handmade presets.
 
-* Gives PMC good gear. Every PMC wear armor, helmet, rig, headphones, face cover and glasses.
+-   Gives PMC good gear. Every PMC wear armor, helmet, rig, headphones, face cover and glasses.
 
-* Gives PMC better backpack loot.
+-   Generates PMC with levels in configurable range.
 
-* Generates PMC with levels in configurable range.
+-   Add trader that sell you couple weapon modules to make weapon until level 15 a bit less crap. And sells you keys for quests witch hard to find because of high randomness of loot in the game.
 
-* Add trader that sell you couple weapon modules to make weapon until level 15 a bit less crap. And sells you keys for quests witch hard to find because of high randomness of loot in the game.
+-   Mod allows to change Flea Market access level. Config parameter `fleaMinUserLevel`. You can increase it to level 42 to add more sense to looting because with Flea you can easy just buy everything your need for craft and hideout update.
 
-* Mod allows to change Flea Market access level. Config parameter `fleaMinUserLevel`. You can increase it to level 42 to add more sense to looting because with Flea you can easy just buy everything your need for craft and hideout update.
+-   Mod allows to increase static and loose loot multipliers. Options `looseLootMultiplier` and `staticLootMultiplier`.
 
-* Mod allows to increase static and loose loot multipliers. Options `looseLootMultiplier` and `staticLootMultiplier`.
+-   Mod increase keys and cards spawn chance.
 
-* Mod increase keys and cards spawn chance.
-
-Weapon and gear split by tiers. Tiers is described in `preset_name/preset.json` file. Mod has two presets *meta* and *live*. Choise *live* if you want more veraity and close to live Tarkov expirience.
+Weapon and gear split by tiers. Tiers is described in `preset_name/preset.json` file. Mod has two presets _meta_ and _live_. Choise _live_ if you want more veraity and close to live Tarkov expirience.
 
 You can disable PMC bot level generator with option `pmcLevel`.
 
@@ -71,29 +69,7 @@ Settings in config 'chadsOnFactoryAndLabOnly', 'chadsPercentage' and 'chadsMinim
 
 ## PMC backpack loot settings
 
-`pmcBackpackLoot` enable/disable custom backpack loot pools
-
 `disableBotBackpackLoot` disable backpack loot completely
-
-##### Backpack Loot Extended Config: `backpack_config.json`
-
-`include_weapons` enable/disable loose weapons in backpack
-
-`duplicate_item_limit` Limit the amount of the same item that can spawn in a backpack
-
-`custom_map_loot_tables` Use map specific backpack loot configs. `Use the laboratory example to see how this can be done. Note: If you have a config for a map, it overwrites the global weights`
-
-`global`Settings for global map config
-
-`global.weights` Weights for each loot table, see loot_tables for how they relate with each other.
-
-`global.keycard_chance` Chance a keycard could spawn in a backpack
-
-`global.rare_key_chance` Chance a rare key could spawn in a backpack
-
-`global.include_normal_keys` Enable normal key loot pool in backpacks.
-
-`loot_tables` extremely rare, rare, valuable and common are all that are used in par with the weights array and in that order. You can add or remove items from the loot pools here.
 
 ## Loot settings
 
@@ -151,7 +127,7 @@ Works only if `mapBotSettings` set to true.
 
 `mapScavsAlwaysHasArmor` Regular scavs always has (their crap) armor.
 
-`mapScavsAlwaysHasHeadwear` Regular scavs always has (their crap) 
+`mapScavsAlwaysHasHeadwear` Regular scavs always has (their crap)
 
 ## Other settings
 
@@ -181,12 +157,13 @@ Works only if `mapBotSettings` set to true.
 
 `playerScavAlwaysHasBackpack` if true player scav always spawns with backpack.
 
+`gpCoinsOnPmcAndScavs` regualar scavs and pmc always has GP Coins in their backpaks.
+
 ## Installation
 
 Put folder `BarlogM-Andern` from zip file into your `user/mods` folder
 
 ## Known issues
 
-* If you close game client with Alt+F4 you have to restart server because mod stops working.
-* Mod does not work with [Algorithmic Level Progression](https://hub.sp-tarkov.com/files/file/1400-algorithmic-level-progression/)
-
+-   If you close game client with Alt+F4 you have to restart server because mod stops working.
+-   Mod does not work with [Algorithmic Level Progression](https://hub.sp-tarkov.com/files/file/1400-algorithmic-level-progression/)

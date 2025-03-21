@@ -1,6 +1,6 @@
 import { inject, injectable } from "tsyringe";
 
-import { ILogger } from "@spt/models/spt/utils/ILogger";
+import type { ILogger } from "@spt/models/spt/utils/ILogger";
 import { HashUtil } from "@spt/utils/HashUtil";
 import { RandomUtil } from "@spt/utils/RandomUtil";
 import { IInventory as PmcInventory } from "@spt/models/eft/common/tables/IBotBase";

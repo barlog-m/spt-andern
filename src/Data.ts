@@ -1,6 +1,6 @@
 import { inject, injectable } from "tsyringe";
 
-import { ILogger } from "@spt/models/spt/utils/ILogger";
+import type { ILogger } from "@spt/models/spt/utils/ILogger";
 import { IItem } from "@spt/models/eft/common/tables/IItem";
 import { RandomUtil } from "@spt/utils/RandomUtil";
 import { HashUtil } from "@spt/utils/HashUtil";
