@@ -35,6 +35,7 @@ import { setSeasonFromConfig, setSeasonRandom } from "./seasonUtils";
 import * as config from "../config/config.json";
 import registerRandomSeason from "./registerRandomSeason";
 import { GpCoinsLootGenerator } from "./GpCoinsLootGenerator";
+import { IInsuranceConfig } from "@spt/models/spt/config/IInsuranceConfig";
 
 export class Andern implements IPreSptLoadMod, IPostSptLoadMod, IPostDBLoadMod {
     private readonly fullModName: string;
@@ -162,6 +163,10 @@ export class Andern implements IPreSptLoadMod, IPostSptLoadMod, IPostDBLoadMod {
             this.enableInsuranceOnLab(container);
         }
 
+        if (config.insuranceReturnsNothing) {
+            this.insuranceReturnsNothing(container);
+        }
+
         if (config.mapBotSettings) {
             mapBotTuning(container, this.modPath, this.logger);
         }
@@ -283,6 +288,22 @@ export class Andern implements IPreSptLoadMod, IPostSptLoadMod, IPostDBLoadMod {
             traders[PRAPOR_ID].base.insurance.max_storage_time = 336;
             traders[THERAPIST_ID].base.insurance.max_storage_time = 336;
         }
+    }
+
+    insuranceReturnsNothing(container: DependencyContainer): undefined {
+        const databaseServer: DatabaseServer =
+            container.resolve<DatabaseServer>("DatabaseServer");
+        const configServer = container.resolve<ConfigServer>("ConfigServer");
+
+        const traders = databaseServer.getTables().traders;
+
+        const insuranceConfig: IInsuranceConfig = configServer.getConfig(
+            ConfigTypes.INSURANCE
+        );
+
+        (Object.keys(traders) as string[]).forEach((traderId: string) => {
+            insuranceConfig.returnChancePercent[traderId] = 0;
+        });
     }
 
     disableFleaBlacklist(container: DependencyContainer): undefined {

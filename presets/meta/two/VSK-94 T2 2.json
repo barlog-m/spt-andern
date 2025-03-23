@@ -1,0 +1,94 @@
+{
+    "Id": "67de38f7010016d23a93d940",
+    "Name": "VSK-94 T2 2",
+    "Root": "67de38fba1237d4114033dfd",
+    "Items": [
+        {
+            "_id": "67de38fba1237d4114033dfd",
+            "_tpl": "645e0c6b3b381ede770e1cc9",
+            "upd": {
+                "Repairable": {
+                    "MaxDurability": 100,
+                    "Durability": 100
+                },
+                "FireMode": {
+                    "FireMode": "single"
+                }
+            }
+        },
+        {
+            "_id": "67de38fba1237d4114033dfe",
+            "_tpl": "6450ec2e7da7133e5a09ca96",
+            "slotId": "mod_magazine",
+            "parentId": "67de38fba1237d4114033dfd"
+        },
+        {
+            "_id": "67de38fba1237d4114033dff",
+            "_tpl": "6452519e3d52156624001fd5",
+            "slotId": "mod_stock",
+            "parentId": "67de38fba1237d4114033dfd"
+        },
+        {
+            "_id": "67de38fba1237d4114033e00",
+            "_tpl": "5c90c3622e221601da359851",
+            "slotId": "mod_scope",
+            "parentId": "67de38fba1237d4114033dfd"
+        },
+        {
+            "_id": "67de38fba1237d4114033e01",
+            "_tpl": "645123013d52156624001fd1",
+            "slotId": "mod_barrel",
+            "parentId": "67de38fba1237d4114033dfd"
+        },
+        {
+            "_id": "67de38fba1237d4114033e02",
+            "_tpl": "57c69dd424597774c03b7bbc",
+            "slotId": "mod_scope",
+            "parentId": "67de38fba1237d4114033e00"
+        },
+        {
+            "_id": "67de38fba1237d4114033e03",
+            "_tpl": "64527a3a7da7133e5a09ca99",
+            "slotId": "mod_muzzle",
+            "parentId": "67de38fba1237d4114033e01"
+        },
+        {
+            "_id": "67de38fba1237d4114033e04",
+            "_tpl": "6448f2f6d4928d46d30be3f6",
+            "slotId": "mod_handguard",
+            "parentId": "67de38fba1237d4114033e01"
+        },
+        {
+            "_id": "67de38fba1237d4114033e05",
+            "_tpl": "5b2388675acfc4771e1be0be",
+            "slotId": "mod_scope",
+            "upd": {
+                "Sight": {
+                    "ScopesCurrentCalibPointIndexes": [0],
+                    "ScopesSelectedModes": [0],
+                    "SelectedScope": 0,
+                    "ScopeZoomValue": 0
+                }
+            },
+            "parentId": "67de38fba1237d4114033e02"
+        },
+        {
+            "_id": "67de38fba1237d4114033e06",
+            "_tpl": "57a3459f245977764a01f703",
+            "slotId": "mod_mount",
+            "parentId": "67de38fba1237d4114033e03"
+        },
+        {
+            "_id": "67de38fba1237d4114033e07",
+            "_tpl": "6272370ee4013c5d7e31f418",
+            "slotId": "mod_tactical",
+            "upd": {
+                "Light": {
+                    "IsActive": true,
+                    "SelectedMode": 0
+                }
+            },
+            "parentId": "67de38fba1237d4114033e06"
+        }
+    ]
+}

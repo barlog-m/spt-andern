@@ -16,6 +16,7 @@
     "traderInsurance": false,
     "traderRepair": false,
     "insuranceOnLab": false,
+    "insuranceReturnsNothing": false,
     "fleaMinUserLevel": 15,
     "chadsOnFactoryAndLabOnly": true,
     "chadsPercentage": 30,

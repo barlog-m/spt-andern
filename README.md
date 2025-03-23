@@ -61,6 +61,8 @@ You can disable trader by set `trader` to false in config.json
 
 `insuranceOnLab` enables insurance on Lab.
 
+`insuranceReturnsNothing` disables insurance by make it returns nothing. For all traders..
+
 PMC bots can use "chads" armor. It possible only in day raids.
 
 Settings in config 'chadsOnFactoryAndLabOnly', 'chadsPercentage' and 'chadsMinimumLevel',
