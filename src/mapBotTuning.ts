@@ -70,7 +70,7 @@ export function mapBotTuning(
         setPmcBrains(configServer, databaseTables, logger, modPath);
     }
 
-    botBrainsTuning(databaseTables);
+    pmcBrainTuning(databaseTables);
 
     tuneScavs(container);
 }
@@ -439,10 +439,6 @@ function loadPmcBrains(
         logger.error(`[Andern] error read file '${brainsFileName}'`);
         logger.error(err.message);
     }
-}
-
-function botBrainsTuning(databaseTables: IDatabaseTables): undefined {
-    pmcBrainTuning(databaseTables);
 }
 
 function pmcBrainTuning(databaseTables: IDatabaseTables): undefined {

@@ -157,6 +157,8 @@ Works only if `mapBotSettings` set to true.
 
 `gpCoinsOnPmcAndScavs` regualar scavs and pmc always has GP Coins in their backpaks.
 
+`removeAllTradersItemsFromFlea` removes all item from default traders from Flea except barter, food and keys.
+
 ## Installation
 
 Put folder `BarlogM-Andern` from zip file into your `user/mods` folder
