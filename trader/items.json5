@@ -1,5 +1,5 @@
 {
-    "one": [
+    one: [
         //Dorm room 114 key
         "59387a4986f77401cc236e62",
         // ZB-014 key
@@ -71,7 +71,7 @@
         // Kirasa-N
         "5b44d22286f774172b0c9de8",
         // WARTECH TV-115 plate carrier (Olive Drab)
-        "64a536392d2c4e6e970f4121", 
+        "64a536392d2c4e6e970f4121",
         // SILENCER_AK74_HEXAGON_AK74_545X39
         "593d493f86f7745e6b2ceb22",
         //SILENCER_ALL_ROTOR_43_V2_556X45
@@ -81,25 +81,29 @@
         //MAG_AK_IZHMASH_AK_STD_55_762X39_30
         "59d625f086f774661516605d",
     ],
-    "two": [
-        //5.45 PP GS
-        "56dff2ced2720bb4668b4567",
+    two: [
+        //5.45x39mm PS gs
+        "56dff3afd2720bba668b4567",
         //5.56x45 M855,
         "54527a984bdc2d4e668b4567",
         //7.62x39 T-45M1 gzh
         "59e4cf5286f7741778269d8a",
     ],
-    "three": [
-        //5.45x39 BT GS
-        "56dff061d2720bb5668b4567",
+    three: [
+        //5.45 PP GS
+        "56dff2ced2720bb4668b4567",
         //5.56x45 MK 318 MOD 0 (SOST)
         "60194943740c5d77f6705eea",
         //7.62x39 PS gzh
         "5656d7c34bdc2d9d198b4587",
         //9x39 SPP GS
         "5c0d668f86f7747ccb7f13b2",
+        //Thunder Beast Arms Ultra 5 sound suppressor
+        "5d44064fa4b9361e4f6eb8b5",
+        //Steiner LAS/TAC 2 tactical flashlight
+        "5b07dd285acfc4001754240d",
     ],
-    "four": [
+    four: [
         //5.45x39 7N40
         "61962b617c6c7b169525f168",
         //5.56x45 M856A1
@@ -112,5 +116,5 @@
         "64b8725c4b75259c590fa899",
         //9x39 SP-6
         "57a0e5022459774d1673f889",
-    ]
+    ],
 }

@@ -111,13 +111,7 @@ Works only if `mapBotSettings` set to true.
 
 `bossDisablePartisan` disable boss Partisan
 
-`mapScavToPmcConvertMultiplier` can increase or decrease percent of scavs converted to PMC (changes amount of PMC on map)
-
 `mapMakePmcAlwaysHostile` by default in SPT-AKI 20% chance that PMC is friendly to player. This setting set this chance to 0.
-
-`mapDisableRogueConvertToPmc` disables converting rogues to PMC.
-
-`mapDisableRaiderConvertToPmc` disables converting raiders to PMC.
 
 `mapPmcBrainsConfig` if set to "default" then does nothing. Loads `brains/[value].json` file with config which brain will be selected as PMC brain. For example "noboss" will load `brains/noboss.json` as brains config.
 
@@ -130,6 +124,8 @@ Works only if `mapBotSettings` set to true.
 `mapScavsAlwaysHasArmor` Regular scavs always has (their crap) armor.
 
 `mapScavsAlwaysHasHeadwear` Regular scavs always has (their crap)
+
+`mapPlayerScavsBossBrainsOff` Player scavs don't use boss brains.
 
 ## Other settings
 

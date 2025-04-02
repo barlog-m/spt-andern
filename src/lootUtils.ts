@@ -37,9 +37,9 @@ const STATIC_LOOT_KEYS_RELATIVE_PROBABILITY = 1400;
 // eslint-disable-next-line @typescript-eslint/naming-convention
 const LOOSE_LOOT_RARE_ITEMS_RELATIVE_PROBABILITY_THRESHOLD = 4;
 // eslint-disable-next-line @typescript-eslint/naming-convention
-const LOOSE_LOOT_RARE_ITEMS_RELATIVE_PROBABILITY_MULTIPLIER = 8;
+const LOOSE_LOOT_RARE_ITEMS_RELATIVE_PROBABILITY_MULTIPLIER = 6;
 // eslint-disable-next-line @typescript-eslint/naming-convention
-const LOOSE_LOOT_RARE_ITEMS_SPAWN_POINT_PROBABILITY = 0.8;
+const LOOSE_LOOT_RARE_ITEMS_SPAWN_POINT_PROBABILITY = 0.4;
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
 const RARE_ITEMS = [
@@ -96,7 +96,7 @@ function setLootMultiplier(container: DependencyContainer): undefined {
     const configServer = container.resolve<ConfigServer>("ConfigServer");
 
     const locationConfig: ILocationConfig = configServer.getConfig(
-        ConfigTypes.LOCATION,
+        ConfigTypes.LOCATION
     );
 
     for (const map in locationConfig.looseLootMultiplier) {
@@ -109,11 +109,11 @@ function setLootMultiplier(container: DependencyContainer): undefined {
 }
 
 function setScavCaseLootValueMultiplier(
-    container: DependencyContainer,
+    container: DependencyContainer
 ): undefined {
     const configServer = container.resolve<ConfigServer>("ConfigServer");
     const scavCaseConfig = configServer.getConfig<IScavCaseConfig>(
-        ConfigTypes.SCAVCASE,
+        ConfigTypes.SCAVCASE
     );
 
     scavCaseConfig.allowBossItemsAsRewards = true;
@@ -128,7 +128,7 @@ function setScavCaseLootValueMultiplier(
 
 function increaseStaticLootKeysSpawn(
     container: DependencyContainer,
-    databaseServer: DatabaseServer,
+    databaseServer: DatabaseServer
 ): undefined {
     const drawers = ["578f87b7245977356274f2cd"];
     const jackets = [
@@ -143,7 +143,7 @@ function increaseStaticLootKeysSpawn(
     const database: IDatabaseTables = databaseServer.getTables();
 
     for (const [locationName, locationObj] of Object.entries(
-        database.locations,
+        database.locations
     )) {
         if (IGNORE_LOCATIONS.includes(locationName)) {
             continue;
@@ -159,8 +159,8 @@ function increaseStaticLootKeysSpawn(
                         staticLootDetails.itemDistribution &&
                         containers.includes(staticLootTpl)
                     );
-                },
-            ),
+                }
+            )
         );
 
         Object.entries(drawersAndJackets).forEach(
@@ -170,7 +170,7 @@ function increaseStaticLootKeysSpawn(
                         if (
                             itemHelper.isOfBaseclass(
                                 itemDistribution.tpl,
-                                BaseClasses.KEY_MECHANICAL,
+                                BaseClasses.KEY_MECHANICAL
                             )
                         ) {
                             if (
@@ -179,16 +179,16 @@ function increaseStaticLootKeysSpawn(
                             ) {
                                 if (config.debug) {
                                     console.log(
-                                        `[Andern] ${itemDistribution.tpl} relative probability ${itemDistribution.relativeProbability} -> ${STATIC_LOOT_KEYS_RELATIVE_PROBABILITY}`,
+                                        `[Andern] ${itemDistribution.tpl} relative probability ${itemDistribution.relativeProbability} -> ${STATIC_LOOT_KEYS_RELATIVE_PROBABILITY}`
                                     );
                                 }
                                 itemDistribution.relativeProbability =
                                     STATIC_LOOT_KEYS_RELATIVE_PROBABILITY;
                             }
                         }
-                    },
+                    }
                 );
-            },
+            }
         );
     }
 }
@@ -199,14 +199,14 @@ function increaseLooseLootProbabilityForKeysAndCards(
     itemClass: BaseClasses,
     targetProbability: number,
     probabilityThreshold: number,
-    probabilityMultiplier: number,
+    probabilityMultiplier: number
 ): undefined {
     const items: IItem[] = spawnPoint.template.Items.filter((item) =>
-        itemHelper.isOfBaseclass(item._tpl, itemClass),
+        itemHelper.isOfBaseclass(item._tpl, itemClass)
     );
     items.forEach((item) => {
         const itemDistribution = spawnPoint.itemDistribution.find(
-            (i) => i.composedKey.key === item._id,
+            (i) => i.composedKey.key === item._id
         );
         if (itemDistribution) {
             if (spawnPoint.probability < targetProbability) {
@@ -222,7 +222,7 @@ function increaseLooseLootProbabilityForKeysAndCards(
 
 function increaseLooseLootKeysSpawn(
     container: DependencyContainer,
-    databaseServer: DatabaseServer,
+    databaseServer: DatabaseServer
 ): undefined {
     const itemHelper = container.resolve<ItemHelper>("ItemHelper");
     const database: IDatabaseTables = databaseServer.getTables();
@@ -238,9 +238,9 @@ function increaseLooseLootKeysSpawn(
                         BaseClasses.KEY_MECHANICAL,
                         LOOSE_LOOT_KEYS_SPAWN_POINT_PROBABILITY,
                         LOOSE_LOOT_KEYS_RELATIVE_PROBABILITY_THRESHOLD,
-                        LOOSE_LOOT_KEYS_RELATIVE_PROBABILITY_MULTIPLIER,
+                        LOOSE_LOOT_KEYS_RELATIVE_PROBABILITY_MULTIPLIER
                     );
-                },
+                }
             );
         }
     });
@@ -248,7 +248,7 @@ function increaseLooseLootKeysSpawn(
 
 function increaseLooseLootCardsSpawn(
     container: DependencyContainer,
-    databaseServer: DatabaseServer,
+    databaseServer: DatabaseServer
 ): undefined {
     const itemHelper = container.resolve<ItemHelper>("ItemHelper");
     const database: IDatabaseTables = databaseServer.getTables();
@@ -264,9 +264,9 @@ function increaseLooseLootCardsSpawn(
                         BaseClasses.KEYCARD,
                         LOOSE_LOOT_CARDS_SPAWN_POINT_PROBABILITY,
                         LOOSE_LOOT_CARDS_RELATIVE_PROBABILITY_THRESHOLD,
-                        LOOSE_LOOT_CARDS_RELATIVE_PROBABILITY_MULTIPLIER,
+                        LOOSE_LOOT_CARDS_RELATIVE_PROBABILITY_MULTIPLIER
                     );
-                },
+                }
             );
         }
     });
@@ -274,29 +274,29 @@ function increaseLooseLootCardsSpawn(
 
 function increaseRareLooseLootSpawn(
     container: DependencyContainer,
-    databaseServer: DatabaseServer,
+    databaseServer: DatabaseServer
 ) {
     const database: IDatabaseTables = databaseServer.getTables();
     const locations: ILocation[] = Object.entries(database.locations)
         .filter(([locationName, locationData]) =>
-            LOCATIONS.includes(locationName),
+            LOCATIONS.includes(locationName)
         )
         .map(([locationName, locationData]) => locationData);
 
     const configServer = container.resolve<ConfigServer>("ConfigServer");
     const locationConfig: ILocationConfig = configServer.getConfig(
-        ConfigTypes.LOCATION,
+        ConfigTypes.LOCATION
     );
 
     LOCATIONS.forEach((locationName) =>
-        increaseLocationLooseLootMultiplier(locationName, locationConfig),
+        increaseLocationLooseLootMultiplier(locationName, locationConfig)
     );
 
     increaseLooseLootRareItemsSpawnChance(locations);
 }
 
 function increaseLooseLootRareItemsSpawnChance(
-    locations: ILocation[],
+    locations: ILocation[]
 ): undefined {
     locations.forEach((location: ILocation) => {
         if (location.looseLoot) {
@@ -307,9 +307,9 @@ function increaseLooseLootRareItemsSpawnChance(
                         RARE_ITEMS,
                         LOOSE_LOOT_RARE_ITEMS_SPAWN_POINT_PROBABILITY,
                         LOOSE_LOOT_RARE_ITEMS_RELATIVE_PROBABILITY_THRESHOLD,
-                        LOOSE_LOOT_RARE_ITEMS_RELATIVE_PROBABILITY_MULTIPLIER,
+                        LOOSE_LOOT_RARE_ITEMS_RELATIVE_PROBABILITY_MULTIPLIER
                     );
-                },
+                }
             );
         }
     });
@@ -320,19 +320,19 @@ function increaseLooseLootProbability(
     itemFilter: string[],
     targetProbability: number,
     probabilityThreshold: number,
-    probabilityMultiplier: number,
+    probabilityMultiplier: number
 ): undefined {
     const itemsToIncreaseSpawn: IItem[] = spawnPoint.template.Items.filter(
-        (item) => itemFilter.includes(item._tpl),
+        (item) => itemFilter.includes(item._tpl)
     );
 
     const itemsToDecreaseSpawn: IItem[] = spawnPoint.template.Items.filter(
-        (item) => !itemFilter.includes(item._tpl),
+        (item) => !itemFilter.includes(item._tpl)
     );
 
     itemsToIncreaseSpawn.forEach((item) => {
         const itemDistribution = spawnPoint.itemDistribution.find(
-            (i) => i.composedKey.key === item._id,
+            (i) => i.composedKey.key === item._id
         );
         if (itemDistribution) {
             if (spawnPoint.probability < targetProbability) {
@@ -347,13 +347,12 @@ function increaseLooseLootProbability(
 
     itemsToDecreaseSpawn.forEach((item) => {
         const itemDistribution = spawnPoint.itemDistribution.find(
-            (i) => i.composedKey.key === item._id,
+            (i) => i.composedKey.key === item._id
         );
         if (itemDistribution) {
             if (itemDistribution.relativeProbability > probabilityThreshold) {
                 itemDistribution.relativeProbability = Math.ceil(
-                    itemDistribution.relativeProbability /
-                        probabilityMultiplier,
+                    itemDistribution.relativeProbability / probabilityMultiplier
                 );
             }
         }
@@ -362,7 +361,7 @@ function increaseLooseLootProbability(
 
 function increaseLocationLooseLootMultiplier(
     locationName: string,
-    locationConfig: ILocationConfig,
+    locationConfig: ILocationConfig
 ): undefined {
     locationConfig.looseLootMultiplier[locationName] *= 1.1;
 }

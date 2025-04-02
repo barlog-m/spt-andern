@@ -36,6 +36,9 @@ import * as config from "../config/config.json";
 import registerRandomSeason from "./registerRandomSeason";
 import { GpCoinsLootGenerator } from "./GpCoinsLootGenerator";
 import { IInsuranceConfig } from "@spt/models/spt/config/IInsuranceConfig";
+import { ItemHelper } from "@spt/helpers/ItemHelper";
+import { BaseClasses } from "@spt/models/enums/BaseClasses";
+import { Traders } from "@spt/models/enums/Traders";
 
 export class Andern implements IPreSptLoadMod, IPostSptLoadMod, IPostDBLoadMod {
     private readonly fullModName: string;
@@ -131,6 +134,10 @@ export class Andern implements IPreSptLoadMod, IPostSptLoadMod, IPostDBLoadMod {
         } else if (config.pmcWeapon) {
             registerBotWeaponGenerator(container);
         }
+
+        if (config.disableSeasonalEvents) {
+            this.disableSeasonalEvents(container);
+        }
     }
 
     public postDBLoad(container: DependencyContainer): void {
@@ -184,10 +191,6 @@ export class Andern implements IPreSptLoadMod, IPostSptLoadMod, IPostDBLoadMod {
             this.disableEmissaryPmcBots(container);
         }
 
-        if (config.disableSeasonalEvents) {
-            this.disableSeasonalEvents(container);
-        }
-
         if (
             config.insuranceIncreaseStorageTime ||
             config.insuranceDecreaseReturnTime
@@ -213,6 +216,10 @@ export class Andern implements IPreSptLoadMod, IPostSptLoadMod, IPostDBLoadMod {
 
         if (config.playerScavAlwaysHasBackpack) {
             this.playerScavAlwaysHasBackpack(container);
+        }
+
+        if (config.removeAllTradersItemsFromFlea) {
+            this.removeAllTradersItemsFromFlea(container);
         }
     }
 
@@ -332,6 +339,55 @@ export class Andern implements IPreSptLoadMod, IPostSptLoadMod, IPostDBLoadMod {
                 karmaValues.modifiers.equipment["Backpack"] = 100;
             }
         );
+    }
+
+    removeAllTradersItemsFromFlea(container: DependencyContainer): undefined {
+        const databaseServer: DatabaseServer =
+            container.resolve<DatabaseServer>("DatabaseServer");
+
+        const configServer = container.resolve<ConfigServer>("ConfigServer");
+
+        const ragfairConfig = configServer.getConfig<IRagfairConfig>(
+            ConfigTypes.RAGFAIR
+        );
+
+        const itemHelper: ItemHelper =
+            container.resolve<ItemHelper>("ItemHelper");
+
+        const ignoreBaseClasses = [
+            BaseClasses.FOOD,
+            BaseClasses.FOOD_DRINK,
+            BaseClasses.BARTER_ITEM,
+            BaseClasses.KEY,
+            BaseClasses.KEYCARD,
+        ];
+        const TRADERS = [
+            Traders.PRAPOR,
+            Traders.THERAPIST,
+            Traders.SKIER,
+            Traders.PEACEKEEPER,
+            Traders.MECHANIC,
+            Traders.RAGMAN,
+            Traders.JAEGER,
+        ];
+
+        const traders = databaseServer.getTables().traders;
+        for (const traderId of TRADERS) {
+            const trader = traders[traderId];
+
+            if (trader.assort) {
+                trader.assort.items.forEach((item) => {
+                    if (
+                        !itemHelper.isOfBaseclasses(
+                            item._tpl,
+                            ignoreBaseClasses
+                        )
+                    ) {
+                        ragfairConfig.dynamic.blacklist.custom.push(item._tpl);
+                    }
+                });
+            }
+        }
     }
 }
 

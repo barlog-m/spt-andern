@@ -88,8 +88,17 @@ export class DoeTrader {
                         this.itemHelper.getItemAndChildrenPrice(itemTpls)
                     )
                     .addLoyaltyLevel(loyaltyLevel)
+                    .addStackCount(3)
                     .export(tables.traders[baseJson._id]);
             } else {
+                const AMMO_TPL = "5485a8684bdc2da71d8b4567";
+                const ITEM_COUNT = 3;
+                const AMMO_COUNT = 1200;
+
+                const count = this.itemHelper.isOfBaseclass(itemTpl, AMMO_TPL)
+                    ? AMMO_COUNT
+                    : ITEM_COUNT;
+
                 fluentTraderAssortHeper
                     .createSingleAssortItem(itemTpl)
                     .addMoneyCost(
@@ -97,6 +106,7 @@ export class DoeTrader {
                         this.itemHelper.getItemPrice(itemTpl)
                     )
                     .addLoyaltyLevel(loyaltyLevel)
+                    .addStackCount(count)
                     .export(tables.traders[baseJson._id]);
             }
         });
@@ -130,9 +140,8 @@ export class DoeTrader {
     copyDialogs() {
         const traders = this.databaseServer.getTables().traders;
 
-        const praporId = "54cb50c76803fa8b248b4571";
         const praporDialogs = JSON.parse(
-            JSON.stringify(traders[praporId].dialogue)
+            JSON.stringify(traders[Traders.THERAPIST].dialogue)
         ) as Record<string, string[]>;
 
         const trader = traders[this.doeTraderId];

@@ -18,6 +18,7 @@ import {
 import {
     IDifficultyCategories,
     IBotType,
+    IDifficulties,
 } from "@spt/models/eft/common/tables/IBotType";
 
 import * as fs from "fs";
@@ -37,7 +38,7 @@ const mapsToIgnore: string[] = [
 export function mapBotTuning(
     container: DependencyContainer,
     modPath: string,
-    logger: ILogger,
+    logger: ILogger
 ): undefined {
     const configServer = container.resolve<ConfigServer>("ConfigServer");
     const databaseServer = container.resolve<DatabaseServer>("DatabaseServer");
@@ -69,19 +70,17 @@ export function mapBotTuning(
         setPmcBrains(configServer, databaseTables, logger, modPath);
     }
 
-    if (config.mapBotBrainsTuning) {
-        botBrainsTuning(databaseTables);
-    }
+    botBrainsTuning(databaseTables);
 
     tuneScavs(container);
 }
 
 function setLocationBaseBotMax(
     databaseTables: IDatabaseTables,
-    logger: ILogger,
+    logger: ILogger
 ): undefined {
     for (const [locationName, locationObj] of Object.entries(
-        databaseTables.locations,
+        databaseTables.locations
     )) {
         if (mapsToIgnore.includes(locationName)) {
             continue;
@@ -121,12 +120,12 @@ function setLocationBaseBotMax(
             const locationBaseBotMaxDefault = locationBase.BotMax;
 
             locationBase.BotMax = Math.ceil(
-                locationBase.BotMax * config.mapMaxBotBuffMultiplier,
+                locationBase.BotMax * config.mapMaxBotBuffMultiplier
             );
 
             if (config.debug) {
                 logger.info(
-                    `[Andern] ${locationName}.Base.BotMax ${locationBaseBotMaxDefault} -> ${locationBase.BotMax}`,
+                    `[Andern] ${locationName}.Base.BotMax ${locationBaseBotMaxDefault} -> ${locationBase.BotMax}`
                 );
             }
         }
@@ -135,7 +134,7 @@ function setLocationBaseBotMax(
 
 function setBotConfigMaxBotCap(
     configServer: ConfigServer,
-    logger: ILogger,
+    logger: ILogger
 ): undefined {
     const botConfig = configServer.getConfig<IBotConfig>(ConfigTypes.BOT);
 
@@ -148,7 +147,7 @@ function setBotConfigMaxBotCap(
         if (map === "tarkovstreets" && config.mapStreetsMaxBotCap > 0) {
             botConfig.maxBotCap[map] = config.mapStreetsMaxBotCap;
             logger.info(
-                `[Andern] FIX botConfig.maxBotCap[${map}] ${botConfig.maxBotCap[map]}`,
+                `[Andern] FIX botConfig.maxBotCap[${map}] ${botConfig.maxBotCap[map]}`
             );
         }
 
@@ -170,12 +169,12 @@ function setBotConfigMaxBotCap(
         const botConfigMaxBotCapDefault = botConfig.maxBotCap[map];
 
         botConfig.maxBotCap[map] = Math.floor(
-            botConfig.maxBotCap[map] * config.mapMaxBotBuffMultiplier,
+            botConfig.maxBotCap[map] * config.mapMaxBotBuffMultiplier
         );
 
         if (config.debug) {
             logger.info(
-                `[Andern] botConfig.maxBotCap[${map}] ${botConfigMaxBotCapDefault} -> ${botConfig.maxBotCap[map]}`,
+                `[Andern] botConfig.maxBotCap[${map}] ${botConfigMaxBotCapDefault} -> ${botConfig.maxBotCap[map]}`
             );
         }
     }
@@ -183,21 +182,21 @@ function setBotConfigMaxBotCap(
 
 function setPmcBotDifficulty(
     configServer: ConfigServer,
-    logger: ILogger,
+    logger: ILogger
 ): undefined {
     const pmcConfig = configServer.getConfig<IPmcConfig>(ConfigTypes.PMC);
     pmcConfig.useDifficultyOverride = true;
     pmcConfig.difficulty = config.mapPmcBotDifficulty;
     if (config.debug) {
         logger.info(
-            `[Andern] pmcConfig.difficulty: ${config.mapPmcBotDifficulty}`,
+            `[Andern] pmcConfig.difficulty: ${config.mapPmcBotDifficulty}`
         );
     }
 }
 
 export function setPmcForceHealingItems(
     container: DependencyContainer,
-    logger: ILogger,
+    logger: ILogger
 ): undefined {
     const configServer = container.resolve<ConfigServer>("ConfigServer");
     const pmcConfig = configServer.getConfig<IPmcConfig>(ConfigTypes.PMC);
@@ -206,7 +205,7 @@ export function setPmcForceHealingItems(
 
 function ajustBotWeaponScattering(
     globals: IGlobals,
-    logger: ILogger,
+    logger: ILogger
 ): undefined {
     globals.BotWeaponScatterings.forEach((scattering) => {
         const divider = config.mapBotAccuracyMultiplier / 2;
@@ -218,10 +217,10 @@ function ajustBotWeaponScattering(
 
 function mapsTuning(
     databaseTables: IDatabaseTables,
-    logger: ILogger,
+    logger: ILogger
 ): undefined {
     for (const [locationName, locationObj] of Object.entries(
-        databaseTables.locations,
+        databaseTables.locations
     )) {
         if (mapsToIgnore.includes(locationName)) {
             continue;
@@ -251,7 +250,7 @@ function mapsTuning(
 
 function bossChanceChange(
     locationBase: ILocationBase,
-    logger: ILogger,
+    logger: ILogger
 ): undefined {
     Object.entries(locationBase.BossLocationSpawn).forEach(
         ([spawnKey, spawnObj]) => {
@@ -268,7 +267,7 @@ function bossChanceChange(
                     bossLocationSpawn.BossChance > 0
                 ) {
                     let chance = Math.round(
-                        bossLocationSpawn.BossChance + config.mapBossChanceBuff,
+                        bossLocationSpawn.BossChance + config.mapBossChanceBuff
                     );
                     if (chance > 100) {
                         chance = 100;
@@ -286,11 +285,11 @@ function bossChanceChange(
                     }
 
                     logger.info(
-                        `[Andern] location '${locationBase.Name}' boss '${bossLocationSpawn.BossName}' chance ${bossLocationSpawn.BossChance}`,
+                        `[Andern] location '${locationBase.Name}' boss '${bossLocationSpawn.BossName}' chance ${bossLocationSpawn.BossChance}`
                     );
                 }
             }
-        },
+        }
     );
 }
 
@@ -301,13 +300,13 @@ function bossDisablePartisan(locationBase: ILocationBase): undefined {
             if (bossLocationSpawn.BossName === "bossPartisan") {
                 bossLocationSpawn.BossChance = 0;
             }
-        },
+        }
     );
 }
 
 function makePmcAlwaysHostile(
     configServer: ConfigServer,
-    logger: ILogger,
+    logger: ILogger
 ): undefined {
     const pmcConfig = configServer.getConfig<IPmcConfig>(ConfigTypes.PMC);
 
@@ -319,6 +318,9 @@ function makePmcAlwaysHostile(
         hostilitySettings.usecEnemyChance = 100;
         hostilitySettings.savageEnemyChance = 100;
         hostilitySettings.savagePlayerBehaviour = "AlwaysEnemies";
+        hostilitySettings.chancedEnemies.forEach((chancedEnemy) => {
+            chancedEnemy.EnemyChance = 100;
+        });
 
         for (const chanceEnimes of hostilitySettings.chancedEnemies) {
             chanceEnimes.EnemyChance = 100;
@@ -327,17 +329,19 @@ function makePmcAlwaysHostile(
 
     if (config.debug) {
         logger.info(
-            `[Andern] pmcConfig.chanceSameSideIsHostilePercent: ${JSON.stringify(pmcConfig.hostilitySettings)}`,
+            `[Andern] pmcConfig.chanceSameSideIsHostilePercent: ${JSON.stringify(
+                pmcConfig.hostilitySettings
+            )}`
         );
     }
 }
 
 function increaseSpawnGroupsSize(
     databaseTables: IDatabaseTables,
-    logger: ILogger,
+    logger: ILogger
 ): undefined {
     for (const [locationName, locationObj] of Object.entries(
-        databaseTables.locations,
+        databaseTables.locations
     )) {
         const location: ILocation = locationObj;
         if (location.base) {
@@ -377,7 +381,7 @@ function setPmcBrains(
     configServer: ConfigServer,
     databaseTables: IDatabaseTables,
     logger: ILogger,
-    modPath: string,
+    modPath: string
 ): undefined {
     const pmcConfig = configServer.getConfig<IPmcConfig>(ConfigTypes.PMC);
 
@@ -385,17 +389,17 @@ function setPmcBrains(
         config.mapPmcBrainsConfig,
         "bear",
         modPath,
-        logger,
+        logger
     );
     const pmcBrainsUsec = loadPmcBrains(
         config.mapPmcBrainsConfig,
         "usec",
         modPath,
-        logger,
+        logger
     );
 
     for (const [locationName, locationObj] of Object.entries(
-        databaseTables.locations,
+        databaseTables.locations
     )) {
         if (mapsToIgnore.includes(locationName)) {
             continue;
@@ -408,13 +412,13 @@ function setPmcBrains(
     if (config.debug) {
         logger.info(
             `[Andern] PmcConfig.pmcType[pmcbear][every location] ${JSON.stringify(
-                pmcBrainsBear,
-            )}`,
+                pmcBrainsBear
+            )}`
         );
         logger.info(
             `[Andern] PmcConfig.pmcType[pmcusec][every location] ${JSON.stringify(
-                pmcBrainsUsec,
-            )}`,
+                pmcBrainsUsec
+            )}`
         );
     }
 }
@@ -423,7 +427,7 @@ function loadPmcBrains(
     brains: string,
     pmcType: string,
     modPath: string,
-    logger: ILogger,
+    logger: ILogger
 ): Record<string, number> {
     const brainsFileName = `${modPath}/brains/${pmcType}/${brains}.json`;
     try {
@@ -438,53 +442,27 @@ function loadPmcBrains(
 }
 
 function botBrainsTuning(databaseTables: IDatabaseTables): undefined {
-    assaultBrainTuning(databaseTables);
-    pmcbotBrainTuning(databaseTables);
     pmcBrainTuning(databaseTables);
 }
 
-function assaultBrainTuning(databaseTables: IDatabaseTables): undefined {
-    const assault: IBotType = databaseTables.bots.types["assault"];
-
-    Object.entries(assault.difficulty).forEach(
-        ([name, difficulty]: [string, IDifficultyCategories]) => {
-            difficulty.Shoot["CHANCE_TO_CHANGE_WEAPON"] = 80;
-            difficulty.Shoot["CHANCE_TO_CHANGE_WEAPON_WITH_HELMET"] = 40;
-        },
-    );
-}
-
-function pmcbotBrainTuning(databaseTables: IDatabaseTables): undefined {
-    const pmcbot: IBotType = databaseTables.bots.types["pmcbot"];
-
-    Object.entries(pmcbot.difficulty).forEach(
-        ([name, difficulty]: [string, IDifficultyCategories]) => {
-            brainTunning(difficulty);
-        },
-    );
-}
-
 function pmcBrainTuning(databaseTables: IDatabaseTables): undefined {
-    const usec: IBotType = databaseTables.bots.types["usec"];
-    const bear: IBotType = databaseTables.bots.types["bear"];
-
-    brainTunning(usec.difficulty.normal);
-    brainTunning(bear.difficulty.normal);
+    ["usec", "pmcusec", "bear", "pmcbear"].forEach((botTypeName) => {
+        const botType: IBotType = databaseTables.bots.types[botTypeName];
+        brainTunning(botType.difficulty);
+    });
 }
 
-function brainTunning(difficulty: IDifficultyCategories): undefined {
+function brainTunning(difficulty: IDifficulties): undefined {
     if (config.mapBotDisablePmcTalkativeness) {
-        difficulty.Mind["CAN_TALK"] = false;
-        difficulty.Mind["TALK_WITH_QUERY"] = false;
+        difficulty.normal.Mind["CAN_TALK"] = false;
+        difficulty.normal.Mind["TALK_WITH_QUERY"] = false;
+
+        difficulty.hard.Mind["CAN_TALK"] = false;
+        difficulty.hard.Mind["TALK_WITH_QUERY"] = false;
+
+        difficulty.impossible.Mind["CAN_TALK"] = false;
+        difficulty.impossible.Mind["TALK_WITH_QUERY"] = false;
     }
-
-    difficulty.Core["AccuratySpeed"] = 0.2;
-    difficulty.Core["GainSightCoef"] = 0.1;
-
-    difficulty.Shoot["HORIZONT_RECOIL_COEF"] = 0.08;
-    difficulty.Shoot["MAX_RECOIL_PER_METER"] = 0.08;
-    difficulty.Shoot["RECOIL_PER_METER"] = 0.04;
-    difficulty.Shoot["RECOIL_TIME_NORMALIZE"] = 1.1;
 }
 
 function tuneScavs(container: DependencyContainer): undefined {
@@ -508,5 +486,11 @@ function tuneScavs(container: DependencyContainer): undefined {
 
     if (config.mapScavsAlwaysHasHeadwear) {
         equipmentChances.Headwear = 100;
+    }
+
+    if (config.mapPlayerScavsBossBrainsOff) {
+        Object.keys(botConfig.playerScavBrainType).forEach((map: string) => {
+            botConfig.playerScavBrainType[map] = { assault: 1, pmcBot: 1 };
+        });
     }
 }
