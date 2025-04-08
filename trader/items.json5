@@ -102,10 +102,10 @@
         "5d44064fa4b9361e4f6eb8b5",
         //Steiner LAS/TAC 2 tactical flashlight
         "5b07dd285acfc4001754240d",
+        //7.62x54mm R T-46M gzh
+        "5e023cf8186a883be655e54f",
     ],
     four: [
-        //5.45x39 7N40
-        "61962b617c6c7b169525f168",
         //5.56x45 M856A1
         "59e6906286f7746c9f75e847",
         //7.62x39 PP gzh
@@ -114,7 +114,7 @@
         "58dd3ad986f77403051cba8f",
         //.300 Blackout CBJ
         "64b8725c4b75259c590fa899",
-        //9x39 SP-6
-        "57a0e5022459774d1673f889",
+        //9x39 PAB-9
+        "61962d879bb3d20b0946d385",
     ],
 }

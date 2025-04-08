@@ -159,6 +159,8 @@ Works only if `mapBotSettings` set to true.
 
 `removeAllTradersItemsFromFlea` removes all item from default traders from Flea except barter, food and keys.
 
+`legaMedalOnBosses` bosses has Lega Medal in their pockets (or not).
+
 ## Installation
 
 Put folder `BarlogM-Andern` from zip file into your `user/mods` folder

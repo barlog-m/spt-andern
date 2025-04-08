@@ -34,7 +34,7 @@ import vssOverheatFix from "./weaponUtils";
 import { setSeasonFromConfig, setSeasonRandom } from "./seasonUtils";
 import * as config from "../config/config.json";
 import registerRandomSeason from "./registerRandomSeason";
-import { GpCoinsLootGenerator } from "./GpCoinsLootGenerator";
+import { AdditionalLootGenerator } from "./AdditionalLootGenerator";
 import { IInsuranceConfig } from "@spt/models/spt/config/IInsuranceConfig";
 import { ItemHelper } from "@spt/helpers/ItemHelper";
 import { BaseClasses } from "@spt/models/enums/BaseClasses";
@@ -111,9 +111,9 @@ export class Andern implements IPreSptLoadMod, IPostSptLoadMod, IPostDBLoadMod {
         });
         this.doeTrader = container.resolve<DoeTrader>("AndernDoeTrader");
 
-        container.register<GpCoinsLootGenerator>(
+        container.register<AdditionalLootGenerator>(
             "BotLootGenerator",
-            GpCoinsLootGenerator,
+            AdditionalLootGenerator,
             {
                 lifecycle: Lifecycle.Singleton,
             }

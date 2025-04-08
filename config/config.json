@@ -61,6 +61,7 @@
     "disableBtr": false,
     "playerScavAlwaysHasBackpack": true,
     "gpCoinsOnPmcAndScavs": true,
-    "removeAllTradersItemsFromFlea": true,
+    "legaMedalOnBosses": true,
+    "removeAllTradersItemsFromFlea": false,
     "debug": false
 }

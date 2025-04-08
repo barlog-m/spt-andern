@@ -16,7 +16,6 @@ import {
     IBossLocationSpawn,
 } from "@spt/models/eft/common/ILocationBase";
 import {
-    IDifficultyCategories,
     IBotType,
     IDifficulties,
 } from "@spt/models/eft/common/tables/IBotType";
@@ -110,11 +109,6 @@ function setLocationBaseBotMax(
                 locationName === "tarkovstreets"
             ) {
                 continue;
-            }
-
-            // FIX for SPT-AKI 3.7.1
-            if (locationName === "factory4_day") {
-                locationBase.BotMax = 16;
             }
 
             const locationBaseBotMaxDefault = locationBase.BotMax;
