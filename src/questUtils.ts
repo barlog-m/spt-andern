@@ -101,6 +101,35 @@ export default function cheeseQuests(
                                 );
                             }
                         }
+
+                        // if quest required RPDN
+                        if (
+                            conditionCounter.weapon?.includes(
+                                "65268d8ecb944ff1e90ea385",
+                            )
+                        ) {
+                            delete conditionCounter.weapon;
+                            delete conditionCounter.weaponModsInclusive;
+                            if (config.debug) {
+                                logger.info(
+                                    `[Andern] quest '${quest.QuestName}' weapon condition removed`,
+                                );
+                            }
+                        }
+
+                        // if quest required UZI
+                        if (
+                            conditionCounter.weapon?.includes(
+                                "6680304edadb7aa61d00cef0",
+                            )
+                        ) {
+                            delete conditionCounter.weaponModsInclusive;
+                            if (config.debug) {
+                                logger.info(
+                                    `[Andern] quest '${quest.QuestName}' weapon condition removed`,
+                                );
+                            }
+                        }
                     });
 
                     if (questConditionCountersToDelete.length > 0) {

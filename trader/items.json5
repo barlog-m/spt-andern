@@ -80,6 +80,8 @@
         "5a9fbacda2750c00141e080f",
         //MAG_AK_IZHMASH_AK_STD_55_762X39_30
         "59d625f086f774661516605d",
+        //Valday PS-320 1/6x scope
+        "5c0517910db83400232ffee5",
     ],
     two: [
         //5.45x39mm PS gs
@@ -116,5 +118,9 @@
         "64b8725c4b75259c590fa899",
         //9x39 PAB-9
         "61962d879bb3d20b0946d385",
+        //9x21mm 7N42 Zubilo
+        "6576f4708ca9c4381d16cd9d",
+        //9x19mm PBP gzh
+        "5efb0da7a29a85116f6ea05f",
     ],
 }
