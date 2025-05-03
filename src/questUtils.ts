@@ -11,7 +11,7 @@ export default function cheeseQuests(
     const databaseServer: DatabaseServer =
         container.resolve<DatabaseServer>("DatabaseServer");
     const tables = databaseServer.getTables();
-    const shotySilencerArray = ["5b363dd25acfc4001a598fd2"];
+    const shotySilencer = "5b363dd25acfc4001a598fd2";
 
     Object.entries(tables.templates.quests).forEach(([questId, quest]) => {
         const questConditions = quest.conditions.AvailableForFinish.filter(
@@ -37,11 +37,7 @@ export default function cheeseQuests(
                         // if quest required silenced shotgun
                         if (
                             conditionCounter.weaponModsInclusive?.some(
-                                (subArray) =>
-                                    subArray.every(
-                                        (value, index) =>
-                                            value === shotySilencerArray[index],
-                                    ),
+                                (subArray) => subArray.includes(shotySilencer),
                             )
                         ) {
                             replaceWithAnySilencedWeapon(conditionCounter);
