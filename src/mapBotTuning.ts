@@ -238,6 +238,10 @@ function mapsTuning(
             if (config.mapBossDisablePartisan) {
                 bossDisablePartisan(locationBase);
             }
+
+            if (config.mapBossDisableGoons) {
+                bossDisableGoons(locationBase);
+            }
         }
     }
 }
@@ -278,6 +282,13 @@ function bossChanceChange(
                         bossLocationSpawn.BossChance = 0;
                     }
 
+                    if (
+                        config.mapBossDisableGoons &&
+                        bossLocationSpawn.BossName === "bossKnight"
+                    ) {
+                        bossLocationSpawn.BossChance = 0;
+                    }
+
                     logger.info(
                         `[Andern] location '${locationBase.Name}' boss '${bossLocationSpawn.BossName}' chance ${bossLocationSpawn.BossChance}`
                     );
@@ -292,6 +303,17 @@ function bossDisablePartisan(locationBase: ILocationBase): undefined {
         ([spawnKey, spawnObj]) => {
             const bossLocationSpawn: IBossLocationSpawn = spawnObj;
             if (bossLocationSpawn.BossName === "bossPartisan") {
+                bossLocationSpawn.BossChance = 0;
+            }
+        }
+    );
+}
+
+function bossDisableGoons(locationBase: ILocationBase): undefined {
+    Object.entries(locationBase.BossLocationSpawn).forEach(
+        ([spawnKey, spawnObj]) => {
+            const bossLocationSpawn: IBossLocationSpawn = spawnObj;
+            if (bossLocationSpawn.BossName === "bossKnight") {
                 bossLocationSpawn.BossChance = 0;
             }
         }

@@ -52,6 +52,26 @@
             id: "5b40e2bc5acfc40016388216",
             name: "HighCom Striker ULACH IIIA helmet (Desert Tan)",
         },
+        {
+            weight: 1,
+            id: "66b5f65ca7f72d197e70bcd6",
+            name: "Ballistic Armor Co. Bastion helmet (Armor Black)",
+        },
+        {
+            weight: 1,
+            id: "66b5f661af44ca0014063c05",
+            name: "Ballistic Armor Co. Bastion helmet (OD Green)",
+        },
+        {
+            weight: 1,
+            id: "66b5f666cad6f002ab7214c2",
+            name: "Ballistic Armor Co. Bastion helmet (MultiCam)",
+        },
+        {
+            weight: 1,
+            id: "6759655674aa5e0825040d62",
+            name: "MTEK FLUX Ballistic helmet (Olive Drab)",
+        },
     ],
     armoredRigs: [
         {

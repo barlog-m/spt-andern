@@ -56,6 +56,12 @@
             "slotId": "mod_magazine"
         },
         {
+            "_id": "98c733d6025261a2f0bba588",
+            "_tpl": "6130ca3fd92c473c77020dbd",
+            "parentId": "8d7f29dd55e8bfbb0df84e7c",
+            "slotId": "mod_charge"
+        },
+        {
             "_id": "3576b67d558e2fa793e98084",
             "_tpl": "649ec127c93611967b034957",
             "parentId": "8d7f29dd55e8bfbb0df84e7c",

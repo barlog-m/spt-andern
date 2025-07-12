@@ -71,7 +71,22 @@
             "weight": 1,
             "id": "5e4bfc1586f774264f7582d3",
             "name": "MSA Gallet TC 800 High Cut combat helmet"
-        }
+        },
+        {
+            weight: 1,
+            id: "66b5f65ca7f72d197e70bcd6",
+            name: "Ballistic Armor Co. Bastion helmet (Armor Black)",
+        },
+        {
+            weight: 1,
+            id: "66b5f661af44ca0014063c05",
+            name: "Ballistic Armor Co. Bastion helmet (OD Green)",
+        },
+        {
+            weight: 1,
+            id: "66b5f666cad6f002ab7214c2",
+            name: "Ballistic Armor Co. Bastion helmet (MultiCam)",
+        },
     ],
     "armoredRigs": [
         {

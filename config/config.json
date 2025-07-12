@@ -38,6 +38,7 @@
     "mapBotAccuracyMultiplier": 1.0,
     "mapBossChanceBuff": 0,
     "mapBossDisablePartisan": true,
+    "mapBossDisableGoons": false,
     "mapMakePmcAlwaysHostile": true,
     "mapIncreaseSpawnGroupsSize": false,
     "mapPmcBrainsConfig": "live",

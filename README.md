@@ -111,6 +111,8 @@ Works only if `mapBotSettings` set to true.
 
 `bossDisablePartisan` disable boss Partisan
 
+`bossDisableGoons` disable boss Goons
+
 `mapMakePmcAlwaysHostile` by default in SPT-AKI 20% chance that PMC is friendly to player. This setting set this chance to 0.
 
 `mapPmcBrainsConfig` if set to "default" then does nothing. Loads `brains/[value].json` file with config which brain will be selected as PMC brain. For example "noboss" will load `brains/noboss.json` as brains config.
