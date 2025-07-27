@@ -127,7 +127,7 @@ Works only if `mapBotSettings` set to true.
 
 `mapScavsAlwaysHasHeadwear` Regular scavs always has (their crap)
 
-`mapPlayerScavsBossBrainsOff` Player scavs don't use boss brains.
+`mapPlayerScavsBossBrainsOff` Player scavs only use pmcBot brains.
 
 ## Other settings
 
@@ -152,6 +152,8 @@ Works only if `mapBotSettings` set to true.
 `season` set season, can be winter, spring, summer and autumn.
 
 `seasonRandom` season set randomly after every raid.
+
+Set `season` and `seasonRandom` both to false disable any season manipulation by this mod.
 
 `disableBtr` disables BTR on all maps.
 
