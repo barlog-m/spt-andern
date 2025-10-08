@@ -1,48 +1,75 @@
 {
     "_id": "67b679b45618661582ccdbb5",
-    "working": true,
     "availableInRaid": false,
+    "unlockedByDefault": true,
+    "customization_seller": false,
+    "medic": false,
+    "name": "Doe",
+    "surname": " ",
+    "nickname": "Doe",
+    "location": "Unknown",
+    "avatar": "/files/trader/avatar/avatar.jpg",
+    "nextResupply": 1631483553,
+    "balance_dol": 0,
+    "balance_eur": 0,
+    "balance_rub": 99000000,
+    "buyer_up": false,
+    "currency": "RUB",
+    "mainDialogue": null,
+    "discount": 0,
+    "discount_end": 0,
+    "gridHeight": 150,
+    "insurance": {
+        "availability": false,
+        "min_return_hour": 0,
+        "max_return_hour": 0,
+        "max_storage_time": 96,
+        "min_payment": 0,
+        "excluded_category": []
+    },
+    "repair": {
+        "availability": false,
+        "currency": "5449016a4bdc2d6f028b456f",
+        "currency_coefficient": 1,
+        "excluded_category": [],
+        "excluded_id_list": [],
+        "quality": "0.0"
+    },
+    "isAvailableInPVE": true,
+    "isCanTransferItems": false,
+    "isCanTransferItemsFromPve": false,
     "items_buy": {
-        "category": ["5422acb9af1c889c16000029", "5448e8d04bdc2ddf718b4569"],
+        "category": [
+            "5422acb9af1c889c16000029",
+            "5448e8d04bdc2ddf718b4569"
+        ],
         "id_list": []
     },
     "items_buy_prohibited": {
         "category": [],
         "id_list": []
     },
-    "customization_seller": false,
-    "name": "Doe",
-    "surname": " ",
-    "nickname": "Doe",
-    "location": "Unknown",
-    "avatar": "/files/trader/avatar/avatar.jpg",
-    "balance_rub": 5000000,
-    "balance_dol": 0,
-    "balance_eur": 0,
-    "unlockedByDefault": true,
-    "discount": 0,
-    "discount_end": 0,
-    "buyer_up": true,
-    "currency": "RUB",
-    "nextResupply": 1615141448,
-    "repair": {
-        "availability": false,
-        "quality": 0,
-        "excluded_id_list": [],
-        "excluded_category": [],
-        "currency": "5449016a4bdc2d6f028b456f",
-        "currency_coefficient": 1,
-        "price_rate": 1
+    "items_sell": {
+        "1": {
+            "category": [],
+            "id_list": []
+        },
+        "2": {
+            "category": [],
+            "id_list": [
+            ]
+        },
+        "3": {
+            "category": [],
+            "id_list": [
+            ]
+        },
+        "4": {
+            "category": [],
+            "id_list": [
+            ]
+        }
     },
-    "insurance": {
-        "availability": false,
-        "min_payment": 0,
-        "min_return_hour": 0,
-        "max_return_hour": 0,
-        "max_storage_time": 96,
-        "excluded_category": ["62e9103049c018f425059f38"]
-    },
-    "gridHeight": 150,
     "loyaltyLevels": [
         {
             "minLevel": 1,
@@ -85,13 +112,14 @@
             "heal_price_coef": 0
         }
     ],
-    "sell_category": [
-        "575146b724597720a27126d5",
-        "635a758bfefc88a93f021b8a",
-        "55d45d3f4bdc2d972f8b456c",
-        "5b363dd25acfc4001a598fd2",
-        "5d1b36a186f7742523398433",
-        "59e3577886f774176a362503",
-        "5d6e67fba4b9361bc73bc779"
-    ]
+    "prohibitedTransferableItems": {
+        "category": [],
+        "id_list": []
+    },
+    "sell_category": [],
+    "sell_modifier_for_prohibited_items": 0,
+    "transferableItems": {
+        "category": [],
+        "id_list": []
+    }
 }

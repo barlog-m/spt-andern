@@ -1,0 +1,87 @@
+{
+    "Id": "68e5ccfc01001c74f89105a3",
+    "Name": "VPO-101 T1",
+    "Root": "68e5cd04fb57e40634035928",
+    "Items": [
+        {
+            "_id": "68e5cd04fb57e40634035928",
+            "_tpl": "5c501a4d2e221602b412b540",
+            "upd": {
+                "Repairable": {
+                    "MaxDurability": 100,
+                    "Durability": 100
+                },
+                "FireMode": {
+                    "FireMode": "single"
+                }
+            }
+        },
+        {
+            "_id": "68e5cd04fb57e40634035929",
+            "_tpl": "5c5039be2e221602b177c9ff",
+            "slotId": "mod_gas_block",
+            "parentId": "68e5cd04fb57e40634035928"
+        },
+        {
+            "_id": "68e5cd04fb57e4063403592a",
+            "_tpl": "5c503d0a2e221602b542b7ef",
+            "slotId": "mod_reciever",
+            "parentId": "68e5cd04fb57e40634035928"
+        },
+        {
+            "_id": "68e5cd04fb57e4063403592b",
+            "_tpl": "5c503b1c2e221602b21d6e9d",
+            "slotId": "mod_sight_rear",
+            "upd": {
+                "Sight": {
+                    "ScopesCurrentCalibPointIndexes": [
+                        0
+                    ],
+                    "ScopesSelectedModes": [
+                        0
+                    ],
+                    "SelectedScope": 0,
+                    "ScopeZoomValue": 0
+                }
+            },
+            "parentId": "68e5cd04fb57e40634035928"
+        },
+        {
+            "_id": "68e5cd04fb57e4063403592c",
+            "_tpl": "5c503af12e221602b177ca02",
+            "slotId": "mod_stock",
+            "parentId": "68e5cd04fb57e40634035928"
+        },
+        {
+            "_id": "68e5cd04fb57e4063403592d",
+            "_tpl": "5c503ac82e221602b21d6e9a",
+            "slotId": "mod_magazine",
+            "parentId": "68e5cd04fb57e40634035928"
+        },
+        {
+            "_id": "68e5cd04fb57e4063403592e",
+            "_tpl": "5947db3f86f77447880cf76f",
+            "slotId": "mod_mount",
+            "upd": {
+                "Sight": {
+                    "ScopesCurrentCalibPointIndexes": [
+                        0
+                    ],
+                    "ScopesSelectedModes": [
+                        0
+                    ],
+                    "SelectedScope": 0,
+                    "ScopeZoomValue": 0
+                }
+            },
+            "parentId": "68e5cd04fb57e40634035928"
+        },
+        {
+            "_id": "68e5cd04fb57e4063403592f",
+            "_tpl": "591c4e1186f77410354b316e",
+            "slotId": "mod_tactical",
+            "parentId": "68e5cd04fb57e4063403592e"
+        }
+    ],
+    "Parent": "5447b5fc4bdc2d87278b4567"
+}

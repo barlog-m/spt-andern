@@ -1,0 +1,11 @@
+{
+    "profiles": {
+        "SPTarkov.Server": {
+            "commandName": "Executable",
+            "executablePath": "$(SPTPath)\\SPT.Server.Linux",
+            "commandLineArgs": "",
+            "workingDirectory": "$(SPTPath)",
+            "environmentVariables": {}
+        }
+    }
+}

@@ -1,6 +1,6 @@
 {
-    minLevel: 32,
-    maxLevel: 41,
-    kittedHelmetPercent: 40,
-    nightVisionPercent: 100,
+    MinLevel: 32,
+    MaxLevel: 41,
+    KittedHelmetPercent: 40,
+    NightVisionPercent: 100,
 }

@@ -153,8 +153,6 @@ Works only if `mapBotSettings` set to true.
 
 `seasonRandom` season set randomly after every raid.
 
-Set `season` and `seasonRandom` both to false disable any season manipulation by this mod.
-
 `disableBtr` disables BTR on all maps.
 
 `playerScavAlwaysHasBackpack` if true player scav always spawns with backpack.
