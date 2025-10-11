@@ -17,7 +17,7 @@ public class ModData
     static readonly FrozenSet<string> _excludedMaps =
         ["develop", "hideout", "privatearea", "suburbs", "terminal", "town"];
 
-    public static readonly FrozenSet<string> EftMaps =
+    public static readonly FrozenSet<string> AllMaps =
     [
         "bigmap",
         "factory4_day",
@@ -36,15 +36,13 @@ public class ModData
 
     public static readonly MongoId LegaMedalId = new("6656560053eaaa7a23349c86");
 
-    public ModData(ISptLogger<Andern> logger, ModHelper modHelper)
+    public ModData(ISptLogger<ModData> logger, ModHelper modHelper)
     {
         PathToMod =
             modHelper.GetAbsolutePathToModFolder(Assembly.GetExecutingAssembly());
 
         var pathToConfig = Path.Join(PathToMod, "config");
         ModConfig = JSON5.ToObject<ModConfig>(modHelper.GetRawFileData(pathToConfig, "config.json5"));
-
-        logger.Info($"{ModConfig}");
     }
 
     public bool IsMapExclueded(string mapName)

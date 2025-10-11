@@ -60,7 +60,7 @@ public class MapBotTuning(
 
     private void MapBossChanceAdjustment()
     {
-        foreach (var locationId in ModData.EftMaps)
+        foreach (var locationId in ModData.AllMaps)
         {
             var location = databaseService.GetLocation(locationId);
             foreach (var bossLocationSpawn in location.Base.BossLocationSpawn)
@@ -104,7 +104,7 @@ public class MapBotTuning(
     {
         var pmcConfig = configServer.GetConfig<PmcConfig>();
 
-        foreach (var locationName in ModData.EftMaps)
+        foreach (var locationName in ModData.AllMaps)
         {
             var usecType = pmcConfig.PmcType["pmcusec"][locationName];
             usecType.Clear();

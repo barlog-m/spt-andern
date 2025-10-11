@@ -161,7 +161,7 @@ public class GearGeneratorHelper(
 
         foreach (var item in items)
         {
-            result.Add(item.Id, item.Weight);
+            result.TryAdd(item.Id, item.Weight);
         }
 
         return result;

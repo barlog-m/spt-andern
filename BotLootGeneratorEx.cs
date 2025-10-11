@@ -65,7 +65,12 @@ public class BotLootGeneratorEx(
         if (_modConfig.GpCoinsOnPmcAndScavs)
         {
             if (botGenerationDetails.IsPmc ||
-                botGenerationDetails.Role == "assault")
+                string.Equals(botGenerationDetails.Role, "assault", StringComparison.OrdinalIgnoreCase) ||
+                string.Equals(botGenerationDetails.Role, "arenafighter", StringComparison.OrdinalIgnoreCase) ||
+                string.Equals(botGenerationDetails.Role, "arenafighterevent", StringComparison.OrdinalIgnoreCase) ||
+                string.Equals(botGenerationDetails.Role, "exusec", StringComparison.OrdinalIgnoreCase) ||
+                string.Equals(botGenerationDetails.Role, "pmc", StringComparison.OrdinalIgnoreCase) ||
+                string.Equals(botGenerationDetails.Role, "pmcbot", StringComparison.OrdinalIgnoreCase))
             {
                 AddGpCoins(botId, botGenerationDetails, botInventory);
             }
@@ -104,7 +109,7 @@ public class BotLootGeneratorEx(
         AddLootFromPool(
             botId,
             GpDict,
-            [EquipmentSlots.Backpack],
+            [EquipmentSlots.Pockets, EquipmentSlots.Backpack],
             1,
             botInventory,
             botGenerationDetails.Role,

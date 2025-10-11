@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "NRl8Qh17Ip0=",
+  "dgSpecHash": "STK9X4P913I=",
   "success": true,
   "projectFilePath": "/mnt/data/github/spt-andern/BarlogM-Andern.csproj",
   "expectedPackageFiles": [
@@ -9,9 +9,9 @@
     "/home/barlog/.nuget/packages/jetbrains.annotations/2025.2.2/jetbrains.annotations.2025.2.2.nupkg.sha512",
     "/home/barlog/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/9.0.9/microsoft.extensions.dependencyinjection.abstractions.9.0.9.nupkg.sha512",
     "/home/barlog/.nuget/packages/semanticversioning/3.0.0/semanticversioning.3.0.0.nupkg.sha512",
-    "/home/barlog/.nuget/packages/sptarkov.common/4.0.0-pre.20251007.1604/sptarkov.common.4.0.0-pre.20251007.1604.nupkg.sha512",
-    "/home/barlog/.nuget/packages/sptarkov.di/4.0.0-pre.20251007.1604/sptarkov.di.4.0.0-pre.20251007.1604.nupkg.sha512",
-    "/home/barlog/.nuget/packages/sptarkov.server.core/4.0.0-pre.20251007.1604/sptarkov.server.core.4.0.0-pre.20251007.1604.nupkg.sha512",
+    "/home/barlog/.nuget/packages/sptarkov.common/4.0.0-pre.20251010.1631/sptarkov.common.4.0.0-pre.20251010.1631.nupkg.sha512",
+    "/home/barlog/.nuget/packages/sptarkov.di/4.0.0-pre.20251010.1631/sptarkov.di.4.0.0-pre.20251010.1631.nupkg.sha512",
+    "/home/barlog/.nuget/packages/sptarkov.server.core/4.0.0-pre.20251010.1631/sptarkov.server.core.4.0.0-pre.20251010.1631.nupkg.sha512",
     "/home/barlog/.nuget/packages/system.io.hashing/9.0.9/system.io.hashing.9.0.9.nupkg.sha512",
     "/home/barlog/.nuget/packages/microsoft.aspnetcore.app.ref/9.0.9/microsoft.aspnetcore.app.ref.9.0.9.nupkg.sha512"
   ],

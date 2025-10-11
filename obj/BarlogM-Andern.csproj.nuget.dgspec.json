@@ -46,15 +46,15 @@
           "dependencies": {
             "SPTarkov.Common": {
               "target": "Package",
-              "version": "[4.0.0-pre.20251007.1604, )"
+              "version": "[4.0.0-pre.20251010.1631, )"
             },
             "SPTarkov.DI": {
               "target": "Package",
-              "version": "[4.0.0-pre.20251007.1604, )"
+              "version": "[4.0.0-pre.20251010.1631, )"
             },
             "SPTarkov.Server.Core": {
               "target": "Package",
-              "version": "[4.0.0-pre.20251007.1604, )"
+              "version": "[4.0.0-pre.20251010.1631, )"
             },
             "fastJSON5": {
               "target": "Package",

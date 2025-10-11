@@ -475,6 +475,7 @@ public class WeaponGenerator(
             weaponTpl,
             isNightVision);
         AlternateModules(botLevel, weaponWithMods, weaponTpl);
+        SetDefaultScopeZoomValue(weaponWithMods);
         AddRandomEnhancement(weaponWithMods);
         var weaponTemplate = GetTemplateById(weaponTpl);
         var caliber = GetCaliberByTemplateId(weaponTpl);
@@ -490,5 +491,21 @@ public class WeaponGenerator(
             AmmoTpl = ammoTpl,
             MagazineTpl = magazineTpl
         };
+    }
+
+    private void SetDefaultScopeZoomValue(List<Item> weaponWithMods)
+    {
+        foreach (var module in weaponWithMods)
+        {
+            if (itemHelper.IsOfBaseclass(module.Template, BaseClasses.OPTIC_SCOPE) ||
+                itemHelper.IsOfBaseclass(module.Template, BaseClasses.ASSAULT_SCOPE))
+            {
+                module.Upd = new Upd();
+                module.Upd.Sight = new UpdSight
+                {
+                    ScopeZoomValue = 0,
+                };
+            }
+        }
     }
 }
