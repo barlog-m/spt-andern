@@ -65,6 +65,8 @@ public class EtcPostDb(
             Traders.MECHANIC,
             Traders.RAGMAN,
             Traders.JAEGER,
+            Traders.REF,
+            Traders.BTR
         ];
 
         var ragfair = configServer.GetConfig<RagfairConfig>();

@@ -1,3 +1,4 @@
+using System.Collections.Frozen;
 using SPTarkov.DI.Annotations;
 using SPTarkov.Server.Core.Generators;
 using SPTarkov.Server.Core.Helpers;
@@ -28,7 +29,6 @@ public class BotLootGeneratorEx(
     ServerLocalisationService serverLocalisationService,
     ConfigServer configServer,
     ICloner cloner,
-    JsonUtil jsonUtil,
     ModData modData
 ) : BotLootGenerator(
     logger,
@@ -52,6 +52,64 @@ public class BotLootGeneratorEx(
     private static readonly Dictionary<MongoId, double> LegaDict = new()
         { [ModData.LegaMedalId] = 1 };
 
+    private static readonly FrozenSet<string> AllScavs =
+    [
+        "arenafighter",
+        "arenafighterevent",
+        "assault",
+        "assaultgroup",
+        "bossboar",
+        "bossboarsniper",
+        "bossbully",
+        "bossgluhar",
+        "bosskilla",
+        "bosskillaagro",
+        "bossknight",
+        "bosskojaniy",
+        "bosskolontay",
+        "bosspartisan",
+        "bosssanitar",
+        "bosstagilla",
+        "bosstagillaagro",
+        "bosstest",
+        "bosszryachiy",
+        "crazyassaultevent",
+        "cursedassault",
+        "exusec",
+        "followerbigpipe",
+        "followerbirdeye",
+        "followerboar",
+        "followerboarclose1",
+        "followerboarclose2",
+        "followerbully",
+        "followergluharassault",
+        "followergluharscout",
+        "followergluharsecurity",
+        "followergluharsnipe",
+        "followerkojaniy",
+        "followerkolontayassault",
+        "followerkolontaysecurity",
+        "followersanitar",
+        "followertagilla",
+        "followerzryachiy",
+        "infectedassault",
+        "infectedcivil",
+        "infectedlaborant",
+        "infectedpmc",
+        "infectedtagilla",
+        "marksman",
+        "peacemaker",
+        "pmc",
+        "pmcbot",
+        "sectantoni",
+        "sectantpredvestnik",
+        "sectantpriest",
+        "sectantprizrak",
+        "sectantwarrior",
+        "skier",
+        "tagillahelperagro"
+    ];
+
     private readonly ModConfig _modConfig = modData.ModConfig;
 
     public override void GenerateLoot(MongoId botId, MongoId sessionId,
@@ -62,25 +120,20 @@ public class BotLootGeneratorEx(
         base.GenerateLoot(botId, sessionId, botJsonTemplate,
             botGenerationDetails, botInventory);
 
-        if (_modConfig.GpCoinsOnPmcAndScavs)
-        {
-            if (botGenerationDetails.IsPmc ||
-                string.Equals(botGenerationDetails.Role, "assault", StringComparison.OrdinalIgnoreCase) ||
-                string.Equals(botGenerationDetails.Role, "arenafighter", StringComparison.OrdinalIgnoreCase) ||
-                string.Equals(botGenerationDetails.Role, "arenafighterevent", StringComparison.OrdinalIgnoreCase) ||
-                string.Equals(botGenerationDetails.Role, "exusec", StringComparison.OrdinalIgnoreCase) ||
-                string.Equals(botGenerationDetails.Role, "pmc", StringComparison.OrdinalIgnoreCase) ||
-                string.Equals(botGenerationDetails.Role, "pmcbot", StringComparison.OrdinalIgnoreCase))
-            {
-                AddGpCoins(botId, botGenerationDetails, botInventory);
-            }
-        }
-
         if (_modConfig.LegaMedalOnBosses)
         {
             if (BotConfig.Bosses.Contains(botGenerationDetails.Role))
             {
                 AddLegaMedal(botId, botGenerationDetails, botInventory);
+            }
+        }
+
+        if (_modConfig.GpCoinsOnPmcAndScavs)
+        {
+            if (botGenerationDetails.IsPmc ||
+                AllScavs.Contains(botGenerationDetails.Role.ToLower()))
+            {
+                AddGpCoins(botId, botGenerationDetails, botInventory);
             }
         }
     }
@@ -109,7 +162,7 @@ public class BotLootGeneratorEx(
         AddLootFromPool(
             botId,
             GpDict,
-            [EquipmentSlots.Pockets, EquipmentSlots.Backpack],
+            [EquipmentSlots.Pockets, EquipmentSlots.Backpack, EquipmentSlots.TacticalVest],
             1,
             botInventory,
             botGenerationDetails.Role,

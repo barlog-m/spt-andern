@@ -9,9 +9,9 @@
 
     <ItemGroup>
         <PackageReference Include="fastJSON5" Version="1.0.4" />
-        <PackageReference Include="SPTarkov.Common" Version="4.0.0-pre.20251010.1631" />
-        <PackageReference Include="SPTarkov.DI" Version="4.0.0-pre.20251010.1631" />
-        <PackageReference Include="SPTarkov.Server.Core" Version="4.0.0-pre.20251010.1631" />
+        <PackageReference Include="SPTarkov.Common" Version="4.0.0-pre.202510110943" />
+        <PackageReference Include="SPTarkov.DI" Version="4.0.0-pre.202510110943" />
+        <PackageReference Include="SPTarkov.Server.Core" Version="4.0.0-pre.202510110943" />
     </ItemGroup>
 
     <ItemGroup>

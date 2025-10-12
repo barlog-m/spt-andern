@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BarlogM-Andern")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+07687dda99fb683a976b5db482967de5c40a7721")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ce1eca6d6f6febea6610b6e7aa4a89765b9dc8e4")]
 [assembly: System.Reflection.AssemblyProductAttribute("BarlogM-Andern")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BarlogM-Andern")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -25,7 +25,7 @@ public class GearGeneratorHelper(
         BotBaseInventory botInventory,
         string equipmentItemTpl)
     {
-        var (isItemExists, templateItem) =
+        var (isItemExists, itemTemplate) =
             itemHelper.GetItem(equipmentItemTpl);
 
         if (!isItemExists)
@@ -36,9 +36,9 @@ public class GearGeneratorHelper(
 
         if (equipmentSlot == EquipmentSlots.Headwear ||
             equipmentSlot == EquipmentSlots.ArmorVest ||
-            (equipmentSlot == EquipmentSlots.TacticalVest && itemHelper.ItemHasSlots(templateItem.Id)))
+            (equipmentSlot == EquipmentSlots.TacticalVest && itemHelper.ItemHasSlots(itemTemplate.Id)))
         {
-            var items = CreateComplexItem(equipmentItemTpl, botRole, templateItem);
+            var items = CreateComplexItem(itemTemplate, botRole);
             var root = items.First();
 
             root.ParentId = botInventory.Equipment;
@@ -49,18 +49,14 @@ public class GearGeneratorHelper(
             return root;
         }
 
-        var extraProps = botGeneratorHelper.GenerateExtraPropertiesForItem(
-            templateItem, botRole, true);
-
-        var id = new MongoId();
-
         var item = new Item
         {
-            Id = id,
-            Template = templateItem.Id,
+            Id = new MongoId(),
+            Template = itemTemplate.Id,
             ParentId = botInventory.Equipment,
             SlotId = equipmentSlot.ToString(),
-            Upd = extraProps == null ? new Upd() : extraProps
+            Upd = botGeneratorHelper.GenerateExtraPropertiesForItem(
+            itemTemplate, botRole)
         };
 
         botInventory.Items.Add(item);
@@ -75,7 +71,7 @@ public class GearGeneratorHelper(
         string slotId,
         MongoId parentId)
     {
-        var (isItemExists, templateItem) =
+        var (isItemExists, itemTemplate) =
             itemHelper.GetItem(equipmentItemTpl);
 
         if (!isItemExists)
@@ -84,37 +80,31 @@ public class GearGeneratorHelper(
                 $"[Andern] PutModItemToInventory: wrong template id {equipmentItemTpl} for slot {slotId}");
         }
 
-        var extraProps = botGeneratorHelper.GenerateExtraPropertiesForItem(
-            templateItem, botRole, true);
-
-        var id = new MongoId();
-
         var item = new Item
         {
-            Id = id,
-            Template = templateItem.Id,
+            Id = new MongoId(),
+            Template = itemTemplate.Id,
             ParentId = parentId,
             SlotId = slotId,
-            Upd = extraProps == null ? new Upd() : extraProps
+            Upd = botGeneratorHelper.GenerateExtraPropertiesForItem(itemTemplate, botRole)
         };
 
-        botInventory.Items.Add(item);
-        return id;
+        botInventory.Items?.Add(item);
+        return item.Id;
     }
 
-    private List<Item> CreateComplexItem(string tpl, string botRole, TemplateItem templateItem)
+    private List<Item> CreateComplexItem(TemplateItem baseItemTemplate, string botRole)
     {
-        var preset = presetHelper.GetDefaultPresetsByTplKey()[tpl];
+        var preset = presetHelper.GetDefaultPresetsByTplKey()[baseItemTemplate.Id];
 
         var items = cloner.Clone(preset.Items).ReplaceIDs().ToList();
         items.RemapRootItemId();
 
         foreach (var item in items)
         {
-            var extraProps = botGeneratorHelper.GenerateExtraPropertiesForItem(
-                templateItem, botRole);
-
-            item.Upd = extraProps == null ? new Upd() : extraProps;
+            var (sItemExists, itemTemplate) = itemHelper.GetItem(item.Template);
+            item.Upd =
+                botGeneratorHelper.GenerateExtraPropertiesForItem(itemTemplate, botRole);
         }
 
         return items;

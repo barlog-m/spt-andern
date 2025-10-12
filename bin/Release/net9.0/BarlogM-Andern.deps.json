@@ -8,9 +8,9 @@
     ".NETCoreApp,Version=v9.0": {
       "BarlogM-Andern/1.0.0": {
         "dependencies": {
-          "SPTarkov.Common": "4.0.0-pre.20251010.1631",
-          "SPTarkov.DI": "4.0.0-pre.20251010.1631",
-          "SPTarkov.Server.Core": "4.0.0-pre.20251010.1631",
+          "SPTarkov.Common": "4.0.0-pre.202510110943",
+          "SPTarkov.DI": "4.0.0-pre.202510110943",
+          "SPTarkov.Server.Core": "4.0.0-pre.202510110943",
           "fastJSON5": "1.0.4"
         },
         "runtime": {
@@ -57,7 +57,7 @@
           }
         }
       },
-      "SPTarkov.Common/4.0.0-pre.20251010.1631": {
+      "SPTarkov.Common/4.0.0-pre.202510110943": {
         "dependencies": {
           "SemanticVersioning": "3.0.0"
         },
@@ -68,7 +68,7 @@
           }
         }
       },
-      "SPTarkov.DI/4.0.0-pre.20251010.1631": {
+      "SPTarkov.DI/4.0.0-pre.202510110943": {
         "dependencies": {
           "JetBrains.Annotations": "2025.2.2",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "9.0.9"
@@ -80,11 +80,11 @@
           }
         }
       },
-      "SPTarkov.Server.Core/4.0.0-pre.20251010.1631": {
+      "SPTarkov.Server.Core/4.0.0-pre.202510110943": {
         "dependencies": {
           "FastCloner": "3.3.16",
-          "SPTarkov.Common": "4.0.0-pre.20251010.1631",
-          "SPTarkov.DI": "4.0.0-pre.20251010.1631",
+          "SPTarkov.Common": "4.0.0-pre.202510110943",
+          "SPTarkov.DI": "4.0.0-pre.202510110943",
           "System.IO.Hashing": "9.0.9"
         },
         "runtime": {
@@ -145,26 +145,26 @@
       "path": "semanticversioning/3.0.0",
       "hashPath": "semanticversioning.3.0.0.nupkg.sha512"
     },
-    "SPTarkov.Common/4.0.0-pre.20251010.1631": {
+    "SPTarkov.Common/4.0.0-pre.202510110943": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-Y2vnEAbZGeMNPi3cg0ZE4Tvs54uDU8a91aMbxYSMDe8G0Bt5ozcI//67Kw+Gr83mfDejiRaMWJooZ2c9eEoBug==",
-      "path": "sptarkov.common/4.0.0-pre.20251010.1631",
-      "hashPath": "sptarkov.common.4.0.0-pre.20251010.1631.nupkg.sha512"
+      "sha512": "sha512-PQ+/OHCyXHufmY7vKddzHNF6BObVcjHYiq0r6uE43UBMQ+2yHBoa3zYqA0NAV7Q6XtmqrYNP7s0vanrMdWsHsg==",
+      "path": "sptarkov.common/4.0.0-pre.202510110943",
+      "hashPath": "sptarkov.common.4.0.0-pre.202510110943.nupkg.sha512"
     },
-    "SPTarkov.DI/4.0.0-pre.20251010.1631": {
+    "SPTarkov.DI/4.0.0-pre.202510110943": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-Te/Y+gLYm6HZpaLl8vOZp9RUZVxNfbC1VYv+z6Rq/MHkevh/r12lMTbblBnnAlott16s5psu5nwVG0J5N5VBQw==",
-      "path": "sptarkov.di/4.0.0-pre.20251010.1631",
-      "hashPath": "sptarkov.di.4.0.0-pre.20251010.1631.nupkg.sha512"
+      "sha512": "sha512-or+Pcsny1vuf8nZoyCknTbl3LG9TGyYgndPTu2N49TdzLbENDt8Snlyo6YyKONGJMC1VaIbb0K1t/z1EgypBQg==",
+      "path": "sptarkov.di/4.0.0-pre.202510110943",
+      "hashPath": "sptarkov.di.4.0.0-pre.202510110943.nupkg.sha512"
     },
-    "SPTarkov.Server.Core/4.0.0-pre.20251010.1631": {
+    "SPTarkov.Server.Core/4.0.0-pre.202510110943": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-e1ozeFP7L3PFWpv9c8cgSvBV6tCt2cfdeJVmfyzq0FM2DnQON0SvpjQ7/5SNFTnq/rIdzfWUgMTtba0yAppTLA==",
-      "path": "sptarkov.server.core/4.0.0-pre.20251010.1631",
-      "hashPath": "sptarkov.server.core.4.0.0-pre.20251010.1631.nupkg.sha512"
+      "sha512": "sha512-VbbwgpldgUkLeOYsgjXZ78LLuMU8O/LSNjz41hgN8343y/VgRgzg5+VV/f6cDITTHphn8RZHp3qUSdbykm0lgQ==",
+      "path": "sptarkov.server.core/4.0.0-pre.202510110943",
+      "hashPath": "sptarkov.server.core.4.0.0-pre.202510110943.nupkg.sha512"
     },
     "System.IO.Hashing/9.0.9": {
       "type": "package",
