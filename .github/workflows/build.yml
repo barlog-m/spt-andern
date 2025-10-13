@@ -26,13 +26,14 @@ jobs:
       - name: Build
         run: |
           cd ${{ env.PROJECT_NAME }}
-          dotnet build --configuration Release --output dist
+          dotnet build --configuration Release --output ${{ env.PROJECT_NAME }}
 
       - name: Create zip archive
         run: |
           cd ${{ env.PROJECT_NAME }}
-          mv dist ${{ env.PROJECT_NAME }}
-          zip -r ${{ env.PROJECT_NAME }}.zip ${{ env.PROJECT_NAME }}
+          mkdir -p SPT/user/mods
+          mv ${{ env.PROJECT_NAME }} SPT/user/mods/
+          zip -r ${{ env.PROJECT_NAME }}.zip SPT/user/mods/${{ env.PROJECT_NAME }}
 
       - name: Release
         uses: softprops/action-gh-release@v1
