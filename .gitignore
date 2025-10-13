@@ -1,0 +1,14 @@
+# macOS
+*~
+.DS_Store
+
+# Vim
+.vim/
+
+# IDEA
+.idea/
+
+obj/
+bin/
+dist/
+
