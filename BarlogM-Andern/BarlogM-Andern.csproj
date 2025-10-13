@@ -20,7 +20,9 @@
             <Private>false</Private>
             <ExcludeAssets>runtime</ExcludeAssets>
         </PackageReference>
-        <PackageReference Include="fastJSON5" Version="1.0.4" />
+        <PackageReference Include="fastJSON5" Version="1.0.4">
+            <Private>true</Private>
+        </PackageReference>
     </ItemGroup>
 
     <ItemGroup>
@@ -59,4 +61,11 @@
         <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
         <ProduceReferenceAssembly>false</ProduceReferenceAssembly>
     </PropertyGroup>
+
+    <Target Name="CopyFastJSON" AfterTargets="Build">
+        <ItemGroup>
+            <FastJSONFiles Include="$(NuGetPackageRoot)fastjson5\1.0.4\lib\netstandard2.1\fastJSON5.dll" />
+        </ItemGroup>
+        <Copy SourceFiles="@(FastJSONFiles)" DestinationFolder="$(OutputPath)" SkipUnchangedFiles="true" />
+    </Target>
 </Project>
