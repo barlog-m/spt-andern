@@ -141,6 +141,8 @@ public class GearGeneratorHelper(
 
     public string WeightedRandomGearItemTpl(List<GearItem> items)
     {
+        if (items.Count == 0) return "";
+
         return weightedRandomHelper.GetWeightedValue(GearItemArrayToDictionary(items));
     }
 

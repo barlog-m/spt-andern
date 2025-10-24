@@ -1,18 +1,19 @@
 {
-    "Caliber545x39": [
-        "56dff4ecd2720b5f5a8b4568",
-        "56dff421d2720b5f5a8b4567"
+    Caliber545x39: [
+        "56dff0bed2720bb0668b4567", // FMJ
+        "56dff3afd2720bba668b4567" // PS
     ],
-    "Caliber762x39": [
-        "64b7af734b75259c590fa895"
+    Caliber762x39: [
+        "64b7af5a8532cf95ee0a0dbd" // FMJ
     ],
-    "Caliber366TKM": [
-        "59e6542b86f77411dc52a77a"
+    Caliber366TKM: [
+        "59e6542b86f77411dc52a77a" // FMJ
     ],
-    "Caliber556x45NATO": [
-        "59e6918f86f7746c9f75e849"
+    Caliber556x45NATO: [
+        "59e68f6f86f7746c9f75e846", // M856
+        "54527a984bdc2d4e668b4567" // M855
     ],
-    "Caliber762x51": [
-        "5e023e88277cce2b522ff2b1"
+    Caliber762x51: [
+        "5e023e88277cce2b522ff2b1" // Ultra Nosler
     ]
 }

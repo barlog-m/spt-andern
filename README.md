@@ -65,6 +65,10 @@ Works only if `mapBotSettings` set to true.
 
 `MapBossChanceAdjustment` add or remove percent for existing boss chance. For example if map boss chance is 35 and you set this parameter to 20 then boss chance will be 35 + 20.
 
+`MapBossPartisanDisable` disable Partisan
+
+`MapBossGoonsDisable` disable Goons
+
 `MapMakePmcAlwaysHostile` by default in SPT-AKI 20% chance that PMC is friendly to player. This setting set this chance to 0.
 
 `MapPmcBrainsAsLive` pmc uses only pmcUSEC and pmcBEAR brains.

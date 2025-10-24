@@ -1,381 +1,417 @@
 {
     headsets: [
         {
+            // Peltor ComTac VI headset (Coyote Brown)
             weight: 2,
             id: "66b5f6985891c84aab75ca76",
-            name: "Peltor ComTac VI headset (Coyote Brown)",
         },
         {
+            // Peltor ComTac V headset (OD Green)
             weight: 2,
             id: "66b5f693acff495a294927e3",
-            name: "Peltor ComTac V headset (OD Green)",
         },
         {
+            // Peltor ComTac IV Hybrid headset (Coyote Brown)
             weight: 1,
             id: "628e4e576d783146b124c64d",
-            name: "Peltor ComTac IV Hybrid headset (Coyote Brown)",
         },
     ],
     helmets: [
         {
-            weight: 1,
+            // Ops-Core FAST MT Super High Cut helmet (Tan)
+            weight: 2,
             id: "5ac8d6885acfc400180ae7b0",
-            name: "Ops-Core FAST MT Super High Cut helmet (Tan)",
         },
         {
-            weight: 1,
+            // Ops-Core FAST MT Super High Cut helmet (Black)
+            weight: 2,
             id: "5a154d5cfcdbcb001a3b00da",
-            name: "Ops-Core FAST MT Super High Cut helmet (Black)",
         },
         {
-            weight: 1,
+            // Crye Precision AirFrame helmet (Tan)
+            weight: 2,
             id: "5c17a7ed2e2216152142459c",
-            name: "Crye Precision AirFrame helmet (Tan)",
         },
         {
-            weight: 1,
+            // Team Wendy EXFIL Ballistic Helmet (Black)
+            weight: 2,
             id: "5e00c1ad86f774747333222c",
-            name: "Team Wendy EXFIL Ballistic Helmet (Black)",
         },
         {
-            weight: 1,
+            // Team Wendy EXFIL Ballistic Helmet (Coyote Brown)
+            weight: 2,
             id: "5e01ef6886f77445f643baa4",
-            name: "Team Wendy EXFIL Ballistic Helmet (Coyote Brown)",
         },
         {
-            weight: 1,
+            // HighCom Striker ULACH IIIA helmet (Black)
+            weight: 2,
             id: "5b40e1525acfc4771e1c6611",
-            name: "HighCom Striker ULACH IIIA helmet (Black)",
         },
         {
-            weight: 1,
+            // HighCom Striker ULACH IIIA helmet (Desert Tan)
+            weight: 2,
             id: "5b40e2bc5acfc40016388216",
-            name: "HighCom Striker ULACH IIIA helmet (Desert Tan)",
         },
         {
-            weight: 1,
+            // Ballistic Armor Co. Bastion helmet (Armor Black)
+            weight: 2,
             id: "66b5f65ca7f72d197e70bcd6",
-            name: "Ballistic Armor Co. Bastion helmet (Armor Black)",
         },
         {
-            weight: 1,
+            // Ballistic Armor Co. Bastion helmet (OD Green)
+            weight: 2,
             id: "66b5f661af44ca0014063c05",
-            name: "Ballistic Armor Co. Bastion helmet (OD Green)",
         },
         {
-            weight: 1,
+            // Ballistic Armor Co. Bastion helmet (MultiCam)
+            weight: 2,
             id: "66b5f666cad6f002ab7214c2",
-            name: "Ballistic Armor Co. Bastion helmet (MultiCam)",
         },
         {
-            weight: 1,
+            // MTEK FLUX Ballistic helmet (Olive Drab)
+            weight: 2,
             id: "6759655674aa5e0825040d62",
-            name: "MTEK FLUX Ballistic helmet (Olive Drab)",
+        },
+        {
+            // Altyn bulletproof helmet
+            weight: 1,
+            id: "5aa7e276e5b5b000171d0647",
+        },
+        {
+            // Rys-T bulletproof helmet
+            weight: 1,
+            id: "5f60c74e3b85f6263c145586",
+        },
+        {
+            // Maska-1SCh bulletproof helmet (Olive Drab)
+            weight: 1,
+            id: "5c091a4e0db834001d5addc8",
+        },
+        {
+            // Maska-1SCh bulletproof helmet (Killa)
+            weight: 1,
+            id: "5c0e874186f7745dc7616606",
+        },
+        {
+            // Vulkan-5 (LShZ-5) bulletproof helmet
+            weight: 1,
+            id: "5ca20ee186f774799474abc2",
         },
     ],
     armoredRigs: [
         {
+            // CQC Osprey MK4A plate carrier (Protection, MTP)
             weight: 2,
             id: "60a3c68c37ea821725773ef5",
-            name: "CQC Osprey MK4A plate carrier (Protection, MTP)",
         },
         {
+            // Crye Precision AVS plate carrier (Ranger Green)
             weight: 1,
             id: "544a5caa4bdc2d1a388b4568",
-            name: "Crye Precision AVS plate carrier",
         },
         {
+            // Crye Precision AVS plate carrier (MultiCam)
+            weight: 1,
+            id: "67ab49aab9c7a1e18c095686",
+        },
+        {
+            // ECLiPSE RBAV-AF plate carrier (Ranger Green)
             weight: 1,
             id: "628dc750b910320f4c27a732",
-            name: "ECLiPSE RBAV-AF plate carrier (Ranger Green)",
         },
         {
+            // Stich Profi Stich Defense mod.2 plate carrier (MultiCam)
             weight: 1,
             id: "66b6295178bbc0200425f995",
-            name: "Stich Profi Stich Defense mod.2 plate carrier (MultiCam)",
         },
         {
+            // Stich Profi Stich Defense mod.2 plate carrier (MultiCam)
             weight: 1,
             id: "66b6295178bbc0200425f995",
-            name: "Stich Profi Stich Defense mod.2 plate carrier (MultiCam)",
         },
     ],
     armor: [
         {
-            weight: 2,
+            // FORT Defender-2 body armor
+            weight: 3,
             id: "5e9dacf986f774054d6b89f4",
-            name: "FORT Defender-2 body armor",
         },
         {
-            weight: 2,
+            // IOTV Gen4 body armor (Assault Kit)
+            weight: 3,
             id: "5b44cf1486f77431723e3d05",
-            name: "IOTV Gen4 body armor (Assault Kit)",
         },
         {
-            weight: 2,
+            // FORT Redut-M body armor
+            weight: 3,
             id: "5ca2151486f774244a3b8d30",
-            name: "FORT Redut-M body armor",
         },
         {
-            weight: 2,
+            // FORT Redut-M body armor (SK Woodland)
+            weight: 3,
+            id: "67ab2f5adafe3b22670c911f",
+        },
+        {
+            // IOTV Gen4 body armor (High Mobility Kit)
+            weight: 3,
             id: "5b44d0de86f774503d30cba8",
-            name: "IOTV Gen4 body armor (High Mobility Kit)",
         },
         {
-            weight: 2,
+            // BNTI Zhuk-6a body armor
+            weight: 3,
             id: "5c0e625a86f7742d77340f62",
-            name: "BNTI Zhuk-6a body armor",
         },
         {
-            weight: 1,
+            // NPP KlASS Korund-VM body armor
+            weight: 3,
             id: "5f5f41476bdad616ad46d631",
-            name: "NPP KlASS Korund-VM body armor",
         },
         {
-            weight: 1,
+            // BNTI Gzhel-K body armor
+            weight: 3,
             id: "5ab8e79e86f7742d8b372e78",
-            name: "BNTI Gzhel-K body armor",
         },
         {
-            weight: 1,
+            // 6B13 M modified assault armor (Tan)
+            weight: 3,
             id: "5c0e541586f7747fa54205c9",
-            name: "6B13 M modified assault armor (Tan)",
         },
         {
-            weight: 1,
+            // LBT-6094A Slick Plate Carrier (Black)
+            weight: 3,
             id: "5e4abb5086f77406975c9342",
-            name: "LBT-6094A Slick Plate Carrier (Black)",
         },
         {
-            weight: 1,
+            // LBT-6094A Slick Plate Carrier (Olive Drab)
+            weight: 2,
             id: "6038b4ca92ec1c3103795a0d",
-            name: "LBT-6094A Slick Plate Carrier (Olive Drab)",
         },
         {
-            weight: 1,
+            // LBT-6094A Slick Plate Carrier (Coyote Tan)
+            weight: 2,
             id: "6038b4b292ec1c3103795a0b",
-            name: "LBT-6094A Slick Plate Carrier (Coyote Tan)",
         },
         {
-            weight: 1,
+            // 5.11 Tactical Hexgrid plate carrier
+            weight: 2,
             id: "5fd4c474dd870108a754b241",
-            name: "5.11 Tactical Hexgrid plate carrier",
+        },
+        {
+            // Hexatac HPC Plate Carrier (MultiCam Black)
+            weight: 2,
+            id: "63737f448b28897f2802b874",
+        },
+        {
+            // Hexatac HPC Plate Carrier (MultiCam)
+            weight: 2,
+            id: "67ab2eecfe82855dcc0f2af6",
+        },
+        {
+            // 6B43 6A Zabralo-Sh body armor
+            weight: 1,
+            id: "545cdb794bdc2d3a198b456a",
+        },
+        {
+            // NFM THOR Integrated Carrier body armor
+            weight: 1,
+            id: "60a283193cb70855c43a381d",
+        },
+        {
+            // FORT Redut-T5 body armor
+            weight: 1,
+            id: "5ca21c6986f77479963115a7",
+        },
+        {
+            // IOTV Gen4 body armor (Full Protection Kit)
+            weight: 1,
+            id: "5b44cd8b86f774503d30cba2",
         },
     ],
     rigs: [
         {
             weight: 1,
             id: "5f5f41f56760b4138443b352",
-            name: "Direct Action Thunderbolt compact chest rig",
+            // Direct Action Thunderbolt compact chest rig",
         },
         {
             weight: 1,
             id: "5648a69d4bdc2ded0b8b457b",
-            name: "BlackRock chest rig",
+            // BlackRock chest rig (Gray)"
+        },
+        {
+            weight: 1,
+            id: "67ab3f146d7ece17bf0096ff",
+            // BlackRock chest rig (Khaki)"
         },
         {
             weight: 1,
             id: "5ab8dab586f77441cd04f2a2",
-            name: "WARTECH MK3 TV-104 chest rig",
+            // WARTECH MK3 TV-104 chest rig",
         },
         {
             weight: 1,
             id: "592c2d1a86f7746dbe2af32a",
-            name: "ANA Tactical Alpha chest rig",
+            // ANA Tactical Alpha chest rig (Olive Drab)"
+        },
+        {
+            weight: 1,
+            id: "67ab3ea96d7ece17bf0096f6",
+            // ANA Tactical Alpha chest rig (MultiCam)"
         },
         {
             weight: 1,
             id: "603648ff5a45383c122086ac",
-            name: "Azimut SS Zhuk chest harness (Black)",
+            // Azimut SS Zhuk chest harness (Black)",
         },
         {
             weight: 1,
             id: "6040dd4ddcf9592f401632d2",
-            name: "Azimut SS Zhuk chest harness (Surpat)",
+            // Azimut SS Zhuk chest harness (Surpat)",
         },
         {
             weight: 1,
             id: "60a621c49c197e4e8c4455e6",
-            name: "Stich Profi Chest Rig MK2 (Assault, A-TACS FG)",
+            // Stich Profi Chest Rig MK2 (Assault, A-TACS FG)",
         },
         {
             weight: 1,
             id: "60a6220e953894617404b00a",
-            name: "Stich Profi Chest Rig MK2 (Recon, A-TACS FG)",
+            // Stich Profi Chest Rig MK2 (Recon, A-TACS FG)",
         },
         {
             weight: 1,
             id: "5fd4c60f875c30179f5d04c2",
-            name: "Gear Craft GC-BSS-MK1 chest rig",
+            // Gear Craft GC-BSS-MK1 chest rig",
         },
         {
             weight: 1,
             id: "5df8a42886f77412640e2e75",
-            name: "Velocity Systems MPPV Multi-Purpose Patrol Vest",
+            // Velocity Systems MPPV Multi-Purpose Patrol Vest",
         },
         {
             weight: 1,
             id: "5e9db13186f7742f845ee9d3",
-            name: "LBT-1961A Load Bearing Chest Rig",
+            // LBT-1961A Load Bearing Chest Rig",
         },
     ],
     backpacks: [
         {
             weight: 2,
             id: "62a1b7fbc30cfa1d366af586",
-            name: "Gruppa 99 T30 backpack (Multicam)",
+            // Gruppa 99 T30 backpack (Multicam)",
         },
         {
             weight: 2,
             id: "628e1ffc83ec92260c0f437f",
-            name: "Gruppa 99 T30 backpack",
+            // Gruppa 99 T30 backpack",
         },
         {
             weight: 2,
             id: "639346cc1c8f182ad90c8972",
-            name: "Tasmanian Tiger Trooper 35 backpack",
+            // Tasmanian Tiger Trooper 35 backpack",
         },
         {
             weight: 1,
             id: "5c0e805e86f774683f3dd637",
-            name: "3V Gear Paratus 3-Day Operators Tactical backpack",
+            // 3V Gear Paratus 3-Day Operators Tactical backpack",
         },
         {
             weight: 1,
             id: "6034d2d697633951dc245ea6",
-            name: "Eberlestock G2 Gunslinger II backpack (Dry Earth)",
+            // Eberlestock G2 Gunslinger II backpack (Dry Earth)",
         },
         {
             weight: 1,
             id: "5c0e774286f77468413cc5b2",
-            name: "Mystery Ranch Blackjack 50 backpack (Multicam)",
+            // Mystery Ranch Blackjack 50 backpack (Multicam)",
         },
         {
             weight: 1,
             id: "5df8a4d786f77412672a1e3b",
-            name: "6Sh118 raid backpack",
+            // 6Sh118 raid backpack",
         },
         {
             weight: 1,
             id: "656e0436d44a1bb4220303a0",
-            name: "Mystery Ranch SATL Bridger Assault Pack (Foliage)",
+            // Mystery Ranch SATL Bridger Assault Pack (Foliage)",
         },
         {
             weight: 1,
             id: "67458730df3c1da90b0b052b",
-            name: "5.11 Tactical RUSH 100 backpack (Black)",
+            // 5.11 Tactical RUSH 100 backpack (Black)",
         },
     ],
     face: [
         {
             weight: 2,
             id: "5ab8f4ff86f77431c60d91ba",
-            name: "Ghost balaclava",
+            // Ghost balaclava",
         },
         {
             weight: 1,
             id: "5b432f3d5acfc4704b4a1dfb",
-            name: "Momex balaclava",
+            // Momex balaclava",
         },
         {
             weight: 1,
             id: "6570aead4d84f81fd002a033",
-            name: "Death Shadow lightweight armored mask",
+            // Death Shadow lightweight armored mask",
         },
     ],
     eyewear: [
         {
+            // Oakley SI Batwolf glasses
             weight: 2,
             id: "62a61c988ec41a51b34758d5",
-            name: "Oakley SI Batwolf glasses",
         },
         {
+            // NPP KlASS Condor glasses
             weight: 1,
             id: "603409c80ca681766b6a0fb2",
-            name: "NPP KlASS Condor glasses",
         },
     ],
     sheath: [
         {
+            // Red Rebel ice pick",
             weight: 1,
             id: "5c0126f40db834002a125382",
-            name: "Red Rebel ice pick",
         },
         {
+            // Miller Bros. Blades M-2 Tactical Sword"
             weight: 1,
             id: "5bffdd7e0db834001b734a1a",
-            name: "Miller Bros. Blades M-2 Tactical Sword",
         },
         {
+            // Crash Axe",
             weight: 1,
             id: "5bffe7930db834001b734a39",
-            name: "Crash Axe",
         },
         {
+            // UVSR Taiga-1 survival machete"
             weight: 1,
             id: "601948682627df266209af05",
-            name: "UVSR Taiga-1 survival machete",
         },
     ],
-    chadMasks: [
+    mask: [
         {
+            // Atomic Defense CQCM ballistic mask (Black)
+            weight: 3,
+            id: "657089638db3adca1009f4ca",
+        },
+        {
+            // Atomic Defense CQCM ballistic mask (Skull)
+            weight: 2,
+            id: "67a5c6068fcd9fb73f0752cf",
+        },
+        {
+            // Tagilla's welding mask 'Gorilla'
             weight: 1,
             id: "60a7ad3a0c5cb24b0134664a",
-            name: "Tagilla's welding mask 'Gorilla'",
         },
         {
+            // Tagilla's welding mask 'UBEY'
             weight: 1,
             id: "60a7ad2a2198820d95707a2e",
-            name: "Tagilla's welding mask 'UBEY'",
-        },
-    ],
-    chadHelmets: [
-        {
-            weight: 1,
-            id: "5aa7e276e5b5b000171d0647",
-            name: "Altyn bulletproof helmet",
-        },
-        {
-            weight: 1,
-            id: "5f60c74e3b85f6263c145586",
-            name: "Rys-T bulletproof helmet",
-        },
-        {
-            weight: 1,
-            id: "5c091a4e0db834001d5addc8",
-            name: "Maska-1SCh bulletproof helmet (Olive Drab)",
-        },
-        {
-            weight: 1,
-            id: "5c0e874186f7745dc7616606",
-            name: "Maska-1SCh bulletproof helmet (Killa)",
-        },
-        {
-            weight: 1,
-            id: "5ca20ee186f774799474abc2",
-            name: "Vulkan-5 (LShZ-5) bulletproof helmet",
-        },
-    ],
-    chadArmor: [
-        {
-            weight: 2,
-            id: "545cdb794bdc2d3a198b456a",
-            name: "6B43 6A Zabralo-Sh body armor",
-        },
-        {
-            weight: 2,
-            id: "60a283193cb70855c43a381d",
-            name: "NFM THOR Integrated Carrier body armor",
-        },
-        {
-            weight: 1,
-            id: "5ca21c6986f77479963115a7",
-            name: "FORT Redut-T5 body armor",
-        },
-        {
-            weight: 1,
-            id: "5b44cd8b86f774503d30cba2",
-            name: "IOTV Gen4 body armor (Full Protection Kit)",
         },
     ],
 }

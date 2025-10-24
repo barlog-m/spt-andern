@@ -45,10 +45,7 @@ public class MapBotTuning(
             SetPmcBrainsAsLive();
         }
 
-        if (_modConfig.MapBossChanceAdjustment != 0)
-        {
-            MapBossChanceAdjustment();
-        }
+        MapBossChanceAdjustment();
 
         TunePmcGear();
     }
@@ -63,7 +60,8 @@ public class MapBotTuning(
                 if (locationId == "labyrinth") continue;
                 var bossName = bossLocationSpawn.BossName.ToLower();
                 if (
-                    bossName is "pmcusec" or "pmcbear" or "pmcbot" or "crazyassaultevent" or "exusec" or "arenafighterevent"
+                    bossName is "pmcusec" or "pmcbear" or "pmcbot"
+                    or "crazyassaultevent" or "exusec" or "arenafighterevent"
                 )
                 {
                     continue;
@@ -76,21 +74,29 @@ public class MapBotTuning(
 
                 var newChance = bossLocationSpawn.BossChance +
                                 modData.ModConfig.MapBossChanceAdjustment;
-                    var chance = Math.Round(newChance.Value);
-                    if (chance > 100.0) {
-                        chance = 100;
-                    }
-                    if (chance < 0.0) {
-                        chance = 0;
-                    }
-                    bossLocationSpawn.BossChance = chance;
 
-                    if (_modConfig.Debug)
-                    {
-                        logger.LogWithColor(
-                            $"[Andern] '{location.Base.Name}' boss '{bossLocationSpawn.BossName}' chance {bossLocationSpawn.BossChance}",
-                            LogTextColor.Blue);
-                    }
+                var chance = Math.Clamp(Math.Round(newChance.Value), 0, 100);
+
+                if (_modConfig.MapBossPartisanDisable &&
+                    bossName == "bosspartisan")
+                {
+                    chance = 0;
+                }
+
+                if (_modConfig.MapBossGoonsDisable &&
+                    bossName == "bossknight")
+                {
+                    chance = 0;
+                }
+
+                bossLocationSpawn.BossChance = chance;
+
+                if (_modConfig.Debug)
+                {
+                    logger.LogWithColor(
+                        $"[Andern] '{location.Base.Name}' boss '{bossLocationSpawn.BossName}' chance {bossLocationSpawn.BossChance}",
+                        LogTextColor.Blue);
+                }
             }
         }
     }
@@ -109,7 +115,6 @@ public class MapBotTuning(
             bearType.Clear();
             bearType.Add("pmcBEAR", 1);
         }
-
     }
 
     private void MakePmcAlwaysHostile()
@@ -126,7 +131,8 @@ public class MapBotTuning(
         hostilitySetting.UsecEnemyChance = 100;
         hostilitySetting.SavageEnemyChance = 100;
         hostilitySetting.SavagePlayerBehaviour = "AlwaysEnemies";
-        foreach (var hostilitySettingChancedEnemy in hostilitySetting.ChancedEnemies)
+        foreach (var hostilitySettingChancedEnemy in hostilitySetting
+                     .ChancedEnemies)
         {
             hostilitySettingChancedEnemy.EnemyChance = 100;
         }
@@ -172,7 +178,8 @@ public class MapBotTuning(
         var botConfig = configServer.GetConfig<BotConfig>();
         botConfig.Equipment["pmc"].ForceOnlyArmoredRigWhenNoArmor = true;
 
-        foreach (var randomisationDetailse in botConfig.Equipment["pmc"].Randomisation)
+        foreach (var randomisationDetailse in botConfig.Equipment["pmc"]
+                     .Randomisation)
         {
             randomisationDetailse.Equipment["Backpack"] = 100;
             randomisationDetailse.Equipment["Earpiece"] = 100;

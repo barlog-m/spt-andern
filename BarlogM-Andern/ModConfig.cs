@@ -16,6 +16,8 @@ public class ModConfig
     public int FleaMinUserLevel { get; set; }
     public bool MapBotSettings { get; set; }
     public int MapBossChanceAdjustment { get; set; }
+    public bool MapBossPartisanDisable { get; set; }
+    public bool MapBossGoonsDisable { get; set; }
     public bool MapMakePmcAlwaysHostile { get; set; }
     public bool MapPmcBrainsAsLive { get; set; }
     public bool MapScavsAlwaysHasBackpack { get; set; }

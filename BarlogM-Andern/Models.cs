@@ -50,7 +50,6 @@ public class GearItem
 {
     public double Weight { get; set; }
     public string Id { get; set; }
-    public string Name { get; set; }
 }
 
 public class PresetGear
@@ -64,7 +63,5 @@ public class PresetGear
     public List<GearItem> Face { get; set; }
     public List<GearItem> Eyewear { get; set; }
     public List<GearItem> Sheath { get; set; }
-    public List<GearItem> ChadMasks { get; set; }
-    public List<GearItem> ChadHelmets { get; set; }
-    public List<GearItem> ChadArmor { get; set; }
+    public List<GearItem> Mask { get; set; }
 }

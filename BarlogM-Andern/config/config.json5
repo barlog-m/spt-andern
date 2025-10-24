@@ -13,6 +13,8 @@
     "FleaMinUserLevel": 15,
     "MapBotSettings": true,
     "MapBossChanceAdjustment": 0,
+    "MapBossPartisanDisable": false,
+    "MapBossGoonsDisable": false,
     "MapMakePmcAlwaysHostile": true,
     "MapPmcBrainsAsLive": true,
     "MapScavsAlwaysHasBackpack": true,

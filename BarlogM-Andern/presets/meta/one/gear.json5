@@ -1,193 +1,196 @@
 {
-    "headsets": [
+    headsets: [
         {
-            "weight": 3,
-            "id": "6033fa48ffd42c541047f728",
-            "name": "OPSMEN Earmor M32 headset"
+            // OPSMEN Earmor M32 headset
+            weight: 3,
+            id: "6033fa48ffd42c541047f728",
         },
         {
-            "weight": 2,
-            "id": "5645bcc04bdc2d363b8b4572",
-            "name": "Peltor ComTac 2 headset"
+            // Peltor ComTac 2 headset
+            weight: 2,
+            id: "5645bcc04bdc2d363b8b4572",
         },
         {
-            "weight": 1,
-            "id": "5b432b965acfc47a8774094e",
-            "name": "GSSh-01 active headset"
+            // GSSh-01 active headset
+            weight: 1,
+            id: "5b432b965acfc47a8774094e",
         }
     ],
-    "helmets": [
+    helmets: [
         {
-            "weight": 2,
-            "id": "5d5e9c74a4b9364855191c40",
-            "name": "MSA ACH TC-2002 MICH Series helmet"
+            // MSA ACH TC-2002 MICH Series helmet
+            weight: 2,
+            id: "5d5e9c74a4b9364855191c40",
         },
         {
-            "weight": 2,
-            "id": "5b432d215acfc4771e1c6624",
-            "name": "6B47 Ratnik-BSh helmet (Digital Flora cover)"
+            // 6B47 Ratnik-BSh helmet (Digital Flora cover)
+            weight: 2,
+            id: "5b432d215acfc4771e1c6624",
         },
         {
-            "weight": 1,
-            "id": "5c06c6a80db834001b735491",
-            "name": "SSh-68 steel helmet"
+            // SSh-68 steel helmet
+            weight: 1,
+            id: "5c06c6a80db834001b735491",
         },
         {
-            "weight": 1,
-            "id": "5aa7d03ae5b5b00016327db5",
-            "name": "UNTAR helmet"
+            // UNTAR helmet
+            weight: 1,
+            id: "5aa7d03ae5b5b00016327db5",
         }
     ],
-    "armoredRigs": [
+    armoredRigs: [
         {
-            "weight": 1,
-            "id": "544a5caa4bdc2d1a388b4568",
-            "name": "Crye Precision AVS plate carrier"
+            // Crye Precision AVS plate carrier
+            weight: 1,
+            id: "544a5caa4bdc2d1a388b4568",
         },
         {
-            "weight": 1,
-            "id": "5c0e722886f7740458316a57",
-            "name": "ANA Tactical M1 plate carrier"
+            // ANA Tactical M1 plate carrier
+            weight: 1,
+            id: "5c0e722886f7740458316a57",
         }
     ],
-    "armor": [
+    armor: [
         {
-            "weight": 2,
-            "id": "64be79c487d1510151095552",
-            "name": "NPP KlASS Kora-Kulon body armor (Black)"
+            // NPP KlASS Kora-Kulon body armor (Black)
+            weight: 2,
+            id: "64be79c487d1510151095552",
         },
         {
-            "weight": 2,
-            "id": "64be79e2bf8412471d0d9bcc",
-            "name": "NPP KlASS Kora-Kulon body armor (Digital Flora)"
+            // NPP KlASS Kora-Kulon body armor (Digital Flora)
+            weight: 2,
+            id: "64be79e2bf8412471d0d9bcc",
         },
         {
-            "weight": 2,
-            "id": "5c0e5edb86f77461f55ed1f7",
-            "name": "BNTI Zhuk-3 body armor (Press)"
+            // BNTI Zhuk-3 body armor (Press)
+            weight: 2,
+            id: "5c0e5edb86f77461f55ed1f7",
         },
         {
-            "weight": 2,
-            "id": "5c0e5bab86f77461f55ed1f3",
-            "name": "6B23-1 body armor (Digital Flora)"
+            // 6B23-1 body armor (Digital Flora)
+            weight: 2,
+            id: "5c0e5bab86f77461f55ed1f3",
         },
         {
-            "weight": 1,
-            "id": "5c0e53c886f7747fa54205c7",
-            "name": "6B13 assault armor (Digital Flora)"
+            // 6B13 assault armor (Digital Flora)
+            weight: 1,
+            id: "5c0e53c886f7747fa54205c7",
         },
         {
-            "weight": 1,
-            "id": "5c0e655586f774045612eeb2",
-            "name": "HighCom Trooper TFO body armor (Multicam)"
+            // HighCom Trooper TFO body armor (Multicam)
+            weight: 1,
+            id: "5c0e655586f774045612eeb2",
         }
     ],
-    "rigs": [
+    rigs: [
         {
-            "weight": 3,
-            "id": "5648a69d4bdc2ded0b8b457b",
-            "name": "BlackRock chest rig"
+            // BlackRock chest rig (Gray)
+            weight: 3,
+            id: "5648a69d4bdc2ded0b8b457b",
         },
         {
-            "weight": 3,
-            "id": "6034cf5fffd42c541047f72e",
-            "name": "Umka M33-SET1 hunter vest"
+            // BlackRock chest rig (Khaki)
+            weight: 3,
+            id: "67ab3f146d7ece17bf0096ff",
         },
         {
-            "weight": 2,
-            "id": "64be7110bf597ba84a0a41ea",
-            "name": "Type 56 Chicom chest harness"
+            // Umka M33-SET1 hunter vest
+            weight: 3,
+            id: "6034cf5fffd42c541047f72e",
         },
         {
-            "weight": 2,
-            "id": "59e7643b86f7742cbf2c109a",
-            "name": "WARTECH TV-109 + TV-106 chest rig"
+            // Type 56 Chicom chest harness
+            weight: 2,
+            id: "64be7110bf597ba84a0a41ea",
         },
         {
-            "weight": 2,
-            "id": "6034d0230ca681766b6a0fb5",
-            "name": "CSA chest rig"
+            // WARTECH TV-109 + TV-106 chest rig
+            weight: 2,
+            id: "59e7643b86f7742cbf2c109a",
         },
         {
-            "weight": 2,
-            "id": "5929a2a086f7744f4b234d43",
-            "name": "UMTBS 6sh112 Scout-Sniper"
+            // CSA chest rig
+            weight: 2,
+            id: "6034d0230ca681766b6a0fb5",
         },
         {
-            "weight": 2,
-            "id": "5ca20abf86f77418567a43f2",
-            "name": "Dynaforce Triton M43-A chest harness"
+            // UMTBS 6sh112 Scout-Sniper
+            weight: 2,
+            id: "5929a2a086f7744f4b234d43",
         },
         {
-            "weight": 2,
-            "id": "5c0e9f2c86f77432297fe0a3",
-            "name": "BlackHawk! Commando chest harness (Black)"
+            // Dynaforce Triton M43-A chest harness
+            weight: 2,
+            id: "5ca20abf86f77418567a43f2",
         },
         {
-            "weight": 1,
-            "id": "5d5d85c586f774279a21cbdb",
-            "name": "Haley Strategic D3CRX Chest Harness"
+            // BlackHawk! Commando chest harness (Black)
+            weight: 2,
+            id: "5c0e9f2c86f77432297fe0a3",
         },
         {
-            "weight": 1,
-            "id": "5e4abc1f86f774069619fbaa",
-            "name": "Spiritus Systems Bank Robber chest rig"
+            // Haley Strategic D3CRX Chest Harness
+            weight: 1,
+            id: "5d5d85c586f774279a21cbdb",
         },
         {
-            "weight": 1,
-            "id": "64be7095047e826eae02b0c1",
-            "name": "Zulu Nylon Gear M4 Reduced Signature Chest Rig"
+            // Spiritus Systems Bank Robber chest rig
+            weight: 1,
+            id: "5e4abc1f86f774069619fbaa",
+        },
+        {
+            // Zulu Nylon Gear M4 Reduced Signature Chest Rig
+            weight: 1,
+            id: "64be7095047e826eae02b0c1",
         }
     ],
-    "backpacks": [
+    backpacks: [
         {
-            "weight": 2,
-            "id": "5ca20d5986f774331e7c9602",
-            "name": "WARTECH Berkut BB-102 backpack"
+            // WARTECH Berkut BB-102 backpack
+            weight: 2,
+            id: "5ca20d5986f774331e7c9602",
         },
         {
-            "weight": 2,
-            "id": "5e9dcf5986f7746c417435b3",
-            "name": "LBT-8005A Day Pack backpack"
+            // LBT-8005A Day Pack backpack
+            weight: 2,
+            id: "5e9dcf5986f7746c417435b3",
         },
         {
-            "weight": 1,
-            "id": "5d5d940f86f7742797262046",
-            "name": "Oakley Mechanism heavy duty backpack (Black)"
+            // Oakley Mechanism heavy duty backpack (Black)
+            weight: 1,
+            id: "5d5d940f86f7742797262046",
         },
         {
-            "weight": 1,
-            "id": "60a2828e8689911a226117f9",
-            "name": "Hazard 4 Pillbox backpack"
+            // Hazard 4 Pillbox backpack
+            weight: 1,
+            id: "60a2828e8689911a226117f9",
         }
     ],
-    "face": [
+    face: [
         {
-            "weight": 1,
-            "id": "572b7f1624597762ae139822",
-            "name": "Balaclava"
+            // Balaclava
+            weight: 1,
+            id: "572b7f1624597762ae139822",
         }
     ],
-    "eyewear": [
+    eyewear: [
         {
-            "weight": 1,
-            "id": "557ff21e4bdc2d89578b4586",
-            "name": "Tactical glasses"
+            // Tactical glasses
+            weight: 1,
+            id: "557ff21e4bdc2d89578b4586",
         }
     ],
-    "sheath": [
+    sheath: [
         {
-            "weight": 1,
-            "id": "5bffdc370db834001d23eca8",
-            "name": "6Kh5 Bayonet"
+            // 6Kh5 Bayonet
+            weight: 1,
+            id: "5bffdc370db834001d23eca8",
         },
         {
-            "weight": 1,
-            "id": "54491bb74bdc2d09088b4567",
-            "name": "ER Bayonet"
+            // ER Bayonet
+            weight: 1,
+            id: "54491bb74bdc2d09088b4567",
         }
     ],
-    "chadMasks": [],
-    "chadHelmets": [],
-    "chadArmor": []
+    mask: [],
 }
