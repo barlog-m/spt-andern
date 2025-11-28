@@ -33,5 +33,6 @@
     "LegaMedalOnBosses": true,
     "RemoveAllTradersItemsFromFlea": false,
     "WeeklyBossEventDisable": false,
+    "CheeseQuests": false,
     "Debug": false
 }

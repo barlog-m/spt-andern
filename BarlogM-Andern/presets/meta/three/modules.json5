@@ -1,13 +1,9 @@
 {
-    // EOTech Vudu 1-6x24 30mm riflescope
-    "5b3b99475acfc432ff4dcbee": [
-        "5b2388675acfc4771e1be0be"
-    ],
-    // ELCAN SpecterDR 1x/4x scope
-    "57ac965c24597706be5f975c": [
-        "57aca93d2459771f2c7e26db",
-        "5d2dc3e548f035404a1a4798",
-        "570fd6c2d2720bc6458b457f"
+    // Vortex Razor AMG UH-1 holographic sight
+    "59f9d81586f7744c7506ee62": [
+        "5c0505e00db834001b735073", // Valday PK-120 (1P87) reflex sight
+        "60a23797a37c940de7062d02", // SIG Sauer ROMEO8T reflex sight
+        "5d2da1e948f035477b1ce2ba", // Trijicon SRS-02 reflex sight
     ],
     // Olight Baldr Pro tactical flashlight with laser
     "6272370ee4013c5d7e31f418": [

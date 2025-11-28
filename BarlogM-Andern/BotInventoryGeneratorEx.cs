@@ -1,5 +1,3 @@
-using System.Text.Json;
-using fastJSON5;
 using SPTarkov.DI.Annotations;
 using SPTarkov.Server.Core.Generators;
 using SPTarkov.Server.Core.Helpers;

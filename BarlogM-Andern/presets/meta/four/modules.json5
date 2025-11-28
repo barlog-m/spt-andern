@@ -1,16 +1,10 @@
 {
-    // Vortex Razor HD Gen.2 1-6x24 30mm riflescope
-    "618ba27d9008e4636a67f61d": [
-        "5b3b99475acfc432ff4dcbee",
-        "6567e7681265c8a131069b0f"
-    ],
-    // ELCAN SpecterDR 1x/4x scope
-    "57ac965c24597706be5f975c": [
-        "57aca93d2459771f2c7e26db",
-        "5d2dc3e548f035404a1a4798",
-        "58491f3324597764bc48fa02",
-        "558022b54bdc2dac148b458d",
-        "59f9d81586f7744c7506ee62"
+    // Vortex Razor AMG UH-1 holographic sight
+    "59f9d81586f7744c7506ee62": [
+        "58491f3324597764bc48fa02", // EOTech XPS3-0 holographic sight  
+        "558022b54bdc2dac148b458d", // EOTech EXPS3-0 holographic sight (Tan)
+        "64785e7c19d732620e045e15", // ELCAN Specter HCO holographic sight
+        "655f13e0a246670fb0373245", // Wilcox BOSS Xe reflex sight
     ],
     // Olight Baldr Pro tactical flashlight with laser
     "6272370ee4013c5d7e31f418": [

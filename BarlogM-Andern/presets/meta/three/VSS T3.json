@@ -1,0 +1,109 @@
+{
+    "Id": "65b1a3ea01001c3ee51e3cb5",
+    "Name": "VSS T3",
+    "Root": "8b32400d03fafdb6908c6210",
+    "Items": [
+        {
+            "_id": "8b32400d03fafdb6908c6210",
+            "_tpl": "57838ad32459774a17445cd2",
+            "upd": {
+                "Repairable": {
+                    "MaxDurability": 100,
+                    "Durability": 100
+                },
+                "FireMode": {
+                    "FireMode": "single"
+                }
+            }
+        },
+        {
+            "_id": "9d25038ba47c8b5d5a3c79c6",
+            "_tpl": "5dff8db859400025ea5150d4",
+            "parentId": "8b32400d03fafdb6908c6210",
+            "slotId": "mod_mount_000"
+        },
+        {
+            "_id": "7af3463bd3cae2c1334cc349",
+            "_tpl": "5a9e81fba2750c00164f6b11",
+            "parentId": "8b32400d03fafdb6908c6210",
+            "slotId": "mod_magazine"
+        },
+        {
+            "_id": "f9d18e19341b272df4d7ac95",
+            "_tpl": "57838c962459774a1651ec63",
+            "parentId": "8b32400d03fafdb6908c6210",
+            "slotId": "mod_muzzle"
+        },
+        {
+            "_id": "bff1962cce4a8790025f661d",
+            "_tpl": "578395402459774a256959b5",
+            "parentId": "8b32400d03fafdb6908c6210",
+            "slotId": "mod_reciever"
+        },
+        {
+            "_id": "2cc109b8fa25b085d5ad299d",
+            "_tpl": "578395e82459774a0e553c7b",
+            "parentId": "8b32400d03fafdb6908c6210",
+            "slotId": "mod_stock"
+        },
+        {
+            "_id": "d3781c810b0dba045d40a069",
+            "_tpl": "6130ca3fd92c473c77020dbd",
+            "parentId": "8b32400d03fafdb6908c6210",
+            "slotId": "mod_charge"
+        },
+        {
+            "_id": "67c9298c15286f06120f14e1",
+            "_tpl": "6565bb7eb4b12a56eb04b084",
+            "parentId": "8b32400d03fafdb6908c6210",
+            "slotId": "mod_handguard"
+        },
+        {
+            "_id": "cc6d871c964aa56fa7a73917",
+            "_tpl": "59f9d81586f7744c7506ee62",
+            "parentId": "9d25038ba47c8b5d5a3c79c6",
+            "slotId": "mod_scope"
+        },
+        {
+            "_id": "9098d389a3229c270da2ab58",
+            "_tpl": "57838e1b2459774a256959b1",
+            "parentId": "f9d18e19341b272df4d7ac95",
+            "slotId": "mod_sight_rear",
+            "upd": {
+                "Sight": {
+                    "ScopesCurrentCalibPointIndexes": [
+                        0
+                    ],
+                    "ScopesSelectedModes": [
+                        0
+                    ],
+                    "SelectedScope": 0
+                }
+            }
+        },
+        {
+            "_id": "3dee5272e4a4f3490ecba3ab",
+            "_tpl": "59eb7ebe86f7740b373438ce",
+            "parentId": "f9d18e19341b272df4d7ac95",
+            "slotId": "mod_mount_000"
+        },
+        {
+            "_id": "87ce19c24aae02d1fefae6b5",
+            "_tpl": "6272370ee4013c5d7e31f418",
+            "parentId": "3dee5272e4a4f3490ecba3ab",
+            "slotId": "mod_tactical_001",
+            "upd": {
+                "Light": {
+                    "IsActive": true,
+                    "SelectedMode": 0
+                }
+            }
+        },
+        {
+            "_id": "18c502de4fc90002fb609f5d",
+            "_tpl": "59fc48e086f77463b1118392",
+            "parentId": "3dee5272e4a4f3490ecba3ab",
+            "slotId": "mod_foregrip"
+        }
+    ]
+}

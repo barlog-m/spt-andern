@@ -83,5 +83,21 @@ public class EtcPostDb(
                 }
             }
         }
+
+        AddExtraItemsToBlacklist(ragfair);
+    }
+
+    void AddExtraItemsToBlacklist(RagfairConfig ragfair)
+    {
+        FrozenSet<MongoId> items = [
+            "628e4e576d783146b124c64d", // Peltor ComTac IV Hybrid headset (Coyote Brown)
+            "66b5f693acff495a294927e3", // Peltor ComTac V headset (OD Green)
+            "66b5f6985891c84aab75ca76", // Peltor ComTac VI headset (Coyote Brown)
+            "5f60cd6cf2bcbb675b00dac6", // Walker's XCEL 500BT Digital headset
+            "5c0e874186f7745dc7616606", // Maska-1SCh bulletproof helmet (Killa Edition)
+            "6759af0f9c8a538dd70bfae6" // Maska-1SCh bulletproof helmet (Christmas Edition)
+        ];
+
+        ragfair.Dynamic.Blacklist.Custom.UnionWith(items);
     }
 }

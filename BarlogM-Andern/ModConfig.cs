@@ -36,5 +36,6 @@ public class ModConfig
     public bool LegaMedalOnBosses { get; set; }
     public bool RemoveAllTradersItemsFromFlea { get; set; }
     public bool WeeklyBossEventDisable { get; set; }
+    public bool CheeseQuests { get; set; }
     public bool Debug { get; set; }
 }

@@ -1,12 +1,13 @@
 {
+    // Axion Kobra EKP-8-18 reflex sight
+    "591c4efa86f7741030027726": [
+        "570fd721d2720bc5458b4596", // Walther MRS reflex sight
+        "6477772ea8a38bb2050ed4db", // SIG Sauer ROMEO7 1x30 reflex sight (Prototype)
+        "57ae0171245977343c27bfcf", // BelOMO PK-06 reflex sight
+    ],
     // Glock GTL 21 tactical flashlight with laser
     "5a800961159bd4315e3a1657": [
         "5cc9c20cd7f00c001336c65d"
-    ],
-    // Axion Kobra EKP-8-18 reflex sight
-    "591c4efa86f7741030027726": [
-        "570fd721d2720bc5458b4596",
-        "6477772ea8a38bb2050ed4db"
     ],
     // Zenit RK-6 tactical foregrip
     "5c1bc7752e221602b1779b34": [

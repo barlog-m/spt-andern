@@ -17,7 +17,7 @@ Idea of this mod is to rebalance the game for better single player experience.
 
 -   Mod allows to change Flea Market access level. Config parameter `FleaMinUserLevel`. You can increase it to level 42 to add more sense to looting because with Flea you can easy just buy everything your need for craft and hideout update.
 
-Weapon and gear split by tiers. Tiers is described in `preset_name/preset.json` file. Mod has two presets _meta_ and _live_. Choise _live_ if you want more veraity and close to live Tarkov expirience.
+Weapon and gear split by tiers. Tiers is described in `preset_name/preset.json` file.
 
 You can disable PMC bot level generator with option `PmcLevel`.
 
@@ -73,7 +73,7 @@ Works only if `mapBotSettings` set to true.
 
 `MapPmcBrainsAsLive` pmc uses only pmcUSEC and pmcBEAR brains.
 
-`MapScavsAlwaysHasBackpack` Regualr scavs always has backpack.
+`MapScavsAlwaysHasBackpack` Regular scavs always has backpack.
 
 `MapScavsAlwaysHasArmor` Regular scavs always has (their crap) armor.
 
@@ -99,7 +99,7 @@ Works only if `mapBotSettings` set to true.
 
 `PlayerScavAlwaysHasBackpack` if true player scav always spawns with backpack.
 
-`GpCoinsOnPmcAndScavs` regualar scavs and pmc always has GP Coins in their backpaks.
+`GpCoinsOnPmcAndScavs` regular scavs and pmc always has GP Coins in their backpacks.
 
 `LegaMedalOnBosses` bosses has Lega Medal in their pockets (or not).
 
@@ -107,11 +107,12 @@ Works only if `mapBotSettings` set to true.
 
 `WeeklyBossEventDisable` disables weekly boss 100% spawn event
 
+`CheeseQuests` disables gear and weapon conditions for same quests. For example DMR allowed for any quest required bolt action rifle.
+
 ## Installation
 
 Put folder `BarlogM-Andern` from zip file into your `user/mods` folder
 
 ## Known issues
 
--   Mod does not work with any mod thats alternate bot inventory
-
+-   Mod does not work with any mod that alternate bot inventory

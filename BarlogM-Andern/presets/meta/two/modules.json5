@@ -1,7 +1,9 @@
 {
-    // ELCAN SpecterDR 1x/4x scope (FDE)
-    "57aca93d2459771f2c7e26db": [
-        "5d2dc3e548f035404a1a4798"
+    // Vortex Razor AMG UH-1 holographic sight
+    "59f9d81586f7744c7506ee62": [
+        "58d268fc86f774111273f8c2", // Leupold DeltaPoint Reflex Sight
+        "58d399e486f77442e0016fe7", // Aimpoint Micro T-1 reflex sight
+        "609a63b6e2ff132951242d09", // Valday Krechet reflex sight
     ],
     // Olight Baldr Pro tactical flashlight with laser
     "6272370ee4013c5d7e31f418": [

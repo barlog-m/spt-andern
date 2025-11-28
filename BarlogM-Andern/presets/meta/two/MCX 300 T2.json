@@ -48,22 +48,9 @@
         },
         {
             "_id": "898f72dede30c44e35bbb038",
-            "_tpl": "57aca93d2459771f2c7e26db",
+            "_tpl": "59f9d81586f7744c7506ee62",
             "parentId": "5d758ab845a32490857e8e88",
-            "slotId": "mod_scope",
-            "upd": {
-                "Sight": {
-                    "ScopesCurrentCalibPointIndexes": [
-                        0,
-                        0
-                    ],
-                    "ScopesSelectedModes": [
-                        0,
-                        0
-                    ],
-                    "SelectedScope": 0
-                }
-            }
+            "slotId": "mod_scope"
         },
         {
             "_id": "44d2f64ca261e1a1939ee7d4",

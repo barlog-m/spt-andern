@@ -65,6 +65,11 @@ public class WeaponGenerator(
     static readonly string AR_10_LANTAC_DRAGON_762X51_MUZZLE_BRAKE_COMPENSATOR = "5c878e9d2e2216000f201903";
     static readonly string LANTAC_BMD_762X51_BLAST_MITIGATION_DEVICE = "5cf78720d7f00c06595bc93e";
     static readonly string ZENIT_KLESCH_2IKS = "5a5f1ce64f39f90b401987bc";
+    static readonly string LEUPOLD_DELTAPOINT_REFLEX_SIGHT = "58d268fc86f774111273f8c2";
+    static readonly string DELTAPOINT_CROSS_SLOT_MOUNT_BASE = "58d2664f86f7747fec5834f6";
+    static readonly string AIMPOINT_MICRO_STANDARD_MOUNT = "58d39d3d86f77445bb794ae7";
+    static readonly string AIMPOINT_MICRO_SPACER_HIGH = "58d39b0386f77443380bf13c";
+    static readonly string AIMPOINT_MICRO_T_1_REFLEX_SIGHT = "58d399e486f77442e0016fe7";
     static readonly int TACTICAL_DEVICE_LIGHT_AND_LASER_MODE = 1;
     static readonly int TACTICAL_DEVICE_LASER_ONLY_MODE = 2;
 
@@ -223,6 +228,7 @@ public class WeaponGenerator(
         {
             ReplaceTacticalDevice(weaponWithMods);
         }
+
         SetTacticalDeviceMode(weaponWithMods);
     }
 
@@ -298,6 +304,11 @@ public class WeaponGenerator(
                     {
                         AlternateOrAddSuppressor(weapon, item);
                     }
+
+                    if (item.SlotId == "mod_scope")
+                    {
+                        AlternateScope(weapon, item);
+                    }
                 }
             }
         }
@@ -320,10 +331,43 @@ public class WeaponGenerator(
         }
     }
 
+    void AlternateScope(List<Item> weapon, Item scope)
+    {
+        if (scope.Template == LEUPOLD_DELTAPOINT_REFLEX_SIGHT)
+        {
+            scope.Template = DELTAPOINT_CROSS_SLOT_MOUNT_BASE;
+            weapon.Add(new Item
+            {
+                Id = new MongoId(),
+                Template = LEUPOLD_DELTAPOINT_REFLEX_SIGHT,
+                ParentId = scope.Id,
+                SlotId = "mod_scope"
+            });
+        }
+        else if (scope.Template == AIMPOINT_MICRO_T_1_REFLEX_SIGHT)
+        {
+            scope.Template = AIMPOINT_MICRO_STANDARD_MOUNT;
+            var spacerHigh = new Item
+            {
+                Id = new MongoId(),
+                Template = AIMPOINT_MICRO_SPACER_HIGH,
+                ParentId = scope.Id,
+                SlotId = "mod_scope"
+            };
+            weapon.Add(spacerHigh);
+            weapon.Add(new Item
+            {
+                Id = new MongoId(),
+                Template = AIMPOINT_MICRO_T_1_REFLEX_SIGHT,
+                ParentId = spacerHigh.Id,
+                SlotId = "mod_scope"
+            });
+        }
+    }
+
     public void AlternateOrAddSuppressor(List<Item> weapon, Item muzzleItem)
     {
-        var suppressor = weapon.Find(
-            i => i.ParentId == muzzleItem.Id && i.SlotId == "mod_muzzle");
+        var suppressor = weapon.Find(i => i.ParentId == muzzleItem.Id && i.SlotId == "mod_muzzle");
 
         if (suppressor != null)
         {
@@ -475,7 +519,6 @@ public class WeaponGenerator(
             weaponTpl,
             isNightVision);
         AlternateModules(botLevel, weaponWithMods, weaponTpl);
-        SetDefaultScopeZoomValue(weaponWithMods);
         AddRandomEnhancement(weaponWithMods);
         var weaponTemplate = GetTemplateById(weaponTpl);
         var caliber = GetCaliberByTemplateId(weaponTpl);
@@ -491,21 +534,5 @@ public class WeaponGenerator(
             AmmoTpl = ammoTpl,
             MagazineTpl = magazineTpl
         };
-    }
-
-    private void SetDefaultScopeZoomValue(List<Item> weaponWithMods)
-    {
-        foreach (var module in weaponWithMods)
-        {
-            if (itemHelper.IsOfBaseclass(module.Template, BaseClasses.OPTIC_SCOPE) ||
-                itemHelper.IsOfBaseclass(module.Template, BaseClasses.ASSAULT_SCOPE))
-            {
-                module.Upd = new Upd();
-                module.Upd.Sight = new UpdSight
-                {
-                    ScopeZoomValue = 0,
-                };
-            }
-        }
     }
 }
