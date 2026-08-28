@@ -1,97 +1,94 @@
-using System.Text.Json;
+using System.Reflection;
 using SPTarkov.Common.Models.Logging;
 using SPTarkov.DI.Annotations;
-using SPTarkov.Server.Core.Generators;
+using SPTarkov.Reflection.Patching;
 using SPTarkov.Server.Core.Generators.Bot;
 using SPTarkov.Server.Core.Generators.Loot;
-using SPTarkov.Server.Core.Helpers;
-using SPTarkov.Server.Core.Helpers.Bot;
-using SPTarkov.Server.Core.Helpers.InRaid;
-using SPTarkov.Server.Core.Helpers.Items;
-using SPTarkov.Server.Core.Helpers.Profile;
 using SPTarkov.Server.Core.Models.Common;
 using SPTarkov.Server.Core.Models.Eft.Common.Tables;
 using SPTarkov.Server.Core.Models.Enums;
 using SPTarkov.Server.Core.Models.Spt.Bots;
 using SPTarkov.Server.Core.Models.Spt.Config;
-using SPTarkov.Server.Core.Models.Utils;
-using SPTarkov.Server.Core.Servers;
-using SPTarkov.Server.Core.Services;
 using SPTarkov.Server.Core.Services.Bot;
-using SPTarkov.Server.Core.Services.Locales;
 using SPTarkov.Server.Core.Services.Profile;
 using SPTarkov.Server.Core.Utils;
 
 namespace BarlogM_Andern;
 
-[Injectable(InjectionType.Scoped)]
-public class BotInventoryGeneratorEx(
-    ISptLogger<BotInventoryGenerator> logger,
-    RandomUtil randomUtil,
-    ProfileActivityService profileActivityService,
-    BotWeaponGenerator botWeaponGenerator,
-    BotLootGenerator botLootGenerator,
-    BotGeneratorHelper botGeneratorHelper,
-    ProfileHelper profileHelper,
-    BotHelper botHelper,
-    WeightedRandomHelper weightedRandomHelper,
-    ItemHelper itemHelper,
-    WeatherHelper weatherHelper,
-    ServerLocalisationService serverLocalisationService,
-    BotEquipmentFilterService botEquipmentFilterService,
-    BotEquipmentModPoolService botEquipmentModPoolService,
-    BotEquipmentModGenerator botEquipmentModGenerator,
-    BotInventoryContainerService botInventoryContainerService,
-    BotConfig botConfig,
-    PmcConfig pmcConfig,
-    Data data,
-    GearGeneratorHelper gearGeneratorHelper,
-    HelmetGenerator helmetGenerator,
-    WeaponGenerator weaponGenerator
-) : BotInventoryGenerator(
-    logger,
-    randomUtil,
-    profileActivityService,
-    botWeaponGenerator,
-    botLootGenerator,
-    botGeneratorHelper,
-    profileHelper,
-    botHelper,
-    weightedRandomHelper,
-    itemHelper,
-    weatherHelper,
-    serverLocalisationService,
-    botEquipmentFilterService,
-    botEquipmentModPoolService,
-    botEquipmentModGenerator,
-    botInventoryContainerService,
-    botConfig,
-    pmcConfig
-    )
+[Injectable]
+public class BotInventoryGeneratorPatch : AbstractPatch
 {
-    public override BotBaseInventory GenerateInventory(
+    private static ISptLogger<BotInventoryGeneratorPatch> _logger = default!;
+    private static RandomUtil _randomUtil = default!;
+    private static ProfileActivityService _profileActivityService = default!;
+    private static BotWeaponGenerator _botWeaponGenerator = default!;
+    private static BotLootGenerator _botLootGenerator = default!;
+    private static BotInventoryContainerService _botInventoryContainerService = default!;
+    private static PmcConfig _pmcConfig = default!;
+    private static Data _data = default!;
+    private static GearGeneratorHelper _gearGeneratorHelper = default!;
+    private static HelmetGenerator _helmetGenerator = default!;
+    private static WeaponGenerator _weaponGenerator = default!;
+
+    public BotInventoryGeneratorPatch(
+        ISptLogger<BotInventoryGeneratorPatch> logger,
+        RandomUtil randomUtil,
+        ProfileActivityService profileActivityService,
+        BotWeaponGenerator botWeaponGenerator,
+        BotLootGenerator botLootGenerator,
+        BotInventoryContainerService botInventoryContainerService,
+        PmcConfig pmcConfig,
+        Data data,
+        GearGeneratorHelper gearGeneratorHelper,
+        HelmetGenerator helmetGenerator,
+        WeaponGenerator weaponGenerator)
+    {
+        _logger = logger;
+        _randomUtil = randomUtil;
+        _profileActivityService = profileActivityService;
+        _botWeaponGenerator = botWeaponGenerator;
+        _botLootGenerator = botLootGenerator;
+        _botInventoryContainerService = botInventoryContainerService;
+        _pmcConfig = pmcConfig;
+        _data = data;
+        _gearGeneratorHelper = gearGeneratorHelper;
+        _helmetGenerator = helmetGenerator;
+        _weaponGenerator = weaponGenerator;
+    }
+
+    protected override MethodBase GetTargetMethod()
+    {
+        return typeof(BotInventoryGenerator).GetMethod(nameof(BotInventoryGenerator.GenerateInventory))
+               ?? throw new InvalidOperationException(
+                   "Could not find target method BotInventoryGenerator.GenerateInventory");
+    }
+
+    [PatchPrefix]
+    public static bool Prefix(
+        BotInventoryGenerator __instance,
+        ref BotBaseInventory __result,
         MongoId botId,
         MongoId sessionId,
         BotType botJsonTemplate,
-        BotGenerationDetails botGenerationDetails)
+        BotGenerationDetails botGenerationDetails
+        )
     {
         if (!botGenerationDetails.IsPmc)
         {
-            return base.GenerateInventory(botId, sessionId, botJsonTemplate,
-                botGenerationDetails);
+            return true;
         }
 
-        var botInventory = GenerateInventoryBase();
+        var botInventory = __instance.GenerateInventoryBase();
 
-        var presetTierConfig = data.GetConfig(botGenerationDetails.BotLevel);
+        var presetTierConfig = _data.GetConfig(botGenerationDetails.BotLevel);
 
-        var isKittedHelmet = randomUtil.GetChance100(
+        var isKittedHelmet = _randomUtil.GetChance100(
             presetTierConfig.KittedHelmetPercent);
 
-        var raidConfig = profileActivityService
+        var raidConfig = _profileActivityService
             .GetProfileActivityRaidData(sessionId).RaidConfiguration;
 
-        var isNightVision = raidConfig!.IsNightRaid && raidConfig.Location! is not ("laboratory" or "labyrinth") && randomUtil.GetChance100(presetTierConfig.NightVisionPercent);
+        var isNightVision = raidConfig!.IsNightRaid && raidConfig.Location! is not ("laboratory" or "labyrinth") && _randomUtil.GetChance100(presetTierConfig.NightVisionPercent);
 
         try
         {
@@ -105,7 +102,7 @@ public class BotInventoryGeneratorEx(
         }
         catch (Exception ex)
         {
-            logger.Error("[Andern] Equipment generate", ex);
+            _logger.Error("[Andern] Equipment generate", ex);
         }
 
         try
@@ -120,32 +117,23 @@ public class BotInventoryGeneratorEx(
         }
         catch (Exception ex)
         {
-            logger.Error("[Andern] Weapon generate", ex);
+            _logger.Error("[Andern] Weapon generate", ex);
         }
 
-        // Pick loot and add to bots containers (rig/backpack/pockets/secure)
-        botLootGenerator.GenerateLoot(botId, sessionId, botJsonTemplate,
+        _botLootGenerator.GenerateLoot(botId, sessionId, botJsonTemplate,
             botGenerationDetails, botInventory);
 
-        // Inventory cache isn't needed, clear to save memory
         if (botGenerationDetails.ClearBotContainerCacheAfterGeneration)
         {
-            botInventoryContainerService.ClearCache(botId);
+            _botInventoryContainerService.ClearCache(botId);
         }
 
-        /* log secure container item tpls
-        var securedContainer = botInventory.Items.FirstOrDefault(i => i.SlotId == "SecuredContainer");
-        var securedContainerItems = botInventory.Items.FindAll(i => i.ParentId == securedContainer.Id);
-        var securedContainerItemTpls = securedContainerItems.Select(i => i.Template.ToString()).ToList();
-        logger.LogWithColor(
-            $"[Andern] secured container items {JsonSerializer.Serialize(securedContainerItemTpls)}",
-            Spectre.Console.Color.Red);
-        */
-        
-        return botInventory;
+        __result = botInventory;
+
+        return false;
     }
 
-    void GenerateAndAddEquipmentToBotEx(
+    static void GenerateAndAddEquipmentToBotEx(
         MongoId botId,
         BotBaseInventory botInventory,
         BotGenerationDetails botGenerationDetails,
@@ -155,15 +143,15 @@ public class BotInventoryGeneratorEx(
     {
         var armbandTpl =
             botGenerationDetails.RoleLowercase == "pmcusec"
-                ? pmcConfig.ForceArmband.Usec
-                : pmcConfig.ForceArmband.Bear;
-        gearGeneratorHelper.PutGearItemToInventory(
+                ? _pmcConfig.ForceArmband.Usec
+                : _pmcConfig.ForceArmband.Bear;
+        _gearGeneratorHelper.PutGearItemToInventory(
             EquipmentSlots.ArmBand,
             botGenerationDetails.Role,
             botInventory,
             armbandTpl);
 
-        var generatedPockets = gearGeneratorHelper.PutGearItemToInventory(
+        var generatedPockets = _gearGeneratorHelper.PutGearItemToInventory(
             EquipmentSlots.Pockets,
             botGenerationDetails.Role,
             botInventory,
@@ -172,19 +160,19 @@ public class BotInventoryGeneratorEx(
                 ? ItemTpl.POCKETS_1X4_TUE
                 : ItemTpl.POCKETS_1X4);
 
-        botInventoryContainerService.AddEmptyContainerToBot(botId,
+        _botInventoryContainerService.AddEmptyContainerToBot(botId,
             EquipmentSlots.Pockets, generatedPockets);
 
-        var secureContainerItem = gearGeneratorHelper.PutGearItemToInventory(
+        var secureContainerItem = _gearGeneratorHelper.PutGearItemToInventory(
             EquipmentSlots.SecuredContainer,
             botGenerationDetails.Role,
             botInventory,
             ItemTpl.SECURE_CONTAINER_BOSS);
 
-        botInventoryContainerService.AddEmptyContainerToBot(botId,
+        _botInventoryContainerService.AddEmptyContainerToBot(botId,
             EquipmentSlots.SecuredContainer, secureContainerItem);
 
-        if (randomUtil.GetChance100(30) && !isNightVision && GetMaskItemTpl(botGenerationDetails.BotLevel) != "")
+        if (_randomUtil.GetChance100(30) && !isNightVision && GetMaskItemTpl(botGenerationDetails.BotLevel) != "")
         {
             GenerateMaskAndEarpieceItem(
                 botGenerationDetails.BotLevel,
@@ -225,7 +213,7 @@ public class BotInventoryGeneratorEx(
             botInventory,
             EquipmentSlots.Backpack);
 
-        botInventoryContainerService.AddEmptyContainerToBot(botId,
+        _botInventoryContainerService.AddEmptyContainerToBot(botId,
             EquipmentSlots.Backpack, generatedBackPack);
 
         GenerateGearItem(
@@ -235,7 +223,7 @@ public class BotInventoryGeneratorEx(
             EquipmentSlots.Scabbard);
     }
 
-    void GenerateAndAddWeaponsToBotEx(
+    static void GenerateAndAddWeaponsToBotEx(
         MongoId botId,
         BotBaseInventory botInventory,
         BotType botJsonTemplate,
@@ -246,7 +234,7 @@ public class BotInventoryGeneratorEx(
         var botLevel = botGenerationDetails.BotLevel;
         var botRole = botGenerationDetails.Role;
 
-        var generatedWeapon = weaponGenerator.GenerateWeapon(
+        var generatedWeapon = _weaponGenerator.GenerateWeapon(
             botLevel,
             botInventory.Equipment,
             isNightVision);
@@ -262,7 +250,7 @@ public class BotInventoryGeneratorEx(
             WeaponTemplate = generatedWeapon.WeaponTemplate,
         };
 
-        botWeaponGenerator.AddExtraMagazinesToInventory(
+        _botWeaponGenerator.AddExtraMagazinesToInventory(
             botId,
             generatedWeaponResult,
             botJsonTemplate.BotGeneration.Items.Magazines,
@@ -270,58 +258,58 @@ public class BotInventoryGeneratorEx(
             botRole);
     }
 
-    string GetGearItemTpl(
+    static string GetGearItemTpl(
         int botLevel,
         EquipmentSlots equipmentSlot)
     {
         switch (equipmentSlot)
         {
             case EquipmentSlots.Earpiece:
-                return gearGeneratorHelper.WeightedRandomGearItemTpl(
-                    data.GetGear(botLevel).Headsets);
+                return _gearGeneratorHelper.WeightedRandomGearItemTpl(
+                    _data.GetGear(botLevel).Headsets);
 
             case EquipmentSlots.Headwear:
-                return gearGeneratorHelper.WeightedRandomGearItemTpl(
-                    data.GetGear(botLevel).Helmets);
+                return _gearGeneratorHelper.WeightedRandomGearItemTpl(
+                    _data.GetGear(botLevel).Helmets);
 
             case EquipmentSlots.Backpack:
-                return gearGeneratorHelper.WeightedRandomGearItemTpl(
-                    data.GetGear(botLevel).Backpacks);
+                return _gearGeneratorHelper.WeightedRandomGearItemTpl(
+                    _data.GetGear(botLevel).Backpacks);
 
             case EquipmentSlots.FaceCover:
-                return gearGeneratorHelper.WeightedRandomGearItemTpl(
-                    data.GetGear(botLevel).Face);
+                return _gearGeneratorHelper.WeightedRandomGearItemTpl(
+                    _data.GetGear(botLevel).Face);
 
             case EquipmentSlots.Eyewear:
-                return gearGeneratorHelper.WeightedRandomGearItemTpl(
-                    data.GetGear(botLevel).Eyewear);
+                return _gearGeneratorHelper.WeightedRandomGearItemTpl(
+                    _data.GetGear(botLevel).Eyewear);
 
             case EquipmentSlots.Scabbard:
-                return gearGeneratorHelper.WeightedRandomGearItemTpl(
-                    data.GetGear(botLevel).Sheath);
+                return _gearGeneratorHelper.WeightedRandomGearItemTpl(
+                    _data.GetGear(botLevel).Sheath);
 
             default:
                 return "";
         }
     }
 
-    private string GetMaskItemTpl(int botLevel)
+    static string GetMaskItemTpl(int botLevel)
     {
-        return gearGeneratorHelper.WeightedRandomGearItemTpl(
-            data.GetGear(botLevel).Mask);
+        return _gearGeneratorHelper.WeightedRandomGearItemTpl(
+            _data.GetGear(botLevel).Mask);
     }
 
-    void GenerateArmor(
+    static void GenerateArmor(
         MongoId botId,
         int botLevel,
         string botRole,
         BotBaseInventory botInventory)
     {
-        if (randomUtil.GetBool())
+        if (_randomUtil.GetBool())
         {
             var generatedArmoredRig =
                 GenerateArmoredRig(botLevel, botRole, botInventory);
-            botInventoryContainerService.AddEmptyContainerToBot(botId,
+            _botInventoryContainerService.AddEmptyContainerToBot(botId,
                 EquipmentSlots.TacticalVest, generatedArmoredRig);
         }
         else
@@ -329,57 +317,57 @@ public class BotInventoryGeneratorEx(
             GenerateArmorVest(botLevel, botRole, botInventory);
             var generatedTacticalVest =
                 GenerateTacticalVest(botLevel, botRole, botInventory);
-            botInventoryContainerService.AddEmptyContainerToBot(botId,
+            _botInventoryContainerService.AddEmptyContainerToBot(botId,
                 EquipmentSlots.TacticalVest, generatedTacticalVest);
         }
     }
 
-    Item GenerateArmoredRig(
+    static Item GenerateArmoredRig(
         int botLevel,
         string botRole,
         BotBaseInventory botInventory)
     {
-        var armoredRigTpl = gearGeneratorHelper.WeightedRandomGearItemTpl(
-            data.GetGear(botLevel).ArmoredRigs);
+        var armoredRigTpl = _gearGeneratorHelper.WeightedRandomGearItemTpl(
+            _data.GetGear(botLevel).ArmoredRigs);
 
-        return gearGeneratorHelper.PutGearItemToInventory(
+        return _gearGeneratorHelper.PutGearItemToInventory(
             EquipmentSlots.TacticalVest,
             botRole,
             botInventory,
             armoredRigTpl);
     }
 
-    void GenerateArmorVest(
+    static void GenerateArmorVest(
         int botLevel,
         string botRole,
         BotBaseInventory botInventory)
     {
-        var armoredRigTpl = gearGeneratorHelper.WeightedRandomGearItemTpl(
-            data.GetGear(botLevel).Armor);
+        var armoredRigTpl = _gearGeneratorHelper.WeightedRandomGearItemTpl(
+            _data.GetGear(botLevel).Armor);
 
-        gearGeneratorHelper.PutGearItemToInventory(
+        _gearGeneratorHelper.PutGearItemToInventory(
             EquipmentSlots.ArmorVest,
             botRole,
             botInventory,
             armoredRigTpl);
     }
 
-    Item GenerateTacticalVest(
+    static Item GenerateTacticalVest(
         int botLevel,
         string botRole,
         BotBaseInventory botInventory)
     {
-        var armoredRigTpl = gearGeneratorHelper.WeightedRandomGearItemTpl(
-            data.GetGear(botLevel).Rigs);
+        var armoredRigTpl = _gearGeneratorHelper.WeightedRandomGearItemTpl(
+            _data.GetGear(botLevel).Rigs);
 
-        return gearGeneratorHelper.PutGearItemToInventory(
+        return _gearGeneratorHelper.PutGearItemToInventory(
             EquipmentSlots.TacticalVest,
             botRole,
             botInventory,
             armoredRigTpl);
     }
 
-    Item GenerateGearItem(
+    static Item GenerateGearItem(
         int botLevel,
         string botRole,
         BotBaseInventory botInventory,
@@ -387,19 +375,19 @@ public class BotInventoryGeneratorEx(
     {
         var gearItemTpl = GetGearItemTpl(botLevel, equipmentSlot);
 
-        return gearGeneratorHelper.PutGearItemToInventory(
+        return _gearGeneratorHelper.PutGearItemToInventory(
             equipmentSlot,
             botRole,
             botInventory,
             gearItemTpl);
     }
 
-    private void GenerateMaskAndEarpieceItem(int botLevel, string botRole,
+    static void GenerateMaskAndEarpieceItem(int botLevel, string botRole,
         BotBaseInventory botInventory)
     {
         var maskItemTpl = GetMaskItemTpl(botLevel);
 
-        gearGeneratorHelper.PutGearItemToInventory(
+        _gearGeneratorHelper.PutGearItemToInventory(
             EquipmentSlots.FaceCover,
             botRole,
             botInventory,
@@ -409,14 +397,14 @@ public class BotInventoryGeneratorEx(
             botLevel,
             EquipmentSlots.Earpiece);
 
-        gearGeneratorHelper.PutGearItemToInventory(
+        _gearGeneratorHelper.PutGearItemToInventory(
             EquipmentSlots.Earpiece,
             botRole,
             botInventory,
             earpieceTpl);
     }
 
-    void GenerateHeadwearAndEarpieceItem(
+    static void GenerateHeadwearAndEarpieceItem(
         int botLevel,
         string botRole,
         BotBaseInventory botInventory,
@@ -427,7 +415,7 @@ public class BotInventoryGeneratorEx(
             botLevel,
             EquipmentSlots.Headwear);
 
-        helmetGenerator.GenerateHelmet(
+        _helmetGenerator.GenerateHelmet(
             botLevel,
             botRole,
             botInventory,
@@ -438,7 +426,7 @@ public class BotInventoryGeneratorEx(
         // for "SSh-68 steel helmet" only one earpiece "GSSh-01 active headset"
         if (headwearItemTpl == "5c06c6a80db834001b735491")
         {
-            gearGeneratorHelper.PutGearItemToInventory(
+            _gearGeneratorHelper.PutGearItemToInventory(
                 EquipmentSlots.Earpiece,
                 botRole,
                 botInventory,
@@ -446,7 +434,7 @@ public class BotInventoryGeneratorEx(
             return;
         }
 
-        if (helmetGenerator.IsEarpieceIncompatible(headwearItemTpl))
+        if (_helmetGenerator.IsEarpieceIncompatible(headwearItemTpl))
         {
             return;
         }
@@ -455,12 +443,12 @@ public class BotInventoryGeneratorEx(
             botLevel,
             EquipmentSlots.Earpiece);
 
-        earpieceTpl = helmetGenerator.IsEarpieceNotFullyCompatible(
+        earpieceTpl = _helmetGenerator.IsEarpieceNotFullyCompatible(
             headwearItemTpl)
-            ? gearGeneratorHelper.ReplaceEarpiece(earpieceTpl)
+            ? _gearGeneratorHelper.ReplaceEarpiece(earpieceTpl)
             : earpieceTpl;
 
-        gearGeneratorHelper.PutGearItemToInventory(
+        _gearGeneratorHelper.PutGearItemToInventory(
             EquipmentSlots.Earpiece,
             botRole,
             botInventory,

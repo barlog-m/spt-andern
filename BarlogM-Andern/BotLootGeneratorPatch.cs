@@ -1,58 +1,42 @@
 using System.Collections.Frozen;
+using System.Reflection;
+using HarmonyLib;
 using SPTarkov.Common.Models.Logging;
 using SPTarkov.DI.Annotations;
-using SPTarkov.Server.Core.Generators.Bot;
+using SPTarkov.Reflection.Patching;
 using SPTarkov.Server.Core.Generators.Loot;
-using SPTarkov.Server.Core.Helpers;
-using SPTarkov.Server.Core.Helpers.Bot;
-using SPTarkov.Server.Core.Helpers.Items;
-using SPTarkov.Server.Core.Helpers.Profile;
 using SPTarkov.Server.Core.Models.Common;
 using SPTarkov.Server.Core.Models.Eft.Common.Tables;
 using SPTarkov.Server.Core.Models.Enums;
 using SPTarkov.Server.Core.Models.Spt.Bots;
 using SPTarkov.Server.Core.Models.Spt.Config;
-using SPTarkov.Server.Core.Services.Bot;
-using SPTarkov.Server.Core.Services.Locales;
-using SPTarkov.Server.Core.Utils;
-using SPTarkov.Server.Core.Utils.Cloners;
 
 namespace BarlogM_Andern;
 
-[Injectable(InjectionType.Scoped)]
-public class BotLootGeneratorEx(
-    ISptLogger<BotLootGenerator> logger,
-    RandomUtil randomUtil,
-    ItemHelper itemHelper,
-    InventoryHelper inventoryHelper,
-    HandbookHelper handbookHelper,
-    BotGeneratorHelper botGeneratorHelper,
-    BotWeaponGenerator botWeaponGenerator,
-    WeightedRandomHelper weightedRandomHelper,
-    BotHelper botHelper,
-    BotLootCacheService botLootCacheService,
-    ServerLocalisationService serverLocalisationService,
-    BotConfig botConfig,
-    PmcConfig pmcConfig,
-    ICloner cloner,
-    ModData modData
-) : BotLootGenerator(
-    logger,
-    randomUtil,
-    itemHelper,
-    inventoryHelper,
-    handbookHelper,
-    botGeneratorHelper,
-    botWeaponGenerator,
-    weightedRandomHelper,
-    botHelper,
-    botLootCacheService,
-    serverLocalisationService,
-    botConfig,
-    pmcConfig,
-    cloner
-)
+[Injectable]
+public class BotLootGeneratorPatch : AbstractPatch
 {
+    private static ISptLogger<BotLootGeneratorPatch> _logger = default!;
+    private static BotConfig _botConfig = default!;
+    private static ModData _modData = default!;
+
+    private static readonly MethodInfo AddLootFromPoolMethod = AccessTools.Method(
+        typeof(BotLootGenerator),
+        "AddLootFromPool",
+        [
+            typeof(MongoId),
+            typeof(Dictionary<MongoId, double>),
+            typeof(HashSet<EquipmentSlots>),
+            typeof(double),
+            typeof(BotBaseInventory),
+            typeof(string),
+            typeof(ItemSpawnLimitSettings),
+            typeof(double),
+            typeof(bool)
+        ]
+    ) ?? throw new InvalidOperationException(
+        "Could not find target method BotLootGenerator.AddLootFromPool");
+
     private static readonly Dictionary<MongoId, double> GP_DICT = new()
         { [Money.GP] = 1 };
 
@@ -116,9 +100,26 @@ public class BotLootGeneratorEx(
         "tagillahelperagro"
     ];
 
-    private readonly ModConfig _modConfig = modData.ModConfig;
+    public BotLootGeneratorPatch(
+        ISptLogger<BotLootGeneratorPatch> logger,
+        BotConfig botConfig,
+        ModData modData)
+    {
+        _logger = logger;
+        _botConfig = botConfig;
+        _modData = modData;
+    }
 
-    public override void GenerateLoot(
+    protected override MethodBase GetTargetMethod()
+    {
+        return typeof(BotLootGenerator).GetMethod(nameof(BotLootGenerator.GenerateLoot))
+               ?? throw new InvalidOperationException(
+                   "Could not find target method BotLootGenerator.GenerateLoot");
+    }
+
+    [PatchPostfix]
+    public static void Postfix(
+        BotLootGenerator __instance,
         MongoId botId,
         MongoId sessionId,
         BotType botJsonTemplate,
@@ -126,32 +127,34 @@ public class BotLootGeneratorEx(
         BotBaseInventory botInventory
         )
     {
-        base.GenerateLoot(botId, sessionId, botJsonTemplate,
-            botGenerationDetails, botInventory);
+        var modConfig = _modData.ModConfig;
 
-        if (_modConfig.LegaMedalOnBosses)
+        if (modConfig.LegaMedalOnBosses)
         {
-            if (botConfig.Bosses.Contains(botGenerationDetails.Role))
+            if (_botConfig.Bosses.Contains(botGenerationDetails.Role))
             {
-                AddLegaMedal(botId, botGenerationDetails, botInventory);
+                AddLegaMedal(__instance, botId, botGenerationDetails, botInventory);
             }
         }
 
-        if (_modConfig.GpCoinsOnPmcAndScavs)
+        if (modConfig.GpCoinsOnPmcAndScavs)
         {
             if (botGenerationDetails.IsPmc ||
                 ALL_SCAVS.Contains(botGenerationDetails.Role.ToLower()))
             {
-                AddGpCoins(botId, botGenerationDetails, botInventory);
+                AddGpCoins(__instance, botId, botGenerationDetails, botInventory);
             }
         }
     }
 
-    private void AddLegaMedal(MongoId botId,
+    private static void AddLegaMedal(
+        BotLootGenerator instance,
+        MongoId botId,
         BotGenerationDetails botGenerationDetails,
         BotBaseInventory botInventory)
     {
         AddLootFromPool(
+            instance,
             botId,
             LEGA_DICT,
             [EquipmentSlots.Pockets],
@@ -164,11 +167,14 @@ public class BotLootGeneratorEx(
         );
     }
 
-    private void AddGpCoins(MongoId botId,
+    private static void AddGpCoins(
+        BotLootGenerator instance,
+        MongoId botId,
         BotGenerationDetails botGenerationDetails,
         BotBaseInventory botInventory)
     {
         AddLootFromPool(
+            instance,
             botId,
             GP_DICT,
             [EquipmentSlots.Pockets, EquipmentSlots.Backpack, EquipmentSlots.TacticalVest],
@@ -179,5 +185,37 @@ public class BotLootGeneratorEx(
             0,
             botGenerationDetails.IsPmc
         );
+    }
+
+    private static void AddLootFromPool(
+        BotLootGenerator instance,
+        MongoId botId,
+        Dictionary<MongoId, double> pool,
+        HashSet<EquipmentSlots> equipmentSlots,
+        double totalItemCount,
+        BotBaseInventory inventoryToAddItemsTo,
+        string botRole,
+        ItemSpawnLimitSettings? itemSpawnLimits,
+        double totalValueLimitRub,
+        bool isPmc)
+    {
+        try
+        {
+            AddLootFromPoolMethod.Invoke(instance, [
+                botId,
+                pool,
+                equipmentSlots,
+                totalItemCount,
+                inventoryToAddItemsTo,
+                botRole,
+                itemSpawnLimits,
+                totalValueLimitRub,
+                isPmc
+            ]);
+        }
+        catch (TargetInvocationException ex) when (ex.InnerException is not null)
+        {
+            _logger.Error("[Andern] AddLootFromPool", ex.InnerException);
+        }
     }
 }
