@@ -1,34 +1,34 @@
+using SPTarkov.Common.Models.Logging;
 using SPTarkov.DI.Annotations;
 using SPTarkov.Server.Core.DI;
 using SPTarkov.Server.Core.Models.Common;
 using SPTarkov.Server.Core.Models.Eft.Common.Tables;
 using SPTarkov.Server.Core.Models.Enums;
-using SPTarkov.Server.Core.Models.Logging;
 using SPTarkov.Server.Core.Models.Spt.Config;
-using SPTarkov.Server.Core.Models.Utils;
-using SPTarkov.Server.Core.Servers;
-using SPTarkov.Server.Core.Services;
+using SPTarkov.Server.Core.Models.Spt.Tables;
 
 namespace BarlogM_Andern;
 
 [Injectable(InjectionType.Singleton,
-    TypePriority = OnLoadOrder.PostSptModLoader + 1)]
+    TypePriority = OnLoadOrder.PostLoad + 1)]
 public class EtcPostSpt(
     ISptLogger<EtcPostSpt> logger,
-    DatabaseService databaseService,
-    ConfigServer configServer,
+    GlobalTable globalTable,
+    TradersTable tradersTable,
+    LocationTable locationTable,
+    TemplateTable templateTable,
+    PmcConfig pmcConfig,
+    InsuranceConfig insuranceConfig,
+    PlayerScavConfig playerScavConfig,
+    LocationConfig locationConfig,
     ModData modData,
     SeasonRandomizer seasonRandomizer
 )
     : IOnLoad
 {
     private readonly ModConfig _modConfig = modData.ModConfig;
-    private readonly PmcConfig _pmcConfig = configServer.GetConfig<PmcConfig>();
-    private readonly InsuranceConfig _insuranceConfig = configServer.GetConfig<InsuranceConfig>();
-    private readonly PlayerScavConfig _playerScavConfig = configServer.GetConfig<PlayerScavConfig>();
-    private readonly LocationConfig _locationConfig = configServer.GetConfig<LocationConfig>();
 
-    public Task OnLoad()
+    public Task OnLoadAsync(CancellationToken cancellationToken)
     {
         SetMinFleaLevel();
 
@@ -76,69 +76,69 @@ public class EtcPostSpt(
 
     void IncreaseLabLoot()
     {
-        _locationConfig.LooseLootMultiplier["laboratory"] *= 1.5;
+        locationConfig.LooseLootMultiplier["laboratory"] *= 1.5;
     }
 
     void PmcBackpackWeaponDisable()
     {
-        _pmcConfig.LooseWeaponInBackpackChancePercent = 0;
-        _pmcConfig.LooseWeaponInBackpackLootMinMax = new MinMax<int>(0, 0);
+        pmcConfig.LooseWeaponInBackpackChancePercent = 0;
+        pmcConfig.LooseWeaponInBackpackLootMinMax = new MinMax<int>(0, 0);
     }
 
     void InsuranceReturnNothing()
     {
-        foreach (var traderId in _insuranceConfig.ReturnChancePercent.Keys)
+        foreach (var traderId in insuranceConfig.ReturnChancePercent.Keys)
         {
-            _insuranceConfig.ReturnChancePercent[traderId] = 0;
+            insuranceConfig.ReturnChancePercent[traderId] = 0;
         }
     }
 
     void InsuranceTune()
     {
-        var prapor = databaseService.GetTrader(Traders.PRAPOR);
-        var therapist = databaseService.GetTrader(Traders.THERAPIST);
+        var prapor = tradersTable.GetTrader(Traders.PRAPOR)!;
+        var therapist = tradersTable.GetTrader(Traders.THERAPIST)!;
 
         if (_modConfig.InsuranceDecreaseReturnTime)
         {
-            prapor.Base.Insurance.MinReturnHour = 2;
+            prapor.Base.Insurance!.MinReturnHour = 2;
             prapor.Base.Insurance.MaxReturnHour = 3;
 
-            therapist.Base.Insurance.MinReturnHour = 1;
+            therapist.Base.Insurance!.MinReturnHour = 1;
             therapist.Base.Insurance.MaxReturnHour = 2;
         }
 
         if (_modConfig.InsuranceIncreaseStorageTime)
         {
-            prapor.Base.Insurance.MaxStorageTime = 336;
-            therapist.Base.Insurance.MaxStorageTime = 336;
+            prapor.Base.Insurance!.MaxStorageTime = 336;
+            therapist.Base.Insurance!.MaxStorageTime = 336;
         }
     }
 
     void SetMinFleaLevel()
     {
-        databaseService.GetGlobals().Configuration.RagFair.MinUserLevel =
+        globalTable.Configuration.RagFair.MinUserLevel =
             modData.ModConfig.FleaMinUserLevel;
     }
 
     void InsuranceOnLab()
     {
-        var lab = databaseService.GetLocation("laboratory");
+        var lab = locationTable.GetLocation("laboratory")!;
         lab.Base.Insurance = true;
     }
 
     void EmissaryPmcBotsDisable()
     {
-        foreach (var memberCategory in _pmcConfig.AccountTypeWeight.Keys)
+        foreach (var memberCategory in pmcConfig.AccountTypeWeight.Keys)
         {
-            _pmcConfig.AccountTypeWeight[memberCategory] = 0;
+            pmcConfig.AccountTypeWeight[memberCategory] = 0;
         }
 
-        _pmcConfig.AccountTypeWeight[MemberCategory.Default] = 25;
+        pmcConfig.AccountTypeWeight[MemberCategory.Default] = 25;
     }
 
     void PlayerScavAlwaysHasBackpack()
     {
-        foreach (var keyValuePair in _playerScavConfig.KarmaLevel)
+        foreach (var keyValuePair in playerScavConfig.KarmaLevel)
         {
             keyValuePair.Value.Modifiers.Equipment["Backpack"] = 100;
         }
@@ -148,7 +148,7 @@ public class EtcPostSpt(
     {
         var shotySilencer = "5b363dd25acfc4001a598fd2";
 
-        foreach (var (questId, quest) in databaseService.GetTemplates().Quests)
+        foreach (var (questId, quest) in templateTable.Quests)
         {
             var questConditions = quest.Conditions.AvailableForFinish
                 .Where(questCondition => questCondition.ConditionType == "CounterCreator")
@@ -175,7 +175,7 @@ public class EtcPostSpt(
                             {
                                 logger.LogWithColor(
                                     $"[Andern] quest '{quest.QuestName}' condition set to any silenced weapon",
-                                    LogTextColor.Blue);
+                                    Spectre.Console.Color.Blue);
                             }
                         }
                     }
@@ -187,7 +187,7 @@ public class EtcPostSpt(
                         if (_modConfig.Debug)
                         {
                             logger.LogWithColor(
-                                $"[Andern] quest '{quest.QuestName}' gear condition removed", LogTextColor.Blue);
+                                $"[Andern] quest '{quest.QuestName}' gear condition removed", Spectre.Console.Color.Blue);
                         }
                     }
 
@@ -210,7 +210,7 @@ public class EtcPostSpt(
                             {
                                 logger.LogWithColor(
                                     $"[Andern] quest '{quest.QuestName}' weapon condition expanded to DMR",
-                                    LogTextColor.Blue);
+                                    Spectre.Console.Color.Blue);
                             }
                         }
                     }
@@ -224,7 +224,7 @@ public class EtcPostSpt(
                         {
                             logger.LogWithColor(
                                 $"[Andern] quest '{quest.QuestName}' weapon condition removed",
-                                LogTextColor.Blue);
+                                Spectre.Console.Color.Blue);
                         }
 
                         continue;
@@ -240,7 +240,7 @@ public class EtcPostSpt(
                         {
                             logger.LogWithColor(
                                 $"[Andern] quest '{quest.QuestName}' weapon condition removed",
-                                LogTextColor.Blue);
+                                Spectre.Console.Color.Blue);
                         }
 
                         continue;
@@ -256,7 +256,7 @@ public class EtcPostSpt(
                         {
                             logger.LogWithColor(
                                 $"[Andern] quest '{quest.QuestName}' weapon condition removed",
-                                LogTextColor.Blue);
+                                Spectre.Console.Color.Blue);
                         }
                     }
                 }

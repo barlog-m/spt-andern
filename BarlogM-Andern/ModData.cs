@@ -1,14 +1,14 @@
 using System.Collections.Frozen;
 using System.Reflection;
 using fastJSON5;
+using SPTarkov.Common.Models.Logging;
 using SPTarkov.DI.Annotations;
-using SPTarkov.Server.Core.Helpers;
+using SPTarkov.Server.Core.Helpers.Server;
 using SPTarkov.Server.Core.Models.Common;
-using SPTarkov.Server.Core.Models.Utils;
 
 namespace BarlogM_Andern;
 
-[Injectable]
+[Injectable(InjectionType.Singleton)]
 public class ModData
 {
     public readonly ModConfig ModConfig;

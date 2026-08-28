@@ -5,8 +5,8 @@ using SPTarkov.Server.Core.Utils;
 namespace BarlogM_Andern;
 
 [Injectable]
-public class CustomStaticRouter(
-    StaticRouterCallbacks callbacks,
+public class RaidEndStaticRouter(
+    RaidEndStaticRouterCallbacks callbacks,
     JsonUtil jsonUtil) : StaticRouter(jsonUtil, [
     new RouteAction(
         "/client/match/local/end",
@@ -14,14 +14,14 @@ public class CustomStaticRouter(
             url,
             info,
             sessionId,
-            output
+            output,
+            cancellationToken
         ) => await callbacks.HandleRaidEnd()
     )
 ]);
 
-
 [Injectable]
-public class StaticRouterCallbacks(
+public class RaidEndStaticRouterCallbacks(
     HttpResponseUtil httpResponseUtil,
     SeasonRandomizer seasonRandomizer)
 {
@@ -31,5 +31,4 @@ public class StaticRouterCallbacks(
 
         return httpResponseUtil.NullResponse();
     }
-
 }

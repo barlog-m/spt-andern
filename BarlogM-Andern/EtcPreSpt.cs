@@ -1,25 +1,23 @@
+using SPTarkov.Common.Models.Logging;
 using SPTarkov.DI.Annotations;
 using SPTarkov.Server.Core.DI;
 using SPTarkov.Server.Core.Models.Spt.Config;
-using SPTarkov.Server.Core.Models.Utils;
-using SPTarkov.Server.Core.Servers;
 
 namespace BarlogM_Andern;
 
-[Injectable(InjectionType.Singleton, TypePriority = OnLoadOrder.PreSptModLoader + 1)]
+[Injectable(InjectionType.Singleton, TypePriority = OnLoadOrder.Preload + 1)]
 public class EtcPreSpt(
     ISptLogger<EtcPreSpt> logger,
-    ConfigServer configServer,
+    SeasonalEventConfig seasonalEventConfig,
+    BotConfig botConfig,
     ModData modData
 )
     : IOnLoad
 {
     private readonly ModConfig _modConfig = modData.ModConfig;
-    
-    private readonly SeasonalEventConfig _seasonalEventConfig = configServer.GetConfig<SeasonalEventConfig>();
-    private readonly BotConfig _botConfig = configServer.GetConfig<BotConfig>();
 
-    public Task OnLoad()
+
+    public Task OnLoadAsync(CancellationToken cancellationToken)
     {
         if (_modConfig.SeasonalEventsDisable)
         {
@@ -36,11 +34,11 @@ public class EtcPreSpt(
 
     private void SeasonalEventsDisable()
     {
-        _seasonalEventConfig.EnableSeasonalEventDetection = false;
+        seasonalEventConfig.EnableSeasonalEventDetection = false;
     }
 
     private void WeeklyBossEventDisable()
     {
-        _botConfig.WeeklyBoss.Enabled = false;
+        botConfig.WeeklyBoss.Enabled = false;
     }
 }

@@ -1,30 +1,27 @@
+using SPTarkov.Common.Models.Logging;
 using SPTarkov.DI.Annotations;
 using SPTarkov.Server.Core.DI;
-using SPTarkov.Server.Core.Helpers;
-using SPTarkov.Server.Core.Models.Logging;
+using SPTarkov.Server.Core.Helpers.Bot;
 using SPTarkov.Server.Core.Models.Spt.Config;
-using SPTarkov.Server.Core.Models.Utils;
-using SPTarkov.Server.Core.Servers;
-using SPTarkov.Server.Core.Services;
+using SPTarkov.Server.Core.Models.Spt.Tables;
 
 namespace BarlogM_Andern;
 
 [Injectable(InjectionType.Singleton,
-    TypePriority = OnLoadOrder.PostDBModLoader + 1)]
+    TypePriority = OnLoadOrder.PostLoad + 1)]
 public class MapBotTuning(
     ISptLogger<MapBotTuning> logger,
-    DatabaseService databaseService,
-    ConfigServer configServer,
+    LocationTable locationTable,
+    BotConfig botConfig,
+    PmcConfig pmcConfig,
     BotHelper botHelper,
     ModData modData
 )
     : IOnLoad
 {
     private readonly ModConfig _modConfig = modData.ModConfig;
-    private readonly BotConfig _botConfig = configServer.GetConfig<BotConfig>();
-    private readonly PmcConfig _pmcConfig = configServer.GetConfig<PmcConfig>();
 
-    public Task OnLoad()
+    public Task OnLoadAsync(CancellationToken cancellationToken)
     {
         if (_modConfig.MapBotSettings)
         {
@@ -56,11 +53,11 @@ public class MapBotTuning(
     {
         foreach (var locationId in ModData.ALL_MAPS)
         {
-            var location = databaseService.GetLocation(locationId);
+            var location = locationTable.GetLocation(locationId)!;
             foreach (var bossLocationSpawn in location.Base.BossLocationSpawn)
             {
                 if (locationId == "labyrinth") continue;
-                var bossName = bossLocationSpawn.BossName.ToLower();
+                var bossName = bossLocationSpawn.BossName!.ToLower();
                 if (
                     bossName is "pmcusec" or "pmcbear" or "pmcbot"
                     or "crazyassaultevent" or "exusec" or "arenafighterevent"
@@ -74,7 +71,7 @@ public class MapBotTuning(
                     continue;
                 }
 
-                var newChance = bossLocationSpawn.BossChance +
+                var newChance = bossLocationSpawn.BossChance! +
                                 modData.ModConfig.MapBossChanceAdjustment;
 
                 var chance = Math.Clamp(Math.Round(newChance.Value), 0, 100);
@@ -90,16 +87,16 @@ public class MapBotTuning(
                     if (_modConfig.MapBossGoonsDisable)
                     {
                         chance = 0;
-                        _botConfig.GoonSpawnSystem.SpawnChance = 0;
+                        botConfig.GoonSpawnSystem.SpawnChance = 0;
                     }
                     else if (chance >= 100)
                     {
-                        _botConfig.GoonSpawnSystem.Enabled = false;
-                        _botConfig.GoonSpawnSystem.SpawnChance = chance;
+                        botConfig.GoonSpawnSystem.Enabled = false;
+                        botConfig.GoonSpawnSystem.SpawnChance = chance;
                     }
                     else
                     {
-                        _botConfig.GoonSpawnSystem.SpawnChance = chance;
+                        botConfig.GoonSpawnSystem.SpawnChance = chance;
                     } 
                 } 
 
@@ -109,7 +106,7 @@ public class MapBotTuning(
                 {
                     logger.LogWithColor(
                         $"[Andern] '{location.Base.Name}' boss '{bossLocationSpawn.BossName}' chance {bossLocationSpawn.BossChance}",
-                        LogTextColor.Blue);
+                        Spectre.Console.Color.Blue);
                 }
             }
         }
@@ -117,11 +114,11 @@ public class MapBotTuning(
         if (_modConfig.Debug)
         {
             logger.LogWithColor(
-                $"[Andern] BotConfig.GoonSpawnSystem.Enabled = {_botConfig.GoonSpawnSystem.Enabled}",
-                LogTextColor.Blue);
+                $"[Andern] BotConfig.GoonSpawnSystem.Enabled = {botConfig.GoonSpawnSystem.Enabled}",
+                Spectre.Console.Color.Blue);
             logger.LogWithColor(
-                $"[Andern] BotConfig.GoonSpawnSystem.SpawnChance = {_botConfig.GoonSpawnSystem.SpawnChance}",
-                LogTextColor.Blue);
+                $"[Andern] BotConfig.GoonSpawnSystem.SpawnChance = {botConfig.GoonSpawnSystem.SpawnChance}",
+                Spectre.Console.Color.Blue);
         }
     }
 
@@ -129,11 +126,11 @@ public class MapBotTuning(
     {
         foreach (var locationName in ModData.ALL_MAPS)
         {
-            var usecType = _pmcConfig.PmcType["pmcusec"][locationName];
+            var usecType = pmcConfig.PmcType["pmcusec"][locationName];
             usecType.Clear();
             usecType.Add("pmcUSEC", 1);
 
-            var bearType = _pmcConfig.PmcType["pmcbear"][locationName];
+            var bearType = pmcConfig.PmcType["pmcbear"][locationName];
             bearType.Clear();
             bearType.Add("pmcBEAR", 1);
         }
@@ -141,8 +138,8 @@ public class MapBotTuning(
 
     private void MakePmcAlwaysHostile()
     {
-        PmcHostilitySettings(_pmcConfig.HostilitySettings["pmcusec"]);
-        PmcHostilitySettings(_pmcConfig.HostilitySettings["pmcbear"]);
+        PmcHostilitySettings(pmcConfig.HostilitySettings["pmcusec"]);
+        PmcHostilitySettings(pmcConfig.HostilitySettings["pmcbear"]);
     }
 
     private void PmcHostilitySettings(
@@ -168,7 +165,7 @@ public class MapBotTuning(
 
         if (modConfig.MapScavsAlwaysHasArmor)
         {
-            _botConfig.Equipment["assault"]!.ForceOnlyArmoredRigWhenNoArmor =
+            botConfig.Equipment["assault"]!.ForceOnlyArmoredRigWhenNoArmor =
                 true;
             equipmentChances["ArmorVest"] = 100;
         }
@@ -185,19 +182,19 @@ public class MapBotTuning(
 
         if (modConfig.MapPlayerScavsBossBrainsOff)
         {
-            foreach (var map in _botConfig.PlayerScavBrainType.Keys)
+            foreach (var map in botConfig.PlayerScavBrainType.Keys)
             {
-                _botConfig.PlayerScavBrainType[map] = [];
-                _botConfig.PlayerScavBrainType[map].Add("pmcBot", 1);
+                botConfig.PlayerScavBrainType[map] = [];
+                botConfig.PlayerScavBrainType[map].Add("pmcBot", 1);
             }
         }
     }
 
     private void TunePmcGear()
     {
-        _botConfig.Equipment["pmc"]!.ForceOnlyArmoredRigWhenNoArmor = true;
+        botConfig.Equipment["pmc"]!.ForceOnlyArmoredRigWhenNoArmor = true;
 
-        foreach (var randomisationDetailse in _botConfig.Equipment["pmc"]!
+        foreach (var randomisationDetailse in botConfig.Equipment["pmc"]!
                      .Randomisation!)
         {
             randomisationDetailse.Equipment["Backpack"] = 100;

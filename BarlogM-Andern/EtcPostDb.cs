@@ -1,32 +1,31 @@
 using System.Collections.Frozen;
+using SPTarkov.Common.Models.Logging;
 using SPTarkov.DI.Annotations;
 using SPTarkov.Server.Core.DI;
-using SPTarkov.Server.Core.Helpers;
+using SPTarkov.Server.Core.Helpers.Items;
 using SPTarkov.Server.Core.Models.Common;
 using SPTarkov.Server.Core.Models.Enums;
 using SPTarkov.Server.Core.Models.Spt.Config;
-using SPTarkov.Server.Core.Models.Utils;
-using SPTarkov.Server.Core.Servers;
-using SPTarkov.Server.Core.Services;
+using SPTarkov.Server.Core.Models.Spt.Tables;
 
 namespace BarlogM_Andern;
 
 [Injectable(InjectionType.Singleton,
-    TypePriority = OnLoadOrder.PostDBModLoader + 1)]
+    TypePriority = OnLoadOrder.PostLoad + 1)]
 public class EtcPostDb(
     ISptLogger<EtcPostDb> logger,
-    DatabaseService databaseService,
-    ConfigServer configServer,
+    TradersTable tradersTable,
+    TemplateTable templateTable,
+    RagfairConfig ragfairConfig,
+    ScavCaseConfig scavCaseConfig,
     ItemHelper itemHelper,
     ModData modData
 )
     : IOnLoad
 {
     private readonly ModConfig _modConfig = modData.ModConfig;
-    private readonly RagfairConfig _ragfairConfig = configServer.GetConfig<RagfairConfig>();
-    private readonly ScavCaseConfig _scavCaseConfig = configServer.GetConfig<ScavCaseConfig>();
 
-    public Task OnLoad()
+    public Task OnLoadAsync(CancellationToken cancellationToken)
     {
         if (_modConfig.FleaBlacklistDisable)
         {
@@ -42,7 +41,7 @@ public class EtcPostDb(
         {
             ScavCaseLootValueMultiplier();
         }
-        
+
         FixCirculateQuest();
         FixVssValOveheat();
 
@@ -56,21 +55,21 @@ public class EtcPostDb(
 
     void ScavCaseLootValueMultiplier()
     {
-        _scavCaseConfig.AllowBossItemsAsRewards = true;
+        scavCaseConfig.AllowBossItemsAsRewards = true;
 
-        foreach (var valueRange in _scavCaseConfig.RewardItemValueRangeRub.Keys)
+        foreach (var valueRange in scavCaseConfig.RewardItemValueRangeRub.Keys)
         {
-            _scavCaseConfig.RewardItemValueRangeRub[valueRange].Min *=
+            scavCaseConfig.RewardItemValueRangeRub[valueRange].Min *=
                 _modConfig.ScavCaseLootValueMultiplier;
-            _scavCaseConfig.RewardItemValueRangeRub[valueRange].Max *=
+            scavCaseConfig.RewardItemValueRangeRub[valueRange].Max *=
                 _modConfig.ScavCaseLootValueMultiplier;
         }
     }
 
     void FleaBlacklistDisable()
     {
-        _ragfairConfig.Dynamic.Blacklist.EnableBsgList = false;
-        _ragfairConfig.Dynamic.Blacklist.TraderItems = true;
+        ragfairConfig.Dynamic.Blacklist.EnableBsgList = false;
+        ragfairConfig.Dynamic.Blacklist.TraderItems = true;
     }
 
     void RemoveAllTradersItemsFromFlea()
@@ -99,18 +98,18 @@ public class EtcPostDb(
 
         foreach (var traderId in traders)
         {
-            var trader = databaseService.GetTrader(traderId)!;
+            var trader = tradersTable.GetTrader(traderId)!;
             foreach (var item in trader.Assort.Items)
             {
                 if (!itemHelper.IsOfBaseclasses(item.Template,
                         ignoreBaseClasses))
                 {
-                    _ragfairConfig.Dynamic.Blacklist.Custom.Add(item.Template);
+                    ragfairConfig.Dynamic.Blacklist.Custom.Add(item.Template);
                 }
             }
         }
 
-        AddExtraItemsToBlacklist(_ragfairConfig);
+        AddExtraItemsToBlacklist(ragfairConfig);
     }
 
     void AddExtraItemsToBlacklist(RagfairConfig ragfair)
@@ -133,7 +132,7 @@ public class EtcPostDb(
 
     void FixCirculateQuest()
     {
-        var conditionsAvailableForFinish = databaseService.GetTemplates()
+        var conditionsAvailableForFinish = templateTable
             .Quests["6663149f1d3ec95634095e75"]
             .Conditions.AvailableForFinish;
 
@@ -154,7 +153,7 @@ public class EtcPostDb(
         const string VAL_TPL = "57c44b372459772d2b39b8ce";
         const double OVERHEAT_MULTIPLIER = 0.8;
 
-        var items = databaseService.GetItems();
+        var items = templateTable.Items;
 
         items[VSS_TPL].Properties!.HeatFactorByShot *= OVERHEAT_MULTIPLIER;
         items[VSS_TPL].Properties!.HeatFactorByShot *= OVERHEAT_MULTIPLIER;
@@ -169,11 +168,11 @@ public class EtcPostDb(
 
     void ReducePenaltiesFromLargeMagazines()
     {
-        var items = databaseService.GetItems();
+        var items = templateTable.Items;
         foreach (var item in items.Values)
         {
             if (item.Parent != BaseClasses.MAGAZINE) continue;
-            
+
             if (item.Properties!.LoadUnloadModifier > 20)
             {
                 item.Properties!.LoadUnloadModifier /= 2;

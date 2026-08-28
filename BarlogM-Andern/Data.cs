@@ -1,10 +1,9 @@
 using fastJSON5;
+using SPTarkov.Common.Models.Logging;
 using SPTarkov.DI.Annotations;
 using SPTarkov.Server.Core.Extensions;
-using SPTarkov.Server.Core.Helpers;
+using SPTarkov.Server.Core.Helpers.Server;
 using SPTarkov.Server.Core.Models.Eft.Common.Tables;
-using SPTarkov.Server.Core.Models.Logging;
-using SPTarkov.Server.Core.Models.Utils;
 using SPTarkov.Server.Core.Utils;
 using SPTarkov.Server.Core.Utils.Cloners;
 using Path = System.IO.Path;
@@ -16,7 +15,6 @@ public class Data
 {
     readonly ModConfig _modConfig;
     readonly Dictionary<string, PresetData> data = new ();
-
     readonly ISptLogger<Data> logger;
     readonly ModHelper modHelper;
     readonly RandomUtil randomUtil;
@@ -121,7 +119,7 @@ public class Data
 
         if (_modConfig.Debug)
         {
-            logger.LogWithColor($"[Andern] for bot level {level} selected tier `{tier}` weapon '{weaponPreset.Name}'", LogTextColor.Blue);
+            logger.LogWithColor($"[Andern] for bot level {level} selected tier `{tier}` weapon '{weaponPreset.Name}'", Spectre.Console.Color.Blue);
         }
 
         var weaponPresetClone = cloner.Clone(weaponPreset.Items).ReplaceIDs().ToList();

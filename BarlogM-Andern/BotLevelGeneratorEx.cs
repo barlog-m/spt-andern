@@ -1,26 +1,24 @@
 using SPTarkov.DI.Annotations;
-using SPTarkov.Server.Core.Generators;
+using SPTarkov.Server.Core.Generators.Bot;
 using SPTarkov.Server.Core.Models.Common;
 using SPTarkov.Server.Core.Models.Eft.Bot;
 using SPTarkov.Server.Core.Models.Eft.Common.Tables;
 using SPTarkov.Server.Core.Models.Spt.Bots;
-using SPTarkov.Server.Core.Services;
+using SPTarkov.Server.Core.Models.Spt.Tables;
 using SPTarkov.Server.Core.Utils;
 
 namespace BarlogM_Andern;
 
-[Injectable(InjectionType.Scoped, typeof(BotLevelGenerator))]
+[Injectable(InjectionType.Scoped)]
 public class BotLevelGeneratorEx(
+    GlobalTable globalTable,
     RandomUtil randomUtil,
-    DatabaseService databaseService,
     ModData modData
-) : BotLevelGenerator(randomUtil, databaseService)
+) : BotLevelGenerator(globalTable, randomUtil)
 {
     private readonly ModConfig _modConfig = modData.ModConfig;
 
-    public override RandomisedBotLevelResult GenerateBotLevel(
-        MinMax<int> levelDetails,
-        BotGenerationDetails botGenerationDetails, BotBase bot)
+    public override RandomisedBotLevelResult GenerateBotLevel(MinMax<int> levelDetails, BotGenerationDetails botGenerationDetails, BotBase bot)
     {
         if (!botGenerationDetails.IsPmc)
         {
@@ -33,7 +31,7 @@ public class BotLevelGeneratorEx(
         var pmcBotLevel =
             randomUtil.GetInt(pmcBotLevelRange.Min, pmcBotLevelRange.Max);
 
-        var expTable = databaseService.GetGlobals().Configuration.Exp.Level
+        var expTable = globalTable.Configuration.Exp.Level
             .ExperienceTable;
         var baseExp = expTable.Take(pmcBotLevel).Sum(entry => entry.Experience);
         var fractionalExp = pmcBotLevel < 99

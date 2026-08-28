@@ -1,16 +1,16 @@
 using fastJSON5;
+using SPTarkov.Common.Models.Logging;
 using SPTarkov.DI.Annotations;
 using SPTarkov.Server.Core.DI;
 using SPTarkov.Server.Core.Extensions;
-using SPTarkov.Server.Core.Helpers;
+using SPTarkov.Server.Core.Helpers.Items;
+using SPTarkov.Server.Core.Helpers.Server;
 using SPTarkov.Server.Core.Models.Common;
 using SPTarkov.Server.Core.Models.Eft.Common.Tables;
 using SPTarkov.Server.Core.Models.Enums;
 using SPTarkov.Server.Core.Models.Spt.Config;
-using SPTarkov.Server.Core.Models.Utils;
+using SPTarkov.Server.Core.Models.Spt.Tables;
 using SPTarkov.Server.Core.Routers;
-using SPTarkov.Server.Core.Servers;
-using SPTarkov.Server.Core.Services;
 using SPTarkov.Server.Core.Utils;
 using SPTarkov.Server.Core.Utils.Cloners;
 using Path = System.IO.Path;
@@ -25,13 +25,15 @@ internal class TraderItems {
 }
 
 [Injectable(InjectionType.Singleton,
-    TypePriority = OnLoadOrder.PostDBModLoader + 1)]
+    TypePriority = OnLoadOrder.PostLoad + 1)]
 public class DoeTrader(
     ISptLogger<DoeTrader> logger,
     ModHelper modHelper,
     ImageRouter imageRouter,
-    DatabaseService databaseService,
-    ConfigServer configServer,
+    TradersTable tradersTable,
+    TraderConfig traderConfig,
+    RagfairConfig ragfairConfig,
+    InsuranceConfig insuranceConfig,
     TimeUtil timeUtil,
     CustomTraderHelper customTraderHelper,
     ItemHelper itemHelper,
@@ -41,17 +43,13 @@ public class DoeTrader(
 )
     : IOnLoad
 {
-    private readonly TraderConfig _traderConfig = configServer.GetConfig<TraderConfig>();
-    private readonly RagfairConfig _ragfairConfig = configServer.GetConfig<RagfairConfig>();
-    private readonly InsuranceConfig _insuranceConfig = configServer.GetConfig<InsuranceConfig>();
 
     private readonly string _traderDataPath =
         Path.Combine(modData.PathToMod, "trader");
 
-        
     private string traderId;
 
-    public Task OnLoad()
+    public Task OnLoadAsync(CancellationToken cancellationToken)
     {
         if (!modData.ModConfig.Trader)
         {
@@ -66,10 +64,10 @@ public class DoeTrader(
 
         imageRouter.AddRoute(traderBase.Avatar!.Replace(".jpg", ""),
             traderImagePath);
-        customTraderHelper.SetTraderUpdateTime(_traderConfig, traderBase,
+        customTraderHelper.SetTraderUpdateTime(traderConfig, traderBase,
             timeUtil.GetHoursAsSeconds(1), timeUtil.GetHoursAsSeconds(2));
 
-        _ragfairConfig.Traders.TryAdd(traderBase.Id, true);
+        ragfairConfig.Traders.TryAdd(traderBase.Id, true);
 
         AddTraderWithEmptyAssortToDb(traderBase);
 
@@ -95,17 +93,17 @@ public class DoeTrader(
 
     private void EnableRepair()
     {
-        var trader = databaseService.GetTrader(traderId)!;
+        var trader = tradersTable.GetTrader(traderId)!;
         trader.Base.Repair!.Availability = true;
     }
 
     private void EnableEnshurance()
     {
-        var trader = databaseService.GetTrader(traderId)!;
+        var trader = tradersTable.GetTrader(traderId)!;
         trader.Base.Insurance!.Availability = true;
 
-        _insuranceConfig.ReturnChancePercent[traderId] = 100;
-        _insuranceConfig.RunIntervalSeconds = 60;
+        insuranceConfig.ReturnChancePercent[traderId] = 100;
+        insuranceConfig.RunIntervalSeconds = 60;
     }
 
     private TraderAssort LoadItems()
@@ -227,7 +225,7 @@ public class DoeTrader(
             LoyalLevelItems = new Dictionary<MongoId, int>()
         };
 
-        var therapist = databaseService.GetTrader(Traders.THERAPIST)!;
+        var therapist = tradersTable.GetTrader(Traders.THERAPIST)!;
 
         var traderDataToAdd = new Trader
         {
@@ -243,8 +241,7 @@ public class DoeTrader(
             Dialogue = cloner.Clone(therapist.Dialogue)!
         };
 
-        if (!databaseService.GetTables().Traders
-                .TryAdd(traderDetailsToAdd.Id, traderDataToAdd))
+        if (!tradersTable.TryAdd(traderDetailsToAdd.Id, traderDataToAdd))
         {
             logger.Error("Error add Doe trader");
         }

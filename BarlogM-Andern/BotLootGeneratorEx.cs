@@ -1,20 +1,25 @@
 using System.Collections.Frozen;
+using SPTarkov.Common.Models.Logging;
 using SPTarkov.DI.Annotations;
-using SPTarkov.Server.Core.Generators;
+using SPTarkov.Server.Core.Generators.Bot;
+using SPTarkov.Server.Core.Generators.Loot;
 using SPTarkov.Server.Core.Helpers;
+using SPTarkov.Server.Core.Helpers.Bot;
+using SPTarkov.Server.Core.Helpers.Items;
+using SPTarkov.Server.Core.Helpers.Profile;
 using SPTarkov.Server.Core.Models.Common;
 using SPTarkov.Server.Core.Models.Eft.Common.Tables;
 using SPTarkov.Server.Core.Models.Enums;
 using SPTarkov.Server.Core.Models.Spt.Bots;
-using SPTarkov.Server.Core.Models.Utils;
-using SPTarkov.Server.Core.Servers;
-using SPTarkov.Server.Core.Services;
+using SPTarkov.Server.Core.Models.Spt.Config;
+using SPTarkov.Server.Core.Services.Bot;
+using SPTarkov.Server.Core.Services.Locales;
 using SPTarkov.Server.Core.Utils;
 using SPTarkov.Server.Core.Utils.Cloners;
 
 namespace BarlogM_Andern;
 
-[Injectable(InjectionType.Scoped, typeof(BotLootGenerator))]
+[Injectable(InjectionType.Scoped)]
 public class BotLootGeneratorEx(
     ISptLogger<BotLootGenerator> logger,
     RandomUtil randomUtil,
@@ -27,7 +32,8 @@ public class BotLootGeneratorEx(
     BotHelper botHelper,
     BotLootCacheService botLootCacheService,
     ServerLocalisationService serverLocalisationService,
-    ConfigServer configServer,
+    BotConfig botConfig,
+    PmcConfig pmcConfig,
     ICloner cloner,
     ModData modData
 ) : BotLootGenerator(
@@ -42,7 +48,8 @@ public class BotLootGeneratorEx(
     botHelper,
     botLootCacheService,
     serverLocalisationService,
-    configServer,
+    botConfig,
+    pmcConfig,
     cloner
 )
 {
@@ -111,17 +118,20 @@ public class BotLootGeneratorEx(
 
     private readonly ModConfig _modConfig = modData.ModConfig;
 
-    public override void GenerateLoot(MongoId botId, MongoId sessionId,
+    public override void GenerateLoot(
+        MongoId botId,
+        MongoId sessionId,
         BotType botJsonTemplate,
         BotGenerationDetails botGenerationDetails,
-        BotBaseInventory botInventory)
+        BotBaseInventory botInventory
+        )
     {
         base.GenerateLoot(botId, sessionId, botJsonTemplate,
             botGenerationDetails, botInventory);
 
         if (_modConfig.LegaMedalOnBosses)
         {
-            if (BotConfig.Bosses.Contains(botGenerationDetails.Role))
+            if (botConfig.Bosses.Contains(botGenerationDetails.Role))
             {
                 AddLegaMedal(botId, botGenerationDetails, botInventory);
             }

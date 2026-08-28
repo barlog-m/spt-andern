@@ -1,20 +1,30 @@
 using System.Text.Json;
+using SPTarkov.Common.Models.Logging;
 using SPTarkov.DI.Annotations;
 using SPTarkov.Server.Core.Generators;
+using SPTarkov.Server.Core.Generators.Bot;
+using SPTarkov.Server.Core.Generators.Loot;
 using SPTarkov.Server.Core.Helpers;
+using SPTarkov.Server.Core.Helpers.Bot;
+using SPTarkov.Server.Core.Helpers.InRaid;
+using SPTarkov.Server.Core.Helpers.Items;
+using SPTarkov.Server.Core.Helpers.Profile;
 using SPTarkov.Server.Core.Models.Common;
 using SPTarkov.Server.Core.Models.Eft.Common.Tables;
 using SPTarkov.Server.Core.Models.Enums;
-using SPTarkov.Server.Core.Models.Logging;
 using SPTarkov.Server.Core.Models.Spt.Bots;
+using SPTarkov.Server.Core.Models.Spt.Config;
 using SPTarkov.Server.Core.Models.Utils;
 using SPTarkov.Server.Core.Servers;
 using SPTarkov.Server.Core.Services;
+using SPTarkov.Server.Core.Services.Bot;
+using SPTarkov.Server.Core.Services.Locales;
+using SPTarkov.Server.Core.Services.Profile;
 using SPTarkov.Server.Core.Utils;
 
 namespace BarlogM_Andern;
 
-[Injectable(InjectionType.Scoped, typeof(BotInventoryGenerator))]
+[Injectable(InjectionType.Scoped)]
 public class BotInventoryGeneratorEx(
     ISptLogger<BotInventoryGenerator> logger,
     RandomUtil randomUtil,
@@ -32,7 +42,8 @@ public class BotInventoryGeneratorEx(
     BotEquipmentModPoolService botEquipmentModPoolService,
     BotEquipmentModGenerator botEquipmentModGenerator,
     BotInventoryContainerService botInventoryContainerService,
-    ConfigServer configServer,
+    BotConfig botConfig,
+    PmcConfig pmcConfig,
     Data data,
     GearGeneratorHelper gearGeneratorHelper,
     HelmetGenerator helmetGenerator,
@@ -54,7 +65,9 @@ public class BotInventoryGeneratorEx(
     botEquipmentModPoolService,
     botEquipmentModGenerator,
     botInventoryContainerService,
-    configServer)
+    botConfig,
+    pmcConfig
+    )
 {
     public override BotBaseInventory GenerateInventory(
         MongoId botId,
@@ -126,7 +139,7 @@ public class BotInventoryGeneratorEx(
         var securedContainerItemTpls = securedContainerItems.Select(i => i.Template.ToString()).ToList();
         logger.LogWithColor(
             $"[Andern] secured container items {JsonSerializer.Serialize(securedContainerItemTpls)}",
-            LogTextColor.Red);
+            Spectre.Console.Color.Red);
         */
         
         return botInventory;
@@ -142,8 +155,8 @@ public class BotInventoryGeneratorEx(
     {
         var armbandTpl =
             botGenerationDetails.RoleLowercase == "pmcusec"
-                ? PMCConfig.ForceArmband.Usec
-                : PMCConfig.ForceArmband.Bear;
+                ? pmcConfig.ForceArmband.Usec
+                : pmcConfig.ForceArmband.Bear;
         gearGeneratorHelper.PutGearItemToInventory(
             EquipmentSlots.ArmBand,
             botGenerationDetails.Role,

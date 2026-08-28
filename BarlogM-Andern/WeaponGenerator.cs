@@ -1,12 +1,11 @@
+using SPTarkov.Common.Models.Logging;
 using SPTarkov.DI.Annotations;
-using SPTarkov.Server.Core.Helpers;
+using SPTarkov.Server.Core.Helpers.Items;
 using SPTarkov.Server.Core.Models.Common;
 using SPTarkov.Server.Core.Models.Eft.Common.Tables;
 using SPTarkov.Server.Core.Models.Enums;
 using SPTarkov.Server.Core.Models.Spt.Config;
-using SPTarkov.Server.Core.Models.Utils;
-using SPTarkov.Server.Core.Servers;
-using SPTarkov.Server.Core.Services;
+using SPTarkov.Server.Core.Services.Commerce;
 using SPTarkov.Server.Core.Utils;
 
 namespace BarlogM_Andern;
@@ -14,7 +13,8 @@ namespace BarlogM_Andern;
 [Injectable]
 public class WeaponGenerator(
     ISptLogger<WeaponGenerator> logger,
-    ConfigServer configServer,
+    PmcConfig pmcConfig,
+    RepairConfig repairConfig,
     ItemHelper itemHelper,
     RandomUtil randomUtil,
     RepairService repairService,
@@ -74,9 +74,6 @@ public class WeaponGenerator(
     const int TACTICAL_DEVICE_LASER_ONLY_MODE = 2;
     const string AK_EVO_STOCK = "6761779c48fa5c377e06fc3f";
     const string AK_ZENIT_PT_3_KLASSIKA_STOCK = "59ecc3dd86f7746dc827481c";
-
-    readonly PmcConfig _pmcConfig = configServer.GetConfig<PmcConfig>();
-    readonly RepairConfig _repairConfig = configServer.GetConfig<RepairConfig>();
 
     string GetTemplateIdFromWeaponItems(List<Item> weaponWithMods)
     {
@@ -497,9 +494,9 @@ public class WeaponGenerator(
 
     void AddRandomEnhancement(List<Item> weapon)
     {
-        if (randomUtil.GetChance100(_pmcConfig.WeaponHasEnhancementChancePercent))
+        if (randomUtil.GetChance100(pmcConfig.WeaponHasEnhancementChancePercent))
         {
-            repairService.AddBuff(_repairConfig.RepairKit.Weapon, weapon[0]);
+            repairService.AddBuff(repairConfig.RepairKit.Weapon, weapon[0]);
         }
     }
 
